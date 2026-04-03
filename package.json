@@ -1,0 +1,46 @@
+{
+  "name": "reado-station",
+  "version": "0.1.0",
+  "description": "AI 情报站运营平台 - Read All. Miss Nothing.",
+  "type": "module",
+  "scripts": {
+    "collect": "tsx scripts/collect.ts",
+    "collect:local": "tsx scripts/collect.ts --mode local",
+    "collect:cloud": "tsx scripts/collect.ts --mode cloud",
+    "summarize": "tsx scripts/summarize.ts",
+    "sync-sources": "tsx scripts/sync-sources.ts",
+    "publish": "tsx scripts/publish-feishu.ts",
+    "pipeline": "npm run sync-sources && npm run collect && npm run summarize",
+    "pipeline:cloud": "npm run sync-sources && npm run collect:cloud && npm run summarize",
+    "pipeline:local": "npm run collect:local",
+    "build": "tsc --noEmit",
+    "test": "vitest"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "ai",
+    "news",
+    "intelligence",
+    "reado",
+    "feishu",
+    "automation"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "consola": "^3.2.3",
+    "dayjs": "^1.11.13",
+    "dotenv": "^16.4.7",
+    "ofetch": "^1.4.1",
+    "p-limit": "^6.1.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.8",
+    "@types/node": "^22.0.0"
+  }
+}

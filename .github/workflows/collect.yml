@@ -1,0 +1,91 @@
+name: AI Daily Collection
+
+on:
+  schedule:
+    # 早报: UTC 00:00 = 北京 08:00
+    - cron: '0 0 * * *'
+    # 晚报: UTC 10:00 = 北京 18:00
+    - cron: '0 10 * * *'
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Collection mode'
+        required: false
+        default: 'cloud'
+        type: choice
+        options:
+          - cloud
+          - all
+
+permissions:
+  contents: write
+
+env:
+  ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+  FEISHU_BITABLE_APP_TOKEN: ${{ secrets.FEISHU_BITABLE_APP_TOKEN }}
+  FEISHU_BITABLE_SOURCES_TABLE: ${{ secrets.FEISHU_BITABLE_SOURCES_TABLE }}
+  FEISHU_BITABLE_FOLLOWS_TABLE: ${{ secrets.FEISHU_BITABLE_FOLLOWS_TABLE }}
+
+jobs:
+  collect-and-summarize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install reado CLI
+        run: npm install -g reado
+
+      - name: Install lark-cli (optional)
+        run: npm install -g lark-cli || echo "lark-cli install failed, will use backup config"
+        continue-on-error: true
+
+      - name: Sync source configuration
+        run: npx tsx scripts/sync-sources.ts
+        continue-on-error: true
+
+      - name: Collect data (cloud mode)
+        run: npx tsx scripts/collect.ts --mode ${{ inputs.mode || 'cloud' }}
+
+      - name: Generate AI summary
+        run: npx tsx scripts/summarize.ts
+
+      - name: Commit data
+        run: |
+          git config user.name "reado-station[bot]"
+          git config user.email "reado-station[bot]@users.noreply.github.com"
+
+          # Add data files
+          git add data/ config/
+
+          # Check if there are changes
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+
+          # Determine batch
+          HOUR=$(date -u +%H)
+          if [ "$HOUR" -lt 14 ]; then
+            BATCH="morning"
+          else
+            BATCH="evening"
+          fi
+
+          DATE=$(date +%Y-%m-%d)
+          git commit -m "data: ${DATE} ${BATCH} collection
+
+          Co-Authored-By: reado-station[bot] <reado-station[bot]@users.noreply.github.com>"
+
+          git push

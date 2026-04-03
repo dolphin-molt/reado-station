@@ -1,0 +1,22 @@
+node_modules/
+dist/
+.env
+.env.local
+
+# Data files are committed (GitHub as backup)
+# But local collection temp files are not
+data/**/local-temp.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Site build output
+site/dist/
+site/.astro/

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.reado.local-collect</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>/Users/dolphin/Desktop/Dolphin/reado-station/scripts/local-collect.sh</string>
+    </array>
+
+    <!-- 每天 07:50 和 17:50 运行（提前 10 分钟，让云端合并） -->
+    <key>StartCalendarInterval</key>
+    <array>
+        <dict>
+            <key>Hour</key>
+            <integer>7</integer>
+            <key>Minute</key>
+            <integer>50</integer>
+        </dict>
+        <dict>
+            <key>Hour</key>
+            <integer>17</integer>
+            <key>Minute</key>
+            <integer>50</integer>
+        </dict>
+    </array>
+
+    <key>StandardOutPath</key>
+    <string>/Users/dolphin/.reado-station/logs/launchd-stdout.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/Users/dolphin/.reado-station/logs/launchd-stderr.log</string>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin</string>
+    </dict>
+
+    <!-- 如果错过了时间点（Mac 休眠），醒来后补跑 -->
+    <key>StartInterval</key>
+    <integer>0</integer>
+</dict>
+</plist>
