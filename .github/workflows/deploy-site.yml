@@ -1,0 +1,77 @@
+name: Deploy Site to GitHub Pages
+
+on:
+  # 采集完成后自动触发
+  workflow_run:
+    workflows: ["AI Daily Collection"]
+    types: [completed]
+    branches: [main]
+
+  # 手动触发
+  workflow_dispatch:
+
+  # 推送到 main 的 site/ 或 scripts/ 变更也触发
+  push:
+    branches: [main]
+    paths:
+      - 'site/**'
+      - 'scripts/build-site-data.ts'
+      - 'scripts/fetch-images.ts'
+      - 'data/**'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install root dependencies
+        run: npm ci
+
+      - name: Install site dependencies
+        run: cd site && npm ci
+
+      - name: Build site data (JSON)
+        run: npx tsx scripts/build-site-data.ts
+
+      - name: Fetch OG images
+        run: npx tsx scripts/fetch-images.ts
+        timeout-minutes: 5
+
+      - name: Build Astro site
+        run: cd site && npx astro build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

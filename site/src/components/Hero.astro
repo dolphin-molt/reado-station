@@ -1,0 +1,38 @@
+---
+interface NewsItem {
+  title: string;
+  url: string;
+  summary: string;
+  sourceName: string;
+  category: string;
+  imageUrl?: string;
+}
+
+interface Props {
+  main: NewsItem;
+  sidebar: NewsItem[];
+}
+
+const { main, sidebar } = Astro.props;
+---
+
+<section class="hero">
+  <div class="container">
+    <div class="hero__grid">
+      <div class="hero__main">
+        <span class="source-tag">{main.sourceName}</span>
+        <h1><a href={main.url} target="_blank" rel="noopener">{main.title}</a></h1>
+        <p class="summary">{main.summary}</p>
+      </div>
+      <div class="hero__sidebar">
+        {sidebar.map((item) => (
+          <div class="hero__sidebar-item">
+            <span class="source-tag">{item.sourceName}</span>
+            <h3><a href={item.url} target="_blank" rel="noopener">{item.title}</a></h3>
+            <p class="summary">{item.summary}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

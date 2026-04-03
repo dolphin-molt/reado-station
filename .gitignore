@@ -20,3 +20,6 @@ Thumbs.db
 # Site build output
 site/dist/
 site/.astro/
+
+# Fetched OG images (regenerated on build, don't bloat repo)
+site/public/images/
