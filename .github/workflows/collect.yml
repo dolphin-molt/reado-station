@@ -21,13 +21,12 @@ permissions:
   contents: write
 
 env:
-  ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
   FEISHU_BITABLE_APP_TOKEN: ${{ secrets.FEISHU_BITABLE_APP_TOKEN }}
   FEISHU_BITABLE_SOURCES_TABLE: ${{ secrets.FEISHU_BITABLE_SOURCES_TABLE }}
   FEISHU_BITABLE_FOLLOWS_TABLE: ${{ secrets.FEISHU_BITABLE_FOLLOWS_TABLE }}
 
 jobs:
-  collect-and-summarize:
+  collect:
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
@@ -58,8 +57,12 @@ jobs:
       - name: Collect data (cloud mode)
         run: npx tsx scripts/collect.ts --mode ${{ inputs.mode || 'cloud' }}
 
-      - name: Generate AI summary
-        run: npx tsx scripts/summarize.ts
+      # v1.0: 日报由 Agent 在对话中生成，Actions 只负责采集
+      # v2.0: 取消下面的注释启用自动摘要（需要 ANTHROPIC_API_KEY secret）
+      # - name: Generate AI summary
+      #   run: npx tsx scripts/summarize.ts
+      #   env:
+      #     ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
 
       - name: Commit data
         run: |

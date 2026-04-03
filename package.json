@@ -10,8 +10,9 @@
     "summarize": "tsx scripts/summarize.ts",
     "sync-sources": "tsx scripts/sync-sources.ts",
     "publish": "tsx scripts/publish-feishu.ts",
-    "pipeline": "npm run sync-sources && npm run collect && npm run summarize",
-    "pipeline:cloud": "npm run sync-sources && npm run collect:cloud && npm run summarize",
+    "pipeline": "npm run sync-sources && npm run collect",
+    "pipeline:cloud": "npm run sync-sources && npm run collect:cloud",
+    "pipeline:auto": "npm run sync-sources && npm run collect && npm run summarize",
     "pipeline:local": "npm run collect:local",
     "build": "tsc --noEmit",
     "test": "vitest"

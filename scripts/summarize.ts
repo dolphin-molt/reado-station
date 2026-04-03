@@ -1,17 +1,24 @@
 #!/usr/bin/env tsx
 /**
- * summarize.ts
+ * summarize.ts  [v2.0 预留 — 当前可选]
  *
- * 使用 Claude API 将采集的原始数据生成结构化 AI 日报。
+ * 使用外部 LLM API 将采集的原始数据生成结构化 AI 日报。
+ * 适用于无人值守的自动化场景（GitHub Actions 定时任务）。
+ *
+ * v1.0 中日报由执行 Agent 自身生成（见 .claude/skills/ai-daily/SKILL.md），
+ * 不需要此脚本。此脚本仅在需要全自动无人值守时使用。
+ *
+ * 支持的 LLM 后端（通过 LLM_PROVIDER 环境变量切换）：
+ * - anthropic (默认): Claude Haiku
+ * - openai: GPT-4o-mini
+ * - deepseek: DeepSeek Chat
  *
  * 流程：
  * 1. 读取 raw.json
  * 2. 按分类拆分数据
- * 3. 分别调用 Claude 生成各板块摘要
+ * 3. 分别调用 LLM 生成各板块摘要
  * 4. 组装最终日报
  * 5. 输出 digest.md + 终端打印
- *
- * 使用 Claude Haiku 模型（成本低、速度快、质量足够）
  */
 import 'dotenv/config'
 import { join } from 'node:path'
