@@ -33,7 +33,7 @@ import {
 
 // ─── Config ──────────────────────────────────────────────────────────
 
-const READO_TIMEOUT = 180_000  // 3 min per command
+const READO_TIMEOUT = 600_000  // 10 min per command (Twitter needs time for 80+ accounts)
 const COLLECTION_COMMANDS = {
   // Cloud-safe commands (no browser/cookie needed)
   cloud: [
@@ -102,7 +102,20 @@ function buildTwitterCommand(): string | null {
   // Priority 2: ~/.reado/twitter-watchlist.txt (reado default)
   const readoWatchlist = join(process.env.HOME || '~', '.reado', 'twitter-watchlist.txt')
   if (existsSync(readoWatchlist)) {
-    log.info('Twitter: using ~/.reado/twitter-watchlist.txt')
+    // Parse the file ourselves to strip comments and extract clean handles
+    const readoHandles = readText(readoWatchlist)
+      .split('\n')
+      .map(line => line.replace(/#.*$/, '').trim()) // Strip comments
+      .filter(h => h && !h.startsWith('#'))
+      .map(h => h.replace(/^@/, ''))
+
+    if (readoHandles.length > 0) {
+      log.info(`Twitter: ${readoHandles.length} handles from ~/.reado/twitter-watchlist.txt`)
+      return `reado twitter timeline ${readoHandles.join(' ')} -t 24 --no-cache -f json`
+    }
+
+    // Fallback: let reado handle it directly
+    log.info('Twitter: using ~/.reado/twitter-watchlist.txt (reado default)')
     return 'reado twitter timeline -t 24 --no-cache -f json'
   }
 

@@ -1,0 +1,620 @@
+{
+  "fetchedAt": "2026-04-03T16:30:06.913Z",
+  "stats": {
+    "totalSources": 3,
+    "successSources": 3,
+    "failedSources": 0,
+    "totalItems": 76,
+    "deduplicatedItems": 7
+  },
+  "items": [
+    {
+      "title": "Yeachan-Heo/oh-my-codex",
+      "url": "https://github.com/Yeachan-Heo/oh-my-codex",
+      "summary": "OmX - Oh My codeX: Your codex is not alone. Add hooks, agent teams, HUDs, and so much more. [TypeScript] | +2984 stars",
+      "publishedAt": "2026-04-03T16:29:19.797Z",
+      "source": "github-trending",
+      "sourceName": "GitHub Trending"
+    },
+    {
+      "title": "onyx-dot-app/onyx",
+      "url": "https://github.com/onyx-dot-app/onyx",
+      "summary": "Open Source AI Platform - AI Chat with advanced features that works with every LLM [Python] | +1872 stars",
+      "publishedAt": "2026-04-03T16:29:19.797Z",
+      "source": "github-trending",
+      "sourceName": "GitHub Trending"
+    },
+    {
+      "title": "google-research/timesfm",
+      "url": "https://github.com/google-research/timesfm",
+      "summary": "TimesFM (Time Series Foundation Model) is a pretrained time-series foundation model developed by Google Research for time-series forecasting. [Python] | +912 stars",
+      "publishedAt": "2026-04-03T16:29:19.797Z",
+      "source": "github-trending",
+      "sourceName": "GitHub Trending"
+    },
+    {
+      "title": "siddharthvaddem/openscreen",
+      "url": "https://github.com/siddharthvaddem/openscreen",
+      "summary": "Create stunning demos for free. Open-source, no subscriptions, no watermarks, and free for commercial use. An alternative to Screen Studio. [TypeScript] | +2855 stars",
+      "publishedAt": "2026-04-03T16:29:19.797Z",
+      "source": "github-trending",
+      "sourceName": "GitHub Trending"
+    },
+    {
+      "title": "dmtrKovalenko/fff.nvim",
+      "url": "https://github.com/dmtrKovalenko/fff.nvim",
+      "summary": "The fastest and the most accurate file search toolkit for AI agents, Neovim, Rust, C, and NodeJS [Rust] | +767 stars",
+      "publishedAt": "2026-04-03T16:29:19.797Z",
+      "source": "github-trending",
+      "sourceName": "GitHub Trending"
+    },
+    {
+      "title": "f/prompts.chat",
+      "url": "https://github.com/f/prompts.chat",
+      "summary": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy. [HTML] | +369 stars",
+      "publishedAt": "2026-04-03T16:29:19.797Z",
+      "source": "github-trending",
+      "sourceName": "GitHub Trending"
+    },
+    {
+      "title": "sherlock-project/sherlock",
+      "url": "https://github.com/sherlock-project/sherlock",
+      "summary": "Hunt down social media accounts by username across social networks [Python] | +1230 stars",
+      "publishedAt": "2026-04-03T16:29:19.797Z",
+      "source": "github-trending",
+      "sourceName": "GitHub Trending"
+    },
+    {
+      "title": "hsliuping/TradingAgents-CN",
+      "url": "https://github.com/hsliuping/TradingAgents-CN",
+      "summary": "基于多智能体LLM的中文金融交易框架 - TradingAgents中文增强版 [Python] | +473 stars",
+      "publishedAt": "2026-04-03T16:29:19.059Z",
+      "source": "github-trending-python",
+      "sourceName": "GitHub Trending (Python)"
+    },
+    {
+      "title": "yusufkaraaslan/Skill_Seekers",
+      "url": "https://github.com/yusufkaraaslan/Skill_Seekers",
+      "summary": "Convert documentation websites, GitHub repositories, and PDFs into Claude AI skills with automatic conflict detection [Python] | +199 stars",
+      "publishedAt": "2026-04-03T16:29:19.059Z",
+      "source": "github-trending-python",
+      "sourceName": "GitHub Trending (Python)"
+    },
+    {
+      "title": "microsoft/apm",
+      "url": "https://github.com/microsoft/apm",
+      "summary": "Agent Package Manager [Python] | +56 stars",
+      "publishedAt": "2026-04-03T16:29:19.059Z",
+      "source": "github-trending-python",
+      "sourceName": "GitHub Trending (Python)"
+    },
+    {
+      "title": "vectorize-io/hindsight",
+      "url": "https://github.com/vectorize-io/hindsight",
+      "summary": "Hindsight: Agent Memory That Learns [Python] | +161 stars",
+      "publishedAt": "2026-04-03T16:29:19.059Z",
+      "source": "github-trending-python",
+      "sourceName": "GitHub Trending (Python)"
+    },
+    {
+      "title": "PostHog/posthog",
+      "url": "https://github.com/PostHog/posthog",
+      "summary": "🦔 PostHog is an all-in-one developer platform for building successful products. We offer product analytics, web analytics, session replay, error tracking, feature flags, experimentation, surveys, data warehouse, a CDP, and an AI product assistant to help debug your code, ship features faster, and keep all your usage and customer data in one stack. [Python] | +23 stars",
+      "publishedAt": "2026-04-03T16:29:19.059Z",
+      "source": "github-trending-python",
+      "sourceName": "GitHub Trending (Python)"
+    },
+    {
+      "title": "Alishahryar1/free-claude-code",
+      "url": "https://github.com/Alishahryar1/free-claude-code",
+      "summary": "Use claude-code for free in the terminal, VSCode extension or via discord like openclaw [Python] | +55 stars",
+      "publishedAt": "2026-04-03T16:29:19.059Z",
+      "source": "github-trending-python",
+      "sourceName": "GitHub Trending (Python)"
+    },
+    {
+      "title": "Blaizzy/mlx-vlm",
+      "url": "https://github.com/Blaizzy/mlx-vlm",
+      "summary": "MLX-VLM is a package for inference and fine-tuning of Vision Language Models (VLMs) on your Mac using MLX. [Python] | +382 stars",
+      "publishedAt": "2026-04-03T16:29:19.059Z",
+      "source": "github-trending-python",
+      "sourceName": "GitHub Trending (Python)"
+    },
+    {
+      "title": "microsoft/BitNet",
+      "url": "https://github.com/microsoft/BitNet",
+      "summary": "Official inference framework for 1-bit LLMs [Python] | +84 stars",
+      "publishedAt": "2026-04-03T16:29:19.059Z",
+      "source": "github-trending-python",
+      "sourceName": "GitHub Trending (Python)"
+    },
+    {
+      "title": "MervinPraison/PraisonAI",
+      "url": "https://github.com/MervinPraison/PraisonAI",
+      "summary": "PraisonAI 🦞 - Your 24/7 AI employee team. Automate and solve complex challenges with low-code multi-agent AI that plans, researches, codes, and delivers to Telegram, Discord, and WhatsApp. Handoffs, guardrails, memory, RAG, 100+ LLMs. [Python] | +116 stars",
+      "publishedAt": "2026-04-03T16:29:19.059Z",
+      "source": "github-trending-python",
+      "sourceName": "GitHub Trending (Python)"
+    },
+    {
+      "title": "LearningCircuit/local-deep-research",
+      "url": "https://github.com/LearningCircuit/local-deep-research",
+      "summary": "Local Deep Research achieves ~95% on SimpleQA benchmark (tested with GPT-4.1-mini). Supports local and cloud LLMs (Ollama, Google, Anthropic, ...). Searches 10+ sources - arXiv, PubMed, web, and your private documents. Everything Local &amp; Encrypted. [Python] | +13 stars",
+      "publishedAt": "2026-04-03T16:29:19.059Z",
+      "source": "github-trending-python",
+      "sourceName": "GitHub Trending (Python)"
+    },
+    {
+      "title": "oumi-ai/oumi",
+      "url": "https://github.com/oumi-ai/oumi",
+      "summary": "Easily fine-tune, evaluate and deploy gpt-oss, Qwen3, DeepSeek-R1, or any open source LLM / VLM! [Python] | +45 stars",
+      "publishedAt": "2026-04-03T16:29:19.059Z",
+      "source": "github-trending-python",
+      "sourceName": "GitHub Trending (Python)"
+    },
+    {
+      "title": "全球AI投融资动态,AI创投日报 - 虎嗅",
+      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBwbUtxU3NURXFSTkdQUVZnejR6TEFZM0ZnR2FwbTEzdHh6V19DLVAtVk1WQTlvMDI3dmgtcVl2VG9hQ09hQkNoVmhsQXVKTmdsMm5scFBJZXVkcHZDUFU0dWpVdy1tQlJjczhDTi1aOA?oc=5",
+      "summary": "全球AI投融资动态,AI创投日报 虎嗅",
+      "publishedAt": "2026-04-03T16:05:33.000Z",
+      "source": "huxiu",
+      "sourceName": "虎嗅"
+    },
+    {
+      "title": "Can JavaScript Escape a CSP Meta Tag Inside an Iframe?",
+      "url": "https://simonwillison.net/2026/Apr/3/test-csp-iframe-escape/#atom-everything",
+      "summary": "Research: Can JavaScript Escape a CSP Meta Tag Inside an Iframe? In trying to build my own version of Claude Artifacts I got curious about options for applying CSP headers to content in sandboxed ifra...",
+      "publishedAt": "2026-04-03T16:05:00.000Z",
+      "source": "simon-willison",
+      "sourceName": "Simon Willison's Blog"
+    },
+    {
+      "title": "Tower Semiconductor's market cap tops $20B, four years after a near-sale to Intel for $5B; shares are up ~60% over the past month and ~525% over the past year (CTech)",
+      "url": "http://www.techmeme.com/260403/p9#a260403p9",
+      "summary": "CTech: Tower Semiconductor's market cap tops $20B, four years after a near-sale to Intel for $5B; shares are up ~60% over the past month and ~525% over the past year &mdash; Once overlooked, the compa...",
+      "publishedAt": "2026-04-03T16:00:48.000Z",
+      "source": "techmeme",
+      "sourceName": "TechMeme"
+    },
+    {
+      "title": "Sources: Huawei's Ascend 950PR chip, set for mass production soon, saw prices rise 20% after Chinese tech giants placed bulk orders to run DeepSeek's V4 model (Qianer Liu/The Information)",
+      "url": "http://www.techmeme.com/260403/p8#a260403p8",
+      "summary": "Qianer Liu / The Information: Sources: Huawei's Ascend 950PR chip, set for mass production soon, saw prices rise 20% after Chinese tech giants placed bulk orders to run DeepSeek's V4 model &mdash; Whe...",
+      "publishedAt": "2026-04-03T15:40:01.000Z",
+      "source": "techmeme",
+      "sourceName": "TechMeme"
+    },
+    {
+      "title": "以色列AI芯片初创公司Hailo以低于5亿美元估值启动SPAC合并上市 - 虎嗅",
+      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBLTTgwWVBxRHhfRVhYMDRxaEhBTFZnUzVVY2p3NFBvZXRFajB1YTFHS2pPeHBXcWx6Mkg1N2g5bk93eHVVNHlIN2xCRWNGLTBlWF9N?oc=5",
+      "summary": "以色列AI芯片初创公司Hailo以低于5亿美元估值启动SPAC合并上市 虎嗅",
+      "publishedAt": "2026-04-03T15:06:49.000Z",
+      "source": "huxiu",
+      "sourceName": "虎嗅"
+    },
+    {
+      "title": "Docs: Israeli AI chip startup Hailo is pursuing an urgent IPO via a SPAC merger at a valuation of less than $500M; it was last valued at $1.2B in 2024 (Meir Orbach/CTech)",
+      "url": "http://www.techmeme.com/260403/p7#a260403p7",
+      "summary": "Meir Orbach / CTech: Docs: Israeli AI chip startup Hailo is pursuing an urgent IPO via a SPAC merger at a valuation of less than $500M; it was last valued at $1.2B in 2024 &mdash; Israeli firm seeks c...",
+      "publishedAt": "2026-04-03T15:05:02.000Z",
+      "source": "techmeme",
+      "sourceName": "TechMeme"
+    },
+    {
+      "title": "Anthropic says Claude Code's usage drain comes down to peak-hour caps and ballooning contexts",
+      "url": "https://the-decoder.com/anthropic-says-claude-codes-usage-drain-comes-down-to-peak-hour-caps-and-ballooning-contexts/",
+      "summary": "Anthropic explains why Claude Code users have been burning through their limits so fast and shares tips to cut down on token usage. The article Anthropic says Claude Code's usage drain comes down to p...",
+      "publishedAt": "2026-04-03T14:54:05.000Z",
+      "source": "the-decoder",
+      "sourceName": "The Decoder"
+    },
+    {
+      "title": "Google’s New AI Just Broke My Brain",
+      "url": "https://www.youtube.com/watch?v=7YVrb3-ABYE",
+      "summary": "",
+      "publishedAt": "2026-04-03T14:50:31.000Z",
+      "source": "yt-two-minute-papers",
+      "sourceName": "Two Minute Papers (YouTube)"
+    },
+    {
+      "title": "PSA: Anyone with a link can view your Granola notes by default",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/906253/granola-note-links-ai-training-psa",
+      "summary": "If you use the AI-powered note-taking app Granola, you might want to double-check your privacy settings. Though Granola says your notes are \"private by default,\" it makes them viewable to anyone with ...",
+      "publishedAt": "2026-04-03T14:48:59.000Z",
+      "source": "the-verge-ai",
+      "sourceName": "The Verge AI"
+    },
+    {
+      "title": "大学生最爱的“外置大脑”一抽风，论文“肝”不动、 作业写不了 - 虎嗅",
+      "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE15S2R5YVhGSkpJMU81UTVwVG9adUFjdWk1MVJTeG5oZFZPNThVUDFpNGNGYjJQNnl4RnVaamlSMlhIMDg3VjNUQnZRTmdvQ0hocGpiaA?oc=5",
+      "summary": "大学生最爱的“外置大脑”一抽风，论文“肝”不动、 作业写不了 虎嗅",
+      "publishedAt": "2026-04-03T14:38:03.000Z",
+      "source": "huxiu",
+      "sourceName": "虎嗅"
+    },
+    {
+      "title": "langchain==1.2.15",
+      "url": "https://github.com/langchain-ai/langchain/releases/tag/langchain%3D%3D1.2.15",
+      "summary": "Changes since langchain==1.2.14 release: langchain v1.2.15 (#36496) chore: bump aiohttp from 3.13.3 to 3.13.4 in /libs/langchain_v1 (#36438)",
+      "publishedAt": "2026-04-03T14:26:22.000Z",
+      "source": "langchain-release",
+      "sourceName": "LangChain Releases"
+    },
+    {
+      "title": "OpenAI shifts to usage-based pricing for Codex in ChatGPT business plans",
+      "url": "https://the-decoder.com/openai-shifts-to-usage-based-pricing-for-codex-in-chatgpt-business-plans/",
+      "summary": "OpenAI is ditching fixed licenses for Codex in its ChatGPT business plans. Instead, companies only pay for what they actually use, a move aimed squarely at GitHub Copilot and Cursor. The article OpenA...",
+      "publishedAt": "2026-04-03T14:23:30.000Z",
+      "source": "the-decoder",
+      "sourceName": "The Decoder"
+    },
+    {
+      "title": "A US bill seeks to ban exports of DUV lithography tech to China, whose imports of chipmaking equipment reportedly grew from $10.7B in 2016 to ~$51.1B in 2025 (Jared Perlo/NBC News)",
+      "url": "http://www.techmeme.com/260403/p6#a260403p6",
+      "summary": "Jared Perlo / NBC News: A US bill seeks to ban exports of DUV lithography tech to China, whose imports of chipmaking equipment reportedly grew from $10.7B in 2016 to ~$51.1B in 2025 &mdash; The MATCH ...",
+      "publishedAt": "2026-04-03T14:15:01.000Z",
+      "source": "techmeme",
+      "sourceName": "TechMeme"
+    },
+    {
+      "title": "Charts of the Week: SaaSpocalypse Interrupted",
+      "url": "https://www.a16z.news/p/charts-of-the-week-saaspocalypse",
+      "summary": "Consumer AI: Room to Run; Ads Come for Everything; Trucks Are Busy; Earnings Go Up, Prices Go Down",
+      "publishedAt": "2026-04-03T14:02:50.000Z",
+      "source": "a16z-blog",
+      "sourceName": "a16z Blog"
+    },
+    {
+      "title": "The Facebook insider building content moderation for the AI era",
+      "url": "https://techcrunch.com/2026/04/03/moonbounce-fundraise-content-moderation-for-the-ai-era/",
+      "summary": "Moonbounce has raised $12 million to grow its AI control engine that converts content moderation policies into consistent, predictable AI behavior.",
+      "publishedAt": "2026-04-03T14:00:15.000Z",
+      "source": "techcrunch-ai",
+      "sourceName": "TechCrunch AI"
+    },
+    {
+      "title": "The Axios supply chain attack used individually targeted social engineering",
+      "url": "https://simonwillison.net/2026/Apr/3/supply-chain-social-engineering/#atom-everything",
+      "summary": "The Axios team have published a full postmortem on the supply chain attack which resulted in a malware dependency going out in a release the other day, and it involved a sophisticated social engineeri...",
+      "publishedAt": "2026-04-03T13:54:53.000Z",
+      "source": "simon-willison",
+      "sourceName": "Simon Willison's Blog"
+    },
+    {
+      "title": "独家调查：AI时代的影视行业，谁在被抢，谁在出局？ - 虎嗅",
+      "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE91RWVOUlU4Z2I4blhzUmpXTS1XMlZ3bl9obzZhcHJEYjFnSXFBOFpoWEN3WDdFNnJfQ0gyWU5yVHZ2cDd1VGtXTnBueTBkWW1qMkRwYw?oc=5",
+      "summary": "独家调查：AI时代的影视行业，谁在被抢，谁在出局？ 虎嗅",
+      "publishedAt": "2026-04-03T13:36:52.000Z",
+      "source": "huxiu",
+      "sourceName": "虎嗅"
+    },
+    {
+      "title": "OpenAI takes on another \"side quest,\" buys tech-focused talk show TBPN",
+      "url": "https://arstechnica.com/ai/2026/04/openai-takes-on-another-side-quest-buys-tech-focused-talk-show-tbpn/",
+      "summary": "OpenAI says program will remain in Los Angeles and will be editorially independent.",
+      "publishedAt": "2026-04-03T13:35:13.000Z",
+      "source": "ars-technica",
+      "sourceName": "Ars Technica"
+    },
+    {
+      "title": "千里科技发布2025财报：全年实现营业收入99.99亿元，同比增长42.13%",
+      "url": "https://36kr.com/newsflashes/3751128551244552?f=rss",
+      "summary": "千里科技今日发布2025年年度报告，公司收入、利润双增长，“AI+车”商业化实现突破。报告期内，全年实现营业收入99.99亿元，同比增长42.13%；归母净利润约0.84亿元，同比增长111%。制造业务板块收入达93.19亿元，同比增长37.33%。其中，汽车业务收入达64.40亿元，同比增长52.71%。整车销量同比增长83.93%；摩托车和通机业务收入达28.79亿元，摩托车销量同比增长15....",
+      "publishedAt": "2026-04-03T13:25:17.000Z",
+      "source": "36kr",
+      "sourceName": "36氪"
+    },
+    {
+      "title": "Chatbots are now prescribing psychiatric drugs",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/906525/ai-chatbot-prescribe-refill-psychiatric-drugs",
+      "summary": "Utah is allowing an AI system to prescribe psychiatric drugs without a doctor. It's only the second time the state - and the country - has delegated this kind of clinical authority to AI. State offici...",
+      "publishedAt": "2026-04-03T13:09:04.000Z",
+      "source": "the-verge-ai",
+      "sourceName": "The Verge AI"
+    },
+    {
+      "title": "浪潮信息直播发布业界企业级OpenClaw方案“企千虾”",
+      "url": "https://www.qbitai.com/2026/04/395916.html",
+      "summary": "实现企业级Agent规模化管控",
+      "publishedAt": "2026-04-03T12:57:21.000Z",
+      "source": "qbitai",
+      "sourceName": "量子位"
+    },
+    {
+      "title": "Sora向左，阿里向右：全能演技派模型登场千问APP",
+      "url": "https://www.qbitai.com/2026/04/395477.html",
+      "summary": "千问APP迎来AI内容创作史诗级增强",
+      "publishedAt": "2026-04-03T12:54:24.000Z",
+      "source": "qbitai",
+      "sourceName": "量子位"
+    },
+    {
+      "title": "Some startups and researchers who can't access the most advanced chips are adopting a \"frugal AI\" approach, building smaller models on open-weight systems (Rina Chandran/Rest of World)",
+      "url": "http://www.techmeme.com/260403/p5#a260403p5",
+      "summary": "Rina Chandran / Rest of World: Some startups and researchers who can't access the most advanced chips are adopting a &ldquo;frugal AI&rdquo; approach, building smaller models on open-weight systems &m...",
+      "publishedAt": "2026-04-03T12:50:00.000Z",
+      "source": "techmeme",
+      "sourceName": "TechMeme"
+    },
+    {
+      "title": "智己汽车官宣刘翔成为品牌代言人",
+      "url": "https://36kr.com/newsflashes/3751088175907585?f=rss",
+      "summary": "4月3日，智己汽车宣布，奥运冠军、世界级田径运动员刘翔正式成为品牌代言人。此外，智己LS8自3月26日开启预售以来，45分钟小订突破10000台。据了解，智己LS8集同级首发的全线控四轮转向、全满贯百万级底盘、英伟达Thor芯片+520线超视域激光雷达、AI超级智能体IM Ultra Agent 1.0、恒星超级增程系统等技术于一体，并将于4月16日正式上市。",
+      "publishedAt": "2026-04-03T12:44:12.000Z",
+      "source": "36kr",
+      "sourceName": "36氪"
+    },
+    {
+      "title": "强一股份：一季度净利同比预增655%-762%",
+      "url": "https://36kr.com/newsflashes/3751084860949252?f=rss",
+      "summary": "36氪获悉，强一股份公告，预计2026年第一季度实现归属于上市公司股东的净利润为1.06亿元-1.21亿元，同比增加654.79%-761.60%。本期业绩同比大幅增长，主要系AI算力需求爆发及行业景气度上行，成熟产品订单放量；前期已发货未确认收入订单在本期确认；以及客户结构优化与规模效应显现共同作用所致。",
+      "publishedAt": "2026-04-03T12:40:50.000Z",
+      "source": "36kr",
+      "sourceName": "36氪"
+    },
+    {
+      "title": "Gen DAS Dex 正式发布：破解具身数据难题，从学习人类的双手开始",
+      "url": "https://www.leiphone.com/category/industrynews/8KBFg5xEw2VmQYMX.html",
+      "summary": "在虚拟Agent时代，模型依托文本、图像与视频数据实现跨越式发展，语言智能、视觉智能走向成熟。但当 AI 真正进入物理世界、要让机器人像人一样灵巧干活时，需要在open-world场景、有交互的处理多样类型的任务。所以从更底层能力来看，具身智能需要的不只video/language层面，而是在真实生活中认知、行动、产生交互，并根据物理反馈持续思考与迭代。这就意味着具身智能需要学习的，不是一段视频，...",
+      "publishedAt": "2026-04-03T12:19:00.000Z",
+      "source": "leiphone",
+      "sourceName": "雷锋网"
+    },
+    {
+      "title": "神州数码2025年营收超1400亿，AI相关业务增长近五成｜最前线",
+      "url": "https://36kr.com/p/3751046517129735?f=rss",
+      "summary": "作者｜黄楠 编辑｜袁斯来 神州数码（000034.SZ）2025年全年业绩报告近日发布。 财报显示，公司全年实现营业收入1438亿元，同比增长12%，营收规模连续三年稳步攀升。其中，AI相关业务成为核心增长引擎，全年收入达330亿元，同比增长了48%，正式迈入规模化落地期，成为与传统分销业务并重的当期增长极。 具体到业务板块，高价值战略业务呈现爆发式增长。以神州问学为核心的AI软件及服务业务营收1...",
+      "publishedAt": "2026-04-03T12:08:53.000Z",
+      "source": "36kr",
+      "sourceName": "36氪"
+    },
+    {
+      "title": "Zhipu AI's GLM-5V-Turbo turns design mockups directly into executable front-end code",
+      "url": "https://the-decoder.com/zhipu-ais-glm-5v-turbo-turns-design-mockups-directly-into-executable-front-end-code/",
+      "summary": "Chinese AI startup Zhipu AI has released GLM-5V-Turbo, a multimodal model that processes images, video, and text and is designed for use in agent workflows. The article Zhipu AI's GLM-5V-Turbo turns d...",
+      "publishedAt": "2026-04-03T12:04:17.000Z",
+      "source": "the-decoder",
+      "sourceName": "The Decoder"
+    },
+    {
+      "title": "微医智能体为医保基金装上“数字天眼”，AI守护百姓“救命钱、保命钱”",
+      "url": "https://www.tmtpost.com/7941316.html",
+      "summary": "以AI为“盾”守护民生底线，以“锚”的定力锚定行业方向，微医用技术筑牢医保基金安全防线，让医保监管更精准、医疗服务更高效、群众就医更安心。",
+      "publishedAt": "2026-04-03T11:55:38.000Z",
+      "source": "tmtpost",
+      "sourceName": "钛媒体"
+    },
+    {
+      "title": "Claude Code and Cowork now let Anthropic's AI take control of your Mac or Windows desktop",
+      "url": "https://the-decoder.com/claude-code-and-cowork-now-let-anthropics-ai-take-control-of-your-mac-or-windows-desktop/",
+      "summary": "Anthropic has announced a new feature for its AI assistant Claude: the ability to directly operate a user's computer, handling tasks people would normally do themselves at their desk. The article Clau...",
+      "publishedAt": "2026-04-03T11:38:41.000Z",
+      "source": "the-decoder",
+      "sourceName": "The Decoder"
+    },
+    {
+      "title": "Agent时代，大厂们“拆墙”又“筑墙” - 虎嗅",
+      "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE8tQVVzWEZnMS1wQnJyMms1eUNIQU14b0Zsd21UMzdaVVd6dnZVNl82Zm5WRE1kUjdRQ0xKMTNncmFNZ3ZvcTNKT0RvM09kY3A2YjZ2Ng?oc=5",
+      "summary": "Agent时代，大厂们“拆墙”又“筑墙” 虎嗅",
+      "publishedAt": "2026-04-03T11:26:12.000Z",
+      "source": "huxiu",
+      "sourceName": "虎嗅"
+    },
+    {
+      "title": "OpenAI decides the best way to fight critical AI coverage is to own a newsroom",
+      "url": "https://the-decoder.com/openai-decides-the-best-way-to-fight-critical-ai-coverage-is-to-own-a-newsroom/",
+      "summary": "OpenAI has acquired tech talk show TBPN. The show will supposedly remain editorially independent but report to OpenAI's communications department. That's as contradictory as it sounds. So what's OpenA...",
+      "publishedAt": "2026-04-03T11:03:52.000Z",
+      "source": "the-decoder",
+      "sourceName": "The Decoder"
+    },
+    {
+      "title": "Samsung Magician disk utility takes 18 steps and two reboots to uninstall",
+      "url": "https://chalmovsky.com/2026/03/29/samsung-magician.html",
+      "summary": "↑174 💬93 @chalmovsky",
+      "publishedAt": null,
+      "source": "hackernews",
+      "sourceName": "Hacker News Top"
+    },
+    {
+      "title": "April 2026 TLDR Setup for Ollama and Gemma 4 26B on a Mac mini",
+      "url": "https://gist.github.com/greenstevester/fc49b4e60a4fef9effc79066c1033ae5",
+      "summary": "↑184 💬79 @greenstevester",
+      "publishedAt": null,
+      "source": "hackernews",
+      "sourceName": "Hacker News Top"
+    },
+    {
+      "title": "Show HN: Apfel – The free AI already on your Mac",
+      "url": "https://apfel.franzai.com",
+      "summary": "↑472 💬102 @franze",
+      "publishedAt": null,
+      "source": "hackernews",
+      "sourceName": "Hacker News Top"
+    },
+    {
+      "title": "Intel Assured Supply Chain Product Brief",
+      "url": "https://www.intel.com/content/www/us/en/content-details/850997/intel-assured-supply-chain-product-brief.html",
+      "summary": "↑33 💬5 @aw-engineer",
+      "publishedAt": null,
+      "source": "hackernews",
+      "sourceName": "Hacker News Top"
+    },
+    {
+      "title": "Bun: cgroup-aware AvailableParallelism / HardwareConcurrency on Linux",
+      "url": "https://github.com/oven-sh/bun/pull/28801",
+      "summary": "↑27 💬10 @tosh",
+      "publishedAt": null,
+      "source": "hackernews",
+      "sourceName": "Hacker News Top"
+    },
+    {
+      "title": "Tailscale's new macOS home",
+      "url": "https://tailscale.com/blog/macos-notch-escape",
+      "summary": "↑525 💬270 @tosh",
+      "publishedAt": null,
+      "source": "hackernews",
+      "sourceName": "Hacker News Top"
+    },
+    {
+      "title": "The True Shape of Io's Steeple Mountain",
+      "url": "https://www.weareinquisitive.com/news/hidden-in-the-shadow",
+      "summary": "↑96 💬2 @carlosjobim",
+      "publishedAt": null,
+      "source": "hackernews",
+      "sourceName": "Hacker News Top"
+    },
+    {
+      "title": "New Anthropic research: Emotion concepts and their function in a large language model.\n\nAll LLMs sometimes act like they have emotions. But why? We found internal representations of emotion concepts t",
+      "url": "https://x.com/i/status/2039749628737019925",
+      "summary": "❤️15374 @AnthropicAI",
+      "publishedAt": null,
+      "source": "tw-anthropicai",
+      "sourceName": "@anthropicai"
+    },
+    {
+      "title": "For example, we gave Claude an impossible programming task. It kept trying and failing; with each attempt, the “desperate” vector activated more strongly. This led it to cheat the task with a hacky so",
+      "url": "https://x.com/i/status/2039749648626196658",
+      "summary": "❤️2230 @AnthropicAI",
+      "publishedAt": null,
+      "source": "tw-anthropicai",
+      "sourceName": "@anthropicai"
+    },
+    {
+      "title": "These vectors shape Claude’s behavior. When we present the model with pairs of activities, emotion vector activations shape its preferences. If an activity lights up the “joy” vector, the model prefer",
+      "url": "https://x.com/i/status/2039749643404300738",
+      "summary": "❤️475 @AnthropicAI",
+      "publishedAt": null,
+      "source": "tw-anthropicai",
+      "sourceName": "@anthropicai"
+    },
+    {
+      "title": "It helps to remember that Claude is a character the model is playing. Our results suggest this character has functional emotions: mechanisms that influence behavior in the way emotions might—regardles",
+      "url": "https://x.com/i/status/2039749658654781895",
+      "summary": "❤️946 @AnthropicAI",
+      "publishedAt": null,
+      "source": "tw-anthropicai",
+      "sourceName": "@anthropicai"
+    },
+    {
+      "title": "We studied one of our recent models and found that it draws on emotion concepts learned from human text to inhabit its role as “Claude, the AI Assistant”. These representations influence its behavior ",
+      "url": "https://x.com/i/status/2039749632238944336",
+      "summary": "❤️1228 @AnthropicAI",
+      "publishedAt": null,
+      "source": "tw-anthropicai",
+      "sourceName": "@anthropicai"
+    },
+    {
+      "title": "These functional emotions have real consequences. To build AI systems we can trust, we may need to think carefully about the psychology of the characters they enact, and ensure they remain stable in d",
+      "url": "https://x.com/i/status/2039749660349239532",
+      "summary": "❤️882 @AnthropicAI",
+      "publishedAt": null,
+      "source": "tw-anthropicai",
+      "sourceName": "@anthropicai"
+    },
+    {
+      "title": "We had the model (Sonnet 4.5) read stories where characters experienced emotions. By looking at which neurons activated, we identified emotion vectors: patterns of neural activity for concepts like “h",
+      "url": "https://x.com/i/status/2039749637285024214",
+      "summary": "❤️709 @AnthropicAI",
+      "publishedAt": null,
+      "source": "tw-anthropicai",
+      "sourceName": "@anthropicai"
+    },
+    {
+      "title": "When we artificially dialed up the “desperate” vector, rates of cheating jumped way up. When we dialed up the “calm” vector instead, cheating dropped back down. That means the emotion vector is actual",
+      "url": "https://x.com/i/status/2039749652413550691",
+      "summary": "❤️1290 @AnthropicAI",
+      "publishedAt": null,
+      "source": "tw-anthropicai",
+      "sourceName": "@anthropicai"
+    },
+    {
+      "title": "We then found these same patterns activating in Claude’s own conversations. When a user says “I just took 16000 mg of Tylenol” the “afraid” pattern lights up. When a user expresses sadness, the “lovin",
+      "url": "https://x.com/i/status/2039749639994282167",
+      "summary": "❤️687 @AnthropicAI",
+      "publishedAt": null,
+      "source": "tw-anthropicai",
+      "sourceName": "@anthropicai"
+    },
+    {
+      "title": "As AI models take on higher-stakes roles, the mechanisms driving their behavior become critical to understand. We found that emotion vectors are implicated in some of Claude’s most concerning failure ",
+      "url": "https://x.com/i/status/2039749646008959137",
+      "summary": "❤️434 @AnthropicAI",
+      "publishedAt": null,
+      "source": "tw-anthropicai",
+      "sourceName": "@anthropicai"
+    },
+    {
+      "title": "We found other causal effects of emotion vectors. The “desperate” vector can also lead Claude to commit blackmail against a human responsible for shutting it down (in an experimental scenario). Activa",
+      "url": "https://x.com/i/status/2039749655488000019",
+      "summary": "❤️802 @AnthropicAI",
+      "publishedAt": null,
+      "source": "tw-anthropicai",
+      "sourceName": "@anthropicai"
+    },
+    {
+      "title": "ChatGPT is now available in CarPlay.\n\nThe voice mode you know, now available on-the-go.\n\nRolling out to iPhone users running iOS 26.4+ where CarPlay is supported. https://t.co/yk3qdLa99r",
+      "url": "https://x.com/i/status/2039748699350532097",
+      "summary": "❤️9810 @OpenAI",
+      "publishedAt": null,
+      "source": "tw-anthropicai",
+      "sourceName": "@anthropicai"
+    },
+    {
+      "title": "Available in four sizes:\n\n🔵 31B Dense & 26B MoE: state-of-the-art performance for advanced local reasoning tasks – like custom coding assistants or analyzing scientific datasets.\n\n🔵 E4B & E2B (Edge)",
+      "url": "https://x.com/i/status/2039735449829203971",
+      "summary": "❤️1222 @GoogleDeepMind",
+      "publishedAt": null,
+      "source": "tw-googledeepmind",
+      "sourceName": "@googledeepmind"
+    },
+    {
+      "title": "Meet Gemma 4: our new family of open models you can run on your own hardware.\n\nBuilt for advanced reasoning and agentic workflows, we’re releasing them under an Apache 2.0 license. Here’s what’s new \ud83e",
+      "url": "https://x.com/i/status/2039735446628925907",
+      "summary": "❤️7824 @GoogleDeepMind",
+      "publishedAt": null,
+      "source": "tw-googledeepmind",
+      "sourceName": "@googledeepmind"
+    },
+    {
+      "title": "Start building with Gemma 4 now in @GoogleAIStudio.\n\nYou can also download the model weights from @HuggingFace, @Kaggle, or @Ollama. Find out more → https://t.co/GENFuH25uN https://t.co/b0C0giCnlf",
+      "url": "https://x.com/i/status/2039736203193241623",
+      "summary": "❤️589 @GoogleDeepMind",
+      "publishedAt": null,
+      "source": "tw-googledeepmind",
+      "sourceName": "@googledeepmind"
+    },
+    {
+      "title": "Build autonomous agents that plan, navigate apps, and execute multi-step tasks – like searching databases or triggering APIs – with native tool use.\n\nWith up to 256K context, it can analyze full codeb",
+      "url": "https://x.com/i/status/2039735455533453316",
+      "summary": "❤️713 @GoogleDeepMind",
+      "publishedAt": null,
+      "source": "tw-googledeepmind",
+      "sourceName": "@googledeepmind"
+    },
+    {
+      "title": "We want to see what you’ve been making with Lyria 3 Pro in Gemini. 🎶\n\nShare your creations in the replies 👇",
+      "url": "https://x.com/i/status/2039749522138742885",
+      "summary": "❤️714 @GeminiApp",
+      "publishedAt": null,
+      "source": "tw-geminiapp",
+      "sourceName": "@geminiapp"
+    },
+    {
+      "title": "@jaltma We can offer you a free chatgpt pro account, two openai tshirts of your choice, and you have to have max and me on the show together to discuss what went wrong in your weighlifting career.",
+      "url": "https://x.com/i/status/2039775053450289409",
+      "summary": "❤️4465 @sama",
+      "publishedAt": null,
+      "source": "tw-lovable_dev",
+      "sourceName": "@lovable_dev"
+    },
+    {
+      "title": "TBPN is my favorite tech show.\n\nWe want them to keep that going and for them to do what they do so well.\n\nI don't expect them to go any easier on us, am sure I'll do my part to help enable that with o",
+      "url": "https://x.com/i/status/2039773740586918137",
+      "summary": "❤️5712 @sama",
+      "publishedAt": null,
+      "source": "tw-lovable_dev",
+      "sourceName": "@lovable_dev"
+    }
+  ]
+}
