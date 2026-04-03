@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../Header.astro';
+import Footer from '../Footer.astro';
+import type { Lang } from '../../i18n/translations';
+import { t } from '../../i18n/translations';
+
+import daysData from '../../data/days.json';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const days = [...daysData].reverse();
+---
+
+<BaseLayout title={`${t(lang, 'archive.title')} - reado`} lang={lang}>
+  <Header lang={lang} />
+
+  <main class="container content" style="margin-top: 2rem;">
+    <h1 style="margin-bottom: 1.5rem;">{t(lang, 'archive.title')}</h1>
+
+    <ul class="archive-list">
+      {days.map((day: any) => (
+        <li class="archive-day">
+          <div>
+            <div class="archive-day__date">{day.date}</div>
+          </div>
+          <div class="archive-day__meta">
+            {day.itemCount} {t(lang, 'archive.items')} · {day.batches.join(', ')}
+          </div>
+        </li>
+      ))}
+    </ul>
+
+    {days.length === 0 && (
+      <p style="color: var(--color-text-muted); text-align: center; padding: 3rem 0;">
+        {lang === 'zh' ? '暂无数据，请先运行采集。' : 'No data yet. Run collection first.'}
+      </p>
+    )}
+  </main>
+
+  <Footer lang={lang} />
+</BaseLayout>

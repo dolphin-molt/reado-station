@@ -1,27 +1,43 @@
 ---
 import '../styles/global.css';
+import type { Lang } from '../i18n/translations';
+import { localePath } from '../i18n/translations';
 
 interface Props {
   title?: string;
   description?: string;
+  lang?: Lang;
 }
 
 const {
   title = 'reado',
   description = 'Read All. Miss Nothing.',
+  lang = 'zh',
 } = Astro.props;
 
 const base = import.meta.env.BASE_URL;
+const htmlLang = lang === 'zh' ? 'zh-CN' : 'en';
+const altLang = lang === 'zh' ? 'en' : 'zh';
+const currentPath = Astro.url.pathname;
+
+// Build alternate language URL
+const b = base.endsWith('/') ? base : base + '/';
+const enPrefix = `${b}en/`;
+const altUrl = lang === 'zh'
+  ? `${enPrefix}${currentPath.startsWith(b) ? currentPath.slice(b.length) : ''}`
+  : `${b}${currentPath.startsWith(enPrefix) ? currentPath.slice(enPrefix.length) : ''}`;
 ---
 
 <!doctype html>
-<html lang="zh-CN">
+<html lang={htmlLang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <title>{title}</title>
     <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+    <link rel="alternate" hreflang={lang === 'zh' ? 'zh' : 'en'} href={currentPath} />
+    <link rel="alternate" hreflang={altLang} href={altUrl} />
   </head>
   <body>
     <slot />

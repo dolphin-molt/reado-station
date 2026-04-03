@@ -1,34 +1,42 @@
 ---
+import type { Lang } from '../i18n/translations';
+import { t, getDateLocale, localePath, altLangUrl } from '../i18n/translations';
+
 interface Props {
   date?: string;
   itemCount?: number;
   sourceCount?: number;
+  lang?: Lang;
 }
 
-const { date, itemCount = 0, sourceCount = 0 } = Astro.props;
+const { date, itemCount = 0, sourceCount = 0, lang = 'zh' } = Astro.props;
 const base = import.meta.env.BASE_URL;
 
-const today = date || new Date().toLocaleDateString('zh-CN', {
+const today = date || new Date().toLocaleDateString(getDateLocale(lang), {
   year: 'numeric',
   month: 'long',
   day: 'numeric',
   weekday: 'long',
 });
+
+const currentPath = Astro.url.pathname;
+const switchUrl = altLangUrl(base, lang, currentPath);
 ---
 
 <header class="masthead container">
   <div class="masthead__logo">
-    <a href={base}>reado</a>
+    <a href={localePath(base, lang)}>{lang === 'zh' ? 'reado' : 'reado'}</a>
   </div>
-  <div class="masthead__tagline">Read All. Miss Nothing.</div>
+  <div class="masthead__tagline">{t(lang, 'tagline')}</div>
   <div class="masthead__meta">
     <span>{today}</span>
-    {sourceCount > 0 && <span>{sourceCount} 信息源</span>}
-    {itemCount > 0 && <span>{itemCount} 条资讯</span>}
+    {sourceCount > 0 && <span>{sourceCount} {t(lang, 'header.sources')}</span>}
+    {itemCount > 0 && <span>{itemCount} {t(lang, 'header.items')}</span>}
   </div>
 </header>
 <nav class="masthead__nav container">
-  <a href={base} class="active">Today</a>
-  <a href={`${base}archive/`}>Archive</a>
-  <a href={`${base}about/`}>About</a>
+  <a href={localePath(base, lang)} class="active">{t(lang, 'nav.today')}</a>
+  <a href={localePath(base, lang, 'archive/')}>{t(lang, 'nav.archive')}</a>
+  <a href={localePath(base, lang, 'about/')}>{t(lang, 'nav.about')}</a>
+  <a href={switchUrl} class="lang-switch">{t(lang, 'lang.switch')}</a>
 </nav>

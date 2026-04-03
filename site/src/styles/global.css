@@ -153,6 +153,25 @@ h4 { font-size: 1.05rem; }
   text-decoration: none;
 }
 
+.masthead__nav .lang-switch {
+  margin-left: auto;
+  padding: 0.15rem 0.5rem;
+  border: 1px solid var(--color-rule);
+  border-radius: 3px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--color-text-secondary);
+  transition: all 0.15s;
+}
+
+.masthead__nav .lang-switch:hover {
+  background: var(--color-text);
+  color: var(--color-bg);
+  border-color: var(--color-text);
+  text-decoration: none;
+}
+
 /* ─── Hero Section ──────────────────────────────────────────────── */
 .hero {
   background: var(--color-hero-bg);
