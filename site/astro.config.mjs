@@ -2,8 +2,8 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://dolphin-molt.github.io',
-  base: '/reado-station',
+  site: 'https://reado.theopcapp.com',
+  base: '/',
   build: {
     format: 'directory',
   },
