@@ -388,7 +388,33 @@ function quality() {
     }
   }
 
-  // 2. GitHub 反馈统计（Issue 数量按类型）
+  // 2. 网站访问数据（Umami API）
+  let websiteSignal: any = { available: false }
+  const umamiUrl = process.env.UMAMI_API_URL       // e.g. https://cloud.umami.is
+  const umamiToken = process.env.UMAMI_API_TOKEN
+  const umamiWebsiteId = process.env.PUBLIC_UMAMI_ID
+  if (umamiUrl && umamiToken && umamiWebsiteId) {
+    try {
+      const now = Date.now()
+      const oneDayAgo = now - 24 * 60 * 60 * 1000
+      const statsRaw = run(`curl -s -H "Authorization: Bearer ${umamiToken}" "${umamiUrl}/api/websites/${umamiWebsiteId}/stats?startAt=${oneDayAgo}&endAt=${now}"`)
+      const stats = JSON.parse(statsRaw)
+      const pagesRaw = run(`curl -s -H "Authorization: Bearer ${umamiToken}" "${umamiUrl}/api/websites/${umamiWebsiteId}/metrics?startAt=${oneDayAgo}&endAt=${now}&type=url"`)
+      const pages = JSON.parse(pagesRaw)
+      websiteSignal = {
+        available: true,
+        period: '24h',
+        pageviews: stats.pageviews?.value || 0,
+        visitors: stats.visitors?.value || 0,
+        avgVisitDuration: stats.totaltime?.value && stats.visits?.value
+          ? Math.round((stats.totaltime.value / stats.visits.value))
+          : 0,
+        topPages: (pages || []).slice(0, 5).map((p: any) => ({ url: p.x, views: p.y }))
+      }
+    } catch {}
+  }
+
+  // 3. GitHub 反馈统计（Issue 数量按类型）
   let feedbackSignal: any = { available: false }
   try {
     const issuesRaw = run(`gh issue list --repo ${config.github.repo} --state all --limit 50 --json number,labels,createdAt,state`)
@@ -414,11 +440,12 @@ function quality() {
     }
   } catch {}
 
-  // 3. 写入 ops-state
+  // 4. 写入 ops-state
   state.qualitySignals = {
     ...signals,
     lastChecked: new Date().toISOString(),
     lark: larkSignal,
+    website: websiteSignal,
     feedback: feedbackSignal
   }
 
@@ -460,11 +487,15 @@ function quality() {
   if (feedbackSignal.available && (feedbackSignal.byLabel?.['bug'] || 0) >= 2) {
     alerts.push(`本周有 ${feedbackSignal.byLabel['bug']} 个 bug 报告待处理`)
   }
+  if (websiteSignal.available && websiteSignal.pageviews === 0) {
+    alerts.push('网站 24h 内零访问，检查部署是否正常')
+  }
 
   console.log(JSON.stringify({
     phase: 'QUALITY',
     status: 'ok',
     lark: larkSignal,
+    website: websiteSignal,
     feedback: feedbackSignal,
     readRateTrend,
     alerts,

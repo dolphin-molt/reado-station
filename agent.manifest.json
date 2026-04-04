@@ -71,6 +71,10 @@
   },
 
   "envVars": [
-    { "key": "SILICONFLOW_API_KEY", "required": false, "description": "翻译用（SiliconFlow Qwen3-8B）" }
+    { "key": "SILICONFLOW_API_KEY", "required": false, "description": "翻译用（SiliconFlow Qwen3-8B）" },
+    { "key": "PUBLIC_UMAMI_ID", "required": false, "description": "Umami 网站 ID（网站端 analytics 脚本）" },
+    { "key": "UMAMI_API_URL", "required": false, "description": "Umami API 地址（如 https://cloud.umami.is）" },
+    { "key": "UMAMI_API_TOKEN", "required": false, "description": "Umami API Token（Agent 读取访问数据）" },
+    { "key": "PUBLIC_CF_ANALYTICS_TOKEN", "required": false, "description": "Cloudflare Web Analytics Token（备选方案）" }
   ]
 }
