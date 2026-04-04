@@ -35,7 +35,7 @@ cat data/ops-state.json
 
 ## 第四步：干活
 
-按 AGENT-PROTOCOL.md 的 8 个 Phase 执行：
+按 AGENT-PROTOCOL.md 的 9 个 Phase 执行：
 
 1. RESTORE — 恢复记忆（已完成，就是第三步）
 2. COLLECT — `npx tsx scripts/collect.ts --mode all`
@@ -45,6 +45,9 @@ cat data/ops-state.json
 6. BUILD — `npm run build:site`
 7. PERSIST — 写回 `data/ops-state.json`
 8. PUBLISH — `git push`
+9. HEAL — 任何 Phase 出错时触发故障自愈
+
+**出错不要停**。跳到 Phase 9 分类诊断 → 尝试修复 → 搞不定就开 Issue → 继续剩余步骤。
 
 ## 信息源维护
 

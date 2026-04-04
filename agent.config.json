@@ -40,6 +40,12 @@
 
   "limits": {
     "completedActionsKeep": 20,
-    "recentGapsKeep": 50
+    "recentGapsKeep": 50,
+    "incidentsKeep": 30
+  },
+
+  "heal": {
+    "recurringThreshold": 3,
+    "escalateLabel": "needs-human"
   }
 }

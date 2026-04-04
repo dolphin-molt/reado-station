@@ -60,6 +60,7 @@
       "result": "success"
     }
   ],
+  "incidents": [],
   "feedbackProcessed": [],
   "stats": {
     "totalRuns": 1,

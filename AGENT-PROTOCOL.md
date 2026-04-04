@@ -82,6 +82,20 @@ cat agent.config.json
   "completedActions": [
     { "type": "...", "payload": {}, "reason": "...", "completedAt": "ISO-8601", "result": "success|failed" }
   ],
+  "incidents": [
+    {
+      "date": "YYYY-MM-DD",
+      "batch": "morning|evening",
+      "phase": "COLLECT|ANALYZE|FEEDBACK|GENERATE|BUILD|PUBLISH",
+      "error": "错误信息",
+      "category": "env|project|infra|data|unknown",
+      "diagnosis": "分析原因",
+      "fix": "做了什么修复（null 表示没修）",
+      "status": "fixed|workaround|escalated|recurring",
+      "commitHash": "abc1234（仅 project 类修复）",
+      "issueNumber": null
+    }
+  ],
   "feedbackProcessed": [
     { "issueNumber": 42, "action": "做了什么", "processedAt": "ISO-8601" }
   ],
@@ -90,16 +104,39 @@ cat agent.config.json
     "sourcesAdded": 0,
     "sourcesDisabled": 0,
     "twitterAccountsAdded": 0,
-    "issuesProcessed": 0
+    "issuesProcessed": 0,
+    "incidentsFixed": 0,
+    "incidentsEscalated": 0
   }
 }
 ```
 
+### incidents 字段说明
+
+**category — 问题分类**
+
+| category | 判断依据 | 修复方式 |
+|----------|---------|---------|
+| `env` | 缺环境变量、CLI 不在 PATH、浏览器没连、权限问题 | 本地修复，不提交代码 |
+| `project` | 脚本 bug、配置错误、构建失败、解析逻辑有误 | 修代码 → commit → push |
+| `infra` | GitHub API 不可用、网络超时、CDN 故障 | 跳过，下次重试 |
+| `data` | JSON 格式损坏、数据字段缺失 | 清理/重新生成数据 |
+| `unknown` | 无法判断 | 开 Issue 等人处理 |
+
+**status — 处理状态**
+
+| status | 含义 | 后续 |
+|--------|------|------|
+| `fixed` | 已修复 | 无 |
+| `workaround` | 绕过了，功能降级 | 记录，不阻塞流程 |
+| `escalated` | 搞不定 | 已开 GitHub Issue（label: `needs-human`），等人处理 |
+| `recurring` | 同一错误连续 ≥ 3 次 | 升级为 escalated，必须开 Issue |
+
 ---
 
-## 四、运行循环（8 个 Phase）
+## 四、运行循环（9 个 Phase）
 
-每次被调度时，严格按以下顺序执行：
+每次被调度时，严格按以下顺序执行。**任何 Phase 出错时，不要中断，跳到 Phase 9 HEAL 处理。**
 
 ### Phase 1: RESTORE — 恢复记忆
 
@@ -193,6 +230,7 @@ npm run build:site
 - sourceHealth = 更新各源计数
 - pendingActions = 新增的待办
 - completedActions = 追加（只保留最近 {config.limits.completedActionsKeep} 条）
+- incidents = 追加本次的故障记录（只保留最近 {config.limits.incidentsKeep} 条）
 - stats = 累加
 
 ### Phase 8: PUBLISH — 发布
@@ -203,6 +241,86 @@ git add data/ site/src/data/ site/public/images/
 git commit -m "data: YYYY-MM-DD {batch} collection + digest"
 git push
 ```
+
+### Phase 9: HEAL — 故障自愈
+
+**在任何 Phase 出错时执行此步骤。**不是最后才跑，而是出错立刻跳到这里，处理完后尝试继续剩余 Phase。
+
+#### 9.1 捕获错误
+
+记录：哪个 Phase 出的错、完整错误信息。
+
+#### 9.2 分类诊断
+
+根据错误信息判断 category：
+
+```
+包含 API_KEY / 401 / 403 / 环境变量 / not found / not in PATH / EACCES
+  → category: env
+
+包含 SyntaxError / TypeError / parse error / build failed / Cannot find module / 脚本报错
+  → category: project
+
+包含 ETIMEDOUT / ECONNREFUSED / 502 / 503 / rate limit / API unavailable
+  → category: infra
+
+包含 JSON / unexpected token / undefined is not / 数据字段缺失
+  → category: data
+
+以上都不匹配
+  → category: unknown
+```
+
+#### 9.3 尝试修复
+
+| category | 修复策略 |
+|----------|---------|
+| **env** | 检查是否有 workaround（如跳过翻译继续构建）。记录问题和修复建议，status = `workaround`。不改代码。 |
+| **project** | 定位出错的脚本/配置，尝试修复。修完后重新执行失败的 Phase 验证。如果修复成功：commit + push 到对应仓库（reado-station 或 reado），status = `fixed`。如果修不了：status = `escalated`。 |
+| **infra** | 跳过，status = `workaround`。下次运行自动重试。 |
+| **data** | 尝试重新生成数据（重跑对应脚本）。成功 → `fixed`，失败 → `escalated`。 |
+| **unknown** | status = `escalated`。 |
+
+#### 9.4 升级（escalate）
+
+当 status = `escalated` 或同一错误连续出现 ≥ 3 次（status 变为 `recurring`）时：
+
+```bash
+gh issue create --repo {config.github.repo} \
+  --title "🔧 Agent 运行故障: {error 简述}" \
+  --label "needs-human" \
+  --body "$(cat <<'EOF'
+## 故障信息
+
+- **时间**: YYYY-MM-DD {batch}
+- **Phase**: {phase}
+- **分类**: {category}
+- **错误**: {error}
+- **诊断**: {diagnosis}
+- **尝试修复**: {fix 或 "未能修复"}
+
+## 需要人工处理
+
+{如果是 env：请检查本地环境配置}
+{如果是 project：Agent 尝试修复失败，需要人工排查}
+{如果是 recurring：此问题已连续出现 N 次}
+
+---
+🤖 由 Agent 自动创建
+EOF
+)"
+```
+
+#### 9.5 继续执行
+
+故障处理完后，尝试继续剩余的 Phase。原则：
+
+- COLLECT 失败 → 无数据，跳过 ANALYZE/GENERATE/BUILD，直接到 PERSIST 记录故障
+- ANALYZE 失败 → 不影响日报生成，继续 GENERATE
+- BUILD 失败 → 跳过 PUBLISH，但仍然 PERSIST 记录
+- PUBLISH 失败 → PERSIST 已完成，记录推送失败即可
+
+**不要因为一个 Phase 失败就整体放弃。能做多少做多少。**
 
 ---
 

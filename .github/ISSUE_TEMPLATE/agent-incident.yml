@@ -1,0 +1,48 @@
+name: Agent 运行故障 / Agent Incident
+description: 由 Agent 自动创建，报告无法自行修复的问题
+labels: ["needs-human"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ⚠️ 此 Issue 由 AI Agent 自动创建，表示遇到了无法自行修复的问题，需要人工介入。
+
+  - type: input
+    id: phase
+    attributes:
+      label: 出错阶段 / Phase
+      placeholder: "COLLECT / BUILD / PUBLISH ..."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: 问题分类 / Category
+      options:
+        - env — 本地环境问题
+        - project — 项目工程问题
+        - infra — 基础设施问题
+        - data — 数据格式问题
+        - unknown — 未知
+
+  - type: textarea
+    id: error
+    attributes:
+      label: 错误信息 / Error
+      render: shell
+    validations:
+      required: true
+
+  - type: textarea
+    id: diagnosis
+    attributes:
+      label: 诊断分析 / Diagnosis
+    validations:
+      required: true
+
+  - type: textarea
+    id: attempted_fix
+    attributes:
+      label: 已尝试的修复 / Attempted Fix
+      description: Agent 尝试了什么修复手段，为什么没成功
