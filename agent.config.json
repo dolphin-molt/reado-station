@@ -47,5 +47,11 @@
   "heal": {
     "recurringThreshold": 3,
     "escalateLabel": "needs-human"
+  },
+
+  "lark": {
+    "cli": "/Users/dolphin/.npm-global/bin/lark-cli",
+    "chatId": "oc_449573991daff2ea1b1a4cbbb20f0a03",
+    "chatName": "reado情报站"
   }
 }
