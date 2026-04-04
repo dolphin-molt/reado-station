@@ -57,7 +57,17 @@ lark-cli auth status   # 可选（飞书推送）
 bash skills/install.sh
 ```
 
-技能包安装到 `~/.claude/skills/`，后续会话自动加载。
+安装脚本会自动检测你当前环境中的 AI 工具，并将技能包安装到对应位置：
+
+| 工具 | 安装位置 |
+|------|---------|
+| Claude Code | `~/.claude/skills/*/SKILL.md` |
+| Codex CLI | `~/.codex/reado-station-rules.md` |
+| Windsurf | `~/.codeium/windsurf/memories/reado-station-rules.md` |
+| Aider | `~/.aider/reado-station-rules.md` + 自动写入配置 |
+| Cursor / Cline / Copilot | `bash skills/install.sh --project`（项目级规则） |
+
+无论你是哪个 Agent，安装后技能包都会在新会话中自动生效。
 
 ---
 

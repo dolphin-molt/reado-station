@@ -4,7 +4,6 @@
   "project": {
     "name": "reado-station",
     "repo": "https://github.com/dolphin-molt/reado-station.git",
-    "localPath": "/Users/dolphin/Desktop/Dolphin/reado-station",
     "description": "AI 情报站自主运营平台"
   },
 
@@ -48,18 +47,20 @@
     {
       "name": "reado-collect",
       "source": "skills/reado-collect/",
-      "target": "~/.claude/skills/reado-collect/",
       "description": "情报采集 + 信息源维护"
     },
     {
       "name": "reado-station-ops",
       "source": "skills/reado-station-ops/",
-      "target": "~/.claude/skills/reado-station-ops/",
       "description": "网站运营完整闭环（9 Phase）"
     }
   ],
 
-  "skillInstall": "bash skills/install.sh",
+  "skillInstall": {
+    "command": "bash skills/install.sh",
+    "note": "自动检测 Claude Code / Codex CLI / Windsurf / Aider，安装到对应路径",
+    "projectLevel": "bash skills/install.sh --project"
+  },
 
   "npmInstall": "npm install",
 
