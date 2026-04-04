@@ -1,0 +1,11 @@
+name: 建议 / Suggestion
+description: 功能建议或改进意见
+labels: ["enhancement", "agent-todo"]
+body:
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: 你的建议
+      description: 请描述你希望看到的改进
+    validations:
+      required: true

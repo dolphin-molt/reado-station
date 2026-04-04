@@ -1,0 +1,45 @@
+{
+  "_doc": "Agent 运营配置。新环境部署时修改此文件即可，AGENT-PROTOCOL.md 通过此文件获取所有路径和参数。",
+
+  "paths": {
+    "station": "/Users/dolphin/Desktop/Dolphin/reado-station",
+    "reado": "/Users/dolphin/Desktop/Dolphin/reado",
+    "twitterWatchlist": "~/.reado/twitter-watchlist.txt",
+    "dailyOutput": "~/ai-daily"
+  },
+
+  "github": {
+    "repo": "dolphin-molt/reado-station",
+    "readoRepo": "dolphin-molt/reado",
+    "siteUrl": "https://reado.theopcapp.com",
+    "feedbackLabel": "agent-todo"
+  },
+
+  "collect": {
+    "defaultMode": "all",
+    "morningBefore": 14,
+    "schedule": {
+      "morning": "08:15",
+      "evening": "18:15"
+    }
+  },
+
+  "translate": {
+    "provider": "siliconflow",
+    "model": "Qwen/Qwen3-8B",
+    "envKey": "SILICONFLOW_API_KEY",
+    "batchSize": 5,
+    "concurrency": 3,
+    "timeout": 30000
+  },
+
+  "sourceHealth": {
+    "maxConsecutiveFailures": 3,
+    "autoDisable": true
+  },
+
+  "limits": {
+    "completedActionsKeep": 20,
+    "recentGapsKeep": 50
+  }
+}

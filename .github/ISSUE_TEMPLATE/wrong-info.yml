@@ -1,0 +1,19 @@
+name: 信息有误 / Wrong Information
+description: 报告错误或过时的信息
+labels: ["bug", "agent-todo"]
+body:
+  - type: input
+    id: article_title
+    attributes:
+      label: 相关文章标题
+      placeholder: "文章标题或 URL"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 问题描述
+      description: 哪里有误？正确的信息是什么？
+    validations:
+      required: true

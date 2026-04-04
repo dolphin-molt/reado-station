@@ -1,0 +1,15 @@
+{
+  "_description": "Agent 运营状态 — 每次采集后更新，作为下次采集的输入",
+  "lastUpdated": null,
+  "sourceHealth": {},
+  "recentFailures": [],
+  "recentGaps": [],
+  "pendingActions": [],
+  "completedActions": [],
+  "stats": {
+    "totalRuns": 0,
+    "sourcesAdded": 0,
+    "sourcesDisabled": 0,
+    "twitterAccountsAdded": 0
+  }
+}

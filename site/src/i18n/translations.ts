@@ -54,6 +54,13 @@ const translations: Record<Lang, Record<string, string>> = {
     'about.join.title': '加入我们',
     'about.join.text': '欢迎加入飞书群获取每日推送，或在 GitHub 贡献代码。',
 
+    // Feedback
+    'feedback.title': '反馈',
+    'feedback.description': '发现缺少的信息源？信息有误？有好的建议？告诉我们，AI Agent 会自动处理你的反馈。',
+    'feedback.missing': '报告缺少的信息源',
+    'feedback.bug': '报告信息有误',
+    'feedback.suggestion': '提建议',
+
     // Language
     'lang.switch': 'EN',
   },
@@ -110,6 +117,13 @@ const translations: Record<Lang, Record<string, string>> = {
     'about.how.text': 'reado CLI auto-collects → AI curates & summarizes → static site + Feishu group push. Fully automated, zero manual effort.',
     'about.join.title': 'Join Us',
     'about.join.text': 'Join our Feishu group for daily updates, or contribute on GitHub.',
+
+    // Feedback
+    'feedback.title': 'Feedback',
+    'feedback.description': 'Missing a source? Found an error? Have a suggestion? Let us know — the AI Agent will process your feedback automatically.',
+    'feedback.missing': 'Report Missing Source',
+    'feedback.bug': 'Report Error',
+    'feedback.suggestion': 'Suggest',
 
     // Language
     'lang.switch': '中文',

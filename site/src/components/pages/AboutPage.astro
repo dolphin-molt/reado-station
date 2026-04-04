@@ -44,8 +44,47 @@ const { lang } = Astro.props;
           GitHub
         </a>
       </p>
+
+      <h2 style="margin: 2rem 0 1rem;">{t(lang, 'feedback.title')}</h2>
+      <p style="margin-bottom: 1.5rem;">{t(lang, 'feedback.description')}</p>
+      <div class="feedback-buttons">
+        <a href="https://github.com/dolphin-molt/reado-station/issues/new?template=missing-source.yml" target="_blank" class="feedback-btn feedback-btn--source">
+          {t(lang, 'feedback.missing')}
+        </a>
+        <a href="https://github.com/dolphin-molt/reado-station/issues/new?template=wrong-info.yml" target="_blank" class="feedback-btn feedback-btn--bug">
+          {t(lang, 'feedback.bug')}
+        </a>
+        <a href="https://github.com/dolphin-molt/reado-station/issues/new?template=suggestion.yml" target="_blank" class="feedback-btn feedback-btn--idea">
+          {t(lang, 'feedback.suggestion')}
+        </a>
+      </div>
     </div>
   </main>
+
+  <style>
+    .feedback-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .feedback-btn {
+      display: inline-block;
+      padding: 0.6rem 1.2rem;
+      border: 1px solid var(--color-border);
+      text-decoration: none;
+      color: var(--color-text);
+      font-size: 0.95rem;
+      transition: all 0.15s ease;
+    }
+    .feedback-btn:hover {
+      background: var(--color-text);
+      color: var(--color-bg);
+      border-color: var(--color-text);
+    }
+    .feedback-btn--source::before { content: '+ '; }
+    .feedback-btn--bug::before { content: '! '; }
+    .feedback-btn--idea::before { content: '* '; }
+  </style>
 
   <Footer lang={lang} />
 </BaseLayout>

@@ -1,0 +1,45 @@
+name: 缺少信息源 / Missing Source
+description: 报告一个应该被覆盖但缺失的信息源
+labels: ["source-request", "agent-todo"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢反馈！AI Agent 会自动处理这个请求。
+        Thanks for the feedback! The AI Agent will process this automatically.
+
+  - type: input
+    id: source_name
+    attributes:
+      label: 信息源名称 / Source Name
+      description: 比如公司名、博客名、Twitter 账号
+      placeholder: "例: Cursor Blog / @cursor_ai"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: source_type
+    attributes:
+      label: 类型 / Type
+      options:
+        - RSS / 博客
+        - Twitter 账号
+        - Reddit 子版
+        - GitHub 项目
+        - Telegram 频道
+        - YouTube 频道
+        - 其他 / Other
+
+  - type: input
+    id: source_url
+    attributes:
+      label: URL（可选）
+      description: 如果你知道 RSS 地址或主页链接
+      placeholder: "https://..."
+
+  - type: textarea
+    id: context
+    attributes:
+      label: 补充说明 / Context
+      description: 为什么需要这个源？缺了什么信息？
+      placeholder: "我在 XX 看到了一条关于 YY 的新闻，但 reado 没有覆盖"
