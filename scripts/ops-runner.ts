@@ -390,51 +390,59 @@ function quality() {
 
   // 2. 网站访问数据（Cloudflare Web Analytics GraphQL 优先，Umami 备选）
   let websiteSignal: any = { available: false }
-  const cfApiToken = process.env.CF_API_TOKEN
   const cfAccountId = process.env.CF_ACCOUNT_ID
   const cfSiteTag = process.env.CF_ANALYTICS_SITE_TAG
   const umamiUrl = process.env.UMAMI_API_URL
   const umamiToken = process.env.UMAMI_API_TOKEN
   const umamiWebsiteId = process.env.PUBLIC_UMAMI_ID
 
-  if (cfApiToken && cfAccountId && cfSiteTag) {
+  // 获取 Cloudflare token：环境变量 > wrangler OAuth
+  function getCfToken(): string {
+    if (process.env.CF_API_TOKEN) return process.env.CF_API_TOKEN
+    try { return run('npx wrangler auth token 2>/dev/null').trim() } catch { return '' }
+  }
+
+  if (cfAccountId && cfSiteTag) {
     // ── Cloudflare Web Analytics (RUM) via GraphQL ──
-    try {
-      const nowISO = new Date().toISOString()
-      const oneDayAgoISO = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString()
-      const query = `{
-        viewer {
-          accounts(filter:{accountTag:"${cfAccountId}"}){
-            total:rumPageloadEventsAdaptiveGroups(
-              filter:{siteTag:"${cfSiteTag}",datetime_geq:"${oneDayAgoISO}",datetime_lt:"${nowISO}"}
-              limit:1
-            ){ count sum { visits } }
-            topPages:rumPageloadEventsAdaptiveGroups(
-              filter:{siteTag:"${cfSiteTag}",datetime_geq:"${oneDayAgoISO}",datetime_lt:"${nowISO}"}
-              limit:5 orderBy:[count_DESC]
-            ){ count dimensions { path:requestPath } }
+    const cfToken = getCfToken()
+    if (cfToken) {
+      try {
+        const nowISO = new Date().toISOString()
+        const oneDayAgoISO = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString()
+        const query = `{
+          viewer {
+            accounts(filter:{accountTag:"${cfAccountId}"}){
+              total:rumPageloadEventsAdaptiveGroups(
+                filter:{siteTag:"${cfSiteTag}",datetime_geq:"${oneDayAgoISO}",datetime_lt:"${nowISO}"}
+                limit:1
+              ){ count sum { visits } }
+              topPages:rumPageloadEventsAdaptiveGroups(
+                filter:{siteTag:"${cfSiteTag}",datetime_geq:"${oneDayAgoISO}",datetime_lt:"${nowISO}"}
+                limit:5 orderBy:[count_DESC]
+              ){ count dimensions { path:requestPath } }
+            }
+          }
+        }`
+        const escaped = JSON.stringify({ query })
+        const raw = run(`curl -s -X POST "https://api.cloudflare.com/client/v4/graphql" -H "Authorization: Bearer ${cfToken}" -H "Content-Type: application/json" -d '${escaped.replace(/'/g, "'\\''")}'`)
+        const resp = JSON.parse(raw)
+        const acct = resp?.data?.viewer?.accounts?.[0]
+        if (acct) {
+          const total = acct.total?.[0]
+          websiteSignal = {
+            available: true,
+            provider: 'cloudflare',
+            period: '24h',
+            pageviews: total?.count || 0,
+            visits: total?.sum?.visits || 0,
+            topPages: (acct.topPages || []).map((p: any) => ({
+              url: p.dimensions?.path || '',
+              views: p.count || 0
+            }))
           }
         }
-      }`
-      const escaped = JSON.stringify({ query })
-      const raw = run(`curl -s -X POST "https://api.cloudflare.com/client/v4/graphql" -H "Authorization: Bearer ${cfApiToken}" -H "Content-Type: application/json" -d '${escaped.replace(/'/g, "'\\''")}'`)
-      const resp = JSON.parse(raw)
-      const acct = resp?.data?.viewer?.accounts?.[0]
-      if (acct) {
-        const total = acct.total?.[0]
-        websiteSignal = {
-          available: true,
-          provider: 'cloudflare',
-          period: '24h',
-          pageviews: total?.count || 0,
-          visits: total?.sum?.visits || 0,
-          topPages: (acct.topPages || []).map((p: any) => ({
-            url: p.dimensions?.path || '',
-            views: p.count || 0
-          }))
-        }
-      }
-    } catch {}
+      } catch {}
+    }
   }
 
   if (!websiteSignal.available && umamiUrl && umamiToken && umamiWebsiteId) {

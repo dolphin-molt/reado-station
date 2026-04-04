@@ -35,6 +35,13 @@
       "description": "GitHub CLI，用于 Issue 管理、PR、发布"
     },
     {
+      "name": "wrangler",
+      "install": "npm install -g wrangler && wrangler login",
+      "verify": "npx wrangler auth token",
+      "required": false,
+      "description": "Cloudflare CLI，用于 OAuth 鉴权读取 Web Analytics 数据"
+    },
+    {
       "name": "lark-cli",
       "install": "npm install -g lark-cli && lark-cli config init && lark-cli auth login",
       "verify": "lark-cli auth status",
@@ -72,9 +79,9 @@
 
   "envVars": [
     { "key": "SILICONFLOW_API_KEY", "required": false, "description": "翻译用（SiliconFlow Qwen3-8B）" },
-    { "key": "CF_API_TOKEN", "required": false, "description": "Cloudflare API Token（需 Account Analytics Read 权限）" },
-    { "key": "CF_ACCOUNT_ID", "required": false, "description": "Cloudflare Account ID" },
-    { "key": "CF_ANALYTICS_SITE_TAG", "required": false, "description": "Cloudflare Web Analytics Site Tag（RUM 站点标识）" },
+    { "key": "CF_API_TOKEN", "required": false, "description": "Cloudflare API Token（可选，未设则自动用 wrangler OAuth token）" },
+    { "key": "CF_ACCOUNT_ID", "required": false, "description": "Cloudflare Account ID（启用 CF 分析必填）" },
+    { "key": "CF_ANALYTICS_SITE_TAG", "required": false, "description": "Cloudflare Web Analytics Site Tag（启用 CF 分析必填）" },
     { "key": "PUBLIC_CF_ANALYTICS_TOKEN", "required": false, "description": "Cloudflare Web Analytics Token（网站端 JS beacon）" },
     { "key": "PUBLIC_UMAMI_ID", "required": false, "description": "Umami 网站 ID（备选方案，网站端脚本）" },
     { "key": "UMAMI_API_URL", "required": false, "description": "Umami API 地址（备选方案）" },
