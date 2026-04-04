@@ -388,12 +388,57 @@ function quality() {
     }
   }
 
-  // 2. 网站访问数据（Umami API）
+  // 2. 网站访问数据（Cloudflare Web Analytics GraphQL 优先，Umami 备选）
   let websiteSignal: any = { available: false }
-  const umamiUrl = process.env.UMAMI_API_URL       // e.g. https://cloud.umami.is
+  const cfApiToken = process.env.CF_API_TOKEN
+  const cfAccountId = process.env.CF_ACCOUNT_ID
+  const cfSiteTag = process.env.CF_ANALYTICS_SITE_TAG
+  const umamiUrl = process.env.UMAMI_API_URL
   const umamiToken = process.env.UMAMI_API_TOKEN
   const umamiWebsiteId = process.env.PUBLIC_UMAMI_ID
-  if (umamiUrl && umamiToken && umamiWebsiteId) {
+
+  if (cfApiToken && cfAccountId && cfSiteTag) {
+    // ── Cloudflare Web Analytics (RUM) via GraphQL ──
+    try {
+      const nowISO = new Date().toISOString()
+      const oneDayAgoISO = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString()
+      const query = `{
+        viewer {
+          accounts(filter:{accountTag:"${cfAccountId}"}){
+            total:rumPageloadEventsAdaptiveGroups(
+              filter:{siteTag:"${cfSiteTag}",datetime_geq:"${oneDayAgoISO}",datetime_lt:"${nowISO}"}
+              limit:1
+            ){ count sum { visits } }
+            topPages:rumPageloadEventsAdaptiveGroups(
+              filter:{siteTag:"${cfSiteTag}",datetime_geq:"${oneDayAgoISO}",datetime_lt:"${nowISO}"}
+              limit:5 orderBy:[count_DESC]
+            ){ count dimensions { path:requestPath } }
+          }
+        }
+      }`
+      const escaped = JSON.stringify({ query })
+      const raw = run(`curl -s -X POST "https://api.cloudflare.com/client/v4/graphql" -H "Authorization: Bearer ${cfApiToken}" -H "Content-Type: application/json" -d '${escaped.replace(/'/g, "'\\''")}'`)
+      const resp = JSON.parse(raw)
+      const acct = resp?.data?.viewer?.accounts?.[0]
+      if (acct) {
+        const total = acct.total?.[0]
+        websiteSignal = {
+          available: true,
+          provider: 'cloudflare',
+          period: '24h',
+          pageviews: total?.count || 0,
+          visits: total?.sum?.visits || 0,
+          topPages: (acct.topPages || []).map((p: any) => ({
+            url: p.dimensions?.path || '',
+            views: p.count || 0
+          }))
+        }
+      }
+    } catch {}
+  }
+
+  if (!websiteSignal.available && umamiUrl && umamiToken && umamiWebsiteId) {
+    // ── Umami 备选 ──
     try {
       const now = Date.now()
       const oneDayAgo = now - 24 * 60 * 60 * 1000
@@ -403,12 +448,10 @@ function quality() {
       const pages = JSON.parse(pagesRaw)
       websiteSignal = {
         available: true,
+        provider: 'umami',
         period: '24h',
         pageviews: stats.pageviews?.value || 0,
-        visitors: stats.visitors?.value || 0,
-        avgVisitDuration: stats.totaltime?.value && stats.visits?.value
-          ? Math.round((stats.totaltime.value / stats.visits.value))
-          : 0,
+        visits: stats.visitors?.value || 0,
         topPages: (pages || []).slice(0, 5).map((p: any) => ({ url: p.x, views: p.y }))
       }
     } catch {}
