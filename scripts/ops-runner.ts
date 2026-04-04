@@ -218,16 +218,73 @@ function publish() {
     console.log(JSON.stringify({ phase: 'PUBLISH', status: 'skip', reason: 'nothing to commit' }))
     return
   }
+
   const now = new Date()
   const dateStr = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`
+
+  // 发布前打 tag，作为回滚锚点
+  const tagName = `pre-publish/${dateStr}-${batch}`
+  run(`git tag -f ${tagName}`)
+
   run('git add data/ site/src/data/ site/public/images/')
   const commitMsg = `data: ${dateStr} ${batch} collection + digest`
-  run(`git commit -m "${commitMsg}"`)
+  const commitResult = run(`git commit -m "${commitMsg}"`)
+
+  if (commitResult.includes('ERROR')) {
+    // commit 失败，回滚到 tag
+    run(`git reset --hard ${tagName}`)
+    console.log(JSON.stringify({
+      phase: 'PUBLISH',
+      status: 'error',
+      error: 'commit failed, rolled back',
+      output: commitResult.slice(-300)
+    }, null, 2))
+    return
+  }
+
   const pushResult = run('git push')
+  if (pushResult.includes('ERROR')) {
+    // push 失败，revert 这次 commit（保留在本地历史中）
+    run('git revert --no-edit HEAD')
+    console.log(JSON.stringify({
+      phase: 'PUBLISH',
+      status: 'error',
+      error: 'push failed, commit reverted',
+      rollbackTag: tagName,
+      output: pushResult.slice(-300)
+    }, null, 2))
+    return
+  }
+
   console.log(JSON.stringify({
     phase: 'PUBLISH',
-    status: pushResult.includes('ERROR') ? 'error' : 'ok',
+    status: 'ok',
     commit: commitMsg,
+    rollbackTag: tagName,
+    output: pushResult.slice(-300)
+  }, null, 2))
+}
+
+// ─── Rollback ───
+function rollback() {
+  // 找到最近的 pre-publish tag
+  const tags = run('git tag -l "pre-publish/*" --sort=-creatordate').trim().split('\n').filter(Boolean)
+  if (tags.length === 0) {
+    console.log(JSON.stringify({ phase: 'ROLLBACK', status: 'error', error: 'no pre-publish tags found' }))
+    return
+  }
+  const latestTag = tags[0]
+  const currentHead = run('git rev-parse --short HEAD').trim()
+
+  // revert 到 tag 对应的状态
+  run(`git revert --no-edit ${latestTag}..HEAD`)
+  const pushResult = run('git push')
+
+  console.log(JSON.stringify({
+    phase: 'ROLLBACK',
+    status: pushResult.includes('ERROR') ? 'error' : 'ok',
+    from: currentHead,
+    to: latestTag,
     output: pushResult.slice(-300)
   }, null, 2))
 }
@@ -273,6 +330,7 @@ switch (phase) {
   case 'persist':      persist(); break
   case 'publish':      publish(); break
   case 'publish-lark': publishLark(); break
+  case 'rollback':     rollback(); break
   default:
     console.log(JSON.stringify({
       error: `Unknown phase: ${phase}`,
