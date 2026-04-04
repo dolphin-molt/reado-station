@@ -1,0 +1,75 @@
+{
+  "_doc": "Agent 运营清单。声明运营本项目所需的一切依赖。ONBOARD.md 引导 Agent 按此文件安装。",
+
+  "project": {
+    "name": "reado-station",
+    "repo": "https://github.com/dolphin-molt/reado-station.git",
+    "localPath": "/Users/dolphin/Desktop/Dolphin/reado-station",
+    "description": "AI 情报站自主运营平台"
+  },
+
+  "runtime": {
+    "node": ">=18.0.0",
+    "shell": "bash"
+  },
+
+  "tools": [
+    {
+      "name": "reado",
+      "install": "npm install -g @dolphin-molt/reado",
+      "verify": "reado --version",
+      "required": true,
+      "description": "信息采集 CLI，165+ 信息源"
+    },
+    {
+      "name": "opencli",
+      "install": "npm install -g opencli",
+      "verify": "opencli --version",
+      "required": false,
+      "description": "社交平台采集（Twitter/微博/知乎等，需要 Chrome 登录态）"
+    },
+    {
+      "name": "gh",
+      "install": "brew install gh && gh auth login",
+      "verify": "gh auth status",
+      "required": true,
+      "description": "GitHub CLI，用于 Issue 管理、PR、发布"
+    },
+    {
+      "name": "lark-cli",
+      "install": "npm install -g lark-cli && lark-cli config init && lark-cli auth login",
+      "verify": "lark-cli auth status",
+      "required": false,
+      "description": "飞书 CLI，用于群消息推送和告警"
+    }
+  ],
+
+  "skills": [
+    {
+      "name": "reado-collect",
+      "source": "skills/reado-collect/",
+      "target": "~/.claude/skills/reado-collect/",
+      "description": "情报采集 + 信息源维护"
+    },
+    {
+      "name": "reado-station-ops",
+      "source": "skills/reado-station-ops/",
+      "target": "~/.claude/skills/reado-station-ops/",
+      "description": "网站运营完整闭环（9 Phase）"
+    }
+  ],
+
+  "skillInstall": "bash skills/install.sh",
+
+  "npmInstall": "npm install",
+
+  "config": {
+    "agentConfig": "agent.config.json",
+    "protocol": "AGENT-PROTOCOL.md",
+    "state": "data/ops-state.json"
+  },
+
+  "envVars": [
+    { "key": "SILICONFLOW_API_KEY", "required": false, "description": "翻译用（SiliconFlow Qwen3-8B）" }
+  ]
+}

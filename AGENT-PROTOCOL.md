@@ -3,7 +3,8 @@
 > 任何能执行 Shell 命令 + 读写文件的 AI Agent 都可以按此协议运营。
 > 与具体 LLM 无关——Claude、GPT、Gemini、Qwen、本地模型均可。
 >
-> **新 Agent 入职**：先读 `ONBOARD.md`，再读本文件。
+> **新 Agent 入职**：先读 [`ONBOARD.md`](https://raw.githubusercontent.com/dolphin-molt/reado-station/main/ONBOARD.md)，再读本文件。
+> 入职指南会引导你完成克隆、安装依赖、安装技能包，然后回到本文件开始工作。
 
 ---
 
