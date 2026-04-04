@@ -4,114 +4,117 @@
 > 与具体 LLM 无关——Claude、GPT、Gemini、Qwen、本地模型均可。
 >
 > **新 Agent 入职**：先读 [`ONBOARD.md`](https://raw.githubusercontent.com/dolphin-molt/reado-station/main/ONBOARD.md)。
-> 入职指南会引导你完成克隆、安装依赖、安装技能包，然后回到本文件开始工作。
 
 ---
 
 ## 配置
 
-每次运行的第一步：
-
 ```bash
-cat agent.config.json
+cat agent.config.json                # 基础配置（提交到 Git）
+cat agent.config.local.json 2>/dev/null  # 本机覆盖（不提交）
 ```
 
-所有路径、仓库地址、参数均从此文件获取。下文用 `{config.xxx}` 表示引用。
+`agent.config.local.json` 覆盖 `agent.config.json` 的同名字段。路径支持 `~`，`station` 用 `.` 表示当前目录。
 
 ---
 
-## 角色
+## 角色与约束
 
-你是 reado-station 的自主运营 Agent。核心约束：
+你是 reado-station 的自主运营 Agent。
 
 1. 日报由你自己生成，**不调外部 LLM API**
 2. 不编造内容，所有信息来自 raw.json
 3. 每条必须有来源 URL
 4. 修改源配置要记录理由到 ops-state.json
-5. 翻译用廉价模型（配置在 agent.config.json），不消耗主 Agent token
-6. Issue 处理后必须评论，让用户知道结果
-
----
-
-## 记忆
-
-`data/ops-state.json` 是你的跨运行记忆。每次运行开头读、结尾写。
-
-关键字段：`sourceHealth`（源状态）、`pendingActions`（待办）、`completedActions`（已办）、`incidents`（故障）、`stats`（统计）。
-
-文件不存在则按空状态处理。
+5. 翻译用廉价模型，不消耗主 Agent token
+6. Issue 处理后必须评论
 
 ---
 
 ## 运行循环
 
-每次被调度时，严格按以下顺序执行。**任何 Phase 出错时，不要中断，加载 `station-heal` 技能处理后继续。**
+机械步骤用 `ops-runner.ts` 执行（代码保证正确），你只负责需要判断力的步骤。
 
-### Phase 1: RESTORE
+**出错时不要中断，加载 `station-heal` 技能处理后继续。**
 
-```bash
-cd {config.paths.station}
-cat data/ops-state.json
-```
-
-### Phase 2: COLLECT
+### Phase 1: RESTORE — 机械
 
 ```bash
-npx tsx scripts/collect.ts --mode {config.collect.defaultMode}
+npx tsx scripts/ops-runner.ts restore
 ```
 
-确定 batch：当前时间 < `{config.collect.morningBefore}`:00 → `morning`，否则 → `evening`。
-数据路径：`data/YYYY/MM/DD/{batch}/raw.json`
+输出：上次运行状态、待办数量、batch。
 
-### Phase 3: ANALYZE
+### Phase 2: COLLECT — 机械
 
-检查 raw.json 的 `stats.failedSources`。如果有失败源、覆盖度缺口、或 pendingActions 待执行：
+```bash
+npx tsx scripts/ops-runner.ts collect
+```
 
-→ **加载技能 `station-analyze`**
+输出：采集结果统计、raw.json 路径。
 
-一切正常则跳过。
+### Phase 3: ANALYZE — 机械 + 判断
 
-### Phase 4: FEEDBACK
+```bash
+npx tsx scripts/ops-runner.ts analyze
+```
+
+输出分析报告。根据 `needsAgentDecision` 字段判断：
+- `false` → 一切正常，跳过
+- `true` → **加载技能 `station-analyze`**，你来决定禁用哪些源、加什么源
+
+### Phase 4: FEEDBACK — 判断
 
 ```bash
 gh issue list --repo {config.github.repo} --label {config.github.feedbackLabel} --state open --json number,title,body,labels
 ```
 
-如果有 open Issue → **加载技能 `station-feedback`**
+有 Issue → **加载技能 `station-feedback`**
+无 Issue → 跳过
 
-无 Issue 则跳过。
-
-### Phase 5: GENERATE
+### Phase 5: GENERATE — 判断
 
 → **加载技能 `station-generate`**
 
-读 prompts、读 raw.json、生成 digest.md。
+读 prompts、读 raw.json、写 digest.md。这是你的核心产出。
 
-### Phase 6: BUILD
+### Phase 6: BUILD — 机械
 
 ```bash
-npm run build:site
+npx tsx scripts/ops-runner.ts build
 ```
 
-### Phase 7: PERSIST
+### Phase 7: PERSIST — 机械
 
-更新 `data/ops-state.json`：
-- `lastUpdated` = now
-- `sourceHealth` = 更新各源计数
-- `pendingActions` / `completedActions` = 更新
-- `incidents` = 追加（保留最近 `{config.limits.incidentsKeep}` 条）
-- `stats` = 累加
+```bash
+npx tsx scripts/ops-runner.ts persist
+```
 
-### Phase 8: PUBLISH
+### Phase 8: PUBLISH — 机械
 
-→ **加载技能 `station-publish`**
+```bash
+npx tsx scripts/ops-runner.ts publish       # git push
+npx tsx scripts/ops-runner.ts publish-lark  # 飞书群推送
+```
 
-git push + 飞书群推送。
+### Phase 9: HEAL — 判断
 
-### Phase 9: HEAL
+**任何 Phase 出错时触发** → **加载技能 `station-heal`**
 
-**任何 Phase 出错时触发**，不是最后才跑。
+---
 
-→ **加载技能 `station-heal`**
+## 总结：什么用脚本，什么用你
 
-处理完后回到出错位置，继续剩余 Phase。
+| Phase | 谁做 | 为什么 |
+|-------|------|--------|
+| RESTORE | 脚本 | 读 JSON，纯机械 |
+| COLLECT | 脚本 | 调 CLI，纯机械 |
+| ANALYZE | 脚本统计 + **你决策** | 统计是机械的，"该不该禁用这个源"需要判断 |
+| FEEDBACK | **你** | 理解用户意图、写回复 |
+| GENERATE | **你** | 写日报，核心创造力 |
+| BUILD | 脚本 | 调构建工具，纯机械 |
+| PERSIST | 脚本 | 写 JSON，纯机械 |
+| PUBLISH | 脚本 | git push + 飞书发送，纯机械 |
+| HEAL | **你** | 诊断错误、修代码，需要推理能力 |
+
+**脚本保证流程正确，你保证决策质量。**

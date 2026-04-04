@@ -54,7 +54,11 @@ lark-cli auth status   # 可选（飞书推送）
 ### 3.3 技能包
 
 ```bash
+# Mac / Linux
 bash skills/install.sh
+
+# Windows (或任何有 Node.js 的环境)
+node skills/install.cjs
 ```
 
 安装脚本会自动检测你当前环境中的 AI 工具，并将技能包安装到对应位置：
@@ -74,17 +78,17 @@ bash skills/install.sh
 ## 第四步：读取配置
 
 ```bash
-cat agent.config.json
+cat agent.config.json                    # 基础配置（所有环境通用）
+cat agent.config.local.json 2>/dev/null  # 本机覆盖（可选，不提交 Git）
 ```
 
-所有路径、仓库地址、运行参数都在这里。记住关键路径：
+`agent.config.json` 使用可移植的默认值（相对路径、`~`）。如果本机有特殊路径（如 reado 项目位置），创建 `agent.config.local.json` 覆盖：
 
-| 配置项 | 含义 |
-|--------|------|
-| `paths.station` | 本项目根目录 |
-| `paths.reado` | reado CLI 项目目录（修改信息源时用） |
-| `github.repo` | GitHub 仓库标识 |
-| `lark.chatId` | 飞书群 ID |
+```json
+{ "paths": { "reado": "/your/path/to/reado" } }
+```
+
+脚本会自动合并两个文件、解析 `~`、发现 reado 路径。
 
 ---
 
@@ -94,13 +98,9 @@ cat agent.config.json
 cat AGENT-PROTOCOL.md
 ```
 
-这是你的**工作手册**，定义了 9 个 Phase 的完整运营循环：
+这是你的**工作手册**——一张路由表，告诉你 9 个 Phase 分别调什么脚本、什么时候需要你做判断。
 
-```
-RESTORE → COLLECT → ANALYZE → FEEDBACK → GENERATE → BUILD → PERSIST → PUBLISH → HEAL
-```
-
-每个 Phase 做什么、读什么文件、写什么文件、出错怎么办，全在里面。
+机械步骤（采集、构建、发布）由 `scripts/ops-runner.ts` 执行，代码保证正确。你只负责需要判断力和创造力的步骤（分析决策、处理反馈、写日报、修故障）。
 
 ---
 

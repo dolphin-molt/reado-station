@@ -2,6 +2,7 @@ node_modules/
 dist/
 .env
 .env.local
+agent.config.local.json
 
 # Data files are committed (GitHub as backup)
 # But local collection temp files are not

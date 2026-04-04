@@ -1,9 +1,9 @@
 {
-  "_doc": "Agent 运营配置。新环境部署时修改此文件即可，AGENT-PROTOCOL.md 通过此文件获取所有路径和参数。",
+  "_doc": "Agent 运营配置（可移植版本）。机器相关的路径放 agent.config.local.json（已 gitignore）。",
 
   "paths": {
-    "station": "/Users/dolphin/Desktop/Dolphin/reado-station",
-    "reado": "/Users/dolphin/Desktop/Dolphin/reado",
+    "station": ".",
+    "reado": "",
     "twitterWatchlist": "~/.reado/twitter-watchlist.txt",
     "dailyOutput": "~/ai-daily"
   },
@@ -50,7 +50,7 @@
   },
 
   "lark": {
-    "cli": "/Users/dolphin/.npm-global/bin/lark-cli",
+    "cli": "lark-cli",
     "chatId": "oc_449573991daff2ea1b1a4cbbb20f0a03",
     "chatName": "reado情报站"
   }
