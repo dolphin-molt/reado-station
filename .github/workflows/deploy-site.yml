@@ -52,6 +52,13 @@ jobs:
       - name: Build site data (JSON)
         run: npx tsx scripts/build-site-data.ts
 
+      - name: Translate content (Qwen3-8B)
+        run: npx tsx scripts/translate.ts
+        timeout-minutes: 5
+        env:
+          SILICONFLOW_API_KEY: ${{ secrets.SILICONFLOW_API_KEY }}
+        continue-on-error: true  # 翻译失败不阻断部署，回退显示原文
+
       - name: Fetch OG images
         run: npx tsx scripts/fetch-images.ts
         timeout-minutes: 5
