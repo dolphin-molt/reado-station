@@ -16,7 +16,9 @@
     "pipeline:local": "npm run collect:local",
     "build:site-data": "tsx scripts/build-site-data.ts",
     "build:images": "tsx scripts/fetch-images.ts",
-    "build:site": "npm run build:site-data && npm run build:images && cd site && npx astro build",
+    "translate": "tsx scripts/translate.ts",
+    "build:site": "npm run build:site-data && npm run translate && npm run build:images && cd site && npx astro build",
+    "build:site-no-translate": "npm run build:site-data && npm run build:images && cd site && npx astro build",
     "build": "tsc --noEmit",
     "test": "vitest"
   },

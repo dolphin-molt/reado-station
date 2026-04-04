@@ -1,8 +1,12 @@
 ---
+import type { Lang } from '../i18n/translations';
+
 interface NewsItem {
   title: string;
+  titleZh?: string;
   url: string;
   summary: string;
+  summaryZh?: string;
   sourceName: string;
   category: string;
   imageUrl?: string;
@@ -11,9 +15,18 @@ interface NewsItem {
 interface Props {
   main: NewsItem;
   sidebar: NewsItem[];
+  lang?: Lang;
 }
 
-const { main, sidebar } = Astro.props;
+const { main, sidebar, lang = 'zh' } = Astro.props;
+
+function d(item: NewsItem, field: 'title' | 'summary') {
+  if (lang === 'zh') {
+    const zhField = field === 'title' ? 'titleZh' : 'summaryZh';
+    if (item[zhField]) return item[zhField];
+  }
+  return item[field];
+}
 ---
 
 <section class="hero">
@@ -21,15 +34,15 @@ const { main, sidebar } = Astro.props;
     <div class="hero__grid">
       <div class="hero__main">
         <span class="source-tag">{main.sourceName}</span>
-        <h1><a href={main.url} target="_blank" rel="noopener">{main.title}</a></h1>
-        <p class="summary">{main.summary}</p>
+        <h1><a href={main.url} target="_blank" rel="noopener">{d(main, 'title')}</a></h1>
+        <p class="summary">{d(main, 'summary')}</p>
       </div>
       <div class="hero__sidebar">
         {sidebar.map((item) => (
           <div class="hero__sidebar-item">
             <span class="source-tag">{item.sourceName}</span>
-            <h3><a href={item.url} target="_blank" rel="noopener">{item.title}</a></h3>
-            <p class="summary">{item.summary}</p>
+            <h3><a href={item.url} target="_blank" rel="noopener">{d(item, 'title')}</a></h3>
+            <p class="summary">{d(item, 'summary')}</p>
           </div>
         ))}
       </div>

@@ -54,7 +54,7 @@ const pageTitle = 'reado | ' + (latestDay?.date || 'AI Intelligence Station');
   />
 
   {heroMain && (
-    <Hero main={heroMain} sidebar={heroSidebar} />
+    <Hero main={heroMain} sidebar={heroSidebar} lang={lang} />
   )}
 
   <main class="container">
@@ -76,8 +76,10 @@ const pageTitle = 'reado | ' + (latestDay?.date || 'AI Intelligence Station');
           {remainingNews.slice(0, 9).map((item: any, idx: number) => (
             <NewsCard
               title={item.title}
+              titleZh={item.titleZh}
               url={item.url}
               summary={item.summary}
+              summaryZh={item.summaryZh}
               sourceName={item.sourceName}
               category={item.category}
               imageUrl={item.imageUrl}
@@ -102,8 +104,10 @@ const pageTitle = 'reado | ' + (latestDay?.date || 'AI Intelligence Station');
               {[...opensource, ...academic].slice(0, 6).map((item: any) => (
                 <NewsCard
                   title={item.title}
+                  titleZh={item.titleZh}
                   url={item.url}
                   summary={item.summary}
+                  summaryZh={item.summaryZh}
                   sourceName={item.sourceName}
                   category={item.category}
                   imageUrl={item.imageUrl}
@@ -122,17 +126,21 @@ const pageTitle = 'reado | ' + (latestDay?.date || 'AI Intelligence Station');
               <span class="count">{community.length}</span>
             </div>
             <ul class="compact-list">
-              {community.slice(0, 8).map((item: any) => (
+              {community.slice(0, 8).map((item: any) => {
+                const dTitle = lang === 'zh' && item.titleZh ? item.titleZh : item.title;
+                const dSummary = lang === 'zh' && item.summaryZh ? item.summaryZh : item.summary;
+                return (
                 <li class="compact-item">
                   <div>
                     <div class="compact-item__title">
-                      <a href={item.url} target="_blank" rel="noopener">{item.title}</a>
+                      <a href={item.url} target="_blank" rel="noopener">{dTitle}</a>
                     </div>
-                    {item.summary && <p class="compact-item__summary">{item.summary}</p>}
+                    {dSummary && <p class="compact-item__summary">{dSummary}</p>}
                   </div>
                   <span class="compact-item__source">{item.sourceName}</span>
                 </li>
-              ))}
+                );
+              })}
             </ul>
           </section>
         )}
@@ -146,16 +154,19 @@ const pageTitle = 'reado | ' + (latestDay?.date || 'AI Intelligence Station');
               <span class="count">{twitter.length}</span>
             </div>
             <ul class="compact-list">
-              {twitter.slice(0, 10).map((item: any) => (
+              {twitter.slice(0, 10).map((item: any) => {
+                const dTitle = lang === 'zh' && item.titleZh ? item.titleZh : item.title;
+                return (
                 <li class="compact-item">
                   <div>
                     <div class="compact-item__title">
-                      <a href={item.url} target="_blank" rel="noopener">{item.title}</a>
+                      <a href={item.url} target="_blank" rel="noopener">{dTitle}</a>
                     </div>
                     <span class="compact-item__source">{item.sourceName}</span>
                   </div>
                 </li>
-              ))}
+                );
+              })}
             </ul>
           </section>
         )}
