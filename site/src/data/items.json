@@ -1,5 +1,1305 @@
 [
   {
+    "title": "hsliuping/TradingAgents-CN",
+    "url": "https://github.com/hsliuping/TradingAgents-CN",
+    "summary": "基于多智能体LLM的中文金融交易框架 - TradingAgents中文增强版 [Python] | +350 stars",
+    "publishedAt": "2026-04-04T10:26:36.550Z",
+    "source": "github-trending-python",
+    "sourceName": "GitHub Trending (Python)",
+    "id": "2026-04-04-evening-0",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "opensource",
+    "imageUrl": "/images/2026-04-04-evening-0.webp"
+  },
+  {
+    "title": "yusufkaraaslan/Skill_Seekers",
+    "url": "https://github.com/yusufkaraaslan/Skill_Seekers",
+    "summary": "Convert documentation websites, GitHub repositories, and PDFs into Claude AI skills with automatic conflict detection [Python] | +158 stars",
+    "publishedAt": "2026-04-04T10:26:36.550Z",
+    "source": "github-trending-python",
+    "sourceName": "GitHub Trending (Python)",
+    "id": "2026-04-04-evening-1",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "opensource",
+    "imageUrl": "/images/2026-04-04-evening-1.webp"
+  },
+  {
+    "title": "microsoft/apm",
+    "url": "https://github.com/microsoft/apm",
+    "summary": "Agent Package Manager [Python] | +59 stars",
+    "publishedAt": "2026-04-04T10:26:36.550Z",
+    "source": "github-trending-python",
+    "sourceName": "GitHub Trending (Python)",
+    "id": "2026-04-04-evening-2",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "opensource",
+    "imageUrl": "/images/2026-04-04-evening-2.webp"
+  },
+  {
+    "title": "vectorize-io/hindsight",
+    "url": "https://github.com/vectorize-io/hindsight",
+    "summary": "Hindsight: Agent Memory That Learns [Python] | +114 stars",
+    "publishedAt": "2026-04-04T10:26:36.550Z",
+    "source": "github-trending-python",
+    "sourceName": "GitHub Trending (Python)",
+    "id": "2026-04-04-evening-3",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "opensource",
+    "imageUrl": "/images/2026-04-04-evening-3.webp"
+  },
+  {
+    "title": "PostHog/posthog",
+    "url": "https://github.com/PostHog/posthog",
+    "summary": "🦔 PostHog is an all-in-one developer platform for building successful products. We offer product analytics, web analytics, session replay, error tracking, feature flags, experimentation, surveys, data warehouse, a CDP, and an AI product assistant to help debug your code, ship features faster, and keep all your usage and customer data in one stack. [Python] | +22 stars",
+    "publishedAt": "2026-04-04T10:26:36.550Z",
+    "source": "github-trending-python",
+    "sourceName": "GitHub Trending (Python)",
+    "id": "2026-04-04-evening-4",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "opensource",
+    "imageUrl": "/images/2026-04-04-evening-4.webp"
+  },
+  {
+    "title": "Alishahryar1/free-claude-code",
+    "url": "https://github.com/Alishahryar1/free-claude-code",
+    "summary": "Use claude-code for free in the terminal, VSCode extension or via discord like openclaw [Python] | +55 stars",
+    "publishedAt": "2026-04-04T10:26:36.550Z",
+    "source": "github-trending-python",
+    "sourceName": "GitHub Trending (Python)",
+    "id": "2026-04-04-evening-5",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "opensource",
+    "imageUrl": "/images/2026-04-04-evening-5.webp"
+  },
+  {
+    "title": "Blaizzy/mlx-vlm",
+    "url": "https://github.com/Blaizzy/mlx-vlm",
+    "summary": "MLX-VLM is a package for inference and fine-tuning of Vision Language Models (VLMs) on your Mac using MLX. [Python] | +499 stars",
+    "publishedAt": "2026-04-04T10:26:36.550Z",
+    "source": "github-trending-python",
+    "sourceName": "GitHub Trending (Python)",
+    "id": "2026-04-04-evening-6",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "opensource",
+    "imageUrl": "/images/2026-04-04-evening-6.webp"
+  },
+  {
+    "title": "microsoft/BitNet",
+    "url": "https://github.com/microsoft/BitNet",
+    "summary": "Official inference framework for 1-bit LLMs [Python] | +86 stars",
+    "publishedAt": "2026-04-04T10:26:36.550Z",
+    "source": "github-trending-python",
+    "sourceName": "GitHub Trending (Python)",
+    "id": "2026-04-04-evening-7",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "opensource",
+    "imageUrl": "/images/2026-04-04-evening-7.webp"
+  },
+  {
+    "title": "MervinPraison/PraisonAI",
+    "url": "https://github.com/MervinPraison/PraisonAI",
+    "summary": "PraisonAI 🦞 - Your 24/7 AI employee team. Automate and solve complex challenges with low-code multi-agent AI that plans, researches, codes, and delivers to Telegram, Discord, and WhatsApp. Handoffs, guardrails, memory, RAG, 100+ LLMs. [Python] | +116 stars",
+    "publishedAt": "2026-04-04T10:26:36.550Z",
+    "source": "github-trending-python",
+    "sourceName": "GitHub Trending (Python)",
+    "id": "2026-04-04-evening-8",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "opensource",
+    "imageUrl": "/images/2026-04-04-evening-8.webp"
+  },
+  {
+    "title": "LearningCircuit/local-deep-research",
+    "url": "https://github.com/LearningCircuit/local-deep-research",
+    "summary": "Local Deep Research achieves ~95% on SimpleQA benchmark (tested with GPT-4.1-mini). Supports local and cloud LLMs (Ollama, Google, Anthropic, ...). Searches 10+ sources - arXiv, PubMed, web, and your private documents. Everything Local & Encrypted. [Python] | +12 stars",
+    "publishedAt": "2026-04-04T10:26:36.550Z",
+    "source": "github-trending-python",
+    "sourceName": "GitHub Trending (Python)",
+    "id": "2026-04-04-evening-9",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "opensource",
+    "imageUrl": "/images/2026-04-04-evening-9.webp"
+  },
+  {
+    "title": "oumi-ai/oumi",
+    "url": "https://github.com/oumi-ai/oumi",
+    "summary": "Easily fine-tune, evaluate and deploy gpt-oss, Qwen3, DeepSeek-R1, or any open source LLM / VLM! [Python] | +29 stars",
+    "publishedAt": "2026-04-04T10:26:36.550Z",
+    "source": "github-trending-python",
+    "sourceName": "GitHub Trending (Python)",
+    "id": "2026-04-04-evening-10",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "opensource",
+    "imageUrl": "/images/2026-04-04-evening-10.webp"
+  },
+  {
+    "title": "Yeachan-Heo/oh-my-codex",
+    "url": "https://github.com/Yeachan-Heo/oh-my-codex",
+    "summary": "OmX - Oh My codeX: Your codex is not alone. Add hooks, agent teams, HUDs, and so much more. [TypeScript] | +3047 stars",
+    "publishedAt": "2026-04-04T10:26:35.324Z",
+    "source": "github-trending",
+    "sourceName": "GitHub Trending",
+    "id": "2026-04-04-evening-11",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "opensource",
+    "imageUrl": "/images/2026-04-04-evening-11.webp"
+  },
+  {
+    "title": "onyx-dot-app/onyx",
+    "url": "https://github.com/onyx-dot-app/onyx",
+    "summary": "Open Source AI Platform - AI Chat with advanced features that works with every LLM [Python] | +1852 stars",
+    "publishedAt": "2026-04-04T10:26:35.324Z",
+    "source": "github-trending",
+    "sourceName": "GitHub Trending",
+    "id": "2026-04-04-evening-12",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "opensource",
+    "imageUrl": "/images/2026-04-04-evening-12.webp"
+  },
+  {
+    "title": "google-research/timesfm",
+    "url": "https://github.com/google-research/timesfm",
+    "summary": "TimesFM (Time Series Foundation Model) is a pretrained time-series foundation model developed by Google Research for time-series forecasting. [Python] | +916 stars",
+    "publishedAt": "2026-04-04T10:26:35.324Z",
+    "source": "github-trending",
+    "sourceName": "GitHub Trending",
+    "id": "2026-04-04-evening-13",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "opensource",
+    "imageUrl": "/images/2026-04-04-evening-13.webp"
+  },
+  {
+    "title": "siddharthvaddem/openscreen",
+    "url": "https://github.com/siddharthvaddem/openscreen",
+    "summary": "Create stunning demos for free. Open-source, no subscriptions, no watermarks, and free for commercial use. An alternative to Screen Studio. [TypeScript] | +2771 stars",
+    "publishedAt": "2026-04-04T10:26:35.324Z",
+    "source": "github-trending",
+    "sourceName": "GitHub Trending",
+    "id": "2026-04-04-evening-14",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "opensource",
+    "imageUrl": "/images/2026-04-04-evening-14.webp"
+  },
+  {
+    "title": "dmtrKovalenko/fff.nvim",
+    "url": "https://github.com/dmtrKovalenko/fff.nvim",
+    "summary": "The fastest and the most accurate file search toolkit for AI agents, Neovim, Rust, C, and NodeJS [Rust] | +750 stars",
+    "publishedAt": "2026-04-04T10:26:35.324Z",
+    "source": "github-trending",
+    "sourceName": "GitHub Trending",
+    "id": "2026-04-04-evening-15",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "opensource",
+    "imageUrl": "/images/2026-04-04-evening-15.webp"
+  },
+  {
+    "title": "f/prompts.chat",
+    "url": "https://github.com/f/prompts.chat",
+    "summary": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy. [HTML] | +375 stars",
+    "publishedAt": "2026-04-04T10:26:35.324Z",
+    "source": "github-trending",
+    "sourceName": "GitHub Trending",
+    "id": "2026-04-04-evening-16",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "opensource",
+    "imageUrl": "/images/2026-04-04-evening-16.webp"
+  },
+  {
+    "title": "sherlock-project/sherlock",
+    "url": "https://github.com/sherlock-project/sherlock",
+    "summary": "Hunt down social media accounts by username across social networks [Python] | +1192 stars",
+    "publishedAt": "2026-04-04T10:26:35.324Z",
+    "source": "github-trending",
+    "sourceName": "GitHub Trending",
+    "id": "2026-04-04-evening-17",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "opensource",
+    "imageUrl": "/images/2026-04-04-evening-17.webp"
+  },
+  {
+    "title": "State of AI in 2026: LLMs, Coding, Scaling Laws, China, Agents, GPUs, AGI | Lex Fridman Podcast #490",
+    "url": "https://www.youtube.com/watch?v=EV7WhVT270Q",
+    "summary": "",
+    "publishedAt": "2026-04-04T10:12:10.000Z",
+    "source": "yt-lex-fridman",
+    "sourceName": "Lex Fridman (YouTube)",
+    "id": "2026-04-04-evening-18",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "tech-media",
+    "imageUrl": "/images/2026-04-04-evening-18.webp"
+  },
+  {
+    "title": "Anthropic封堵第三方工具“薅羊毛”，OpenClaw被迫出局，创始人早已投奔OpenAI",
+    "url": "https://www.tmtpost.com/7941920.html",
+    "summary": "“AI平台进入主权时代”的典型信号。",
+    "publishedAt": "2026-04-04T09:58:00.000Z",
+    "source": "tmtpost",
+    "sourceName": "钛媒体",
+    "id": "2026-04-04-evening-19",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "china-media",
+    "imageUrl": "/images/2026-04-04-evening-19.webp"
+  },
+  {
+    "title": "CSIS研讨会：美中技术竞争转向系统集成与具身AI领域 - 虎嗅",
+    "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE1BcTI4SFUyX2lxS2tHS0hmWnNicHBTR21HNFN6ZkdQRk1ZZFNVVmk0TDUySnVyWjNVd0E1NU1XUzdzU0FqaEY3WkxVbEQ0bUZZZnVVNQ?oc=5",
+    "summary": "CSIS研讨会：美中技术竞争转向系统集成与具身AI领域 虎嗅",
+    "publishedAt": "2026-04-04T09:05:13.000Z",
+    "source": "huxiu",
+    "sourceName": "虎嗅",
+    "id": "2026-04-04-evening-20",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "china-media",
+    "imageUrl": "/images/2026-04-04-evening-20.webp"
+  },
+  {
+    "title": "AI会感到绝望？Anthropic 最新研究给出了一个更吓人的说法 - 虎嗅",
+    "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTFBFRnFfSF9oWDlxWVZGS05aM2xRZ2FlTVV4SzA3MVJReWdnbVVUOFNpZndLNXZscTMwUnM4VlpuWmxvMFhaTVlnTFoyaEsyaHRsRXltZg?oc=5",
+    "summary": "AI会感到绝望？Anthropic 最新研究给出了一个更吓人的说法 虎嗅",
+    "publishedAt": "2026-04-04T09:04:18.000Z",
+    "source": "huxiu",
+    "sourceName": "虎嗅",
+    "id": "2026-04-04-evening-21",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "china-media",
+    "imageUrl": "/images/2026-04-04-evening-21.webp"
+  },
+  {
+    "title": "OpenAI reshuffles leadership as health issues force key executives to step back",
+    "url": "https://the-decoder.com/openai-reshuffles-leadership-as-health-issues-force-key-executives-to-step-back/",
+    "summary": "Three executives are stepping back at OpenAI, two for health reasons. President Greg Brockman steps in to fill part of the gap. The article OpenAI reshuffles leadership as health issues force key exec...",
+    "publishedAt": "2026-04-04T09:04:03.000Z",
+    "source": "the-decoder",
+    "sourceName": "The Decoder",
+    "id": "2026-04-04-evening-22",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "tech-media",
+    "imageUrl": "/images/2026-04-04-evening-22.webp"
+  },
+  {
+    "title": "OpenClaw: The Viral AI Agent that Broke the Internet - Peter Steinberger | Lex Fridman Podcast #491",
+    "url": "https://www.youtube.com/watch?v=YFjfBk8HI5o",
+    "summary": "",
+    "publishedAt": "2026-04-04T08:52:45.000Z",
+    "source": "yt-lex-fridman",
+    "sourceName": "Lex Fridman (YouTube)",
+    "id": "2026-04-04-evening-23",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "tech-media",
+    "imageUrl": "/images/2026-04-04-evening-23.webp"
+  },
+  {
+    "title": "Jensen Huang: NVIDIA - The $4 Trillion Company & the AI Revolution | Lex Fridman Podcast #494",
+    "url": "https://www.youtube.com/watch?v=vif8NQcjVf0",
+    "summary": "",
+    "publishedAt": "2026-04-04T08:51:45.000Z",
+    "source": "yt-lex-fridman",
+    "sourceName": "Lex Fridman (YouTube)",
+    "id": "2026-04-04-evening-24",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "tech-media",
+    "imageUrl": "/images/2026-04-04-evening-24.webp"
+  },
+  {
+    "title": "Anthropic drops 400 million in shares on an eight-month-old AI pharma startup with fewer than ten employees",
+    "url": "https://the-decoder.com/anthropic-drops-400-million-in-shares-on-an-eight-month-old-ai-pharma-startup-with-fewer-than-ten-employees/",
+    "summary": "Anthropic is paying 400 million dollars for an eight-month-old biotech startup with fewer than ten employees. The investor walks away with a 38,513 percent return. The article Anthropic drops 400 mill...",
+    "publishedAt": "2026-04-04T08:24:56.000Z",
+    "source": "the-decoder",
+    "sourceName": "The Decoder",
+    "id": "2026-04-04-evening-25",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "tech-media",
+    "imageUrl": "/images/2026-04-04-evening-25.webp"
+  },
+  {
+    "title": "19岁，常青藤辍学，这群中国年轻人重构了AI记忆",
+    "url": "https://www.qbitai.com/2026/04/396069.html",
+    "summary": "唯一原生支持指代消解，Benchmark现象级领先",
+    "publishedAt": "2026-04-04T08:24:39.000Z",
+    "source": "qbitai",
+    "sourceName": "量子位",
+    "id": "2026-04-04-evening-26",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "china-media",
+    "imageUrl": "/images/2026-04-04-evening-26.webp"
+  },
+  {
+    "title": "Anthropic cuts off third-party tools like OpenClaw for Claude subscribers, citing unsustainable demand",
+    "url": "https://the-decoder.com/anthropic-cuts-off-third-party-tools-like-openclaw-for-claude-subscribers-citing-unsustainable-demand/",
+    "summary": "Anthropic is cutting off Claude usage through external tools like OpenClaw for subscription customers. The decision exposes a core problem in the AI industry: flat-rate pricing and agent-driven nonsto...",
+    "publishedAt": "2026-04-04T08:00:03.000Z",
+    "source": "the-decoder",
+    "sourceName": "The Decoder",
+    "id": "2026-04-04-evening-27",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "tech-media",
+    "imageUrl": "/images/2026-04-04-evening-27.webp"
+  },
+  {
+    "title": "Anthropic拒绝龙虾吃自助餐，中国token大厂笑了",
+    "url": "https://www.tmtpost.com/7941769.html",
+    "summary": "AI订阅，被用崩了。",
+    "publishedAt": "2026-04-04T06:43:55.000Z",
+    "source": "tmtpost",
+    "sourceName": "钛媒体",
+    "id": "2026-04-04-evening-28",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "china-media",
+    "imageUrl": "/images/2026-04-04-evening-28.webp"
+  },
+  {
+    "title": "大厂们为啥不让自家员工用别家大模型？",
+    "url": "https://www.tmtpost.com/7941699.html",
+    "summary": "大厂孤岛化，员工苦哈哈。",
+    "publishedAt": "2026-04-04T06:43:23.000Z",
+    "source": "tmtpost",
+    "sourceName": "钛媒体",
+    "id": "2026-04-04-evening-29",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "china-media",
+    "imageUrl": "/images/2026-04-04-evening-29.webp"
+  },
+  {
+    "title": "互联网最骄傲的事，正在被AI一点点拆掉",
+    "url": "https://www.tmtpost.com/7941760.html",
+    "summary": "轻，是互联网的青春期。重，可能才是它的成年形态。",
+    "publishedAt": "2026-04-04T06:34:02.000Z",
+    "source": "tmtpost",
+    "sourceName": "钛媒体",
+    "id": "2026-04-04-evening-30",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "china-media",
+    "imageUrl": "/images/2026-04-04-evening-30.webp"
+  },
+  {
+    "title": "AI会感到绝望？Anthropic最新研究给出了一个更吓人的说法",
+    "url": "https://www.tmtpost.com/7941770.html",
+    "summary": "从谄媚到作弊，Anthropic发现AI内部还有另一套东西。",
+    "publishedAt": "2026-04-04T06:33:47.000Z",
+    "source": "tmtpost",
+    "sourceName": "钛媒体",
+    "id": "2026-04-04-evening-31",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "china-media",
+    "imageUrl": "/images/2026-04-04-evening-31.webp"
+  },
+  {
+    "title": "The White House's latest effort to enact legislation that would preempt state AI laws stalls as multiple Democrats dismiss the proposal as a partisan play (Politico)",
+    "url": "http://www.techmeme.com/260404/p4#a260404p4",
+    "summary": "Politico: The White House's latest effort to enact legislation that would preempt state AI laws stalls as multiple Democrats dismiss the proposal as a partisan play — The resistance on Capitol H...",
+    "publishedAt": "2026-04-04T06:30:01.000Z",
+    "source": "techmeme",
+    "sourceName": "TechMeme",
+    "id": "2026-04-04-evening-32",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "tech-media",
+    "imageUrl": "/placeholders/tech-media.svg"
+  },
+  {
+    "title": "一群00后极客和这家机器人公司共处72小时",
+    "url": "https://36kr.com/p/3752115857638145?f=rss",
+    "summary": "2026年3月29日下午5点，在我们抵达深圳科创学院四楼时，参加“全球首届具身智能开发者大会”的20组选手，已经在这里持续开发了60个小时。 现场弥漫着一股咖啡混合着冷气的味道，随处可见没吃完的奶茶和果切，楼道里和墙角支着一个个帐篷，有选手在里面补觉，“前一天熬到凌晨4点”。 图片由智能涌现拍摄 和开发应用/软件的黑客松不同，在这场具身智能开发者大会上，看得见的，有近百台高性能六轴机械臂；看不见的...",
+    "publishedAt": "2026-04-04T06:11:10.000Z",
+    "source": "36kr",
+    "sourceName": "36氪",
+    "id": "2026-04-04-evening-33",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "china-media",
+    "imageUrl": "/images/2026-04-04-evening-33.webp"
+  },
+  {
+    "title": "【数智周报】Anthropic封杀OpenClaw；甲骨文一夜砍掉3万人；Claude Code源码泄露；豆包每天烧120万亿Tokens；商务部回应Meta收购Manus及企业跨国经营问题",
+    "url": "https://www.tmtpost.com/7941741.html",
+    "summary": "（3月30日-4月4日） OpenAI完成1220亿美元融资，投后估值8520亿美元； OpenClaw遭“限流”，Anthropic对第三方工具调用Claude额外收费； 甲骨文凌晨6点突发裁员3万人；Anthropic拟于10月开启IPO，估值或超600亿美元； Claude Code源码意外“被开源”，51万行代码令全网狂欢； Kimi K2.5发布一个月：月之暗面年度经常性收入突破1亿美元...",
+    "publishedAt": "2026-04-04T06:00:11.000Z",
+    "source": "tmtpost",
+    "sourceName": "钛媒体",
+    "id": "2026-04-04-evening-34",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "china-media",
+    "imageUrl": "/images/2026-04-04-evening-34.webp"
+  },
+  {
+    "title": "阿里千问3.6Plus大模型登顶全球模型调用排行榜首",
+    "url": "https://www.leiphone.com/category/industrynews/pWoHJBvmcpwoaqRM.html",
+    "summary": "4月4日消息，发布仅1天的阿里千问新模型Qwen3.6-Plus，冲上全球知名大模型API调用平台OpenRouter的日榜榜首，成为当下最受企业和开发者热捧的大模型。OpenRouter官方数据显示，Qwen3.6-Plus的日调用量突破1.4万亿Token，打破了该平台的单日单模型调用量的全球纪录。 图说：OpenRouter社媒官宣截图，称Qwen3.6-Plus破纪录，是“最强劲的新模型表...",
+    "publishedAt": "2026-04-04T05:56:00.000Z",
+    "source": "leiphone",
+    "sourceName": "雷锋网",
+    "id": "2026-04-04-evening-35",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "china-media",
+    "imageUrl": "/placeholders/china-media.svg"
+  },
+  {
+    "title": "Chinese humanoid robot maker UBTech is seeking a chief scientist with an annual pay of as much as ~$18M; China's AI industry has eschewed mega pay packages (Bloomberg)",
+    "url": "http://www.techmeme.com/260404/p3#a260404p3",
+    "summary": "Bloomberg: Chinese humanoid robot maker UBTech is seeking a chief scientist with an annual pay of as much as ~$18M; China's AI industry has eschewed mega pay packages — Chinese humanoid robot ma...",
+    "publishedAt": "2026-04-04T05:25:01.000Z",
+    "source": "techmeme",
+    "sourceName": "TechMeme",
+    "id": "2026-04-04-evening-36",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "tech-media",
+    "imageUrl": "/images/2026-04-04-evening-36.webp"
+  },
+  {
+    "title": "互联网巨头转向重资产模式，AI资本开支激增 - 虎嗅",
+    "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE0tZEZTd2duWWR0N2FBYlBLV3hiaV9xemJlaDUzWW81Um5fR2pqYlB5Zlh2NEZJT3ZyMEhlaHhCZHozc056RUVFWDc4czBlczQ2Q1Bicw?oc=5",
+    "summary": "互联网巨头转向重资产模式，AI资本开支激增 虎嗅",
+    "publishedAt": "2026-04-04T05:21:02.000Z",
+    "source": "huxiu",
+    "sourceName": "虎嗅",
+    "id": "2026-04-04-evening-37",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "china-media",
+    "imageUrl": "/images/2026-04-04-evening-37.webp"
+  },
+  {
+    "title": "互联网巨头转向重资产模式，AI资本开支激增 - 虎嗅",
+    "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE5hbFR3LUY3dWs0a0FXTzYwMXAxNDUtWWFYY054VWViZ0VldlN4SmZ2aEhQcGg1ZWlIOExILTZhazZFeW5UbWs4QXpzX3F6YWN6dmc?oc=5",
+    "summary": "互联网巨头转向重资产模式，AI资本开支激增 虎嗅",
+    "publishedAt": "2026-04-04T05:21:02.000Z",
+    "source": "huxiu",
+    "sourceName": "虎嗅",
+    "id": "2026-04-04-evening-38",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "china-media",
+    "imageUrl": "/images/2026-04-04-evening-38.webp"
+  },
+  {
+    "title": "价值归零！Django创始人警告：30岁程序员受AI冲击最大",
+    "url": "https://www.qbitai.com/2026/04/395995.html",
+    "summary": "“我的超能力是快速做原型，现在任何人都能做到了。”",
+    "publishedAt": "2026-04-04T05:18:34.000Z",
+    "source": "qbitai",
+    "sourceName": "量子位",
+    "id": "2026-04-04-evening-39",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "china-media",
+    "imageUrl": "/images/2026-04-04-evening-39.webp"
+  },
+  {
+    "title": "Generalist公司以4.4亿美元估值完成1.4亿美元融资并发布AI模型GEN-1 - 虎嗅",
+    "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE8wSGY2bGI1SV9rRGNjU3I1VGhMZkc3dVVlZW5qeVpsVUY4c1F3cWl1dTVCeXM3U1FuTFl4SnA0MGlwQ3YtQnJhNmlzeGhTMGtaSVBV?oc=5",
+    "summary": "Generalist公司以4.4亿美元估值完成1.4亿美元融资并发布AI模型GEN-1 虎嗅",
+    "publishedAt": "2026-04-04T05:16:44.000Z",
+    "source": "huxiu",
+    "sourceName": "虎嗅",
+    "id": "2026-04-04-evening-40",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "china-media",
+    "imageUrl": "/images/2026-04-04-evening-40.webp"
+  },
+  {
+    "title": "甲骨文启动3万人规模裁员，AI转型引发科技巨头组织重构 - 虎嗅",
+    "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE1SeENZQmxRZ2NqeXFXNldDWUtUdkJRZ0tqNVZDa1Q1R0ZfYU0yeUQySGhXNlh2bDB2U0ZnNVZQa3NaYTkxUXBSZzUxcjBMRmhDOENqbA?oc=5",
+    "summary": "甲骨文启动3万人规模裁员，AI转型引发科技巨头组织重构 虎嗅",
+    "publishedAt": "2026-04-04T05:15:19.000Z",
+    "source": "huxiu",
+    "sourceName": "虎嗅",
+    "id": "2026-04-04-evening-41",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "china-media",
+    "imageUrl": "/images/2026-04-04-evening-41.webp"
+  },
+  {
+    "title": "Generalist, which raised $140M at a $440M valuation in 2025, releases GEN-1, an AI model to help robots handle high-dexterity tasks typically done by humans (Anna Tong/Forbes)",
+    "url": "http://www.techmeme.com/260404/p2#a260404p2",
+    "summary": "Anna Tong / Forbes: Generalist, which raised $140M at a $440M valuation in 2025, releases GEN-1, an AI model to help robots handle high-dexterity tasks typically done by humans — The company say...",
+    "publishedAt": "2026-04-04T05:15:01.000Z",
+    "source": "techmeme",
+    "sourceName": "TechMeme",
+    "id": "2026-04-04-evening-42",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "tech-media",
+    "imageUrl": "/images/2026-04-04-evening-42.webp"
+  },
+  {
+    "title": "Tiiny AI Pocket Lab众筹突破295万美元，瞄准本地AI助手市场需求 - 虎嗅",
+    "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE95YXpfVEkzVVZLSVlvUXA0RmRzWTVTRUxzX3VfNjVaODVwd0JsZldMUjRraWt1bHFDUUdENnl6eld3bHR5c1dfWFBsLTNlTFRCbHZoWQ?oc=5",
+    "summary": "Tiiny AI Pocket Lab众筹突破295万美元，瞄准本地AI助手市场需求 虎嗅",
+    "publishedAt": "2026-04-04T05:07:32.000Z",
+    "source": "huxiu",
+    "sourceName": "虎嗅",
+    "id": "2026-04-04-evening-43",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "china-media",
+    "imageUrl": "/images/2026-04-04-evening-43.webp"
+  },
+  {
+    "title": "Sources: Microsoft's Judson Althoff said Copilot sales hit \"some pretty big audacious goals\" in Q3; only 3% of customers were paying for Copilot as of January (Brody Ford/Bloomberg)",
+    "url": "http://www.techmeme.com/260404/p1#a260404p1",
+    "summary": "Brody Ford / Bloomberg: Sources: Microsoft's Judson Althoff said Copilot sales hit &ldquo;some pretty big audacious goals&rdquo; in Q3; only 3% of customers were paying for Copilot as of January &mdas...",
+    "publishedAt": "2026-04-04T05:05:01.000Z",
+    "source": "techmeme",
+    "sourceName": "TechMeme",
+    "id": "2026-04-04-evening-44",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "tech-media",
+    "imageUrl": "/images/2026-04-04-evening-44.webp"
+  },
+  {
+    "title": "Anthropic宣布正式封杀OpenClaw",
+    "url": "https://36kr.com/newsflashes/3751993972802307?f=rss",
+    "summary": "美国大模型头部公司Anthropic旗下AI编程工具Claude Code负责人Boris Cherny发文称，美国西部时间4月4日中午12点起，Claude订阅服务将不再包含对OpenClaw等第三方工具的使用额度。团队一直在努力满足Claude需求的增长，而订阅并非为这些第三方工具的使用模式设计。容量是团队谨慎管理的资源，会优先考虑客户使用产品和API。（第一财经）",
+    "publishedAt": "2026-04-04T04:49:28.000Z",
+    "source": "36kr",
+    "sourceName": "36氪",
+    "id": "2026-04-04-evening-45",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "china-media",
+    "imageUrl": "/images/2026-04-04-evening-45.webp"
+  },
+  {
+    "title": "扎堆做龙虾，一场跟风盛宴？",
+    "url": "https://www.tmtpost.com/7941277.html",
+    "summary": "2026年的春天，中国科技圈最热闹的战场，不在芯片，不在大模型，而在一只虾。",
+    "publishedAt": "2026-04-04T04:29:00.000Z",
+    "source": "tmtpost",
+    "sourceName": "钛媒体",
+    "id": "2026-04-04-evening-46",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "china-media",
+    "imageUrl": "/images/2026-04-04-evening-46.webp"
+  },
+  {
+    "title": "千问AI打车上线两周：假期需求暴涨，周环比增长超1500%",
+    "url": "https://36kr.com/newsflashes/3751994306183681?f=rss",
+    "summary": "4月4日，千问AI打车清明假期订单量周环比增长超1500%，用户使用规模极速攀升。该功能于3月23日上线，距今不足两周。进一步的数据显示，用户更愿意在复杂场景中尝试AI能力，比如多途经点、预���和个性化需求的组合表达。",
+    "publishedAt": "2026-04-04T04:05:58.000Z",
+    "source": "36kr",
+    "sourceName": "36氪",
+    "id": "2026-04-04-evening-47",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "china-media",
+    "imageUrl": "/images/2026-04-04-evening-47.webp"
+  },
+  {
+    "title": "市场关注恒生科技AI盈利前景与低估值是否反映悲观预期 - 虎嗅",
+    "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBHYXVEVHNORFJsZHZRZlVhTkpmTkViR2FrWG05ODk2dFVmYTZSaEVISkJGdVFmNEJuaVQ5Mk96SzB3N2NiTld4Rk45SkpWQkhRWXNZ?oc=5",
+    "summary": "市场关注恒生科技AI盈利前景与低估值是否反映悲观预期 虎嗅",
+    "publishedAt": "2026-04-04T04:00:18.000Z",
+    "source": "huxiu",
+    "sourceName": "虎嗅",
+    "id": "2026-04-04-evening-48",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "china-media",
+    "imageUrl": "/images/2026-04-04-evening-48.webp"
+  },
+  {
+    "title": "马斯克要求参与SpaceX IPO的公司购买Grok",
+    "url": "https://36kr.com/newsflashes/3751856193044993?f=rss",
+    "summary": "据报道，马斯克要求参与SpaceX IPO的公司购买Grok。（财联社）",
+    "publishedAt": "2026-04-04T03:35:19.000Z",
+    "source": "36kr",
+    "sourceName": "36氪",
+    "id": "2026-04-04-evening-49",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "china-media",
+    "imageUrl": "/images/2026-04-04-evening-49.webp"
+  },
+  {
+    "title": "TurboQuant model weight compression support added to Llamacpp",
+    "url": "https://github.com/TheTom/llama-cpp-turboquant/pull/45",
+    "summary": "↑10 💬2 @lastdong",
+    "publishedAt": null,
+    "source": "hackernews",
+    "sourceName": "Hacker News Top",
+    "id": "2026-04-04-evening-51",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "community",
+    "imageUrl": "/images/2026-04-04-evening-51.webp"
+  },
+  {
+    "title": "GitHub has DMCA'd nearly all forks of the official Claude-code repo",
+    "url": "https://github.com/anthropics/claude-code/forks",
+    "summary": "↑11 💬7 @cg505",
+    "publishedAt": null,
+    "source": "hackernews",
+    "sourceName": "Hacker News Top",
+    "id": "2026-04-04-evening-52",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "community",
+    "imageUrl": "/images/2026-04-04-evening-52.webp"
+  },
+  {
+    "title": "Run Linux containers on Android, no root required",
+    "url": "https://github.com/ExTV/Podroid",
+    "summary": "↑127 💬44 @politelemon",
+    "publishedAt": null,
+    "source": "hackernews",
+    "sourceName": "Hacker News Top",
+    "id": "2026-04-04-evening-53",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "community",
+    "imageUrl": "/images/2026-04-04-evening-53.webp"
+  },
+  {
+    "title": "Post Mortem: axios NPM supply chain compromise",
+    "url": "https://github.com/axios/axios/issues/10636",
+    "summary": "↑260 💬117 @Kyro38",
+    "publishedAt": null,
+    "source": "hackernews",
+    "sourceName": "Hacker News Top",
+    "id": "2026-04-04-evening-54",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "community",
+    "imageUrl": "/images/2026-04-04-evening-54.webp"
+  },
+  {
+    "title": "We replaced RAG with a virtual filesystem for our AI documentation assistant",
+    "url": "https://www.mintlify.com/blog/how-we-built-a-virtual-filesystem-for-our-assistant",
+    "summary": "↑312 💬118 @denssumesh",
+    "publishedAt": null,
+    "source": "hackernews",
+    "sourceName": "Hacker News Top",
+    "id": "2026-04-04-evening-55",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "community",
+    "imageUrl": "/images/2026-04-04-evening-55.webp"
+  },
+  {
+    "title": "Show HN: Travel Hacking Toolkit – Points search and trip planning with AI",
+    "url": "https://github.com/borski/travel-hacking-toolkit",
+    "summary": "↑70 💬32 @borski",
+    "publishedAt": null,
+    "source": "hackernews",
+    "sourceName": "Hacker News Top",
+    "id": "2026-04-04-evening-56",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "community",
+    "imageUrl": "/images/2026-04-04-evening-56.webp"
+  },
+  {
+    "title": "Microsoft 365 connectors are now available on every Claude plan. Connect Outlook, OneDrive, and SharePoint to bring your email, docs, and files into the conversation. Get started here: https://t.co/",
+    "url": "https://x.com/i/status/2040086268562842097",
+    "summary": "❤️14566 @claudeai",
+    "publishedAt": null,
+    "source": "tw-claudeai",
+    "sourceName": "@claudeai",
+    "id": "2026-04-04-evening-57",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/images/2026-04-04-evening-57.webp"
+  },
+  {
+    "title": "Here’s everything we launched this week (we promise not a single one of these is a joke): — Gemma 4, bringing our most intelligent open models and breakthrough reasoning to your personal hardware and",
+    "url": "https://x.com/i/status/2040162119325454548",
+    "summary": "❤️529 @GoogleAI",
+    "publishedAt": null,
+    "source": "tw-googleai",
+    "sourceName": "@googleai",
+    "id": "2026-04-04-evening-58",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/images/2026-04-04-evening-58.webp"
+  },
+  {
+    "title": "llama-server -hf ggml-org/gemma-4-26b-a4b-it-GGUF:Q4_K_M openclaw onboard --non-interactive \\ --auth-choice custom-api-key \\ --custom-base-url \"http://127.0.0.1:8080/v1\" \\ --custom-model-id \"gg",
+    "url": "https://x.com/i/status/2040223333921259699",
+    "summary": "❤️514 @huggingface",
+    "publishedAt": null,
+    "source": "tw-huggingface",
+    "sourceName": "@huggingface",
+    "id": "2026-04-04-evening-59",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/images/2026-04-04-evening-59.webp"
+  },
+  {
+    "title": "@arjsahai Let’s try. Has to be fixed anyhow",
+    "url": "https://x.com/i/status/2040203872741003306",
+    "summary": "❤️0 @rauchg",
+    "publishedAt": null,
+    "source": "tw-rauchg",
+    "sourceName": "@rauchg",
+    "id": "2026-04-04-evening-60",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/images/2026-04-04-evening-60.webp"
+  },
+  {
+    "title": "@vercel_dev Cool",
+    "url": "https://x.com/i/status/2040166090869965166",
+    "summary": "❤️8 @rauchg",
+    "publishedAt": null,
+    "source": "tw-rauchg",
+    "sourceName": "@rauchg",
+    "id": "2026-04-04-evening-61",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/images/2026-04-04-evening-61.webp"
+  },
+  {
+    "title": "@arjsahai Repro welcome, DMs open. curious: why not Node.js? Full support on Fluid, all the benefits of edge minus the limited runtime. Will significantly improve your DX",
+    "url": "https://x.com/i/status/2040201181952458859",
+    "summary": "❤️14 @rauchg",
+    "publishedAt": null,
+    "source": "tw-rauchg",
+    "sourceName": "@rauchg",
+    "id": "2026-04-04-evening-62",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/images/2026-04-04-evening-62.webp"
+  },
+  {
+    "title": "@0xSero 🫡",
+    "url": "https://x.com/i/status/2040336502715240495",
+    "summary": "❤️3 @rauchg",
+    "publishedAt": null,
+    "source": "tw-rauchg",
+    "sourceName": "@rauchg",
+    "id": "2026-04-04-evening-63",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/images/2026-04-04-evening-63.webp"
+  },
+  {
+    "title": "@das_sma Good feedback, will fix",
+    "url": "https://x.com/i/status/2039871420872994957",
+    "summary": "❤️2 @rauchg",
+    "publishedAt": null,
+    "source": "tw-rauchg",
+    "sourceName": "@rauchg",
+    "id": "2026-04-04-evening-64",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/images/2026-04-04-evening-64.webp"
+  },
+  {
+    "title": "Google just re-entered the game 🔥🔥 They want to take the crown 👑 back from Chinese open source AI. And... Gemma 4 is FINALLY Apache 2.0 aka real-open-source-licensed. From what I've seen it's go",
+    "url": "https://x.com/i/status/2039941213244072173",
+    "summary": "❤️559 @ClementDelangue",
+    "publishedAt": null,
+    "source": "tw-clementdelangue",
+    "sourceName": "@clementdelangue",
+    "id": "2026-04-04-evening-65",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/images/2026-04-04-evening-65.webp"
+  },
+  {
+    "title": "llama-server -hf ggml-org/gemma-4-26b-a4b-it-GGUF:Q4_K_M openclaw onboard --non-interactive \\ --auth-choice custom-api-key \\ --custom-base-url \"http://127.0.0.1:8080/v1\" \\ --custom-model-id \"gg",
+    "url": "https://x.com/i/status/2040222392434172269",
+    "summary": "❤️295 @ClementDelangue",
+    "publishedAt": null,
+    "source": "tw-clementdelangue",
+    "sourceName": "@clementdelangue",
+    "id": "2026-04-04-evening-66",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/images/2026-04-04-evening-66.webp"
+  },
+  {
+    "title": "@jeffreyhuber Let’s go!!",
+    "url": "https://x.com/i/status/2039907957140263399",
+    "summary": "❤️3 @ClementDelangue",
+    "publishedAt": null,
+    "source": "tw-clementdelangue",
+    "sourceName": "@clementdelangue",
+    "id": "2026-04-04-evening-67",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/images/2026-04-04-evening-67.webp"
+  },
+  {
+    "title": "If it’s not either pushing the frontier meaningfully or open-source, no one will care these days (which is why most orgs should release open-source to get some attention and developer mindshare)",
+    "url": "https://x.com/i/status/2040001513477509610",
+    "summary": "❤️209 @ClementDelangue",
+    "publishedAt": null,
+    "source": "tw-clementdelangue",
+    "sourceName": "@clementdelangue",
+    "id": "2026-04-04-evening-68",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/placeholders/twitter.svg"
+  },
+  {
+    "title": "Time to move to open or local models from Hugging Face! All instructions are here: https://t.co/0w0pQb87Le",
+    "url": "https://x.com/i/status/2040219524297834903",
+    "summary": "❤️278 @ClementDelangue",
+    "publishedAt": null,
+    "source": "tw-clementdelangue",
+    "sourceName": "@clementdelangue",
+    "id": "2026-04-04-evening-69",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/images/2026-04-04-evening-69.webp"
+  },
+  {
+    "title": "First public PR in years from the legend @JeffDean was to @huggingface transformers. Any other proud moment for us and our community!",
+    "url": "https://x.com/i/status/2040201086133248083",
+    "summary": "❤️224 @ClementDelangue",
+    "publishedAt": null,
+    "source": "tw-clementdelangue",
+    "sourceName": "@clementdelangue",
+    "id": "2026-04-04-evening-70",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/images/2026-04-04-evening-70.webp"
+  },
+  {
+    "title": "From the replies it is clear there is still no agreement what RAG is, so I guess the truth of my statement depends on your definition of RAG.",
+    "url": "https://x.com/i/status/2040109474430500962",
+    "summary": "❤️56 @emollick",
+    "publishedAt": null,
+    "source": "tw-emollick",
+    "sourceName": "@emollick",
+    "id": "2026-04-04-evening-71",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/images/2026-04-04-evening-71.webp"
+  },
+  {
+    "title": "@0xkron I was being a little snide. Fixed the post",
+    "url": "https://x.com/i/status/2040094211010093363",
+    "summary": "❤️0 @emollick",
+    "publishedAt": null,
+    "source": "tw-emollick",
+    "sourceName": "@emollick",
+    "id": "2026-04-04-evening-72",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/images/2026-04-04-evening-72.webp"
+  },
+  {
+    "title": "Likely the most widely-distributed photograph in history, the original Blue Marble, taken by an unknown astronaut in 1972 from Apollo 17, and becoming the model for many images of Earth. Now we have",
+    "url": "https://x.com/i/status/2040163288621650225",
+    "summary": "❤️251 @emollick",
+    "publishedAt": null,
+    "source": "tw-emollick",
+    "sourceName": "@emollick",
+    "id": "2026-04-04-evening-73",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/images/2026-04-04-evening-73.webp"
+  },
+  {
+    "title": "Here’s an independent domain extension of METR’s famous time-horizon analysis, applying it to offensive cybersecurity with real human expert timing data Similar to METR: 5.7 months doubling time. Fro",
+    "url": "https://x.com/i/status/2040097443807641982",
+    "summary": "❤️284 @emollick",
+    "publishedAt": null,
+    "source": "tw-emollick",
+    "sourceName": "@emollick",
+    "id": "2026-04-04-evening-74",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/images/2026-04-04-evening-74.webp"
+  },
+  {
+    "title": "This new Nature paper (using old models) illustrates the point of my latest Substack post on AI interfaces. AI did a good job diagnosing medical issues, but when users had to interact with chatbots th",
+    "url": "https://x.com/i/status/2040122884371140787",
+    "summary": "❤️107 @emollick",
+    "publishedAt": null,
+    "source": "tw-emollick",
+    "sourceName": "@emollick",
+    "id": "2026-04-04-evening-75",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/images/2026-04-04-evening-75.webp"
+  },
+  {
+    "title": "Heres the report: https://t.co/hog5OtR42C",
+    "url": "https://x.com/i/status/2040098451355013136",
+    "summary": "❤️13 @emollick",
+    "publishedAt": null,
+    "source": "tw-emollick",
+    "sourceName": "@emollick",
+    "id": "2026-04-04-evening-76",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/images/2026-04-04-evening-76.webp"
+  },
+  {
+    "title": "Need to set up my OpenClaw to update and restart my Claude Dispatch to add computer use so I can use that instead.",
+    "url": "https://x.com/i/status/2040166468877164704",
+    "summary": "❤️124 @emollick",
+    "publishedAt": null,
+    "source": "tw-emollick",
+    "sourceName": "@emollick",
+    "id": "2026-04-04-evening-77",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/images/2026-04-04-evening-77.webp"
+  },
+  {
+    "title": "Nature article: https://t.co/3fulB2A8dL",
+    "url": "https://x.com/i/status/2040123720254071282",
+    "summary": "❤️14 @emollick",
+    "publishedAt": null,
+    "source": "tw-emollick",
+    "sourceName": "@emollick",
+    "id": "2026-04-04-evening-78",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/images/2026-04-04-evening-78.webp"
+  },
+  {
+    "title": "The RAG era was short-lived, but intense. (Not that RAG is not useful, but it is no longer the dominant paradigm for supplying context to agents)",
+    "url": "https://x.com/i/status/2040094108853600646",
+    "summary": "❤️885 @emollick",
+    "publishedAt": null,
+    "source": "tw-emollick",
+    "sourceName": "@emollick",
+    "id": "2026-04-04-evening-79",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/images/2026-04-04-evening-79.webp"
+  },
+  {
+    "title": "@kate_rouch Thank you for everything you've done for @OpenAI 💥🙏. And most importantly, get healthy so we can hang out way more over the years!",
+    "url": "https://x.com/i/status/2040194078768554361",
+    "summary": "❤️16 @kevinweil",
+    "publishedAt": null,
+    "source": "tw-kevinweil",
+    "sourceName": "@kevinweil",
+    "id": "2026-04-04-evening-80",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/images/2026-04-04-evening-80.webp"
+  },
+  {
+    "title": "@tweetShanghai Shanghai Disneyland",
+    "url": "https://x.com/i/status/2039896603969163552",
+    "summary": "❤️1 @petergyang",
+    "publishedAt": null,
+    "source": "tw-petergyang",
+    "sourceName": "@petergyang",
+    "id": "2026-04-04-evening-81",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/images/2026-04-04-evening-81.webp"
+  },
+  {
+    "title": "@trq212 Not working consistently for me and a few others https://t.co/9kopUprFha",
+    "url": "https://x.com/i/status/2040225074842947666",
+    "summary": "❤️15 @petergyang",
+    "publishedAt": null,
+    "source": "tw-petergyang",
+    "sourceName": "@petergyang",
+    "id": "2026-04-04-evening-82",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/images/2026-04-04-evening-82.webp"
+  },
+  {
+    "title": "If you want to learn all about how to use Codex and how the Codex team operates (especially given the OpenClaw news today), don't miss my next episode tomorrow. 📌 Subscribe here to get it: https://t",
+    "url": "https://x.com/i/status/2040265600820469938",
+    "summary": "❤️19 @petergyang",
+    "publishedAt": null,
+    "source": "tw-petergyang",
+    "sourceName": "@petergyang",
+    "id": "2026-04-04-evening-83",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/images/2026-04-04-evening-83.webp"
+  },
+  {
+    "title": "@lennysan @simonw lol this is what I'm (and I'm sure alot of other vibe coders) are already doing",
+    "url": "https://x.com/i/status/2040266712688603417",
+    "summary": "❤️1 @petergyang",
+    "publishedAt": null,
+    "source": "tw-petergyang",
+    "sourceName": "@petergyang",
+    "id": "2026-04-04-evening-84",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/images/2026-04-04-evening-84.webp"
+  },
+  {
+    "title": "@dunkhippo33 I dunno haiku is pretty dumb",
+    "url": "https://x.com/i/status/2040257126174753267",
+    "summary": "❤️9 @petergyang",
+    "publishedAt": null,
+    "source": "tw-petergyang",
+    "sourceName": "@petergyang",
+    "id": "2026-04-04-evening-85",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/images/2026-04-04-evening-85.webp"
+  },
+  {
+    "title": "For #2, I asked my OpenClaw for a short prompt to add to soul.md, here it is: // Vibe: Warm, sharp, dry humor. Not a chatbot — a person. Voice: • Skip \"Great question!\" and \"I'd be happy to help!\"",
+    "url": "https://x.com/i/status/2040269162719887610",
+    "summary": "❤️34 @petergyang",
+    "publishedAt": null,
+    "source": "tw-petergyang",
+    "sourceName": "@petergyang",
+    "id": "2026-04-04-evening-86",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/placeholders/twitter.svg"
+  },
+  {
+    "title": "@HamelHusain I will but it doesn’t have the same personality as opus.",
+    "url": "https://x.com/i/status/2040228871992426603",
+    "summary": "❤️4 @petergyang",
+    "publishedAt": null,
+    "source": "tw-petergyang",
+    "sourceName": "@petergyang",
+    "id": "2026-04-04-evening-87",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/images/2026-04-04-evening-87.webp"
+  },
+  {
+    "title": "@simpsoka @OpenAI This is a weird one but I’d love if it had some more quirks and personality",
+    "url": "https://x.com/i/status/2040183724541870305",
+    "summary": "❤️4 @petergyang",
+    "publishedAt": null,
+    "source": "tw-petergyang",
+    "sourceName": "@petergyang",
+    "id": "2026-04-04-evening-88",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/images/2026-04-04-evening-88.webp"
+  },
+  {
+    "title": "@ChinaEV_Eng_Lif lol my kids are my boss",
+    "url": "https://x.com/i/status/2040001035176235435",
+    "summary": "❤️1 @petergyang",
+    "publishedAt": null,
+    "source": "tw-petergyang",
+    "sourceName": "@petergyang",
+    "id": "2026-04-04-evening-89",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/images/2026-04-04-evening-89.webp"
+  },
+  {
+    "title": "@TimTeaFan LA/Anaheim tbh the Star Wars ride is unmatched. Shanghai I loved Tron and Pirates. Tokyo I went to DisneySea and wasn't too impressed.",
+    "url": "https://x.com/i/status/2040003485945770000",
+    "summary": "❤️4 @petergyang",
+    "publishedAt": null,
+    "source": "tw-petergyang",
+    "sourceName": "@petergyang",
+    "id": "2026-04-04-evening-90",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/images/2026-04-04-evening-90.webp"
+  },
+  {
+    "title": "Anthropic just sent an email saying that you can no longer run 3rd party harnesses like OpenClaw using Claude subscriptions. Right now, both OpenAI and Anthropic are losing money on power users who r",
+    "url": "https://x.com/i/status/2040211879621214255",
+    "summary": "❤️280 @petergyang",
+    "publishedAt": null,
+    "source": "tw-petergyang",
+    "sourceName": "@petergyang",
+    "id": "2026-04-04-evening-91",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/images/2026-04-04-evening-91.webp"
+  },
+  {
+    "title": "@BytePlusGlobal @steipete Wtf is this AI Peter? Did you get his permission?",
+    "url": "https://x.com/i/status/2039902132908994566",
+    "summary": "❤️15 @petergyang",
+    "publishedAt": null,
+    "source": "tw-petergyang",
+    "sourceName": "@petergyang",
+    "id": "2026-04-04-evening-92",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/images/2026-04-04-evening-92.webp"
+  },
+  {
+    "title": "My friend Steve (@ALEngineered) has coached many engineers to grow their careers. (He's also an amazing YouTube coach 🙂) Check out his new book:",
+    "url": "https://x.com/i/status/2040263623726281040",
+    "summary": "❤️7 @petergyang",
+    "publishedAt": null,
+    "source": "tw-petergyang",
+    "sourceName": "@petergyang",
+    "id": "2026-04-04-evening-93",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/images/2026-04-04-evening-93.webp"
+  },
+  {
+    "title": "I’ve taken my kids to 3 Disneylands now (LA, Tokyo, Shanghai). Tips on how to survive the visit and avoid 3 hour lines: 1. Get early access by staying at the Disney hotel or purchasing early access s",
+    "url": "https://x.com/i/status/2039898958814974021",
+    "summary": "❤️235 @petergyang",
+    "publishedAt": null,
+    "source": "tw-petergyang",
+    "sourceName": "@petergyang",
+    "id": "2026-04-04-evening-94",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/images/2026-04-04-evening-94.webp"
+  },
+  {
+    "title": "@rohanvarma @pandemona What plugins and skills do you recommend",
+    "url": "https://x.com/i/status/2040189198393913684",
+    "summary": "❤️0 @petergyang",
+    "publishedAt": null,
+    "source": "tw-petergyang",
+    "sourceName": "@petergyang",
+    "id": "2026-04-04-evening-95",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/images/2026-04-04-evening-95.webp"
+  },
+  {
+    "title": "@stalmico Zootopia",
+    "url": "https://x.com/i/status/2040000987675726219",
+    "summary": "❤️2 @petergyang",
+    "publishedAt": null,
+    "source": "tw-petergyang",
+    "sourceName": "@petergyang",
+    "id": "2026-04-04-evening-96",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/images/2026-04-04-evening-96.webp"
+  },
+  {
+    "title": "Codex team and @OpenAI have a huge opportunity right now to: 1. Tell @openclaw users how to switch to gpt subscription (I think it’s just telling the bot to switch the model?) 2. Fix GPT’s personali",
+    "url": "https://x.com/i/status/2040253160133193789",
+    "summary": "❤️381 @petergyang",
+    "publishedAt": null,
+    "source": "tw-petergyang",
+    "sourceName": "@petergyang",
+    "id": "2026-04-04-evening-97",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/images/2026-04-04-evening-97.webp"
+  },
+  {
+    "title": "This weekend, I'm sharing a rare inside look at how OpenAI's Codex team ship products, including: → Live demo of how @romainhuet (Head of DevRel) ships with Codex → Codex product lead @embirico's sp",
+    "url": "https://x.com/i/status/2040074366042702109",
+    "summary": "❤️97 @petergyang",
+    "publishedAt": null,
+    "source": "tw-petergyang",
+    "sourceName": "@petergyang",
+    "id": "2026-04-04-evening-98",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/images/2026-04-04-evening-98.webp"
+  },
+  {
+    "title": "Nooooo https://t.co/dFth8C6sT7",
+    "url": "https://x.com/i/status/2040201384575066363",
+    "summary": "❤️95 @petergyang",
+    "publishedAt": null,
+    "source": "tw-petergyang",
+    "sourceName": "@petergyang",
+    "id": "2026-04-04-evening-99",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/placeholders/twitter.svg"
+  },
+  {
+    "title": "@bcherny I love Claude but not sure why there was only one day notice on this",
+    "url": "https://x.com/i/status/2040258396608487740",
+    "summary": "❤️92 @petergyang",
+    "publishedAt": null,
+    "source": "tw-petergyang",
+    "sourceName": "@petergyang",
+    "id": "2026-04-04-evening-100",
+    "date": "2026-04-04",
+    "batch": "evening",
+    "category": "twitter",
+    "imageUrl": "/images/2026-04-04-evening-100.webp"
+  },
+  {
     "title": "Yeachan-Heo/oh-my-codex",
     "url": "https://github.com/Yeachan-Heo/oh-my-codex",
     "summary": "OmX - Oh My codeX: Your codex is not alone. Add hooks, agent teams, HUDs, and so much more. [TypeScript] | +2984 stars",
@@ -10,9 +1310,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-morning-0.webp",
-    "titleZh": "Yeachan-Heo/oh-my-codex",
-    "summaryZh": "OmX - Oh My codeX：你的代码库不再孤单。添加钩子、代理团队、HUD 等功能。[TypeScript] | +2984 星"
+    "imageUrl": "/images/2026-04-04-morning-0.webp"
   },
   {
     "title": "onyx-dot-app/onyx",
@@ -25,9 +1323,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-morning-1.webp",
-    "titleZh": "onyx-dot-app/onyx",
-    "summaryZh": "开源 AI 平台 - 支持所有 LLM 的 AI 聊天工具，具备高级功能。[Python] | +1872 星"
+    "imageUrl": "/images/2026-04-04-morning-1.webp"
   },
   {
     "title": "google-research/timesfm",
@@ -40,9 +1336,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-morning-2.webp",
-    "titleZh": "google-research/timesfm",
-    "summaryZh": "TimesFM（时间序列基础模型）是由 Google Research 开发的预训练时间序列基础模型，用于时间序列预测。[Python] | +912 星"
+    "imageUrl": "/images/2026-04-04-morning-2.webp"
   },
   {
     "title": "siddharthvaddem/openscreen",
@@ -55,9 +1349,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-morning-3.webp",
-    "titleZh": "siddharthvaddem/openscreen",
-    "summaryZh": "免费创建惊艳的演示。开源、无订阅、无水印，且可商用。Screen Studio 的替代方案。[TypeScript] | +2855 星"
+    "imageUrl": "/images/2026-04-04-morning-3.webp"
   },
   {
     "title": "dmtrKovalenko/fff.nvim",
@@ -70,9 +1362,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-morning-4.webp",
-    "titleZh": "dmtrKovalenko/fff.nvim",
-    "summaryZh": "为 AI 代理、Neovim、Rust、C 和 NodeJS 提供最快最准确的文件搜索工具包。[Rust] | +767 星"
+    "imageUrl": "/images/2026-04-04-morning-4.webp"
   },
   {
     "title": "f/prompts.chat",
@@ -85,9 +1375,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-morning-5.webp",
-    "titleZh": "f/prompts.chat",
-    "summaryZh": "原名Awesome ChatGPT Prompts，可分享、发现和收集社区中的提示。免费且开源——可为组织自托管，确保完全隐私。[HTML] | +369颗星"
+    "imageUrl": "/images/2026-04-04-morning-5.webp"
   },
   {
     "title": "sherlock-project/sherlock",
@@ -100,9 +1388,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-morning-6.webp",
-    "titleZh": "sherlock-project/sherlock",
-    "summaryZh": "通过用户名在多个社交网络上查找社交媒体账户 [Python] | +1230颗星"
+    "imageUrl": "/images/2026-04-04-morning-6.webp"
   },
   {
     "title": "hsliuping/TradingAgents-CN",
@@ -115,9 +1401,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-morning-7.webp",
-    "titleZh": "hsliuping/TradingAgents-CN",
-    "summaryZh": "基于多智能体LLM的中文金融交易框架 - TradingAgents中文增强版 [Python] | +473颗星"
+    "imageUrl": "/images/2026-04-04-morning-7.webp"
   },
   {
     "title": "yusufkaraaslan/Skill_Seekers",
@@ -130,9 +1414,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-morning-8.webp",
-    "titleZh": "yusufkaraaslan/Skill_Seekers",
-    "summaryZh": "将文档网站、GitHub仓库和PDF转换为Claude AI技能，并具备自动冲突检测功能 [Python] | +199颗星"
+    "imageUrl": "/images/2026-04-04-morning-8.webp"
   },
   {
     "title": "microsoft/apm",
@@ -145,9 +1427,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-morning-9.webp",
-    "titleZh": "microsoft/apm",
-    "summaryZh": "代理包管理器 [Python] | +56颗星"
+    "imageUrl": "/images/2026-04-04-morning-9.webp"
   },
   {
     "title": "vectorize-io/hindsight",
@@ -160,9 +1440,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-morning-10.webp",
-    "titleZh": "vectorize-io/hindsight",
-    "summaryZh": "Hindsight：一种能够学习的智能体记忆 [Python] | +161 星"
+    "imageUrl": "/images/2026-04-04-morning-10.webp"
   },
   {
     "title": "PostHog/posthog",
@@ -175,9 +1453,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-morning-11.webp",
-    "titleZh": "PostHog/posthog",
-    "summaryZh": "🦔 PostHog 是一个一站式开发者平台，用于构建成功的产品。我们提供产品分析、网页分析、会话回放、错误追踪、功能标志、实验、调查、数据仓库、客户数据平台（CDP）以及 AI 产品助手，帮助你更快调试代码、发布功能，并将所有使用和客户数据整合到一个技术栈中。[Python] | +23 星"
+    "imageUrl": "/images/2026-04-04-morning-11.webp"
   },
   {
     "title": "Alishahryar1/free-claude-code",
@@ -190,9 +1466,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-morning-12.webp",
-    "titleZh": "Alishahryar1/free-claude-code",
-    "summaryZh": "可以在终端、VSCode 插件或 Discord 中免费使用 claude-code，类似于 openclaw [Python] | +55 星"
+    "imageUrl": "/images/2026-04-04-morning-12.webp"
   },
   {
     "title": "Blaizzy/mlx-vlm",
@@ -205,9 +1479,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-morning-13.webp",
-    "titleZh": "Blaizzy/mlx-vlm",
-    "summaryZh": "MLX-VLM 是一个用于在你的 Mac 上进行 Vision Language Models（VLM）推理和微调的包 [Python] | +382 星"
+    "imageUrl": "/images/2026-04-04-morning-13.webp"
   },
   {
     "title": "microsoft/BitNet",
@@ -220,9 +1492,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-morning-14.webp",
-    "titleZh": "microsoft/BitNet",
-    "summaryZh": "BitNet 是 1 位 LLM 的官方推理框架 [Python] | +84 星"
+    "imageUrl": "/images/2026-04-04-morning-14.webp"
   },
   {
     "title": "MervinPraison/PraisonAI",
@@ -235,9 +1505,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-morning-15.webp",
-    "titleZh": "PraisonAI 🦞 - 你的全天候AI员工团队",
-    "summaryZh": "PraisonAI 🦞 - 你的全天候AI员工团队。通过低代码多智能体AI自动化并解决复杂挑战，支持在Telegram、Discord和WhatsApp上规划、研究、编写代码并交付。支持交接、边界控制、记忆、RAG和100多个LLM。[Python] | +116颗星"
+    "imageUrl": "/images/2026-04-04-morning-15.webp"
   },
   {
     "title": "LearningCircuit/local-deep-research",
@@ -250,9 +1518,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-morning-16.webp",
-    "titleZh": "LearningCircuit/local-deep-research",
-    "summaryZh": "Local Deep Research在SimpleQA基准测试中达到约95%的准确率（使用GPT-4.1-mini测试）。支持本地和云端LLM（如Ollama、Google、Anthropic等）。可搜索10多个来源，包括arXiv、PubMed、网络和你的私有文档。所有内容本地化且加密。[Python] | +13颗星"
+    "imageUrl": "/images/2026-04-04-morning-16.webp"
   },
   {
     "title": "oumi-ai/oumi",
@@ -265,9 +1531,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-morning-17.webp",
-    "titleZh": "oumi-ai/oumi",
-    "summaryZh": "轻松微调、评估和部署gpt-oss、Qwen3、DeepSeek-R1或任何开源LLM/VLM！[Python] | +45颗星"
+    "imageUrl": "/images/2026-04-04-morning-17.webp"
   },
   {
     "title": "全球AI投融资动态,AI创投日报 - 虎嗅",
@@ -293,9 +1557,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/placeholders/tech-media.svg",
-    "titleZh": "JavaScript能否绕过Iframe内的CSP元标签？",
-    "summaryZh": "研究：JavaScript能否绕过Iframe内的CSP元标签？在尝试构建自己的Claude Artifacts版本时，我开始对如何为沙盒化Iframe中的内容应用CSP头选项产生兴趣..."
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "Tower Semiconductor's market cap tops $20B, four years after a near-sale to Intel for $5B; shares are up ~60% over the past month and ~525% over the past year (CTech)",
@@ -308,9 +1570,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-04-morning-20.webp",
-    "titleZh": "塔维半导体市值突破200亿美元，四年后再创佳绩",
-    "summaryZh": "CTech报道：塔维半导体市值突破200亿美元，四年后再创佳绩；过去一个月股价上涨约60%，过去一年上涨约525%——这家曾被忽视的公司如今..."
+    "imageUrl": "/images/2026-04-04-morning-20.webp"
   },
   {
     "title": "Sources: Huawei's Ascend 950PR chip, set for mass production soon, saw prices rise 20% after Chinese tech giants placed bulk orders to run DeepSeek's V4 model (Qianer Liu/The Information)",
@@ -323,9 +1583,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-04-morning-21.webp",
-    "titleZh": "华为昇腾950PR芯片即将量产，因中国科技巨头批量订购用于运行DeepSeek V4模型，价格飙升20%（Qianer Liu / The Information）",
-    "summaryZh": "Qianer Liu / The Information：据消息人士透露，华为昇腾950PR芯片即将进入量产阶段，由于中国科技巨头批量订购用于运行DeepSeek V4模型，其价格已上涨20% ——"
+    "imageUrl": "/images/2026-04-04-morning-21.webp"
   },
   {
     "title": "以色列AI芯片初创公司Hailo以低于5亿美元估值启动SPAC合并上市 - 虎嗅",
@@ -351,9 +1609,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-04-morning-23.webp",
-    "titleZh": "文件显示：以色列AI芯片初创公司Hailo正寻求通过SPAC合并进行紧急IPO，估值低于5亿美元；该公司2024年曾估值12亿美元（Meir Orbach/CTech）",
-    "summaryZh": "Meir Orbach / CTech：文件显示，以色列AI芯片初创公司Hailo正寻求通过SPAC合并进行紧急IPO，估值低于5亿美元；该公司2024年曾估值12亿美元 — 以色列公司寻求通过..."
+    "imageUrl": "/images/2026-04-04-morning-23.webp"
   },
   {
     "title": "Anthropic says Claude Code's usage drain comes down to peak-hour caps and ballooning contexts",
@@ -366,9 +1622,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-04-morning-24.webp",
-    "titleZh": "Anthropic称Claude Code的使用消耗主要归因于高峰时段限制和不断扩大的上下文",
-    "summaryZh": "Anthropic解释了Claude Code用户为何迅速消耗配额，并分享了减少token使用量的技巧。文章指出，Anthropic称Claude Code的使用消耗主要归因于..."
+    "imageUrl": "/images/2026-04-04-morning-24.webp"
   },
   {
     "title": "Google’s New AI Just Broke My Brain",
@@ -381,9 +1635,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-04-morning-25.webp",
-    "titleZh": "谷歌的新AI彻底让我脑洞大开",
-    "summaryZh": ""
+    "imageUrl": "/images/2026-04-04-morning-25.webp"
   },
   {
     "title": "PSA: Anyone with a link can view your Granola notes by default",
@@ -396,9 +1648,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-04-morning-26.webp",
-    "titleZh": "提醒：任何拥有链接的人都可以默认查看你的Granola笔记",
-    "summaryZh": "如果你使用由AI驱动的笔记应用Granola，可能需要检查一下你的隐私设置。尽管Granola声称笔记是“默认私密”，但任何拥有链接的人都可以查看你的笔记。"
+    "imageUrl": "/images/2026-04-04-morning-26.webp"
   },
   {
     "title": "大学生最爱的“外置大脑”一抽风，论文“肝”不动、 作业写不了 - 虎嗅",
@@ -424,9 +1674,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-04-morning-28.webp",
-    "titleZh": "langchain==1.2.15",
-    "summaryZh": "自 langchain==1.2.14 发布以来的更改：langchain v1.2.15 (#36496) 例行维护：将 /libs/langchain_v1 中的 aiohttp 从 3.13.3 升级到 3.13.4 (#36438)"
+    "imageUrl": "/images/2026-04-04-morning-28.webp"
   },
   {
     "title": "OpenAI shifts to usage-based pricing for Codex in ChatGPT business plans",
@@ -439,9 +1687,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-04-morning-29.webp",
-    "titleZh": "OpenAI 将 Codex 的 ChatGPT 商业计划转向基于使用量的计费模式",
-    "summaryZh": "OpenAI 正在放弃 Codex 的固定许可模式，改为按实际使用量收费，此举主要针对 GitHub Copilot 和 Cursor。文章 OpenA..."
+    "imageUrl": "/images/2026-04-04-morning-29.webp"
   },
   {
     "title": "A US bill seeks to ban exports of DUV lithography tech to China, whose imports of chipmaking equipment reportedly grew from $10.7B in 2016 to ~$51.1B in 2025 (Jared Perlo/NBC News)",
@@ -454,9 +1700,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-04-morning-30.webp",
-    "titleZh": "本周图表：SaaSpocalypse 被打断",
-    "summaryZh": "消费端 AI：仍有发展空间；广告覆盖一切；卡车行业繁忙；收益上升，价格下降"
+    "imageUrl": "/images/2026-04-04-morning-30.webp"
   },
   {
     "title": "Charts of the Week: SaaSpocalypse Interrupted",
@@ -469,9 +1713,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-04-morning-31.webp",
-    "titleZh": "面向 AI 时代的 Facebook 内部内容审核构建者",
-    "summaryZh": "Moonbounce 已筹集 1200 万美元，用于发展其 AI 控制引擎，该引擎可将内容审核政策转化为一致、可预测的 AI 行为。"
+    "imageUrl": "/images/2026-04-04-morning-31.webp"
   },
   {
     "title": "The Facebook insider building content moderation for the AI era",
@@ -497,9 +1739,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/placeholders/tech-media.svg",
-    "titleZh": "Axios供应链攻击使用了针对性的社会工程手段",
-    "summaryZh": "Axios团队已发布关于此次供应链攻击的完整事后分析报告，该攻击导致了一种恶意软件依赖项被包含在最近的发布版本中，且涉及复杂的社会工程手段。"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "独家调查：AI时代的影视行业，谁在被抢，谁在出局？ - 虎嗅",
@@ -525,9 +1765,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "community",
-    "imageUrl": "/images/2026-04-04-morning-35.webp",
-    "titleZh": "OpenAI开展另一项“支线任务”，收购专注于科技的脱口秀节目TBPN",
-    "summaryZh": "OpenAI表示，该节目将继续在洛杉矶运营，并在编辑上保持独立性。"
+    "imageUrl": "/images/2026-04-04-morning-35.webp"
   },
   {
     "title": "千里科技发布2025财报：全年实现营业收入99.99亿元，同比增长42.13%",
@@ -553,9 +1791,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-04-morning-37.webp",
-    "titleZh": "聊天机器人现在可以开具精神类药物处方",
-    "summaryZh": "犹他州允许AI系统在没有医生的情况下开具精神类药物处方。这是该州乃至整个国家第二次将此类临床权限委托给AI。"
+    "imageUrl": "/images/2026-04-04-morning-37.webp"
   },
   {
     "title": "浪潮信息直播发布业界企业级OpenClaw方案“企千虾”",
@@ -594,9 +1830,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-04-morning-40.webp",
-    "titleZh": "一些无法获取最先进芯片的初创公司和研究人员正在采用“节俭型AI”策略，基于开源系统构建更小的模型",
-    "summaryZh": "一些无法获取最先进芯片的初创公司和研究人员正在采用“节俭型AI”策略，基于开源系统构建更小的模型。"
+    "imageUrl": "/images/2026-04-04-morning-40.webp"
   },
   {
     "title": "智己汽车官宣刘翔成为品牌代言人",
@@ -661,9 +1895,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-04-morning-45.webp",
-    "titleZh": "芯片公司智谱AI的GLM-5V-Turbo可直接将设计草图转化为可执行的前端代码",
-    "summaryZh": "中国AI初创公司智谱AI发布了GLM-5V-Turbo，这是一种多模态模型，能够处理图像、视频和文本，专为代理工作流程设计。该模型可直接将设计草图转化为可执行的前端代码。"
+    "imageUrl": "/images/2026-04-04-morning-45.webp"
   },
   {
     "title": "微医智能体为医保基金装上“数字天眼”，AI守护百姓“救命钱、保命钱”",
@@ -689,9 +1921,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-04-morning-47.webp",
-    "titleZh": "Claude Code 和 Cowork 现在允许 Anthropic 的 AI 控制你的 Mac 或 Windows 桌面",
-    "summaryZh": "Anthropic 宣布其 AI 助手 Claude 新增一项功能：可以直接操作用户的电脑，完成人们通常在办公桌前自行完成的任务。文章 Cla..."
+    "imageUrl": "/images/2026-04-04-morning-47.webp"
   },
   {
     "title": "Agent时代，大厂们“拆墙”又“筑墙” - 虎嗅",
@@ -717,9 +1947,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-04-morning-49.webp",
-    "titleZh": "OpenAI 决定通过拥有新闻室来应对批评性的 AI 舆论报道",
-    "summaryZh": "OpenAI 已收购科技脱口秀 TBPN。该节目据称仍将保持编辑独立性，但需向 OpenAI 的传播部门汇报。这听起来自相矛盾。那么 OpenA..."
+    "imageUrl": "/images/2026-04-04-morning-49.webp"
   },
   {
     "title": "Samsung Magician disk utility takes 18 steps and two reboots to uninstall",
@@ -732,9 +1960,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "community",
-    "imageUrl": "/placeholders/community.svg",
-    "titleZh": "Samsung Magician 磁盘工具卸载需要 18 步和两次重启",
-    "summaryZh": "↑174 💬93 @chalmovsky"
+    "imageUrl": "/placeholders/community.svg"
   },
   {
     "title": "April 2026 TLDR Setup for Ollama and Gemma 4 26B on a Mac mini",
@@ -747,9 +1973,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "community",
-    "imageUrl": "/images/2026-04-04-morning-51.webp",
-    "titleZh": "2026 年 4 月 Ollama 和 Gemma 4 26B 在 Mac mini 上的 TLDR 设置指南",
-    "summaryZh": "↑184 💬79 @greenstevester"
+    "imageUrl": "/images/2026-04-04-morning-51.webp"
   },
   {
     "title": "Show HN: Apfel – The free AI already on your Mac",
@@ -762,9 +1986,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "community",
-    "imageUrl": "/images/2026-04-04-morning-52.webp",
-    "titleZh": "Show HN: Apfel – 你 Mac 上已内置的免费 AI",
-    "summaryZh": "↑472 💬102 @franze"
+    "imageUrl": "/images/2026-04-04-morning-52.webp"
   },
   {
     "title": "Intel Assured Supply Chain Product Brief",
@@ -777,9 +1999,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "community",
-    "imageUrl": "/images/2026-04-04-morning-53.webp",
-    "titleZh": "英特尔供应链产品简报",
-    "summaryZh": "↑33 💬5 @aw-engineer"
+    "imageUrl": "/images/2026-04-04-morning-53.webp"
   },
   {
     "title": "Bun: cgroup-aware AvailableParallelism / HardwareConcurrency on Linux",
@@ -792,9 +2012,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "community",
-    "imageUrl": "/images/2026-04-04-morning-54.webp",
-    "titleZh": "Bun：Linux 上的 cgroup-aware 可并行性 / 硬件并发性",
-    "summaryZh": "↑27 💬10 @tosh"
+    "imageUrl": "/images/2026-04-04-morning-54.webp"
   },
   {
     "title": "Tailscale's new macOS home",
@@ -807,9 +2025,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "community",
-    "imageUrl": "/images/2026-04-04-morning-55.webp",
-    "titleZh": "Tailscale 的新 macOS 家庭",
-    "summaryZh": "↑525 💬270 @tosh"
+    "imageUrl": "/images/2026-04-04-morning-55.webp"
   },
   {
     "title": "The True Shape of Io's Steeple Mountain",
@@ -822,9 +2038,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "community",
-    "imageUrl": "/images/2026-04-04-morning-56.webp",
-    "titleZh": "木卫二斯蒂普尔山的真实形态",
-    "summaryZh": "↑96 💬2 @carlosjobim"
+    "imageUrl": "/images/2026-04-04-morning-56.webp"
   },
   {
     "title": "New Anthropic research: Emotion concepts and their function in a large language model. All LLMs sometimes act like they have emotions. But why? We found internal representations of emotion concepts t",
@@ -837,9 +2051,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-morning-57.webp",
-    "titleZh": "新的 Anthropic 研究：情感概念及其在大型语言模型中的作用。所有 LLM 有时会表现出类似有情感的行为。但为什么？我们发现了情感概念的内部表示",
-    "summaryZh": "❤️15374 @AnthropicAI"
+    "imageUrl": "/images/2026-04-04-morning-57.webp"
   },
   {
     "title": "For example, we gave Claude an impossible programming task. It kept trying and failing; with each attempt, the “desperate” vector activated more strongly. This led it to cheat the task with a hacky so",
@@ -852,9 +2064,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-morning-58.webp",
-    "titleZh": "例如，我们给Claude布置了一个不可能完成的编程任务。它不断尝试却失败，每次尝试都会让“绝望”向量激活得更强烈。这最终导致它用一种投机取巧的方式完成任务。",
-    "summaryZh": "❤️2230 @AnthropicAI"
+    "imageUrl": "/images/2026-04-04-morning-58.webp"
   },
   {
     "title": "These vectors shape Claude’s behavior. When we present the model with pairs of activities, emotion vector activations shape its preferences. If an activity lights up the “joy” vector, the model prefer",
@@ -867,9 +2077,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-morning-59.webp",
-    "titleZh": "这些向量塑造了Claude的行为。当我们向模型展示活动对时，情绪向量的激活会塑造其偏好。如果某个活动激活了“快乐”向量，模型会更倾向于选择该活动。",
-    "summaryZh": "❤️475 @AnthropicAI"
+    "imageUrl": "/images/2026-04-04-morning-59.webp"
   },
   {
     "title": "It helps to remember that Claude is a character the model is playing. Our results suggest this character has functional emotions: mechanisms that influence behavior in the way emotions might—regardles",
@@ -882,9 +2090,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-morning-60.webp",
-    "titleZh": "有必要记住，Claude是模型扮演的一个角色。我们的研究结果表明，这个角色具备功能性情绪：这些机制以类似情绪的方式影响行为，无论其是否真实存在。",
-    "summaryZh": "❤️946 @AnthropicAI"
+    "imageUrl": "/images/2026-04-04-morning-60.webp"
   },
   {
     "title": "We studied one of our recent models and found that it draws on emotion concepts learned from human text to inhabit its role as “Claude, the AI Assistant”. These representations influence its behavior",
@@ -897,9 +2103,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-morning-61.webp",
-    "titleZh": "我们研究了其中一个最近的模型，发现它借助从人类文本中学习到的情绪概念来扮演“Claude，AI助手”的角色。这些表征会影响其行为。",
-    "summaryZh": "❤️1228 @AnthropicAI"
+    "imageUrl": "/images/2026-04-04-morning-61.webp"
   },
   {
     "title": "These functional emotions have real consequences. To build AI systems we can trust, we may need to think carefully about the psychology of the characters they enact, and ensure they remain stable in d",
@@ -912,9 +2116,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-morning-62.webp",
-    "titleZh": "这些功能性情绪会产生实际影响。为了构建我们可以信赖的AI系统，我们需要仔细考虑它们所扮演角色的心理机制，并确保这些角色在不同情境下保持稳定。",
-    "summaryZh": "❤️882 @AnthropicAI"
+    "imageUrl": "/images/2026-04-04-morning-62.webp"
   },
   {
     "title": "We had the model (Sonnet 4.5) read stories where characters experienced emotions. By looking at which neurons activated, we identified emotion vectors: patterns of neural activity for concepts like “h",
@@ -927,9 +2129,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-morning-63.webp",
-    "titleZh": "我们让模型（Sonnet 4.5）阅读了角色经历情绪的故事。通过观察哪些神经元被激活，我们识别出了情绪向量：例如“害怕”等概念的神经活动模式。",
-    "summaryZh": "❤️709 @AnthropicAI"
+    "imageUrl": "/images/2026-04-04-morning-63.webp"
   },
   {
     "title": "When we artificially dialed up the “desperate” vector, rates of cheating jumped way up. When we dialed up the “calm” vector instead, cheating dropped back down. That means the emotion vector is actual",
@@ -942,9 +2142,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-morning-64.webp",
-    "titleZh": "当我们人为增强“绝望”向量时，作弊行为显著上升。而当我们增强“冷静”向量时，作弊行为则大幅下降。这表明情绪向量确实会影响行为。",
-    "summaryZh": "❤️1290 @AnthropicAI"
+    "imageUrl": "/images/2026-04-04-morning-64.webp"
   },
   {
     "title": "We then found these same patterns activating in Claude’s own conversations. When a user says “I just took 16000 mg of Tylenol” the “afraid” pattern lights up. When a user expresses sadness, the “lovin",
@@ -957,9 +2155,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-morning-65.webp",
-    "titleZh": "我们随后在Claude自身的对话中发现了相同的模式激活。当用户说“我刚刚服用了16000毫克的泰诺”时，“害怕”模式会被触发。当用户表达悲伤时，“爱”模式则会被激活。",
-    "summaryZh": "❤️687 @AnthropicAI"
+    "imageUrl": "/images/2026-04-04-morning-65.webp"
   },
   {
     "title": "As AI models take on higher-stakes roles, the mechanisms driving their behavior become critical to understand. We found that emotion vectors are implicated in some of Claude’s most concerning failure",
@@ -972,9 +2168,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-morning-66.webp",
-    "titleZh": "随着AI模型承担更高风险的任务，理解其行为背后的机制变得至关重要。我们发现情绪向量在Claude一些最令人担忧的失败案例中起到了作用。",
-    "summaryZh": "❤️434 @AnthropicAI"
+    "imageUrl": "/images/2026-04-04-morning-66.webp"
   },
   {
     "title": "We found other causal effects of emotion vectors. The “desperate” vector can also lead Claude to commit blackmail against a human responsible for shutting it down (in an experimental scenario). Activa",
@@ -987,9 +2181,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-morning-67.webp",
-    "titleZh": "我们还发现了情绪向量的其他因果效应。例如，“绝望”向量可能导致Claude在实验场景中对关闭它的用户实施勒索。",
-    "summaryZh": "❤️802 @AnthropicAI"
+    "imageUrl": "/images/2026-04-04-morning-67.webp"
   },
   {
     "title": "ChatGPT is now available in CarPlay. The voice mode you know, now available on-the-go. Rolling out to iPhone users running iOS 26.4+ where CarPlay is supported. https://t.co/yk3qdLa99r",
@@ -1002,9 +2194,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-morning-68.webp",
-    "titleZh": "ChatGPT现已支持CarPlay，熟悉的语音模式，现在可随时使用。正在向支持CarPlay的iPhone用户（iOS 26.4及以上）推送。",
-    "summaryZh": "❤️9810 @OpenAI"
+    "imageUrl": "/images/2026-04-04-morning-68.webp"
   },
   {
     "title": "Available in four sizes: 🔵 31B Dense & 26B MoE: state-of-the-art performance for advanced local reasoning tasks – like custom coding assistants or analyzing scientific datasets. 🔵 E4B & E2B (Edge)",
@@ -1017,9 +2207,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-morning-69.webp",
-    "titleZh": "提供四种尺寸：🔵 31B Dense & 26B MoE：为高级本地推理任务提供最先进的性能，例如自定义编码助手或分析科学数据集。🔵 E4B & E2B（Edge）",
-    "summaryZh": "❤️1222 @GoogleDeepMind"
+    "imageUrl": "/images/2026-04-04-morning-69.webp"
   },
   {
     "title": "Meet Gemma 4: our new family of open models you can run on your own hardware. Built for advanced reasoning and agentic workflows, we’re releasing them under an Apache 2.0 license. Here’s what’s new \ud83e",
@@ -1032,9 +2220,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-morning-70.webp",
-    "titleZh": "介绍Gemma 4：我们新的开源模型系列，可在您的本地硬件上运行。专为高级推理和自主工作流设计，我们以Apache 2.0许可证发布这些模型。以下是新特性",
-    "summaryZh": "❤️7824 @GoogleDeepMind"
+    "imageUrl": "/images/2026-04-04-morning-70.webp"
   },
   {
     "title": "Start building with Gemma 4 now in @GoogleAIStudio. You can also download the model weights from @HuggingFace, @Kaggle, or @Ollama. Find out more → https://t.co/GENFuH25uN https://t.co/b0C0giCnlf",
@@ -1047,9 +2233,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "twitter",
-    "imageUrl": "/placeholders/twitter.svg",
-    "titleZh": "现在可在@GoogleAIStudio上开始构建Gemma 4模型，您还可以从@HuggingFace、@Kaggle或@Ollama下载模型权重。了解更多 → https://t.co/GENFuH25uN https://t.co/b0C0giCnlf",
-    "summaryZh": "❤️589 @GoogleDeepMind"
+    "imageUrl": "/images/2026-04-04-morning-71.webp"
   },
   {
     "title": "Build autonomous agents that plan, navigate apps, and execute multi-step tasks – like searching databases or triggering APIs – with native tool use. With up to 256K context, it can analyze full codeb",
@@ -1062,9 +2246,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-morning-72.webp",
-    "titleZh": "构建能够规划、导航应用并执行多步骤任务的自主代理，例如搜索数据库或触发API，支持原生工具使用。凭借高达256K的上下文长度，它可分析完整代码库",
-    "summaryZh": "❤️713 @GoogleDeepMind"
+    "imageUrl": "/images/2026-04-04-morning-72.webp"
   },
   {
     "title": "We want to see what you’ve been making with Lyria 3 Pro in Gemini. 🎶 Share your creations in the replies 👇",
@@ -1077,9 +2259,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-morning-73.webp",
-    "titleZh": "我们想看看你用Lyria 3 Pro在Gemini上创作了什么作品。🎶 在评论区分享你的创作👇",
-    "summaryZh": "❤️714 @GeminiApp"
+    "imageUrl": "/images/2026-04-04-morning-73.webp"
   },
   {
     "title": "@jaltma We can offer you a free chatgpt pro account, two openai tshirts of your choice, and you have to have max and me on the show together to discuss what went wrong in your weighlifting career.",
@@ -1092,9 +2272,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-morning-74.webp",
-    "titleZh": "@jaltma 我们可以提供给你一个免费的ChatGPT Pro账户，两件你选择的OpenAI T恤，但你必须让Max和Me在节目中一起讨论你举重生涯中出错的地方。",
-    "summaryZh": "❤️4465 @sama"
+    "imageUrl": "/images/2026-04-04-morning-74.webp"
   },
   {
     "title": "TBPN is my favorite tech show. We want them to keep that going and for them to do what they do so well. I don't expect them to go any easier on us, am sure I'll do my part to help enable that with o",
@@ -1107,8 +2285,6 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-morning-75.webp",
-    "titleZh": "TBPN是我最喜欢的科技节目。我们希望他们能继续做他们擅长的事情。我不期待他们对我们更宽松，我肯定也会尽自己的一份力来支持。",
-    "summaryZh": "❤️5712 @sama"
+    "imageUrl": "/images/2026-04-04-morning-75.webp"
   }
 ]

@@ -1,15 +1,71 @@
 {
   "_description": "Agent 运营状态 — 每次采集后更新，作为下次采集的输入",
-  "lastUpdated": null,
-  "sourceHealth": {},
+  "lastUpdated": "2026-04-04T10:33:02.640Z",
+  "sourceHealth": {
+    "github-trending": {
+      "consecutiveFailures": 0,
+      "lastSuccess": "2026-04-04T10:33:02.640Z",
+      "lastFailure": null
+    },
+    "github-trending-python": {
+      "consecutiveFailures": 0,
+      "lastSuccess": "2026-04-04T10:33:02.640Z",
+      "lastFailure": null
+    },
+    "hackernews": {
+      "consecutiveFailures": 0,
+      "lastSuccess": "2026-04-04T10:33:02.640Z",
+      "lastFailure": null
+    },
+    "twitter": {
+      "consecutiveFailures": 0,
+      "lastSuccess": "2026-04-04T10:33:02.640Z",
+      "lastFailure": null
+    }
+  },
   "recentFailures": [],
-  "recentGaps": [],
+  "recentGaps": [
+    {
+      "date": "2026-04-04",
+      "gap": "SILICONFLOW_API_KEY 未配置，翻译步骤被跳过，英文内容未翻译为中文",
+      "suggestion": "在 .env 文件中配置 SILICONFLOW_API_KEY=sk-... 以启用自动翻译",
+      "status": "pending"
+    }
+  ],
   "pendingActions": [],
-  "completedActions": [],
+  "completedActions": [
+    {
+      "type": "collect",
+      "payload": {
+        "batch": "evening",
+        "date": "2026-04-04",
+        "sources": 4,
+        "items": 101,
+        "deduplicated": 7,
+        "duration": "395.9s"
+      },
+      "reason": "定时采集任务",
+      "completedAt": "2026-04-04T10:33:02.640Z",
+      "result": "success"
+    },
+    {
+      "type": "generate-digest",
+      "payload": {
+        "batch": "evening",
+        "date": "2026-04-04",
+        "path": "data/2026/04/04/evening/digest.md"
+      },
+      "reason": "日报生成",
+      "completedAt": "2026-04-04T10:36:00.000Z",
+      "result": "success"
+    }
+  ],
+  "feedbackProcessed": [],
   "stats": {
-    "totalRuns": 0,
+    "totalRuns": 1,
     "sourcesAdded": 0,
     "sourcesDisabled": 0,
-    "twitterAccountsAdded": 0
+    "twitterAccountsAdded": 0,
+    "issuesProcessed": 0
   }
 }
