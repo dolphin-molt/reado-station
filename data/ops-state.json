@@ -68,5 +68,18 @@
     "sourcesDisabled": 0,
     "twitterAccountsAdded": 0,
     "issuesProcessed": 0
+  },
+  "qualitySignals": {
+    "lastChecked": "2026-04-04T16:21:16.435Z",
+    "lark": {
+      "available": false
+    },
+    "feedback": {
+      "available": true,
+      "totalOpen": 0,
+      "thisWeekNew": 0,
+      "byLabel": {}
+    },
+    "history": []
   }
 }

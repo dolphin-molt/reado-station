@@ -56,12 +56,14 @@ npx tsx scripts/ops-runner.ts collect
 ### Phase 3: ANALYZE — 机械 + 判断
 
 ```bash
-npx tsx scripts/ops-runner.ts analyze
+npx tsx scripts/ops-runner.ts analyze   # 3.1-3.3 源健康 + 覆盖度
+npx tsx scripts/ops-runner.ts quality   # 3.4 质量信号（飞书已读率 + 反馈统计）
 ```
 
-输出分析报告。根据 `needsAgentDecision` 字段判断：
-- `false` → 一切正常，跳过
-- `true` → **加载技能 `station-analyze`**，你来决定禁用哪些源、加什么源
+两个命令都输出 JSON 报告。根据 `needsAgentDecision` / `needsAgentAttention` 字段判断：
+- 都为 `false` → 一切正常，跳过
+- analyze 需要决策 → **加载技能 `station-analyze`**，你来决定禁用哪些源、加什么源
+- quality 有 alerts → 关注警告（阅读率下降、bug 积压等），酌情调整内容策略
 
 ### Phase 4: FEEDBACK — 判断
 
@@ -110,6 +112,7 @@ npx tsx scripts/ops-runner.ts publish-lark  # 飞书群推送
 | RESTORE | 脚本 | 读 JSON，纯机械 |
 | COLLECT | 脚本 | 调 CLI，纯机械 |
 | ANALYZE | 脚本统计 + **你决策** | 统计是机械的，"该不该禁用这个源"需要判断 |
+| QUALITY | 脚本采集 + **你关注** | 飞书已读率、反馈趋势，驱动内容策略调整 |
 | FEEDBACK | **你** | 理解用户意图、写回复 |
 | GENERATE | **你** | 写日报，核心创造力 |
 | BUILD | 脚本 | 调构建工具，纯机械 |

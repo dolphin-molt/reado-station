@@ -12,6 +12,8 @@
  *   npx tsx scripts/ops-runner.ts persist      # Phase 7
  *   npx tsx scripts/ops-runner.ts publish      # Phase 8（git 部分）
  *   npx tsx scripts/ops-runner.ts publish-lark # Phase 8（飞书部分）
+ *   npx tsx scripts/ops-runner.ts quality      # Phase 3.4（质量信号采集）
+ *   npx tsx scripts/ops-runner.ts rollback     # 回滚到上次发布前
  *
  * 不包含的 Phase（需要 LLM）：
  *   Phase 4 FEEDBACK — Agent 自己处理 Issue
@@ -312,12 +314,164 @@ function publishLark() {
     ? content.slice(0, 3800) + `\n\n📡 完整日报: ${config.github.siteUrl}`
     : content
 
-  const result = run(`${larkCli} im +messages-send --chat-id "${config.lark.chatId}" --markdown "${truncated.replace(/"/g, '\\"')}"`)
+  // 用 bot 身份发送（bot 发的消息才能查已读）
+  const result = run(`${larkCli} im +messages-send --as bot --chat-id "${config.lark.chatId}" --markdown "${truncated.replace(/"/g, '\\"')}"`)
+
+  // 从返回结果提取 message_id
+  let messageId = ''
+  try {
+    const parsed = JSON.parse(result)
+    messageId = parsed?.data?.message_id || ''
+  } catch {
+    // 尝试正则匹配
+    const match = result.match(/"message_id"\s*:\s*"(om_[^"]+)"/)
+    messageId = match?.[1] || ''
+  }
+
+  // 保存 message_id 到 ops-state，下次运行时可以查已读
+  if (messageId) {
+    const state = readJSON(opsStatePath()) || {}
+    if (!state.qualitySignals) state.qualitySignals = {}
+    state.qualitySignals.lastMessageId = messageId
+    state.qualitySignals.lastMessageBatch = batch
+    state.qualitySignals.lastMessageTime = new Date().toISOString()
+    writeJSON(opsStatePath(), state)
+  }
+
   console.log(JSON.stringify({
     phase: 'PUBLISH-LARK',
-    status: result.includes('ERROR') ? 'error' : 'ok',
+    status: result.includes('ERROR') || result.includes('error') ? 'error' : 'ok',
+    messageId,
     truncated: content.length > 3800,
     output: result.slice(-300)
+  }, null, 2))
+}
+
+// ─── Quality Signals ───
+function quality() {
+  const state = readJSON(opsStatePath()) || {}
+  const signals = state.qualitySignals || {}
+  const messageId = signals.lastMessageId
+
+  // 1. 飞书消息已读
+  let larkSignal: any = { available: false }
+  if (messageId) {
+    let larkCli = config.lark.cli
+    try { execSync(`${larkCli} --version`, { stdio: 'ignore' }) } catch { larkCli = '' }
+
+    if (larkCli) {
+      // 查已读用户数
+      const readResult = run(`${larkCli} im messages read_users --params '{"message_id":"${messageId}","user_id_type":"open_id"}' --page-all --format json`)
+      let readCount = 0
+      try {
+        const parsed = JSON.parse(readResult)
+        readCount = parsed?.data?.items?.length || 0
+      } catch {}
+
+      // 查群成员总数
+      const memberResult = run(`${larkCli} im chat.members get --params '{"chat_id":"${config.lark.chatId}"}' --page-all --format json`)
+      let memberTotal = 0
+      try {
+        const parsed = JSON.parse(memberResult)
+        memberTotal = parsed?.data?.member_total || parsed?.data?.items?.length || 0
+      } catch {}
+
+      larkSignal = {
+        available: true,
+        messageId,
+        batch: signals.lastMessageBatch,
+        sentAt: signals.lastMessageTime,
+        readCount,
+        memberTotal,
+        readRate: memberTotal > 0 ? Math.round(readCount / memberTotal * 100) / 100 : 0
+      }
+    }
+  }
+
+  // 2. GitHub 反馈统计（Issue 数量按类型）
+  let feedbackSignal: any = { available: false }
+  try {
+    const issuesRaw = run(`gh issue list --repo ${config.github.repo} --state all --limit 50 --json number,labels,createdAt,state`)
+    const issues = JSON.parse(issuesRaw)
+    const thisWeek = issues.filter((i: any) => {
+      const created = new Date(i.createdAt)
+      const now = new Date()
+      const daysDiff = (now.getTime() - created.getTime()) / (1000 * 60 * 60 * 24)
+      return daysDiff <= 7
+    })
+    const byLabel: Record<string, number> = {}
+    for (const issue of thisWeek) {
+      for (const label of (issue.labels || [])) {
+        const name = label.name || label
+        byLabel[name] = (byLabel[name] || 0) + 1
+      }
+    }
+    feedbackSignal = {
+      available: true,
+      totalOpen: issues.filter((i: any) => i.state === 'OPEN').length,
+      thisWeekNew: thisWeek.length,
+      byLabel
+    }
+  } catch {}
+
+  // 3. 写入 ops-state
+  state.qualitySignals = {
+    ...signals,
+    lastChecked: new Date().toISOString(),
+    lark: larkSignal,
+    feedback: feedbackSignal
+  }
+
+  // 4. 趋势分析（和上次比较）
+  const history = signals.history || []
+  if (larkSignal.available) {
+    history.push({
+      date: new Date().toISOString().slice(0, 10),
+      batch: larkSignal.batch,
+      readRate: larkSignal.readRate,
+      readCount: larkSignal.readCount
+    })
+  }
+  // 只保留最近 14 条
+  state.qualitySignals.history = history.slice(-14)
+
+  // 计算趋势
+  let readRateTrend = 'insufficient_data'
+  if (history.length >= 3) {
+    const recent3 = history.slice(-3).map((h: any) => h.readRate)
+    const avg = recent3.reduce((a: number, b: number) => a + b, 0) / 3
+    const prev3 = history.slice(-6, -3).map((h: any) => h.readRate)
+    if (prev3.length >= 3) {
+      const prevAvg = prev3.reduce((a: number, b: number) => a + b, 0) / 3
+      readRateTrend = avg > prevAvg + 0.05 ? 'improving' : avg < prevAvg - 0.05 ? 'declining' : 'stable'
+    }
+  }
+
+  writeJSON(opsStatePath(), state)
+
+  // 5. 输出报告给 Agent
+  const alerts: string[] = []
+  if (larkSignal.available && larkSignal.readRate < 0.2) {
+    alerts.push(`飞书阅读率低 (${Math.round(larkSignal.readRate * 100)}%)，考虑精简日报`)
+  }
+  if (readRateTrend === 'declining') {
+    alerts.push('阅读率呈下降趋势，建议调整内容策略')
+  }
+  if (feedbackSignal.available && (feedbackSignal.byLabel?.['bug'] || 0) >= 2) {
+    alerts.push(`本周有 ${feedbackSignal.byLabel['bug']} 个 bug 报告待处理`)
+  }
+
+  console.log(JSON.stringify({
+    phase: 'QUALITY',
+    status: 'ok',
+    lark: larkSignal,
+    feedback: feedbackSignal,
+    readRateTrend,
+    alerts,
+    needsAgentAttention: alerts.length > 0,
+    message: alerts.length > 0
+      ? `有 ${alerts.length} 个质量警告，建议 Agent 关注`
+      : '质量信号正常'
   }, null, 2))
 }
 
@@ -330,6 +484,7 @@ switch (phase) {
   case 'persist':      persist(); break
   case 'publish':      publish(); break
   case 'publish-lark': publishLark(); break
+  case 'quality':      quality(); break
   case 'rollback':     rollback(); break
   default:
     console.log(JSON.stringify({
