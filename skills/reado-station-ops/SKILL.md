@@ -7,50 +7,37 @@ description: |
 
 # reado-station-ops — 网站运营技能包
 
-自主运营 reado-station 情报网站的完整闭环。
+自主运营 reado-station 情报网站。这是入口技能，按需加载子技能。
 
-**依赖 reado-collect 技能包**采集数据，本技能包负责后续的分析、生成、构建、发布。
+## 入职
 
-## 入职指南
+1. `cat agent.config.json` — 配置
+2. `cat AGENT-PROTOCOL.md` — 运营循环（9 Phase 路由表）
+3. `cat data/ops-state.json` — 上一任 Agent 的记忆
 
-**你是新来的 Agent？按以下步骤入职：**
+## 技能体系
 
-1. 读取项目配置：`cat agent.config.json`（所有路径和参数）
-2. 读取运营协议：`cat AGENT-PROTOCOL.md`（8 个 Phase 完整流程）
-3. 读取运营状态：`cat data/ops-state.json`（上一任 Agent 的交接记录）
-4. 开始干活
+| 技能 | 加载时机 | 内容 |
+|------|---------|------|
+| **reado-station-ops**（本技能） | 每次 | 入口 + 路由 |
+| **station-analyze** | Phase 3 有异常时 | 源健康检查 + 覆盖度分析 + 执行待办 |
+| **station-feedback** | Phase 4 有 Issue 时 | GitHub Issue 处理规则 |
+| **station-generate** | Phase 5 | 日报生成规范 + prompt 文件 |
+| **station-publish** | Phase 8 | git push + 飞书群推送 |
+| **station-heal** | 任何 Phase 出错时 | 故障分类 + 诊断 + 修复 + 升级 |
+| **reado-collect** | 需要加源时 | 信息源配置格式 + 采集命令 |
 
-## 项目位置
+## 正常运行的上下文加载
 
-从 `agent.config.json` 的 `paths.station` 获取。
-
-## 运营循环（8 Phase）
-
-完整规范见 `AGENT-PROTOCOL.md`，简版：
+一次无故障的运行只需加载：
 
 ```
-1. RESTORE   — 读 ops-state.json（恢复记忆）
-2. COLLECT   — npx tsx scripts/collect.ts（采集数据）
-3. ANALYZE   — 源健康 + 覆盖度 + 执行待办
-4. FEEDBACK  — gh issue list --label agent-todo（处理反馈）
-5. GENERATE  — 读 prompts/*.md → 生成 digest.md
-6. BUILD     — npm run build:site（翻译+图片+Astro）
-7. PERSIST   — 写回 ops-state.json
-8. PUBLISH   — git push → GitHub Actions 部署
+常驻：reado-station-ops + AGENT-PROTOCOL.md + agent.config.json + ops-state.json
+Phase 5：station-generate
+Phase 8：station-publish
 ```
 
-## 关键文件
-
-| 文件 | 作用 |
-|------|------|
-| `agent.config.json` | 所有配置（路径、仓库、参数） |
-| `AGENT-PROTOCOL.md` | 完整运营协议（8 Phase 详细规范） |
-| `data/ops-state.json` | 运营状态（你的记忆 / 交接本） |
-| `prompts/*.md` | 日报生成模板 |
-| `scripts/collect.ts` | 采集脚本 |
-| `scripts/build-site-data.ts` | 数据转换 |
-| `scripts/translate.ts` | 翻译（SiliconFlow Qwen3-8B） |
-| `scripts/fetch-images.ts` | OG 图片抓取 |
+总计约 5KB。其余技能仅在异常/反馈/维护场景才加载。
 
 ## 构建管线
 
@@ -58,20 +45,6 @@ description: |
 npm run build:site
 # = build-site-data → translate → fetch-images → astro build
 ```
-
-## 反馈处理
-
-用户通过网站 About 页提交 GitHub Issue（自动标 `agent-todo`）。
-
-```bash
-gh issue list --repo {repo} --label agent-todo --state open --json number,title,body,labels
-```
-
-| Label | 处理 |
-|-------|------|
-| `source-request` | 找 RSS → 加源（用 reado-collect 技能）→ 评论 → 关闭 |
-| `bug` | 记录 → 评论已收到 → 留给人工 |
-| `enhancement` | 评估 → 能做就做 → 不能做就记录 |
 
 ## 约束
 
