@@ -18,8 +18,8 @@ const API_URL = 'https://api.siliconflow.cn/v1/chat/completions'
 const MODEL = process.env.TRANSLATE_MODEL || 'Qwen/Qwen3-8B'
 const API_KEY = process.env.SILICONFLOW_API_KEY || ''
 const CONCURRENCY = 5
-const BATCH_SIZE = 10  // 每次翻译多条，减少 API 调用次数
-const TIMEOUT = 30_000
+const BATCH_SIZE = 8   // 每次翻译多条，减少 API 调用次数
+const TIMEOUT = 60_000 // 单次 API 请求超时（batch 越大响应越慢）
 
 // ─── Paths ──────────────────────────────────────────────────────────
 
@@ -170,22 +170,29 @@ async function main() {
 
   const tasks = batches.map((batch, batchIdx) =>
     limit(async () => {
-      try {
-        const results = await translateBatch(batch)
-        for (const item of batch) {
-          const translation = results.get(item.id)
-          if (translation) {
-            item.titleZh = translation.titleZh
-            item.summaryZh = translation.summaryZh
-            successCount++
+      for (let attempt = 0; attempt < 2; attempt++) {
+        try {
+          const results = await translateBatch(batch)
+          for (const item of batch) {
+            const translation = results.get(item.id)
+            if (translation) {
+              item.titleZh = translation.titleZh
+              item.summaryZh = translation.summaryZh
+              successCount++
+            } else {
+              failCount++
+            }
+          }
+          log.success(`  Batch ${batchIdx + 1}/${batches.length}: ${results.size}/${batch.length} translated`)
+          return  // 成功，退出重试循环
+        } catch (err: any) {
+          if (attempt === 0) {
+            log.warn(`  Batch ${batchIdx + 1}/${batches.length} failed, retrying: ${err.message}`)
           } else {
-            failCount++
+            failCount += batch.length
+            log.warn(`  Batch ${batchIdx + 1}/${batches.length} failed: ${err.message}`)
           }
         }
-        log.success(`  Batch ${batchIdx + 1}/${batches.length}: ${results.size}/${batch.length} translated`)
-      } catch (err: any) {
-        failCount += batch.length
-        log.warn(`  Batch ${batchIdx + 1}/${batches.length} failed: ${err.message}`)
       }
     })
   )
