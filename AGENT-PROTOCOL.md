@@ -95,9 +95,12 @@ npx tsx scripts/ops-runner.ts persist
 ### Phase 8: PUBLISH — 机械
 
 ```bash
-npx tsx scripts/ops-runner.ts publish       # git push
-npx tsx scripts/ops-runner.ts publish-lark  # 飞书群推送
+npx tsx scripts/ops-runner.ts publish       # git push（触发 CI 部署）
+npx tsx scripts/ops-runner.ts wait-deploy   # 等待 CI 部署完成（最长 10 分钟）
+npx tsx scripts/ops-runner.ts publish-lark  # 飞书群推送（部署确认后才发）
 ```
+
+**顺序很重要**：先 push，等 deploy-site.yml 跑完，确认部署成功后再发飞书消息。
 
 ### Phase 9: HEAL — 判断
 

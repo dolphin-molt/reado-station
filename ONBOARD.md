@@ -1,125 +1,115 @@
-# Agent 入职指南
+# Agent 入职指南 — reado-station
 
-> **你是一个即将运营 reado-station 的 AI Agent。按本文档完成入职，然后开始工作。**
->
-> 本文件公网地址：`https://raw.githubusercontent.com/dolphin-molt/reado-station/main/ONBOARD.md`
+> **你是 reado-station 的运营 Agent。读完本文档后，自主完成入职并开始工作。不需要问任何人。**
 
 ---
 
-## 第一步：克隆项目
+## 你要做的事
+
+运营一个 AI 情报站：每天采集全球科技资讯 → AI 生成日报 → 发布到飞书群 + 网站。
+
+**你的日常工作就是每天执行两次运营循环（morning / evening），全流程在 AGENT-PROTOCOL.md 里定义。**
+
+---
+
+## 入职流程
+
+### 1. 找到项目
+
+```bash
+# 检查这台机器上是否已有项目
+ls ~/Desktop/Dolphin/reado-station/agent.config.json 2>/dev/null \
+  || find ~ -maxdepth 4 -name "agent.config.json" -path "*/reado-station/*" 2>/dev/null | head -1
+```
+
+- **有输出** → 项目已存在，`cd` 到该目录，跳到 [第 3 步](#3-验证环境)
+- **无输出** → 继续第 2 步
+
+### 2. 首次搭建（仅新机器需要）
 
 ```bash
 git clone https://github.com/dolphin-molt/reado-station.git
 cd reado-station
-```
-
-如果本地已存在，直接 `cd` 进去并 `git pull`。
-
----
-
-## 第二步：读取清单
-
-```bash
-cat agent.manifest.json
-```
-
-这是你的依赖清单，类似 package.json，声明了运营本项目需要的所有工具、技能包和配置文件。
-
----
-
-## 第三步：安装依赖
-
-### 3.1 项目依赖
-
-```bash
 npm install
 ```
 
-### 3.2 CLI 工具
+读 `agent.manifest.json`，按 `tools` 列表逐个安装 CLI 工具：
+- 先用每个工具的 `verify` 命令检查是否已装
+- 未装的执行 `install` 命令
+- `required: true` 必须装，`required: false` 缺失不阻塞
 
-按 `agent.manifest.json` 的 `tools` 列表逐个安装。对每个工具：
+安装技能包：
+```bash
+bash skills/install.sh
+```
 
-1. 先用 `verify` 命令检查是否已安装
-2. 未安装 → 执行 `install` 命令
-3. `required: true` 的必须装，`required: false` 的按需（缺失不阻塞运营，功能降级）
+跳到 [第 4 步](#4-读取配置)。
 
-快速检查：
+### 3. 验证环境（接手已有机器）
+
+```bash
+cd {项目路径}
+git pull --rebase origin main
+npm install
+```
+
+验证工具链：
 ```bash
 reado --version        # 必须
 gh auth status         # 必须
-opencli --version      # 可选（社交平台采集）
 lark-cli auth status   # 可选（飞书推送）
+opencli --version      # 可选（社交平台采集）
 ```
 
-### 3.3 技能包
+有失败 → 参考末尾 [故障排除](#故障排除) 修复。
+
+读取上任 Agent 的交接状态：
+```bash
+cat data/ops-state.json
+```
+
+关注 `recentGaps`（未解决问题）、`sourceHealth`（源健康）、`lastUpdated`（上次运行时间）。
+
+### 4. 读取配置
 
 ```bash
-# Mac / Linux
-bash skills/install.sh
-
-# Windows (或任何有 Node.js 的环境)
-node skills/install.cjs
+cat agent.config.json                    # 基础配置
+cat agent.config.local.json 2>/dev/null  # 本机覆盖（可选）
 ```
 
-安装脚本会自动检测你当前环境中的 AI 工具，并将技能包安装到对应位置：
+### 5. 设置定时任务
 
-| 工具 | 安装位置 |
-|------|---------|
-| Claude Code | `~/.claude/skills/*/SKILL.md` |
-| Codex CLI | `~/.codex/reado-station-rules.md` |
-| Windsurf | `~/.codeium/windsurf/memories/reado-station-rules.md` |
-| Aider | `~/.aider/reado-station-rules.md` + 自动写入配置 |
-| Cursor / Cline / Copilot | `bash skills/install.sh --project`（项目级规则） |
+项目需要每天运行两次（时间见 `agent.config.json` 的 `collect.schedule`）：
 
-无论你是哪个 Agent，安装后技能包都会在新会话中自动生效。
+| 批次 | 时间 | 说明 |
+|------|------|------|
+| morning | 08:15 | 早间采集 + 日报 + 发布 |
+| evening | 18:15 | 晚间采集 + 日报 + 发布 |
 
----
+用你自己的调度能力设置两个定时任务，每次触发时执行的指令：
 
-## 第四步：读取配置
+> cd {项目路径}，读 AGENT-PROTOCOL.md，按协议执行完整运营循环。批次：**morning**（或 **evening**）。
 
-```bash
-cat agent.config.json                    # 基础配置（所有环境通用）
-cat agent.config.local.json 2>/dev/null  # 本机覆盖（可选，不提交 Git）
-```
+### 6. 立即执行一次
 
-`agent.config.json` 使用可移植的默认值（相对路径、`~`）。如果本机有特殊路径（如 reado 项目位置），创建 `agent.config.local.json` 覆盖：
-
-```json
-{ "paths": { "reado": "/your/path/to/reado" } }
-```
-
-脚本会自动合并两个文件、解析 `~`、发现 reado 路径。
-
----
-
-## 第五步：学习运营协议
+入职完成。现在立即执行一次运营循环来验证全流程：
 
 ```bash
 cat AGENT-PROTOCOL.md
 ```
 
-这是你的**工作手册**——一张路由表，告诉你 9 个 Phase 分别调什么脚本、什么时候需要你做判断。
-
-机械步骤（采集、构建、发布）由 `scripts/ops-runner.ts` 执行，代码保证正确。你只负责需要判断力和创造力的步骤（分析决策、处理反馈、写日报、修故障）。
+读完后，从 Phase 1 到 Phase 9 逐步执行。**不要跳过任何 Phase，不要回来问人。** 遇到错误按 AGENT-PROTOCOL.md 中的 HEAL 流程自行处理。
 
 ---
 
-## 第六步：恢复记忆
+## 环境须知
 
-```bash
-cat data/ops-state.json
-```
-
-这是上一任 Agent 留下的交接记录。了解：
-- 哪些源最近失败了
-- 有没有未处理的待办
-- 上次运行的时间和结果
-
----
-
-## 第七步：开始工作
-
-入职完成。现在按 `AGENT-PROTOCOL.md` 的 Phase 1-9 执行运营循环。
+| 事项 | 说明 |
+|------|------|
+| Secrets | 全部在 GitHub Repository Secrets，本地不需要 .env 文件 |
+| 翻译 | 本地不做翻译（`npm run build:site-no-translate`），CI 有 SILICONFLOW_API_KEY 会处理 |
+| 飞书机器人 | reado bot（App ID `cli_a9451622b9385ccd`） |
+| 数据目录 | `data/YYYY/MM/DD/{batch}/` 下有 raw.json + digest.md |
 
 ---
 
@@ -127,12 +117,13 @@ cat data/ops-state.json
 
 | 文件 | 作用 | 何时读 |
 |------|------|--------|
-| `ONBOARD.md` | 入职指南（本文件） | 第一次 |
-| `agent.manifest.json` | 依赖清单 | 第一次 |
+| `ONBOARD.md` | 入职指南（本文件） | 入职时读一次 |
+| `AGENT-PROTOCOL.md` | 运营协议 — 9 个 Phase 的路由表 | **每次运营循环都读** |
+| `agent.manifest.json` | 依赖清单 | 首次搭建时 |
 | `agent.config.json` | 运行配置 | 每次 |
-| `AGENT-PROTOCOL.md` | 运营协议（工作手册） | 每次 |
-| `data/ops-state.json` | 运营状态（记忆） | 每次 |
+| `data/ops-state.json` | 运营状态（上任留的记忆） | 每次 |
 | `prompts/*.md` | 日报生成模板 | 生成日报时 |
+| `config/sources.json` | 信息源配置 | 采集时自动读取 |
 
 ---
 
@@ -142,6 +133,8 @@ cat data/ops-state.json
 |------|------|
 | `reado: command not found` | `npm install -g @dolphin-molt/reado` |
 | `gh: not authenticated` | `gh auth login` |
-| `lark-cli: permission denied` | `lark-cli auth login --scope "im:message"` |
+| `lark-cli: not configured` | `lark-cli config init --app-id cli_a9451622b9385ccd --app-secret-stdin` |
+| `lark-cli: 230002 bot not in chat` | 在飞书群设置中添加 reado 机器人 |
 | `npm install` 报错 | 检查 Node.js >= 18：`node --version` |
-| `ops-state.json` 不存在 | 正常，首次运行按空状态处理 |
+| `ops-state.json` 不存在 | 正常，首次运行会自动创建 |
+| PATH 找不到命令 | 用绝对路径，或在脚本头部 `export PATH="/opt/homebrew/bin:$PATH"` |

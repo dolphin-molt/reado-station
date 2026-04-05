@@ -10,8 +10,9 @@
  *   npx tsx scripts/ops-runner.ts analyze      # Phase 3（输出分析报告，Agent 决策）
  *   npx tsx scripts/ops-runner.ts build        # Phase 6
  *   npx tsx scripts/ops-runner.ts persist      # Phase 7
- *   npx tsx scripts/ops-runner.ts publish      # Phase 8（git 部分）
- *   npx tsx scripts/ops-runner.ts publish-lark # Phase 8（飞书部分）
+ *   npx tsx scripts/ops-runner.ts publish      # Phase 8（git push）
+ *   npx tsx scripts/ops-runner.ts wait-deploy  # Phase 8（等 CI 部署完成）
+ *   npx tsx scripts/ops-runner.ts publish-lark # Phase 8（飞书推送，部署确认后）
  *   npx tsx scripts/ops-runner.ts quality      # Phase 3.4（质量信号采集）
  *   npx tsx scripts/ops-runner.ts rollback     # 回滚到上次发布前
  *
@@ -292,6 +293,84 @@ function rollback() {
   }, null, 2))
 }
 
+// ─── Wait for deploy workflow ───
+function waitDeploy() {
+  const repo = config.github.repo
+  const maxWait = 10 * 60 * 1000  // 10 分钟超时
+  const pollInterval = 15_000      // 每 15 秒查一次
+  const start = Date.now()
+
+  // 获取最近一次 push 触发的 deploy-site workflow run
+  const findRun = () => {
+    try {
+      const result = execSync(
+        `gh run list --repo ${repo} --workflow deploy-site.yml --limit 1 --json databaseId,status,conclusion,createdAt`,
+        { encoding: 'utf-8', timeout: 15_000 }
+      ).trim()
+      const runs = JSON.parse(result)
+      return runs[0] || null
+    } catch {
+      return null
+    }
+  }
+
+  const latestRun = findRun()
+  if (!latestRun) {
+    console.log(JSON.stringify({ phase: 'WAIT-DEPLOY', status: 'skip', reason: 'no deploy workflow found' }))
+    return
+  }
+
+  const runId = latestRun.databaseId
+
+  // 如果已经完成了（可能是之前的 run），直接返回
+  if (latestRun.status === 'completed') {
+    console.log(JSON.stringify({
+      phase: 'WAIT-DEPLOY',
+      status: latestRun.conclusion === 'success' ? 'ok' : 'error',
+      runId,
+      conclusion: latestRun.conclusion,
+      waited: 0
+    }))
+    return
+  }
+
+  // 轮询等待
+  while (Date.now() - start < maxWait) {
+    try {
+      const result = execSync(
+        `gh run view ${runId} --repo ${repo} --json status,conclusion`,
+        { encoding: 'utf-8', timeout: 15_000 }
+      ).trim()
+      const run = JSON.parse(result)
+
+      if (run.status === 'completed') {
+        const waited = Math.round((Date.now() - start) / 1000)
+        console.log(JSON.stringify({
+          phase: 'WAIT-DEPLOY',
+          status: run.conclusion === 'success' ? 'ok' : 'error',
+          runId,
+          conclusion: run.conclusion,
+          waited
+        }))
+        return
+      }
+    } catch {
+      // gh 命令失败，继续等
+    }
+
+    // sleep
+    execSync(`sleep ${pollInterval / 1000}`)
+  }
+
+  // 超时
+  console.log(JSON.stringify({
+    phase: 'WAIT-DEPLOY',
+    status: 'timeout',
+    runId,
+    waited: Math.round((Date.now() - start) / 1000)
+  }))
+}
+
 // ─── Phase 8: PUBLISH (lark) ───
 function publishLark() {
   const digestPath = join(datePath(), 'digest.md')
@@ -566,13 +645,14 @@ switch (phase) {
   case 'build':        build(); break
   case 'persist':      persist(); break
   case 'publish':      publish(); break
+  case 'wait-deploy':  waitDeploy(); break
   case 'publish-lark': publishLark(); break
   case 'quality':      quality(); break
   case 'rollback':     rollback(); break
   default:
     console.log(JSON.stringify({
       error: `Unknown phase: ${phase}`,
-      usage: 'npx tsx scripts/ops-runner.ts <restore|collect|analyze|build|persist|publish|publish-lark>'
+      usage: 'npx tsx scripts/ops-runner.ts <restore|collect|analyze|build|persist|publish|wait-deploy|publish-lark>'
     }))
     process.exit(1)
 }

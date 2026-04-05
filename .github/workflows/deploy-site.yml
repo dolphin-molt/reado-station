@@ -54,7 +54,7 @@ jobs:
 
       - name: Translate content (Qwen3-8B)
         run: npx tsx scripts/translate.ts
-        timeout-minutes: 5
+        timeout-minutes: 8
         env:
           SILICONFLOW_API_KEY: ${{ secrets.SILICONFLOW_API_KEY }}
         continue-on-error: true  # 翻译失败不阻断部署，回退显示原文
