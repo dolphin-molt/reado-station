@@ -70,7 +70,7 @@
     "issuesProcessed": 0
   },
   "qualitySignals": {
-    "lastChecked": "2026-04-04T16:21:16.435Z",
+    "lastChecked": "2026-04-04T17:11:27.142Z",
     "lark": {
       "available": false
     },
@@ -80,6 +80,9 @@
       "thisWeekNew": 0,
       "byLabel": {}
     },
-    "history": []
+    "history": [],
+    "website": {
+      "available": false
+    }
   }
 }
