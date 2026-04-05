@@ -1035,7 +1035,7 @@
     {
       "id": "hackernews",
       "name": "Hacker News Top",
-      "adapter": "opencli",
+      "adapter": "hackernews",
       "url": "",
       "hours": 24,
       "topics": [
@@ -1063,7 +1063,7 @@
     {
       "id": "hackernews-best",
       "name": "Hacker News Best",
-      "adapter": "opencli",
+      "adapter": "hackernews",
       "url": "",
       "hours": 48,
       "topics": [
