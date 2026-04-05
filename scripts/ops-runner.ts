@@ -21,6 +21,7 @@
  *   Phase 9 HEAL     — Agent 自己诊断修复
  */
 
+import 'dotenv/config'
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs'
 import { join } from 'node:path'
 import { execSync } from 'node:child_process'
