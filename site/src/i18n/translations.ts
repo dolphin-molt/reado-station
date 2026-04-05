@@ -63,6 +63,9 @@ const translations: Record<Lang, Record<string, string>> = {
     'feedback.suggestion': '提建议',
     'feedback.cta': '缺少你关注的信息源？',
     'feedback.cta.action': '告诉我们',
+    'feedback.placeholder': '输入你想关注的信息源，如 "36kr"、"Hacker News"...',
+    'feedback.submit': '提交',
+    'feedback.success': '已提交，感谢反馈！',
 
     // Language
     'lang.switch': 'EN',
@@ -130,6 +133,9 @@ const translations: Record<Lang, Record<string, string>> = {
     'feedback.suggestion': 'Suggest',
     'feedback.cta': 'Missing a source you care about?',
     'feedback.cta.action': 'Let us know',
+    'feedback.placeholder': 'Enter a source you want, e.g. "36kr", "Hacker News"...',
+    'feedback.submit': 'Submit',
+    'feedback.success': 'Submitted, thanks for your feedback!',
 
     // Language
     'lang.switch': '中文',

@@ -174,34 +174,88 @@ const pageTitle = 'reado | ' + (latestDay?.date || 'AI Intelligence Station');
     </div>
   </main>
 
-  <div class="feedback-bar container">
-    <span>{t(lang, 'feedback.cta')}</span>
-    <a href="https://github.com/dolphin-molt/reado-station/issues/new/choose" target="_blank" rel="noopener">
-      {t(lang, 'feedback.cta.action')} &rarr;
-    </a>
+  <div class="feedback-section container" id="feedback">
+    <p class="feedback-label">{t(lang, 'feedback.cta')}</p>
+    <form class="feedback-form" id="feedbackForm">
+      <input
+        type="text"
+        name="source"
+        class="feedback-input"
+        placeholder={t(lang, 'feedback.placeholder')}
+        required
+      />
+      <button type="submit" class="feedback-submit">{t(lang, 'feedback.submit')}</button>
+    </form>
+    <p class="feedback-success" id="feedbackSuccess" style="display:none">{t(lang, 'feedback.success')}</p>
   </div>
+
+  <script is:inline>
+    document.getElementById('feedbackForm')?.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const input = this.querySelector('input[name="source"]');
+      const value = input?.value?.trim();
+      if (!value) return;
+      const title = encodeURIComponent('信息源请求: ' + value);
+      const body = encodeURIComponent('**请求的信息源**\n\n' + value + '\n\n---\n来自网站反馈表单');
+      const url = 'https://github.com/dolphin-molt/reado-station/issues/new?title=' + title + '&body=' + body + '&labels=source-request';
+      window.open(url, '_blank');
+      input.value = '';
+      document.getElementById('feedbackSuccess').style.display = 'block';
+      setTimeout(() => { document.getElementById('feedbackSuccess').style.display = 'none'; }, 3000);
+    });
+  </script>
 
   <Footer lang={lang} />
 </BaseLayout>
 
 <style>
-  .feedback-bar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 1rem 0;
+  .feedback-section {
     margin-top: 2rem;
+    padding: 1.5rem 0;
     border-top: 1px solid var(--color-rule);
+    text-align: center;
+  }
+  .feedback-label {
     font-size: 0.9rem;
     color: var(--color-text-secondary);
+    margin-bottom: 0.75rem;
   }
-  .feedback-bar a {
+  .feedback-form {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .feedback-input {
+    flex: 1;
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--color-rule);
+    border-radius: 4px;
+    font-size: 0.9rem;
+    background: var(--color-bg);
     color: var(--color-text);
-    text-decoration: none;
-    font-weight: 500;
   }
-  .feedback-bar a:hover {
-    text-decoration: underline;
+  .feedback-input:focus {
+    outline: none;
+    border-color: var(--color-text);
+  }
+  .feedback-submit {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--color-text);
+    border-radius: 4px;
+    background: var(--color-text);
+    color: var(--color-bg);
+    font-size: 0.9rem;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .feedback-submit:hover {
+    opacity: 0.85;
+  }
+  .feedback-success {
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+    margin-top: 0.5rem;
   }
 </style>
