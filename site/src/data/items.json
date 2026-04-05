@@ -10,7 +10,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-05-morning-0.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "imbue-ai/mngr",
@@ -23,7 +23,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-05-morning-1.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "ml-explore/mlx-lm",
@@ -36,7 +36,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-05-morning-2.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "siddharthvaddem/openscreen",
@@ -49,7 +49,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-05-morning-3.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "telegramdesktop/tdesktop",
@@ -62,7 +62,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-05-morning-4.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "block/goose",
@@ -75,7 +75,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-05-morning-5.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "microsoft/agent-framework",
@@ -88,7 +88,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-05-morning-6.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "sherlock-project/sherlock",
@@ -101,7 +101,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-05-morning-7.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "Blaizzy/mlx-vlm",
@@ -114,7 +114,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-05-morning-8.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "onyx-dot-app/onyx",
@@ -127,7 +127,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-05-morning-9.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "Yeachan-Heo/oh-my-codex",
@@ -140,7 +140,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-05-morning-10.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "How India's film industry is embracing AI, as studios use the tech to cut production time and costs, while union rules constrain its use in Hollywood (Munsif Vengattil/Reuters)",
@@ -153,7 +153,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-05-morning-11.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "易烊千玺工作室声明维权AI侵权短剧盗用肖像 - 虎嗅",
@@ -166,7 +166,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-05-morning-12.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "Apple reportedly signed a 3rd-party driver, by Tiny Corp, for AMD or Nvidia eGPUs for Apple Silicon Macs; it's meant for AI research, not accelerating graphics (AppleInsider)",
@@ -179,7 +179,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-05-morning-13.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "Research across 1,372 participants and 9K+ trials details \"cognitive surrender\", where most subjects had minimal AI skepticism and accepted faulty AI reasoning (Kyle Orland/Ars Technica)",
@@ -192,7 +192,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-05-morning-14.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "Tech companies are trying to neuter Colorado’s landmark right-to-repair law",
@@ -205,7 +205,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "community",
-    "imageUrl": "/images/2026-04-05-morning-15.webp"
+    "imageUrl": "/placeholders/community.svg"
   },
   {
     "title": "VCs are covering expenses like rent for young college dropouts founding AI startups; Antler: average AI unicorn founder age fell from 40 in 2020 to 29 in 2024 (Kate Clark/Wall Street Journal)",
@@ -218,7 +218,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-05-morning-16.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "A folk musician became a target for AI fakes and a copyright troll",
@@ -231,7 +231,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-05-morning-17.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "Anthropic says Claude Code subscribers will need to pay extra for OpenClaw usage",
@@ -244,7 +244,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-05-morning-18.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "Y Combinator appears to have dropped Delve, removing the company's profile from its startup directory, following allegations of fake compliance certificates (The Economic Times)",
@@ -257,7 +257,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-05-morning-19.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "C端AI硬件领域的智能情报动态,AI硬件线报日报 - 虎嗅",
@@ -270,7 +270,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-05-morning-20.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "全球AI投融资动态,AI创投日报 - 虎嗅",
@@ -283,7 +283,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-05-morning-21.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "Russian media says attempts to limit VPN use may have triggered a widespread banking outage, as Moscow intensifies a crackdown on internet use and Telegram (Anthony Halpin/Bloomberg)",
@@ -296,7 +296,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-05-morning-22.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "张文宏谈AI时代医学与新闻行业的共性与挑战 - 虎嗅",
@@ -309,7 +309,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-05-morning-23.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "AI技术仅需1-4美元即可破解网络匿名身份，隐私安全面临新挑战 - 虎嗅",
@@ -322,7 +322,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-05-morning-24.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "Q&A with Simon Willison on the November release of GPT-5.1 and Opus 4.5 as the inflection point for coding, exhaustion due to managing coding agents, and more (Lenny Rachitsky/Lenny's Newsletter)",
@@ -335,7 +335,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-05-morning-25.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "Really, you made this without AI? Prove it",
@@ -348,7 +348,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-05-morning-26.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "AI短剧《桃花簪》侵权事件引发行业关注，素人肖像权保护成焦点 - 虎嗅",
@@ -361,7 +361,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-05-morning-27.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "专访黄文政：人们恐惧AI，是怕自己被社会分配抛弃 - 虎嗅",
@@ -374,7 +374,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-05-morning-28.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "A profile of Benjamin Brundage, a 22-year-old college senior who helped uncover the Kimwolf botnet, which launched 26,000+ DDoS attacks targeting 8,000+ victims (Robert McMillan/Wall Street Journal)",
@@ -387,7 +387,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-05-morning-29.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "Jensen Huang: NVIDIA - The $4 Trillion Company & the AI Revolution | Lex Fridman Podcast #494",
@@ -400,7 +400,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-05-morning-30.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "Netflix open-sources VOID, an AI framework that erases video objects and rewrites the physics they left behind",
@@ -413,7 +413,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-05-morning-31.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "Anthropic成立PAC：厨子不看菜谱看上兵法了",
@@ -426,7 +426,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-05-morning-32.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "Frontier Safety Roadmap Updates - Anthropic",
@@ -439,7 +439,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "ai-company",
-    "imageUrl": "/images/2026-04-05-morning-33.webp"
+    "imageUrl": "/placeholders/ai-company.svg"
   },
   {
     "title": "Anthropic discovers \"functional emotions\" in Claude that influence its behavior",
@@ -452,7 +452,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-05-morning-34.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "Hackers Are Posting the Claude Code Leak With Bonus Malware",
@@ -465,7 +465,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-05-morning-35.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "State of AI in 2026: LLMs, Coding, Scaling Laws, China, Agents, GPUs, AGI | Lex Fridman Podcast #490",
@@ -478,7 +478,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-05-morning-36.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "- DeepSeek - Into the Unknown",
@@ -491,7 +491,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "ai-company",
-    "imageUrl": "/images/2026-04-05-morning-37.webp"
+    "imageUrl": "/placeholders/ai-company.svg"
   },
   {
     "title": "Anthropic封堵第三方工具“薅羊毛”，OpenClaw被迫出局，创始人早已投奔OpenAI",
@@ -504,7 +504,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-05-morning-38.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "- DeepSeek - Into the Unknown",
@@ -517,7 +517,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "ai-company",
-    "imageUrl": "/images/2026-04-05-morning-39.webp"
+    "imageUrl": "/placeholders/ai-company.svg"
   },
   {
     "title": "CSIS研讨会：美中技术竞争转向系统集成与具身AI领域 - 虎嗅",
@@ -530,7 +530,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-05-morning-40.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "Anthropic研究表明AI具有 - 虎嗅",
@@ -543,7 +543,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-05-morning-41.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "OpenAI reshuffles leadership as health issues force key executives to step back",
@@ -556,7 +556,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-05-morning-42.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "OpenClaw: The Viral AI Agent that Broke the Internet - Peter Steinberger | Lex Fridman Podcast #491",
@@ -569,7 +569,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-05-morning-43.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "Anthropic drops 400 million in shares on an eight-month-old AI pharma startup with fewer than ten employees",
@@ -582,7 +582,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-05-morning-44.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "19岁，常青藤辍学，这群中国年轻人重构了AI记忆",
@@ -595,7 +595,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-05-morning-45.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "Anthropic cuts off third-party tools like OpenClaw for Claude subscribers, citing unsustainable demand",
@@ -608,7 +608,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-05-morning-46.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "Anthropic拒绝龙虾吃自助餐，中国token大厂笑了",
@@ -621,7 +621,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-05-morning-47.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "大厂们为啥不让自家员工用别家大模型？",
@@ -634,7 +634,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-05-morning-48.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "互联网最骄傲的事，正在被AI一点点拆掉",
@@ -647,7 +647,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-05-morning-49.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "How many products does Microsoft have named 'Copilot'?",
@@ -673,7 +673,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "community",
-    "imageUrl": "/images/2026-04-05-morning-51.webp"
+    "imageUrl": "/placeholders/community.svg"
   },
   {
     "title": "Show HN: sllm – Split a GPU node with other developers, unlimited tokens",
@@ -699,7 +699,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "community",
-    "imageUrl": "/images/2026-04-05-morning-53.webp"
+    "imageUrl": "/placeholders/community.svg"
   },
   {
     "title": "Components of a Coding Agent",
@@ -712,7 +712,7 @@
     "date": "2026-04-05",
     "batch": "morning",
     "category": "community",
-    "imageUrl": "/images/2026-04-05-morning-54.webp"
+    "imageUrl": "/placeholders/community.svg"
   },
   {
     "title": "Electrical Transformer Manufacturing Is Throttling the Electrified Future",
@@ -738,7 +738,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-evening-0.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "yusufkaraaslan/Skill_Seekers",
@@ -751,7 +751,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-evening-1.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "microsoft/apm",
@@ -764,7 +764,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-evening-2.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "vectorize-io/hindsight",
@@ -777,7 +777,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-evening-3.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "PostHog/posthog",
@@ -790,7 +790,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-evening-4.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "Alishahryar1/free-claude-code",
@@ -803,7 +803,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-evening-5.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "Blaizzy/mlx-vlm",
@@ -816,7 +816,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-evening-6.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "microsoft/BitNet",
@@ -829,7 +829,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-evening-7.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "MervinPraison/PraisonAI",
@@ -842,7 +842,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-evening-8.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "LearningCircuit/local-deep-research",
@@ -855,7 +855,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-evening-9.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "oumi-ai/oumi",
@@ -868,7 +868,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-evening-10.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "Yeachan-Heo/oh-my-codex",
@@ -881,7 +881,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-evening-11.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "onyx-dot-app/onyx",
@@ -894,7 +894,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-evening-12.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "google-research/timesfm",
@@ -907,7 +907,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-evening-13.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "siddharthvaddem/openscreen",
@@ -920,7 +920,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-evening-14.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "dmtrKovalenko/fff.nvim",
@@ -933,7 +933,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-evening-15.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "f/prompts.chat",
@@ -946,7 +946,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-evening-16.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "sherlock-project/sherlock",
@@ -959,7 +959,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-evening-17.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "State of AI in 2026: LLMs, Coding, Scaling Laws, China, Agents, GPUs, AGI | Lex Fridman Podcast #490",
@@ -972,7 +972,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-04-evening-18.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "Anthropic封堵第三方工具“薅羊毛”，OpenClaw被迫出局，创始人早已投奔OpenAI",
@@ -985,7 +985,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-04-evening-19.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "CSIS研讨会：美中技术竞争转向系统集成与具身AI领域 - 虎嗅",
@@ -998,7 +998,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-04-evening-20.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "AI会感到绝望？Anthropic 最新研究给出了一个更吓人的说法 - 虎嗅",
@@ -1011,7 +1011,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-04-evening-21.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "OpenAI reshuffles leadership as health issues force key executives to step back",
@@ -1024,7 +1024,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-04-evening-22.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "OpenClaw: The Viral AI Agent that Broke the Internet - Peter Steinberger | Lex Fridman Podcast #491",
@@ -1037,7 +1037,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-04-evening-23.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "Jensen Huang: NVIDIA - The $4 Trillion Company & the AI Revolution | Lex Fridman Podcast #494",
@@ -1050,7 +1050,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-04-evening-24.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "Anthropic drops 400 million in shares on an eight-month-old AI pharma startup with fewer than ten employees",
@@ -1063,7 +1063,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-04-evening-25.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "19岁，常青藤辍学，这群中国年轻人重构了AI记忆",
@@ -1076,7 +1076,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-04-evening-26.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "Anthropic cuts off third-party tools like OpenClaw for Claude subscribers, citing unsustainable demand",
@@ -1089,7 +1089,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-04-evening-27.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "Anthropic拒绝龙虾吃自助餐，中国token大厂笑了",
@@ -1102,7 +1102,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-04-evening-28.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "大厂们为啥不让自家员工用别家大模型？",
@@ -1115,7 +1115,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-04-evening-29.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "互联网最骄傲的事，正在被AI一点点拆掉",
@@ -1128,7 +1128,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-04-evening-30.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "AI会感到绝望？Anthropic最新研究给出了一个更吓人的说法",
@@ -1141,7 +1141,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-04-evening-31.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "The White House's latest effort to enact legislation that would preempt state AI laws stalls as multiple Democrats dismiss the proposal as a partisan play (Politico)",
@@ -1167,7 +1167,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-04-evening-33.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "【数智周报】Anthropic封杀OpenClaw；甲骨文一夜砍掉3万人；Claude Code源码泄露；豆包每天烧120万亿Tokens；商务部回应Meta收购Manus及企业跨国经营问题",
@@ -1180,7 +1180,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-04-evening-34.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "阿里千问3.6Plus大模型登顶全球模型调用排行榜首",
@@ -1206,7 +1206,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-04-evening-36.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "互联网巨头转向重资产模式，AI资本开支激增 - 虎嗅",
@@ -1219,7 +1219,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-04-evening-37.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "互联网巨头转向重资产模式，AI资本开支激增 - 虎嗅",
@@ -1232,7 +1232,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-04-evening-38.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "价值归零！Django创始人警告：30岁程序员受AI冲击最大",
@@ -1245,7 +1245,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-04-evening-39.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "Generalist公司以4.4亿美元估值完成1.4亿美元融资并发布AI模型GEN-1 - 虎嗅",
@@ -1258,7 +1258,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-04-evening-40.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "甲骨文启动3万人规模裁员，AI转型引发科技巨头组织重构 - 虎嗅",
@@ -1271,7 +1271,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-04-evening-41.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "Generalist, which raised $140M at a $440M valuation in 2025, releases GEN-1, an AI model to help robots handle high-dexterity tasks typically done by humans (Anna Tong/Forbes)",
@@ -1284,7 +1284,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-04-evening-42.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "Tiiny AI Pocket Lab众筹突破295万美元，瞄准本地AI助手市场需求 - 虎嗅",
@@ -1297,7 +1297,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-04-evening-43.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "Sources: Microsoft's Judson Althoff said Copilot sales hit \"some pretty big audacious goals\" in Q3; only 3% of customers were paying for Copilot as of January (Brody Ford/Bloomberg)",
@@ -1310,7 +1310,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-04-evening-44.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "Anthropic宣布正式封杀OpenClaw",
@@ -1323,7 +1323,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-04-evening-45.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "扎堆做龙虾，一场跟风盛宴？",
@@ -1336,7 +1336,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-04-evening-46.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "千问AI打车上线两周：假期需求暴涨，周环比增长超1500%",
@@ -1349,7 +1349,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-04-evening-47.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "市场关注恒生科技AI盈利前景与低估值是否反映悲观预期 - 虎嗅",
@@ -1362,7 +1362,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-04-evening-48.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "马斯克要求参与SpaceX IPO的公司购买Grok",
@@ -1375,7 +1375,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-04-evening-49.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "TurboQuant model weight compression support added to Llamacpp",
@@ -1388,7 +1388,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "community",
-    "imageUrl": "/images/2026-04-04-evening-51.webp"
+    "imageUrl": "/placeholders/community.svg"
   },
   {
     "title": "GitHub has DMCA'd nearly all forks of the official Claude-code repo",
@@ -1401,7 +1401,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "community",
-    "imageUrl": "/images/2026-04-04-evening-52.webp"
+    "imageUrl": "/placeholders/community.svg"
   },
   {
     "title": "Run Linux containers on Android, no root required",
@@ -1414,7 +1414,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "community",
-    "imageUrl": "/images/2026-04-04-evening-53.webp"
+    "imageUrl": "/placeholders/community.svg"
   },
   {
     "title": "Post Mortem: axios NPM supply chain compromise",
@@ -1427,7 +1427,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "community",
-    "imageUrl": "/images/2026-04-04-evening-54.webp"
+    "imageUrl": "/placeholders/community.svg"
   },
   {
     "title": "We replaced RAG with a virtual filesystem for our AI documentation assistant",
@@ -1440,7 +1440,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "community",
-    "imageUrl": "/images/2026-04-04-evening-55.webp"
+    "imageUrl": "/placeholders/community.svg"
   },
   {
     "title": "Show HN: Travel Hacking Toolkit – Points search and trip planning with AI",
@@ -1453,7 +1453,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "community",
-    "imageUrl": "/images/2026-04-04-evening-56.webp"
+    "imageUrl": "/placeholders/community.svg"
   },
   {
     "title": "Microsoft 365 connectors are now available on every Claude plan. Connect Outlook, OneDrive, and SharePoint to bring your email, docs, and files into the conversation. Get started here: https://t.co/",
@@ -1466,7 +1466,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-57.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "Here’s everything we launched this week (we promise not a single one of these is a joke): — Gemma 4, bringing our most intelligent open models and breakthrough reasoning to your personal hardware and",
@@ -1479,7 +1479,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-58.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "llama-server -hf ggml-org/gemma-4-26b-a4b-it-GGUF:Q4_K_M openclaw onboard --non-interactive \\ --auth-choice custom-api-key \\ --custom-base-url \"http://127.0.0.1:8080/v1\" \\ --custom-model-id \"gg",
@@ -1492,7 +1492,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-59.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "@arjsahai Let’s try. Has to be fixed anyhow",
@@ -1505,7 +1505,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-60.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "@vercel_dev Cool",
@@ -1518,7 +1518,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-61.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "@arjsahai Repro welcome, DMs open. curious: why not Node.js? Full support on Fluid, all the benefits of edge minus the limited runtime. Will significantly improve your DX",
@@ -1531,7 +1531,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-62.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "@0xSero 🫡",
@@ -1544,7 +1544,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-63.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "@das_sma Good feedback, will fix",
@@ -1557,7 +1557,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-64.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "Google just re-entered the game 🔥🔥 They want to take the crown 👑 back from Chinese open source AI. And... Gemma 4 is FINALLY Apache 2.0 aka real-open-source-licensed. From what I've seen it's go",
@@ -1570,7 +1570,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-65.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "llama-server -hf ggml-org/gemma-4-26b-a4b-it-GGUF:Q4_K_M openclaw onboard --non-interactive \\ --auth-choice custom-api-key \\ --custom-base-url \"http://127.0.0.1:8080/v1\" \\ --custom-model-id \"gg",
@@ -1583,7 +1583,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-66.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "@jeffreyhuber Let’s go!!",
@@ -1596,7 +1596,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-67.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "If it’s not either pushing the frontier meaningfully or open-source, no one will care these days (which is why most orgs should release open-source to get some attention and developer mindshare)",
@@ -1609,7 +1609,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-68.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "Time to move to open or local models from Hugging Face! All instructions are here: https://t.co/0w0pQb87Le",
@@ -1622,7 +1622,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-69.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "First public PR in years from the legend @JeffDean was to @huggingface transformers. Any other proud moment for us and our community!",
@@ -1635,7 +1635,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-70.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "From the replies it is clear there is still no agreement what RAG is, so I guess the truth of my statement depends on your definition of RAG.",
@@ -1648,7 +1648,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-71.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "@0xkron I was being a little snide. Fixed the post",
@@ -1661,7 +1661,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-72.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "Likely the most widely-distributed photograph in history, the original Blue Marble, taken by an unknown astronaut in 1972 from Apollo 17, and becoming the model for many images of Earth. Now we have",
@@ -1674,7 +1674,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-73.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "Here’s an independent domain extension of METR’s famous time-horizon analysis, applying it to offensive cybersecurity with real human expert timing data Similar to METR: 5.7 months doubling time. Fro",
@@ -1687,7 +1687,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-74.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "This new Nature paper (using old models) illustrates the point of my latest Substack post on AI interfaces. AI did a good job diagnosing medical issues, but when users had to interact with chatbots th",
@@ -1700,7 +1700,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-75.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "Heres the report: https://t.co/hog5OtR42C",
@@ -1713,7 +1713,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-76.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "Need to set up my OpenClaw to update and restart my Claude Dispatch to add computer use so I can use that instead.",
@@ -1726,7 +1726,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-77.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "Nature article: https://t.co/3fulB2A8dL",
@@ -1739,7 +1739,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-78.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "The RAG era was short-lived, but intense. (Not that RAG is not useful, but it is no longer the dominant paradigm for supplying context to agents)",
@@ -1752,7 +1752,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-79.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "@kate_rouch Thank you for everything you've done for @OpenAI 💥🙏. And most importantly, get healthy so we can hang out way more over the years!",
@@ -1765,7 +1765,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-80.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "@tweetShanghai Shanghai Disneyland",
@@ -1778,7 +1778,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-81.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "@trq212 Not working consistently for me and a few others https://t.co/9kopUprFha",
@@ -1791,7 +1791,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-82.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "If you want to learn all about how to use Codex and how the Codex team operates (especially given the OpenClaw news today), don't miss my next episode tomorrow. 📌 Subscribe here to get it: https://t",
@@ -1804,7 +1804,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-83.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "@lennysan @simonw lol this is what I'm (and I'm sure alot of other vibe coders) are already doing",
@@ -1817,7 +1817,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-84.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "@dunkhippo33 I dunno haiku is pretty dumb",
@@ -1830,7 +1830,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-85.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "For #2, I asked my OpenClaw for a short prompt to add to soul.md, here it is: // Vibe: Warm, sharp, dry humor. Not a chatbot — a person. Voice: • Skip \"Great question!\" and \"I'd be happy to help!\"",
@@ -1843,7 +1843,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-86.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "@HamelHusain I will but it doesn’t have the same personality as opus.",
@@ -1856,7 +1856,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-87.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "@simpsoka @OpenAI This is a weird one but I’d love if it had some more quirks and personality",
@@ -1869,7 +1869,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-88.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "@ChinaEV_Eng_Lif lol my kids are my boss",
@@ -1882,7 +1882,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-89.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "@TimTeaFan LA/Anaheim tbh the Star Wars ride is unmatched. Shanghai I loved Tron and Pirates. Tokyo I went to DisneySea and wasn't too impressed.",
@@ -1895,7 +1895,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-90.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "Anthropic just sent an email saying that you can no longer run 3rd party harnesses like OpenClaw using Claude subscriptions. Right now, both OpenAI and Anthropic are losing money on power users who r",
@@ -1908,7 +1908,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-91.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "@BytePlusGlobal @steipete Wtf is this AI Peter? Did you get his permission?",
@@ -1921,7 +1921,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-92.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "My friend Steve (@ALEngineered) has coached many engineers to grow their careers. (He's also an amazing YouTube coach 🙂) Check out his new book:",
@@ -1934,7 +1934,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-93.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "I’ve taken my kids to 3 Disneylands now (LA, Tokyo, Shanghai). Tips on how to survive the visit and avoid 3 hour lines: 1. Get early access by staying at the Disney hotel or purchasing early access s",
@@ -1947,7 +1947,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-94.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "@rohanvarma @pandemona What plugins and skills do you recommend",
@@ -1960,7 +1960,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-95.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "@stalmico Zootopia",
@@ -1973,7 +1973,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-96.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "Codex team and @OpenAI have a huge opportunity right now to: 1. Tell @openclaw users how to switch to gpt subscription (I think it’s just telling the bot to switch the model?) 2. Fix GPT’s personali",
@@ -1986,7 +1986,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-97.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "This weekend, I'm sharing a rare inside look at how OpenAI's Codex team ship products, including: → Live demo of how @romainhuet (Head of DevRel) ships with Codex → Codex product lead @embirico's sp",
@@ -1999,7 +1999,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-98.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "Nooooo https://t.co/dFth8C6sT7",
@@ -2012,7 +2012,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-99.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "@bcherny I love Claude but not sure why there was only one day notice on this",
@@ -2025,7 +2025,7 @@
     "date": "2026-04-04",
     "batch": "evening",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-evening-100.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "Yeachan-Heo/oh-my-codex",
@@ -2038,7 +2038,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-morning-0.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "onyx-dot-app/onyx",
@@ -2051,7 +2051,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-morning-1.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "google-research/timesfm",
@@ -2064,7 +2064,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-morning-2.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "siddharthvaddem/openscreen",
@@ -2077,7 +2077,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-morning-3.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "dmtrKovalenko/fff.nvim",
@@ -2090,7 +2090,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-morning-4.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "f/prompts.chat",
@@ -2103,7 +2103,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-morning-5.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "sherlock-project/sherlock",
@@ -2116,7 +2116,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-morning-6.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "hsliuping/TradingAgents-CN",
@@ -2129,7 +2129,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-morning-7.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "yusufkaraaslan/Skill_Seekers",
@@ -2142,7 +2142,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-morning-8.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "microsoft/apm",
@@ -2155,7 +2155,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-morning-9.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "vectorize-io/hindsight",
@@ -2168,7 +2168,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-morning-10.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "PostHog/posthog",
@@ -2181,7 +2181,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-morning-11.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "Alishahryar1/free-claude-code",
@@ -2194,7 +2194,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-morning-12.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "Blaizzy/mlx-vlm",
@@ -2207,7 +2207,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-morning-13.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "microsoft/BitNet",
@@ -2220,7 +2220,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-morning-14.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "MervinPraison/PraisonAI",
@@ -2233,7 +2233,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-morning-15.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "LearningCircuit/local-deep-research",
@@ -2246,7 +2246,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-morning-16.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "oumi-ai/oumi",
@@ -2259,7 +2259,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "opensource",
-    "imageUrl": "/images/2026-04-04-morning-17.webp"
+    "imageUrl": "/placeholders/opensource.svg"
   },
   {
     "title": "全球AI投融资动态,AI创投日报 - 虎嗅",
@@ -2272,7 +2272,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-04-morning-18.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "Can JavaScript Escape a CSP Meta Tag Inside an Iframe?",
@@ -2298,7 +2298,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-04-morning-20.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "Sources: Huawei's Ascend 950PR chip, set for mass production soon, saw prices rise 20% after Chinese tech giants placed bulk orders to run DeepSeek's V4 model (Qianer Liu/The Information)",
@@ -2311,7 +2311,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-04-morning-21.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "以色列AI芯片初创公司Hailo以低于5亿美元估值启动SPAC合并上市 - 虎嗅",
@@ -2324,7 +2324,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-04-morning-22.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "Docs: Israeli AI chip startup Hailo is pursuing an urgent IPO via a SPAC merger at a valuation of less than $500M; it was last valued at $1.2B in 2024 (Meir Orbach/CTech)",
@@ -2337,7 +2337,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-04-morning-23.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "Anthropic says Claude Code's usage drain comes down to peak-hour caps and ballooning contexts",
@@ -2350,7 +2350,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-04-morning-24.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "Google’s New AI Just Broke My Brain",
@@ -2363,7 +2363,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-04-morning-25.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "PSA: Anyone with a link can view your Granola notes by default",
@@ -2376,7 +2376,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-04-morning-26.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "大学生最爱的“外置大脑”一抽风，论文“肝”不动、 作业写不了 - 虎嗅",
@@ -2389,7 +2389,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-04-morning-27.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "langchain==1.2.15",
@@ -2402,7 +2402,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-04-morning-28.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "OpenAI shifts to usage-based pricing for Codex in ChatGPT business plans",
@@ -2415,7 +2415,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-04-morning-29.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "A US bill seeks to ban exports of DUV lithography tech to China, whose imports of chipmaking equipment reportedly grew from $10.7B in 2016 to ~$51.1B in 2025 (Jared Perlo/NBC News)",
@@ -2428,7 +2428,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-04-morning-30.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "Charts of the Week: SaaSpocalypse Interrupted",
@@ -2441,7 +2441,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-04-morning-31.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "The Facebook insider building content moderation for the AI era",
@@ -2454,7 +2454,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-04-morning-32.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "The Axios supply chain attack used individually targeted social engineering",
@@ -2480,7 +2480,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-04-morning-34.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "OpenAI takes on another \"side quest,\" buys tech-focused talk show TBPN",
@@ -2493,7 +2493,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "community",
-    "imageUrl": "/images/2026-04-04-morning-35.webp"
+    "imageUrl": "/placeholders/community.svg"
   },
   {
     "title": "千里科技发布2025财报：全年实现营业收入99.99亿元，同比增长42.13%",
@@ -2506,7 +2506,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-04-morning-36.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "Chatbots are now prescribing psychiatric drugs",
@@ -2519,7 +2519,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-04-morning-37.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "浪潮信息直播发布业界企业级OpenClaw方案“企千虾”",
@@ -2532,7 +2532,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-04-morning-38.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "Sora向左，阿里向右：全能演技派模型登场千问APP",
@@ -2545,7 +2545,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-04-morning-39.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "Some startups and researchers who can't access the most advanced chips are adopting a \"frugal AI\" approach, building smaller models on open-weight systems (Rina Chandran/Rest of World)",
@@ -2558,7 +2558,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-04-morning-40.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "智己汽车官宣刘翔成为品牌代言人",
@@ -2571,7 +2571,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-04-morning-41.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "强一股份：一季度净利同比预增655%-762%",
@@ -2584,7 +2584,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-04-morning-42.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "Gen DAS Dex 正式发布：破解具身数据难题，从学习人类的双手开始",
@@ -2610,7 +2610,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-04-morning-44.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "Zhipu AI's GLM-5V-Turbo turns design mockups directly into executable front-end code",
@@ -2623,7 +2623,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-04-morning-45.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "微医智能体为医保基金装上“数字天眼”，AI守护百姓“救命钱、保命钱”",
@@ -2636,7 +2636,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-04-morning-46.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "Claude Code and Cowork now let Anthropic's AI take control of your Mac or Windows desktop",
@@ -2649,7 +2649,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-04-morning-47.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "Agent时代，大厂们“拆墙”又“筑墙” - 虎嗅",
@@ -2662,7 +2662,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "china-media",
-    "imageUrl": "/images/2026-04-04-morning-48.webp"
+    "imageUrl": "/placeholders/china-media.svg"
   },
   {
     "title": "OpenAI decides the best way to fight critical AI coverage is to own a newsroom",
@@ -2675,7 +2675,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "tech-media",
-    "imageUrl": "/images/2026-04-04-morning-49.webp"
+    "imageUrl": "/placeholders/tech-media.svg"
   },
   {
     "title": "Samsung Magician disk utility takes 18 steps and two reboots to uninstall",
@@ -2701,7 +2701,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "community",
-    "imageUrl": "/images/2026-04-04-morning-51.webp"
+    "imageUrl": "/placeholders/community.svg"
   },
   {
     "title": "Show HN: Apfel – The free AI already on your Mac",
@@ -2714,7 +2714,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "community",
-    "imageUrl": "/images/2026-04-04-morning-52.webp"
+    "imageUrl": "/placeholders/community.svg"
   },
   {
     "title": "Intel Assured Supply Chain Product Brief",
@@ -2727,7 +2727,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "community",
-    "imageUrl": "/images/2026-04-04-morning-53.webp"
+    "imageUrl": "/placeholders/community.svg"
   },
   {
     "title": "Bun: cgroup-aware AvailableParallelism / HardwareConcurrency on Linux",
@@ -2740,7 +2740,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "community",
-    "imageUrl": "/images/2026-04-04-morning-54.webp"
+    "imageUrl": "/placeholders/community.svg"
   },
   {
     "title": "Tailscale's new macOS home",
@@ -2753,7 +2753,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "community",
-    "imageUrl": "/images/2026-04-04-morning-55.webp"
+    "imageUrl": "/placeholders/community.svg"
   },
   {
     "title": "The True Shape of Io's Steeple Mountain",
@@ -2766,7 +2766,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "community",
-    "imageUrl": "/images/2026-04-04-morning-56.webp"
+    "imageUrl": "/placeholders/community.svg"
   },
   {
     "title": "New Anthropic research: Emotion concepts and their function in a large language model. All LLMs sometimes act like they have emotions. But why? We found internal representations of emotion concepts t",
@@ -2779,7 +2779,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-morning-57.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "For example, we gave Claude an impossible programming task. It kept trying and failing; with each attempt, the “desperate” vector activated more strongly. This led it to cheat the task with a hacky so",
@@ -2792,7 +2792,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-morning-58.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "These vectors shape Claude’s behavior. When we present the model with pairs of activities, emotion vector activations shape its preferences. If an activity lights up the “joy” vector, the model prefer",
@@ -2805,7 +2805,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-morning-59.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "It helps to remember that Claude is a character the model is playing. Our results suggest this character has functional emotions: mechanisms that influence behavior in the way emotions might—regardles",
@@ -2818,7 +2818,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-morning-60.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "We studied one of our recent models and found that it draws on emotion concepts learned from human text to inhabit its role as “Claude, the AI Assistant”. These representations influence its behavior",
@@ -2831,7 +2831,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-morning-61.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "These functional emotions have real consequences. To build AI systems we can trust, we may need to think carefully about the psychology of the characters they enact, and ensure they remain stable in d",
@@ -2844,7 +2844,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-morning-62.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "We had the model (Sonnet 4.5) read stories where characters experienced emotions. By looking at which neurons activated, we identified emotion vectors: patterns of neural activity for concepts like “h",
@@ -2857,7 +2857,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-morning-63.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "When we artificially dialed up the “desperate” vector, rates of cheating jumped way up. When we dialed up the “calm” vector instead, cheating dropped back down. That means the emotion vector is actual",
@@ -2870,7 +2870,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-morning-64.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "We then found these same patterns activating in Claude’s own conversations. When a user says “I just took 16000 mg of Tylenol” the “afraid” pattern lights up. When a user expresses sadness, the “lovin",
@@ -2883,7 +2883,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-morning-65.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "As AI models take on higher-stakes roles, the mechanisms driving their behavior become critical to understand. We found that emotion vectors are implicated in some of Claude’s most concerning failure",
@@ -2896,7 +2896,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-morning-66.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "We found other causal effects of emotion vectors. The “desperate” vector can also lead Claude to commit blackmail against a human responsible for shutting it down (in an experimental scenario). Activa",
@@ -2909,7 +2909,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-morning-67.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "ChatGPT is now available in CarPlay. The voice mode you know, now available on-the-go. Rolling out to iPhone users running iOS 26.4+ where CarPlay is supported. https://t.co/yk3qdLa99r",
@@ -2922,7 +2922,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-morning-68.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "Available in four sizes: 🔵 31B Dense & 26B MoE: state-of-the-art performance for advanced local reasoning tasks – like custom coding assistants or analyzing scientific datasets. 🔵 E4B & E2B (Edge)",
@@ -2935,7 +2935,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-morning-69.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "Meet Gemma 4: our new family of open models you can run on your own hardware. Built for advanced reasoning and agentic workflows, we’re releasing them under an Apache 2.0 license. Here’s what’s new \ud83e",
@@ -2948,7 +2948,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-morning-70.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "Start building with Gemma 4 now in @GoogleAIStudio. You can also download the model weights from @HuggingFace, @Kaggle, or @Ollama. Find out more → https://t.co/GENFuH25uN https://t.co/b0C0giCnlf",
@@ -2961,7 +2961,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-morning-71.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "Build autonomous agents that plan, navigate apps, and execute multi-step tasks – like searching databases or triggering APIs – with native tool use. With up to 256K context, it can analyze full codeb",
@@ -2974,7 +2974,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-morning-72.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "We want to see what you’ve been making with Lyria 3 Pro in Gemini. 🎶 Share your creations in the replies 👇",
@@ -2987,7 +2987,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-morning-73.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "@jaltma We can offer you a free chatgpt pro account, two openai tshirts of your choice, and you have to have max and me on the show together to discuss what went wrong in your weighlifting career.",
@@ -3000,7 +3000,7 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-morning-74.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   },
   {
     "title": "TBPN is my favorite tech show. We want them to keep that going and for them to do what they do so well. I don't expect them to go any easier on us, am sure I'll do my part to help enable that with o",
@@ -3013,6 +3013,6 @@
     "date": "2026-04-04",
     "batch": "morning",
     "category": "twitter",
-    "imageUrl": "/images/2026-04-04-morning-75.webp"
+    "imageUrl": "/placeholders/twitter.svg"
   }
 ]
