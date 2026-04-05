@@ -1,6 +1,6 @@
 {
   "_description": "Agent 运营状态 — 每次采集后更新，作为下次采集的输入",
-  "lastUpdated": "2026-04-04T10:33:02.640Z",
+  "lastUpdated": "2026-04-05T00:35:52.356Z",
   "sourceHealth": {
     "github-trending": {
       "consecutiveFailures": 0,
@@ -63,14 +63,14 @@
   "incidents": [],
   "feedbackProcessed": [],
   "stats": {
-    "totalRuns": 1,
+    "totalRuns": 2,
     "sourcesAdded": 0,
     "sourcesDisabled": 0,
     "twitterAccountsAdded": 0,
     "issuesProcessed": 0
   },
   "qualitySignals": {
-    "lastChecked": "2026-04-04T17:11:27.142Z",
+    "lastChecked": "2026-04-05T00:31:10.549Z",
     "lark": {
       "available": false
     },
