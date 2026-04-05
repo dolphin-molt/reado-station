@@ -1,6 +1,6 @@
 {
   "_description": "Agent 运营状态 — 每次采集后更新，作为下次采集的输入",
-  "lastUpdated": "2026-04-05T06:17:14.859Z",
+  "lastUpdated": "2026-04-05T11:56:11.823Z",
   "sourceHealth": {
     "github-trending": {
       "consecutiveFailures": 0,
@@ -29,13 +29,15 @@
       "date": "2026-04-04",
       "gap": "SILICONFLOW_API_KEY 未配置，翻译步骤被跳过，英文内容未翻译为中文",
       "suggestion": "在 .env 文件中配置 SILICONFLOW_API_KEY=sk-... 以启用自动翻译",
-      "status": "pending"
+      "status": "resolved",
+      "resolution": "本地构建改为 build:site-no-translate，翻译由 CI (deploy-site.yml) 通过 GitHub Secret 处理"
     },
     {
       "date": "2026-04-05",
       "gap": "evening 批次飞书推送失败（Bot 不在群里 / 错误码 230002），日报未送达飞书群",
       "suggestion": "请检查 Lark Bot 是否仍在群 oc_449573991daff2ea1b1a4cbbb20f0a03 中，必要时重新将 Bot 加入群聊",
-      "status": "pending"
+      "status": "resolved",
+      "resolution": "已切换到 reado 机器人 (cli_a9451622b9385ccd)，测试发送成功"
     }
   ],
   "pendingActions": [],
@@ -85,8 +87,8 @@
       "error": "Missing SILICONFLOW_API_KEY environment variable",
       "category": "env",
       "diagnosis": "构建步骤依赖翻译服务，但 SILICONFLOW_API_KEY 未在环境中配置。此问题在上次运行中已记录。",
-      "fix": "改用 npm run build:site-no-translate 跳过翻译步骤，构建成功完成",
-      "status": "workaround",
+      "fix": "本地构建改为 build:site-no-translate，翻译由 CI 通过 GitHub Secret 处理",
+      "status": "resolved",
       "commitHash": null,
       "issueNumber": null
     },
@@ -97,22 +99,22 @@
       "error": "HTTP 400: Bot/User can NOT be out of the chat. (error code 230002)",
       "category": "env",
       "diagnosis": "Lark Bot 不在目标聊天群 oc_449573991daff2ea1b1a4cbbb20f0a03 中，或群聊状态异常。注意：同日早晨批次推送成功，可能是临时状态。",
-      "fix": null,
-      "status": "workaround",
+      "fix": "切换到 reado 机器人 (cli_a9451622b9385ccd)，重新授权 IM 域，测试发送成功",
+      "status": "resolved",
       "commitHash": null,
       "issueNumber": null
     }
   ],
   "feedbackProcessed": [],
   "stats": {
-    "totalRuns": 3,
+    "totalRuns": 4,
     "sourcesAdded": 0,
     "sourcesDisabled": 0,
     "twitterAccountsAdded": 0,
     "issuesProcessed": 0
   },
   "qualitySignals": {
-    "lastChecked": "2026-04-05T06:11:19.457Z",
+    "lastChecked": "2026-04-05T11:54:13.379Z",
     "lark": {
       "available": true,
       "messageId": "om_x100b522ea29528a4c140fa4aae9c90b",
@@ -123,9 +125,18 @@
       "readRate": 0
     },
     "feedback": {
-      "available": false
+      "available": true,
+      "totalOpen": 0,
+      "thisWeekNew": 0,
+      "byLabel": {}
     },
     "history": [
+      {
+        "date": "2026-04-05",
+        "batch": "morning",
+        "readRate": 0,
+        "readCount": 0
+      },
       {
         "date": "2026-04-05",
         "batch": "morning",
