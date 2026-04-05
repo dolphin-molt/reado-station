@@ -389,6 +389,11 @@ function publishLark() {
   }
 
   const content = readFileSync(digestPath, 'utf-8')
+
+  // 更新 latest-digest.md，方便 Agent 快速读取最新日报
+  const latestPath = join(config.paths.station, 'data', 'latest-digest.md')
+  writeFileSync(latestPath, content)
+
   // 飞书消息限制约 4000 字
   const truncated = content.length > 3800
     ? content.slice(0, 3800) + `\n\n📡 完整日报: ${config.github.siteUrl}`
