@@ -44,8 +44,7 @@ const dateFormatted = latestDay?.date
 
 const pageTitle = 'reado | ' + (latestDay?.date || 'AI Intelligence Station');
 
-const feedbackEndpoint = import.meta.env.PUBLIC_FEEDBACK_URL || 'https://api.web3forms.com/submit';
-const feedbackKey = import.meta.env.PUBLIC_WEB3FORMS_KEY || '';
+const feedbackEndpoint = import.meta.env.PUBLIC_FEEDBACK_URL || '';
 ---
 
 <BaseLayout title={pageTitle} lang={lang}>
@@ -180,8 +179,7 @@ const feedbackKey = import.meta.env.PUBLIC_WEB3FORMS_KEY || '';
   <div class="feedback-section container" id="feedback">
     <p class="feedback-label">{t(lang, 'feedback.cta')}</p>
     <form class="feedback-form" id="feedbackForm"
-      data-endpoint={feedbackEndpoint}
-      data-key={feedbackKey}>
+      data-endpoint={feedbackEndpoint}>
       <input
         type="text"
         name="source"
@@ -203,19 +201,14 @@ const feedbackKey = import.meta.env.PUBLIC_WEB3FORMS_KEY || '';
       if (!value) return;
 
       const endpoint = this.dataset.endpoint;
-      const key = this.dataset.key;
+      if (!endpoint) return;
       btn.disabled = true;
 
       try {
-        const isWorker = endpoint.includes('/api/feedback');
-        const body = isWorker
-          ? { source: value }
-          : { access_key: key, subject: '信息源请求: ' + value, message: value, from_name: 'reado feedback' };
-
         const res = await fetch(endpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(body),
+          body: JSON.stringify({ source: value }),
         });
 
         if (res.ok) {
