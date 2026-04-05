@@ -65,7 +65,7 @@
 
   "skillInstall": {
     "command": "bash skills/install.sh",
-    "note": "自动检测 Claude Code / Codex CLI / Windsurf / Aider，安装到对应路径",
+    "note": "自动检测 Claude Code / Openclaw / Codex CLI / Windsurf / Aider，安装到对应路径",
     "projectLevel": "bash skills/install.sh --project"
   },
 

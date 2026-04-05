@@ -112,7 +112,20 @@ if (commandExists('claude') || dirExists(claudeDir)) {
   installed++
 }
 
-// 2. Codex CLI
+// 2. Openclaw
+const openclawDir = path.join(HOME, '.openclaw')
+if (commandExists('openclaw') || dirExists(openclawDir)) {
+  const target = path.join(openclawDir, 'skills')
+  fs.mkdirSync(target, { recursive: true })
+  for (const name of listSkills()) {
+    rmSync(path.join(target, name))
+    copyDirSync(path.join(SCRIPT_DIR, name), path.join(target, name))
+  }
+  green(`Openclaw     → ${path.join('~', '.openclaw', 'skills', '')}`)
+  installed++
+}
+
+// Codex CLI
 const codexDir = path.join(HOME, '.codex')
 if (commandExists('codex') || dirExists(codexDir)) {
   fs.mkdirSync(codexDir, { recursive: true })
@@ -196,7 +209,7 @@ if (PROJECT_FLAG) {
 console.log('')
 if (installed === 0 && !PROJECT_FLAG) {
   yellow('No AI coding tools detected globally.')
-  yellow('Supported: Claude Code, Codex CLI, Windsurf, Aider')
+  yellow('Supported: Claude Code, Openclaw, Codex CLI, Windsurf, Aider')
   console.log('')
   dim('Use --project to install project-level rules for Cursor/Cline/Copilot.')
 } else {
