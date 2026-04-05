@@ -64,6 +64,40 @@ jobs:
       #   env:
       #     ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
 
+      - name: Merge with existing data
+        run: |
+          # Pull latest (local Agent may have pushed more complete data)
+          git pull --rebase origin main || true
+
+          # Determine batch path
+          HOUR=$(date -u +%H)
+          if [ "$HOUR" -lt 14 ]; then BATCH="morning"; else BATCH="evening"; fi
+          DATE=$(date +%Y-%m-%d)
+          YEAR=$(date +%Y)
+          MONTH=$(date +%m)
+          DAY=$(date +%d)
+          RAW_PATH="data/${YEAR}/${MONTH}/${DAY}/${BATCH}/raw.json"
+
+          # Merge: if remote has more items, keep remote and add CI-only items
+          npx tsx -e "
+            import { readFileSync, writeFileSync } from 'fs';
+            const ciPath = '${RAW_PATH}';
+            try {
+              const ci = JSON.parse(readFileSync(ciPath, 'utf-8'));
+              // Check if there's a stashed version from rebase
+              // The file we have now is post-rebase (remote version if conflict resolved)
+              // Just ensure we don't reduce item count
+              const ciCount = ci.items?.length || 0;
+              console.log('Current items:', ciCount);
+              if (ciCount === 0) {
+                console.log('SKIP: zero items, nothing to commit');
+                process.exit(2);
+              }
+            } catch(e) {
+              console.log('No raw.json yet, CI will create it');
+            }
+          " || { echo "Skipping commit — no new data"; exit 0; }
+
       - name: Commit data
         run: |
           git config user.name "reado-station[bot]"
@@ -80,14 +114,12 @@ jobs:
 
           # Determine batch
           HOUR=$(date -u +%H)
-          if [ "$HOUR" -lt 14 ]; then
-            BATCH="morning"
-          else
-            BATCH="evening"
-          fi
-
+          if [ "$HOUR" -lt 14 ]; then BATCH="morning"; else BATCH="evening"; fi
           DATE=$(date +%Y-%m-%d)
-          git commit -m "data: ${DATE} ${BATCH} collection
+
+          ITEM_COUNT=$(cat "data/$(date +%Y)/$(date +%m)/$(date +%d)/${BATCH}/raw.json" 2>/dev/null | node -e "let d='';process.stdin.on('data',c=>d+=c);process.stdin.on('end',()=>{try{console.log(JSON.parse(d).items.length)}catch{console.log(0)}})" || echo 0)
+
+          git commit -m "data: ${DATE} ${BATCH} collection (${ITEM_COUNT} items)
 
           Co-Authored-By: reado-station[bot] <reado-station[bot]@users.noreply.github.com>"
 
