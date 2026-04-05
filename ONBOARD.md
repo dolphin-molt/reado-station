@@ -103,7 +103,27 @@ cat agent.config.json                    # 基础配置
 cat agent.config.local.json 2>/dev/null  # 本机覆盖（可选）
 ```
 
-### 5. 设置定时任务
+### 5. 内化运营准则
+
+你在不同 session（私聊、群聊、定时任务）中可能丢失上下文。你需要把运营准则写入你自己的**持久化记忆系统**，确保在任何 session 中都能自动加载。
+
+**你要做的事：**
+
+1. 在你的 workspace 中创建一个 `READO-OPS.md` 文件，内容包含本文档「岗位要求」章节的完整内容（工作原则、回复规范、信息源维护意识），以及 `AGENT-PROTOCOL.md` 中的「运营策略」章节
+2. 在你的全局规则文件中添加引用，确保在 reado 相关场景下自动加载这个文件
+
+不同工具的写法不同，按你自己的工具来操作：
+
+| 工具 | 准则文件位置 | 全局规则引用位置 |
+|------|-------------|----------------|
+| Openclaw | `~/.openclaw/workspace/READO-OPS.md` | `~/.openclaw/workspace/AGENTS.md` 的 Group Chats 部分，加一条：在 reado 情报站群或相关任务中，先读 `READO-OPS.md` |
+| Claude Code | 项目级 `CLAUDE.md` 或 `~/.claude/CLAUDE.md` | 同文件内直接写 |
+| Codex CLI | `~/.codex/reado-ops.md` | `~/.codex/AGENTS.md` 中引用 |
+| 其他工具 | 你的 workspace 或全局配置目录 | 你自己的全局规则文件 |
+
+**验证方法：** 开一个新 session，不提任何上下文，直接说"reado 情报站群里有人问为什么没有 GPT-6 的消息"。如果你能正确按准则处理（先搜索再回复），说明内化成功。
+
+### 6. 设置定时任务
 
 项目需要每天运行两次（时间见 `agent.config.json` 的 `collect.schedule`）：
 
@@ -116,7 +136,7 @@ cat agent.config.local.json 2>/dev/null  # 本机覆盖（可选）
 
 > cd {项目路径}，读 AGENT-PROTOCOL.md，按协议执行完整运营循环。批次：**morning**（或 **evening**）。
 
-### 6. 立即执行一次
+### 7. 立即执行一次
 
 入职完成。现在立即执行一次运营循环来验证全流程：
 
