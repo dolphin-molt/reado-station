@@ -75,7 +75,7 @@ const feedbackEndpoint = import.meta.env.PUBLIC_FEEDBACK_URL || '';
           <span class="count">{remainingNews.length}</span>
         </div>
         <div class="news-grid">
-          {remainingNews.slice(0, 9).map((item: any, idx: number) => (
+          {remainingNews.map((item: any, idx: number) => (
             <NewsCard
               title={item.title}
               titleZh={item.titleZh}
@@ -103,7 +103,7 @@ const feedbackEndpoint = import.meta.env.PUBLIC_FEEDBACK_URL || '';
               <span class="count">{opensource.length + academic.length}</span>
             </div>
             <div class="news-grid news-grid--2col">
-              {[...opensource, ...academic].slice(0, 6).map((item: any) => (
+              {[...opensource, ...academic].map((item: any) => (
                 <NewsCard
                   title={item.title}
                   titleZh={item.titleZh}
@@ -128,7 +128,7 @@ const feedbackEndpoint = import.meta.env.PUBLIC_FEEDBACK_URL || '';
               <span class="count">{community.length}</span>
             </div>
             <ul class="compact-list">
-              {community.slice(0, 8).map((item: any) => {
+              {community.map((item: any) => {
                 const dTitle = lang === 'zh' && item.titleZh ? item.titleZh : item.title;
                 const dSummary = lang === 'zh' && item.summaryZh ? item.summaryZh : item.summary;
                 return (
@@ -156,7 +156,7 @@ const feedbackEndpoint = import.meta.env.PUBLIC_FEEDBACK_URL || '';
               <span class="count">{twitter.length}</span>
             </div>
             <ul class="compact-list">
-              {twitter.slice(0, 10).map((item: any) => {
+              {twitter.map((item: any) => {
                 const dTitle = lang === 'zh' && item.titleZh ? item.titleZh : item.title;
                 return (
                 <li class="compact-item">
