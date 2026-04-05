@@ -36,6 +36,7 @@ const translations: Record<Lang, Record<string, string>> = {
 
     // Footer
     'footer.slogan': '一个人读不完世界，一群人可以。Read All. Miss Nothing.',
+    'footer.feedback': '反馈',
 
     // Archive
     'archive.title': '归档',
@@ -60,6 +61,8 @@ const translations: Record<Lang, Record<string, string>> = {
     'feedback.missing': '报告缺少的信息源',
     'feedback.bug': '报告信息有误',
     'feedback.suggestion': '提建议',
+    'feedback.cta': '缺少你关注的信息源？',
+    'feedback.cta.action': '告诉我们',
 
     // Language
     'lang.switch': 'EN',
@@ -100,6 +103,7 @@ const translations: Record<Lang, Record<string, string>> = {
 
     // Footer
     'footer.slogan': 'One person can\'t read the world. Together, we can. Read All. Miss Nothing.',
+    'footer.feedback': 'Feedback',
 
     // Archive
     'archive.title': 'Archive',
@@ -124,6 +128,8 @@ const translations: Record<Lang, Record<string, string>> = {
     'feedback.missing': 'Report Missing Source',
     'feedback.bug': 'Report Error',
     'feedback.suggestion': 'Suggest',
+    'feedback.cta': 'Missing a source you care about?',
+    'feedback.cta.action': 'Let us know',
 
     // Language
     'lang.switch': '中文',

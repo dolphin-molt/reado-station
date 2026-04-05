@@ -174,5 +174,34 @@ const pageTitle = 'reado | ' + (latestDay?.date || 'AI Intelligence Station');
     </div>
   </main>
 
+  <div class="feedback-bar container">
+    <span>{t(lang, 'feedback.cta')}</span>
+    <a href="https://github.com/dolphin-molt/reado-station/issues/new/choose" target="_blank" rel="noopener">
+      {t(lang, 'feedback.cta.action')} &rarr;
+    </a>
+  </div>
+
   <Footer lang={lang} />
 </BaseLayout>
+
+<style>
+  .feedback-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem 0;
+    margin-top: 2rem;
+    border-top: 1px solid var(--color-rule);
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+  }
+  .feedback-bar a {
+    color: var(--color-text);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .feedback-bar a:hover {
+    text-decoration: underline;
+  }
+</style>
