@@ -11,7 +11,6 @@
  *
  * 输出：data/YYYY/MM/DD/{batch}/raw.json 或 local.json
  */
-import 'dotenv/config'
 import { join } from 'node:path'
 import { existsSync } from 'node:fs'
 import dayjs from 'dayjs'

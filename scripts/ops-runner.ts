@@ -21,7 +21,6 @@
  *   Phase 9 HEAL     — Agent 自己诊断修复
  */
 
-import 'dotenv/config'
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs'
 import { join } from 'node:path'
 import { execSync } from 'node:child_process'
@@ -173,7 +172,8 @@ function analyze() {
 // ─── Phase 6: BUILD ───
 function build() {
   console.log(JSON.stringify({ phase: 'BUILD', status: 'running' }))
-  const output = run('npm run build:site')
+  // 翻译由 CI (deploy-site.yml) 负责，本地只做无翻译构建
+  const output = run('npm run build:site-no-translate')
   const hasError = output.startsWith('ERROR')
   console.log(JSON.stringify({
     phase: 'BUILD',

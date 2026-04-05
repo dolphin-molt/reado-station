@@ -8,7 +8,6 @@
  * Env:    SILICONFLOW_API_KEY (or falls back to hardcoded key)
  */
 
-import 'dotenv/config'
 import { readJSON, writeJSON, log, getProjectRoot } from './lib/utils.js'
 import { join } from 'node:path'
 import pLimit from 'p-limit'
