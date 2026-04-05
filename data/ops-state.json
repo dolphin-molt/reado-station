@@ -1,6 +1,6 @@
 {
   "_description": "Agent 运营状态 — 每次采集后更新，作为下次采集的输入",
-  "lastUpdated": "2026-04-05T00:37:45.952Z",
+  "lastUpdated": "2026-04-05T06:17:14.859Z",
   "sourceHealth": {
     "github-trending": {
       "consecutiveFailures": 0,
@@ -74,24 +74,34 @@
   "incidents": [],
   "feedbackProcessed": [],
   "stats": {
-    "totalRuns": 2,
+    "totalRuns": 3,
     "sourcesAdded": 0,
     "sourcesDisabled": 0,
     "twitterAccountsAdded": 0,
     "issuesProcessed": 0
   },
   "qualitySignals": {
-    "lastChecked": "2026-04-05T00:31:10.549Z",
+    "lastChecked": "2026-04-05T06:11:19.457Z",
     "lark": {
-      "available": false
+      "available": true,
+      "messageId": "om_x100b522ea29528a4c140fa4aae9c90b",
+      "batch": "morning",
+      "sentAt": "2026-04-05T00:37:45.951Z",
+      "readCount": 0,
+      "memberTotal": 1,
+      "readRate": 0
     },
     "feedback": {
-      "available": true,
-      "totalOpen": 0,
-      "thisWeekNew": 0,
-      "byLabel": {}
+      "available": false
     },
-    "history": [],
+    "history": [
+      {
+        "date": "2026-04-05",
+        "batch": "morning",
+        "readRate": 0,
+        "readCount": 0
+      }
+    ],
     "website": {
       "available": false
     },
