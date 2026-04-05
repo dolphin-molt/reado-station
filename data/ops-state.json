@@ -30,6 +30,12 @@
       "gap": "SILICONFLOW_API_KEY 未配置，翻译步骤被跳过，英文内容未翻译为中文",
       "suggestion": "在 .env 文件中配置 SILICONFLOW_API_KEY=sk-... 以启用自动翻译",
       "status": "pending"
+    },
+    {
+      "date": "2026-04-05",
+      "gap": "evening 批次飞书推送失败（Bot 不在群里 / 错误码 230002），日报未送达飞书群",
+      "suggestion": "请检查 Lark Bot 是否仍在群 oc_449573991daff2ea1b1a4cbbb20f0a03 中，必要时重新将 Bot 加入群聊",
+      "status": "pending"
     }
   ],
   "pendingActions": [],
@@ -71,7 +77,32 @@
       "result": "success"
     }
   ],
-  "incidents": [],
+  "incidents": [
+    {
+      "date": "2026-04-05",
+      "batch": "evening",
+      "phase": "BUILD",
+      "error": "Missing SILICONFLOW_API_KEY environment variable",
+      "category": "env",
+      "diagnosis": "构建步骤依赖翻译服务，但 SILICONFLOW_API_KEY 未在环境中配置。此问题在上次运行中已记录。",
+      "fix": "改用 npm run build:site-no-translate 跳过翻译步骤，构建成功完成",
+      "status": "workaround",
+      "commitHash": null,
+      "issueNumber": null
+    },
+    {
+      "date": "2026-04-05",
+      "batch": "evening",
+      "phase": "PUBLISH-LARK",
+      "error": "HTTP 400: Bot/User can NOT be out of the chat. (error code 230002)",
+      "category": "env",
+      "diagnosis": "Lark Bot 不在目标聊天群 oc_449573991daff2ea1b1a4cbbb20f0a03 中，或群聊状态异常。注意：同日早晨批次推送成功，可能是临时状态。",
+      "fix": null,
+      "status": "workaround",
+      "commitHash": null,
+      "issueNumber": null
+    }
+  ],
   "feedbackProcessed": [],
   "stats": {
     "totalRuns": 3,
