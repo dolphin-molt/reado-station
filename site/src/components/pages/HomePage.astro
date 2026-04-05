@@ -43,6 +43,9 @@ const dateFormatted = latestDay?.date
   : '';
 
 const pageTitle = 'reado | ' + (latestDay?.date || 'AI Intelligence Station');
+
+const feedbackEndpoint = import.meta.env.PUBLIC_FEEDBACK_URL || 'https://api.web3forms.com/submit';
+const feedbackKey = import.meta.env.PUBLIC_WEB3FORMS_KEY || '';
 ---
 
 <BaseLayout title={pageTitle} lang={lang}>
@@ -176,7 +179,9 @@ const pageTitle = 'reado | ' + (latestDay?.date || 'AI Intelligence Station');
 
   <div class="feedback-section container" id="feedback">
     <p class="feedback-label">{t(lang, 'feedback.cta')}</p>
-    <form class="feedback-form" id="feedbackForm">
+    <form class="feedback-form" id="feedbackForm"
+      data-endpoint={feedbackEndpoint}
+      data-key={feedbackKey}>
       <input
         type="text"
         name="source"
@@ -190,18 +195,36 @@ const pageTitle = 'reado | ' + (latestDay?.date || 'AI Intelligence Station');
   </div>
 
   <script is:inline>
-    document.getElementById('feedbackForm')?.addEventListener('submit', function(e) {
+    document.getElementById('feedbackForm')?.addEventListener('submit', async function(e) {
       e.preventDefault();
       const input = this.querySelector('input[name="source"]');
+      const btn = this.querySelector('button[type="submit"]');
       const value = input?.value?.trim();
       if (!value) return;
-      const title = encodeURIComponent('信息源请求: ' + value);
-      const body = encodeURIComponent('**请求的信息源**\n\n' + value + '\n\n---\n来自网站反馈表单');
-      const url = 'https://github.com/dolphin-molt/reado-station/issues/new?title=' + title + '&body=' + body + '&labels=source-request';
-      window.open(url, '_blank');
-      input.value = '';
-      document.getElementById('feedbackSuccess').style.display = 'block';
-      setTimeout(() => { document.getElementById('feedbackSuccess').style.display = 'none'; }, 3000);
+
+      const endpoint = this.dataset.endpoint;
+      const key = this.dataset.key;
+      btn.disabled = true;
+
+      try {
+        const isWorker = endpoint.includes('/api/feedback');
+        const body = isWorker
+          ? { source: value }
+          : { access_key: key, subject: '信息源请求: ' + value, message: value, from_name: 'reado feedback' };
+
+        const res = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+        });
+
+        if (res.ok) {
+          input.value = '';
+          document.getElementById('feedbackSuccess').style.display = 'block';
+          setTimeout(() => { document.getElementById('feedbackSuccess').style.display = 'none'; }, 3000);
+        }
+      } catch (_) {}
+      btn.disabled = false;
     });
   </script>
 
