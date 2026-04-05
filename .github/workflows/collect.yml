@@ -44,7 +44,7 @@ jobs:
         run: npm ci
 
       - name: Install reado CLI
-        run: npm install -g reado
+        run: npm install -g @dolphin-molt/reado
 
       - name: Install lark-cli (optional)
         run: npm install -g lark-cli || echo "lark-cli install failed, will use backup config"

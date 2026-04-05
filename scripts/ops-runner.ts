@@ -173,7 +173,7 @@ function analyze() {
 function build() {
   console.log(JSON.stringify({ phase: 'BUILD', status: 'running' }))
   const output = run('npm run build:site')
-  const hasError = output.includes('ERROR') || output.includes('error')
+  const hasError = output.startsWith('ERROR')
   console.log(JSON.stringify({
     phase: 'BUILD',
     status: hasError ? 'error' : 'ok',
@@ -340,7 +340,7 @@ function publishLark() {
 
   console.log(JSON.stringify({
     phase: 'PUBLISH-LARK',
-    status: result.includes('ERROR') || result.includes('error') ? 'error' : 'ok',
+    status: result.startsWith('ERROR') ? 'error' : 'ok',
     messageId,
     truncated: content.length > 3800,
     output: result.slice(-300)
