@@ -105,13 +105,25 @@
       "issueNumber": null
     }
   ],
-  "feedbackProcessed": [],
+  "feedbackProcessed": [
+    {
+      "issueNumber": 9,
+      "type": "suggestion",
+      "title": "[建议] 这是一条测试反馈，验证完整链路",
+      "submitter": "测试用户",
+      "email": "test@example.com",
+      "body": "这是一条测试反馈，验证完整链路",
+      "receivedAt": "2026-04-06T02:43:00+08:00",
+      "action": "acknowledged",
+      "note": "测试反馈，链路验证成功"
+    }
+  ],
   "stats": {
     "totalRuns": 5,
     "sourcesAdded": 0,
     "sourcesDisabled": 0,
     "twitterAccountsAdded": 0,
-    "issuesProcessed": 0
+    "issuesProcessed": 1
   },
   "qualitySignals": {
     "lastChecked": "2026-04-05T12:44:56.760Z",
