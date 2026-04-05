@@ -177,16 +177,19 @@ const feedbackEndpoint = import.meta.env.PUBLIC_FEEDBACK_URL || '';
   </main>
 
   <div class="feedback-section container" id="feedback">
-    <p class="feedback-label">{t(lang, 'feedback.cta')}</p>
-    <form class="feedback-form" id="feedbackForm"
-      data-endpoint={feedbackEndpoint}>
-      <input
-        type="text"
-        name="source"
-        class="feedback-input"
-        placeholder={t(lang, 'feedback.placeholder')}
-        required
-      />
+    <h3 class="feedback-title">{t(lang, 'feedback.title')}</h3>
+    <p class="feedback-desc">{t(lang, 'feedback.description')}</p>
+    <form class="feedback-form" id="feedbackForm" data-endpoint={feedbackEndpoint}>
+      <div class="feedback-row">
+        <input type="text" name="name" class="feedback-input" placeholder={t(lang, 'feedback.name')} required />
+        <input type="email" name="email" class="feedback-input" placeholder={t(lang, 'feedback.email')} required />
+      </div>
+      <select name="type" class="feedback-select">
+        <option value="source-request">{t(lang, 'feedback.type.source')}</option>
+        <option value="bug">{t(lang, 'feedback.type.bug')}</option>
+        <option value="suggestion">{t(lang, 'feedback.type.suggestion')}</option>
+      </select>
+      <textarea name="message" class="feedback-textarea" rows="3" placeholder={t(lang, 'feedback.message')} required></textarea>
       <button type="submit" class="feedback-submit">{t(lang, 'feedback.submit')}</button>
     </form>
     <p class="feedback-success" id="feedbackSuccess" style="display:none">{t(lang, 'feedback.success')}</p>
@@ -195,26 +198,29 @@ const feedbackEndpoint = import.meta.env.PUBLIC_FEEDBACK_URL || '';
   <script is:inline>
     document.getElementById('feedbackForm')?.addEventListener('submit', async function(e) {
       e.preventDefault();
-      const input = this.querySelector('input[name="source"]');
       const btn = this.querySelector('button[type="submit"]');
-      const value = input?.value?.trim();
-      if (!value) return;
-
       const endpoint = this.dataset.endpoint;
       if (!endpoint) return;
-      btn.disabled = true;
 
+      const data = {
+        name: this.querySelector('[name="name"]').value.trim(),
+        email: this.querySelector('[name="email"]').value.trim(),
+        type: this.querySelector('[name="type"]').value,
+        message: this.querySelector('[name="message"]').value.trim(),
+      };
+      if (!data.name || !data.email || !data.message) return;
+
+      btn.disabled = true;
       try {
         const res = await fetch(endpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ source: value }),
+          body: JSON.stringify(data),
         });
-
         if (res.ok) {
-          input.value = '';
+          this.reset();
           document.getElementById('feedbackSuccess').style.display = 'block';
-          setTimeout(() => { document.getElementById('feedbackSuccess').style.display = 'none'; }, 3000);
+          setTimeout(() => { document.getElementById('feedbackSuccess').style.display = 'none'; }, 4000);
         }
       } catch (_) {}
       btn.disabled = false;
@@ -227,44 +233,67 @@ const feedbackEndpoint = import.meta.env.PUBLIC_FEEDBACK_URL || '';
 <style>
   .feedback-section {
     margin-top: 2rem;
-    padding: 1.5rem 0;
+    padding: 2rem 0;
     border-top: 1px solid var(--color-rule);
+  }
+  .feedback-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
     text-align: center;
   }
-  .feedback-label {
-    font-size: 0.9rem;
+  .feedback-desc {
+    font-size: 0.85rem;
     color: var(--color-text-secondary);
-    margin-bottom: 0.75rem;
+    margin-bottom: 1.25rem;
+    text-align: center;
   }
   .feedback-form {
     display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    max-width: 480px;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-width: 520px;
     margin: 0 auto;
   }
-  .feedback-input {
+  .feedback-row {
+    display: flex;
+    gap: 0.75rem;
+  }
+  .feedback-row .feedback-input {
     flex: 1;
-    padding: 0.5rem 0.75rem;
+  }
+  .feedback-input,
+  .feedback-select,
+  .feedback-textarea {
+    padding: 0.6rem 0.75rem;
     border: 1px solid var(--color-rule);
     border-radius: 4px;
     font-size: 0.9rem;
     background: var(--color-bg);
     color: var(--color-text);
+    font-family: inherit;
+    width: 100%;
+    box-sizing: border-box;
   }
-  .feedback-input:focus {
+  .feedback-input:focus,
+  .feedback-select:focus,
+  .feedback-textarea:focus {
     outline: none;
     border-color: var(--color-text);
   }
+  .feedback-textarea {
+    resize: vertical;
+    min-height: 60px;
+  }
   .feedback-submit {
-    padding: 0.5rem 1rem;
+    padding: 0.6rem 1.5rem;
     border: 1px solid var(--color-text);
     border-radius: 4px;
     background: var(--color-text);
     color: var(--color-bg);
     font-size: 0.9rem;
     cursor: pointer;
-    white-space: nowrap;
+    align-self: flex-end;
   }
   .feedback-submit:hover {
     opacity: 0.85;
@@ -273,5 +302,11 @@ const feedbackEndpoint = import.meta.env.PUBLIC_FEEDBACK_URL || '';
     font-size: 0.85rem;
     color: var(--color-text-secondary);
     margin-top: 0.5rem;
+    text-align: center;
+  }
+  @media (max-width: 480px) {
+    .feedback-row {
+      flex-direction: column;
+    }
   }
 </style>
