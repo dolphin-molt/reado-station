@@ -11,7 +11,7 @@
  */
 import { readdirSync, existsSync } from 'node:fs'
 import { join } from 'node:path'
-import { readJSON, writeJSON, log } from './lib/utils.js'
+import { readJSON, writeJSON, log, categorizeSite, sanitizeText } from './lib/utils.js'
 import type { CollectedData, InfoItem } from './lib/utils.js'
 
 interface SiteItem extends InfoItem {
@@ -29,46 +29,14 @@ interface DayMeta {
   digestPath: string | null
 }
 
-// ─── Category mapping ────────────────────────────────────────────────
+// ─── Category mapping (from lib/utils.ts) ────────────────────────────
 
-function categorize(source: string): string {
-  const s = source.toLowerCase()
-  if (s.includes('twitter') || s.includes('nitter') || s.startsWith('tw-')) return 'twitter'
-  if (s.includes('github') || s.includes('gh-trending')) return 'opensource'
-  if (s.includes('arxiv') || s.includes('huggingface') || s.includes('hf-')) return 'academic'
-  if (s.includes('hackernews') || s.includes('hn')) return 'community'
-  if (s.includes('reddit') || s.includes('v2ex') || s.includes('lobsters') || s.includes('devto')) return 'community'
-  if (s.includes('36kr') || s.includes('huxiu') || s.includes('tmtpost') || s.includes('leiphone') || s.includes('qbitai')) return 'china-media'
-  if (s.includes('techmeme') || s.includes('techcrunch') || s.includes('the-verge') || s.includes('ars-technica') || s.includes('the-decoder') || s.includes('wired') || s.includes('bbc')) return 'tech-media'
-  if (s.includes('a16z') || s.includes('ycombinator')) return 'tech-media'
-  if (s.includes('openai') || s.includes('anthropic') || s.includes('google-ai') || s.includes('deepmind') || s.includes('meta-ai') || s.includes('nvidia') || s.includes('deepseek') || s.includes('mistral') || s.includes('xai')) return 'ai-company'
-  return 'tech-media'
-}
+// categorize and sanitizeText are imported from lib/utils.ts
+// Use categorizeSite as the local alias
+const categorize = categorizeSite
 
 function placeholderImage(category: string): string {
   return `/placeholders/${category}.svg`
-}
-
-/**
- * Sanitize text fields: remove newlines, trim, truncate
- */
-function sanitizeText(text: string | undefined, maxLen: number = 300): string {
-  if (!text) return ''
-  return text
-    .replace(/\n+/g, ' ')       // Replace newlines with spaces
-    .replace(/\s+/g, ' ')       // Collapse whitespace
-    .replace(/[`]/g, "'")       // Replace backticks (breaks template literals)
-    .replace(/&mdash;/g, '\u2014')   // Decode HTML entities
-    .replace(/&ndash;/g, '\u2013')
-    .replace(/&amp;/g, '&')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&quot;/g, '"')
-    .replace(/&#39;/g, "'")
-    .replace(/&nbsp;/g, ' ')
-    .replace(/&#(\d+);/g, (_, n) => String.fromCharCode(Number(n)))
-    .trim()
-    .slice(0, maxLen)
 }
 
 // ─── Main ────────────────────────────────────────────────────────────

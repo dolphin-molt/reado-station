@@ -9,7 +9,7 @@
     "collect:cloud": "tsx scripts/collect.ts --mode cloud",
     "summarize": "tsx scripts/summarize.ts",
     "sync-sources": "tsx scripts/sync-sources.ts",
-    "publish": "tsx scripts/publish-feishu.ts",
+    "publish:lark": "tsx scripts/ops-runner.ts publish-lark",
     "pipeline": "npm run sync-sources && npm run collect",
     "pipeline:cloud": "npm run sync-sources && npm run collect:cloud",
     "pipeline:auto": "npm run sync-sources && npm run collect && npm run summarize",

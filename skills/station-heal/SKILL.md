@@ -39,12 +39,23 @@ description: |
 | category | 策略 | 改代码? |
 |----------|------|--------|
 | **env** | 找 workaround（如跳过翻译继续构建）。记录问题和修复建议。status = `workaround` | 否 |
-| **project** | 定位出错脚本，尝试修复。修完重跑验证。成功 → commit + push，status = `fixed`。修不了 → `escalated` | 是 |
+| **project** | 定位出错脚本，按 bug 修复规范处理（见下方）。成功 → commit + push，status = `fixed`。修不了 → `escalated` | 是 |
 | **infra** | 跳过，下次自动重试。status = `workaround` | 否 |
 | **data** | 重新生成数据（重跑脚本）。成功 → `fixed`，失败 → `escalated` | 否 |
 | **unknown** | status = `escalated` | 否 |
 
-## 9.4 升级（escalate）
+## 9.4 Project 类修复规范
+
+运行时发现的 project 类 bug，遵循与用户反馈 bug 相同的修复标准。
+
+**详见 `station-feedback` 技能的 Bug 自修权限章节。** 核心规则：
+
+- **可自主修复**：改动 1-2 个文件、修复逻辑显而易见（错字、类型错误、缺少 null check、路径错）、不改变业务逻辑
+- **需要升级**：涉及 3+ 文件联动、改变函数签名/数据结构、修复方案不确定、涉及第三方 API 变更
+- **改完必须验证**：`npx vitest run`（回归测试）→ `tsc --noEmit` → 受影响脚本冒烟测试 → `git diff` 确认范围
+- 验证失败 → 回滚（`git checkout -- .`）→ status = `escalated`
+
+## 9.5 升级（escalate）
 
 当 `status = escalated` 或同一错误连续 ≥ `{config.heal.recurringThreshold}` 次（变为 `recurring`）：
 
@@ -77,12 +88,12 @@ EOF
 
 **飞书告警：**
 ```bash
-PATH="/opt/homebrew/bin:$PATH" {config.lark.cli} im +messages-send \
+{config.lark.cli} im +messages-send --as bot \
   --chat-id "{config.lark.chatId}" \
   --markdown "⚠️ **Agent 运行故障**\n\n**阶段**: {phase}\n**分类**: {category}\n**错误**: {error 简述}\n\n已创建 Issue #{N}，需要人工处理。"
 ```
 
-## 9.5 继续执行
+## 9.6 继续执行
 
 故障处理完后，根据失败的 Phase 决定后续：
 

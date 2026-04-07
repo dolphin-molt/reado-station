@@ -1,0 +1,92 @@
+{
+  "fetchedAt": "2026-04-07T08:30:00Z",
+  "stats": {
+    "totalSources": 5,
+    "successSources": 4,
+    "failedSources": 1,
+    "totalItems": 10,
+    "deduplicatedItems": 9
+  },
+  "items": [
+    {
+      "title": "OpenAI launches GPT-5 with improved reasoning",
+      "url": "https://openai.com/blog/gpt-5",
+      "summary": "OpenAI today announced GPT-5, featuring significant improvements in multi-step reasoning and reduced hallucination rates.",
+      "publishedAt": "2026-04-07T06:00:00Z",
+      "source": "openai-blog",
+      "sourceName": "OpenAI Blog"
+    },
+    {
+      "title": "Anthropic raises $5B Series D",
+      "url": "https://www.anthropic.com/news/series-d",
+      "summary": "Anthropic has closed a $5 billion Series D round led by Google and Spark Capital.",
+      "publishedAt": "2026-04-07T05:30:00Z",
+      "source": "anthropic-blog",
+      "sourceName": "Anthropic Blog"
+    },
+    {
+      "title": "@karpathy: The best way to learn transformers is to build one from scratch",
+      "url": "https://twitter.com/karpathy/status/123456",
+      "summary": "Karpathy shares his updated guide to building transformers step by step.",
+      "publishedAt": "2026-04-07T04:00:00Z",
+      "source": "tw-karpathy",
+      "sourceName": "Andrej Karpathy"
+    },
+    {
+      "title": "llama.cpp adds GGUF v4 support",
+      "url": "https://github.com/ggerganov/llama.cpp/releases/tag/v4.0",
+      "summary": "New GGUF v4 format brings 15% faster inference and better quantization.",
+      "publishedAt": "2026-04-07T03:00:00Z",
+      "source": "github-trending",
+      "sourceName": "GitHub Trending"
+    },
+    {
+      "title": "Attention Is All You Need &mdash; 10 Years Later",
+      "url": "https://arxiv.org/abs/2026.12345",
+      "summary": "A retrospective on the transformer paper&#39;s impact on AI research &amp; industry.",
+      "publishedAt": "2026-04-07T02:00:00Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv CS.AI"
+    },
+    {
+      "title": "Show HN: I built an AI code reviewer",
+      "url": "https://news.ycombinator.com/item?id=99999",
+      "summary": "Side project that reviews PRs using Claude API. Open source.",
+      "publishedAt": "2026-04-07T01:00:00Z",
+      "source": "hackernews-top",
+      "sourceName": "Hacker News"
+    },
+    {
+      "title": "Reddit ML: New benchmark for LLM evaluation",
+      "url": "https://reddit.com/r/MachineLearning/comments/abc123",
+      "summary": "Community discussion on a new comprehensive LLM benchmark.",
+      "publishedAt": "2026-04-07T00:30:00Z",
+      "source": "reddit-ml",
+      "sourceName": "Reddit ML"
+    },
+    {
+      "title": "36\u6c2a AI\u65e5\u62a5\uff1a\u8c37\u6b4c\u53d1\u5e03 Gemini 3",
+      "url": "https://36kr.com/p/12345",
+      "summary": "\u8c37\u6b4c\u4eca\u65e5\u53d1\u5e03\u4e86 Gemini 3 \u6a21\u578b\uff0c\u591a\u6a21\u6001\u80fd\u529b\u5927\u5e45\u63d0\u5347\u3002",
+      "publishedAt": "2026-04-07T00:00:00Z",
+      "source": "36kr-ai",
+      "sourceName": "36\u6c2a"
+    },
+    {
+      "title": "HuggingFace Daily Papers: Scaling laws revisited",
+      "url": "https://huggingface.co/papers/2026.56789",
+      "summary": "New paper challenges existing scaling law predictions for dense models.",
+      "publishedAt": "2026-04-06T23:00:00Z",
+      "source": "hf-daily-papers",
+      "sourceName": "HuggingFace Papers"
+    },
+    {
+      "title": "OpenAI launches GPT-5 with improved reasoning",
+      "url": "https://OPENAI.COM/blog/gpt-5/",
+      "summary": "Duplicate of the first item with different URL casing and trailing slash.",
+      "publishedAt": "2026-04-07T06:00:00Z",
+      "source": "techcrunch",
+      "sourceName": "TechCrunch"
+    }
+  ]
+}

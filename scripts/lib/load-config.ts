@@ -45,6 +45,9 @@ function discoverReadoPath(): string {
 }
 
 export interface AgentConfig {
+  env: {
+    extraPaths: string[]
+  }
   paths: {
     station: string
     reado: string
@@ -72,6 +75,17 @@ export function loadConfig(): AgentConfig {
     config = deepMerge(config, local)
   }
 
+  // 注入额外 PATH（在解析路径之前，这样后续 which/execSync 都能找到工具）
+  if (config.env?.extraPaths?.length) {
+    const sep = process.platform === 'win32' ? ';' : ':'
+    const expanded = config.env.extraPaths.map((p: string) => expandPath(p))
+    const currentPath = process.env.PATH || ''
+    const missing = expanded.filter((p: string) => !currentPath.includes(p))
+    if (missing.length) {
+      process.env.PATH = [...missing, currentPath].join(sep)
+    }
+  }
+
   // 解析 station 路径
   config.paths.station = config.paths.station === '.'
     ? PROJECT_ROOT
@@ -86,6 +100,10 @@ export function loadConfig(): AgentConfig {
     config.paths.reado = discoverReadoPath()
   } else {
     config.paths.reado = expandPath(config.paths.reado)
+  }
+
+  if (!config.paths.reado) {
+    console.warn('[load-config] ⚠️ 未找到 reado 安装路径。source-request 功能不可用。设置 READO_DIR 环境变量或在 agent.config.local.json 中配置 paths.reado')
   }
 
   // 发现 lark-cli 路径（如果只写了命令名，尝试解析完整路径）

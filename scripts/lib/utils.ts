@@ -16,6 +16,9 @@ export interface CollectedData {
     failedSources: number
     totalItems: number
     deduplicatedItems: number
+    contributingSources?: number
+    successSourceIds?: string[]
+    failedSourceIds?: string[]
   }
   items: InfoItem[]
 }
@@ -208,7 +211,7 @@ export function categorizeItems(items: InfoItem[]): {
     ) {
       opensource.push(item)
     } else if (
-      src.includes('hackernews') || src.includes('hn') ||
+      src.includes('hackernews') || src.startsWith('hn-') || src === 'hn' ||
       src.includes('reddit') ||
       src.includes('v2ex') ||
       src.includes('lobsters') ||
@@ -221,6 +224,59 @@ export function categorizeItems(items: InfoItem[]): {
   }
 
   return { news, twitter, opensource, community }
+}
+
+// ─── Site Data Helpers ────────────────────────────────────────────────
+
+/**
+ * Categorize a source ID into a site display category.
+ * Used by build-site-data.ts and tests.
+ */
+export function categorizeSite(source: string): string {
+  const s = source.toLowerCase()
+  if (s.includes('twitter') || s.includes('nitter') || s.startsWith('tw-')) return 'twitter'
+  if (s.includes('github') || s.includes('gh-trending')) return 'opensource'
+  if (s.includes('arxiv') || s.includes('huggingface') || s.includes('hf-')) return 'academic'
+  if (s.includes('hackernews') || s.startsWith('hn-') || s === 'hn') return 'community'
+  if (s.includes('reddit') || s.includes('v2ex') || s.includes('lobsters') || s.includes('devto')) return 'community'
+  if (s.includes('36kr') || s.includes('huxiu') || s.includes('tmtpost') || s.includes('leiphone') || s.includes('qbitai')) return 'china-media'
+  if (s.includes('techmeme') || s.includes('techcrunch') || s.includes('the-verge') || s.includes('ars-technica') || s.includes('the-decoder') || s.includes('wired') || s.includes('bbc')) return 'tech-media'
+  if (s.includes('a16z') || s.includes('ycombinator')) return 'tech-media'
+  if (s.includes('openai') || s.includes('anthropic') || s.includes('google-ai') || s.includes('deepmind') || s.includes('meta-ai') || s.includes('nvidia') || s.includes('deepseek') || s.includes('mistral') || s.includes('xai')) return 'ai-company'
+  return 'tech-media'
+}
+
+/**
+ * Sanitize text: decode HTML entities, collapse whitespace, truncate.
+ * Used by build-site-data.ts and tests.
+ */
+export function sanitizeText(text: string | undefined, maxLen: number = 300): string {
+  if (!text) return ''
+  return text
+    .replace(/\n+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .replace(/[`]/g, "'")
+    .replace(/&mdash;/g, '\u2014')
+    .replace(/&ndash;/g, '\u2013')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&#(\d+);/g, (_, n) => String.fromCharCode(Number(n)))
+    .trim()
+    .slice(0, maxLen)
+}
+
+/**
+ * Check if text is likely Chinese (> 15% Chinese characters).
+ * Used by translate.ts to skip already-Chinese items.
+ */
+export function isLikelyChinese(text: string): boolean {
+  if (!text) return true
+  const chineseChars = text.match(/[\u4e00-\u9fff]/g)
+  return (chineseChars?.length || 0) / text.length > 0.15
 }
 
 // ─── Logging ─────────────────────────────────────────────────────────

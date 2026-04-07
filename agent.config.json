@@ -1,6 +1,11 @@
 {
   "_doc": "Agent 运营配置（可移植版本）。机器相关的路径放 agent.config.local.json（已 gitignore）。",
 
+  "env": {
+    "_doc": "额外的 PATH 目录，load-config 启动时注入 process.env.PATH。各机器在 local.json 覆盖。",
+    "extraPaths": []
+  },
+
   "paths": {
     "station": ".",
     "reado": "",

@@ -55,8 +55,70 @@ function run(cmd: string, cwd?: string): string {
 function datePath() { return getTodayDataPath(config, batch) }
 function opsStatePath() { return join(stationDir, 'data', 'ops-state.json') }
 
+// ─── Preflight: 工具健康检查 ───
+function preflight(): { warnings: string[] } {
+  const warnings: string[] = []
+
+  // 检查 lark-cli 可用性 + auth 状态
+  let larkCli = config.lark.cli
+  try {
+    execSync(`${larkCli} --version`, { stdio: 'ignore' })
+    // lark-cli 存在，检查 auth
+    const authOutput = execSync(`${larkCli} auth status 2>&1`, { encoding: 'utf-8', timeout: 10_000 })
+    try {
+      const auth = JSON.parse(authOutput)
+      if (auth.tokenStatus === 'expired' || auth.expired || !auth.tokenStatus) {
+        warnings.push('lark-cli auth token 已过期，飞书推送将不可用。请运行 lark-cli auth login 重新授权。')
+      } else if (auth.expiresAt) {
+        // 检查是否即将过期（2 小时内）
+        const expiresMs = new Date(auth.expiresAt).getTime()
+        const remainMs = expiresMs - Date.now()
+        if (remainMs < 2 * 60 * 60 * 1000) {
+          const remainMin = Math.round(remainMs / 60_000)
+          warnings.push(`lark-cli auth token 将在 ${remainMin} 分钟后过期，请尽快运行 lark-cli auth login 续期。`)
+        }
+      }
+    } catch {
+      // 非 JSON 输出，检查文本
+      if (authOutput.includes('expired') || authOutput.includes('not logged') || authOutput.includes('未登录')) {
+        warnings.push('lark-cli auth token 已过期，飞书推送将不可用。请运行 lark-cli auth login 重新授权。')
+      }
+    }
+  } catch {
+    // lark-cli 本身不可用 — 非关键，只是跳过飞书功能
+  }
+
+  // 检查 gh 可用性
+  try {
+    execSync('gh auth status', { stdio: 'ignore', timeout: 10_000 })
+  } catch {
+    warnings.push('gh auth 不可用，GitHub 操作将失败。')
+  }
+
+  // 有严重警告时，用可用渠道告警
+  if (warnings.length > 0) {
+    const title = `⚠️ 工具健康检查警告 (${new Date().toISOString().slice(0, 10)})`
+    const existingIssues = run(`gh issue list --repo ${config.github.repo} --label "${config.heal.escalateLabel}" --state open --search "${title}" --json number`)
+    let alreadyReported = false
+    try {
+      const issues = JSON.parse(existingIssues)
+      alreadyReported = issues.length > 0
+    } catch {}
+
+    if (!alreadyReported) {
+      const body = warnings.map(w => `- ${w}`).join('\\n')
+      run(`gh issue create --repo ${config.github.repo} --title "${title}" --label "${config.heal.escalateLabel}" --body "${body}\n\n---\n🤖 由 ops-runner preflight 自动检测"`)
+    }
+  }
+
+  return { warnings }
+}
+
 // ─── Phase 1: RESTORE ───
 function restore() {
+  // 运行 preflight 检查
+  const { warnings } = preflight()
+
   const state = readJSON(opsStatePath())
   if (!state) {
     console.log(JSON.stringify({
@@ -64,19 +126,21 @@ function restore() {
       status: 'empty',
       message: 'ops-state.json 不存在，首次运行',
       batch,
+      preflightWarnings: warnings,
       config: { repo: config.github.repo, siteUrl: config.github.siteUrl }
     }, null, 2))
     return
   }
   console.log(JSON.stringify({
     phase: 'RESTORE',
-    status: 'ok',
+    status: warnings.length > 0 ? 'warning' : 'ok',
     batch,
     lastUpdated: state.lastUpdated,
     totalRuns: state.stats?.totalRuns || 0,
     pendingActions: state.pendingActions?.length || 0,
     recentFailures: state.recentFailures?.length || 0,
     unresolvedGaps: state.recentGaps?.filter((g: any) => g.status === 'pending').length || 0,
+    preflightWarnings: warnings,
     config: { repo: config.github.repo, siteUrl: config.github.siteUrl }
   }, null, 2))
 }
@@ -193,6 +257,18 @@ function persist() {
 
   state.lastUpdated = new Date().toISOString()
   state.stats.totalRuns = (state.stats.totalRuns || 0) + 1
+
+  // 记录本次运行
+  if (!state.runHistory) state.runHistory = []
+  state.runHistory.push({
+    date: new Date().toISOString().slice(0, 10),
+    batch,
+    completedAt: new Date().toISOString()
+  })
+  // 只保留最近 30 条
+  if (state.runHistory.length > 30) {
+    state.runHistory = state.runHistory.slice(-30)
+  }
 
   // Trim arrays
   if (state.completedActions?.length > config.limits.completedActionsKeep) {
@@ -445,8 +521,8 @@ function quality() {
     try { execSync(`${larkCli} --version`, { stdio: 'ignore' }) } catch { larkCli = '' }
 
     if (larkCli) {
-      // 查已读用户数
-      const readResult = run(`${larkCli} im messages read_users --params '{"message_id":"${messageId}","user_id_type":"open_id"}' --page-all --format json`)
+      // 查已读用户数（必须用 bot 身份，只能查 bot 发的消息）
+      const readResult = run(`${larkCli} im messages read_users --as bot --params '{"message_id":"${messageId}","user_id_type":"open_id"}' --page-all --format json`)
       let readCount = 0
       try {
         const parsed = JSON.parse(readResult)
@@ -454,7 +530,7 @@ function quality() {
       } catch {}
 
       // 查群成员总数
-      const memberResult = run(`${larkCli} im chat.members get --params '{"chat_id":"${config.lark.chatId}"}' --page-all --format json`)
+      const memberResult = run(`${larkCli} im chat.members get --as bot --params '{"chat_id":"${config.lark.chatId}"}' --page-all --format json`)
       let memberTotal = 0
       try {
         const parsed = JSON.parse(memberResult)
