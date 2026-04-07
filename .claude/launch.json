@@ -3,8 +3,10 @@
   "configurations": [
     {
       "name": "site",
-      "runtimeExecutable": "npx",
-      "runtimeArgs": ["astro", "dev", "--port", "4321"],
+      "runtimeExecutable": "/opt/homebrew/bin/node",
+      "runtimeArgs": ["./node_modules/.bin/astro", "dev", "--port", "4321"],
+      "cwd": "site",
+      "env": { "PATH": "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin" },
       "port": 4321
     }
   ]

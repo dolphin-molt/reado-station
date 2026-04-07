@@ -21,12 +21,46 @@ const today = date || new Date().toLocaleDateString(getDateLocale(lang), {
 
 const currentPath = Astro.url.pathname;
 const switchUrl = altLangUrl(base, lang, currentPath);
+
+// Determine active nav link
+const homePath = localePath(base, lang);
+const archivePath = localePath(base, lang, 'archive/');
+const aboutPath = localePath(base, lang, 'about/');
+
+function isActive(linkPath: string): boolean {
+  // Normalize trailing slashes for comparison
+  const norm = (p: string) => p.replace(/\/+$/, '') || '/';
+  if (linkPath === homePath) {
+    // Home is active only when NOT on archive or about
+    return !currentPath.includes('/archive') && !currentPath.includes('/about');
+  }
+  return norm(currentPath).startsWith(norm(linkPath));
+}
 ---
 
-<header class="masthead container">
-  <div class="masthead__logo">
-    <a href={localePath(base, lang)}>{lang === 'zh' ? 'reado' : 'reado'}</a>
+<nav class="topnav" id="topnav">
+  <div class="topnav__inner container">
+    <div class="topnav__left">
+      <a href={localePath(base, lang)} class="topnav__brand">reado</a>
+    </div>
+    <div class="topnav__links">
+      <a href={homePath} class={isActive(homePath) ? 'active' : ''}>{t(lang, 'nav.today')}</a>
+      <a href={archivePath} class={isActive(archivePath) ? 'active' : ''}>{t(lang, 'nav.archive')}</a>
+      <a href={aboutPath} class={isActive(aboutPath) ? 'active' : ''}>{t(lang, 'nav.about')}</a>
+    </div>
+    <div class="topnav__actions">
+      <button class="style-toggle" id="styleToggle" aria-label="Switch style" title="Switch style">
+        <span id="styleIcon">✏️</span>
+      </button>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle__icon"></span>
+      </button>
+      <a href={switchUrl} class="lang-switch">{t(lang, 'lang.switch')}</a>
+    </div>
   </div>
+</nav>
+
+<header class="masthead container">
   <div class="masthead__tagline">{t(lang, 'tagline')}</div>
   <div class="masthead__meta">
     <span>{today}</span>
@@ -34,9 +68,3 @@ const switchUrl = altLangUrl(base, lang, currentPath);
     {itemCount > 0 && <span>{itemCount} {t(lang, 'header.items')}</span>}
   </div>
 </header>
-<nav class="masthead__nav container">
-  <a href={localePath(base, lang)} class="active">{t(lang, 'nav.today')}</a>
-  <a href={localePath(base, lang, 'archive/')}>{t(lang, 'nav.archive')}</a>
-  <a href={localePath(base, lang, 'about/')}>{t(lang, 'nav.about')}</a>
-  <a href={switchUrl} class="lang-switch">{t(lang, 'lang.switch')}</a>
-</nav>

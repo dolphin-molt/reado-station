@@ -46,6 +46,77 @@ const altUrl = lang === 'zh'
     )}
   </head>
   <body>
+    <!-- Restore theme + style before paint to avoid flash -->
+    <script is:inline>
+      (function() {
+        var t = localStorage.getItem('theme');
+        if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+        var s = localStorage.getItem('style');
+        if (s) {
+          document.documentElement.setAttribute('data-style', s);
+        }
+      })();
+    </script>
     <slot />
+    <script is:inline>
+      /* ── Style definitions ── */
+      /* ── Style registry ──
+         To add/remove a style: edit this array + the matching CSS file in themes/
+      */
+      var STYLES = [
+        { id: 'sketch',  icon: '\u270F\uFE0F',  label: 'Sketch'    },
+        { id: 'cafe',    icon: '\u2615',         label: 'Cafe'      },
+        { id: 'paper',   icon: '\uD83D\uDCF0',   label: 'Paper'     },
+        { id: 'apple',   icon: '\uD83C\uDF4E',   label: 'Minimal'   },
+        { id: 'blossom', icon: '\uD83C\uDF38',   label: 'Blossom'   },
+      ];
+
+      /* ── Dark / Light toggle ── */
+      function toggleTheme() {
+        var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        if (isDark) {
+          document.documentElement.removeAttribute('data-theme');
+          localStorage.setItem('theme', 'light');
+        } else {
+          document.documentElement.setAttribute('data-theme', 'dark');
+          localStorage.setItem('theme', 'dark');
+        }
+        updateThemeIcon();
+      }
+
+      function updateThemeIcon() {
+        var btn = document.getElementById('themeToggle');
+        if (!btn) return;
+        var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        btn.textContent = isDark ? '\u2600' : '\u263E';
+        btn.onclick = toggleTheme;
+      }
+
+      /* ── Style cycle toggle ── */
+      function cycleStyle() {
+        var current = document.documentElement.getAttribute('data-style') || 'sketch';
+        var idx = STYLES.findIndex(function(s) { return s.id === current; });
+        var next = STYLES[(idx + 1) % STYLES.length];
+        document.documentElement.setAttribute('data-style', next.id);
+        localStorage.setItem('style', next.id);
+        updateStyleIcon();
+      }
+
+      function updateStyleIcon() {
+        var btn = document.getElementById('styleToggle');
+        var iconEl = document.getElementById('styleIcon');
+        if (!btn || !iconEl) return;
+        var current = document.documentElement.getAttribute('data-style') || 'sketch';
+        var style = STYLES.find(function(s) { return s.id === current; }) || STYLES[0];
+        iconEl.textContent = style.icon;
+        btn.title = style.label;
+        btn.onclick = cycleStyle;
+      }
+
+      updateThemeIcon();
+      updateStyleIcon();
+    </script>
   </body>
 </html>

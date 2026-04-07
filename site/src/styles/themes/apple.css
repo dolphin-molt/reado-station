@@ -1,0 +1,90 @@
+/* ═══════════════════════════════════════════════════════════════
+   THEME: Apple — ultra-minimal, SF Pro, glass nav
+   To remove: delete this file + remove from global.css @import + remove from STYLES[] in BaseLayout.astro
+   ═══════════════════════════════════════════════════════════════ */
+
+html[data-style="apple"] {
+  --font-headline: -apple-system, 'Helvetica Neue', 'Inter', sans-serif;
+  --font-body: -apple-system, 'Helvetica Neue', 'Inter', sans-serif;
+  --font-ui: -apple-system, 'Helvetica Neue', 'Inter', sans-serif;
+
+  --color-bg: #ffffff;
+  --color-surface: #fbfbfd;
+  --color-text: #1d1d1f;
+  --color-text-secondary: #6e6e73;
+  --color-text-muted: #86868b;
+  --color-rule: #e8e8ed;
+  --color-accent: #0071e3;
+  --color-accent-hover: #0077ed;
+  --color-hero-bg: #000000;
+  --color-hero-text: #f5f5f7;
+  --color-tag-bg: #f5f5f7;
+  --color-card-shadow: rgba(0, 0, 0, 0.04);
+  --color-nav-bg: rgba(255, 255, 255, 0.72);
+
+  --radius: 14px;
+  --radius-lg: 20px;
+  --border-style: solid;
+  --card-hover-rotate: 0deg;
+  --headline-style: normal;
+}
+
+html[data-theme="dark"][data-style="apple"] {
+  --color-bg: #000000;
+  --color-surface: #1c1c1e;
+  --color-text: #f5f5f7;
+  --color-text-secondary: #a1a1a6;
+  --color-text-muted: #6e6e73;
+  --color-rule: #2c2c2e;
+  --color-accent: #2997ff;
+  --color-accent-hover: #4aadff;
+  --color-hero-bg: #000000;
+  --color-hero-text: #f5f5f7;
+  --color-tag-bg: #1c1c1e;
+  --color-card-shadow: rgba(0, 0, 0, 0.4);
+  --color-nav-bg: rgba(0, 0, 0, 0.72);
+}
+
+/* ── Apple layout overrides ── */
+html[data-style="apple"] body { font-weight: 300; }
+html[data-style="apple"] h1,
+html[data-style="apple"] h2,
+html[data-style="apple"] h3,
+html[data-style="apple"] h4 { font-weight: 600; letter-spacing: -0.02em; }
+html[data-style="apple"] h1 { font-size: 3.2rem; font-weight: 700; }
+
+html[data-style="apple"] .topnav {
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--color-rule);
+}
+html[data-style="apple"] .topnav__brand { font-weight: 600; font-size: 1.3rem; letter-spacing: -0.02em; }
+html[data-style="apple"] .topnav__links { background: var(--color-tag-bg); border: none; border-radius: 980px; }
+html[data-style="apple"] .topnav__links a { font-weight: 400; font-size: 0.82rem; padding: 0.35rem 1.1rem; border-radius: 980px; }
+
+html[data-style="apple"] .hero {
+  border: none; border-radius: 0; max-width: none; margin-left: 0; margin-right: 0;
+  padding: 3rem 0; box-shadow: none;
+  background: linear-gradient(180deg, #000 0%, #1d1d1f 100%);
+}
+html[data-theme="dark"][data-style="apple"] .hero { background: linear-gradient(180deg, #000 0%, #0a0a0a 100%); }
+html[data-style="apple"] .hero__main h1 {
+  font-size: 2.5rem; font-weight: 700; letter-spacing: -0.03em;
+  background: linear-gradient(90deg, #fff, #a1a1a6);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+
+html[data-style="apple"] .card { border: none; padding: 1.25rem; box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04); transition: transform 0.4s cubic-bezier(.25,.46,.45,.94), box-shadow 0.4s; }
+html[data-style="apple"] .card:hover { transform: scale(1.02); box-shadow: 0 8px 30px rgba(0,0,0,0.08); border-color: transparent; }
+html[data-style="apple"] .card__image { border: none; }
+html[data-style="apple"] .section-header { border-bottom: none; padding-bottom: 0; }
+html[data-style="apple"] .section-header h2 { font-size: 1.8rem; font-weight: 700; }
+html[data-style="apple"] .stats-bar, html[data-style="apple"] .category-pills { border: none; background: var(--color-tag-bg); border-radius: 980px; }
+html[data-style="apple"] .show-more { border: none; background: var(--color-tag-bg); border-radius: 980px; font-weight: 500; }
+html[data-style="apple"] .show-more:hover { background: var(--color-accent); color: #fff; transform: scale(1.02); }
+html[data-style="apple"] .theme-toggle, html[data-style="apple"] .style-toggle { border-radius: 980px; border: none; background: var(--color-tag-bg); }
+html[data-style="apple"] .topnav__actions .lang-switch { border-radius: 980px; border: none; background: var(--color-tag-bg); }
+html[data-style="apple"] .category-tag { border-radius: 980px; font-weight: 500; padding: 0.15rem 0.55rem; }
+html[data-style="apple"] .category-pills button { border: none; background: var(--color-tag-bg); }
+html[data-style="apple"] .category-pills button.active { box-shadow: none; }
+html[data-style="apple"] .footer { border-top: 1px solid var(--color-rule); }

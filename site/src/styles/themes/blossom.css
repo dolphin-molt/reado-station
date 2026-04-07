@@ -1,0 +1,201 @@
+/* ═══════════════════════════════════════════════════════════════
+   THEME: Blossom — pale pinks, creams, petal dividers, tranquil
+   To remove: delete this file + remove from global.css @import + remove from STYLES[] in BaseLayout.astro
+   ═══════════════════════════════════════════════════════════════ */
+
+html[data-style="blossom"] {
+  --font-headline: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Nunito', -apple-system, sans-serif;
+  --font-ui: 'DM Sans', -apple-system, sans-serif;
+
+  --color-bg: #fef8f4;
+  --color-surface: #ffffff;
+  --color-text: #4a3040;
+  --color-text-secondary: #7a6070;
+  --color-text-muted: #b0a0a8;
+  --color-rule: #f0d8d8;
+  --color-accent: #d4728c;
+  --color-accent-hover: #c45878;
+  --color-hero-bg: linear-gradient(135deg, #f8e8ee 0%, #fdf0e8 50%, #f0e0f0 100%);
+  --color-hero-text: #4a3040;
+  --color-tag-bg: #fdf0ee;
+  --color-card-shadow: rgba(180, 100, 120, 0.06);
+  --color-nav-bg: rgba(254, 248, 244, 0.85);
+
+  --radius: 16px;
+  --radius-lg: 24px;
+  --border-style: solid;
+  --card-hover-rotate: 0deg;
+  --headline-style: italic;
+}
+
+html[data-theme="dark"][data-style="blossom"] {
+  --color-bg: #1a1418;
+  --color-surface: #221c20;
+  --color-text: #f0e0e8;
+  --color-text-secondary: #b8a0b0;
+  --color-text-muted: #786070;
+  --color-rule: #3a2830;
+  --color-accent: #e888a0;
+  --color-accent-hover: #f0a0b8;
+  --color-hero-bg: linear-gradient(135deg, #1e1418 0%, #201818 50%, #1a1420 100%);
+  --color-hero-text: #f0e0e8;
+  --color-tag-bg: #2a2028;
+  --color-card-shadow: rgba(0, 0, 0, 0.25);
+  --color-nav-bg: rgba(26, 20, 24, 0.85);
+}
+
+/* ── Blossom layout overrides ── */
+html[data-style="blossom"] body {
+  background-image:
+    radial-gradient(ellipse at 20% 20%, rgba(240, 180, 200, 0.12) 0%, transparent 40%),
+    radial-gradient(ellipse at 80% 80%, rgba(200, 170, 220, 0.1) 0%, transparent 40%),
+    radial-gradient(ellipse at 50% 50%, rgba(250, 220, 200, 0.08) 0%, transparent 50%);
+  background-attachment: fixed;
+}
+
+html[data-style="blossom"] .topnav {
+  backdrop-filter: saturate(120%) blur(16px);
+  -webkit-backdrop-filter: saturate(120%) blur(16px);
+  border-bottom: 1px solid var(--color-rule);
+}
+
+html[data-style="blossom"] .topnav__links {
+  border: 1px solid var(--color-rule);
+  border-radius: 980px;
+  background: rgba(255,255,255,0.6);
+}
+
+html[data-theme="dark"][data-style="blossom"] .topnav__links {
+  background: rgba(255,255,255,0.08);
+}
+
+html[data-style="blossom"] .topnav__links a {
+  border-radius: 980px;
+}
+
+html[data-theme="dark"][data-style="blossom"] .topnav__links a {
+  color: var(--color-text-secondary);
+}
+
+html[data-theme="dark"][data-style="blossom"] .topnav__links a:hover {
+  color: var(--color-text);
+  background: rgba(255,255,255,0.08);
+}
+
+html[data-theme="dark"][data-style="blossom"] .topnav__links a.active {
+  color: #fff;
+}
+
+html[data-style="blossom"] .hero {
+  border: none;
+  background: var(--color-hero-bg);
+  box-shadow: 0 2px 20px rgba(180, 100, 120, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Petal divider after hero */
+html[data-style="blossom"] .hero::after {
+  content: '❀ ✿ ❀';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--color-accent);
+  opacity: 0.35;
+  letter-spacing: 1.5rem;
+  background: linear-gradient(to bottom, transparent 40%, var(--color-bg) 100%);
+  padding: 0.5rem 0 0.25rem;
+}
+
+html[data-style="blossom"] .hero__main h1 {
+  color: var(--color-text);
+}
+
+html[data-style="blossom"] .card {
+  border: 1px solid var(--color-rule);
+  box-shadow: 0 2px 12px var(--color-card-shadow);
+  transition: transform 0.35s, box-shadow 0.35s;
+}
+
+html[data-style="blossom"] .card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(180, 100, 120, 0.1);
+  border-color: var(--color-accent);
+}
+
+/* Petal section dividers */
+html[data-style="blossom"] .section-header {
+  border-bottom: 1px solid var(--color-rule);
+  position: relative;
+}
+
+html[data-style="blossom"] .section-header::after {
+  content: '✿';
+  position: absolute;
+  right: 0;
+  bottom: -0.5rem;
+  font-size: 0.75rem;
+  color: var(--color-accent);
+  opacity: 0.4;
+  background: var(--color-bg);
+  padding: 0 0.4rem;
+}
+
+html[data-style="blossom"] .stats-bar {
+  border: 1px solid var(--color-rule);
+  background: rgba(255,255,255,0.5);
+  border-radius: 980px;
+}
+
+html[data-theme="dark"][data-style="blossom"] .stats-bar {
+  background: rgba(255,255,255,0.05);
+}
+
+html[data-style="blossom"] .show-more {
+  border: 1px solid var(--color-rule);
+  border-radius: 980px;
+}
+
+html[data-style="blossom"] .show-more:hover {
+  background: var(--color-accent);
+  color: #fff;
+  border-color: var(--color-accent);
+}
+
+html[data-style="blossom"] .category-tag {
+  border-radius: 980px;
+}
+
+html[data-style="blossom"] .category-pills button {
+  border: 1px solid var(--color-rule);
+}
+
+html[data-style="blossom"] .theme-toggle,
+html[data-style="blossom"] .style-toggle {
+  border-radius: 980px;
+}
+
+html[data-style="blossom"] .topnav__actions .lang-switch {
+  border-radius: 980px;
+}
+
+html[data-style="blossom"] .footer {
+  border-top: 1px solid var(--color-rule);
+  position: relative;
+}
+
+html[data-style="blossom"] .footer::before {
+  content: '❀ ✿ ❀ ✿ ❀';
+  display: block;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--color-accent);
+  opacity: 0.3;
+  letter-spacing: 1rem;
+  margin-bottom: 1rem;
+  margin-top: -0.5rem;
+}

@@ -15,27 +15,49 @@ interface Props {
 }
 
 const { lang } = Astro.props;
+const INITIAL_SHOW = 12;
 
 const latestDay = daysData[daysData.length - 1];
 const todayItems = itemsData.filter((item: any) => item.date === latestDay?.date);
 
-const aiCompany = todayItems.filter((i: any) => i.category === 'ai-company');
 const contributingSources = [...new Set(todayItems.map((i: any) => i.sourceName).filter(Boolean))].length;
-const techMedia = todayItems.filter((i: any) => i.category === 'tech-media');
-const opensource = todayItems.filter((i: any) => i.category === 'opensource');
-const community = todayItems.filter((i: any) => i.category === 'community');
-const twitter = todayItems.filter((i: any) => i.category === 'twitter');
-const chinaMedia = todayItems.filter((i: any) => i.category === 'china-media');
-const academic = todayItems.filter((i: any) => i.category === 'academic');
 
-const allNews = [...techMedia, ...aiCompany, ...chinaMedia];
+// Category mapping
+const CATEGORIES = [
+  { id: 'all',        label: lang === 'zh' ? '全部' : 'All' },
+  { id: 'news',       label: lang === 'zh' ? '新闻' : 'News',       cats: ['tech-media', 'ai-company', 'china-media'] },
+  { id: 'opensource',  label: lang === 'zh' ? '开源 & 论文' : 'Open Source', cats: ['opensource', 'academic'] },
+  { id: 'community',  label: lang === 'zh' ? '社区' : 'Community',   cats: ['community'] },
+  { id: 'twitter',    label: 'Twitter / X',                          cats: ['twitter'] },
+];
+
+// Count per category group
+const catCounts: Record<string, number> = { all: todayItems.length };
+for (const c of CATEGORIES) {
+  if (c.id !== 'all') {
+    catCounts[c.id] = todayItems.filter((i: any) => c.cats?.includes(i.category)).length;
+  }
+}
+
+// Map each item to its filter group
+function getFilterGroup(category: string): string {
+  for (const c of CATEGORIES) {
+    if (c.cats?.includes(category)) return c.id;
+  }
+  return 'news'; // fallback
+}
+
+// Hero selection
+const allNews = todayItems.filter((i: any) => ['tech-media', 'ai-company', 'china-media'].includes(i.category));
 const heroPool = allNews
   .filter((i: any) => i.summary && i.summary.length > 30)
   .sort((a: any, b: any) => (b.summary?.length || 0) - (a.summary?.length || 0));
-
 const heroMain = heroPool[0];
 const heroSidebar = heroPool.slice(1, 4);
-const remainingNews = allNews.filter((i: any) => i !== heroMain && !heroSidebar.includes(i));
+const heroIds = new Set([heroMain, ...heroSidebar].filter(Boolean).map((i: any) => i.url));
+
+// All items except hero ones
+const gridItems = todayItems.filter((i: any) => !heroIds.has(i.url));
 
 const dateFormatted = latestDay?.date
   ? new Date(latestDay.date + 'T00:00:00').toLocaleDateString(getDateLocale(lang), {
@@ -44,8 +66,7 @@ const dateFormatted = latestDay?.date
   : '';
 
 const pageTitle = 'reado | ' + (latestDay?.date || 'AI Intelligence Station');
-
-const feedbackEndpoint = import.meta.env.PUBLIC_FEEDBACK_URL || '';
+const moreLabel = lang === 'zh' ? '显示更多' : 'Show more';
 ---
 
 <BaseLayout title={pageTitle} lang={lang}>
@@ -61,22 +82,33 @@ const feedbackEndpoint = import.meta.env.PUBLIC_FEEDBACK_URL || '';
   )}
 
   <main class="container">
+    <!-- Stats -->
     <div class="stats-bar">
       <span>{t(lang, 'stats.items')} <strong>{todayItems.length}</strong></span>
-      <span>{t(lang, 'stats.news')} <strong>{allNews.length}</strong></span>
-      <span>{t(lang, 'stats.opensource')} <strong>{opensource.length}</strong></span>
-      <span>{t(lang, 'stats.community')} <strong>{community.length}</strong></span>
-      <span>{t(lang, 'stats.twitter')} <strong>{twitter.length}</strong></span>
+      <span>{t(lang, 'stats.news')} <strong>{catCounts.news}</strong></span>
+      <span>{t(lang, 'stats.opensource')} <strong>{catCounts.opensource}</strong></span>
+      <span>{t(lang, 'stats.community')} <strong>{catCounts.community}</strong></span>
+      <span>{t(lang, 'stats.twitter')} <strong>{catCounts.twitter}</strong></span>
     </div>
 
-    {remainingNews.length > 0 && (
-      <section class="news-section">
-        <div class="section-header">
-          <h2>{t(lang, 'section.news')}</h2>
-          <span class="count">{remainingNews.length}</span>
-        </div>
-        <div class="news-grid">
-          {remainingNews.map((item: any, idx: number) => (
+    <!-- Category filter pills -->
+    <div class="category-pills" id="categoryPills">
+      {CATEGORIES.map((c) => (
+        <button
+          data-filter={c.id}
+          class={c.id === 'all' ? 'active' : ''}
+        >
+          {c.label}
+          {catCounts[c.id] > 0 && <span class="pill-count">({catCounts[c.id]})</span>}
+        </button>
+      ))}
+    </div>
+
+    <!-- Unified grid -->
+    <section class="news-section" id="newsGrid">
+      <div class="news-grid">
+        {gridItems.map((item: any, idx: number) => (
+          <div class="card-wrap" data-group={getFilterGroup(item.category)} data-index={idx}>
             <NewsCard
               title={item.title}
               titleZh={item.titleZh}
@@ -87,227 +119,76 @@ const feedbackEndpoint = import.meta.env.PUBLIC_FEEDBACK_URL || '';
               category={item.category}
               imageUrl={item.imageUrl}
               publishedAt={item.publishedAt}
-              showImage={idx < 3}
+              showImage={idx < 6}
               lang={lang}
             />
-          ))}
-        </div>
-      </section>
-    )}
-
-    <div class="two-col">
-      <div class="two-col__main">
-        {opensource.length > 0 && (
-          <section class="news-section">
-            <div class="section-header">
-              <h2>{t(lang, 'section.opensource')}</h2>
-              <span class="count">{opensource.length + academic.length}</span>
-            </div>
-            <div class="news-grid news-grid--2col">
-              {[...opensource, ...academic].map((item: any) => (
-                <NewsCard
-                  title={item.title}
-                  titleZh={item.titleZh}
-                  url={item.url}
-                  summary={item.summary}
-                  summaryZh={item.summaryZh}
-                  sourceName={item.sourceName}
-                  category={item.category}
-                  imageUrl={item.imageUrl}
-                  showImage={false}
-                  lang={lang}
-                />
-              ))}
-            </div>
-          </section>
-        )}
-
-        {community.length > 0 && (
-          <section class="news-section">
-            <div class="section-header">
-              <h2>{t(lang, 'section.community')}</h2>
-              <span class="count">{community.length}</span>
-            </div>
-            <ul class="compact-list">
-              {community.map((item: any) => {
-                const dTitle = lang === 'zh' && item.titleZh ? item.titleZh : item.title;
-                const dSummary = lang === 'zh' && item.summaryZh ? item.summaryZh : item.summary;
-                return (
-                <li class="compact-item">
-                  <div>
-                    <div class="compact-item__title">
-                      <a href={item.url} target="_blank" rel="noopener">{dTitle}</a>
-                    </div>
-                    {dSummary && <p class="compact-item__summary">{dSummary}</p>}
-                  </div>
-                  <span class="compact-item__source">{item.sourceName}</span>
-                </li>
-                );
-              })}
-            </ul>
-          </section>
-        )}
+          </div>
+        ))}
       </div>
-
-      <div class="two-col__sidebar">
-        {twitter.length > 0 && (
-          <section class="news-section">
-            <div class="section-header">
-              <h2>{t(lang, 'section.twitter')}</h2>
-              <span class="count">{twitter.length}</span>
-            </div>
-            <ul class="compact-list">
-              {twitter.map((item: any) => {
-                const dTitle = lang === 'zh' && item.titleZh ? item.titleZh : item.title;
-                return (
-                <li class="compact-item">
-                  <div>
-                    <div class="compact-item__title">
-                      <a href={item.url} target="_blank" rel="noopener">{dTitle}</a>
-                    </div>
-                    <span class="compact-item__source">{item.sourceName}</span>
-                  </div>
-                </li>
-                );
-              })}
-            </ul>
-          </section>
-        )}
-      </div>
-    </div>
+      <button class="show-more" id="showMoreBtn">{moreLabel}</button>
+    </section>
   </main>
-
-  <div class="feedback-section container" id="feedback">
-    <h3 class="feedback-title">{t(lang, 'feedback.title')}</h3>
-    <p class="feedback-desc">{t(lang, 'feedback.description')}</p>
-    <form class="feedback-form" id="feedbackForm" data-endpoint={feedbackEndpoint}>
-      <div class="feedback-row">
-        <input type="text" name="name" class="feedback-input" placeholder={t(lang, 'feedback.name')} required />
-        <input type="email" name="email" class="feedback-input" placeholder={t(lang, 'feedback.email')} required />
-      </div>
-      <select name="type" class="feedback-select">
-        <option value="source-request">{t(lang, 'feedback.type.source')}</option>
-        <option value="bug">{t(lang, 'feedback.type.bug')}</option>
-        <option value="suggestion">{t(lang, 'feedback.type.suggestion')}</option>
-      </select>
-      <textarea name="message" class="feedback-textarea" rows="3" placeholder={t(lang, 'feedback.message')} required></textarea>
-      <button type="submit" class="feedback-submit">{t(lang, 'feedback.submit')}</button>
-    </form>
-    <p class="feedback-success" id="feedbackSuccess" style="display:none">{t(lang, 'feedback.success')}</p>
-  </div>
-
-  <script is:inline>
-    document.getElementById('feedbackForm')?.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const btn = this.querySelector('button[type="submit"]');
-      const endpoint = this.dataset.endpoint;
-      if (!endpoint) return;
-
-      const data = {
-        name: this.querySelector('[name="name"]').value.trim(),
-        email: this.querySelector('[name="email"]').value.trim(),
-        type: this.querySelector('[name="type"]').value,
-        message: this.querySelector('[name="message"]').value.trim(),
-      };
-      if (!data.name || !data.email || !data.message) return;
-
-      btn.disabled = true;
-      try {
-        const res = await fetch(endpoint, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data),
-        });
-        if (res.ok) {
-          this.reset();
-          document.getElementById('feedbackSuccess').style.display = 'block';
-          setTimeout(() => { document.getElementById('feedbackSuccess').style.display = 'none'; }, 4000);
-        }
-      } catch (_) {}
-      btn.disabled = false;
-    });
-  </script>
 
   <Footer lang={lang} />
 </BaseLayout>
 
 <style>
-  .feedback-section {
-    margin-top: 2rem;
-    padding: 2rem 0;
-    border-top: 1px solid var(--color-rule);
+  .card-wrap {
+    display: block;
   }
-  .feedback-title {
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 0.25rem;
-    text-align: center;
-  }
-  .feedback-desc {
-    font-size: 0.85rem;
-    color: var(--color-text-secondary);
-    margin-bottom: 1.25rem;
-    text-align: center;
-  }
-  .feedback-form {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    max-width: 520px;
-    margin: 0 auto;
-  }
-  .feedback-row {
-    display: flex;
-    gap: 0.75rem;
-  }
-  .feedback-row .feedback-input {
-    flex: 1;
-  }
-  .feedback-input,
-  .feedback-select,
-  .feedback-textarea {
-    padding: 0.6rem 0.75rem;
-    border: 1px solid var(--color-rule);
-    border-radius: 4px;
-    font-size: 0.9rem;
-    background: var(--color-bg);
-    color: var(--color-text);
-    font-family: inherit;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  .feedback-input:focus,
-  .feedback-select:focus,
-  .feedback-textarea:focus {
-    outline: none;
-    border-color: var(--color-text);
-  }
-  .feedback-textarea {
-    resize: vertical;
-    min-height: 60px;
-  }
-  .feedback-submit {
-    padding: 0.6rem 1.5rem;
-    border: 1px solid var(--color-text);
-    border-radius: 4px;
-    background: var(--color-text);
-    color: var(--color-bg);
-    font-size: 0.9rem;
-    cursor: pointer;
-    align-self: flex-end;
-  }
-  .feedback-submit:hover {
-    opacity: 0.85;
-  }
-  .feedback-success {
-    font-size: 0.85rem;
-    color: var(--color-text-secondary);
-    margin-top: 0.5rem;
-    text-align: center;
-  }
-  @media (max-width: 480px) {
-    .feedback-row {
-      flex-direction: column;
-    }
+  .card-wrap[data-visible="false"] {
+    display: none;
   }
 </style>
+
+<script is:inline define:vars={{ INITIAL_SHOW }}>
+  (function() {
+    var pills = document.querySelectorAll('#categoryPills button');
+    var wraps = document.querySelectorAll('.card-wrap');
+    var moreBtn = document.getElementById('showMoreBtn');
+    var currentFilter = 'all';
+    var showCount = INITIAL_SHOW;
+
+    function render() {
+      var visible = 0;
+      var total = 0;
+      wraps.forEach(function(w) {
+        var group = w.getAttribute('data-group');
+        var matchFilter = currentFilter === 'all' || group === currentFilter;
+        if (matchFilter) {
+          total++;
+          if (visible < showCount) {
+            w.setAttribute('data-visible', 'true');
+            visible++;
+          } else {
+            w.setAttribute('data-visible', 'false');
+          }
+        } else {
+          w.setAttribute('data-visible', 'false');
+        }
+      });
+      if (moreBtn) {
+        moreBtn.style.display = visible < total ? 'block' : 'none';
+      }
+    }
+
+    pills.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        pills.forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        currentFilter = btn.getAttribute('data-filter') || 'all';
+        showCount = INITIAL_SHOW;
+        render();
+      });
+    });
+
+    if (moreBtn) {
+      moreBtn.addEventListener('click', function() {
+        showCount += INITIAL_SHOW;
+        render();
+      });
+    }
+
+    render();
+  })();
+</script>

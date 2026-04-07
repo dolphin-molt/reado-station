@@ -1,0 +1,161 @@
+/* ═══════════════════════════════════════════════════════════════
+   THEME: Sketch — hand-drawn whimsical
+   To remove: delete this file + remove from global.css @import + remove from STYLES[] in BaseLayout.astro
+   ═══════════════════════════════════════════════════════════════ */
+
+html[data-style="sketch"] {
+  --font-headline: 'Caveat', cursive;
+  --font-body: 'Nunito', -apple-system, sans-serif;
+  --font-ui: 'Patrick Hand', cursive;
+
+  --color-bg: #fdf6ee;
+  --color-surface: #ffffff;
+  --color-text: #3a3a3a;
+  --color-text-secondary: #6b6b6b;
+  --color-text-muted: #9a9a9a;
+  --color-rule: #e8ddd0;
+  --color-accent: #e07850;
+  --color-accent-hover: #c9623a;
+  --color-hero-bg: #ffecd2;
+  --color-hero-text: #3a3a3a;
+  --color-tag-bg: #f0e8dd;
+  --color-card-shadow: rgba(0, 0, 0, 0.06);
+  --color-nav-bg: var(--color-surface);
+
+  --radius: 12px;
+  --radius-lg: 18px;
+  --border-style: dashed;
+  --card-hover-rotate: -0.3deg;
+  --headline-style: normal;
+}
+
+html[data-theme="dark"][data-style="sketch"] {
+  --color-bg: #1c1a22;
+  --color-surface: #252330;
+  --color-text: #e8e4f0;
+  --color-text-secondary: #a8a0b8;
+  --color-text-muted: #706880;
+  --color-rule: #3a3548;
+  --color-accent: #f0a070;
+  --color-accent-hover: #f8c090;
+  --color-hero-bg: #2a2835;
+  --color-hero-text: #e8e4f0;
+  --color-tag-bg: #302d3a;
+  --color-card-shadow: rgba(0, 0, 0, 0.2);
+  --color-nav-bg: #1a1822;
+}
+
+/* ── Sketch layout overrides ── */
+html[data-style="sketch"] .topnav {
+  border-bottom: 2px dashed var(--color-rule);
+}
+
+html[data-style="sketch"] .topnav__links {
+  border: 2px dashed var(--color-rule);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+}
+
+html[data-style="sketch"] .topnav__links a {
+  border-radius: var(--radius);
+  font-family: var(--font-ui);
+}
+
+html[data-style="sketch"] .topnav__brand {
+  font-family: var(--font-headline);
+  font-size: 1.6rem;
+}
+
+html[data-style="sketch"] .hero {
+  border: 2px dashed var(--color-rule);
+  background: var(--color-hero-bg);
+  position: relative;
+}
+
+/* Doodle corner decorations */
+html[data-style="sketch"] .hero::before {
+  content: '✦ ✧ ✦';
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  font-size: 0.75rem;
+  color: var(--color-accent);
+  opacity: 0.5;
+  letter-spacing: 0.5rem;
+}
+
+html[data-style="sketch"] .hero__main h1 {
+  font-size: 2.4rem;
+  line-height: 1.2;
+  transform: rotate(-0.5deg);
+}
+
+html[data-style="sketch"] .card {
+  border: 2px dashed var(--color-rule);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+html[data-style="sketch"] .card:hover {
+  transform: rotate(var(--card-hover-rotate)) translateY(-2px);
+  box-shadow: 4px 4px 0 var(--color-rule);
+  border-color: var(--color-accent);
+}
+
+html[data-style="sketch"] .card__title {
+  font-family: var(--font-headline);
+  font-size: 1.35rem;
+}
+
+html[data-style="sketch"] .stats-bar {
+  border: 2px dashed var(--color-rule);
+  background: var(--color-surface);
+  border-radius: var(--radius);
+}
+
+html[data-style="sketch"] .category-pills button {
+  border: 2px dashed var(--color-rule);
+  border-radius: var(--radius);
+  font-family: var(--font-ui);
+}
+
+html[data-style="sketch"] .category-pills button.active {
+  border-style: solid;
+  border-color: var(--color-accent);
+}
+
+html[data-style="sketch"] .show-more {
+  border: 2px dashed var(--color-rule);
+  border-radius: var(--radius);
+  font-family: var(--font-ui);
+}
+
+html[data-style="sketch"] .show-more:hover {
+  background: var(--color-accent);
+  color: #fff;
+  border-style: solid;
+}
+
+html[data-style="sketch"] .theme-toggle,
+html[data-style="sketch"] .style-toggle {
+  border: 2px dashed var(--color-rule);
+  border-radius: var(--radius);
+}
+
+html[data-style="sketch"] .topnav__actions .lang-switch {
+  border: 2px dashed var(--color-rule);
+  border-radius: var(--radius);
+}
+
+html[data-style="sketch"] .footer {
+  border-top: 2px dashed var(--color-rule);
+}
+
+/* Wavy underline on section headers */
+html[data-style="sketch"] .section-header {
+  border-bottom: 2px dashed var(--color-rule);
+}
+
+html[data-style="sketch"] .category-tag {
+  border-radius: var(--radius);
+  font-family: var(--font-ui);
+}
