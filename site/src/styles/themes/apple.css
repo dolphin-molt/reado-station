@@ -79,12 +79,12 @@ html[data-style="apple"] .card:hover { transform: scale(1.02); box-shadow: 0 8px
 html[data-style="apple"] .card__image { border: none; }
 html[data-style="apple"] .section-header { border-bottom: none; padding-bottom: 0; }
 html[data-style="apple"] .section-header h2 { font-size: 1.8rem; font-weight: 700; }
-html[data-style="apple"] .stats-bar, html[data-style="apple"] .category-pills { border: none; background: var(--color-tag-bg); border-radius: 980px; }
+html[data-style="apple"] .stats-bar, html[data-style="apple"] .filter-bar { border: none; background: var(--color-tag-bg); border-radius: 980px; }
 html[data-style="apple"] .show-more { border: none; background: var(--color-tag-bg); border-radius: 980px; font-weight: 500; }
 html[data-style="apple"] .show-more:hover { background: var(--color-accent); color: #fff; transform: scale(1.02); }
 html[data-style="apple"] .theme-toggle, html[data-style="apple"] .style-toggle { border-radius: 980px; border: none; background: var(--color-tag-bg); }
 html[data-style="apple"] .topnav__actions .lang-switch { border-radius: 980px; border: none; background: var(--color-tag-bg); }
 html[data-style="apple"] .category-tag { border-radius: 980px; font-weight: 500; padding: 0.15rem 0.55rem; }
-html[data-style="apple"] .category-pills button { border: none; background: var(--color-tag-bg); }
-html[data-style="apple"] .category-pills button.active { box-shadow: none; }
+html[data-style="apple"] .filter-bar button { border: none; background: var(--color-tag-bg); }
+html[data-style="apple"] .filter-bar button.active { box-shadow: none; }
 html[data-style="apple"] .footer { border-top: 1px solid var(--color-rule); }

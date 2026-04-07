@@ -112,13 +112,13 @@ html[data-style="sketch"] .stats-bar {
   border-radius: var(--radius);
 }
 
-html[data-style="sketch"] .category-pills button {
+html[data-style="sketch"] .filter-bar button {
   border: 2px dashed var(--color-rule);
   border-radius: var(--radius);
   font-family: var(--font-ui);
 }
 
-html[data-style="sketch"] .category-pills button.active {
+html[data-style="sketch"] .filter-bar button.active {
   border-style: solid;
   border-color: var(--color-accent);
 }

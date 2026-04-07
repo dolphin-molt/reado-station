@@ -168,7 +168,7 @@ html[data-style="paper"] .stats-bar {
   letter-spacing: 0.06em;
 }
 
-html[data-style="paper"] .category-pills button {
+html[data-style="paper"] .filter-bar button {
   border: 1px solid var(--color-rule);
   border-radius: var(--radius);
   text-transform: uppercase;
@@ -177,7 +177,7 @@ html[data-style="paper"] .category-pills button {
   font-family: var(--font-ui);
 }
 
-html[data-style="paper"] .category-pills button.active {
+html[data-style="paper"] .filter-bar button.active {
   background: var(--color-text);
   color: var(--color-bg);
   border-color: var(--color-text);
@@ -223,7 +223,7 @@ html[data-theme="dark"][data-style="paper"] .topnav {
   background: var(--color-nav-bg);
 }
 
-html[data-theme="dark"][data-style="paper"] .category-pills button.active {
+html[data-theme="dark"][data-style="paper"] .filter-bar button.active {
   background: var(--color-text);
   color: var(--color-bg);
 }

@@ -170,7 +170,7 @@ html[data-style="blossom"] .category-tag {
   border-radius: 980px;
 }
 
-html[data-style="blossom"] .category-pills button {
+html[data-style="blossom"] .filter-bar button {
   border: 1px solid var(--color-rule);
 }
 

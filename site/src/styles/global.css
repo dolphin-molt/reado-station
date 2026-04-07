@@ -247,49 +247,46 @@ h4 { font-size: 1.1rem; }
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   CATEGORY PILLS (filter bar)
+   FILTER BAR (category pills)
    ═══════════════════════════════════════════════════════════════════ */
-.category-pills {
+.filter-bar {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
+  gap: 0.5rem;
   justify-content: center;
-  padding: 0.6rem 1rem;
+  padding: 0.75rem 0;
   margin-bottom: 1.5rem;
-  border: 2px var(--border-style) var(--color-rule);
-  border-radius: var(--radius);
-  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-rule);
 }
 
-.category-pills button {
+.filter-bar button {
   font-family: var(--font-ui);
-  font-size: 0.78rem;
-  padding: 0.3rem 0.85rem;
-  border: 1px var(--border-style) var(--color-rule);
-  border-radius: var(--radius);
-  background: none;
+  font-size: 0.82rem;
+  padding: 0.4rem 1rem;
+  border: none;
+  border-radius: 980px;
+  background: var(--color-tag-bg);
   color: var(--color-text-secondary);
   cursor: pointer;
   transition: all 0.2s;
   white-space: nowrap;
 }
 
-.category-pills button:hover {
-  background: var(--color-tag-bg);
+.filter-bar button:hover {
+  background: var(--color-rule);
   color: var(--color-text);
 }
 
-.category-pills button.active {
+.filter-bar button.active {
   background: var(--color-accent);
   color: #fff;
-  border-color: var(--color-accent);
-  box-shadow: 0 2px 6px var(--color-card-shadow);
+  box-shadow: 0 2px 8px var(--color-card-shadow);
 }
 
-.category-pills .pill-count {
-  font-size: 0.68rem;
-  opacity: 0.7;
-  margin-left: 0.15rem;
+.filter-bar .pill-count {
+  font-size: 0.7rem;
+  opacity: 0.65;
+  margin-left: 0.25rem;
 }
 
 /* ═══════════════════════════════════════════════════════════════════
@@ -404,13 +401,14 @@ h4 { font-size: 1.1rem; }
   display: flex;
   justify-content: center;
   gap: 1.5rem;
-  padding: 0.7rem 1rem;
-  border: 2px var(--border-style) var(--color-rule);
-  border-radius: var(--radius);
-  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-bottom: 1px solid var(--color-rule);
+  border-radius: 0;
+  margin-bottom: 0.6rem;
   font-family: var(--font-ui);
-  font-size: 0.85rem;
-  color: var(--color-text-secondary);
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
   background: var(--color-surface);
 }
 .stats-bar strong { color: var(--color-accent); font-weight: 700; }
@@ -502,7 +500,7 @@ h4 { font-size: 1.1rem; }
   .news-grid { grid-template-columns: 1fr; gap: 1rem; }
   .hero__main h1 { font-size: 1.6rem; }
   .stats-bar { flex-wrap: wrap; gap: 0.8rem; }
-  .category-pills { gap: 0.3rem; }
-  .category-pills button { font-size: 0.72rem; padding: 0.25rem 0.65rem; }
+  .filter-bar { gap: 0.3rem; }
+  .filter-bar button { font-size: 0.72rem; padding: 0.25rem 0.65rem; }
   .topnav__links { display: none; }
 }

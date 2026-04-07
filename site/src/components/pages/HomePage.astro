@@ -82,27 +82,18 @@ const moreLabel = lang === 'zh' ? '显示更多' : 'Show more';
   )}
 
   <main class="container">
-    <!-- Stats -->
-    <div class="stats-bar">
-      <span>{t(lang, 'stats.items')} <strong>{todayItems.length}</strong></span>
-      <span>{t(lang, 'stats.news')} <strong>{catCounts.news}</strong></span>
-      <span>{t(lang, 'stats.opensource')} <strong>{catCounts.opensource}</strong></span>
-      <span>{t(lang, 'stats.community')} <strong>{catCounts.community}</strong></span>
-      <span>{t(lang, 'stats.twitter')} <strong>{catCounts.twitter}</strong></span>
-    </div>
-
     <!-- Category filter pills -->
-    <div class="category-pills" id="categoryPills">
+    <nav class="filter-bar" id="categoryPills">
       {CATEGORIES.map((c) => (
         <button
           data-filter={c.id}
           class={c.id === 'all' ? 'active' : ''}
         >
           {c.label}
-          {catCounts[c.id] > 0 && <span class="pill-count">({catCounts[c.id]})</span>}
+          {catCounts[c.id] > 0 && <span class="pill-count">{catCounts[c.id]}</span>}
         </button>
       ))}
-    </div>
+    </nav>
 
     <!-- Unified grid -->
     <section class="news-section" id="newsGrid">
