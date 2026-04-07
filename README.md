@@ -1,10 +1,23 @@
+<div align="center">
+
 # reado-station
 
-> Read All. Miss Nothing.
+「Read All. Miss Nothing.」
 
-AI 情报站自主运营平台。从 165 个信息源自动采集全球 AI/科技资讯，生成结构化日报，发布到[网站](https://reado.theopcapp.com)和飞书群。
+[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+[![Agent Operated](https://img.shields.io/badge/Agent-Operated-blue)](AGENT-PROTOCOL.md)
+[![Sources](https://img.shields.io/badge/Sources-165+-orange)](config/sources.json)
+[![Site](https://img.shields.io/badge/Site-reado.theopcapp.com-purple)](https://reado.theopcapp.com)
 
-全流程由 Agent 自主运营 — 采集、分析、生成、构建、发布、故障自愈，无需人工介入。
+AI 情报站自主运营平台。165 个信息源，每天自动采集、生成日报、发布网站。
+
+全流程由 Agent 自主运营 — 无需人工介入。
+
+[看网站](https://reado.theopcapp.com) · [快速开始](#quick-start) · [架构设计](#architecture) · [Agent 运营](#agent-运营) · [自主运营文档](docs/autonomous-operation.md)
+
+</div>
+
+---
 
 ## Quick Start
 
