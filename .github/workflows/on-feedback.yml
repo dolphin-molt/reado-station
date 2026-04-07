@@ -1,0 +1,27 @@
+name: Notify Agent on Feedback
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  notify-agent:
+    # 只处理带 agent-todo 标签的 Issue
+    if: contains(github.event.issue.labels.*.name, 'agent-todo')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger agent via Relay
+        run: |
+          curl -sf -X POST \
+            "https://relay.theopcapp.com/agent/reado-mac/openclaw/dataops" \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer ${{ secrets.RELAY_AGENT_TOKEN }}" \
+            -d "$(jq -n \
+              --arg message "收到用户反馈 Issue #${{ github.event.issue.number }}：${{ github.event.issue.title }}。请执行 /station-feedback 处理 GitHub Issues 中 label 为 agent-todo 的反馈，按照 READO-OPS.md 的规则处理，处理完后在飞书群里汇报结果。" \
+              '{
+                message: $message,
+                deliver: true,
+                replyChannel: "feishu",
+                replyTo: "oc_756e48ef0507c8f531b62775864e6b09"
+              }'
+            )"

@@ -57,9 +57,15 @@ cat agent.config.local.json 2>/dev/null  # 本机覆盖（不提交）
 ### GitHub Issue 处理
 
 见技能 `station-feedback`。核心规则：
+
+**分级**：🔴 紧急（系统级故障）→ 立即处理 | 🟡 重要（单点故障）→ 当次循环 | 🟢 普通 → 排队
+
+**分类**：
 - `source-request` → 搜索并尝试加源 → 评论结果 → 关闭
-- `bug` → 记录 → 评论"已收到" → **不关闭**
-- `enhancement` → 评估并尝试处理 → 评论结果
+- `bug` → 先定级，能自修直接修，需改代码走审批 → 修复前不关闭
+- `enhancement` → 评估影响 → 只改 config 可自主完成，改代码走审批
+
+**审批流程**：需要改代码时，**不要直接改**。在飞书群发评估方案（影响范围、工作量、方案），等 dolphin 回复「可以」后才动手。Issue 标记 `awaiting-approval`，移除 `agent-todo`。
 
 ### 信息源主动维护
 
