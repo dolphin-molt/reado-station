@@ -1,18 +1,23 @@
 {
-  "fetchedAt": "2026-04-07T14:44:26.475Z",
+  "fetchedAt": "2026-04-07T14:46:37.259Z",
   "stats": {
     "totalSources": 60,
-    "successSources": 5,
-    "failedSources": 2,
-    "totalItems": 70,
+    "successSources": 6,
+    "failedSources": 1,
+    "totalItems": 121,
     "deduplicatedItems": 2,
-    "contributingSources": 11,
+    "contributingSources": 16,
     "successSourceIds": [
       "techcrunch-ai",
       "deepseek",
       "the-verge-ai",
       "anthropic",
       "aws-ml",
+      "meta-ai",
+      "a16z-blog",
+      "stratechery",
+      "36kr-en",
+      "arxiv-cs-ai",
       "mastodon-ai",
       "langchain-release",
       "mastodon-llm",
@@ -21,8 +26,7 @@
       "github-trending-python"
     ],
     "failedSourceIds": [
-      "rss-batch-2",
-      "rss-batch-3"
+      "rss-batch-2"
     ]
   },
   "items": [
@@ -65,14 +69,6 @@
       "publishedAt": "2026-04-07T05:30:00.000Z",
       "source": "techcrunch-ai",
       "sourceName": "TechCrunch AI"
-    },
-    {
-      "title": "- DeepSeek",
-      "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE81UzRiOEZPZUxGUDBjUzc3cGk5cWxXR0VjZ3otQXYxbTF0bUVGbmRWam10S0dsRWh5OHFoVmZkM0tTeDYwRzcyd3lfY0h0QV9FQmVRdGRWR3VVQnhkX2Zj?oc=5",
-      "summary": "DeepSeek",
-      "publishedAt": "2026-04-07T00:13:54.000Z",
-      "source": "deepseek",
-      "sourceName": "DeepSeek"
     },
     {
       "title": "Anthropic expands partnership with Google and Broadcom for multiple gigawatts of next-generation compute - Anthropic",
@@ -187,12 +183,428 @@
       "sourceName": "The Verge AI"
     },
     {
+      "title": "How Alta Daily Uses Meta’s Segment Anything to Reimagine the Digital Closet - AI at Meta",
+      "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTFBsRnJlNFRqaHEtdEp3cm51UmdSaTlrQ3V0SjlXaHpWRWJYWklYTjVLZ1FVY2MtOUdZWExhTC1NdFBkZWFSZWFRV1BZTmdLaERnb3hZa21hRDQ5LUVsa3BPcGc3bm5hSWlkNjlGWW9DUEU5Rnc?oc=5",
+      "summary": "How Alta Daily Uses Meta’s Segment Anything to Reimagine the Digital Closet AI at Meta",
+      "publishedAt": "2026-04-06T16:21:14.000Z",
+      "source": "meta-ai",
+      "sourceName": "Meta AI Blog"
+    },
+    {
       "title": "OpenAI’s vision for the AI economy: public wealth funds, robot taxes, and a four-day workweek",
       "url": "https://techcrunch.com/2026/04/06/openais-vision-for-the-ai-economy-public-wealth-funds-robot-taxes-and-a-four-day-work-week/",
       "summary": "OpenAI proposes taxes on AI profits, public wealth funds, and expanded safety nets to address job loss and inequality, blending redistribution with capitalism as policymakers debate AI’s economic impa...",
       "publishedAt": "2026-04-06T15:55:55.000Z",
       "source": "techcrunch-ai",
       "sourceName": "TechCrunch AI"
+    },
+    {
+      "title": "Antarctica, and the Extreme Logistics of Human Exploration",
+      "url": "https://www.a16z.news/p/antarctica-and-the-extreme-logistics",
+      "summary": "But of all the harsh environments on Earth, one stands above the rest.",
+      "publishedAt": "2026-04-07T14:02:03.000Z",
+      "source": "a16z-blog",
+      "sourceName": "a16z Blog"
+    },
+    {
+      "title": "Introducing the a16z Growth Engineer Fellowship",
+      "url": "https://www.a16z.news/p/introducing-the-a16z-growth-engineer",
+      "summary": "A new 8-week cohort of growth engineers, AI-native GTM leaders, and tech-savvy agent builders shaping the future of company growth",
+      "publishedAt": "2026-04-07T13:35:48.000Z",
+      "source": "a16z-blog",
+      "sourceName": "a16z Blog"
+    },
+    {
+      "title": "Anthropics New TPU Deal, Anthropics Computing Crunch, The Anthropic-Google Alliance",
+      "url": "https://stratechery.com/2026/anthropics-new-tpu-deal-anthropics-computing-crunch-the-anthropic-google-alliance/",
+      "summary": "Anthropic needs compute, and Google has the most: it's a natural partnership, particularly for Google.",
+      "publishedAt": "2026-04-07T10:00:00.000Z",
+      "source": "stratechery",
+      "sourceName": "Stratechery"
+    },
+    {
+      "title": "36Kr Exclusive: Sodium Battery Cathode Material Manufacturer Secures Tens of Millions of Yuan in Financing for Kiloton - Scale Production Capacity Expansion - 36 Kr",
+      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE9mTDFrLTN0Qm9qbTZkazRFMDF0NWUtUm5xbUNGWU4tVHg2V1Qxci03QXBTbS1mUE9OVTVreXFEcFptVjBCbXQtU3loSTdaMHNTZ1c0?oc=5",
+      "summary": "36Kr Exclusive: Sodium Battery Cathode Material Manufacturer Secures Tens of Millions of Yuan in Financing for Kiloton - Scale Production Capacity Expansion 36 Kr",
+      "publishedAt": "2026-04-07T08:34:51.000Z",
+      "source": "36kr-en",
+      "sourceName": "36Kr English"
+    },
+    {
+      "title": "IC3-Evolve: Proof-/Witness-Gated Offline LLM-Driven Heuristic Evolution for IC3 Hardware Model Checking",
+      "url": "https://arxiv.org/abs/2604.03232",
+      "summary": "arXiv:2604.03232v1 Announce Type: new Abstract: IC3, also known as property-directed reachability (PDR), is a commonly-used algorithm for hardware safety model checking. It checks if a state transitio...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "To Throw a Stone with Six Birds: On Agents and Agenthood",
+      "url": "https://arxiv.org/abs/2604.03239",
+      "summary": "arXiv:2604.03239v1 Announce Type: new Abstract: Six Birds Theory (SBT) treats macroscopic objects as induced closures rather than primitives. Empirical discussions of agency often conflate persistence...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Position: Science of AI Evaluation Requires Item-level Benchmark Data",
+      "url": "https://arxiv.org/abs/2604.03244",
+      "summary": "arXiv:2604.03244v1 Announce Type: new Abstract: AI evaluations have become the primary evidence for deploying generative AI systems across high-stakes domains. However, current evaluation paradigms of...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Evaluating Artificial Intelligence Through a Christian Understanding of Human Flourishing",
+      "url": "https://arxiv.org/abs/2604.03356",
+      "summary": "arXiv:2604.03356v1 Announce Type: new Abstract: Artificial intelligence (AI) alignment is fundamentally a formation problem, not only a safety problem. As Large Language Models (LLMs) increasingly med...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "VERT: Reliable LLM Judges for Radiology Report Evaluation",
+      "url": "https://arxiv.org/abs/2604.03376",
+      "summary": "arXiv:2604.03376v1 Announce Type: new Abstract: Current literature on radiology report evaluation has focused primarily on designing LLM-based metrics and fine-tuning small models for chest X-rays. Ho...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "BioAlchemy: Distilling Biological Literature into Reasoning-Ready Reinforcement Learning Training Data",
+      "url": "https://arxiv.org/abs/2604.03506",
+      "summary": "arXiv:2604.03506v1 Announce Type: new Abstract: Despite the large corpus of biology training text, the impact of reasoning models on biological research generally lags behind math and coding. In this ...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "ActionNex: A Virtual Outage Manager for Cloud",
+      "url": "https://arxiv.org/abs/2604.03512",
+      "summary": "arXiv:2604.03512v1 Announce Type: new Abstract: Outage management in large-scale cloud operations remains heavily manual, requiring rapid triage, cross-team coordination, and experience-driven decisio...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Structural Rigidity and the 57-Token Predictive Window: A Physical Framework for Inference-Layer Governability in Large Language Models",
+      "url": "https://arxiv.org/abs/2604.03524",
+      "summary": "arXiv:2604.03524v1 Announce Type: new Abstract: Current AI safety relies on behavioral monitoring and post-training alignment, yet empirical measurement shows these approaches produce no detectable pr...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Explainable Model Routing for Agentic Workflows",
+      "url": "https://arxiv.org/abs/2604.03527",
+      "summary": "arXiv:2604.03527v1 Announce Type: new Abstract: Modern agentic workflows decompose complex tasks into specialized subtasks and route them to diverse models to minimize cost without sacrificing quality...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Automated Analysis of Global AI Safety Initiatives: A Taxonomy-Driven LLM Approach",
+      "url": "https://arxiv.org/abs/2604.03533",
+      "summary": "arXiv:2604.03533v1 Announce Type: new Abstract: We present an automated crosswalk framework that compares an AI safety policy document pair under a shared taxonomy of activities. Using the activity ca...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Towards the AI Historian: Agentic Information Extraction from Primary Sources",
+      "url": "https://arxiv.org/abs/2604.03553",
+      "summary": "arXiv:2604.03553v1 Announce Type: new Abstract: AI is supporting, accelerating, and automating scientific discovery across a diverse set of fields. However, AI adoption in historical research remains ...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "When Do Hallucinations Arise? A Graph Perspective on the Evolution of Path Reuse and Path Compression",
+      "url": "https://arxiv.org/abs/2604.03557",
+      "summary": "arXiv:2604.03557v1 Announce Type: new Abstract: Reasoning hallucinations in large language models (LLMs) often appear as fluent yet unsupported conclusions that violate either the given context or und...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "When Adaptive Rewards Hurt: Causal Probing and the Switching-Stability Dilemma in LLM-Guided LEO Satellite Scheduling",
+      "url": "https://arxiv.org/abs/2604.03562",
+      "summary": "arXiv:2604.03562v1 Announce Type: new Abstract: Adaptive reward design for deep reinforcement learning (DRL) in multi-beam LEO satellite scheduling is motivated by the intuition that regime-aware rewa...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Personality Requires Struggle: Three Regimes of the Baldwin Effect in Neuroevolved Chess Agents",
+      "url": "https://arxiv.org/abs/2604.03565",
+      "summary": "arXiv:2604.03565v1 Announce Type: new Abstract: Can lifetime learning expand behavioral diversity over evolutionary time, rather than collapsing it? Prior theory predicts that plasticity reduces varia...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Selective Forgetting for Large Reasoning Models",
+      "url": "https://arxiv.org/abs/2604.03571",
+      "summary": "arXiv:2604.03571v1 Announce Type: new Abstract: Large Reasoning Models (LRMs) generate structured chains of thought (CoTs) before producing final answers, making them especially vulnerable to knowledg...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Rashomon Memory: Towards Argumentation-Driven Retrieval for Multi-Perspective Agent Memory",
+      "url": "https://arxiv.org/abs/2604.03588",
+      "summary": "arXiv:2604.03588v1 Announce Type: new Abstract: AI agents operating over extended time horizons accumulate experiences that serve multiple concurrent goals, and must often maintain conflicting interpr...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Entropy and Attention Dynamics in Small Language Models: A Trace-Level Structural Analysis on the TruthfulQA Benchmark",
+      "url": "https://arxiv.org/abs/2604.03589",
+      "summary": "arXiv:2604.03589v1 Announce Type: new Abstract: Small language models (SLMs) have been increasingly deployed in edge devices and other resource-constrained settings. However, these models make confide...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "A Multimodal Foundation Model of Spatial Transcriptomics and Histology for Biological Discovery and Clinical Prediction",
+      "url": "https://arxiv.org/abs/2604.03630",
+      "summary": "arXiv:2604.03630v1 Announce Type: new Abstract: Spatial transcriptomics (ST) enables gene expression mapping within anatomical context but remains costly and low-throughput. Hematoxylin and eosin (H\\&...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Single-agent vs. Multi-agents for Automated Video Analysis of On-Screen Collaborative Learning Behaviors",
+      "url": "https://arxiv.org/abs/2604.03631",
+      "summary": "arXiv:2604.03631v1 Announce Type: new Abstract: On-screen learning behavior provides valuable insights into how students seek, use, and create information during learning. Analyzing on-screen behavior...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Beyond Retrieval: Modeling Confidence Decay and Deterministic Agentic Platforms in Generative Engine Optimization",
+      "url": "https://arxiv.org/abs/2604.03656",
+      "summary": "arXiv:2604.03656v1 Announce Type: new Abstract: Generative Engine Optimization (GEO) is rapidly reshaping digital marketing paradigms in the era of Large Language Models (LLMs). However, current GEO s...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "TableVision: A Large-Scale Benchmark for Spatially Grounded Reasoning over Complex Hierarchical Tables",
+      "url": "https://arxiv.org/abs/2604.03660",
+      "summary": "arXiv:2604.03660v1 Announce Type: new Abstract: Structured tables are essential for conveying high-density information in professional domains such as finance, healthcare, and scientific research. Des...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "PRAISE: Prefix-Based Rollout Reuse in Agentic Search Training",
+      "url": "https://arxiv.org/abs/2604.03675",
+      "summary": "arXiv:2604.03675v1 Announce Type: new Abstract: In agentic search, large language models (LLMs) are trained to perform multi-turn retrieval and reasoning for complex tasks such as multi-hop question a...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Structured Multi-Criteria Evaluation of Large Language Models with Fuzzy Analytic Hierarchy Process and DualJudge",
+      "url": "https://arxiv.org/abs/2604.03742",
+      "summary": "arXiv:2604.03742v1 Announce Type: new Abstract: Effective evaluation of large language models (LLMs) remains a critical bottleneck, as conventional direct scoring often yields inconsistent and opaque ...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "RL-Driven Sustainable Land-Use Allocation for the Lake Malawi Basin",
+      "url": "https://arxiv.org/abs/2604.03768",
+      "summary": "arXiv:2604.03768v1 Announce Type: new Abstract: Unsustainable land-use practices in ecologically sensitive regions threaten biodiversity, water resources, and the livelihoods of millions. This paper p...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Decomposing Communication Gain and Delay Cost Under Cross-Timestep Delays in Cooperative Multi-Agent Reinforcement Learning",
+      "url": "https://arxiv.org/abs/2604.03785",
+      "summary": "arXiv:2604.03785v1 Announce Type: new Abstract: Communication is essential for coordination in \\emph{cooperative} multi-agent reinforcement learning under partial observability, yet \\emph{cross-timest...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Affording Process Auditability with QualAnalyzer: An Atomistic LLM Analysis Tool for Qualitative Research",
+      "url": "https://arxiv.org/abs/2604.03820",
+      "summary": "arXiv:2604.03820v1 Announce Type: new Abstract: Large language models are increasingly used for qualitative data analysis, but many workflows obscure how analytic conclusions are produced. We present ...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "PolySwarm: A Multi-Agent Large Language Model Framework for Prediction Market Trading and Latency Arbitrage",
+      "url": "https://arxiv.org/abs/2604.03888",
+      "summary": "arXiv:2604.03888v1 Announce Type: new Abstract: This paper presents PolySwarm, a novel multi-agent large language model (LLM) framework designed for real-time prediction market trading and latency arb...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "FeynmanBench: Benchmarking Multimodal LLMs on Diagrammatic Physics Reasoning",
+      "url": "https://arxiv.org/abs/2604.03893",
+      "summary": "arXiv:2604.03893v1 Announce Type: new Abstract: Breakthroughs in frontier theory often depend on the combination of concrete diagrammatic notations with rigorous logic. While multimodal large language...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "LLM-Agent-based Social Simulation for Attitude Diffusion",
+      "url": "https://arxiv.org/abs/2604.03898",
+      "summary": "arXiv:2604.03898v1 Announce Type: new Abstract: This paper introduces discourse_simulator, an open-source framework that combines LLMs with agent-based modelling. It offers a new way to simulate how p...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "CODE-GEN: A Human-in-the-Loop RAG-Based Agentic AI System for Multiple-Choice Question Generation",
+      "url": "https://arxiv.org/abs/2604.03926",
+      "summary": "arXiv:2604.03926v1 Announce Type: new Abstract: We present CODE-GEN, a human-in-the-Loop, retrieval-augmented generation (RAG)-based agentic AI system for generating context-aligned multiple-choice qu...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "SKILLFOUNDRY: Building Self-Evolving Agent Skill Libraries from Heterogeneous Scientific Resources",
+      "url": "https://arxiv.org/abs/2604.03964",
+      "summary": "arXiv:2604.03964v1 Announce Type: new Abstract: Modern scientific ecosystems are rich in procedural knowledge across repositories, APIs, scripts, notebooks, documentation, databases, and papers, yet m...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Quantifying Trust: Financial Risk Management for Trustworthy AI Agents",
+      "url": "https://arxiv.org/abs/2604.03976",
+      "summary": "arXiv:2604.03976v1 Announce Type: new Abstract: Prior work on trustworthy AI emphasizes model-internal properties such as bias mitigation, adversarial robustness, and interpretability. As AI systems e...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "FactReview: Evidence-Grounded Reviews with Literature Positioning and Execution-Based Claim Verification",
+      "url": "https://arxiv.org/abs/2604.04074",
+      "summary": "arXiv:2604.04074v1 Announce Type: new Abstract: Peer review in machine learning is under growing pressure from rising submission volume and limited reviewer time. Most LLM-based reviewing systems read...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Compliance-by-Construction Argument Graphs: Using Generative AI to Produce Evidence-Linked Formal Arguments for Certification-Grade Accountability",
+      "url": "https://arxiv.org/abs/2604.04103",
+      "summary": "arXiv:2604.04103v1 Announce Type: new Abstract: High-stakes decision systems increasingly require structured justification, traceability, and auditability to ensure accountability and regulatory compl...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Profile-Then-Reason: Bounded Semantic Complexity for Tool-Augmented Language Agents",
+      "url": "https://arxiv.org/abs/2604.04131",
+      "summary": "arXiv:2604.04131v1 Announce Type: new Abstract: Large language model agents that use external tools are often implemented through reactive execution, in which reasoning is repeatedly recomputed after ...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Solar-VLM: Multimodal Vision-Language Models for Augmented Solar Power Forecasting",
+      "url": "https://arxiv.org/abs/2604.04145",
+      "summary": "arXiv:2604.04145v1 Announce Type: new Abstract: Photovoltaic (PV) power forecasting plays a critical role in power system dispatch and market participation. Because PV generation is highly sensitive t...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Readable Minds: Emergent Theory-of-Mind-Like Behavior in LLM Poker Agents",
+      "url": "https://arxiv.org/abs/2604.04157",
+      "summary": "arXiv:2604.04157v1 Announce Type: new Abstract: Theory of Mind (ToM) -- the ability to model others' mental states -- is fundamental to human social cognition. Whether large language models (LLMs) can...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "A Model of Understanding in Deep Learning Systems",
+      "url": "https://arxiv.org/abs/2604.04171",
+      "summary": "arXiv:2604.04171v1 Announce Type: new Abstract: I propose a model of systematic understanding, suitable for machine learning systems. On this account, an agent understands a property of a target syste...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "CoALFake: Collaborative Active Learning with Human-LLM Co-Annotation for Cross-Domain Fake News Detection",
+      "url": "https://arxiv.org/abs/2604.04174",
+      "summary": "arXiv:2604.04174v1 Announce Type: new Abstract: The proliferation of fake news across diverse domains highlights critical limitations in current detection systems, which often exhibit narrow domain sp...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Comparative reversal learning reveals rigid adaptation in LLMs under non-stationary uncertainty",
+      "url": "https://arxiv.org/abs/2604.04182",
+      "summary": "arXiv:2604.04182v1 Announce Type: new Abstract: Non-stationary environments require agents to revise previously learned action values when contingencies change. We treat large language models (LLMs) a...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Schema-Aware Planning and Hybrid Knowledge Toolset for Reliable Knowledge Graph Triple Verification",
+      "url": "https://arxiv.org/abs/2604.04190",
+      "summary": "arXiv:2604.04190v1 Announce Type: new Abstract: Knowledge Graphs (KGs) serve as a critical foundation for AI systems, yet their automated construction inevitably introduces noise, compromising data tr...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "TimeSeek: Temporal Reliability of Agentic Forecasters",
+      "url": "https://arxiv.org/abs/2604.04220",
+      "summary": "arXiv:2604.04220v1 Announce Type: new Abstract: We introduce TimeSeek, a benchmark for studying how the reliability of agentic LLM forecasters changes over a prediction market's lifecycle. We evaluate...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Pedagogical Safety in Educational Reinforcement Learning: Formalizing and Detecting Reward Hacking in AI Tutoring Systems",
+      "url": "https://arxiv.org/abs/2604.04237",
+      "summary": "arXiv:2604.04237v1 Announce Type: new Abstract: Reinforcement learning (RL) is increasingly used to personalize instruction in intelligent tutoring systems, yet the field lacks a formal framework for ...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Combee: Scaling Prompt Learning for Self-Improving Language Model Agents",
+      "url": "https://arxiv.org/abs/2604.04247",
+      "summary": "arXiv:2604.04247v1 Announce Type: new Abstract: Recent advances in prompt learning allow large language model agents to acquire task-relevant knowledge from inference-time context without parameter ch...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "MC-CPO: Mastery-Conditioned Constrained Policy Optimization",
+      "url": "https://arxiv.org/abs/2604.04251",
+      "summary": "arXiv:2604.04251v1 Announce Type: new Abstract: Engagement-optimized adaptive tutoring systems may prioritize short-term behavioral signals over sustained learning outcomes, creating structural incent...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Context Engineering: A Practitioner Methodology for Structured Human-AI Collaboration",
+      "url": "https://arxiv.org/abs/2604.04258",
+      "summary": "arXiv:2604.04258v1 Announce Type: new Abstract: The quality of AI-generated output is often attributed to prompting technique, but extensive empirical observation suggests that context completeness ma...",
+      "publishedAt": "2026-04-07T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "@plantarum I question \"AI would be a useful learning tool\". I will say that you don't actually learn...",
+      "url": "https://ottawa.place/@human3500/116363962768591634",
+      "summary": "@plantarum I question \"AI would be a useful learning tool\". I will say that you don't actually learn - you were given the answer. You won't be capable of regenerating that work without the tool. This ...",
+      "publishedAt": "2026-04-07T14:46:02.000Z",
+      "source": "mastodon-ai",
+      "sourceName": "Mastodon #ai"
     },
     {
       "title": "https://winbuzzer.com/2026/04/07/amd-ai-director-claude-code-performance-decline-7000-sessions-xcxwb...",
@@ -327,8 +739,8 @@
       "url": "https://social.treehouse.systems/@mgorny/116363880180697918",
       "summary": "Remember how people gave techbros the term \"#AI\" to use for their #LLM crap, and then started using \"AGI\" for the old AI?Apparently techbros are now selling LLM crap as \"AGI\": https://futureagi.com/Al...",
       "publishedAt": "2026-04-07T14:25:02.000Z",
-      "source": "mastodon-ai",
-      "sourceName": "Mastodon #ai"
+      "source": "mastodon-llm",
+      "sourceName": "Mastodon #llm"
     },
     {
       "title": "I saw someone recently comment about LLM coding agents: \"Now that writing code is no longer the bott...",
@@ -491,66 +903,10 @@
       "sourceName": "LangChain Releases"
     },
     {
-      "title": "tobi/qmd",
-      "url": "https://github.com/tobi/qmd",
-      "summary": "mini cli search engine for your docs, knowledge bases, meeting notes, whatever. Tracking current sota approaches while being all local [TypeScript] | +859 stars",
-      "publishedAt": "2026-04-07T14:44:25.273Z",
-      "source": "github-trending",
-      "sourceName": "GitHub Trending"
-    },
-    {
-      "title": "forrestchang/andrej-karpathy-skills",
-      "url": "https://github.com/forrestchang/andrej-karpathy-skills",
-      "summary": " | +42 stars",
-      "publishedAt": "2026-04-07T14:44:25.273Z",
-      "source": "github-trending",
-      "sourceName": "GitHub Trending"
-    },
-    {
-      "title": "elebumm/RedditVideoMakerBot",
-      "url": "https://github.com/elebumm/RedditVideoMakerBot",
-      "summary": "Create Reddit Videos with just✨ one command ✨ [Python] | +656 stars",
-      "publishedAt": "2026-04-07T14:44:25.273Z",
-      "source": "github-trending",
-      "sourceName": "GitHub Trending"
-    },
-    {
-      "title": "HKUDS/DeepTutor",
-      "url": "https://github.com/HKUDS/DeepTutor",
-      "summary": "\"DeepTutor: Agent-Native Personalized Learning Assistant\" [Python] | +164 stars",
-      "publishedAt": "2026-04-07T14:44:25.273Z",
-      "source": "github-trending",
-      "sourceName": "GitHub Trending"
-    },
-    {
-      "title": "TheCraigHewitt/seomachine",
-      "url": "https://github.com/TheCraigHewitt/seomachine",
-      "summary": "A specialized Claude Code workspace for creating long-form, SEO-optimized blog content for any business. This system helps you research, write, analyze, and optimize content that ranks well and serves your target audience. [Python] | +213 stars",
-      "publishedAt": "2026-04-07T14:44:25.273Z",
-      "source": "github-trending",
-      "sourceName": "GitHub Trending"
-    },
-    {
-      "title": "google-ai-edge/gallery",
-      "url": "https://github.com/google-ai-edge/gallery",
-      "summary": "A gallery that showcases on-device ML/GenAI use cases and allows people to try and use models locally. [Kotlin] | +899 stars",
-      "publishedAt": "2026-04-07T14:44:25.272Z",
-      "source": "github-trending",
-      "sourceName": "GitHub Trending"
-    },
-    {
-      "title": "google-ai-edge/LiteRT-LM",
-      "url": "https://github.com/google-ai-edge/LiteRT-LM",
-      "summary": " [C++] | +522 stars",
-      "publishedAt": "2026-04-07T14:44:25.272Z",
-      "source": "github-trending",
-      "sourceName": "GitHub Trending"
-    },
-    {
       "title": "NVIDIA/personaplex",
       "url": "https://github.com/NVIDIA/personaplex",
       "summary": "PersonaPlex code. [Python] | +663 stars",
-      "publishedAt": "2026-04-07T14:44:25.272Z",
+      "publishedAt": "2026-04-07T14:46:33.442Z",
       "source": "github-trending",
       "sourceName": "GitHub Trending"
     },
@@ -558,7 +914,63 @@
       "title": "abhigyanpatwari/GitNexus",
       "url": "https://github.com/abhigyanpatwari/GitNexus",
       "summary": "GitNexus: The Zero-Server Code Intelligence Engine - GitNexus is a client-side knowledge graph creator that runs entirely in your browser. Drop in a GitHub repo or ZIP file, and get an interactive knowledge graph wit a built in Graph RAG Agent. Perfect for code exploration [TypeScript] | +1174 stars",
-      "publishedAt": "2026-04-07T14:44:25.272Z",
+      "publishedAt": "2026-04-07T14:46:33.442Z",
+      "source": "github-trending",
+      "sourceName": "GitHub Trending"
+    },
+    {
+      "title": "tobi/qmd",
+      "url": "https://github.com/tobi/qmd",
+      "summary": "mini cli search engine for your docs, knowledge bases, meeting notes, whatever. Tracking current sota approaches while being all local [TypeScript] | +859 stars",
+      "publishedAt": "2026-04-07T14:46:33.442Z",
+      "source": "github-trending",
+      "sourceName": "GitHub Trending"
+    },
+    {
+      "title": "forrestchang/andrej-karpathy-skills",
+      "url": "https://github.com/forrestchang/andrej-karpathy-skills",
+      "summary": " | +42 stars",
+      "publishedAt": "2026-04-07T14:46:33.442Z",
+      "source": "github-trending",
+      "sourceName": "GitHub Trending"
+    },
+    {
+      "title": "elebumm/RedditVideoMakerBot",
+      "url": "https://github.com/elebumm/RedditVideoMakerBot",
+      "summary": "Create Reddit Videos with just✨ one command ✨ [Python] | +656 stars",
+      "publishedAt": "2026-04-07T14:46:33.442Z",
+      "source": "github-trending",
+      "sourceName": "GitHub Trending"
+    },
+    {
+      "title": "HKUDS/DeepTutor",
+      "url": "https://github.com/HKUDS/DeepTutor",
+      "summary": "\"DeepTutor: Agent-Native Personalized Learning Assistant\" [Python] | +164 stars",
+      "publishedAt": "2026-04-07T14:46:33.442Z",
+      "source": "github-trending",
+      "sourceName": "GitHub Trending"
+    },
+    {
+      "title": "TheCraigHewitt/seomachine",
+      "url": "https://github.com/TheCraigHewitt/seomachine",
+      "summary": "A specialized Claude Code workspace for creating long-form, SEO-optimized blog content for any business. This system helps you research, write, analyze, and optimize content that ranks well and serves your target audience. [Python] | +213 stars",
+      "publishedAt": "2026-04-07T14:46:33.442Z",
+      "source": "github-trending",
+      "sourceName": "GitHub Trending"
+    },
+    {
+      "title": "google-ai-edge/gallery",
+      "url": "https://github.com/google-ai-edge/gallery",
+      "summary": "A gallery that showcases on-device ML/GenAI use cases and allows people to try and use models locally. [Kotlin] | +899 stars",
+      "publishedAt": "2026-04-07T14:46:33.441Z",
+      "source": "github-trending",
+      "sourceName": "GitHub Trending"
+    },
+    {
+      "title": "google-ai-edge/LiteRT-LM",
+      "url": "https://github.com/google-ai-edge/LiteRT-LM",
+      "summary": " [C++] | +522 stars",
+      "publishedAt": "2026-04-07T14:46:33.441Z",
       "source": "github-trending",
       "sourceName": "GitHub Trending"
     },
@@ -566,7 +978,7 @@
       "title": "NousResearch/hermes-agent",
       "url": "https://github.com/NousResearch/hermes-agent",
       "summary": "The agent that grows with you [Python] | +2547 stars",
-      "publishedAt": "2026-04-07T14:44:26.438Z",
+      "publishedAt": "2026-04-07T14:46:37.236Z",
       "source": "github-trending-python",
       "sourceName": "GitHub Trending (Python)"
     },
@@ -574,7 +986,7 @@
       "title": "vectorize-io/hindsight",
       "url": "https://github.com/vectorize-io/hindsight",
       "summary": "Hindsight: Agent Memory That Learns [Python] | +172 stars",
-      "publishedAt": "2026-04-07T14:44:26.438Z",
+      "publishedAt": "2026-04-07T14:46:37.236Z",
       "source": "github-trending-python",
       "sourceName": "GitHub Trending (Python)"
     },
@@ -582,7 +994,7 @@
       "title": "HKUDS/AutoAgent",
       "url": "https://github.com/HKUDS/AutoAgent",
       "summary": "\"AutoAgent: Fully-Automated and Zero-Code LLM Agent Framework\" [Python] | +94 stars",
-      "publishedAt": "2026-04-07T14:44:26.438Z",
+      "publishedAt": "2026-04-07T14:46:37.236Z",
       "source": "github-trending-python",
       "sourceName": "GitHub Trending (Python)"
     }
