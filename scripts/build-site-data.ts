@@ -51,6 +51,23 @@ function main() {
   const allItems: SiteItem[] = []
   const days: DayMeta[] = []
 
+  // Load existing items.json to preserve translations (titleZh/summaryZh)
+  const existingItemsPath = join(outDir, 'items.json')
+  const translationCache = new Map<string, { titleZh?: string; summaryZh?: string }>()
+  if (existsSync(existingItemsPath)) {
+    try {
+      const existingItems = readJSON<SiteItem[]>(existingItemsPath) || []
+      for (const item of existingItems) {
+        if (item.titleZh || item.summaryZh) {
+          // Cache by both id and url for robust matching
+          if (item.id) translationCache.set(item.id, { titleZh: item.titleZh, summaryZh: item.summaryZh })
+          if (item.url) translationCache.set(item.url, { titleZh: item.titleZh, summaryZh: item.summaryZh })
+        }
+      }
+      log.info(`Loaded ${translationCache.size / 2} existing translations from cache`)
+    } catch { /* ignore parse errors */ }
+  }
+
   if (!existsSync(dataRoot)) {
     log.error('No data/ directory found. Run collection first.')
     process.exit(1)
@@ -90,15 +107,22 @@ function main() {
             if (!item.url) continue
 
             const cat = categorize(item.source)
+            const itemId = `${dateStr}-${batch}-${i}`
             const siteItem: SiteItem = {
               ...item,
               title: sanitizeText(item.title, 200),
               summary: sanitizeText(item.summary, 400),
-              id: `${dateStr}-${batch}-${i}`,
+              id: itemId,
               date: dateStr,
               batch,
               category: cat,
               imageUrl: placeholderImage(cat),
+            }
+            // Restore cached translations
+            const cached = translationCache.get(itemId) || translationCache.get(item.url)
+            if (cached) {
+              if (cached.titleZh) siteItem.titleZh = cached.titleZh
+              if (cached.summaryZh) siteItem.summaryZh = cached.summaryZh
             }
             allItems.push(siteItem)
             dayItemCount++

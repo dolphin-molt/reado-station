@@ -17,9 +17,9 @@ import pLimit from 'p-limit'
 const API_URL = 'https://api.siliconflow.cn/v1/chat/completions'
 const MODEL = process.env.TRANSLATE_MODEL || 'Qwen/Qwen3-8B'
 const API_KEY = process.env.SILICONFLOW_API_KEY || ''
-const CONCURRENCY = 5
-const BATCH_SIZE = 8   // 每次翻译多条，减少 API 调用次数
-const TIMEOUT = 60_000 // 单次 API 请求超时（batch 越大响应越慢）
+const CONCURRENCY = 8
+const BATCH_SIZE = 12  // 每次翻译多条，减少 API 调用次数
+const TIMEOUT = 90_000 // 单次 API 请求超时（batch 越大响应越慢）
 
 // ─── Paths ──────────────────────────────────────────────────────────
 
