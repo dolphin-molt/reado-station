@@ -176,7 +176,7 @@ h4 { font-size: 1.05rem; }
 .hero {
   background: var(--color-hero-bg);
   color: var(--color-hero-text);
-  padding: 2rem 0;
+  padding: 1.5rem 0;
   margin-bottom: var(--section-gap);
 }
 
