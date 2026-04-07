@@ -20,6 +20,7 @@ const latestDay = daysData[daysData.length - 1];
 const todayItems = itemsData.filter((item: any) => item.date === latestDay?.date);
 
 const aiCompany = todayItems.filter((i: any) => i.category === 'ai-company');
+const contributingSources = [...new Set(todayItems.map((i: any) => i.sourceName).filter(Boolean))].length;
 const techMedia = todayItems.filter((i: any) => i.category === 'tech-media');
 const opensource = todayItems.filter((i: any) => i.category === 'opensource');
 const community = todayItems.filter((i: any) => i.category === 'community');
@@ -51,7 +52,7 @@ const feedbackEndpoint = import.meta.env.PUBLIC_FEEDBACK_URL || '';
   <Header
     date={dateFormatted}
     itemCount={todayItems.length}
-    sourceCount={3}
+    sourceCount={contributingSources}
     lang={lang}
   />
 
