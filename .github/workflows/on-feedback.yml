@@ -12,7 +12,12 @@ jobs:
     steps:
       - name: Trigger agent via Relay
         run: |
-          curl -sf -X POST \
+          # 发送后不等 agent 完成（agent 执行可能 >30s）
+          # --max-time 10: 只等 relay 接收确认，不等 agent 执行完
+          # 即使 relay 返回 504 也不影响——请求已经送达 bridge
+          HTTP_CODE=$(curl -s -o /tmp/relay-response.txt -w "%{http_code}" \
+            --max-time 10 \
+            -X POST \
             "https://relay.theopcapp.com/agent/reado-mac/openclaw/dataops" \
             -H "Content-Type: application/json" \
             -H "Authorization: Bearer ${{ secrets.RELAY_AGENT_TOKEN }}" \
@@ -24,4 +29,16 @@ jobs:
                 replyChannel: "feishu",
                 replyTo: "oc_756e48ef0507c8f531b62775864e6b09"
               }'
-            )"
+            )" || true)
+          echo "HTTP response code: $HTTP_CODE"
+          cat /tmp/relay-response.txt || true
+          echo ""
+          # 2xx = relay 正常接收; 504 = relay 接收了但 agent 超时(正常); 其他 = 真的有问题
+          if [ "$HTTP_CODE" = "000" ]; then
+            echo "::warning::Relay unreachable (network error or timeout)"
+          elif [ "$HTTP_CODE" -ge 200 ] && [ "$HTTP_CODE" -lt 300 ] || [ "$HTTP_CODE" = "504" ]; then
+            echo "✅ Request dispatched to agent (HTTP $HTTP_CODE)"
+          else
+            echo "::error::Relay returned unexpected status: $HTTP_CODE"
+            exit 1
+          fi
