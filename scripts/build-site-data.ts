@@ -335,6 +335,13 @@ function main() {
             const item = raw.items[i]
             if (!item.url) continue
 
+            // Skip low-quality items: title is just a site name/tagline, not real article content
+            const trimmedTitle = (item.title || '').replace(/^-\s*/, '').trim()
+            if (!trimmedTitle || trimmedTitle === item.sourceName || trimmedTitle === item.source) continue
+            // Skip if title equals summary (Google News garbage: title and summary are identical site taglines)
+            const trimmedSummary = (item.summary || '').trim()
+            if (trimmedTitle === trimmedSummary && trimmedTitle.length < 60) continue
+
             const cat = categorize(item.source)
             const itemId = `${dateStr}-${batch}-${i}`
             const siteItem: SiteItem = {

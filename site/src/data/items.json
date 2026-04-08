@@ -10,20 +10,7 @@
     "date": "2026-04-08",
     "batch": "evening",
     "category": "ai-company",
-    "imageUrl": "/placeholders/ai-company.svg"
-  },
-  {
-    "title": "- DeepSeek",
-    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE13YnpKYVg0YS14Uk5YT19pbWlBaWcyc3A5LXdVWWw3a1RFV1hRSXJ5blluSzhfc1p0ZTJvUUNwVGRGWktkVlNsWlJ3Mm9OZW85eUpOY3N5VnFnX054UE5F?oc=5",
-    "summary": "DeepSeek",
-    "publishedAt": "2026-04-08T06:23:23.000Z",
-    "source": "deepseek",
-    "sourceName": "DeepSeek",
-    "id": "2026-04-08-evening-1",
-    "date": "2026-04-08",
-    "batch": "evening",
-    "category": "ai-company",
-    "imageUrl": "/placeholders/ai-company.svg"
+    "imageUrl": "/images/2026-04-08-morning-0.webp"
   },
   {
     "title": "Google quietly launched an AI dictation app that works offline",
@@ -39,58 +26,6 @@
     "imageUrl": "/images/2026-04-08-evening-2.webp"
   },
   {
-    "title": "- DeepSeek",
-    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1Sd19Wb2t1WHFoY2p3d2dscU1GWEZkMWVRaFozLWY4R2NMWmFxbUgwcGhaN2JNMlhBVk5xVW56VU4tLTZXSnY0THlCUHBud2JxR3VrdTVacDBpa3VQLUFj?oc=5",
-    "summary": "DeepSeek",
-    "publishedAt": "2026-04-08T05:27:10.000Z",
-    "source": "deepseek",
-    "sourceName": "DeepSeek",
-    "id": "2026-04-08-evening-3",
-    "date": "2026-04-08",
-    "batch": "evening",
-    "category": "ai-company",
-    "imageUrl": "/placeholders/ai-company.svg"
-  },
-  {
-    "title": "- DeepSeek",
-    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBwZ2k0TndOZmtiNHdfQ1ZxWjZoa3FrVUhlNFowdUZTZlJJRDNYZWhBSTc1TWRJQ2Z1cVE0UE96TVAzdzFKN1VEZTM2TjdYYkZ1d0NQbmFvcFcwMEM1YlNN?oc=5",
-    "summary": "DeepSeek",
-    "publishedAt": "2026-04-08T04:42:48.000Z",
-    "source": "deepseek",
-    "sourceName": "DeepSeek",
-    "id": "2026-04-08-evening-4",
-    "date": "2026-04-08",
-    "batch": "evening",
-    "category": "ai-company",
-    "imageUrl": "/placeholders/ai-company.svg"
-  },
-  {
-    "title": "- DeepSeek",
-    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9uT2dIcTB0V1J1OWhURzJpYVJmVEZXU2NIS0xLSGJyRHpTalpZSnhrY3dneXhGRnRwZUt2cllIRTVabzVERUhfSzhWem8xZTNGSmFHVURUbGxybzhlbGhZ?oc=5",
-    "summary": "DeepSeek",
-    "publishedAt": "2026-04-08T04:42:48.000Z",
-    "source": "deepseek",
-    "sourceName": "DeepSeek",
-    "id": "2026-04-08-evening-5",
-    "date": "2026-04-08",
-    "batch": "evening",
-    "category": "ai-company",
-    "imageUrl": "/placeholders/ai-company.svg"
-  },
-  {
-    "title": "- DeepSeek",
-    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5JSTI1UXlfVkpTYXBoUU9WOTU2Y1ZyTzRZRmhWem82eGJfZlhVbHY1SmdDeUFwNE54VjFZU0EwUlFOLXRCZUNmbU9jN0h6cUhUeC1ia3Ftd0FIRExGcHNZ?oc=5",
-    "summary": "DeepSeek",
-    "publishedAt": "2026-04-08T04:08:37.000Z",
-    "source": "deepseek",
-    "sourceName": "DeepSeek",
-    "id": "2026-04-08-evening-6",
-    "date": "2026-04-08",
-    "batch": "evening",
-    "category": "ai-company",
-    "imageUrl": "/placeholders/ai-company.svg"
-  },
-  {
     "title": "Project Glasswing: Securing critical software for the AI era - Anthropic",
     "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTFBfQUdtMDZYaEtZV0JMSk1ZSzdqTl9mV3dQTnZYcVEzaHo4cV8yUEl2a25QMWRXenFTYUQ3NF9WakR5WXVwaDRTZC1ZYw?oc=5",
     "summary": "Project Glasswing: Securing critical software for the AI era Anthropic",
@@ -101,7 +36,7 @@
     "date": "2026-04-08",
     "batch": "evening",
     "category": "ai-company",
-    "imageUrl": "/placeholders/ai-company.svg"
+    "imageUrl": "/images/2026-04-08-morning-7.webp"
   },
   {
     "title": "Manage AI costs with Amazon Bedrock Projects",
@@ -124,19 +59,6 @@
     "source": "anthropic",
     "sourceName": "Anthropic",
     "id": "2026-04-08-evening-9",
-    "date": "2026-04-08",
-    "batch": "evening",
-    "category": "ai-company",
-    "imageUrl": "/placeholders/ai-company.svg"
-  },
-  {
-    "title": "- DeepSeek",
-    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBpWC15WTZtRXZaZjhTR1QtMUJKeGF4bGFhZGhYNlZTNWZMSWZXazRGTmw0OWRSMzFVY2JDSThaa0d6MHJfdWRFQzZSVWxGc1VQMi16UTA4YmVnMHRBMWsw?oc=5",
-    "summary": "DeepSeek",
-    "publishedAt": "2026-04-07T22:10:19.000Z",
-    "source": "deepseek",
-    "sourceName": "DeepSeek",
-    "id": "2026-04-08-evening-10",
     "date": "2026-04-08",
     "batch": "evening",
     "category": "ai-company",
@@ -192,7 +114,7 @@
     "date": "2026-04-08",
     "batch": "evening",
     "category": "ai-company",
-    "imageUrl": "/placeholders/ai-company.svg"
+    "imageUrl": "/images/2026-04-08-morning-14.webp"
   },
   {
     "title": "Anthropic debuts preview of powerful new AI model Mythos in new cybersecurity initiative",
@@ -297,19 +219,6 @@
     "batch": "evening",
     "category": "tech-media",
     "imageUrl": "/images/2026-04-08-evening-22.webp"
-  },
-  {
-    "title": "- DeepSeek",
-    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9xY1Q4X0tjRk5JTkZObS1ya1laSHdSdlBlcDlPVG5fcUdrYnNidG12SEtrT1pWOUZ1UWV6Q3ZORmlrV1JQd01fdFQzSmlIWTFhNGphdFpCSDhuRVRmTHhN?oc=5",
-    "summary": "DeepSeek",
-    "publishedAt": "2026-04-07T11:19:31.000Z",
-    "source": "deepseek",
-    "sourceName": "DeepSeek",
-    "id": "2026-04-08-evening-23",
-    "date": "2026-04-08",
-    "batch": "evening",
-    "category": "ai-company",
-    "imageUrl": "/placeholders/ai-company.svg"
   },
   {
     "title": "“企享云”获近亿元A轮战略融资",
@@ -985,7 +894,7 @@
     "date": "2026-04-08",
     "batch": "evening",
     "category": "china-media",
-    "imageUrl": "/placeholders/china-media.svg"
+    "imageUrl": "/images/2026-04-08-morning-25.webp"
   },
   {
     "title": "Pramana: Fine-Tuning Large Language Models for Epistemic Reasoning through Navya-Nyaya",
@@ -1674,7 +1583,7 @@
     "date": "2026-04-08",
     "batch": "evening",
     "category": "tech-media",
-    "imageUrl": "/placeholders/tech-media.svg"
+    "imageUrl": "/images/2026-04-08-morning-76.webp"
   },
   {
     "title": "Anthropic integriert Subagents in Claude Code für parallele Aufgabenbearbeitung und Entlastung des K...",
@@ -1687,7 +1596,7 @@
     "date": "2026-04-08",
     "batch": "evening",
     "category": "tech-media",
-    "imageUrl": "/placeholders/tech-media.svg"
+    "imageUrl": "/images/2026-04-08-morning-77.webp"
   },
   {
     "title": "One of the most important questions about AI in project work is:How do you use it without losing con...",
@@ -1726,7 +1635,7 @@
     "date": "2026-04-08",
     "batch": "evening",
     "category": "tech-media",
-    "imageUrl": "/placeholders/tech-media.svg"
+    "imageUrl": "/images/2026-04-08-morning-80.webp"
   },
   {
     "title": "インテル、マスク氏の半導体製造構想「Terafab」に参画https://www.watch.impress.co.jp/docs/news/2100173.html#watch_impress #テ...",
@@ -1739,7 +1648,7 @@
     "date": "2026-04-08",
     "batch": "evening",
     "category": "tech-media",
-    "imageUrl": "/placeholders/tech-media.svg"
+    "imageUrl": "/images/2026-04-08-morning-81.webp"
   },
   {
     "title": "🔗 Quantization from the ground uphttps://ngrok.com/blog/quantization#performance #machinelearning #...",
@@ -1752,7 +1661,7 @@
     "date": "2026-04-08",
     "batch": "evening",
     "category": "tech-media",
-    "imageUrl": "/placeholders/tech-media.svg"
+    "imageUrl": "/images/2026-04-08-morning-82.webp"
   },
   {
     "title": "#AI #Asian #Petite #virtualinfluencer #digitalart #trendingnow #fyp #reels #perfectface #cyberbabe #...",
@@ -1778,7 +1687,7 @@
     "date": "2026-04-08",
     "batch": "evening",
     "category": "tech-media",
-    "imageUrl": "/placeholders/tech-media.svg"
+    "imageUrl": "/images/2026-04-08-morning-84.webp"
   },
   {
     "title": "Times of India | Delta CEO says AI will not change flying experience but will tackle one of the bigg...",
@@ -1791,7 +1700,7 @@
     "date": "2026-04-08",
     "batch": "evening",
     "category": "tech-media",
-    "imageUrl": "/placeholders/tech-media.svg"
+    "imageUrl": "/images/2026-04-08-morning-85.webp"
   },
   {
     "title": "🎮 Stop the petition: The Rocketeer mimicking the Vaporizer's alert noise was actually a bug, and it...",
@@ -1869,7 +1778,7 @@
     "date": "2026-04-08",
     "batch": "evening",
     "category": "tech-media",
-    "imageUrl": "/placeholders/tech-media.svg"
+    "imageUrl": "/images/2026-04-08-morning-91.webp"
   },
   {
     "title": "UNBELIEVABLE news today that Anthropic have developed an #ai model they say is too dangerous to rele...",
@@ -1882,7 +1791,7 @@
     "date": "2026-04-08",
     "batch": "evening",
     "category": "tech-media",
-    "imageUrl": "/placeholders/tech-media.svg"
+    "imageUrl": "/images/2026-04-08-morning-92.webp"
   },
   {
     "title": "All Content from Business Insider | Roblox's Peter Yang wants his kids to skip college and corporate...",
@@ -1895,7 +1804,7 @@
     "date": "2026-04-08",
     "batch": "evening",
     "category": "tech-media",
-    "imageUrl": "/placeholders/tech-media.svg"
+    "imageUrl": "/images/2026-04-08-morning-93.webp"
   },
   {
     "title": "Один скилл, четыре модели — что может пойти не такНа GitHub лежат сотни AI-скиллов. Скилл для code r...",
@@ -1908,7 +1817,7 @@
     "date": "2026-04-08",
     "batch": "evening",
     "category": "tech-media",
-    "imageUrl": "/placeholders/tech-media.svg"
+    "imageUrl": "/images/2026-04-08-morning-95.webp"
   },
   {
     "title": "写真ですか……タムズの次の仕事になりそうです「iPhone Fold」「iPhone 18 Pro」「iPhone 18 Pro Max」のダミーの写真 https://www.applelinkag...",
@@ -1921,7 +1830,7 @@
     "date": "2026-04-08",
     "batch": "evening",
     "category": "tech-media",
-    "imageUrl": "/placeholders/tech-media.svg"
+    "imageUrl": "/images/2026-04-08-morning-96.webp"
   },
   {
     "title": "いくら艦長とはいえ、ボイスについてはただ見守るしかないかもしれませんブルーカラーの方が稼げるって本当? 人手不足時代の職業選び3分解説 https://www.nikkei.com/article/D...",
@@ -1934,7 +1843,7 @@
     "date": "2026-04-08",
     "batch": "evening",
     "category": "tech-media",
-    "imageUrl": "/placeholders/tech-media.svg"
+    "imageUrl": "/images/2026-04-08-morning-97.webp"
   },
   {
     "title": "まさかテンプレートが……艦長にまた怒られそうですApple、開発者やデザイナー向けに「Studio Display/XDR (2026)」のベゼルテンプレートをPhotoshopとPNG形式で公開。 ...",
@@ -1947,7 +1856,7 @@
     "date": "2026-04-08",
     "batch": "evening",
     "category": "tech-media",
-    "imageUrl": "/placeholders/tech-media.svg"
+    "imageUrl": "/images/2026-04-08-morning-98.webp"
   },
   {
     "title": "【25種の生物種にわたるmRNA言語モデルのトレーニングが165ドルで可能】https://huggingface.co/blog/OpenMed/training-mrna-models-25-sp...",
@@ -1960,7 +1869,7 @@
     "date": "2026-04-08",
     "batch": "evening",
     "category": "tech-media",
-    "imageUrl": "/placeholders/tech-media.svg"
+    "imageUrl": "/images/2026-04-08-morning-99.webp"
   },
   {
     "title": "The Story of Anthropic’s Latest Controversies Regarding the Business of Its Prized Creation…As Told ...",
@@ -1973,7 +1882,7 @@
     "date": "2026-04-08",
     "batch": "evening",
     "category": "tech-media",
-    "imageUrl": "/placeholders/tech-media.svg"
+    "imageUrl": "/images/2026-04-08-morning-100.webp"
   },
   {
     "title": "DRAматургия GPU в Kubernetes: зачем нужен DRA, если Device Plugin работает? Разбираем грабли AI-инфр...",
@@ -1986,7 +1895,7 @@
     "date": "2026-04-08",
     "batch": "evening",
     "category": "tech-media",
-    "imageUrl": "/placeholders/tech-media.svg"
+    "imageUrl": "/images/2026-04-08-morning-101.webp"
   },
   {
     "title": "#Zhupai AI released #GLM 5.1, a 754-billion parameter #opensource #LLM designed for #autonomouswork....",
@@ -1999,7 +1908,7 @@
     "date": "2026-04-08",
     "batch": "evening",
     "category": "tech-media",
-    "imageUrl": "/placeholders/tech-media.svg"
+    "imageUrl": "/images/2026-04-08-morning-102.webp"
   },
   {
     "title": "こんどアンナと一緒に年を見に行こうiPhone Foldがテスト生産開始と報道。9月発売に間に合うかも https://www.gizmodo.jp/2026/04/apple-iphone-fold...",
@@ -2012,7 +1921,7 @@
     "date": "2026-04-08",
     "batch": "evening",
     "category": "tech-media",
-    "imageUrl": "/placeholders/tech-media.svg"
+    "imageUrl": "/images/2026-04-08-morning-103.webp"
   },
   {
     "title": "副艦長としては新型は見逃せませんです「MacBook Neo 2」はA19 Pro＋12GB RAMを搭載し2027年に登場か https://netaful.jp/macbook/0195653.h...",
@@ -2025,7 +1934,7 @@
     "date": "2026-04-08",
     "batch": "evening",
     "category": "tech-media",
-    "imageUrl": "/placeholders/tech-media.svg"
+    "imageUrl": "/images/2026-04-08-morning-104.webp"
   },
   {
     "title": "宇都宮のことは、フェイさんに任せるしかないんでしょうか新宿の携帯店で1600万円相当強奪疑い、3人逮捕 闇バイトか https://mainichi.jp/articles/20260408/k00/...",
@@ -2038,7 +1947,7 @@
     "date": "2026-04-08",
     "batch": "evening",
     "category": "tech-media",
-    "imageUrl": "/placeholders/tech-media.svg"
+    "imageUrl": "/images/2026-04-08-morning-105.webp"
   },
   {
     "title": "Foldable！これはユグドラシルのみなさんにも教えてあげないとFoldable iPhone Design Revealed in Images of Dummy Models https://w...",
@@ -2051,7 +1960,7 @@
     "date": "2026-04-08",
     "batch": "evening",
     "category": "tech-media",
-    "imageUrl": "/placeholders/tech-media.svg"
+    "imageUrl": "/images/2026-04-08-morning-106.webp"
   },
   {
     "title": "NVIDIA’s New AI Just Changed Everything",
@@ -2220,7 +2129,7 @@
     "date": "2026-04-08",
     "batch": "evening",
     "category": "opensource",
-    "imageUrl": "/placeholders/opensource.svg"
+    "imageUrl": "/images/2026-04-08-morning-118.webp"
   },
   {
     "title": "goharbor/harbor",
@@ -4186,19 +4095,6 @@
     "imageUrl": "/images/2026-04-08-morning-0.webp"
   },
   {
-    "title": "- DeepSeek",
-    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE13YnpKYVg0YS14Uk5YT19pbWlBaWcyc3A5LXdVWWw3a1RFV1hRSXJ5blluSzhfc1p0ZTJvUUNwVGRGWktkVlNsWlJ3Mm9OZW85eUpOY3N5VnFnX054UE5F?oc=5",
-    "summary": "DeepSeek",
-    "publishedAt": "2026-04-08T06:23:23.000Z",
-    "source": "deepseek",
-    "sourceName": "DeepSeek",
-    "id": "2026-04-08-morning-1",
-    "date": "2026-04-08",
-    "batch": "morning",
-    "category": "ai-company",
-    "imageUrl": "/placeholders/ai-company.svg"
-  },
-  {
     "title": "Google quietly launched an AI dictation app that works offline",
     "url": "https://techcrunch.com/2026/04/07/google-quietly-releases-an-offline-first-ai-dictation-app-on-ios/",
     "summary": "Google's new offline-first dictation app uses Gemma AI models to take on the apps like Wispr Flow.",
@@ -4210,58 +4106,6 @@
     "batch": "morning",
     "category": "tech-media",
     "imageUrl": "/images/2026-04-08-morning-2.webp"
-  },
-  {
-    "title": "- DeepSeek",
-    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE1Sd19Wb2t1WHFoY2p3d2dscU1GWEZkMWVRaFozLWY4R2NMWmFxbUgwcGhaN2JNMlhBVk5xVW56VU4tLTZXSnY0THlCUHBud2JxR3VrdTVacDBpa3VQLUFj?oc=5",
-    "summary": "DeepSeek",
-    "publishedAt": "2026-04-08T05:27:10.000Z",
-    "source": "deepseek",
-    "sourceName": "DeepSeek",
-    "id": "2026-04-08-morning-3",
-    "date": "2026-04-08",
-    "batch": "morning",
-    "category": "ai-company",
-    "imageUrl": "/placeholders/ai-company.svg"
-  },
-  {
-    "title": "- DeepSeek",
-    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBwZ2k0TndOZmtiNHdfQ1ZxWjZoa3FrVUhlNFowdUZTZlJJRDNYZWhBSTc1TWRJQ2Z1cVE0UE96TVAzdzFKN1VEZTM2TjdYYkZ1d0NQbmFvcFcwMEM1YlNN?oc=5",
-    "summary": "DeepSeek",
-    "publishedAt": "2026-04-08T04:42:48.000Z",
-    "source": "deepseek",
-    "sourceName": "DeepSeek",
-    "id": "2026-04-08-morning-4",
-    "date": "2026-04-08",
-    "batch": "morning",
-    "category": "ai-company",
-    "imageUrl": "/images/2026-04-08-morning-4.webp"
-  },
-  {
-    "title": "- DeepSeek",
-    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9uT2dIcTB0V1J1OWhURzJpYVJmVEZXU2NIS0xLSGJyRHpTalpZSnhrY3dneXhGRnRwZUt2cllIRTVabzVERUhfSzhWem8xZTNGSmFHVURUbGxybzhlbGhZ?oc=5",
-    "summary": "DeepSeek",
-    "publishedAt": "2026-04-08T04:42:48.000Z",
-    "source": "deepseek",
-    "sourceName": "DeepSeek",
-    "id": "2026-04-08-morning-5",
-    "date": "2026-04-08",
-    "batch": "morning",
-    "category": "ai-company",
-    "imageUrl": "/placeholders/ai-company.svg"
-  },
-  {
-    "title": "- DeepSeek",
-    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5JSTI1UXlfVkpTYXBoUU9WOTU2Y1ZyTzRZRmhWem82eGJfZlhVbHY1SmdDeUFwNE54VjFZU0EwUlFOLXRCZUNmbU9jN0h6cUhUeC1ia3Ftd0FIRExGcHNZ?oc=5",
-    "summary": "DeepSeek",
-    "publishedAt": "2026-04-08T04:08:37.000Z",
-    "source": "deepseek",
-    "sourceName": "DeepSeek",
-    "id": "2026-04-08-morning-6",
-    "date": "2026-04-08",
-    "batch": "morning",
-    "category": "ai-company",
-    "imageUrl": "/placeholders/ai-company.svg"
   },
   {
     "title": "Project Glasswing: Securing critical software for the AI era - Anthropic",
@@ -4301,19 +4145,6 @@
     "batch": "morning",
     "category": "ai-company",
     "imageUrl": "/placeholders/ai-company.svg"
-  },
-  {
-    "title": "- DeepSeek",
-    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBpWC15WTZtRXZaZjhTR1QtMUJKeGF4bGFhZGhYNlZTNWZMSWZXazRGTmw0OWRSMzFVY2JDSThaa0d6MHJfdWRFQzZSVWxGc1VQMi16UTA4YmVnMHRBMWsw?oc=5",
-    "summary": "DeepSeek",
-    "publishedAt": "2026-04-07T22:10:19.000Z",
-    "source": "deepseek",
-    "sourceName": "DeepSeek",
-    "id": "2026-04-08-morning-10",
-    "date": "2026-04-08",
-    "batch": "morning",
-    "category": "ai-company",
-    "imageUrl": "/images/2026-04-08-morning-10.webp"
   },
   {
     "title": "I cant help rooting for tiny open source AI model maker Arcee",
@@ -4470,19 +4301,6 @@
     "batch": "morning",
     "category": "tech-media",
     "imageUrl": "/images/2026-04-08-morning-22.webp"
-  },
-  {
-    "title": "- DeepSeek",
-    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9xY1Q4X0tjRk5JTkZObS1ya1laSHdSdlBlcDlPVG5fcUdrYnNidG12SEtrT1pWOUZ1UWV6Q3ZORmlrV1JQd01fdFQzSmlIWTFhNGphdFpCSDhuRVRmTHhN?oc=5",
-    "summary": "DeepSeek",
-    "publishedAt": "2026-04-07T11:19:31.000Z",
-    "source": "deepseek",
-    "sourceName": "DeepSeek",
-    "id": "2026-04-08-morning-23",
-    "date": "2026-04-08",
-    "batch": "morning",
-    "category": "ai-company",
-    "imageUrl": "/images/2026-04-08-morning-23.webp"
   },
   {
     "title": "Anthropics New Model, The Mythos Wolf, Glasswing and Alignment",
@@ -5967,19 +5785,6 @@
     "imageUrl": "/images/2026-04-07-evening-2.webp"
   },
   {
-    "title": "- DeepSeek",
-    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9xY1Q4X0tjRk5JTkZObS1ya1laSHdSdlBlcDlPVG5fcUdrYnNidG12SEtrT1pWOUZ1UWV6Q3ZORmlrV1JQd01fdFQzSmlIWTFhNGphdFpCSDhuRVRmTHhN?oc=5",
-    "summary": "DeepSeek",
-    "publishedAt": "2026-04-07T01:15:31.000Z",
-    "source": "deepseek",
-    "sourceName": "DeepSeek",
-    "id": "2026-04-07-evening-3",
-    "date": "2026-04-07",
-    "batch": "evening",
-    "category": "ai-company",
-    "imageUrl": "/placeholders/ai-company.svg"
-  },
-  {
     "title": "Anthropic expands partnership with Google and Broadcom for multiple gigawatts of next-generation compute - Anthropic",
     "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTFB0dUE0NnFtSW9iTTQyZTFsa1FvWkZXaXoxdE5YY3RleHNUSXdwRlgzODd5S0lXOVBVTFRPSGdXX1I2cW16YUxwQV81NjRjNFB4ZDh5QVdIZy1BcVNKNzl2YWlUZkRjWHNzay1nVEhjaW5QQndL?oc=5",
     "summary": "Anthropic expands partnership with Google and Broadcom for multiple gigawatts of next-generation compute Anthropic",
@@ -6006,32 +5811,6 @@
     "imageUrl": "/images/2026-04-07-evening-5.webp"
   },
   {
-    "title": "- DeepSeek",
-    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE0xZnZQUzRqM3lpenBKN2g4UjVJa1ZQVUhkNHcxNmFQWVY3LUppZ1BGUXpwM3NVNGEwYk1lZHQ4ZkZOa21fQ1cyVHFfdllBZER2cjNBSG1IWUt0d3NrUVJr?oc=5",
-    "summary": "DeepSeek",
-    "publishedAt": "2026-04-06T20:32:15.000Z",
-    "source": "deepseek",
-    "sourceName": "DeepSeek",
-    "id": "2026-04-07-evening-6",
-    "date": "2026-04-07",
-    "batch": "evening",
-    "category": "ai-company",
-    "imageUrl": "/placeholders/ai-company.svg"
-  },
-  {
-    "title": "- DeepSeek",
-    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE45QUgwektubDh0WkV4a0dmS2Z3SHB3NGFwRVQzVnhEQ01TYlV4ckh0d0VzOXFvOTJZUFk2UnNMT2d2emRfbjJ0b0U0QkN1S0Q3UmlyVnRlQzN2S2ZLUTA0?oc=5",
-    "summary": "DeepSeek",
-    "publishedAt": "2026-04-06T19:14:31.000Z",
-    "source": "deepseek",
-    "sourceName": "DeepSeek",
-    "id": "2026-04-07-evening-7",
-    "date": "2026-04-07",
-    "batch": "evening",
-    "category": "ai-company",
-    "imageUrl": "/placeholders/ai-company.svg"
-  },
-  {
     "title": "Google quietly launched an AI dictation app that works offline",
     "url": "https://techcrunch.com/2026/04/06/google-quietly-releases-an-offline-first-ai-dictation-app-on-ios/",
     "summary": "Google's new offline-first dictation app uses Gemma AI models to take on the apps like Wispr Flow.",
@@ -6056,19 +5835,6 @@
     "batch": "evening",
     "category": "tech-media",
     "imageUrl": "/images/2026-04-07-evening-9.webp"
-  },
-  {
-    "title": "- DeepSeek",
-    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFA5VklBSm53UGN2bXlnR1hUTWMzV09XZVpZMmNlS1JxZHFFdE1VVDlKUmotTm5jamFGU0dKekJCeVNaWmEtakRabnBfUzhQdEFQalN1MV8xVWx3ajg3REs4?oc=5",
-    "summary": "DeepSeek",
-    "publishedAt": "2026-04-06T18:33:46.000Z",
-    "source": "deepseek",
-    "sourceName": "DeepSeek",
-    "id": "2026-04-07-evening-10",
-    "date": "2026-04-07",
-    "batch": "evening",
-    "category": "ai-company",
-    "imageUrl": "/placeholders/ai-company.svg"
   },
   {
     "title": "Iran threatens OpenAI’s Stargate data center in Abu Dhabi",
@@ -10062,19 +9828,6 @@
     "imageUrl": "/images/2026-04-07-morning-102.webp"
   },
   {
-    "title": "@TonyRedmond #ai #privacy #microsoft",
-    "url": "https://ieji.de/@hanscees/116363015782433489",
-    "summary": "@TonyRedmond #ai #privacy #microsoft",
-    "publishedAt": "2026-04-07T10:45:12.000Z",
-    "source": "mastodon-ai",
-    "sourceName": "Mastodon #ai",
-    "id": "2026-04-07-morning-103",
-    "date": "2026-04-07",
-    "batch": "morning",
-    "category": "tech-media",
-    "imageUrl": "/images/2026-04-07-morning-103.webp"
-  },
-  {
     "title": "🎮 Framework says stabilising memory prices are a 'temporary reprieve' and there are more cost incre...",
     "url": "https://igeek.gamer-geek-news.com/@feed/statuses/01KNKRA7TQF71Q247N8DQ90FXV",
     "summary": "🎮 Framework says stabilising memory prices are a 'temporary reprieve' and there are more cost increases to come this yearIt ain't over yet, folks.📰 Source: Latest from PC Gamer🔗 Link: https://www.p...",
@@ -10803,19 +10556,6 @@
     "imageUrl": "/placeholders/ai-company.svg"
   },
   {
-    "title": "- DeepSeek - Into the Unknown",
-    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5jSmNPX2dBRVBvR1FKQ0l2MlV4WjhseThRZE1Ea0ZMNlk2U0JnNU5Yal9UN0kwSVN1blF5bE90QVBIbng0VFJJT1ZPVzY2a3VmYzE4RHBrcXd0N0NPaG9j?oc=5",
-    "summary": "DeepSeek - Into the Unknown",
-    "publishedAt": "2026-04-06T06:19:01.000Z",
-    "source": "deepseek",
-    "sourceName": "DeepSeek",
-    "id": "2026-04-06-evening-1",
-    "date": "2026-04-06",
-    "batch": "evening",
-    "category": "ai-company",
-    "imageUrl": "/placeholders/ai-company.svg"
-  },
-  {
     "title": "Industrial policy for the Intelligence Age",
     "url": "https://openai.com/index/industrial-policy-for-the-intelligence-age",
     "summary": "Explore our ambitious, people-first industrial policy ideas for the AI era—focused on expanding opportunity, sharing prosperity, and building resilient institutions as advanced intelligence evolves.",
@@ -10827,19 +10567,6 @@
     "batch": "evening",
     "category": "ai-company",
     "imageUrl": "/images/2026-04-06-evening-2.webp"
-  },
-  {
-    "title": "- deepseek.com",
-    "url": "https://news.google.com/rss/articles/CBMi0ghBVV95cUxPeVdkeTZoRFowcUlubnF5cFozaW9Ka2s3UWlCX0xLdFFZQVBkZlZWdXhWWWxnd0pmd1dMeERqejRpeEdoZ2FVeF9xYlljQy11UWJaWmFzVkI2VDNDaHF4SE1sVjZIVHJqSi1Xc2JJcG44XzBRNlZlcVE5N19XcFpubXRlU0tSb2Y5RE9qV1d3TzRvYkM5QXRnRVlTTDdsa29HS29ma0dxQ0FSblV4ckNoVUFnZ3hRcVBuY0FZSE93QmpZNllMWFFjOGZoczhLSEhYT1J5NjlDZEhaeG90MXNRYnRmdG53MlJOa2dsRE11WE9ZcWhRYVFrTlF1OGNWM19tNGxScV9GclBxZXAwZFg1TXlUXzVQemlDX3hQWjNNZjdpSkFpeUR1TnVIaTh3UnltWFNHcnBFWl9hVjUyakVIR0lWTmNCVnBsRUNuT3F1akxTU2hmd3Q3OXpWam1obUYyaF9LU29LU2JvQm9xWWFlMkRxWGNTVWNsUEVCSkhPN1ZXUk9ab0NBN2RrRktjTjVHVXdiQ1R6N3JxRUp4SEI3MnJRcmxXNmFHMXp1Y1NrdEpFY0x0UzFIVmZxdG8yMHE0Sk9DZG1rR3A2X3pucmNBb1hGLXJ0UkRXdTN5ZWRyMVJ4NHMyMl9iV3d5RlBBNFdzcDRCRGlaU19QTl92WGxqbTdLbkQtNkdRc0FydVRITjdLQVVnS0hoMUJZeFlaZ1lrd0N1NU51OXZ2WXFCN09fQ3ZpRjQxMGdGa3NvN1hnV0s3RmlybkJTZDBITkZwWUxESXpVZEdZdGpYaFo1WGUxZFg2VzFwcXF1UExRMW8wQzk5b2VwNEdyNEpzcUtFUzhtcnRqTzR0OUxYbUpvZXpNLW1JR1NhekxRV1lRY1V5VWJyV29PclJZVGhJWUEtU3NHLTRyRE9GOWNQX2FqWmZZTVBQVGZac0F5bHMxRGttZzRoVElTVFNnRDJtYXFjVTd6bTJEVFVfNG1SX05FUDJmbXVrcXF0WU9haUQtVThJTC1fSzJab1N4R2dKc2VJYnVHYTlqa2h3eGxXbzQ1SU5vV3lDZFBYYzFxTnRJeXJkX3psSnFIRm5jcmlwVnYxX3R4OGg4Q0dUWjFjZ3JaZ3hwdUU2WGVRbW9BNjhoV2Y5M3hNX1E3dlhyRjhaUmlXTVNvVTZ0MkFMMEJhczB6V1N4RkdIdDRNOG8xUnd2VWFTMjU3aFBPWXkwTFBWSWx0Q1EtNzFXYmQyY3E5dk1FMmlMMkNEa0Rfb3NjVGs3NHNrSkxXR3g0aElqbG5SNnRmNk52RElQaW9aU1ZPS05GZVg3a0d5TTRfRlZDOVNWSWd0a0lCR3lIYldubzB5eHkyekRMLVhVQXI4WWZLTmpLX0hiVm1wdUJnN3BoTkgySl9vbnZjejVQdzIybHNCTmtXVXNIbGcxOGVlVFNWTEh2UFdkM3FLdElYMTViQlhkMUxYS3ZLQQ?oc=5",
-    "summary": "deepseek.com",
-    "publishedAt": "2026-04-05T23:14:11.000Z",
-    "source": "deepseek",
-    "sourceName": "DeepSeek",
-    "id": "2026-04-06-evening-3",
-    "date": "2026-04-06",
-    "batch": "evening",
-    "category": "ai-company",
-    "imageUrl": "/placeholders/ai-company.svg"
   },
   {
     "title": "Copilot is ‘for entertainment purposes only,’ according to Microsoft’s terms of use",
@@ -10879,32 +10606,6 @@
     "batch": "evening",
     "category": "tech-media",
     "imageUrl": "/images/2026-04-06-evening-6.webp"
-  },
-  {
-    "title": "- DeepSeek - Into the Unknown",
-    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9xY1Q4X0tjRk5JTkZObS1ya1laSHdSdlBlcDlPVG5fcUdrYnNidG12SEtrT1pWOUZ1UWV6Q3ZORmlrV1JQd01fdFQzSmlIWTFhNGphdFpCSDhuRVRmTHhN?oc=5",
-    "summary": "DeepSeek - Into the Unknown",
-    "publishedAt": "2026-04-05T11:55:25.000Z",
-    "source": "deepseek",
-    "sourceName": "DeepSeek",
-    "id": "2026-04-06-evening-7",
-    "date": "2026-04-06",
-    "batch": "evening",
-    "category": "ai-company",
-    "imageUrl": "/placeholders/ai-company.svg"
-  },
-  {
-    "title": "- DeepSeek - Into the Unknown",
-    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5ySF9FZlo0Y3NQNkdGVldlNEp6OU9Qd2lEejZieWxWSV9PM25kS184Qk1UbEk3eUFDNUdlYnJZWkNPUXVCQ1hHcWk5RjRLVnZoVkJ6TVhWcmVSaXltTF9v?oc=5",
-    "summary": "DeepSeek - Into the Unknown",
-    "publishedAt": "2026-04-05T10:18:25.000Z",
-    "source": "deepseek",
-    "sourceName": "DeepSeek",
-    "id": "2026-04-06-evening-8",
-    "date": "2026-04-06",
-    "batch": "evening",
-    "category": "ai-company",
-    "imageUrl": "/placeholders/ai-company.svg"
   },
   {
     "title": "OpenAI unveils policy proposals for a world with superintelligence: higher capital gains taxes, a public AI investment fund, strengthened safety nets, and more (Amrith Ramkumar/Wall Street Journal)",
@@ -12506,19 +12207,6 @@
     "imageUrl": "/placeholders/tech-media.svg"
   },
   {
-    "title": "Don't use the monkey's paw.#LLM #Closedsourceai #aibubble",
-    "url": "https://mastodon.social/@ProngSprong_nCloven/116357063996666265",
-    "summary": "Don't use the monkey's paw.#LLM #Closedsourceai #aibubble",
-    "publishedAt": "2026-04-06T09:31:35.000Z",
-    "source": "mastodon-llm",
-    "sourceName": "Mastodon #llm",
-    "id": "2026-04-06-evening-132",
-    "date": "2026-04-06",
-    "batch": "evening",
-    "category": "tech-media",
-    "imageUrl": "/placeholders/tech-media.svg"
-  },
-  {
     "title": "むむ、契約ですか。副館長としては冷静にならなければKDDI、AppleCare Servicesと連携した法人向けのサポートサービスを提供開始 https://news.mynavi.jp/techp...",
     "url": "https://mastodon.crazynewworld.net/@hans/116356921669072437",
     "summary": "むむ、契約ですか。副館長としては冷静にならなければKDDI、AppleCare Servicesと連携した法人向けのサポートサービスを提供開始 https://news.mynavi.jp/techplus/article/20260406-4303886/#Apple #LLM #news #bot",
@@ -13518,58 +13206,6 @@
     "batch": "morning",
     "category": "tech-media",
     "imageUrl": "/images/2026-04-06-morning-3.webp"
-  },
-  {
-    "title": "- DeepSeek - Into the Unknown",
-    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9xY1Q4X0tjRk5JTkZObS1ya1laSHdSdlBlcDlPVG5fcUdrYnNidG12SEtrT1pWOUZ1UWV6Q3ZORmlrV1JQd01fdFQzSmlIWTFhNGphdFpCSDhuRVRmTHhN?oc=5",
-    "summary": "DeepSeek - Into the Unknown",
-    "publishedAt": "2026-04-05T11:55:25.000Z",
-    "source": "deepseek",
-    "sourceName": "DeepSeek",
-    "id": "2026-04-06-morning-4",
-    "date": "2026-04-06",
-    "batch": "morning",
-    "category": "ai-company",
-    "imageUrl": "/placeholders/ai-company.svg"
-  },
-  {
-    "title": "- DeepSeek - Into the Unknown",
-    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE5ySF9FZlo0Y3NQNkdGVldlNEp6OU9Qd2lEejZieWxWSV9PM25kS184Qk1UbEk3eUFDNUdlYnJZWkNPUXVCQ1hHcWk5RjRLVnZoVkJ6TVhWcmVSaXltTF9v?oc=5",
-    "summary": "DeepSeek - Into the Unknown",
-    "publishedAt": "2026-04-05T10:18:25.000Z",
-    "source": "deepseek",
-    "sourceName": "DeepSeek",
-    "id": "2026-04-06-morning-5",
-    "date": "2026-04-06",
-    "batch": "morning",
-    "category": "ai-company",
-    "imageUrl": "/placeholders/ai-company.svg"
-  },
-  {
-    "title": "- DeepSeek - Into the Unknown",
-    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBKeUtwWkF3aXRfNG4xUEExdGs4VXVpaWNFbjloeTl1OFRVWXU1WjJhWk5weW9GakpCbXhtSVYxeE9FeWpVS1lma0xhVlUwQXQwT3FlVkg4cFBZYkVVSHRv?oc=5",
-    "summary": "DeepSeek - Into the Unknown",
-    "publishedAt": "2026-04-05T09:49:25.000Z",
-    "source": "deepseek",
-    "sourceName": "DeepSeek",
-    "id": "2026-04-06-morning-6",
-    "date": "2026-04-06",
-    "batch": "morning",
-    "category": "ai-company",
-    "imageUrl": "/placeholders/ai-company.svg"
-  },
-  {
-    "title": "- DeepSeek - Into the Unknown",
-    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFAzNUpBTkpoaDk2QjUtUWlSU29MLXBHcHMxYldtSkNZa3N0U1VTdEVHUW9lUEUtbERHOEdseUdybWNNNVBaY25ieFRhWk5DNTNaVnlVZGVPeFdoX0lTUWJF?oc=5",
-    "summary": "DeepSeek - Into the Unknown",
-    "publishedAt": "2026-04-05T02:38:18.000Z",
-    "source": "deepseek",
-    "sourceName": "DeepSeek",
-    "id": "2026-04-06-morning-7",
-    "date": "2026-04-06",
-    "batch": "morning",
-    "category": "ai-company",
-    "imageUrl": "/placeholders/ai-company.svg"
   },
   {
     "title": "大模型生死局：从六小龙到双雄上市，AI创业的泡沫、突围与终局",
@@ -15886,19 +15522,6 @@
     "imageUrl": "/placeholders/ai-company.svg"
   },
   {
-    "title": "- DeepSeek - Into the Unknown",
-    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFBKeUtwWkF3aXRfNG4xUEExdGs4VXVpaWNFbjloeTl1OFRVWXU1WjJhWk5weW9GakpCbXhtSVYxeE9FeWpVS1lma0xhVlUwQXQwT3FlVkg4cFBZYkVVSHRv?oc=5",
-    "summary": "DeepSeek - Into the Unknown",
-    "publishedAt": "2026-04-05T09:49:25.000Z",
-    "source": "deepseek",
-    "sourceName": "DeepSeek",
-    "id": "2026-04-05-evening-1",
-    "date": "2026-04-05",
-    "batch": "evening",
-    "category": "ai-company",
-    "imageUrl": "/placeholders/ai-company.svg"
-  },
-  {
     "title": "mTLS Authentication - docs.x.ai",
     "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE5kWFE0V0tlMmFXSmRiTDBsRmFZekV2dHJDX1VpVFVuRGhJeGRULTVSdURqb1JpZnpuZ2dmdnNrRDhqNmNPT0VmM0dBTjhFa2o5bzZ6bHBZdWtPRVFWcGo0YzR3?oc=5",
     "summary": "mTLS Authentication docs.x.ai",
@@ -15906,32 +15529,6 @@
     "source": "xai",
     "sourceName": "xAI / Grok",
     "id": "2026-04-05-evening-2",
-    "date": "2026-04-05",
-    "batch": "evening",
-    "category": "ai-company",
-    "imageUrl": "/placeholders/ai-company.svg"
-  },
-  {
-    "title": "- DeepSeek - Into the Unknown",
-    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9RY3U3V3hRUXRXMWY5NW9ER2VWcy1feldFNHJVUlhJWDZXLU9sYWJra3VMcFozUWtwOE5qak9hdHpOOVpGb0dqY0Z1LW9HN3FscEdNM3BYQmZVdzRQYjRR?oc=5",
-    "summary": "DeepSeek - Into the Unknown",
-    "publishedAt": "2026-04-04T23:54:40.000Z",
-    "source": "deepseek",
-    "sourceName": "DeepSeek",
-    "id": "2026-04-05-evening-3",
-    "date": "2026-04-05",
-    "batch": "evening",
-    "category": "ai-company",
-    "imageUrl": "/placeholders/ai-company.svg"
-  },
-  {
-    "title": "- DeepSeek - Into the Unknown",
-    "url": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFB5VnBuQXNWQ2dOUXdFM1hGZmEwSWd4YXIxZXhHVkhtYzh0X0FoWGpoWnJQMGxRU0p6VEkzOEYtLWFpeXBQVWF0QktCSGQ0b3FmYkJtSnAwRjd6cWFYc1ZB?oc=5",
-    "summary": "DeepSeek - Into the Unknown",
-    "publishedAt": "2026-04-04T21:44:07.000Z",
-    "source": "deepseek",
-    "sourceName": "DeepSeek",
-    "id": "2026-04-05-evening-4",
     "date": "2026-04-05",
     "batch": "evening",
     "category": "ai-company",
