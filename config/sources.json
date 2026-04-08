@@ -122,9 +122,10 @@
       "url": "https://news.google.com/rss/search?q=site:deepseek.com+-site:chat.deepseek.com&hl=en&gl=US&ceid=US:en",
       "hours": 168,
       "topics": [],
-      "enabled": true,
+      "enabled": false,
       "category": "AI公司",
-      "googleNewsQuery": "site:deepseek.com -site:chat.deepseek.com"
+      "googleNewsQuery": "site:deepseek.com -site:chat.deepseek.com",
+      "_disabledReason": "Google News RSS 对 deepseek.com 索引质量极差，标题全为 '- DeepSeek'，无法获取有效内容。待 DeepSeek 推出官方 Blog RSS 后重新启用。"
     },
     {
       "id": "mistral",

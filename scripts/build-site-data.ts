@@ -310,10 +310,17 @@ function main() {
               const digestMd = readFileSync(digestMdPath, 'utf-8')
               const parsed = parseDigest(digestMd, dateStr)
               if (parsed.clusters.length > 0) {
-                // Keep only the latest digest per date (prefer morning over evening or latest batch)
+                // Keep the best digest per date — prefer the one with more content
                 const existingIdx = digests.findIndex(d => d.date === dateStr)
                 if (existingIdx >= 0) {
-                  digests[existingIdx] = parsed
+                  const existing = digests[existingIdx]
+                  // Merge: keep the version with more clusters, but always preserve observations
+                  const merged = parsed.clusters.length >= existing.clusters.length ? parsed : existing
+                  // If the winning digest has no observations but the other does, copy them over
+                  if (merged.observations.length === 0 && (parsed.observations.length > 0 || existing.observations.length > 0)) {
+                    merged.observations = parsed.observations.length > 0 ? parsed.observations : existing.observations
+                  }
+                  digests[existingIdx] = merged
                 } else {
                   digests.push(parsed)
                 }
