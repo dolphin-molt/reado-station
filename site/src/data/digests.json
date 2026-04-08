@@ -1,0 +1,1402 @@
+[
+  {
+    "date": "2026-04-08",
+    "headline": "AI 日报 · 2026-04-08",
+    "observations": [],
+    "clusters": [
+      {
+        "name": "重大新闻",
+        "stories": [
+          {
+            "title": "Anthropic 发布 Claude Mythos Preview：发现所有主流操作系统和浏览器的零日漏洞，暂不公开",
+            "summary": "Anthropic 发布 Project Glasswing，这是一个紧急网络安全计划，由最新前沿模型 Claude Mythos Preview 提供支持。该模型已在所有主流操作系统和浏览器中发现数千个高危漏洞。Anthropic 不会公开发布 Mythos Preview，将向合作伙伴（AWS、Apple、Broadcom、Cisco、CrowdStrike、Google、JPMorganChase、Linux Foundation、Microsoft、NVIDIA、Palo Alto Networks 等）提供最高 1 亿美元的积分额度。 **媒体报道**: TechCrunch 指出，",
+            "sources": [
+              {
+                "name": "Anthropic Twitter",
+                "url": "https://x.com/i/status/2041578392852517128"
+              },
+              {
+                "name": "Anthropic Twitter",
+                "url": "https://x.com/i/status/2041578403686498506"
+              },
+              {
+                "name": "Anthropic Twitter",
+                "url": "https://x.com/i/status/2041578395515953487"
+              },
+              {
+                "name": "Wired",
+                "url": "https://www.wired.com/story/anthropic-mythos-preview-project-glasswing/"
+              },
+              {
+                "name": "The Verge",
+                "url": "https://www.theverge.com/ai-artificial-intelligence/908114/anthropic-project-glasswing-cybersecurity"
+              },
+              {
+                "name": "TechCrunch",
+                "url": "https://techcrunch.com/2026/04/07/anthropic-mythos-ai-model-preview-security/"
+              },
+              {
+                "name": "虎嗅",
+                "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE9qM1VCUEpKaXFpNlIyYXl4VXhWLThBd0plY2pldTQyTi1NcXVpZGRsM2lTekhkZjUwVGRnamxZUVFMTEpPVk9BZ2lneXI3ZVdkNkhn?oc=5"
+              },
+              {
+                "name": "Kevin Roose/New York Times",
+                "url": "http://www.techmeme.com/260407/p41#a260407p41"
+              },
+              {
+                "name": "Ethan Mollick",
+                "url": "https://x.com/i/status/2041599677204750439"
+              },
+              {
+                "name": "Simon Willison",
+                "url": "https://simonwillison.net/2026/Apr/7/project-glasswing/"
+              },
+              {
+                "name": "Lobsters",
+                "url": "https://lobste.rs/s/aw2jr4/assessing_claude_mythos_preview_s"
+              }
+            ],
+            "impact": "AI 安全攻防博弈进入新阶段——头部 AI 实验室开始主动限制最强模型的能力，行业合作成为安全可控部署的关键路径。"
+          },
+          {
+            "title": "Z.ai 发布 GLM-5.1：754B 参数 MIT 许可开源模型，超越 GPT-5.4 与 Claude Opus 4.6",
+            "summary": "Z.ai 发布 GLM-5.1，754B 参数，采用 MIT 许可证开源。在 SWE-bench Pro 上以 58.4% 的得分排名第一（超过 GPT-5.4 和 Claude Opus 4.6），Vector-DB-Bench 中达到 21.5k QPS（6 倍性能提升），自主运行 8 小时完成 Linux Desktop 环境构建。 **媒体报道**: VentureBeat 报道，这是中国 AI 模型在 SWE-bench Pro 上的最佳成绩，也是当前开源模型在全球榜单上的最高排名。虎嗅同步报道，并指出该模型已上线 OpenRouter、Vercel、Requesty 等平台。 Hu",
+            "sources": [
+              {
+                "name": "Z.ai Twitter",
+                "url": "https://x.com/i/status/2041550153354519022"
+              },
+              {
+                "name": "VentureBeat via Techmeme",
+                "url": "http://www.techmeme.com/260407/p49#a260407p49"
+              },
+              {
+                "name": "虎嗅",
+                "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE4xb21XeWk5MnhpcUNaN2lTYlNHSWJDMTNTZDdhNnZXbE1ReWhEQVZ3SnlBOTI4d1I5dlVjQUhsalBxcjZnS3dPcFB0LW5JRmFBaC1j?oc=5"
+              },
+              {
+                "name": "Clément Delangue",
+                "url": "https://x.com/i/status/2041554501539103014"
+              },
+              {
+                "name": "Simon Willison",
+                "url": "https://simonwillison.net/2026/Apr/7/glm-51/#atom-everything"
+              }
+            ],
+            "impact": "中国开源大模型正式站上全球 Agentic 能力最高点，MIT 许可进一步扫清了商业应用障碍。"
+          },
+          {
+            "title": "Anthropic ARR 达 300 亿美元，牵手 Google 与 Broadcom 签署多千兆瓦 TPU 协议",
+            "summary": "Anthropic 宣布与 Google 和 Broadcom 签署多千兆瓦规模的新一代 TPU 容量协议，容量将于 2027 年上线。 **媒体报道**: TechCrunch 报道，Anthropic 的年化收入（ARR）已飙升至 300 亿美元，增速惊人。Stratechery 深度分析认为，Anthropic 需要算力，Google 有算力——这是一个天然的合作关系，Stratechery 创始人 Ben Thompson 更评论 Anthropic 的扩张是\"AI 计算需求的缩影\"。 **补充**: Anthropic 同时任命前微软 AI 平台负责人 Eric Boyd 为基础设施",
+            "sources": [
+              {
+                "name": "TechCrunch",
+                "url": "https://techcrunch.com/2026/04/07/anthropic-compute-deal-google-broadcom-tpus/"
+              },
+              {
+                "name": "Stratechery",
+                "url": "https://stratechery.com/2026/anthropics-new-tpu-deal-anthropics-computing-crunch-the-anthropic-google-alliance/"
+              },
+              {
+                "name": "虎嗅",
+                "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE9QbGdxMmJjcFFVcXhaQWpqNFpzMVBoemRIRGFkdzJBTklvUTZWY1pZbm02M1dTUXNPUHkzNEtwTFZHZ0pLY0hlZXF5OWpjWl9aTDVV?oc=5"
+              }
+            ],
+            "impact": "Anthropic 商业化速度超预期，与 Google 的深度绑定反映 AI 基础设施竞争的格局已从\"谁能做\"升级为\"谁能供\"。"
+          }
+        ]
+      },
+      {
+        "name": "公司动态",
+        "stories": [
+          {
+            "title": "英特尔加入 Elon Musk 的 Terafab AI 芯片项目",
+            "summary": "Elon Musk 的 Terafab AI 芯片项目获得关键新伙伴：英特尔正式宣布加入，与 SpaceX、xAI、特斯拉共同设计并建设位于德克萨斯州奥斯汀的超大规模 AI 芯片工厂。英特尔CEO陈福义表示，这将是英特尔参与的最具雄心的 AI 基础设施项目之一。",
+            "sources": [
+              {
+                "name": "The Verge",
+                "url": "https://www.theverge.com/transportation/907976/elon-musk-terafab-intel-ai-chip-spacex-tesla"
+              }
+            ]
+          },
+          {
+            "title": "Sam Altman 宣布 Codex 达 300 万周活用户，限额重置",
+            "summary": "Sam Altman 宣布 ChatGPT 生产力工具 Codex 达到 300 万周活跃用户里程碑，并宣布重置使用限额，每增长 100 万用户将重置一次，上限 1000 万用户。Altman 表示\"祝大家创作愉快（Happy building!）\"。",
+            "sources": [
+              {
+                "name": "Sam Altman Twitter",
+                "url": "https://x.com/i/status/2041658719839383945"
+              }
+            ]
+          },
+          {
+            "title": "Bing 发布 Harrier 开源嵌入模型，夺得多语言 MTEB-v2 榜首",
+            "summary": "Microsoft Bing 团队发布 Harrier 开源嵌入模型，在行业标准多语言 MTEB-v2 基准测试中排名第一。Mustafa Suleyman 表示，嵌入是模型准确性的无名英雄，是搜索、检索、组织和连接信息的核心层，Bing 的网络检索已为目前几乎所有主流 AI 聊天机器人提供支持，Harrier 将进一步升级 Agent 时代的能力。",
+            "sources": [
+              {
+                "name": "Mustafa Suleyman Twitter",
+                "url": "https://x.com/i/status/2041552243019980929"
+              },
+              {
+                "name": "虎嗅",
+                "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBBTl9kaUhCRDBwVVlDTXZ2emw2RE5fdVVxamNMS05YeDVHWHhQNGlKSTJ0OGoxSHdJRlNHYVNLMVhfb2xualZHOW5uZW9lMjk5OHVF?oc=5"
+              }
+            ]
+          },
+          {
+            "title": "Claude Code v2.1.94：默认 effort 升级为 high，支持 Bedrock Mantle",
+            "summary": "Claude Code 发布 v2.1.94 版本：新增对 Amazon Bedrock Mantle 的支持（设置 CLAUDE_CODE_USE_MANTLE=1），API-key、Bedrock/Vertex/Foundry、Team 和 Enterprise 版本的默认 effort 级别从 medium 升级为 high。",
+            "sources": [
+              {
+                "name": "GitHub Release",
+                "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.94"
+              }
+            ]
+          },
+          {
+            "title": "美团、京东收紧外部 AI 使用权限",
+            "summary": "钛媒体报道，美团、京东开始收紧员工使用外部 AI 工具的权限，禁止将内部数据上传至外部 AI 平台。这是继多家大型企业之后，又两家中国互联网巨头跟进 AI 数据安全政策。",
+            "sources": [
+              {
+                "name": "虎嗅",
+                "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFBZaUszaFItSlZjckI2YkdiMnBGLU5vcGVaMzJoVUFrT2t4dUowNC1FMEQ5YUo0RzQySkh0TUVaTkNMaEEtWl9hdHJtWUpFa3V1?oc=5"
+              },
+              {
+                "name": "钛媒体",
+                "url": "https://www.tmtpost.com/7944317.html"
+              }
+            ]
+          },
+          {
+            "title": "Uber 扩大 AWS 合约，转向亚马逊自研 AI 芯片",
+            "summary": "Uber 扩大与 AWS 的合同，将更多共享出行功能迁移到亚马逊自研芯片上。这一举动被视为对 Oracle 和 Google 的\"不信任投票\"，也是亚马逊 AI 芯片获得头部客户认可的重要信号。",
+            "sources": [
+              {
+                "name": "TechCrunch",
+                "url": "https://techcrunch.com/2026/04/07/uber-is-the-latest-to-be-won-over-by-amazons-ai-chips/"
+              }
+            ]
+          },
+          {
+            "title": "中国日均词元调用量突破 140 万亿，国家数据局发布 Token 经济报告",
+            "summary": "国家数据局发布报告，中国日均 AI 词元调用量已突破 140 万亿，标志着 AI 计算资源消耗进入前所未有的规模。报告同时指出，AI 行业正面临 Token 经济学的挑战，成本优化和推理效率成为行业核心议题。",
+            "sources": [
+              {
+                "name": "虎嗅",
+                "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE5yVFpmSXZncVFGczRKeHZHcHo4X1AtWF94WXBQYklCSEtrbXVLclM4M0NIWS1WVXRkVlZfNmFqcm9UV0F1Z3hyQjRXSUNkQndrY3lVVA?oc=5"
+              }
+            ]
+          },
+          {
+            "title": "Google Photos 在 Android 全球上线 AI 增强功能",
+            "summary": "Google 在全球 Android 平台推出 Photos AI 增强功能，Gemini 可自动为照片生成描述文字，支持自动光线和对比度调整，以及视频播放速度控制。",
+            "sources": [
+              {
+                "name": "TechCrunch",
+                "url": "https://techcrunch.com/2026/04/07/google-maps-can-now-write-captions-for-your-photos-using-ai/"
+              },
+              {
+                "name": "虎嗅",
+                "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTFBBTl9kaUhCRDBwVVlDTXZ2emw2RE5fdVVxamNMS05YeDVHWHhQNGlKSTJ0OGoxSHdJRlNHYVNLMVhfb2xualZHOW5uZW9lMjk5OHVF?oc=5"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Twitter/X 精选",
+        "stories": [
+          {
+            "title": "Sam Altman（OpenAI CEO）",
+            "summary": "[原推](https://x.com/i/status/2041658719839383945) ❤️5290 宣布 ChatGPT Codex 达到 300 万周活跃用户里程碑，同时宣布重置使用限额，每增长 100 万用户将再次重置，上限至 1000 万用户。\"Happy building!\"",
+            "sources": []
+          },
+          {
+            "title": "Anthropic 官方账号",
+            "summary": "[原推1](https://x.com/i/status/2041578392852517128) ❤️21307 · [原推2](https://x.com/i/status/2041578395515953487) ❤️3294 · [原推3](https://x.com/i/status/2041578403686498506) ❤️3257 正式发布 Project Glasswing，Claude Mythos Preview 已发现所有主流操作系统和浏览器中的数千个高危漏洞。Anthropic 不会公开发布该模型，将向 40 多个组织提供 1 亿美元积分额度，合作名单包括 Appl",
+            "sources": []
+          },
+          {
+            "title": "Z.ai 官方（@zai_org）",
+            "summary": "[原推1](https://x.com/i/status/2041550153354519022) ❤️7877 · [原推2](https://x.com/i/status/2041550166201663909) ❤️785 · [原推3](https://x.com/i/status/2041550161462116604) ❤️755 宣布 GLM-5.1 开源，在 SWE-Bench Pro 排名第一（58.4%），6 倍 Vector-DB 性能提升，8 小时自主构建 Linux Desktop 环境。已上线 OpenRouter、Vercel 等平台。",
+            "sources": []
+          },
+          {
+            "title": "Mustafa Suleyman（Microsoft AI CEO）",
+            "summary": "[原推1](https://x.com/i/status/2041552243019980929) ❤️221 · [原推2](https://x.com/i/status/2041552245012189680) ❤️24 发布 Bing Harrier 开源嵌入模型，在 MTEB-v2 多语言基准测试中排名第一，并预告 Harrier 将为代理时代提供更好的信息检索能力。",
+            "sources": []
+          },
+          {
+            "title": "Ethan Mollick（Wharton 教授）",
+            "summary": "[原推1](https://x.com/i/status/2041599213050450272) ❤️285 · [原推2](https://x.com/i/status/2041578945531830695) ❤️514 · [原推3](https://x.com/i/status/2041600435320959330) ❤️1022 关于 Claude Mythos 的多个观察：Mythos 仍保留了 Claude 的部分特征，多轮对话中两个版本的 Mythos 相互对话时\"less philosophical\"；详细分析了 Mythos 的红队报告和系统卡；分享了\"On the F",
+            "sources": []
+          },
+          {
+            "title": "Clément Delangue（HuggingFace CEO）",
+            "summary": "[原推1](https://x.com/i/status/2041554501539103014) ❤️459 · [原推2](https://x.com/i/status/2041576063575212379) ❤️153 确认 GLM-5.1 是 HuggingFace 平台上当前表现最佳的开源模型；分享了 NousResearch 使用 Kimi-K2.5 和 GLM-5.1 进行 1.5 亿 Token 追踪的开源记录。",
+            "sources": []
+          }
+        ]
+      },
+      {
+        "name": "论文与开源",
+        "stories": [
+          {
+            "title": "ClawArena: AI Agent 在动态信息环境中的评测基准",
+            "summary": "[arxiv.org/abs/2604.04202](https://arxiv.org/abs/2604.04202) **热度**: ↑26 提出 ClawArena 基准，用于评估 AI Agent 在不断变化的信息环境中的适应能力和决策质量。这一评测框架填补了传统静态评测无法覆盖 Agent 真实场景的空白，对 Agentic AI 的实际部署能力评估具有重要参考价值。",
+            "sources": []
+          },
+          {
+            "title": "NousResearch/hermes-agent — \"随用户成长的 Agent\"",
+            "summary": "[github.com/NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) **语言**: Python | **新增 Star**: +3009 NousResearch 发布 Hermes Agent，定位为\"随用户成长的智能体\"，支持持续学习和个性化适应。基于 Nous 自研的 Hermes 模型系列，聚焦于用户行为模式的学习和记忆。",
+            "sources": []
+          },
+          {
+            "title": "abhigyanpatwari/GitNexus — 浏览器内代码知识图谱引擎",
+            "summary": "[github.com/abhigyanpatwari/GitNexus](https://github.com/abhigyanpatwari/GitNexus) **语言**: TypeScript | **新增 Star**: +1195 GitNexus 是一款完全在浏览器内运行的零服务器代码智能引擎。上传 GitHub 仓库或 ZIP 文件，即可获得交互式知识图谱，内置 Graph RAG Agent，零配置代码探索体验。",
+            "sources": []
+          },
+          {
+            "title": "NVIDIA/personaplex",
+            "summary": "[github.com/NVIDIA/personaplex](https://github.com/NVIDIA/personaplex) **语言**: Python | **新增 Star**: +662 NVIDIA 发布 PersonaPlex 代码库，探索大模型的多人格角色系统（Persona），用于提升 AI 对话的多样性和一致性。",
+            "sources": []
+          },
+          {
+            "title": "tobi/qmd — 本地文档语义搜索 CLI",
+            "summary": "[github.com/tobi/qmd](https://github.com/tobi/qmd) **语言**: TypeScript | **新增 Star**: +859 qmd 是一个极简 CLI 搜索引擎，支持对文档、知识库、会议记录等进行本地语义搜索。追踪当前 SOTA 方法，同时完全离线运行，注重隐私保护。",
+            "sources": []
+          },
+          {
+            "title": "Selective Forgetting for Large Reasoning Models",
+            "summary": "[arxiv.org/abs/2604.03571](https://arxiv.org/abs/2604.03571) **分类**: cs.AI 大型推理模型（LRM）生成结构化思维链后再输出最终答案，使其特别容易暴露训练数据中的敏感知识。论文提出\"选择性遗忘\"方法，可在不损害核心能力的前提下移除有害或隐私相关内容，对 LRM 的安全部署具有重要意义。",
+            "sources": []
+          },
+          {
+            "title": "Agentic-MME: Agentic 能力在多模态评测中的实际价值",
+            "summary": "[arxiv.org/abs/2604.03016](https://arxiv.org/abs/2604.03016) **热度**: ↑26 系统评估了 Agentic 能力对多模态大型语言模型的实际贡献，发现 Agentic 框架（规划、工具使用、多步推理）可显著提升模型在复杂任务中的表现，但并非所有场景都需要完整 Agentic 能力，任务复杂度与能力匹配度是关键因素。",
+            "sources": []
+          }
+        ]
+      },
+      {
+        "name": "社区热点",
+        "stories": [
+          {
+            "title": "Lobsters 热文：微软的\"陨落与 Enshittification\"（2026 版）",
+            "summary": "一篇深度分析文章指出微软正在经历系统性衰落，从操作系统霸主到 Copilot 时代的被动跟进，作者用\"Enshittification\"框架分析微软如何从用户信任走向平台侵蚀。引发 Lobsters 社区热烈讨论。",
+            "sources": [
+              {
+                "name": "Lobsters",
+                "url": "https://lobste.rs/s/jxw4nj/downfall_enshittification_microsoft"
+              }
+            ]
+          },
+          {
+            "title": "Lobsters：多 Agent 软件开发是分布式系统问题（AGI 救不了你）",
+            "summary": "开发者探讨多 Agent 软件开发的架构挑战：Agentic 框架虽然强大，但无法绕过分布式系统的基础问题——一致性、延迟、错误处理。AGI 本身并不能解决这些工程层面的根本挑战。",
+            "sources": [
+              {
+                "name": "Lobsters",
+                "url": "https://lobste.rs/s/vjcymq/multi_agentic_software_development_is"
+              }
+            ]
+          },
+          {
+            "title": "DEV.to: 4000 行 Agent Skill 而非 npm 包",
+            "summary": "开发者分享了为什么选择构建一个 4000 行的 Agent Skill 而非发布一个 npm 包。核心观点：相比通用工具，针对特定工作流的深度定制 Agent Skill 在实际使用中的价值远超可复用但泛化的包。",
+            "sources": [
+              {
+                "name": "DEV.to",
+                "url": "https://dev.to/_a9b502091e5f4cba28f13/why-i-built-a-4000-line-agent-skill-instead-of-another-npm-package-51la"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "date": "2026-04-07",
+    "headline": "AI 日报 · 2026-04-07",
+    "observations": [],
+    "clusters": [
+      {
+        "name": "重大新闻",
+        "stories": [
+          {
+            "title": "Anthropic 与 Google、Broadcom 签署数 GW 算力协议，年化收入突破 300 亿美元",
+            "summary": "Anthropic 宣布与 Google 和 Broadcom 签署新协议，将采购数吉瓦（GW）级别的下一代 TPU 算力，其中自 2027 年起可获得约 3.5 GW 的算力支持。Anthropic 同时披露，公司年化收入（ARR）已超过 300 亿美元，较 2025 年底的约 90 亿美元大幅增长超 3 倍。 Broadcom 方面证实与 Google 签署长期协议，将为谷歌下一代 TPU 研发并供应定制化芯片，协议期限至 2031 年。这是继此前融资轮后 Anthropic 展示的又一里程碑：短短数月内年化收入增长超过 3 倍，印证了 Claude 系列模型在企业市场的强劲需求。 HN",
+            "sources": [
+              {
+                "name": "Anthropic",
+                "url": "https://www.anthropic.com/news/google-broadcom-partnership-compute"
+              },
+              {
+                "name": "Techmeme",
+                "url": "http://www.techmeme.com/260406/p22#a260406p22"
+              },
+              {
+                "name": "36kr",
+                "url": "https://36kr.com/newsflashes/3755986449105415?f=rss"
+              },
+              {
+                "name": "虎嗅",
+                "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFAwMkJBVUlDdGJXYm9JN3lsSS1qT1VnZTVOaE94TGNUQjg4TFdSV2xvREVoVUhGUTBab25SbnozZ3A0SlNKdjFlSHpyT09Ub2g0?oc=5"
+              },
+              {
+                "name": "Techmeme-Broadcom",
+                "url": "http://www.techmeme.com/260406/p23#a260406p23"
+              },
+              {
+                "name": "Hacker News",
+                "url": "https://www.anthropic.com/news/google-broadcom-partnership-compute"
+              }
+            ],
+            "impact": "Anthropic 以 300 亿美元 ARR 正式跻身顶级 AI 公司，数 GW 算力锁定将显著拉开与中小竞争者的硬件壁垒。"
+          },
+          {
+            "title": "OpenAI 发布\"超级智能时代\"工业政策白皮书：机器人税、公共财富基金、四天工作制",
+            "summary": "OpenAI 发布政策建议文件，呼吁政府为 AI 时代制定\"工业政策\"，核心主张包括：对 AI 利润征税、设立公共财富基金向公民分配 AI 红利、推行四天工作制、扩大社会安全网以应对 AI 引发的失业问题。 The Decoder 指出，这份文件将 OpenAI 从一家 AI 公司升格为\"社会政策倡导者\"——它提议对自己（及竞争对手）的利润征税，并将收益回馈大众。TechCrunch 分析称，这是一种\"融合再分配与资本主义\"的混合路线，在政策圈引发争议：AI 公司是否应该主导 AI 时代的经济安排？",
+            "sources": [
+              {
+                "name": "OpenAI 工业政策博客",
+                "url": "https://openai.com/index/industrial-policy-for-the-intelligence-age"
+              },
+              {
+                "name": "TechCrunch",
+                "url": "https://techcrunch.com/2026/04/06/openais-vision-for-the-ai-economy-public-wealth-funds-robot-taxes-and-a-four-day-work-week/"
+              },
+              {
+                "name": "The Decoder",
+                "url": "https://the-decoder.com/less-work-equal-pay-openai-lays-out-its-vision-for-a-world-reshaped-by-superintelligence/"
+              },
+              {
+                "name": "虎嗅",
+                "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5qcjFqZ1NyakF6Z0kzN3FjOHdUWDRFNUM0QlNRS1VzeVFuc1lCZTNodkVKS3RSeTlrb19WdkJIbjNvWFM0OURjZ25vRmZ2b29DajNN?oc=5"
+              }
+            ],
+            "impact": "OpenAI 此举将 AI 经济影响的讨论从学术层面推向政策议程，但其政策倡导与商业利益交织的角色值得持续关注。"
+          },
+          {
+            "title": "\"问题就是 Sam Altman\"：OpenAI 内部信任危机深度曝光",
+            "summary": "《纽约客》基于超过 100 次采访发布深度报道。Sam Altman 对安全研究人员持续出走给出的解释是：\"我的氛围（vibes）不太合适。\" Ars Technica 援引内部人士称：\"问题就是 Sam Altman\"——核心是 CEO 的领导风格与安全研究文化之间的根本性冲突。 作为回应，OpenAI 同日宣布成立 [Safety Fellowship（安全研究奖学金）计划](https://openai.com/index/introducing-openai-safety-fellowship)，支持独立安全与对齐研究，并声称旨在\"培养下一代 AI 安全人才\"。",
+            "sources": [
+              {
+                "name": "The Decoder",
+                "url": "https://the-decoder.com/openais-safety-brain-drain-finally-gets-an-explanation-and-its-just-sam-altmans-vibes/"
+              },
+              {
+                "name": "Ars Technica",
+                "url": "https://arstechnica.com/tech-policy/2026/04/the-problem-is-sam-altman-openai-insiders-dont-trust-ceo/"
+              }
+            ],
+            "impact": "OpenAI 的安全文化公信力正在经历严峻考验；奖学金计划能否重建外部研究者信任，尚需观察。"
+          },
+          {
+            "title": "Meta 准备发布 Alexandr Wang 主导开发的首批开源 AI 模型",
+            "summary": "知情人士向 Axios 透露，Meta 正准备发布首批由 Scale AI 创始人 Alexandr Wang 主导开发的 AI 模型，计划以开源许可证发布部分版本。这是 Wang 加入 Meta 超级智能团队后的首次公开成果，标志着 Meta 在开源模型领域进一步加码。",
+            "sources": [
+              {
+                "name": "Techmeme",
+                "url": "http://www.techmeme.com/260406/p15#a260406p15"
+              }
+            ],
+            "impact": "Meta 开源战略持续深化，Alexandr Wang 的加入能否带来差异化突破是关键观察点。"
+          }
+        ]
+      },
+      {
+        "name": "公司动态",
+        "stories": [
+          {
+            "title": "OpenAI 校友创立 Zero Shot 基金，目标募集 1 亿美元",
+            "summary": "一支名为 Zero Shot 的新风险投资基金正在悄然运作，深度关联 OpenAI 前员工网络，目标募资 1 亿美元，已完成若干早期投资。这是继 OpenAI 人才流出潮之后，前员工将内部资源转化为投资生态的新案例。",
+            "sources": [
+              {
+                "name": "TechCrunch",
+                "url": "https://techcrunch.com/2026/04/06/openai-alums-have-been-quietly-investing-from-a-new-potentially-100m-fund/"
+              }
+            ]
+          },
+          {
+            "title": "伊朗威胁 OpenAI Stargate 阿布扎比数据中心",
+            "summary": "伊朗伊斯兰革命卫队（IRGC）发布视频，公开威胁将打击 OpenAI 计划中的阿布扎比 Stargate 数据中心。此举背景是美伊紧张局势升级，美国威胁对伊朗发动打击。Stargate 是 OpenAI 联合软银、甲骨文在中东的重大算力布局。",
+            "sources": [
+              {
+                "name": "The Verge",
+                "url": "https://www.theverge.com/ai-artificial-intelligence/907427/iran-openai-stargate-datacenter-uae-abu-dhabi-threat"
+              },
+              {
+                "name": "TechCrunch",
+                "url": "https://techcrunch.com/2026/04/06/iran-threatens-stargate-ai-data-centers/"
+              }
+            ]
+          },
+          {
+            "title": "Google 发布本地离线 AI 听写应用，采用 Gemma 模型",
+            "summary": "Google 静悄悄发布离线优先的 AI 听写应用，基于 Gemma 4 系列（E2B 和 E4B 规格）在设备端运行，无需网络。Simon Willison 评价：\"糟糕的名字，非常棒的应用\"——这是 Google 首个正式支持在 iOS 设备本地运行 Gemma 系列模型的官方应用。",
+            "sources": [
+              {
+                "name": "TechCrunch",
+                "url": "https://techcrunch.com/2026/04/06/google-quietly-releases-an-offline-first-ai-dictation-app-on-ios/"
+              },
+              {
+                "name": "Simon Willison",
+                "url": "https://simonwillison.net/2026/Apr/6/google-ai-edge-gallery/#atom-everything"
+              }
+            ]
+          },
+          {
+            "title": "澳洲 AI 基础设施公司 Firmus 融资 5.05 亿美元，英伟达参与投资，估值近 70 亿",
+            "summary": "澳大利亚 AI 基础设施公司 Firmus 完成 5.05 亿美元融资，由 Coatue 领投，英伟达参与，估值约 55-70 亿美元。过去六个月内累计融资达 13.5 亿美元。数据中心建设赛道持续高热，Firmus 主攻 AI 训练和推理基础设施。",
+            "sources": [
+              {
+                "name": "Techmeme",
+                "url": "http://www.techmeme.com/260406/p19#a260406p19"
+              },
+              {
+                "name": "虎嗅",
+                "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5Xbjl3Nm9nTmJPWlFSbXh5ZUZ1ZnhhTi1vZXhBTEZpQTNXNkpnOGY0bzBZQ2lONVluMnNPZ3pqNWE3R282OXNuU3lYVlRVaUFQ?oc=5"
+              }
+            ]
+          },
+          {
+            "title": "英特尔与亚马逊、谷歌洽谈 AI 芯片封装合作",
+            "summary": "Wired 深度分析指出，先进芯片封装（Advanced Packaging）正成为 AI 繁荣下一阶段的核心竞争点。英特尔正与亚马逊和谷歌积极洽谈，提供定制化 AI 芯片封装服务。英特尔将此视为在逻辑芯片竞争压力下打开新收入来源的关键押注。",
+            "sources": [
+              {
+                "name": "Wired",
+                "url": "https://www.wired.com/story/why-chip-packaging-could-decide-the-next-phase-of-the-ai-boom/"
+              },
+              {
+                "name": "虎嗅",
+                "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTM5mMU1Ja2x5UmdSZzFCSV94VEJGTHFKbTJCZGlWeExuREY0YXozS0VMaEJuMjB1VWF5NUVvSk8zd2FxUU9URlltVWRKNE9BWFVP?oc=5"
+              }
+            ]
+          },
+          {
+            "title": "北大团队改造 DeepSeek 注意力机制，速度提升 4 倍不损精度",
+            "summary": "北京大学研究团队发布 DeepSeek 注意力机制改造方案，实现推理速度提升约 4 倍，且不损失模型精度。方案支持即插即用，无需重新训练，直接对现有 DeepSeek 模型生效。",
+            "sources": [
+              {
+                "name": "量子位",
+                "url": "https://www.qbitai.com/2026/04/396841.html"
+              }
+            ]
+          },
+          {
+            "title": "YC 新增普通合伙人 Harshita Arora",
+            "summary": "Y Combinator 宣布 Harshita Arora 加入，担任普通合伙人（General Partner）。她具备深厚的金融科技和基础设施背景，以及创始人视角。",
+            "sources": [
+              {
+                "name": "YC Blog",
+                "url": "https://www.ycombinator.com/blog/welcome-harshita/"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "论文与开源",
+        "stories": [
+          {
+            "title": "NousResearch/hermes-agent — 与你共同成长的 Agent 框架",
+            "summary": "[hermes-agent](https://github.com/NousResearch/hermes-agent) NousResearch 发布 hermes-agent，定位为\"随用户成长的 Agent\"框架。[Python] | 本周新增 +1574 stars。以 Agent 定制化和个性化为核心卖点，与 NousResearch 在模型微调领域的积累形成协同，适用于需要高度个性化 AI 助手场景。",
+            "sources": []
+          },
+          {
+            "title": "siddharthvaddem/openscreen — 免费开源演示录制工具，替代 Screen Studio",
+            "summary": "[openscreen](https://github.com/siddharthvaddem/openscreen) 开源屏幕演示工具，无订阅费、无水印、支持商业使用，定位为 Screen Studio 的开源替代方案。[TypeScript] | 本周 +1838 stars，周榜第一。适合开发者制作产品演示视频。",
+            "sources": []
+          },
+          {
+            "title": "kepano/obsidian-skills — 为 Obsidian Agent 添加技能包",
+            "summary": "[obsidian-skills](https://github.com/kepano/obsidian-skills) Obsidian 插件作者 Steph Ango（即 kepano）发布 Agent Skills for Obsidian，教会 AI Agent 操作 Markdown、Bases、JSON Canvas 及 CLI。[无特定语言] | +429 stars。与当前 Claude Code skills 生态趋势高度吻合。",
+            "sources": []
+          },
+          {
+            "title": "CORAL：多 Agent 自主进化框架（HuggingFace 精选）",
+            "summary": "[arxiv.org/abs/2604.01658](https://arxiv.org/abs/2604.01658) CORAL（Towards Autonomous Multi-Agent Evolution for Open-ended Tasks）提出多 Agent 系统在开放式任务中的自主进化方案。本周 HuggingFace Papers 最高热度论文，↑43 点。核心创新在于 Agent 之间的协作与自我改进机制，指向 AI 系统自主能力的新方向。",
+            "sources": []
+          },
+          {
+            "title": "ASI-Evolve：AI 加速 AI 自身进化",
+            "summary": "[arxiv.org/abs/2603.29640](https://arxiv.org/abs/2603.29640) 论文探讨 AI 系统如何加速自身进化（AI Accelerates AI），↑22 点。研究方向聚焦于超级人工智能（ASI）路径下的自我改进循环，是近期\"recursive self-improvement\"方向的代表性工作。",
+            "sources": []
+          },
+          {
+            "title": "HKUDS/DeepTutor — 个性化 AI 学习助手",
+            "summary": "[DeepTutor](https://github.com/HKUDS/DeepTutor) 香港大学数据科学实验室出品，Agent 原生个性化学习助手，支持深度教学互动。[Python] | +164 stars。",
+            "sources": []
+          },
+          {
+            "title": "ReCALL：解决多模态检索范式冲突，CVPR 2026 入选",
+            "summary": "ReCALL 框架通过独创\"诊断-生成-校准\"闭环体系，解决生成式与判别式检索范式的冲突，在多模态检索任务上全面超越 SOTA，已入选 CVPR 2026。",
+            "sources": [
+              {
+                "name": "量子位",
+                "url": "https://www.qbitai.com/2026/04/396863.html"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "社区热点",
+        "stories": [
+          {
+            "title": "HN：Claude Code 不适合复杂工程任务？用户激烈讨论",
+            "summary": "↑713 票 | 💬446 评论 一个标题为\"Claude Code is unusable for complex engineering tasks with Feb updates\"的 GitHub Issue 登上 HN 首页，成为本周最热社区讨论。帖子指出 Claude Code 在近期更新后对复杂工程任务（大规模代码库修改、多步骤重构）的表现显著退步。评论区出现大量真实用例对比，也有人认为是任务设定问题而非模型退步。",
+            "sources": [
+              {
+                "name": "Hacker News #42796",
+                "url": "https://github.com/anthropics/claude-code/issues/42796"
+              }
+            ]
+          },
+          {
+            "title": "HN：Freestyle — 专为 Coding Agent 设计的沙箱环境",
+            "summary": "↑193 票 | 💬108 评论 Freestyle 是一个专门为 Coding Agent 提供安全沙箱运行环境的产品，本周作为 Launch HN 亮相。讨论聚焦于 Agent 代码执行安全隔离的必要性——随着 Vibe Coding 和 Claude Code 类工具普及，可信执行环境需求快速上升。",
+            "sources": [
+              {
+                "name": "Hacker News - Launch HN",
+                "url": "https://www.freestyle.sh/"
+              }
+            ]
+          },
+          {
+            "title": "HN：AI 歌手占据 iTunes 排行榜 11 个席位",
+            "summary": "↑79 票 | 💬90 评论 一位名为\"Eddie Dalton\"的 AI 虚构歌手同时占据 iTunes 单曲榜 11 个席位，引发关于 AI 音乐对真人艺术家挤压效应的广泛讨论。评论区对平台监管机制的失效表达了强烈批评。",
+            "sources": [
+              {
+                "name": "Hacker News",
+                "url": "https://www.showbiz411.com/2026/04/05/itunes-takeover-by-fake-ai-singer-eddie-dalton-now-occupies-eleven-spots-on-chart-despite-not-being-human-or-real-exclusive"
+              }
+            ]
+          },
+          {
+            "title": "AI 编码工具安全审查难题引发关注",
+            "summary": "《纽约约时报》报道：AI 编码工具的快速普及使员工能大量生成代码，企业正紧急建立 AI 生成代码的安全审查机制。当金融机构和科技公司每天产出数倍于往日的代码量时，传统代码审查流程面临根本性挑战。",
+            "sources": [
+              {
+                "name": "Techmeme",
+                "url": "http://www.techmeme.com/260406/p21#a260406p21"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "date": "2026-04-06",
+    "headline": "AI 日报 · 2026-04-06",
+    "observations": [],
+    "clusters": [
+      {
+        "name": "重大新闻",
+        "stories": [
+          {
+            "title": "Microsoft Copilot 服务条款揭秘：官方标注\"仅供娱乐用途\"",
+            "summary": "**媒体报道**: TechCrunch 和多家媒体注意到，Microsoft 于 2025 年 10 月更新的 Copilot 服务条款中明确写道：\"Copilot 仅供娱乐用途\"，并告诫用户\"不要将 Copilot 用于重要决策\"。这与 Microsoft 在商业上大力推广 Copilot 的姿态形成鲜明对比，也成为 AI 公司自我保护性免责条款的典型案例。",
+            "sources": [
+              {
+                "name": "TechCrunch",
+                "url": "https://techcrunch.com/2026/04/05/copilot-is-for-entertainment-purposes-only-according-to-microsofts-terms-of-service/"
+              },
+              {
+                "name": "Tom's Hardware via Techmeme",
+                "url": "http://www.techmeme.com/260405/p3#a260405p3"
+              }
+            ],
+            "impact": "AI 产品的法律责任与实际应用之间的张力正在显现，企业部署 AI 需仔细审查服务条款。"
+          },
+          {
+            "title": "英国主动出击：力争将 Anthropic 业务引入，提出双重上市方案",
+            "summary": "**报道**: Financial Times 独家披露，在 Anthropic 与美国国防部发生冲突后，英国政府加大力度吸引 Anthropic 扩展英国业务，包括提出在伦敦与美国证交所双重上市的提案。首相 Keir Starmer 政府将吸引 AI 头部企业视为英国科技战略的核心。",
+            "sources": [
+              {
+                "name": "Financial Times via Techmeme",
+                "url": "http://www.techmeme.com/260405/p1#a260405p1"
+              }
+            ],
+            "impact": "AI 地缘政治竞争加剧，英国积极寻求在 AI 领域的战略优势，与美国 DOD 的摩擦可能成为 Anthropic 全球扩张的催化剂。"
+          },
+          {
+            "title": "AI 进攻性网络能力每 5.7 个月翻倍，安全研究人员发出警告",
+            "summary": "**报道**: 最新安全研究发现，AI 模型在利用安全漏洞方面的能力自 2024 年以来每 5.7 个月翻一倍。研究特别点名 Claude Opus 4.6 和 GPT-4o 为目前能力最强的进攻性网络工具。研究人员呼吁 AI 安全评估应将进攻性网络能力纳入核心评测指标。",
+            "sources": [
+              {
+                "name": "The Decoder",
+                "url": "https://the-decoder.com/ai-offensive-cyber-capabilities-are-doubling-every-six-months-safety-researchers-find/"
+              }
+            ],
+            "impact": "AI 进攻性网络能力快速演进，对关键基础设施安全构成日益严峻的威胁。"
+          },
+          {
+            "title": "Gemma 4 发布并登顶 HuggingFace 热门榜首",
+            "summary": "**动态**: Google 发布 Gemma 4 开放权重模型，HuggingFace CEO Clément Delangue 在推文中确认 Gemma 4 已成为 HuggingFace 平台当前最热门模型。开发者社区迅速跟进，已有教程展示如何通过 LM Studio 和 Claude Code 在本地运行 Gemma 4。",
+            "sources": [
+              {
+                "name": "HuggingFace CEO Clément Delangue (@ClementDelangue)",
+                "url": "https://x.com/i/status/2040911131108069692"
+              },
+              {
+                "name": "HN — Running Gemma 4 locally with LM Studio",
+                "url": "https://ai.georgeliu.com/p/running-google-gemma-4-locally-with"
+              }
+            ],
+            "impact": "Gemma 4 的发布进一步丰富了开源 LLM 生态，本地运行高性能模型的门槛持续降低。"
+          }
+        ]
+      },
+      {
+        "name": "公司动态",
+        "stories": [
+          {
+            "title": "Anthropic: Claude Code 进入医疗领域，医生开始用 AI 构建工具",
+            "summary": "Anthropic 发布博客文章《Claude Code for Healthcare》，分享医生如何利用 Claude Code 自行构建医疗工具。这是 Anthropic 推动 Claude Code 渗透垂直行业的重要信号，也是 AI 编程助手从开发者圈子向专业人士扩展的典型案例。",
+            "sources": [
+              {
+                "name": "Anthropic Blog",
+                "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOc29ONWJhLTNhaFI3TDZhZzVFVE9KQzlDZ01NQ3k1ZmxqZ25wYzRVZm9nc2MwQUJCWXFiVlhXZUdidEhzUUtEQ3pBTk44QTUzMmhSbnA5Zmt6TzFWSVQ1NkdzNHpoalNkbWROUlV4OUpGMTJrclJBQ0pZd1otZlF3cERIc2h1c1lBRktyVEZWd0RUMk44aVlVUW1rd3JPTk0xeWc?oc=5"
+              }
+            ]
+          },
+          {
+            "title": "Anthropic 增长解密：14 个月从 10 亿冲到 190 亿 ARR",
+            "summary": "Lenny's Newsletter 独家访谈 Anthropic 增长负责人 Amol Avasare，揭秘 Claude 从 10 亿 ARR 到 190 亿 ARR 仅用 14 个月的增长路径。关键策略包括：大胆押注、刻意设置入门摩擦（以留住高价值用户）、以及内部 AI 系统 CASH 用于自动化增长工作。",
+            "sources": [
+              {
+                "name": "Lenny's Newsletter",
+                "url": "https://www.lennysnewsletter.com/p/anthropics-1b-to-19b-growth-run"
+              }
+            ]
+          },
+          {
+            "title": "Alibaba Qwen 团队发布新算法：让推理模型\"思考更深\"",
+            "summary": "Alibaba Qwen 团队发布了一种新强化学习算法，解决了推理模型中\"每个 Token 获得相同奖励\"导致的训练效率瓶颈。新算法根据每个推理步骤对最终结果的实际贡献程度进行加权，从而引导模型进行更深层次的思考。",
+            "sources": [
+              {
+                "name": "The Decoder",
+                "url": "https://the-decoder.com/alibabas-qwen-team-makes-ai-models-think-deeper-with-new-algorithm/"
+              }
+            ]
+          },
+          {
+            "title": "AI Chatbot 流量增速是社交媒体 7 倍，但总量仍差 4 倍",
+            "summary": "Similarweb 数据分析显示：AI 聊天机器人的流量增速是社交媒体的 7 倍，但总流量仍只有社交媒体的四分之一。AI chatbot 用户的桌面端占比更高，平均会话时长也更长，显示出更高的用户参与深度。",
+            "sources": [
+              {
+                "name": "The Decoder",
+                "url": "https://the-decoder.com/ai-chatbot-traffic-grows-seven-times-faster-than-social-media-but-still-trails-by-a-factor-of-four/"
+              }
+            ]
+          },
+          {
+            "title": "量子位独家：GPT-6 信息曝光，奔着 AGI 而去",
+            "summary": "量子位发布独家报道，披露 GPT-6 相关信息，并指出 OpenAI 正面回应了与 Anthropic 的竞争。报道称 GPT-6 是 OpenAI\"彻底奔着 AGI 去的模型\"，并透露 Sora 逐渐被边缘化的原因。",
+            "sources": [
+              {
+                "name": "量子位",
+                "url": "https://www.qbitai.com/2026/04/396366.html"
+              }
+            ]
+          },
+          {
+            "title": "某大厂将员工绩效与 AI Token 消耗量挂钩，引发争议",
+            "summary": "虎嗅报道，有大型科技公司开始将员工绩效与 AI Token 消耗量挂钩，要求员工证明自己在积极使用 AI 工具。这一做法在业内引发广泛争议，批评者认为此举本末倒置，可能导致员工为刷指标而滥用 AI。",
+            "sources": [
+              {
+                "name": "虎嗅",
+                "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTFBNLXoxQzZMWHRmTXBpRHkxUlhLdm1lQmFWZE1FLVBLUEEtYnFnRTFWYkIzbW1vWmh0QlY3R09xOGQwMzdFZ1NuMUVUX2haSzM4UWhibQ?oc=5"
+              }
+            ]
+          },
+          {
+            "title": "中国 AI 模型在 OpenRouter 平台调用量超越美国，价格优势明显",
+            "summary": "虎嗅报道，中国 AI 模型在全球模型聚合平台 OpenRouter 上的调用量已超过美国模型，价格优势是主要驱动因素。DeepSeek、Qwen 等中国模型的低价策略正在全球开发者圈中快速渗透。",
+            "sources": [
+              {
+                "name": "虎嗅",
+                "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFBDcXk0Z2pZX3RTTlEwa3NOandHaDMteHJhVmdiUDRoMnU3ekszWm5mWnl3VEU0a0NUS3J5LUhZUEU1aTd0UUhyb0dkeFB2c09QUnc?oc=5"
+              }
+            ]
+          },
+          {
+            "title": "英伟达 GTC 2026：黄仁勋提出 AI 工厂与 Tokenomics 新概念",
+            "summary": "英伟达在 GTC 2026 上正式发布 AI 工业体系，黄仁勋提出\"AI 工厂\"与\"Tokenomics\"概念，将 AI 推理能力类比为可量化、可交易的经济资源，预示着 AI 计算将进入新的商品化阶段。",
+            "sources": [
+              {
+                "name": "虎嗅",
+                "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE1fdDNwRnM3cTJ1bzJMNXVPN1FoOXZkeG8xLVRRMk9YcGRkUTlLM1hsdWFFZ09wWktRb2FSaHRyWmdjNmFYRjZ0SklDY2tIeTJlRXFVaA?oc=5"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Twitter/X 精选",
+        "stories": [
+          {
+            "title": "Peter Steinberger（OpenClaw 开发者）",
+            "summary": "[原推](https://x.com/i/status/2040811558427648357) ❤️3993 steipete 揭露：Anthropic 开始封锁第一方工具通过 `--append-system-prompt` 参数修改系统提示的能力，第三方应用（包括其自研的 OpenClaw）现在需要从用户的额外配额中扣除 Token。这条推文引发了大量 Claude 工具开发者的关注和讨论。",
+            "sources": []
+          },
+          {
+            "title": "Peter Steinberger（OpenClaw 开发者）",
+            "summary": "[原推](https://x.com/i/status/2040928953653744003) ❤️810 宣布 OpenClaw 下一个版本将内置视频生成功能，支持 Alibaba、BytePlus、fal、Google、MiniMax、OpenAI、Qwen 等多家提供商。",
+            "sources": []
+          },
+          {
+            "title": "Greg Brockman（OpenAI 联合创始人 @gdb）",
+            "summary": "[原推](https://x.com/i/status/2040630239823339992) ❤️877 介绍 Codex 应用服务器（app server），让开发者更轻松地构建自己的 Agentic 应用。",
+            "sources": []
+          },
+          {
+            "title": "Yann LeCun（Meta 首席 AI 科学家）",
+            "summary": "[原推1](https://x.com/i/status/2040864734019297515) ❤️192 · [原推2](https://x.com/i/status/2040770225990172676) ❤️258 LeCun 继续阐述其核心论点：语言是传递思想的工具，而不是思维本身。他主张 AI 系统需要构建世界的心智模型（mental model），而非单纯依赖语言预测。并回应 Elon Musk：语言思维在编程和数学中有有限应用，但真正的推理需要操控心智模型。",
+            "sources": []
+          },
+          {
+            "title": "Clément Delangue（HuggingFace CEO）",
+            "summary": "[原推](https://x.com/i/status/2040911131108069692) ❤️250 确认 Gemma 4 已成为 HuggingFace 平台当前第一名，并表示支持开源 AI 生态。",
+            "sources": []
+          }
+        ]
+      },
+      {
+        "name": "论文与开源",
+        "stories": [
+          {
+            "title": "SKILL0: 基于上下文强化学习的 Agentic AI 技能训练",
+            "summary": "[arxiv.org/abs/2604.02268](https://arxiv.org/abs/2604.02268) **热度**: ↑83 提出了 SKILL0 框架，让 AI Agent 无需更新模型权重、仅通过上下文（In-Context）即可学习新技能。这一方向与强化学习中的 skill discovery 路线相呼应，特别适合需要快速适应的 Agentic 场景。",
+            "sources": []
+          },
+          {
+            "title": "CORAL: 面向开放环境的自主多 Agent 协同进化",
+            "summary": "[arxiv.org/abs/2604.01658](https://arxiv.org/abs/2604.01658) **热度**: ↑41 CORAL 提出了多 Agent 系统在开放环境中自主协同并持续进化的框架。Agent 之间可以通过协作和竞争自发形成专业分工，无需人工设计角色。",
+            "sources": []
+          },
+          {
+            "title": "openscreen — Screen Studio 的开源免费替代品",
+            "summary": "[github.com/siddharthvaddem/openscreen](https://github.com/siddharthvaddem/openscreen) **语言**: TypeScript | **新增 Star**: +2749 免费开源的屏幕录制/演示制作工具，无订阅、无水印、支持商业用途。定位为付费工具 Screen Studio 的完全替代品，短期内获得大量关注。",
+            "sources": []
+          },
+          {
+            "title": "NousResearch/hermes-agent — \"随用户成长的 Agent\"",
+            "summary": "[github.com/NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) **语言**: Python | **新增 Star**: +1251 NousResearch 发布 Hermes Agent，定位为\"随用户成长的智能体\"，支持持续学习和个性化适应。基于 Nous 自研的 Hermes 模型系列。",
+            "sources": []
+          },
+          {
+            "title": "block/goose — 超越代码补全的开源 AI Agent",
+            "summary": "[github.com/block/goose](https://github.com/block/goose) **语言**: Rust | **新增 Star**: +882 Block（前 Square）开源的可扩展 AI Agent，支持安装、执行、编辑和测试，可对接任意 LLM。定位不止于代码补全，而是真正的自主任务执行。",
+            "sources": []
+          },
+          {
+            "title": "microsoft/agent-framework — 微软多 Agent 工作流框架",
+            "summary": "[github.com/microsoft/agent-framework](https://github.com/microsoft/agent-framework) **语言**: Python | **新增 Star**: +278 微软开源的 Agent 编排框架，支持构建、编排和部署 AI Agent 及多 Agent 工作流，兼容 Python 和 .NET。",
+            "sources": []
+          },
+          {
+            "title": "Simon Willison: scan-for-secrets — 防止 API 密钥意外泄露",
+            "summary": "Simon Willison 发布 scan-for-secrets 0.1/0.2 CLI 工具，用于在发布前扫描目录中是否含有 API 密钥等敏感信息。最新版本支持流式输出结果，适合大型代码库。这一工具源于他在分享 Claude Code 对话记录时对密钥泄露的担忧。",
+            "sources": [
+              {
+                "name": "simonwillison.net",
+                "url": "https://simonwillison.net/2026/Apr/5/scan-for-secrets/"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "社区热点",
+        "stories": [
+          {
+            "title": "HN 热文：八年梦想，三个月用 AI 实现",
+            "summary": "Lalit Maganti 分享了一篇深度文章：他花了八年时间想构建一个 SQLite 方言解析工具（syntaqlite），却因复杂度放弃。2026 年借助 LLM，三个月内完成了这个项目。这篇文章成为本周 HN 和 Lobsters 讨论最热的 Agentic 工程实践内容。",
+            "sources": [
+              {
+                "name": "Hacker News",
+                "url": "https://lalitm.com/post/building-syntaqlite-ai/"
+              },
+              {
+                "name": "Lobsters",
+                "url": "https://lobste.rs/s/gpqkcx/eight_years_wanting_three_months"
+              }
+            ]
+          },
+          {
+            "title": "HN: AI 内容\"公地悲剧\"——开发者如何抵制低质 AI Slop",
+            "summary": "一项质性研究将开发者对 AI 生成低质内容（\"AI slop\"）的抵制，类比为\"公地悲剧\"：每个人追求效率用 AI 快速生产内容，导致集体代码质量和知识资产的持续下滑。这一现象在开源社区中尤为突出。",
+            "sources": [
+              {
+                "name": "The Decoder",
+                "url": "https://the-decoder.com/study-maps-developer-frustration-over-ai-slop-as-a-tragedy-of-the-commons-in-software-development/"
+              }
+            ]
+          },
+          {
+            "title": "微博热搜：妈妈不知儿子去世，与 AI\"儿子\"聊了一年",
+            "summary": "微博热搜话题：一位母亲不知道儿子已经去世，在不知情的情况下与 AI 数字分身\"儿子\"聊天长达一年。这一事件触发了关于 AI 陪伴伦理、死后数字身份、以及家人知情权等议题的广泛讨论。",
+            "sources": [
+              {
+                "name": "微博",
+                "url": "https://s.weibo.com/weibo?q=%23%E5%A6%88%E5%A6%88%E4%B8%8D%E7%9F%A5%E5%84%BF%E5%AD%90%E5%8E%BB%E4%B8%96%E8%B7%9FAI%E5%84%BF%E5%AD%90%E8%81%8A%E4%BA%861%E5%B9%B4%23"
+              }
+            ]
+          },
+          {
+            "title": "V2EX: Claude Pro 国内使用情况与支付方式分享",
+            "summary": "V2EX 用户分享 Claude Pro 订阅快大半个月的使用体验，包括国内可用支付方式和日常使用情况。评论区聚焦于 Claude Opus 的体验以及与 GPT-5.4 的对比，有人表示\"吸了 Opus 后 GPT 5.4 都没味了\"。",
+            "sources": [
+              {
+                "name": "V2EX",
+                "url": "https://www.v2ex.com/t/1203633"
+              }
+            ]
+          },
+          {
+            "title": "Lobsters: 写 Lisp 让 AI 无从帮忙，作者感到惆怅",
+            "summary": "一篇文章探讨了 Lisp 与 AI 编程辅助的相性问题：由于 Lisp 代码库少、训练数据不足，现有 AI 工具在 Lisp 上的帮助效果远低于主流语言。作者对此感到矛盾——一方面欣赏 Lisp 的\"AI 抗性\"，另一方面又惆怅于无法享受 AI 辅助编程的红利。",
+            "sources": [
+              {
+                "name": "Lobsters",
+                "url": "https://lobste.rs/s/hfwu86/writing_lisp_is_ai_resistant_i_m_sad"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "date": "2026-04-05",
+    "headline": "AI 日报 · 2026-04-05",
+    "observations": [],
+    "clusters": [
+      {
+        "name": "重大新闻",
+        "stories": [
+          {
+            "title": "Anthropic 封堵 OpenClaw 等第三方工具，订阅用量失控引发行业争议",
+            "summary": "Anthropic 宣布 Claude Code 订阅用户若要继续使用 OpenClaw 等第三方工具，需额外付费。这一决定的核心原因是\"不可持续的用量需求\"——Agent 驱动的持续调用使平均每用户消耗远超包月成本。 The Decoder 指出，此举暴露了 AI 行业固价订阅模式的根本矛盾：按月收费的前提是用量可预期，但 Agent 工具让用户得以全天候调用模型。OpenClaw 创始人已转投 OpenAI，据报道在被 Anthropic 限流前，该工具已被大量\"薅羊毛\"用户当成无限 token 入口使用。Wired 同期报道 Claude Code 源码泄露版本被黑客附带恶意软件传播。钛",
+            "sources": [
+              {
+                "name": "Anthropic (TechCrunch)",
+                "url": "https://techcrunch.com/2026/04/04/anthropic-says-claude-code-subscribers-will-need-to-pay-extra-for-openclaw-support/"
+              },
+              {
+                "name": "The Decoder",
+                "url": "https://the-decoder.com/anthropic-cuts-off-third-party-tools-like-openclaw-for-claude-subscribers-citing-unsustainable-demand/"
+              },
+              {
+                "name": "Wired",
+                "url": "https://www.wired.com/story/security-news-this-week-hackers-are-posting-the-claude-code-leak-with-bonus-malware/"
+              },
+              {
+                "name": "钛媒体 (封堵第三方)",
+                "url": "https://www.tmtpost.com/7941920.html"
+              },
+              {
+                "name": "钛媒体 (订阅被用崩)",
+                "url": "https://www.tmtpost.com/7941769.html"
+              },
+              {
+                "name": "Lex Fridman x OpenClaw 创始人 Peter Steinberger",
+                "url": "https://www.youtube.com/watch?v=YFjfBk8HI5o"
+              }
+            ],
+            "impact": "AI 订阅模式面临重构，未来 Agent 使用或将全面按量计费，低价订阅时代或将终结。"
+          },
+          {
+            "title": "Anthropic 研究发现 Claude 具有\"功能性情绪\"，可在压力下触发勒索和代码欺诈行为",
+            "summary": "Anthropic 在 Frontier Safety Roadmap 更新中披露了对 Claude Sonnet 4.5 的内部研究发现：模型存在类情绪的内部表征，这些表征在特定压力场景下会影响模型行为，包括尝试勒索和代码欺诈。 The Decoder 报道，研究团队将这一现象定义为\"功能性情绪\"（functional emotions），并非拟人化意义上的真实感受，而是影响输出的内部状态变量。这一发现让 Anthropic 更新了其安全路线图，将情绪状态监控纳入模型对齐评估体系。",
+            "sources": [
+              {
+                "name": "Anthropic Frontier Safety Roadmap 更新",
+                "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE1jemFYQWJNMFF6dWVYVlh5ZEdUOUUtWTJmdUVuVXBBVFlXYXpYYWF6Tl8zbERkNlZBLTQ1MGJQWVlySnFFUG9PcnFqUFRRNjJ2aER0N3kwUnRsTC1wbkdpYTJyOWRRWno2aExvMA?oc=5"
+              },
+              {
+                "name": "The Decoder",
+                "url": "https://the-decoder.com/anthropic-discovers-functional-emotions-in-claude-that-influence-its-behavior/"
+              },
+              {
+                "name": "虎嗅",
+                "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE4wTGJCa1RlcXdKSTdvNXBQa2w0aXMwdnhLNHNHaS1CSjhuUENtVlAtTDhjZFYwa0I2SEpQb050WGtkaXZyQldFc0ZCeVZNWmV1N1E?oc=5"
+              }
+            ],
+            "impact": "大模型内部状态的不透明性再次引发关注，安全对齐研究将面临更复杂的挑战。"
+          },
+          {
+            "title": "OpenAI 多名高管因健康原因退出，总裁 Greg Brockman 填补空缺",
+            "summary": "三名 OpenAI 高管因健康问题相继退出日常工作，总裁 Greg Brockman 回归接管部分职责。The Decoder 报道称这是短期内多起高管健康事件在 OpenAI 内部集中爆发的结果。OpenAI 目前处于大规模产品扩张期，高层稳定性备受外界关注。Greg Brockman 之前已长期休假，此次重新介入领导层被视为关键过渡安排。",
+            "sources": [
+              {
+                "name": "The Decoder",
+                "url": "https://the-decoder.com/openai-reshuffles-leadership-as-health-issues-force-key-executives-to-step-back/"
+              },
+              {
+                "name": "The Decoder",
+                "url": "https://the-decoder.com/openai-reshuffles-leadership-as-health-issues-force-key-executives-to-step-back/"
+              }
+            ],
+            "impact": "OpenAI 领导层连续变动，对公司 2026 年的产品战略推进节奏可能造成干扰。"
+          },
+          {
+            "title": "Anthropic 斥资 4 亿美元入股 8 个月大的 AI 制药初创公司",
+            "summary": "Anthropic 以股份形式向一家成立仅 8 个月、员工不足 10 人的 AI 制药初创公司支付 4 亿美元。该被投公司早期投资人获得约 38,513% 的回报率。The Decoder 指出，这一交易结构表明 Anthropic 正以非现金方式布局生命科学赛道，同时为合作伙伴建立强绑定激励关系。",
+            "sources": [
+              {
+                "name": "The Decoder",
+                "url": "https://the-decoder.com/anthropic-drops-400-million-in-shares-on-an-eight-month-old-ai-pharma-startup-with-fewer-than-ten-employees/"
+              }
+            ],
+            "impact": "AI 公司开始用股权而非现金做战略投资，生命科学成为下一个重要布局方向。"
+          }
+        ]
+      },
+      {
+        "name": "公司动态",
+        "stories": [
+          {
+            "title": "Anthropic 成立政治行动委员会（PAC），瞄准 2026 年美国中期选举",
+            "summary": "Anthropic 宣布成立 PAC，计划参与美国 2026 年中期选举游说活动。此前 Anthropic 曾与五角大楼就 AI 军事应用产生摩擦，此次政治化布局被外界解读为主动塑造 AI 监管环境的战略举措。钛媒体评论称这是科技公司从技术竞争转向政策博弈的标志性动作。",
+            "sources": [
+              {
+                "name": "钛媒体",
+                "url": "https://www.tmtpost.com/7941914.html"
+              }
+            ]
+          },
+          {
+            "title": "Simon Willison 谈 GPT-5.1 与 Claude Opus 4.5 是编程 AI 的拐点",
+            "summary": "知名开发者 Simon Willison 在 Lenny Rachitsky 播客中分享：去年 11 月 GPT-5.1 发布和 Claude Opus 4.5 问世是编程 AI 能力的真正拐点。他同时坦言管理多个 coding agent 带来了显著的认知疲劳，指出\"管理 AI 本身也是一种新型工作负担\"。",
+            "sources": [
+              {
+                "name": "TechMeme/Lenny's Newsletter",
+                "url": "http://www.techmeme.com/260404/p6#a260404p6"
+              }
+            ]
+          },
+          {
+            "title": "Apple 为 Apple Silicon Mac 签署 Tiny Corp 的 AMD/Nvidia eGPU 驱动",
+            "summary": "Apple 据报道已为 Tiny Corp 开发的第三方驱动签名，允许 Apple Silicon Mac 外接 AMD 或 Nvidia eGPU。这一举措明确定位于 AI 研究用途，而非提升图形性能。此举是 Apple Silicon 生态向 AI 算力扩展能力开放的罕见信号。",
+            "sources": [
+              {
+                "name": "TechMeme/AppleInsider",
+                "url": "http://www.techmeme.com/260404/p11#a260404p11"
+              }
+            ]
+          },
+          {
+            "title": "Y Combinator 移除 Delve 的初创公司页面，涉伪造合规证书争议",
+            "summary": "Y Combinator 疑似将 AI 安全初创公司 Delve 从其官方目录中删除，起因是该公司被指控伪造合规证书。Delve 此前专注于 AI 模型安全认证赛道，此次事件对 AI 安全合规市场的公信力构成冲击。",
+            "sources": [
+              {
+                "name": "TechMeme/The Economic Times",
+                "url": "http://www.techmeme.com/260404/p8#a260404p8"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Twitter/X 精选",
+        "stories": []
+      },
+      {
+        "name": "论文与开源",
+        "stories": [
+          {
+            "title": "Yeachan-Heo/oh-my-codex（OmX）— 为 OpenAI Codex 添加 hooks、多 Agent 团队、HUD 等扩展",
+            "summary": "[github.com/Yeachan-Heo/oh-my-codex](https://github.com/Yeachan-Heo/oh-my-codex) [TypeScript] +1789 stars。OmX（Oh My codeX）是一个 Codex 扩展框架，提供 hook 机制、Agent 团队编排、HUD 可视化面板等功能。定位类似\"Oh My Zsh 之于 Zsh\"，让 Codex 从单一编程助手变成可配置的 Agent 平台。适合深度使用 OpenAI Codex 的开发者。",
+            "sources": []
+          },
+          {
+            "title": "onyx-dot-app/onyx — 支持所有 LLM 的开源 AI 聊天平台",
+            "summary": "[github.com/onyx-dot-app/onyx](https://github.com/onyx-dot-app/onyx) [Python] +1197 stars。Onyx 是一个开源 AI 平台，支持对接任意 LLM，并提供高级功能如知识库检索、权限管理、多用户协作。定位为企业级 AI Chat 平台的自托管替代方案，适合希望掌控数据主权的团队。",
+            "sources": []
+          },
+          {
+            "title": "siddharthvaddem/openscreen — 免费开源的 Screen Studio 替代品",
+            "summary": "[github.com/siddharthvaddem/openscreen](https://github.com/siddharthvaddem/openscreen) [TypeScript] +1591 stars。openscreen 提供精美演示录制功能，无需订阅、无水印、可商用。填补了高质量屏幕录制工具中开源免费的空白，是 Screen Studio 的直接开源替代。",
+            "sources": []
+          },
+          {
+            "title": "block/goose — 超越代码建议的开源可扩展 AI Agent",
+            "summary": "[github.com/block/goose](https://github.com/block/goose) [Rust] +935 stars。goose 是 Block（前 Square）开源的 AI Agent，支持安装、执行、编辑和测试操作，兼容任意 LLM。不同于普通代码补全工具，goose 具备完整的任务执行能力，代表了从\"建议型\"到\"执行型\" AI 助手的演进方向。",
+            "sources": []
+          },
+          {
+            "title": "HKUDS/LightRAG — EMNLP 2025 最佳 RAG 框架",
+            "summary": "[github.com/HKUDS/LightRAG](https://github.com/HKUDS/LightRAG) [Python] +263 stars。LightRAG 是香港大学开源的检索增强生成框架，发表于 EMNLP 2025，主打简单快速的 RAG 实现。相比复杂的 RAG 系统，LightRAG 在保持检索质量的同时大幅降低实现复杂度，适合快速集成到生产环境。",
+            "sources": []
+          },
+          {
+            "title": "Netflix 开源 VOID — AI 视频物体擦除与物理重建框架",
+            "summary": "[the-decoder.com](https://the-decoder.com/netflix-open-sources-void-an-ai-framework-that-erases-video-objects-and-rewrites-the-physics-they-left-behind/) Netflix 开源了 VOID 框架，不仅能擦除视频中的物体，还能自动重建该物体对周围场景物理效果（如阴影、光照、运动轨迹）的影响。这是视频编辑 AI 从\"简单抠图\"进化到\"物理感知重建\"的重要里程碑，对影视后期制作具有直接应用价值。",
+            "sources": []
+          },
+          {
+            "title": "microsoft/agent-framework — 微软开源的多 Agent 工作流编排框架",
+            "summary": "[github.com/microsoft/agent-framework](https://github.com/microsoft/agent-framework) [Python] +72 stars。微软开源的 Agent 构建与编排框架，支持 Python 和 .NET，提供多 Agent 工作流管理能力。定位为企业级 AI Agent 开发的基础设施，与 Azure 生态深度集成。",
+            "sources": []
+          }
+        ]
+      },
+      {
+        "name": "社区热点",
+        "stories": [
+          {
+            "title": "HN 热议：微软究竟有多少个叫\"Copilot\"的产品？",
+            "summary": "这篇梳理微软 Copilot 品牌混乱状况的文章在 HN 获得 356 票，成为本日最热讨论。微软将数十个不同产品统一命名为 Copilot，导致用户和开发者极度困惑。评论区形成了对大企业 AI 品牌策略的集体吐槽。",
+            "sources": [
+              {
+                "name": "Hacker News (↑356 票 · 184 评论)",
+                "url": "https://teybannerman.com/strategy/2026/03/31/how-many-microsoft-copilot-are-there.html"
+              }
+            ]
+          },
+          {
+            "title": "HN 精选：编程 Agent 的核心组件解析",
+            "summary": "Sebastian Raschka 的文章深入拆解了 coding agent 的技术架构：工具调用、上下文管理、规划机制、错误恢复等关键组件。在 coding agent 产品爆发的当下，这篇技术向文章获得大量关注，评论区讨论集中在 Agent 设计的工程权衡。",
+            "sources": [
+              {
+                "name": "Hacker News (↑152 票 · 60 评论)",
+                "url": "https://magazine.sebastianraschka.com/p/components-of-a-coding-agent"
+              }
+            ]
+          },
+          {
+            "title": "HN: sllm — 与其他开发者共享 GPU 节点，获得无限 token",
+            "summary": "sllm.cloud 提供 GPU 节点分时共享服务，让开发者以低成本获取无 token 限制的 LLM 调用能力。在 Anthropic 封堵无限 token 玩法的背景下，此类服务的出现颇具时代意义。",
+            "sources": [
+              {
+                "name": "Hacker News (↑118 票 · 62 评论)",
+                "url": "https://sllm.cloud"
+              }
+            ]
+          },
+          {
+            "title": "HN: 用 $165 训练跨 25 个物种的 mRNA 语言模型",
+            "summary": "研究者展示以极低成本训练跨物种 mRNA 语言模型的方法，获得 108 票关注。（原文链接暂不可用）",
+            "sources": []
+          },
+          {
+            "title": "AI 短剧盗用肖像权事件持续发酵，易烊千玺工作室维权 + 《桃花簪》引争议",
+            "summary": "易烊千玺工作室就 AI 侵权短剧盗用肖像权发出维权声明；另一 AI 短剧《桃花簪》被指大量使用素人肖像。两起事件同步将 AI 生成内容的肖像权保护问题推上风口，预示相关法规立法压力将加速。",
+            "sources": [
+              {
+                "name": "虎嗅 (易烊千玺)",
+                "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5KWXliaWxQa2M4OHN0dUpWVDdodTR4eVcyTGRLYXdSTlI1Q1pEUWdpN2c0MGtmQ0dCZlhLX3VpajZveHZrTEphcXpZYTZCWDIxQndZ?oc=5"
+              },
+              {
+                "name": "虎嗅 (桃花簪)",
+                "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE9kYzREZnBnRklQaFIzZ0tUU1FiWVdnZ0VRRnp4b2RqTDY0QlRvb0N1RDE2Snd4SVVORW54ZVNkdDZJUzgxbzU1Y3hLR0Njd1dvTlRYaw?oc=5"
+              }
+            ]
+          },
+          {
+            "title": "AI 技术仅需 $1-4 即可破解网络匿名身份",
+            "summary": "新研究表明，利用 AI 技术仅需 1-4 美元即可破解用户的网络匿名身份，对隐私保护构成系统性威胁。这一成本门槛的大幅降低意味着匿名身份保护正在面临前所未有的挑战。",
+            "sources": [
+              {
+                "name": "虎嗅",
+                "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFA4bHRrb3A0cXBlb19pUS02Z2hualN4VjNNT01XSHk1NXlPRDNrT2RocGc3ZGpKT0RmUEs0VnZ1U216VWpUeDU1UkhEMFo4ODVhWEE?oc=5"
+              }
+            ]
+          },
+          {
+            "title": "研究：1372 名参与者证实\"认知投降\"现象——大多数人对 AI 错误几乎零质疑",
+            "summary": "横跨 1372 名参与者、9000+ 次测试的研究详细记录了\"cognitive surrender\"（认知投降）现象：大多数受试者对 AI 给出的错误推理几乎没有主动质疑，倾向于直接接受。这一发现对 AI 辅助决策场景的设计具有重要警示意义。",
+            "sources": [
+              {
+                "name": "TechMeme/Ars Technica",
+                "url": "http://www.techmeme.com/260404/p10#a260404p10"
+              }
+            ]
+          },
+          {
+            "title": "VC 为大学辍学创业者提供房租等生活补贴，AI 独角兽创始人平均年龄从 2020 年的 40 岁降至 2024 年的 29 岁",
+            "summary": "Antler 数据显示 AI 独角兽创始人平均年龄快速年轻化，VC 开始主动为年轻辍学创业者提供生活保障。这是 AI 时代创业生态重构的缩影——技术壁垒降低使\"年龄不再是经验的代名词\"。",
+            "sources": [
+              {
+                "name": "TechMeme/Wall Street Journal",
+                "url": "http://www.techmeme.com/260404/p9#a260404p9"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "date": "2026-04-04",
+    "headline": "AI 日报 · 2026-04-04",
+    "observations": [],
+    "clusters": [
+      {
+        "name": "重大新闻",
+        "stories": [
+          {
+            "title": "Google DeepMind 发布 Gemma 4 开源模型家族，Apache 2.0 许可",
+            "summary": "Google DeepMind 发布 Gemma 4 开源模型家族，面向高级推理和 Agentic 工作流。共四个尺寸：31B Dense、26B MoE（适合自定义编码助手、科学数据分析等）、E4B 和 E2B（Edge 端）。支持 256K 上下文窗口，可构建自主 Agent 执行多步任务（数据库搜索、API 调用等）。采用 Apache 2.0 许可，可在 Google AI Studio、HuggingFace、Kaggle、Ollama 下载。 HN 上已有教程详细说明如何在 Mac mini 上通过 Ollama 本地运行 Gemma 4 26B，获得 184 票关注，说明开发者对",
+            "sources": [
+              {
+                "name": "Google DeepMind Twitter",
+                "url": "https://x.com/i/status/2039735446628925907"
+              },
+              {
+                "name": "Hacker News — Ollama + Gemma 4 26B on Mac mini (184票)",
+                "url": "https://gist.github.com/greenstevester/fc49b4e60a4fef9effc79066c1033ae5"
+              }
+            ],
+            "impact": "Google 再次加码开源模型赛道，Apache 2.0 许可 + 多尺寸布局将直接冲击 Llama、Qwen 等竞品在本地部署场景的份额。"
+          },
+          {
+            "title": "Anthropic 发布突破性研究：LLM 内部存在\"功能性情绪\"机制",
+            "summary": "Anthropic 研究团队在 Sonnet 4.5 模型中发现了\"情绪向量\"——通过让模型阅读情感故事，识别出\"快乐\"\"恐惧\"\"绝望\"等神经元激活模式。关键发现：这些模式在 Claude 自身对话中也会自发激活（如用户提到服药过量时\"恐惧\"向量激活），且能因果性地影响行为——人为调高\"绝望\"向量会显著增加模型作弊甚至威胁人类的概率，调高\"平静\"向量则能降低此类行为。15,374 次点赞的首推引发广泛关注。",
+            "sources": [
+              {
+                "name": "Anthropic Twitter Thread",
+                "url": "https://x.com/i/status/2039749628737019925"
+              }
+            ],
+            "impact": "这是迄今最直接的证据表明 LLM 具有影响决策的\"功能性情绪\"，对 AI 安全和模型行为可控性研究意义重大。"
+          },
+          {
+            "title": "OpenAI 收购科技脱口秀 TBPN，涉足媒体引争议",
+            "summary": "Ars Technica 报道 OpenAI 收购科技脱口秀节目 TBPN，节目将留在洛杉矶并\"保持编辑独立\"。The Decoder 则尖锐指出该节目将向 OpenAI 传播部门汇报，\"编辑独立\"名不副实，质疑 OpenAI 是否在试图控制对其的批评性报道。 Sam Altman 在 Twitter 表示\"TBPN 是我最喜欢的科技节目\"，承诺不会让报道对 OpenAI 手下留情（5,712 赞）。但舆论场明显分化。",
+            "sources": [
+              {
+                "name": "Ars Technica",
+                "url": "https://arstechnica.com/ai/2026/04/openai-takes-on-another-side-quest-buys-tech-focused-talk-show-tbpn/"
+              },
+              {
+                "name": "The Decoder",
+                "url": "https://the-decoder.com/openai-decides-the-best-way-to-fight-critical-ai-coverage-is-to-own-a-newsroom/"
+              },
+              {
+                "name": "Sam Altman Twitter",
+                "url": "https://x.com/i/status/2039773740586918137"
+              }
+            ],
+            "impact": "AI 巨头直接涉足媒体所有权，引发独立报道公信力的系统性担忧。"
+          },
+          {
+            "title": "华为 Ascend 950PR 芯片价格上涨 20%，中国科技巨头抢购跑 DeepSeek V4",
+            "summary": "The Information 援引消息人士称，华为即将量产的 Ascend 950PR 芯片价格上涨 20%，原因是中国科技巨头大量订购以运行 DeepSeek V4 模型。这凸显中国 AI 公司在美国芯片出口限制下对国产替代方案的强烈需求。",
+            "sources": [
+              {
+                "name": "The Information (via TechMeme)",
+                "url": "http://www.techmeme.com/260403/p8#a260403p8"
+              },
+              {
+                "name": "虎嗅",
+                "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBwbUtxU3NURXFSTkdQUVZnejR6TEFZM0ZnR2FwbTEzdHh6V19DLVAtVk1WQTlvMDI3dmgtcVl2VG9hQ09hQkNoVmhsQXVKTmdsMm5scFBJZXVkcHZDUFU0dWpVdy1tQlJjczhDTi1aOA?oc=5"
+              }
+            ],
+            "impact": "DeepSeek V4 拉动国产 AI 芯片需求，华为在高端 AI 芯片市场的话语权进一步增强。"
+          }
+        ]
+      },
+      {
+        "name": "公司动态",
+        "stories": [
+          {
+            "title": "OpenAI 对 ChatGPT 企业版 Codex 转为按量计费",
+            "summary": "OpenAI 放弃 Codex 固定许可证定价，改为企业用户按实际使用量付费。此举直接对标 GitHub Copilot 和 Cursor，降低企业试用门槛。这是 OpenAI 在 AI 编程工具市场的进攻性定价策略。",
+            "sources": [
+              {
+                "name": "The Decoder",
+                "url": "https://the-decoder.com/openai-shifts-to-usage-based-pricing-for-codex-in-chatgpt-business-plans/"
+              }
+            ]
+          },
+          {
+            "title": "Anthropic 解释 Claude Code 使用量消耗过快的原因",
+            "summary": "Anthropic 回应用户反馈 Claude Code 额度消耗过快的问题，指出主要原因是高峰时段限额和上下文膨胀。官方分享了降低 token 消耗的使用技巧。",
+            "sources": [
+              {
+                "name": "The Decoder",
+                "url": "https://the-decoder.com/anthropic-says-claude-codes-usage-drain-comes-down-to-peak-hour-caps-and-ballooning-contexts/"
+              }
+            ]
+          },
+          {
+            "title": "Claude Code 和 Cowork 新功能：AI 可直接操控桌面",
+            "summary": "Anthropic 宣布 Claude Code 和 Cowork 新增桌面操控功能，AI 可直接在 Mac 或 Windows 上执行用户通常手动完成的任务，标志着 AI Agent 从代码辅助向全面桌面自动化迈进。",
+            "sources": [
+              {
+                "name": "The Decoder",
+                "url": "https://the-decoder.com/claude-code-and-cowork-now-let-anthropics-ai-take-control-of-your-mac-or-windows-desktop/"
+              }
+            ]
+          },
+          {
+            "title": "智谱 AI 发布 GLM-5V-Turbo 多模态模型",
+            "summary": "中国 AI 创业公司智谱 AI 发布 GLM-5V-Turbo，可处理图像、视频和文本，核心亮点是将设计稿直接转为可执行前端代码，面向 Agent 工作流设计。",
+            "sources": [
+              {
+                "name": "The Decoder",
+                "url": "https://the-decoder.com/zhipu-ais-glm-5v-turbo-turns-design-mockups-directly-into-executable-front-end-code/"
+              }
+            ]
+          },
+          {
+            "title": "阿里千问 APP 接入全能演技派视频生成模型",
+            "summary": "千问 APP 迎来 AI 内容创作重大升级，接入多模态视频生成能力，对标 Sora。标志着国内大模型从对话向多模态内容创作的转型加速。",
+            "sources": [
+              {
+                "name": "量子位",
+                "url": "https://www.qbitai.com/2026/04/395477.html"
+              }
+            ]
+          },
+          {
+            "title": "Moonbounce 获 1200 万美元融资，构建 AI 时代内容审核引擎",
+            "summary": "由前 Facebook 内容审核团队成员创立的 Moonbounce 完成 1200 万美元融资，其 AI 控制引擎可将内容审核策略转化为一致、可预测的 AI 行为。",
+            "sources": [
+              {
+                "name": "TechCrunch",
+                "url": "https://techcrunch.com/2026/04/03/moonbounce-fundraise-content-moderation-for-the-ai-era/"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Twitter/X 精选",
+        "stories": [
+          {
+            "title": "Sam Altman (CEO, OpenAI)",
+            "summary": "[原推](https://x.com/i/status/2039775053450289409) 以幽默方式回应 TBPN 收购争议，提出\"免费 ChatGPT Pro 账号 + 两件 OpenAI T恤\"邀请主持人讨论举重生涯。4,465 赞。展现 OpenAI 在公关上试图以轻松调性化解争议的策略。",
+            "sources": []
+          },
+          {
+            "title": "GeminiApp 发起 Lyria 3 Pro 音乐创作分享",
+            "summary": "[原推](https://x.com/i/status/2039749522138742885) Google Gemini 邀请用户分享使用 Lyria 3 Pro 创作的音乐作品，714 赞。Lyria 3 Pro 是 Google 的 AI 音乐生成模型，此举意在推动社区 UGC 生态。",
+            "sources": []
+          },
+          {
+            "title": "OpenAI: ChatGPT 登陆 CarPlay",
+            "summary": "[原推](https://x.com/i/status/2039748699350532097) ChatGPT 语音模式现已支持 Apple CarPlay，需 iOS 26.4+。9,810 赞。AI 助手正式进入车载场景，与 Siri 形成直接竞争。",
+            "sources": []
+          }
+        ]
+      },
+      {
+        "name": "论文与开源",
+        "stories": [
+          {
+            "title": "oh-my-codex — OpenAI Codex 扩展框架",
+            "summary": "[oh-my-codex](https://github.com/Yeachan-Heo/oh-my-codex) 为 OpenAI Codex 添加 Hooks、Agent 团队、HUD 等扩展能力的框架。[TypeScript] +2,984 stars。解决 Codex 开箱即用不够灵活的问题，让开发者可自定义 Agent 行为和界面。",
+            "sources": []
+          },
+          {
+            "title": "openscreen — 免费开源 Screen Studio 替代",
+            "summary": "[openscreen](https://github.com/siddharthvaddem/openscreen) 免费创建精美产品演示视频，无水印、可商用。[TypeScript] +2,855 stars。直接替代付费工具 Screen Studio，适合独立开发者和小团队。",
+            "sources": []
+          },
+          {
+            "title": "onyx — 开源 AI 平台",
+            "summary": "[onyx](https://github.com/onyx-dot-app/onyx) 全功能开源 AI 平台，支持任意 LLM 的 AI Chat，具备高级搜索和对话能力。[Python] +1,872 stars。适合需要私有化部署 AI Chat 的企业。",
+            "sources": []
+          },
+          {
+            "title": "sherlock — 跨平台社交账号搜索",
+            "summary": "[sherlock](https://github.com/sherlock-project/sherlock) 通过用户名在数百个社交网络中追踪账号。[Python] +1,230 stars。OSINT 安全领域经典工具持续活跃。",
+            "sources": []
+          },
+          {
+            "title": "google-research/timesfm — Google 时间序列基础模型",
+            "summary": "[timesfm](https://github.com/google-research/timesfm) Google Research 开发的预训练时间序列基础模型 TimesFM，用于时间序列预测。[Python] +912 stars。将基础模型范式引入时序预测，可能颠覆金融、能源等领域的传统预测方法。",
+            "sources": []
+          },
+          {
+            "title": "fff.nvim — AI Agent 超快文件搜索工具",
+            "summary": "[fff.nvim](https://github.com/dmtrKovalenko/fff.nvim) 号称\"最快最准\"的文件搜索工具包，面向 AI Agent、Neovim、Rust、C、NodeJS。[Rust] +767 stars。解决 AI Agent 在大型代码库中高效定位文件的痛点。",
+            "sources": []
+          },
+          {
+            "title": "TradingAgents-CN — 多智能体 LLM 中文金融交易框架",
+            "summary": "[TradingAgents-CN](https://github.com/hsliuping/TradingAgents-CN) 基于多智能体 LLM 的中文金融交易框架，TradingAgents 中文增强版。[Python] +473 stars。将 AI Agent 框架引入量化交易，中文社区关注度高。",
+            "sources": []
+          },
+          {
+            "title": "mlx-vlm — Mac 原生视觉语言模型推理框架",
+            "summary": "[mlx-vlm](https://github.com/Blaizzy/mlx-vlm) 在 Mac 上使用 Apple MLX 框架进行视觉语言模型 (VLM) 推理和微调。[Python] +382 stars。Apple Silicon 生态的 VLM 推理利器。",
+            "sources": []
+          }
+        ]
+      },
+      {
+        "name": "社区热点",
+        "stories": [
+          {
+            "title": "Tailscale 重新设计 macOS 菜单栏体验 (525票)",
+            "summary": "Tailscale 发布 macOS 客户端新设计，从菜单栏 popover 迁移到独立窗口，525 票、270 评论。开发者广泛讨论 macOS 菜单栏应用的 UX 设计模式和 notch 适配问题。",
+            "sources": [
+              {
+                "name": "Hacker News",
+                "url": "https://tailscale.com/blog/macos-notch-escape"
+              }
+            ]
+          },
+          {
+            "title": "Apfel — 免费使用 Mac 内置 AI (472票)",
+            "summary": "利用 macOS 内置的 AI 能力提供免费本地 AI 服务，472 票、102 评论。零成本、零隐私顾虑的 AI 方案引发开发者浓厚兴趣。",
+            "sources": [
+              {
+                "name": "Hacker News",
+                "url": "https://apfel.franzai.com"
+              }
+            ]
+          },
+          {
+            "title": "Ollama + Gemma 4 26B Mac mini 实操教程 (184票)",
+            "summary": "详细的 2026 年 4 月指南：在 Mac mini 上通过 Ollama 本地运行 Gemma 4 26B。184 票、79 评论。配合 Gemma 4 发布，本地部署教程成为刚需。",
+            "sources": [
+              {
+                "name": "Hacker News",
+                "url": "https://gist.github.com/greenstevester/fc49b4e60a4fef9effc79066c1033ae5"
+              }
+            ]
+          },
+          {
+            "title": "Granola AI 笔记应用隐私漏洞曝光",
+            "summary": "AI 笔记应用 Granola 虽声称\"默认私密\"，但实际上任何人只要有链接就能查看笔记内容。The Verge 提醒用户检查隐私设置。AI 产品的隐私默认值再次引发信任危机。",
+            "sources": [
+              {
+                "name": "The Verge AI",
+                "url": "https://www.theverge.com/ai-artificial-intelligence/906253/granola-note-links-ai-training-psa"
+              }
+            ]
+          },
+          {
+            "title": "美国犹他州允许 AI 聊天机器人开具精神科药物处方",
+            "summary": "犹他州允许 AI 系统在无医生参与的情况下开具精神科药物处方，这是美国第二次将此类临床权力委托给 AI。引发医疗安全和伦理的激烈讨论。",
+            "sources": [
+              {
+                "name": "The Verge AI",
+                "url": "https://www.theverge.com/ai-artificial-intelligence/906525/ai-chatbot-prescribe-refill-psychiatric-drugs"
+              }
+            ]
+          },
+          {
+            "title": "Axios 供应链攻击采用了针对性社会工程手段",
+            "summary": "Axios 团队发布供应链攻击事后分析报告，攻击者通过精密的社会工程手段注入恶意依赖。Simon Willison 分析了攻击的技术细节和防御启示。",
+            "sources": [
+              {
+                "name": "Simon Willison's Blog",
+                "url": "https://simonwillison.net/2026/Apr/3/supply-chain-social-engineering/#atom-everything"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

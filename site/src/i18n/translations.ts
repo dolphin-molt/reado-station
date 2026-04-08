@@ -34,6 +34,12 @@ const translations: Record<Lang, Record<string, string>> = {
     'category.twitter': 'Twitter',
     'category.china-media': '中文媒体',
 
+    // Observations
+    'observations.title': '今日观察',
+
+    // Briefing
+    'briefing.title': '今日速览',
+
     // Footer
     'footer.slogan': '一个人读不完世界，一群人可以。Read All. Miss Nothing.',
     'footer.feedback': '反馈',
@@ -103,6 +109,12 @@ const translations: Record<Lang, Record<string, string>> = {
     'category.community': 'Community',
     'category.twitter': 'Twitter',
     'category.china-media': 'Chinese Media',
+
+    // Observations
+    'observations.title': 'Daily Observations',
+
+    // Briefing
+    'briefing.title': 'Daily Briefing',
 
     // Footer
     'footer.slogan': 'One person can\'t read the world. Together, we can. Read All. Miss Nothing.',

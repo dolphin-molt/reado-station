@@ -2,6 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../Header.astro';
 import Hero from '../Hero.astro';
+import DailyObservations from '../DailyObservations.astro';
+import DailyBriefing from '../DailyBriefing.astro';
 import NewsCard from '../NewsCard.astro';
 import Footer from '../Footer.astro';
 import type { Lang } from '../../i18n/translations';
@@ -9,6 +11,7 @@ import { t, getDateLocale } from '../../i18n/translations';
 
 import itemsData from '../../data/items.json';
 import daysData from '../../data/days.json';
+import digestsData from '../../data/digests.json';
 
 interface Props {
   lang: Lang;
@@ -65,8 +68,14 @@ const dateFormatted = latestDay?.date
     })
   : '';
 
+// Digest data for today
+const todayDigest = (digestsData as any[]).find((d: any) => d.date === latestDay?.date);
+const observations = todayDigest?.observations || [];
+const clusters = todayDigest?.clusters || [];
+
 const pageTitle = 'reado | ' + (latestDay?.date || 'AI Intelligence Station');
 const moreLabel = lang === 'zh' ? '显示更多' : 'Show more';
+const allItemsLabel = lang === 'zh' ? '全部资讯' : 'All Items';
 ---
 
 <BaseLayout title={pageTitle} lang={lang}>
@@ -81,7 +90,16 @@ const moreLabel = lang === 'zh' ? '显示更多' : 'Show more';
     <Hero main={heroMain} sidebar={heroSidebar} lang={lang} />
   )}
 
+  {observations.length > 0 && (
+    <DailyObservations observations={observations} lang={lang} />
+  )}
+
+  {clusters.length > 0 && (
+    <DailyBriefing clusters={clusters} lang={lang} />
+  )}
+
   <main class="container">
+    <h2 class="all-items-title">{allItemsLabel}</h2>
     <!-- Category filter pills -->
     <nav class="filter-bar" id="categoryPills">
       {CATEGORIES.map((c) => (

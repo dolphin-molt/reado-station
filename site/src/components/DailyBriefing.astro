@@ -1,0 +1,98 @@
+---
+import type { Lang } from '../i18n/translations';
+import { t } from '../i18n/translations';
+
+interface DigestStory {
+  title: string;
+  summary: string;
+  sources: { name: string; url: string }[];
+  impact?: string;
+}
+
+interface DigestCluster {
+  name: string;
+  stories: DigestStory[];
+}
+
+interface Props {
+  clusters: DigestCluster[];
+  lang?: Lang;
+}
+
+const { clusters, lang = 'zh' } = Astro.props;
+const INITIAL_SHOW = 5;
+
+// Flatten all stories with cluster context
+const allStories: { title: string; impact: string; cluster: string; sources: { name: string; url: string }[] }[] = [];
+for (const cluster of clusters) {
+  for (const story of cluster.stories) {
+    allStories.push({
+      title: story.title,
+      impact: story.impact || story.summary.slice(0, 120),
+      cluster: cluster.name,
+      sources: story.sources,
+    });
+  }
+}
+
+const moreLabel = lang === 'zh' ? '展开更多' : 'Show more';
+const collapseLabel = lang === 'zh' ? '收起' : 'Collapse';
+---
+
+<section class="briefing">
+  <div class="container">
+    <h2 class="briefing__title">{t(lang, 'briefing.title')}</h2>
+    <div class="briefing__list" id="briefingList">
+      {allStories.map((item, idx) => (
+        <div class="briefing__item" data-briefing-idx={idx}>
+          <span class="briefing__num">{String(idx + 1).padStart(2, '0')}</span>
+          <div class="briefing__content">
+            <span class="briefing__cluster-tag">{item.cluster}</span>
+            <h3 class="briefing__headline">{item.title}</h3>
+            <p class="briefing__impact">{item.impact}</p>
+            {item.sources.length > 0 && (
+              <div class="briefing__sources">
+                {item.sources.slice(0, 5).map((src) => (
+                  <a href={src.url} target="_blank" rel="noopener" class="briefing__source-tag">
+                    {src.name}
+                  </a>
+                ))}
+                {item.sources.length > 5 && (
+                  <span class="briefing__source-more">+{item.sources.length - 5}</span>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+    {allStories.length > INITIAL_SHOW && (
+      <button class="briefing__toggle" id="briefingToggle">{moreLabel}</button>
+    )}
+  </div>
+</section>
+
+<script is:inline define:vars={{ INITIAL_SHOW, moreLabel, collapseLabel }}>
+(function() {
+  var items = document.querySelectorAll('#briefingList .briefing__item');
+  var btn = document.getElementById('briefingToggle');
+  var expanded = false;
+
+  function render() {
+    items.forEach(function(el) {
+      var idx = parseInt(el.getAttribute('data-briefing-idx'), 10);
+      el.style.display = (expanded || idx < INITIAL_SHOW) ? '' : 'none';
+    });
+    if (btn) btn.textContent = expanded ? collapseLabel : moreLabel;
+  }
+
+  if (btn) {
+    btn.addEventListener('click', function() {
+      expanded = !expanded;
+      render();
+    });
+  }
+
+  render();
+})();
+</script>
