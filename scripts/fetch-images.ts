@@ -41,6 +41,19 @@ interface SiteItem {
   sourceName: string
 }
 
+// ─── Google News URL Detection ─────────────────────────────────────
+
+const GOOGLE_NEWS_PATTERN = /^https?:\/\/news\.google\.com\/rss\/articles\//
+
+/**
+ * Google News redirect URLs use encrypted protobuf encoding and block
+ * server-side requests, so we skip them entirely to avoid fetching
+ * Google's own og:image instead of the real article image.
+ */
+function isGoogleNewsUrl(url: string): boolean {
+  return GOOGLE_NEWS_PATTERN.test(url)
+}
+
 // ─── Helpers ────────────────────────────────────────────────────────
 
 /**
@@ -135,13 +148,20 @@ async function main() {
   mkdirSync(IMAGES_DIR, { recursive: true })
 
   // 3. Filter items that need an image fetched
+  let skippedGoogleNews = 0
   const pending = items.filter((item) => {
     if (!item.url) return false
     // Skip items that already have a non-placeholder image
     if (item.imageUrl && !PLACEHOLDER_PATTERN.test(item.imageUrl)) return false
+    // Skip Google News redirect URLs — they use encrypted protobuf encoding
+    // and return Google's own og:image instead of the real article image
+    if (isGoogleNewsUrl(item.url)) {
+      skippedGoogleNews++
+      return false
+    }
     return true
   })
-  log.info(`${pending.length} items need OG images (${items.length - pending.length} already have images)`)
+  log.info(`${pending.length} items need OG images (${items.length - pending.length} already have images, ${skippedGoogleNews} Google News URLs skipped)`)
 
   if (pending.length === 0) {
     log.success('Nothing to do')

@@ -119,12 +119,12 @@
       "id": "deepseek",
       "name": "DeepSeek",
       "adapter": "rss",
-      "url": "https://news.google.com/rss/search?q=site:deepseek.com&hl=en&gl=US&ceid=US:en",
+      "url": "https://news.google.com/rss/search?q=site:deepseek.com+-site:chat.deepseek.com&hl=en&gl=US&ceid=US:en",
       "hours": 168,
       "topics": [],
       "enabled": true,
       "category": "AI公司",
-      "googleNewsQuery": "site:deepseek.com"
+      "googleNewsQuery": "site:deepseek.com -site:chat.deepseek.com"
     },
     {
       "id": "mistral",

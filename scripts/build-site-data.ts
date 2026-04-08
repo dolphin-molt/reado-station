@@ -254,9 +254,10 @@ function main() {
   const days: DayMeta[] = []
   const digests: DigestData[] = []
 
-  // Load existing items.json to preserve translations (titleZh/summaryZh)
+  // Load existing items.json to preserve translations and fetched images
   const existingItemsPath = join(outDir, 'items.json')
   const translationCache = new Map<string, { titleZh?: string; summaryZh?: string }>()
+  const imageCache = new Map<string, string>()
   if (existsSync(existingItemsPath)) {
     try {
       const existingItems = readJSON<SiteItem[]>(existingItemsPath) || []
@@ -266,8 +267,13 @@ function main() {
           if (item.id) translationCache.set(item.id, { titleZh: item.titleZh, summaryZh: item.summaryZh })
           if (item.url) translationCache.set(item.url, { titleZh: item.titleZh, summaryZh: item.summaryZh })
         }
+        // Preserve non-placeholder image URLs
+        if (item.imageUrl && !item.imageUrl.startsWith('/placeholders/')) {
+          if (item.id) imageCache.set(item.id, item.imageUrl)
+          if (item.url) imageCache.set(item.url, item.imageUrl)
+        }
       }
-      log.info(`Loaded ${translationCache.size / 2} existing translations from cache`)
+      log.info(`Loaded ${translationCache.size / 2} existing translations, ${imageCache.size / 2} existing images from cache`)
     } catch { /* ignore parse errors */ }
   }
 
@@ -339,6 +345,11 @@ function main() {
             if (cached) {
               if (cached.titleZh) siteItem.titleZh = cached.titleZh
               if (cached.summaryZh) siteItem.summaryZh = cached.summaryZh
+            }
+            // Restore cached image URLs (fetched by fetch-images.ts)
+            const cachedImage = imageCache.get(itemId) || imageCache.get(item.url)
+            if (cachedImage) {
+              siteItem.imageUrl = cachedImage
             }
             allItems.push(siteItem)
             dayItemCount++
