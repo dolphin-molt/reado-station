@@ -2,33 +2,19 @@
 import type { Lang } from '../i18n/translations';
 import { t } from '../i18n/translations';
 
-interface Observation {
-  expert: string;
-  avatar: string;
-  text: string;
-}
-
 interface Props {
-  observations: Observation[];
+  observationText?: string;
   lang?: Lang;
 }
 
-const { observations, lang = 'zh' } = Astro.props;
+const { observationText, lang = 'zh' } = Astro.props;
 ---
 
-<section class="observations">
-  <div class="container">
-    <h2 class="observations__title">{t(lang, 'observations.title')}</h2>
-    <div class="observations__grid">
-      {observations.map((obs) => (
-        <div class="observations__card">
-          <div class="observations__header">
-            <span class="observations__avatar">{obs.avatar}</span>
-            <span class="observations__expert">{obs.expert}</span>
-          </div>
-          <p class="observations__text">{obs.text}</p>
-        </div>
-      ))}
+{observationText && (
+  <section class="observations">
+    <div class="container">
+      <h2 class="observations__title">{t(lang, 'observations.title')}</h2>
+      <p class="observations__text">{observationText}</p>
     </div>
-  </div>
-</section>
+  </section>
+)}

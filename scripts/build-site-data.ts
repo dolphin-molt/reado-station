@@ -52,6 +52,9 @@ interface Observation {
 interface DigestData {
   date: string
   headline: string
+  /** New format: single paragraph of editorial commentary */
+  observationText: string
+  /** @deprecated Legacy per-expert observations, kept for backwards compat */
   observations: Observation[]
   clusters: DigestCluster[]
 }
@@ -62,13 +65,15 @@ function parseDigest(md: string, date: string): DigestData {
   const lines = md.split('\n')
   const clusters: DigestCluster[] = []
   const observations: Observation[] = []
+  let observationText = ''
   let currentCluster: DigestCluster | null = null
   let currentStory: DigestStory | null = null
   let headline = ''
   let inObservations = false
   let currentObservation: Observation | null = null
+  let observationHasH3 = false // detect old vs new format
 
-  // Expert avatar mapping
+  // Expert avatar mapping (legacy format support)
   const expertAvatars: Record<string, string> = {
     '马斯克': '🚀', 'Elon Musk': '🚀',
     '贝佐斯': '📦', 'Jeff Bezos': '📦',
@@ -126,19 +131,28 @@ function parseDigest(md: string, date: string): DigestData {
       continue
     }
 
-    // Parse observations (### Expert Name)
+    // Parse observations section — supports both new (plain text) and legacy (### Expert) formats
     if (inObservations) {
       const h3Match = line.match(/^### (.+)$/)
       if (h3Match) {
+        // Legacy format: per-expert H3 sections
+        observationHasH3 = true
         if (currentObservation) observations.push(currentObservation)
         const expert = h3Match[1].trim()
         currentObservation = { expert, avatar: getAvatar(expert), text: '' }
         continue
       }
-      if (currentObservation) {
+      if (observationHasH3 && currentObservation) {
+        // Legacy format: collecting expert text
         const trimmed = line.trim()
         if (trimmed && !trimmed.startsWith('---') && !trimmed.startsWith('>')) {
           currentObservation.text += (currentObservation.text ? ' ' : '') + trimmed
+        }
+      } else if (!observationHasH3) {
+        // New format: plain paragraph text
+        const trimmed = line.trim()
+        if (trimmed && !trimmed.startsWith('---') && !trimmed.startsWith('>')) {
+          observationText += (observationText ? ' ' : '') + trimmed
         }
       }
       continue
@@ -228,7 +242,12 @@ function parseDigest(md: string, date: string): DigestData {
     obs.text = obs.text.slice(0, 300).trim()
   }
 
-  return { date, headline, observations, clusters }
+  // If we have legacy per-expert observations but no observationText, merge them into one paragraph
+  if (!observationText && observations.length > 0) {
+    observationText = observations.map(o => o.text).join(' ')
+  }
+
+  return { date, headline, observationText: observationText.trim(), observations, clusters }
 }
 
 // ─── Category mapping (from lib/utils.ts) ────────────────────────────
@@ -316,7 +335,10 @@ function main() {
                   const existing = digests[existingIdx]
                   // Merge: keep the version with more clusters, but always preserve observations
                   const merged = parsed.clusters.length >= existing.clusters.length ? parsed : existing
-                  // If the winning digest has no observations but the other does, copy them over
+                  // If the winning digest has no observations/observationText but the other does, copy them over
+                  if (!merged.observationText && (parsed.observationText || existing.observationText)) {
+                    merged.observationText = parsed.observationText || existing.observationText
+                  }
                   if (merged.observations.length === 0 && (parsed.observations.length > 0 || existing.observations.length > 0)) {
                     merged.observations = parsed.observations.length > 0 ? parsed.observations : existing.observations
                   }

@@ -2,6 +2,7 @@
   {
     "date": "2026-04-08",
     "headline": "AI 日报 · 2026-04-08",
+    "observationText": "今天的核心不是模型又强了多少，而是 Anthropic 开始把“能力太强不能直接放出”变成一套安全部署机制。Project Glasswing 说明前沿模型的网络安全能力已经从理论风险进入实际治理阶段。 另一条很清楚的线是算力和基础设施继续上行。Anthropic 扩大 TPU 合作、苹果服务器芯片曝光、腾讯宣布加码 AI 投入，这些都说明行业竞争正在从模型能力转向长期供给能力。 今天也能看到另一面，开源阵营还在快速逼近。GLM-5.1 拿到更强的 Agent 和代码成绩，GitHub Trending 上又出现一批 Agent、记忆和本地推理项目，闭源和开源的拉锯会更激烈。 中国线索也很密集，阿里围绕 Token 重构电商、智谱 GLM-5.1 上线华为云、DeepSeek 调整产品模式，说明国内竞争点正在从“谁有模型”转为“谁能把模型真正接进业务”。",
     "observations": [
       {
         "expert": "Dario Amodei（Anthropic）",
@@ -339,6 +340,7 @@
   {
     "date": "2026-04-07",
     "headline": "AI 日报 · 2026-04-07",
+    "observationText": "",
     "observations": [],
     "clusters": [
       {
@@ -612,6 +614,7 @@
   {
     "date": "2026-04-06",
     "headline": "AI 日报 · 2026-04-06",
+    "observationText": "",
     "observations": [],
     "clusters": [
       {
@@ -895,6 +898,7 @@
   {
     "date": "2026-04-05",
     "headline": "AI 日报 · 2026-04-05",
+    "observationText": "",
     "observations": [],
     "clusters": [
       {
@@ -1080,6 +1084,7 @@
   {
     "date": "2026-04-04",
     "headline": "AI 日报 · 2026-04-04",
+    "observationText": "",
     "observations": [],
     "clusters": [
       {

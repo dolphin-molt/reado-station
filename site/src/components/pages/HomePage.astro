@@ -57,7 +57,7 @@ const dateFormatted = latestDay?.date
 
 // Digest data for today
 const todayDigest = (digestsData as any[]).find((d: any) => d.date === latestDay?.date);
-const observations = todayDigest?.observations || [];
+const observationText = todayDigest?.observationText || '';
 const clusters = todayDigest?.clusters || [];
 
 // Hero stories from digest (AI-curated top stories)
@@ -91,8 +91,8 @@ const allItemsLabel = lang === 'zh' ? '全部资讯' : 'All Items';
     <Hero stories={heroStories} lang={lang} />
   )}
 
-  {observations.length > 0 && (
-    <DailyObservations observations={observations} lang={lang} />
+  {observationText && (
+    <DailyObservations observationText={observationText} lang={lang} />
   )}
 
   <main class="container">
