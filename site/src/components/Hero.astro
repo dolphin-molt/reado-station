@@ -1,51 +1,165 @@
 ---
 import type { Lang } from '../i18n/translations';
+import { t } from '../i18n/translations';
 
-interface NewsItem {
+interface HeroStory {
   title: string;
-  titleZh?: string;
-  url: string;
   summary: string;
-  summaryZh?: string;
-  sourceName: string;
-  category: string;
-  imageUrl?: string;
+  sources: { name: string; url: string }[];
+  impact?: string;
+  cluster: string;
 }
 
 interface Props {
-  main: NewsItem;
-  sidebar: NewsItem[];
+  stories: HeroStory[];
   lang?: Lang;
 }
 
-const { main, sidebar, lang = 'zh' } = Astro.props;
-
-function d(item: NewsItem, field: 'title' | 'summary') {
-  if (lang === 'zh') {
-    const zhField = field === 'title' ? 'titleZh' : 'summaryZh';
-    if (item[zhField]) return item[zhField];
-  }
-  return item[field];
-}
+const { stories, lang = 'zh' } = Astro.props;
+const heroTitle = lang === 'zh' ? '今日必看' : 'Must Read';
 ---
 
-<section class="hero">
+<section class="hero" id="heroCarousel">
   <div class="container">
-    <div class="hero__grid">
-      <div class="hero__main">
-        <span class="source-tag">{main.sourceName}</span>
-        <h1><a href={main.url} target="_blank" rel="noopener">{d(main, 'title')}</a></h1>
-        <p class="summary">{d(main, 'summary')}</p>
+    <div class="hero__header">
+      <h2 class="hero__title">{heroTitle}</h2>
+      <div class="hero__nav">
+        <span class="hero__counter"><span id="heroCurrentSlide">1</span> / {stories.length}</span>
+        <button class="hero__arrow hero__arrow--prev" id="heroPrev" aria-label="Previous">‹</button>
+        <button class="hero__arrow hero__arrow--next" id="heroNext" aria-label="Next">›</button>
       </div>
-      <div class="hero__sidebar">
-        {sidebar.map((item) => (
-          <div class="hero__sidebar-item">
-            <span class="source-tag">{item.sourceName}</span>
-            <h3><a href={item.url} target="_blank" rel="noopener">{d(item, 'title')}</a></h3>
-            <p class="summary">{d(item, 'summary')}</p>
+    </div>
+    <div class="hero__track-wrapper">
+      <div class="hero__track" id="heroTrack">
+        {stories.map((story, idx) => (
+          <div class="hero__slide" data-slide={idx}>
+            <span class="hero__cluster-tag">{story.cluster}</span>
+            <h1 class="hero__headline">
+              {story.sources[0]?.url ? (
+                <a href={story.sources[0].url} target="_blank" rel="noopener">{story.title}</a>
+              ) : story.title}
+            </h1>
+            <p class="hero__summary">{story.impact || story.summary.slice(0, 200)}</p>
+            {story.sources.length > 0 && (
+              <div class="hero__sources">
+                {story.sources.slice(0, 5).map((src) => (
+                  <a href={src.url} target="_blank" rel="noopener" class="hero__source-tag">
+                    {src.name}
+                  </a>
+                ))}
+              </div>
+            )}
           </div>
         ))}
       </div>
     </div>
+    <div class="hero__dots" id="heroDots">
+      {stories.map((_, idx) => (
+        <button class={`hero__dot ${idx === 0 ? 'active' : ''}`} data-dot={idx} aria-label={`Slide ${idx + 1}`}></button>
+      ))}
+    </div>
   </div>
 </section>
+
+<script is:inline>
+(function() {
+  var track = document.getElementById('heroTrack');
+  var slides = track ? track.querySelectorAll('.hero__slide') : [];
+  var dots = document.querySelectorAll('#heroDots .hero__dot');
+  var prevBtn = document.getElementById('heroPrev');
+  var nextBtn = document.getElementById('heroNext');
+  var counter = document.getElementById('heroCurrentSlide');
+  var current = 0;
+  var total = slides.length;
+  if (total === 0) return;
+
+  function goTo(idx) {
+    if (idx < 0) idx = total - 1;
+    if (idx >= total) idx = 0;
+    current = idx;
+    track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    dots.forEach(function(d, i) {
+      d.classList.toggle('active', i === current);
+    });
+    if (counter) counter.textContent = String(current + 1);
+  }
+
+  if (prevBtn) prevBtn.addEventListener('click', function() { goTo(current - 1); });
+  if (nextBtn) nextBtn.addEventListener('click', function() { goTo(current + 1); });
+  dots.forEach(function(dot) {
+    dot.addEventListener('click', function() {
+      goTo(parseInt(dot.getAttribute('data-dot'), 10));
+    });
+  });
+
+  // Touch/swipe support
+  var startX = 0, startY = 0, isDragging = false, diffX = 0;
+  var wrapper = track ? track.parentElement : null;
+
+  if (wrapper) {
+    wrapper.addEventListener('touchstart', function(e) {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      isDragging = true;
+      track.style.transition = 'none';
+    }, { passive: true });
+
+    wrapper.addEventListener('touchmove', function(e) {
+      if (!isDragging) return;
+      diffX = e.touches[0].clientX - startX;
+      var diffY = e.touches[0].clientY - startY;
+      // Only horizontal swipe
+      if (Math.abs(diffX) > Math.abs(diffY)) {
+        var offset = -(current * 100) + (diffX / wrapper.offsetWidth * 100);
+        track.style.transform = 'translateX(' + offset + '%)';
+      }
+    }, { passive: true });
+
+    wrapper.addEventListener('touchend', function() {
+      isDragging = false;
+      track.style.transition = '';
+      if (Math.abs(diffX) > 50) {
+        goTo(diffX > 0 ? current - 1 : current + 1);
+      } else {
+        goTo(current);
+      }
+      diffX = 0;
+    });
+
+    // Mouse drag for desktop
+    wrapper.addEventListener('mousedown', function(e) {
+      startX = e.clientX;
+      isDragging = true;
+      track.style.transition = 'none';
+      wrapper.style.cursor = 'grabbing';
+      e.preventDefault();
+    });
+
+    document.addEventListener('mousemove', function(e) {
+      if (!isDragging) return;
+      diffX = e.clientX - startX;
+      var offset = -(current * 100) + (diffX / wrapper.offsetWidth * 100);
+      track.style.transform = 'translateX(' + offset + '%)';
+    });
+
+    document.addEventListener('mouseup', function() {
+      if (!isDragging) return;
+      isDragging = false;
+      track.style.transition = '';
+      wrapper.style.cursor = '';
+      if (Math.abs(diffX) > 50) {
+        goTo(diffX > 0 ? current - 1 : current + 1);
+      } else {
+        goTo(current);
+      }
+      diffX = 0;
+    });
+  }
+
+  // Keyboard
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowLeft') goTo(current - 1);
+    if (e.key === 'ArrowRight') goTo(current + 1);
+  });
+})();
+</script>

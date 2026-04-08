@@ -3,7 +3,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../Header.astro';
 import Hero from '../Hero.astro';
 import DailyObservations from '../DailyObservations.astro';
-import DailyBriefing from '../DailyBriefing.astro';
 import NewsCard from '../NewsCard.astro';
 import Footer from '../Footer.astro';
 import type { Lang } from '../../i18n/translations';
@@ -50,18 +49,6 @@ function getFilterGroup(category: string): string {
   return 'news'; // fallback
 }
 
-// Hero selection
-const allNews = todayItems.filter((i: any) => ['tech-media', 'ai-company', 'china-media'].includes(i.category));
-const heroPool = allNews
-  .filter((i: any) => i.summary && i.summary.length > 30)
-  .sort((a: any, b: any) => (b.summary?.length || 0) - (a.summary?.length || 0));
-const heroMain = heroPool[0];
-const heroSidebar = heroPool.slice(1, 4);
-const heroIds = new Set([heroMain, ...heroSidebar].filter(Boolean).map((i: any) => i.url));
-
-// All items except hero ones
-const gridItems = todayItems.filter((i: any) => !heroIds.has(i.url));
-
 const dateFormatted = latestDay?.date
   ? new Date(latestDay.date + 'T00:00:00').toLocaleDateString(getDateLocale(lang), {
       year: 'numeric', month: 'long', day: 'numeric', weekday: 'long',
@@ -72,6 +59,20 @@ const dateFormatted = latestDay?.date
 const todayDigest = (digestsData as any[]).find((d: any) => d.date === latestDay?.date);
 const observations = todayDigest?.observations || [];
 const clusters = todayDigest?.clusters || [];
+
+// Hero stories from digest (AI-curated top stories)
+const heroStories: { title: string; summary: string; sources: { name: string; url: string }[]; impact?: string; cluster: string }[] = [];
+if (clusters.length > 0) {
+  for (const cluster of clusters) {
+    for (const story of cluster.stories) {
+      heroStories.push({ ...story, cluster: cluster.name });
+      if (heroStories.length >= 8) break;
+    }
+    if (heroStories.length >= 8) break;
+  }
+}
+
+const gridItems = todayItems;
 
 const pageTitle = 'reado | ' + (latestDay?.date || 'AI Intelligence Station');
 const moreLabel = lang === 'zh' ? '显示更多' : 'Show more';
@@ -86,16 +87,12 @@ const allItemsLabel = lang === 'zh' ? '全部资讯' : 'All Items';
     lang={lang}
   />
 
-  {heroMain && (
-    <Hero main={heroMain} sidebar={heroSidebar} lang={lang} />
+  {heroStories.length > 0 && (
+    <Hero stories={heroStories} lang={lang} />
   )}
 
   {observations.length > 0 && (
     <DailyObservations observations={observations} lang={lang} />
-  )}
-
-  {clusters.length > 0 && (
-    <DailyBriefing clusters={clusters} lang={lang} />
   )}
 
   <main class="container">
