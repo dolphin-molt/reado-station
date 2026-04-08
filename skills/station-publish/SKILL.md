@@ -11,7 +11,7 @@ description: |
 
 ```bash
 cd {config.paths.station}
-git add data/ site/src/data/ site/public/images/
+git add data/ site/src/data/ site/src/components/ site/src/styles/ site/public/images/
 git commit -m "data: YYYY-MM-DD {batch} collection + digest"
 git push
 ```

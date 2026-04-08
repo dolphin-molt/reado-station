@@ -46,6 +46,28 @@ npm run build:site
 # = build-site-data → translate → fetch-images → astro build
 ```
 
+### build-site-data 输出
+
+构建脚本 `scripts/build-site-data.ts` 输出三个文件：
+
+| 文件 | 内容 |
+|------|------|
+| `site/src/data/items.json` | 所有新闻条目，平铺 |
+| `site/src/data/days.json` | 按天聚合的元数据 |
+| `site/src/data/digests.json` | 从 digest.md 解析的结构化数据（今日观察 + 话题聚合） |
+
+`digests.json` 由 build-site-data.ts 自动解析每天的 digest.md 生成，包含：
+- `observations[]` — 今日观察（专家视角点评）
+- `clusters[]` — 按 H2 段落分组的新闻聚合（重大新闻/公司动态/论文等）
+
+### 网站首页结构
+
+| 模块 | 数据来源 | 说明 |
+|------|---------|------|
+| **今日必看**（Hero 轮播） | digests.json clusters | 从各话题取前 8 条重要新闻，支持侧滑翻页 |
+| **今日观察** | digests.json observations | 不同行业专家视角的今日点评 |
+| **全部资讯** | items.json | 分类筛选（新闻/开源&论文/社区/Twitter）+ 分页 |
+
 ## 约束
 
 1. 日报由你自己生成，不调外部 LLM
@@ -53,3 +75,4 @@ npm run build:site
 3. 信息源维护用 **reado-collect** 技能包的知识
 4. 翻译用廉价模型，不消耗主 Agent token
 5. Issue 处理后必须评论
+6. **digest.md 必须包含 `## 今日观察` 段** — 网站首页依赖此数据
