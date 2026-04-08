@@ -38,9 +38,10 @@
   {
     "date": "2026-04-08",
     "batches": [
+      "evening",
       "morning"
     ],
-    "itemCount": 121,
+    "itemCount": 446,
     "digestPath": "2026/04/08/morning/digest.md"
   }
 ]

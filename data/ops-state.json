@@ -1,6 +1,6 @@
 {
   "_description": "Agent 运营状态 — 每次采集后更新，作为下次采集的输入",
-  "lastUpdated": "2026-04-08T00:53:12.292Z",
+  "lastUpdated": "2026-04-08T11:50:46.840Z",
   "sourceHealth": {
     "github-trending": {
       "consecutiveFailures": 0,
@@ -128,31 +128,31 @@
     }
   ],
   "stats": {
-    "totalRuns": 10,
+    "totalRuns": 11,
     "sourcesAdded": 0,
     "sourcesDisabled": 0,
     "twitterAccountsAdded": 0,
     "issuesProcessed": 2
   },
   "qualitySignals": {
-    "lastChecked": "2026-04-08T00:36:54.457Z",
+    "lastChecked": "2026-04-08T11:42:18.404Z",
     "lark": {
       "available": true,
-      "messageId": "om_x100b520467960d3cb3b4e0ffecdaa5f",
+      "messageId": "om_x100b526e21cc2ca8b2b4c1b44f6718c",
       "batch": "morning",
-      "sentAt": "2026-04-06T00:47:18.383Z",
-      "readCount": 2,
+      "sentAt": "2026-04-08T00:53:04.562Z",
+      "readCount": 1,
       "memberTotal": 2,
-      "readRate": 1
+      "readRate": 0.5
     },
     "feedback": {
       "available": true,
       "totalOpen": 2,
-      "thisWeekNew": 32,
+      "thisWeekNew": 33,
       "byLabel": {
+        "needs-human": 2,
         "bug": 5,
         "agent-todo": 5,
-        "needs-human": 1,
         "suggestion": 11,
         "source-request": 15
       }
@@ -205,6 +205,12 @@
         "batch": "morning",
         "readRate": 1,
         "readCount": 2
+      },
+      {
+        "date": "2026-04-08",
+        "batch": "morning",
+        "readRate": 0.5,
+        "readCount": 1
       }
     ],
     "website": {
@@ -224,6 +230,11 @@
       "date": "2026-04-08",
       "batch": "morning",
       "completedAt": "2026-04-08T00:53:12.292Z"
+    },
+    {
+      "date": "2026-04-08",
+      "batch": "evening",
+      "completedAt": "2026-04-08T11:50:46.840Z"
     }
   ]
 }
