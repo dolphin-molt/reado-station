@@ -3,7 +3,7 @@ export type Lang = 'zh' | 'en';
 const translations: Record<Lang, Record<string, string>> = {
   zh: {
     // Header
-    'tagline': 'Read All. Miss Nothing.',
+    'tagline': 'Read Less. Know More.',
     'header.sources': '信息源',
     'header.items': '条资讯',
 
@@ -41,7 +41,7 @@ const translations: Record<Lang, Record<string, string>> = {
     'briefing.title': '今日速览',
 
     // Footer
-    'footer.slogan': '一个人读不完世界，一群人可以。Read All. Miss Nothing.',
+    'footer.slogan': '一个人读不完世界，一群人可以。Read Less. Know More.',
     'footer.feedback': '反馈',
 
     // Archive
@@ -79,7 +79,7 @@ const translations: Record<Lang, Record<string, string>> = {
 
   en: {
     // Header
-    'tagline': 'Read All. Miss Nothing.',
+    'tagline': 'Read Less. Know More.',
     'header.sources': 'sources',
     'header.items': 'items',
 
@@ -117,7 +117,7 @@ const translations: Record<Lang, Record<string, string>> = {
     'briefing.title': 'Daily Briefing',
 
     // Footer
-    'footer.slogan': 'One person can\'t read the world. Together, we can. Read All. Miss Nothing.',
+    'footer.slogan': 'One person can\'t read the world. Together, we can. Read Less. Know More.',
     'footer.feedback': 'Feedback',
 
     // Archive

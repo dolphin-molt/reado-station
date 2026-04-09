@@ -1,0 +1,151 @@
+---
+import type { Lang } from '../i18n/translations';
+
+interface KeyStory {
+  title: string;
+  summary: string;
+  sources: { name: string; url: string }[];
+  impact?: string;
+  cluster: string;
+}
+
+interface Props {
+  stories: KeyStory[];
+  lang?: Lang;
+}
+
+const { stories, lang = 'zh' } = Astro.props;
+const sectionTitle = lang === 'zh' ? '今日关键' : 'Key Stories';
+---
+
+<section class="key-stories">
+  <div class="container">
+    <h2 class="key-stories__title">{sectionTitle}</h2>
+    <ol class="key-stories__list">
+      {stories.map((story, idx) => (
+        <li class="key-stories__item">
+          <span class="key-stories__num">{String(idx + 1).padStart(2, '0')}</span>
+          <div class="key-stories__content">
+            <h3 class="key-stories__headline">
+              {story.sources[0]?.url ? (
+                <a href={story.sources[0].url} target="_blank" rel="noopener">{story.title}</a>
+              ) : story.title}
+            </h3>
+            {story.impact && (
+              <p class="key-stories__impact">{story.impact}</p>
+            )}
+            <div class="key-stories__meta">
+              <span class="key-stories__cluster">{story.cluster}</span>
+              {story.sources.slice(0, 4).map((src) => (
+                <a href={src.url} target="_blank" rel="noopener" class="key-stories__source">{src.name}</a>
+              ))}
+            </div>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .key-stories {
+    padding: 1.5rem 0 2rem;
+  }
+
+  .key-stories__title {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+
+  .key-stories__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .key-stories__item {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--color-border, rgba(0,0,0,0.08));
+    align-items: flex-start;
+  }
+
+  .key-stories__item:last-child {
+    border-bottom: none;
+  }
+
+  .key-stories__num {
+    font-size: 1.5rem;
+    font-weight: 700;
+    opacity: 0.15;
+    line-height: 1.2;
+    flex-shrink: 0;
+    min-width: 2rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .key-stories__content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .key-stories__headline {
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.4;
+    margin: 0 0 0.3rem;
+  }
+
+  .key-stories__headline a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .key-stories__headline a:hover {
+    text-decoration: underline;
+  }
+
+  .key-stories__impact {
+    font-size: 0.88rem;
+    opacity: 0.65;
+    margin: 0 0 0.4rem;
+    line-height: 1.5;
+  }
+
+  .key-stories__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    align-items: center;
+  }
+
+  .key-stories__cluster {
+    font-size: 0.75rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+    background: var(--color-accent, #c0785c);
+    color: white;
+    font-weight: 500;
+  }
+
+  .key-stories__source {
+    font-size: 0.75rem;
+    color: var(--color-text-muted, #888);
+    text-decoration: none;
+    opacity: 0.7;
+  }
+
+  .key-stories__source:hover {
+    opacity: 1;
+    text-decoration: underline;
+  }
+
+  .key-stories__source::before {
+    content: '·';
+    margin-right: 0.2rem;
+  }
+</style>

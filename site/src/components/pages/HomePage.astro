@@ -1,8 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../Header.astro';
-import Hero from '../Hero.astro';
 import DailyObservations from '../DailyObservations.astro';
+import KeyStories from '../KeyStories.astro';
 import NewsCard from '../NewsCard.astro';
 import Footer from '../Footer.astro';
 import type { Lang } from '../../i18n/translations';
@@ -46,7 +46,7 @@ function getFilterGroup(category: string): string {
   for (const c of CATEGORIES) {
     if (c.cats?.includes(category)) return c.id;
   }
-  return 'news'; // fallback
+  return 'news';
 }
 
 const dateFormatted = latestDay?.date
@@ -60,15 +60,15 @@ const todayDigest = (digestsData as any[]).find((d: any) => d.date === latestDay
 const observationText = todayDigest?.observationText || '';
 const clusters = todayDigest?.clusters || [];
 
-// Hero stories from digest (AI-curated top stories)
-const heroStories: { title: string; summary: string; sources: { name: string; url: string }[]; impact?: string; cluster: string }[] = [];
+// Key stories: top 5 from digest clusters, each with impact/why-it-matters
+const keyStories: { title: string; summary: string; sources: { name: string; url: string }[]; impact?: string; cluster: string }[] = [];
 if (clusters.length > 0) {
   for (const cluster of clusters) {
     for (const story of cluster.stories) {
-      heroStories.push({ ...story, cluster: cluster.name });
-      if (heroStories.length >= 8) break;
+      keyStories.push({ ...story, cluster: cluster.name });
+      if (keyStories.length >= 5) break;
     }
-    if (heroStories.length >= 8) break;
+    if (keyStories.length >= 5) break;
   }
 }
 
@@ -76,7 +76,7 @@ const gridItems = todayItems;
 
 const pageTitle = 'reado | ' + (latestDay?.date || 'AI Intelligence Station');
 const moreLabel = lang === 'zh' ? '显示更多' : 'Show more';
-const allItemsLabel = lang === 'zh' ? '全部资讯' : 'All Items';
+const allItemsLabel = lang === 'zh' ? `全部 ${todayItems.length} 条资讯` : `All ${todayItems.length} Items`;
 ---
 
 <BaseLayout title={pageTitle} lang={lang}>
@@ -87,52 +87,61 @@ const allItemsLabel = lang === 'zh' ? '全部资讯' : 'All Items';
     lang={lang}
   />
 
-  {heroStories.length > 0 && (
-    <Hero stories={heroStories} lang={lang} />
-  )}
-
+  <!-- 1. 今日观察 — 页面第一焦点 -->
   {observationText && (
     <DailyObservations observationText={observationText} lang={lang} />
   )}
 
-  <main class="container">
-    <h2 class="all-items-title">{allItemsLabel}</h2>
-    <!-- Category filter pills -->
-    <nav class="filter-bar" id="categoryPills">
-      {CATEGORIES.map((c) => (
-        <button
-          data-filter={c.id}
-          class={c.id === 'all' ? 'active' : ''}
-        >
-          {c.label}
-          {catCounts[c.id] > 0 && <span class="pill-count">{catCounts[c.id]}</span>}
-        </button>
-      ))}
-    </nav>
+  <!-- 2. 关键事件 — 5 条最重要的新闻 -->
+  {keyStories.length > 0 && (
+    <KeyStories stories={keyStories} lang={lang} />
+  )}
 
-    <!-- Unified grid -->
-    <section class="news-section" id="newsGrid">
-      <div class="news-grid">
-        {gridItems.map((item: any, idx: number) => (
-          <div class="card-wrap" data-group={getFilterGroup(item.category)} data-index={idx}>
-            <NewsCard
-              title={item.title}
-              titleZh={item.titleZh}
-              url={item.url}
-              summary={item.summary}
-              summaryZh={item.summaryZh}
-              sourceName={item.sourceName}
-              category={item.category}
-              imageUrl={item.imageUrl}
-              publishedAt={item.publishedAt}
-              showImage={idx < 6}
-              lang={lang}
-            />
-          </div>
+  <!-- 3. 全部资讯 — 默认折叠 -->
+  <main class="container">
+    <details class="all-items-details" id="allItemsDetails">
+      <summary class="all-items-summary">
+        <h2 class="all-items-title">{allItemsLabel}</h2>
+        <span class="all-items-chevron"></span>
+      </summary>
+
+      <!-- Category filter pills -->
+      <nav class="filter-bar" id="categoryPills">
+        {CATEGORIES.map((c) => (
+          <button
+            data-filter={c.id}
+            class={c.id === 'all' ? 'active' : ''}
+          >
+            {c.label}
+            {catCounts[c.id] > 0 && <span class="pill-count">{catCounts[c.id]}</span>}
+          </button>
         ))}
-      </div>
-      <button class="show-more" id="showMoreBtn">{moreLabel}</button>
-    </section>
+      </nav>
+
+      <!-- Unified grid -->
+      <section class="news-section" id="newsGrid">
+        <div class="news-grid">
+          {gridItems.map((item: any, idx: number) => (
+            <div class="card-wrap" data-group={getFilterGroup(item.category)} data-index={idx}>
+              <NewsCard
+                title={item.title}
+                titleZh={item.titleZh}
+                url={item.url}
+                summary={item.summary}
+                summaryZh={item.summaryZh}
+                sourceName={item.sourceName}
+                category={item.category}
+                imageUrl={item.imageUrl}
+                publishedAt={item.publishedAt}
+                showImage={idx < 6}
+                lang={lang}
+              />
+            </div>
+          ))}
+        </div>
+        <button class="show-more" id="showMoreBtn">{moreLabel}</button>
+      </section>
+    </details>
   </main>
 
   <Footer lang={lang} />
@@ -144,6 +153,46 @@ const allItemsLabel = lang === 'zh' ? '全部资讯' : 'All Items';
   }
   .card-wrap[data-visible="false"] {
     display: none;
+  }
+
+  .all-items-details {
+    margin-top: 2rem;
+  }
+
+  .all-items-summary {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    list-style: none;
+    padding: 1rem 0;
+    border-top: 1px dashed var(--color-border, #ddd);
+    user-select: none;
+  }
+
+  .all-items-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .all-items-summary .all-items-title {
+    margin: 0;
+    font-size: 1.1rem;
+    opacity: 0.7;
+  }
+
+  .all-items-chevron {
+    display: inline-block;
+    width: 0.5em;
+    height: 0.5em;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(-45deg);
+    transition: transform 0.2s;
+    opacity: 0.5;
+  }
+
+  .all-items-details[open] .all-items-chevron {
+    transform: rotate(45deg);
   }
 </style>
 
