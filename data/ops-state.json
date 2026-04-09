@@ -1,6 +1,6 @@
 {
   "_description": "Agent 运营状态 — 每次采集后更新，作为下次采集的输入",
-  "lastUpdated": "2026-04-08T11:50:46.840Z",
+  "lastUpdated": "2026-04-09T00:43:54.931Z",
   "sourceHealth": {
     "github-trending": {
       "consecutiveFailures": 0,
@@ -128,29 +128,29 @@
     }
   ],
   "stats": {
-    "totalRuns": 11,
+    "totalRuns": 12,
     "sourcesAdded": 0,
     "sourcesDisabled": 0,
     "twitterAccountsAdded": 0,
     "issuesProcessed": 2
   },
   "qualitySignals": {
-    "lastChecked": "2026-04-08T11:42:18.404Z",
+    "lastChecked": "2026-04-09T00:34:41.295Z",
     "lark": {
       "available": true,
-      "messageId": "om_x100b526e21cc2ca8b2b4c1b44f6718c",
-      "batch": "morning",
-      "sentAt": "2026-04-08T00:53:04.562Z",
+      "messageId": "om_x100b52503732d0b4b298510a68758fd",
+      "batch": "evening",
+      "sentAt": "2026-04-08T12:18:40.341Z",
       "readCount": 1,
       "memberTotal": 2,
       "readRate": 0.5
     },
     "feedback": {
       "available": true,
-      "totalOpen": 2,
-      "thisWeekNew": 33,
+      "totalOpen": 3,
+      "thisWeekNew": 34,
       "byLabel": {
-        "needs-human": 2,
+        "needs-human": 3,
         "bug": 5,
         "agent-todo": 5,
         "suggestion": 11,
@@ -211,14 +211,26 @@
         "batch": "morning",
         "readRate": 0.5,
         "readCount": 1
+      },
+      {
+        "date": "2026-04-09",
+        "batch": "evening",
+        "readRate": 0.5,
+        "readCount": 1
+      },
+      {
+        "date": "2026-04-09",
+        "batch": "evening",
+        "readRate": 0.5,
+        "readCount": 1
       }
     ],
     "website": {
       "available": false
     },
-    "lastMessageId": "om_x100b526e21cc2ca8b2b4c1b44f6718c",
-    "lastMessageBatch": "morning",
-    "lastMessageTime": "2026-04-08T00:53:04.562Z"
+    "lastMessageId": "om_x100b52503732d0b4b298510a68758fd",
+    "lastMessageBatch": "evening",
+    "lastMessageTime": "2026-04-08T12:18:40.341Z"
   },
   "runHistory": [
     {
@@ -235,6 +247,11 @@
       "date": "2026-04-08",
       "batch": "evening",
       "completedAt": "2026-04-08T11:50:46.840Z"
+    },
+    {
+      "date": "2026-04-09",
+      "batch": "morning",
+      "completedAt": "2026-04-09T00:43:54.931Z"
     }
   ]
 }
