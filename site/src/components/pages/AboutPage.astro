@@ -37,53 +37,34 @@ const { lang } = Astro.props;
       <p style="margin-bottom: 1.5rem;">{t(lang, 'about.how.text')}</p>
 
       <h2 style="margin: 2rem 0 1rem;">{t(lang, 'about.join.title')}</h2>
-      <p>
+      <p style="margin-bottom: 1.5rem;">
         {t(lang, 'about.join.text')}
-        {' '}
-        <a href="https://github.com/dolphin-molt/reado-station" target="_blank" style="color: var(--color-accent);">
-          GitHub
-        </a>
       </p>
 
       <h2 style="margin: 2rem 0 1rem;">{t(lang, 'feedback.title')}</h2>
-      <p style="margin-bottom: 1.5rem;">{t(lang, 'feedback.description')}</p>
-      <div class="feedback-buttons">
-        <a href="https://github.com/dolphin-molt/reado-station/issues/new?template=missing-source.yml" target="_blank" class="feedback-btn feedback-btn--source">
-          {t(lang, 'feedback.missing')}
-        </a>
-        <a href="https://github.com/dolphin-molt/reado-station/issues/new?template=wrong-info.yml" target="_blank" class="feedback-btn feedback-btn--bug">
-          {t(lang, 'feedback.bug')}
-        </a>
-        <a href="https://github.com/dolphin-molt/reado-station/issues/new?template=suggestion.yml" target="_blank" class="feedback-btn feedback-btn--idea">
-          {t(lang, 'feedback.suggestion')}
-        </a>
-      </div>
+      <p style="margin-bottom: 1rem;">{t(lang, 'feedback.description')}</p>
+      <button class="feedback-trigger-btn" data-feedback-trigger>
+        {t(lang, 'feedback.submit')}
+      </button>
     </div>
   </main>
 
   <style>
-    .feedback-buttons {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-    .feedback-btn {
+    .feedback-trigger-btn {
       display: inline-block;
-      padding: 0.6rem 1.2rem;
-      border: 1px solid var(--color-border);
-      text-decoration: none;
-      color: var(--color-text);
+      padding: 0.7rem 1.5rem;
+      background: var(--color-accent, #c0785c);
+      color: white;
+      border: none;
+      border-radius: 6px;
       font-size: 0.95rem;
-      transition: all 0.15s ease;
+      cursor: pointer;
+      font-weight: 500;
+      transition: opacity 0.15s;
     }
-    .feedback-btn:hover {
-      background: var(--color-text);
-      color: var(--color-bg);
-      border-color: var(--color-text);
+    .feedback-trigger-btn:hover {
+      opacity: 0.85;
     }
-    .feedback-btn--source::before { content: '+ '; }
-    .feedback-btn--bug::before { content: '! '; }
-    .feedback-btn--idea::before { content: '* '; }
   </style>
 
   <Footer lang={lang} />

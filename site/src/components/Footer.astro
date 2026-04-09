@@ -1,6 +1,7 @@
 ---
 import type { Lang } from '../i18n/translations';
 import { t, localePath } from '../i18n/translations';
+import FeedbackModal from './FeedbackModal.astro';
 
 interface Props {
   lang?: Lang;
@@ -15,8 +16,9 @@ const base = import.meta.env.BASE_URL;
   <p>{t(lang, 'footer.slogan')}</p>
   <div class="footer__links">
     <a href="https://github.com/dolphin-molt/reado-station" target="_blank">GitHub</a>
-    <a href="https://github.com/dolphin-molt/reado" target="_blank">reado CLI</a>
     <a href={localePath(base, lang, 'about/')}>{t(lang, 'nav.about')}</a>
-    <a href="https://github.com/dolphin-molt/reado-station/issues/new/choose" target="_blank">{t(lang, 'footer.feedback')}</a>
+    <a href="#" data-feedback-trigger>{t(lang, 'footer.feedback')}</a>
   </div>
 </footer>
+
+<FeedbackModal lang={lang} />
