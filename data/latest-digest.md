@@ -1,182 +1,267 @@
-# AI 日报 · 2026-04-08
+# AI 日报 · 2026-04-09
 
-> 采集时间 19:02 | 信息源: 24 | 条目: 322
+> 采集时间 00:31 UTC | 信息源: 39 | 条目: 238
 
 ## 今日观察
 
-### Dario Amodei（Anthropic）
-今天的核心不是模型又强了多少，而是 Anthropic 开始把“能力太强不能直接放出”变成一套安全部署机制。Project Glasswing 说明前沿模型的网络安全能力已经从理论风险进入实际治理阶段。
-
-### 黄仁勋（Jensen Huang）
-另一条很清楚的线是算力和基础设施继续上行。Anthropic 扩大 TPU 合作、苹果服务器芯片曝光、腾讯宣布加码 AI 投入，这些都说明行业竞争正在从模型能力转向长期供给能力。
-
-### 奥特曼（Sam Altman）
-今天也能看到另一面，开源阵营还在快速逼近。GLM-5.1 拿到更强的 Agent 和代码成绩，GitHub Trending 上又出现一批 Agent、记忆和本地推理项目，闭源和开源的拉锯会更激烈。
-
-### 李彦宏
-中国线索也很密集，阿里围绕 Token 重构电商、智谱 GLM-5.1 上线华为云、DeepSeek 调整产品模式，说明国内竞争点正在从“谁有模型”转为“谁能把模型真正接进业务”。
+今天的 AI 领域有两条主线同步推进：模型竞争进入新阶段，以及企业级 AI 部署基础设施正在成熟。Meta 时隔一年发布 Muse Spark，这是其超级智能实验室的首款前沿模型，也是 Meta 首次放弃开源策略——这一转变标志着头部公司对闭源商业化路径的重新审视。与此同时，Anthropic 推出 Claude Managed Agents，主动降低企业构建 AI Agent 的门槛，OpenAI 则公布企业业务已占总收入 40%，Codex 周活跃用户突破 300 万。算力侧，全球云厂商集体上调 AI 算力价格，中国公有云首次面临"AI 通胀"压力，豆包日均 Token 使用量突破 120 万亿（自 2024 年 5 月以来增长 1000 倍），显示出推理需求规模已超越大多数人的预期。安全维度上，Anthropic 推出 Glasswing 网络安全项目，OpenAI 发布儿童安全蓝图，同日其新模型因被认定"风险过高"暂未发布——围绕 AI 能力边界的讨论正从学术走向政策与司法。
 
 ---
 
 ## 重大新闻
 
-### Anthropic 推出 Project Glasswing，并限制 Mythos Preview 仅向安全伙伴开放
+### Meta 发布 Muse Spark：首款前沿闭源模型，股价涨 6.5%
 
 **来源**:
-- 官方: [Anthropic](https://news.google.com/rss/articles/CBMiVkFVX3lxTE1OZllhcGl6UjF2TjYtaWtwRjBCMEUxX1BsRGExWGp5SmFJbXZWb3hLajdYdG1kb0JMTi11cUExcFFMQm8yeWdCWDRISTNPVFlad2otNFVB?oc=5) · [Anthropic Red Team](https://news.google.com/rss/articles/CBMiWkFVX3lxTFBDbE9iaGJ1N01XbThiXzFTNDV0Q1RFemd0X0JuQzRobGFrbFZkMW00N0thaGl5amhxZmtvS0RRbDQxcGpQa0dtU3JuSlpuSE9QUVlYdjhDbFFMdw?oc=5) · [Anthropic Twitter](https://x.com/i/status/2041578392852517128)
-- 媒体: [TechCrunch](https://techcrunch.com/2026/04/07/anthropic-mythos-ai-model-preview-security/) · [Stratechery](https://stratechery.com/2026/anthropics-new-model-the-mythos-wolf-glasswing-and-alignment/) · [Techmeme / NYT](http://www.techmeme.com/260408/p14#a260408p14)
-- 社区: [Hacker News](https://www.anthropic.com/glasswing) · [Lobsters](https://lobste.rs/s/aw2jr4/assessing_claude_mythos_preview_s)
+- 官方: [Meta AI Blog](https://news.google.com/rss/articles/CBMiYkFVX3lxTFBsNC1udEdYdEhzd29jVTV6YWhvUjZrRVIzSzR5WktVZzRudE5OUENGbTFFbU55QmZveHhqV1JjakhhWkF2b1poOXFJZVZKVFRaNWJrdGtKWHB0a21obGtuempn?oc=5)
+- 媒体: [The Verge](https://www.theverge.com/tech/908769/meta-muse-spark-ai-model-launch-rollout) · [The Decoder](https://the-decoder.com/metas-muse-spark-is-its-first-frontier-model-and-its-first-without-open-weights/) · [Wired](https://www.wired.com/story/muse-spark-meta-open-source-closed-source/) · [Ars Technica](https://arstechnica.com/ai/2026/04/metas-superintelligence-lab-unveils-its-first-public-model-muse-spark/) · [CNBC via Techmeme](http://www.techmeme.com/260408/p29#a260408p29)
+- 分析: [Simon Willison](https://simonwillison.net/2026/Apr/8/muse-spark/#atom-everything)
 
-**官方公告**: Anthropic 宣布 Project Glasswing，由最新前沿模型 Claude Mythos Preview 驱动，用于帮助关键软件维护者发现高危漏洞。官方明确表示该模型暂不对公众开放，而是向合作伙伴和关键基础设施维护方提供受控访问。
+**官方公告**: Meta 超级智能实验室（Alexandr Wang 领导）发布 Muse Spark，已接入 Meta AI 应用和 WhatsApp，驱动"购物模式"等功能。正向精选合作伙伴开放私有 API 预览，计划后续向更广用户收费。同时承诺将在未来推出开源版本。
 
-**媒体补充**: TechCrunch 与 Stratechery 均指出，这不是常规新品发布，而是一次“能力先行，限制部署”的安全试点。外部报道普遍强调，Anthropic 已将网络安全视为前沿模型最先进入现实世界的高风险场景。
+**媒体补充**: The Decoder 指出 Muse Spark 是 Meta 首款前沿模型，也是首款不提供开放权重的模型，独立测试显示其与 OpenAI、Anthropic、Google 的差距已明显缩小，但在 Agentic 任务和编码方面仍有差距。Meta 承认"性能差距"。Wired 称此举给 Zuckerberg 带来了与顶级竞争对手同台竞技的资格。META 股价收涨 6.5%。
 
-**社区反应**: HN 与 Lobsters 的讨论集中在两点，一是 Mythos 级别能力是否意味着更大范围的漏洞军备竞赛，二是这种限制开放策略是否会成为未来前沿模型的默认路径。
+**社区反应**: Simon Willison 注意到 meta.ai 聊天界面内置了有趣的工具集，模型在过去 9 个月经过了从零重建，以在相同计算资源下获得更高性能。
 
-> 影响评估: 前沿模型的竞争已经从“谁更强”进入“谁能安全部署更强模型”的新阶段。
+> 影响评估: Meta 放弃开源优先策略，转向闭源商业化，AI 头部竞争格局趋于收敛。
 
 ---
 
-### GLM-5.1 持续放大开源声量，并进入华为云等分发渠道
+### Anthropic 推出 Claude Managed Agents，降低企业 Agent 构建门槛
 
 **来源**:
-- 官方: [Z.ai Twitter](https://x.com/i/status/2041550153354519022)
-- 媒体: [36Kr](https://36kr.com/newsflashes/3758040148951810?f=rss) · [QbitAI](https://www.qbitai.com/2026/04/397898.html)
-- 社区: [Clement Delangue](https://x.com/i/status/2041554501539103014)
+- 官方: [Anthropic Blog](https://news.google.com/rss/articles/CBMiYkFVX3lxTE5LY3VWakFxdE02bVBBdDNrSEJaY2NqV1ZkZ3hfNUxBeWFXZDdrU21vTTdnSFdNUGNPRVpSMWVyVGp6MWlQWTFYU2JIcVZDdDcwMXcwRlpYNExMeWZBMGxXOWJ3?oc=5)
+- 媒体: [Wired](https://www.wired.com/story/anthropic-launches-claude-managed-agents/) · [Techmeme](http://www.techmeme.com/260408/p33#a260408p33)
+- 中文: [虎嗅](https://news.google.com/rss/articles/CBMiU0FVX3lxTE5QdzEzVm1fWDhXdngtX0g3YnVYaGZzTk9JSkplaXplOXg2STNoTDhRUDVILURKY1NqQUg2RFppemk0SDRPVzA4c3JrWkhuQlh5cndZ?oc=5)
 
-**官方公告**: Z.ai 持续宣传 GLM-5.1 的代码与 Agent 能力，强调其在 SWE-Bench Pro、长时任务和 Vector-DB-Bench 上的表现，并展示 8 小时自主构建 Linux Desktop 的案例。
+**官方公告**: Anthropic 推出 Claude Managed Agents，提供 Agent 运行框架和配套工具，帮助开发者大规模构建和部署 AI Agent，现已进入公测阶段。核心产品概念为"将大脑与执行分离"（Decoupling the brain from the hands）。
 
-**媒体补充**: 国内媒体补充了它在国内云厂商和生态侧的落地进展，36Kr 提到 GLM-5.1 已 Day0 上线华为云，QbitAI 则继续放大其对闭源强模型的对比优势。
+**媒体补充**: Wired 报道这是 Anthropic 在企业快速增长背景下，主动降低企业接入门槛的举措，包含 Agent 工具调用、多步骤规划、错误恢复等工具链。
 
-**社区反应**: Hugging Face CEO Clément Delangue 明确为其站台，称其是平台上当前最强的开源模型之一，强化了开源阵营的舆论势能。
-
-> 影响评估: 开源模型正在把“能不能追上闭源”转成“在哪些核心场景先超一段”。
+> 影响评估: Anthropic 从模型供应商向 Agent 平台转型，与 OpenAI 的企业 AI 战略形成直接竞争。
 
 ---
 
-### 中国互联网大厂进一步围绕 AI 组织和业务重构
+### Anthropic Project Glasswing：为 AI 时代保护关键软件安全
 
 **来源**:
-- 媒体: [36Kr](https://36kr.com/p/3748018292802309?f=rss) · [36Kr EN](https://news.google.com/rss/articles/CBMiU0FVX3lxTE5BWDRXNDNIRzNVS2lWUUhfT004dHlzVHZpc1ZSVXE1NDN2Rjl0QXFxQjN1bEJ0Skt6UVFRSi1rQzlRWFc0T1lBRGt2VFRuYWNHeUs4?oc=5) · [钛媒体](https://www.tmtpost.com/7945695.html) · [虎嗅](https://news.google.com/rss/articles/CBMiU0FVX3lxTE9sSVdMUW9xVnVPZ1dyd3NETWRmU185ZUtOelVMMFY4bmpPLVA2dGdOd2M2NmZDWDhyUFVad2t1U3Zpb3F4S0VoQWVGWm1qY0xXc3BB?oc=5)
+- 官方: [Anthropic](https://news.google.com/rss/articles/CBMiS0FVX3lxTFBfQUdtMDZYaEtZV0JMSk1ZSzdqTl9mV3dQTnZYcVEzaHo4cV8yUEl2a25QMWRXenFTYUQ3NF9WakR5WXVwaDRTZC1ZYw?oc=5)
+- 延伸: [TechMeme — 钛媒体报道](https://www.tmtpost.com/7945693.html)
 
-阿里被多家媒体同时报道正在围绕 Token、组织架构和通义事业部做新一轮调整，方向是把 AI 能力更深地嵌入电商与集团技术体系。与此同时，腾讯披露 2025 年营收 7518 亿元，并表示 AI 投入将进一步加码。国内头部公司的共同点很明确，AI 已经从实验项目转成真正的经营变量。
+**官方公告**: Anthropic 推出 Project Glasswing，专注于用 AI 保护关键软件安全，同时宣布聘请量子物理背景的研究者领导网络安全红队。这是 Anthropic 在 AI 安全领域的主动出击——不仅要防止 AI 被滥用，还要让 AI 成为网络安全防御工具。
 
-> 影响评估: 2026 年中国大厂的 AI 竞争重点正在从模型发布转向组织改造和业务落地效率。
+> 影响评估: 随着 AI 渗透基础设施，AI 公司开始将安全能力作为差异化竞争维度。
+
+---
+
+### OpenAI 企业业务占比超 40%，Codex 周活跃用户破 300 万
+
+**来源**:
+- 官方: [OpenAI Enterprise Blog](https://openai.com/index/next-phase-of-enterprise-ai)
+- 媒体: [36氪](https://36kr.com/newsflashes/3758807110664966?f=rss) · [Techmeme — CFO IPO 表态](http://www.techmeme.com/260408/p36#a260408p36)
+
+**官方公告**: OpenAI 首席营收官 Denise Dresser 宣布，企业业务目前占总收入 40% 以上，预计 2026 年底前与消费者业务持平。Codex 周活跃用户刚突破 300 万。CFO Sarah Friar 同日表示，IPO 将"肯定"为散户投资者保留份额。
+
+**媒体补充**: 此次企业 AI 战略发布伴随 ChatGPT Enterprise、Codex 和公司级 AI Agent 的更新，标志着 OpenAI 商业化进入成熟期。
+
+> 影响评估: OpenAI 企业级收入快速增长，B 端商业模式正在验证，散户 IPO 预期升温。
+
+---
+
+### Anthropic 供应链风险认定：两院裁决相互矛盾
+
+**来源**:
+- 媒体: [Wired](https://www.wired.com/story/anthropic-appeals-court-ruling/) · [Reuters via Techmeme](http://www.techmeme.com/260408/p38#a260408p38)
+
+**媒体补充**: 美国国防部此前将 Anthropic 认定为"供应链风险"，加州法院 3 月已颁布临时禁令。但 DC 上诉法院拒绝了 Anthropic 暂停该认定的请求，两份裁决相互矛盾，美军是否可以使用 Claude 模型仍处于法律不确定状态。
+
+> 影响评估: AI 模型的国家安全定性正成为新的监管战场，企业与政府的法律博弈将持续。
 
 ---
 
 ## 公司动态
 
-### 苹果自研 AI 服务器芯片 Baltra 曝光
+### Anthropic 聘请微软 Azure AI 负责人 Eric Boyd 出任基础设施主管
 
-**来源**: [虎嗅](https://news.google.com/rss/articles/CBMiUEFVX3lxTE1mdVJFNElsYy1vMGhrUXBINkRKaE43cXBCV0FUdjczcXJXcm1uRGl6aFdiZHZfQWZWTV9lSGYxa3Q3YWVkN3hxZUY3clR6UUFl?oc=5)
+**来源**: [The Decoder](https://the-decoder.com/anthropic-hires-microsofts-azure-ai-chief-to-fix-its-infrastructure-problems/)
 
-报道称苹果自研 AI 服务器芯片 Baltra 的更多供应链细节曝光，包含玻璃基板等关键部件采购线索。虽然仍属外部报道，但它进一步强化了苹果正在补齐云侧 AI 基础设施的判断。
-
-### 腾讯称 2025 年营收 7518 亿元，AI 投入将翻倍
-
-**来源**: [虎嗅](https://news.google.com/rss/articles/CBMiVEFVX3lxTFBUUm81ODhpc3BjWVpGcF9HVEJzMzYwaEI2dmRDQmk1S2pRajd5OUZBVGgwbDZZUWdnaWdVSWhTYjM3NlBzdFVGUHBudlRnVE9BZ09QNQ?oc=5)
-
-腾讯披露 2025 年营收 7518 亿元，并表示 AI 投入将翻倍，目标直指更大规模增长。这说明头部平台公司已经接受 AI 投入周期会变长，但回报会体现在更深层业务结构上。
-
-### DeepSeek 调整产品交互，推出分层模式
-
-**来源**: [虎嗅](https://news.google.com/rss/articles/CBMiVEFVX3lxTE9mVGdpWHVjTjhFZWJrSVRkd2s2QU1fRG9sbjBLVHFCQUNIMTNwdVZRMHY4VzI5Y05NTlJPZ3hTQVpxUXNFVTVYdEhfVnB2cmFxSlVYTg?oc=5)
-
-DeepSeek 被报道上线分层模式界面，尝试通过不同使用模式更细致地分配算力与交互体验。方向上很像把高强度推理能力做成分级商品，而不是统一入口。
+据 Bloomberg 报道，Anthropic 聘请微软 Azure AI 前负责人 Eric Boyd 担任基础设施主管。此前有报道称 Anthropic 在 GPU 调度和推理基础设施方面存在瓶颈，此次人事变动被视为解决这一问题的战略举措。
 
 ---
 
-## Twitter/X 精选
+### xAI 工程团队大规模重组，与 SpaceX 深度整合
 
-### Anthropic 官方（Anthropic）
+**来源**: [36氪](https://36kr.com/newsflashes/3758803331498503?f=rss)
 
-**来源**: @AnthropicAI · Twitter/X
-**链接**: [原推](https://x.com/i/status/2041578392852517128)
+内部备忘录显示，SpaceX 星链高级副总裁 Michael Nichols 近期出任 xAI 总裁，并主导新一轮工程重组。备忘录明确指出 xAI "明显落后于竞争对手"，正采取措施追赶。此次重组恰逢 SpaceX 历史性 IPO 前夕。
 
-Anthropic 用一串 thread 正式介绍 Glasswing，重点强调 Mythos Preview 已能发现大量高危漏洞，但不会直接开放给大众。核心信息不是“又出了个更强模型”，而是“更强模型必须先带着安全护栏进入现实世界”。
+---
 
-### Dario Amodei（Anthropic CEO）
+### Google Gemini 上线 Notebooks，深度整合 NotebookLM
 
-**来源**: @darioamodei · Twitter/X
-**链接**: [原推](https://x.com/i/status/2041580338426585171)
+**来源**: [The Verge](https://www.theverge.com/tech/909031/google-gemini-notebooks-notebooklm) · [Techmeme](http://www.techmeme.com/260408/p40#a260408p40)
 
-Dario 把 Glasswing 定义为一次面向网络安全风险的现实治理实验。他反复强调，如果这类模型处理得当，AI 也可能成为提升全球软件安全性的关键防线。
+Google Gemini 应用新增"Notebooks"功能，为用户提供统一工作区以组织聊天记录、文件和自定义指令，是 Gemini 与 NotebookLM 深度整合的关键一步。
 
-### Z.ai 官方（Z.ai）
+---
 
-**来源**: @zai_org · Twitter/X
-**链接**: [原推](https://x.com/i/status/2041550153354519022)
+### Databricks 联创获 ACM 最高奖，称 AGI 已经到来
 
-Z.ai 继续放大 GLM-5.1 的开源能力，突出 SWE-Bench Pro、长时自治任务和数据库优化性能，试图把“开源可用”进一步升级为“开源领先”。
+**来源**: [TechCrunch](https://techcrunch.com/2026/04/08/databricks-matei-zaharia-wins-acm-computing-prize-agi/)
 
-### Clément Delangue（Hugging Face CEO）
+Matei Zaharia 荣获 ACM 计算奖（最高荣誉），他现专注于 AI 研究工具，并表示 AGI 已经实现——只是人们对 AGI 的定义存在误解。
 
-**来源**: @ClementDelangue · Twitter/X
-**链接**: [原推](https://x.com/i/status/2041554501539103014)
+---
 
-Clément 公开为 GLM-5.1 站台，称其已成为 Hugging Face 平台上最强的开源模型之一。这类来自平台方的背书，对模型生态扩散非常关键。
+### OpenAI 发布儿童安全蓝图
 
-### OpenClaw 官方（OpenClaw）
+**来源**: [OpenAI](https://openai.com/index/introducing-child-safety-blueprint) · [TechCrunch](https://techcrunch.com/2026/04/08/openai-releases-a-new-safety-blueprint-to-address-the-rise-in-child-sexual-exploitation/)
 
-**来源**: @openclaw · Twitter/X
-**链接**: [原推](https://x.com/i/status/2041714270212108657)
+OpenAI 发布儿童安全蓝图，针对 AI 驱动的儿童性剥削问题，提出立法更新、检测改进和协作机制三大方向。
 
-OpenClaw 发布 2026.4.7 更新，亮点包括 `openclaw infer`、music/video editing、session branch/restore、webhook-driven TaskFlow 以及 memory-wiki 等能力，整体方向是在把工具链进一步做成统一智能工作台。
+---
+
+### Anthropic 完成员工股份要约收购，估值 3500 亿美元
+
+**来源**: [36氪](https://36kr.com/newsflashes/3758830318043657?f=rss)
+
+Anthropic 完成今年早些时候启动的存量股份出售，定价与 2 月份最新融资估值（3500 亿美元）一致。但由于员工愿意出售的股份数量有限，部分投资者未能按计划购入足够份额。
+
+---
+
+### Tubi 成为首家在 ChatGPT 内推出原生应用的流媒体
+
+**来源**: [TechCrunch](https://techcrunch.com/2026/04/08/tubi-is-the-first-streamer-to-launch-a-native-app-within-chatgpt/)
+
+Fox 旗下 Tubi 成为首家在 ChatGPT 内推出原生应用的流媒体服务，用户可通过自然语言请求浏览其 30 万+ 片库。
+
+---
+
+### Mistral 发布欧洲 AI 战略手册
+
+**来源**: [Mistral AI](https://news.google.com/rss/articles/CBMiP0FVX3lxTFA1TllXay1ZQlNuMV9aWXhCNzRPQ1FXN0NfR3hCV0pmelZESEhMM1lxTHRQUkhHMXM3VUNnSmZVOA?oc=5)
+
+Mistral 发布欧洲 AI 战略手册，主张欧洲应主导自己的 AI 议程，而非依赖美国技术。
+
+---
+
+### Claude Code v2.1.97 更新：新增 Focus View 功能
+
+**来源**: [GitHub Release](https://github.com/anthropics/claude-code/releases/tag/v2.1.97)
+
+Claude Code 发布 v2.1.97，新增 Focus View 切换（Ctrl+O）：在 NO_FLICKER 模式下显示提示词、单行工具摘要（含编辑 diff 统计）和最终响应。同步修复了 v2.1.96 中的 Bedrock 403 授权头问题。
+
+---
+
+### 全球云厂商集体上调 AI 算力价格，中国公有云首遭"AI 通胀"
+
+**来源**: [虎嗅](https://news.google.com/rss/articles/CBMiVEFVX3lxTFBqS0RlV1hCR1FaS3hfdzdwTHNra1gxNE5Sd3pqSWZJUXJQNk5XZkYzc0doRUphMmJNZ1hrTTJ2ZmJiZkxjaVNaWmt3M0JtTUNsWVNHVw?oc=5)
+
+2026 年，全球云厂商集体上调 AI 算力价格，中国公有云市场首次面临"AI 通胀"压力。中信建投研报指出，豆包大模型日均 Token 使用量已突破 120 万亿，自 2024 年 5 月以来增长 1000 倍，显示推理需求规模爆发。
 
 ---
 
 ## 论文与开源
 
-### NousResearch/hermes-agent
-
-**来源**: GitHub Trending (Python)
-**链接**: [原文链接](https://github.com/NousResearch/hermes-agent)
-
-Hermes Agent 是一个强调长期记忆与用户适配的 Agent 项目，今天继续出现在 Python Trending 前列。它值得关注的点不只是“又一个 Agent 框架”，而是把可持续记忆作为核心能力来设计。
-
-### abhigyanpatwari/GitNexus
+### obra/superpowers — Agentic 技能框架 +2028 Stars
 
 **来源**: GitHub Trending
-**链接**: [原文链接](https://github.com/abhigyanpatwari/GitNexus)
+**链接**: [github.com/obra/superpowers](https://github.com/obra/superpowers)
 
-GitNexus 主打浏览器内代码知识图谱与 Graph RAG Agent，强调零服务端、零配置的仓库理解能力。对于代码浏览、知识整理和轻量协作场景都很有吸引力。
+[Shell] Superpowers 是一个 Agentic 技能框架和软件开发方法论，专为 AI Agent 协作开发场景设计。本周单日涨 2028 stars，是趋势榜单最热门项目，体现了开发者对 Agent 框架工具链的强烈需求。
 
-### Learning to Retrieve from Agent Trajectories
+---
 
-**来源**: HuggingFace Papers
-**链接**: [原文链接](https://arxiv.org/abs/2604.04949)
+### NousResearch/hermes-agent — 可持续成长的 AI Agent +5794 Stars
 
-论文关注如何从 Agent 的真实轨迹中学习检索策略，而不是只在静态 QA 数据上优化。这类工作很贴近 Agent 实战，因为检索质量往往直接决定多步任务的稳定性。
+**来源**: GitHub Trending（Python）
+**链接**: [github.com/NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent)
 
-### Paper Circle: An Open-source Multi-agent Research Discovery System
+[Python] hermes-agent 是 NousResearch 推出的 Agent 框架，强调"随用户成长"的设计理念。本周涨幅超 5700 stars，是 Python 趋势榜第一，方向对齐当前 AI Agent 热潮。
 
-**来源**: HuggingFace Papers
-**链接**: [原文链接](https://arxiv.org/abs/2604.06170)
+---
 
-这是一个面向科研发现的开源多 Agent 系统，目标是让论文筛选、归纳和追踪更自动化。它很契合当前“研究工作流 Agent 化”的趋势。
+### HKUDS/DeepTutor — Agent 原生个性化学习助手 +1306 Stars
+
+**来源**: GitHub Trending（Python）
+**链接**: [github.com/HKUDS/DeepTutor](https://github.com/HKUDS/DeepTutor)
+
+[Python] 香港大学数据科学研究小组推出 DeepTutor，一款 Agent 原生的个性化学习助手，基于论文同名研究。适用于教育 AI 场景，提供深度个性化教学辅导，周涨 1306 stars。
+
+---
+
+### MegaTrain：在单张 GPU 上全精度训练 1000 亿参数 LLM
+
+**来源**: [arXiv](https://arxiv.org/abs/2604.05091) · [HackerNews ↑249](https://news.ycombinator.com/item?id=)
+
+arXiv 论文 MegaTrain 提出了一种在单张 GPU 上全精度训练 100B+ 参数大模型的方法，在 HackerNews 获 249 票关注，打破了"超大模型必须分布式训练"的普遍假设。
+
+---
+
+### Learning to Retrieve from Agent Trajectories — HF Papers 本周最热
+
+**来源**: [HuggingFace Papers](https://arxiv.org/abs/2604.04949)
+
+本周 HuggingFace 日报最热论文（↑55），研究如何从 Agent 执行轨迹中学习检索策略，对 RAG + Agent 的结合有直接应用价值。
+
+---
+
+### ALTK-Evolve：AI Agent 在职学习框架
+
+**来源**: [HuggingFace Blog](https://huggingface.co/blog/ibm-research/altk-evolve)
+
+IBM Research 在 HuggingFace 发布 ALTK-Evolve，一套让 AI Agent 在实际工作中持续学习改进的框架，对企业部署 Agent 后的能力演进有参考意义。
+
+---
+
+### google-ai-edge/gallery — 设备端 ML/GenAI 展示库 +853 Stars
+
+**来源**: GitHub Trending
+**链接**: [github.com/google-ai-edge/gallery](https://github.com/google-ai-edge/gallery)
+
+[Kotlin] Google 开源的设备端 ML/GenAI 用例展示库，支持用户本地运行模型。配合 LiteRT-LM（+501 stars）共同演示 Google 的端侧 AI 战略。
 
 ---
 
 ## 社区热点
 
-### Hacker News 继续围绕 Glasswing 与 Mythos 展开讨论
+### Anthropic 支持响应问题引发 HN 高票讨论
 
-**来源**: [Hacker News](https://www.anthropic.com/glasswing)
+**来源**: [Hacker News ↑250 💬126](https://nickvecchioni.github.io/thoughts/2026/04/08/anthropic-support-doesnt-exist/)
 
-HN 今日与 AI 直接相关的高热讨论仍然集中在 Anthropic 的 Glasswing 计划和 Mythos system card。讨论焦点不是单纯赞叹能力，而是模型风险、披露边界和安全合作机制是否足够可信。
+一位用户在博客发文"我等了 Anthropic 一个多月账单问题仍无回应"，在 HN 获 250 票、126 条评论。随着 Anthropic 企业用户快速增长，支持响应能力的短板引发广泛共鸣。
 
-### Lobsters：多 Agent 软件开发本质上仍是分布式系统问题
+---
 
-**来源**: [Lobsters](https://lobste.rs/s/vjcymq/multi_agentic_software_development_is)
+### Railway 前端从 Next.js 迁移，构建时间从 10 分钟缩短到 2 分钟
 
-社区热帖强调，多 Agent 编程并不会绕过一致性、延迟、状态同步等老问题。即使模型更强，工程系统的基本约束仍然存在，这个判断对 Agent 工程落地很有价值。
+**来源**: [Hacker News ↑172 💬160](https://blog.railway.com/p/moving-railways-frontend-off-nextjs)
 
-### Product Hunt / 社区新品中，Agent 与工作流工具继续堆积
+Railway 工程团队分享了将前端从 Next.js 迁出的经验，构建时间大幅压缩，在 HN 引发 160 条关于前端框架选择的讨论。
 
-**来源**: [Product Hunt](https://www.producthunt.com/products/clawcast)
+---
 
-今晚新品里仍然能看到大量 workflow、AI 辅助创作和自动化工具，说明市场热度还在，但真正能留下来的产品大概率还是那些能接进真实工作流的少数玩家。
+### Lobsters：Claude Mythos Preview 网络安全能力评估
+
+**来源**: [Lobsters ↑68 💬30](https://lobste.rs/s/aw2jr4/assessing_claude_mythos_preview_s)
+
+Lobsters 社区热议对 Claude Mythos Preview（Anthropic 新模型）网络安全能力的评测文章，68 票，30 条评论，是 Stratechery 分析（该模型"风险过高暂不发布"）的实测补充。
+
+---
+
+### V2EX：国内 Claude Opus 免费渠道讨论
+
+**来源**: [V2EX 💬135](https://www.v2ex.com/t/1204217)
+
+V2EX 热帖整理近期可用的免费 Claude Opus 渠道，135 条评论，反映国内开发者对顶级模型访问的持续需求。
+
+---
+
+### 美团/京东限制员工使用外部大模型引发争议
+
+**来源**: [虎嗅](https://news.google.com/rss/articles/CBMiVEFVX3lxTE5wLUR4UDdTSWVXYnloWHUzZnZRcVJya0FRd2hRdzRIMG1sUWFON3Nha1JhSDdSMl9CZENNWXlxcjd3UjZmMEpic3g4LVJtLTIxNU1LRw?oc=5)
+
+美团和京东相继限制员工在工作中使用外部大模型产品，引发业界争议——是数据安全考量，还是对内部 AI 工具的保护性措施？
 
 ---
 
@@ -184,7 +269,7 @@ HN 今日与 AI 直接相关的高热讨论仍然集中在 Anthropic 的 Glasswi
 
 | 指标 | 数值 |
 |------|------|
-| 信息源总数 | 47 |
-| 成功采集 | 24 |
-| 条目总数 | 322 |
-| 去重移除 | 0 |
+| 信息源总数 | 80 |
+| 成功采集 | 39 |
+| 条目总数 | 238 |
+| 去重移除 | 13 |

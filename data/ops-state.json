@@ -135,12 +135,12 @@
     "issuesProcessed": 2
   },
   "qualitySignals": {
-    "lastChecked": "2026-04-09T00:34:41.295Z",
+    "lastChecked": "2026-04-09T12:57:48.685Z",
     "lark": {
       "available": true,
-      "messageId": "om_x100b52503732d0b4b298510a68758fd",
-      "batch": "evening",
-      "sentAt": "2026-04-08T12:18:40.341Z",
+      "messageId": "om_x100b525bc6ae4cbcb3f84dbe0e6a113",
+      "batch": "morning",
+      "sentAt": "2026-04-09T00:53:26.575Z",
       "readCount": 1,
       "memberTotal": 2,
       "readRate": 0.5
@@ -223,14 +223,20 @@
         "batch": "evening",
         "readRate": 0.5,
         "readCount": 1
+      },
+      {
+        "date": "2026-04-09",
+        "batch": "morning",
+        "readRate": 0.5,
+        "readCount": 1
       }
     ],
     "website": {
       "available": false
     },
-    "lastMessageId": "om_x100b52503732d0b4b298510a68758fd",
-    "lastMessageBatch": "evening",
-    "lastMessageTime": "2026-04-08T12:18:40.341Z"
+    "lastMessageId": "om_x100b525bc6ae4cbcb3f84dbe0e6a113",
+    "lastMessageBatch": "morning",
+    "lastMessageTime": "2026-04-09T00:53:26.575Z"
   },
   "runHistory": [
     {

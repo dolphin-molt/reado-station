@@ -1,0 +1,1097 @@
+{
+  "fetchedAt": "2026-04-09T11:52:45.373Z",
+  "stats": {
+    "totalSources": 80,
+    "successSources": 17,
+    "failedSources": 0,
+    "totalItems": 133,
+    "deduplicatedItems": 12,
+    "contributingSources": 17,
+    "successSourceIds": [
+      "tw-anthropicai",
+      "tw-claudeai",
+      "tw-geminiapp",
+      "tw-alibaba_qwen",
+      "tw-minimax_ai",
+      "tw-replit",
+      "tw-alexandr_wang",
+      "tw-mustafasuleyman",
+      "tw-noamshazeer",
+      "reddit-locallama",
+      "v2ex",
+      "devto",
+      "producthunt",
+      "hf-papers",
+      "zhihu-hot",
+      "bilibili-ranking",
+      "36kr-hot"
+    ],
+    "failedSourceIds": []
+  },
+  "items": [
+    {
+      "title": "New on the Engineering Blog: \n\nBuilding Managed Agents—our hosted service for long-running agents—meant solving an old problem in computing: how to design a system for “programs as yet unthought of.”\n",
+      "url": "https://x.com/i/status/2041929199976640948",
+      "summary": "❤️2929 @AnthropicAI",
+      "publishedAt": null,
+      "source": "tw-anthropicai",
+      "sourceName": "@anthropicai"
+    },
+    {
+      "title": "Introducing Claude Managed Agents: everything you need to build and deploy agents at scale.\n\nIt pairs an agent harness tuned for performance with production infrastructure, so you can go from prototyp",
+      "url": "https://x.com/i/status/2041927687460024721",
+      "summary": "❤️48379 @claudeai",
+      "publishedAt": null,
+      "source": "tw-claudeai",
+      "sourceName": "@claudeai"
+    },
+    {
+      "title": "Build and deploy your agents through the Claude Console, Claude Code, or our new CLI: https://t.co/E9xQ7xd4rG\n\nRead more on the blog: https://t.co/omWjJ4fK88",
+      "url": "https://x.com/i/status/2041927700063883281",
+      "summary": "❤️967 @claudeai",
+      "publishedAt": null,
+      "source": "tw-claudeai",
+      "sourceName": "@claudeai"
+    },
+    {
+      "title": "@NotionHQ lets teams delegate work to Claude directly inside their workspace. Dozens of tasks run in parallel, and whole teams collaborate on the outputs. Available now in private alpha: https://t.co/",
+      "url": "https://x.com/i/status/2041927691268497548",
+      "summary": "❤️1244 @claudeai",
+      "publishedAt": null,
+      "source": "tw-claudeai",
+      "sourceName": "@claudeai"
+    },
+    {
+      "title": "@Rakuten deploys specialist agents, powered by Managed Agents, for product, sales, marketing, and finance, each one in under a week: https://t.co/ScoKKsgJZo",
+      "url": "https://x.com/i/status/2041927694628037022",
+      "summary": "❤️530 @claudeai",
+      "publishedAt": null,
+      "source": "tw-claudeai",
+      "sourceName": "@claudeai"
+    },
+    {
+      "title": "Shipping a production agent meant months of infrastructure work first.\n\nManaged Agents handles that for you. Define your agent's tasks, tools, and guardrails, and we run it on our infrastructure.\n\nHer",
+      "url": "https://x.com/i/status/2041927689397788789",
+      "summary": "❤️2161 @claudeai",
+      "publishedAt": null,
+      "source": "tw-claudeai",
+      "sourceName": "@claudeai"
+    },
+    {
+      "title": "@asana built AI Teammates on Managed Agents: agents that work inside Asana as part of your team, picking up assigned tasks.\n\nOffloading the infrastructure let them put engineering time into the multip",
+      "url": "https://x.com/i/status/2041927692874895500",
+      "summary": "❤️544 @claudeai",
+      "publishedAt": null,
+      "source": "tw-claudeai",
+      "sourceName": "@claudeai"
+    },
+    {
+      "title": "@sentry now takes you from Seer's root-cause analysis to a Claude-powered agent that writes the fix and opens a PR. They built the integration on Managed Agents in weeks: https://t.co/kPd2qFH2IM",
+      "url": "https://x.com/i/status/2041927696351994006",
+      "summary": "❤️511 @claudeai",
+      "publishedAt": null,
+      "source": "tw-claudeai",
+      "sourceName": "@claudeai"
+    },
+    {
+      "title": "On @vibecodeapp_, developers can now spin up agent infrastructure at least 10x faster with Managed Agents, going from a prompt to a deployed app without weeks of setup: https://t.co/YyvozwEc5O",
+      "url": "https://x.com/i/status/2041927698210058629",
+      "summary": "❤️881 @claudeai",
+      "publishedAt": null,
+      "source": "tw-claudeai",
+      "sourceName": "@claudeai"
+    },
+    {
+      "title": "Gemini 🤝 @NotebookLM\n\nGood news for NotebookLM users: Now you can access all your existing personal notebooks within Gemini too.\nhttps://t.co/1DEEe4Jgas",
+      "url": "https://x.com/i/status/2041983289062547772",
+      "summary": "❤️216 @GeminiApp",
+      "publishedAt": null,
+      "source": "tw-geminiapp",
+      "sourceName": "@geminiapp"
+    },
+    {
+      "title": "Notebooks in Gemini are rolling out this week, starting with Google AI Ultra, Pro, and Plus subscribers on the web. In the coming weeks we'll expand access to mobile, more countries across Europe and ",
+      "url": "https://x.com/i/status/2041983287577735396",
+      "summary": "❤️270 @GeminiApp",
+      "publishedAt": null,
+      "source": "tw-geminiapp",
+      "sourceName": "@geminiapp"
+    },
+    {
+      "title": "Project organization is here: Introducing notebooks in Gemini.\n\nYou can now keep multiple projects organized and even add past chats and relevant files as sources, so you have a dedicated space to foc",
+      "url": "https://x.com/i/status/2041983079787721013",
+      "summary": "❤️2685 @GeminiApp",
+      "publishedAt": null,
+      "source": "tw-geminiapp",
+      "sourceName": "@geminiapp"
+    },
+    {
+      "title": "🚀🚀",
+      "url": "https://x.com/i/status/2041912173363085511",
+      "summary": "❤️346 @Alibaba_Qwen",
+      "publishedAt": null,
+      "source": "tw-alibaba_qwen",
+      "sourceName": "@alibaba_qwen"
+    },
+    {
+      "title": "🏆 Qwen3.6-Plus just swept OpenRouter’s Daily, Weekly & Trending charts!\nThe trial has wrapped. The model is fully live & production-ready.\n📉 Lower latency | 🔥 Top-tier reasoning | 💰 Unmatched $/to",
+      "url": "https://x.com/i/status/2041871541080924477",
+      "summary": "❤️777 @Alibaba_Qwen",
+      "publishedAt": null,
+      "source": "tw-alibaba_qwen",
+      "sourceName": "@alibaba_qwen"
+    },
+    {
+      "title": "Wrapped our Featured Talk at #HumanX2026. 🎙️\n\nLinda Sheng, our President of Global Business, sat down with @EricNewcomer and shared how MiniMax builds general intelligence at scale, from foundation m",
+      "url": "https://x.com/i/status/2041932849658655034",
+      "summary": "❤️54 @MiniMax_AI",
+      "publishedAt": null,
+      "source": "tw-minimax_ai",
+      "sourceName": "@minimax_ai"
+    },
+    {
+      "title": "Day 3 at #HumanX2026. What a week! 🎉 \n\nIt's been amazing meeting so many of you. From live demos to great conversations about the future of AI, the energy has been incredible.  \n\nTomorrow's the final",
+      "url": "https://x.com/i/status/2042080171088638063",
+      "summary": "❤️250 @MiniMax_AI",
+      "publishedAt": null,
+      "source": "tw-minimax_ai",
+      "sourceName": "@minimax_ai"
+    },
+    {
+      "title": "@RockFlowApp Congratulations to all participants. MiniMax will continue to iterate and deliver better models! 😁",
+      "url": "https://x.com/i/status/2042106714061963773",
+      "summary": "❤️21 @MiniMax_AI",
+      "publishedAt": null,
+      "source": "tw-minimax_ai",
+      "sourceName": "@minimax_ai"
+    },
+    {
+      "title": "Proud to power @NousResearch's Hermes Agent with MiniMax M2.7, and excited for what we're building together.\n\nTry MiniMax M2.7 in Hermes Agent today → https://t.co/1GTw6AtfXe\n\n#MiniMax #NousResearch #",
+      "url": "https://x.com/i/status/2041707145553694907",
+      "summary": "❤️766 @MiniMax_AI",
+      "publishedAt": null,
+      "source": "tw-minimax_ai",
+      "sourceName": "@minimax_ai"
+    },
+    {
+      "title": "@VadimStrizheus @NousResearch 🫡",
+      "url": "https://x.com/i/status/2041730360896319535",
+      "summary": "❤️4 @MiniMax_AI",
+      "publishedAt": null,
+      "source": "tw-minimax_ai",
+      "sourceName": "@minimax_ai"
+    },
+    {
+      "title": "@VadimStrizheus @NousResearch DMed you",
+      "url": "https://x.com/i/status/2041730337496314340",
+      "summary": "❤️2 @MiniMax_AI",
+      "publishedAt": null,
+      "source": "tw-minimax_ai",
+      "sourceName": "@minimax_ai"
+    },
+    {
+      "title": "PMs spend an incredible amount of time launching a feature vs building. Building ends when the feature works. Launching ends when everyone else understands it.\n\nMost teams have one environment for the",
+      "url": "https://x.com/i/status/2042012211988533502",
+      "summary": "❤️38 @Replit",
+      "publishedAt": null,
+      "source": "tw-replit",
+      "sourceName": "@replit"
+    },
+    {
+      "title": "Read part 5 of our 6-part PM series: https://t.co/3iG0KeKYX9",
+      "url": "https://x.com/i/status/2042012212852629506",
+      "summary": "❤️5 @Replit",
+      "publishedAt": null,
+      "source": "tw-replit",
+      "sourceName": "@replit"
+    },
+    {
+      "title": "To use, just ask the Agent to use the stock analyzer skill, or click the + button from the input box after logging in and select the \"stock analyzer skill\"",
+      "url": "https://x.com/i/status/2041667381865673159",
+      "summary": "❤️6 @Replit",
+      "publishedAt": null,
+      "source": "tw-replit",
+      "sourceName": "@replit"
+    },
+    {
+      "title": "Find your next 10x investment with AI 💰",
+      "url": "https://x.com/i/status/2041667379185512558",
+      "summary": "❤️163 @Replit",
+      "publishedAt": null,
+      "source": "tw-replit",
+      "sourceName": "@replit"
+    },
+    {
+      "title": "Not investment advice, for informational purposes only",
+      "url": "https://x.com/i/status/2041667380729016350",
+      "summary": "❤️7 @Replit",
+      "publishedAt": null,
+      "source": "tw-replit",
+      "sourceName": "@replit"
+    },
+    {
+      "title": "1/ today we're releasing muse spark, the first model from MSL. nine months ago we rebuilt our ai stack from scratch. new infrastructure, new architecture, new data pipelines. muse spark is the result ",
+      "url": "https://x.com/i/status/2041909376508985381",
+      "summary": "❤️9307 @alexandr_wang",
+      "publishedAt": null,
+      "source": "tw-alexandr_wang",
+      "sourceName": "@alexandr_wang"
+    },
+    {
+      "title": "@brian_armstrong we're cooking!",
+      "url": "https://x.com/i/status/2042022247607759199",
+      "summary": "❤️49 @alexandr_wang",
+      "publishedAt": null,
+      "source": "tw-alexandr_wang",
+      "sourceName": "@alexandr_wang"
+    },
+    {
+      "title": "try muse spark yourself! download the Meta AI app or go to https://t.co/DipeeIuXm2!",
+      "url": "https://x.com/i/status/2042024651610861657",
+      "summary": "❤️121 @alexandr_wang",
+      "publishedAt": null,
+      "source": "tw-alexandr_wang",
+      "sourceName": "@alexandr_wang"
+    },
+    {
+      "title": "@AcerFur try Contemplating mode once it rolls out!",
+      "url": "https://x.com/i/status/2041945178374910040",
+      "summary": "❤️122 @alexandr_wang",
+      "publishedAt": null,
+      "source": "tw-alexandr_wang",
+      "sourceName": "@alexandr_wang"
+    },
+    {
+      "title": "8/ read more about our research and muse spark here: https://t.co/uu89CkvlqU",
+      "url": "https://x.com/i/status/2041909390241100113",
+      "summary": "❤️472 @alexandr_wang",
+      "publishedAt": null,
+      "source": "tw-alexandr_wang",
+      "sourceName": "@alexandr_wang"
+    },
+    {
+      "title": "a good writeup about Muse Spark on a few complex queries (multimodal, stock analysis, coding):\nhttps://t.co/ngYaXTZ4gW",
+      "url": "https://x.com/i/status/2041991027981218022",
+      "summary": "❤️406 @alexandr_wang",
+      "publishedAt": null,
+      "source": "tw-alexandr_wang",
+      "sourceName": "@alexandr_wang"
+    },
+    {
+      "title": "@alexfmac thank you sir! more to ship!",
+      "url": "https://x.com/i/status/2042041228322275473",
+      "summary": "❤️46 @alexandr_wang",
+      "publishedAt": null,
+      "source": "tw-alexandr_wang",
+      "sourceName": "@alexandr_wang"
+    },
+    {
+      "title": "@0xSiva it will be publicly available today! go to https://t.co/DipeeIuXm2!",
+      "url": "https://x.com/i/status/2041911033544241597",
+      "summary": "❤️48 @alexandr_wang",
+      "publishedAt": null,
+      "source": "tw-alexandr_wang",
+      "sourceName": "@alexandr_wang"
+    },
+    {
+      "title": "@scaling01 🔜",
+      "url": "https://x.com/i/status/2041983942572859539",
+      "summary": "❤️575 @alexandr_wang",
+      "publishedAt": null,
+      "source": "tw-alexandr_wang",
+      "sourceName": "@alexandr_wang"
+    },
+    {
+      "title": "@alex we intend to release the API soon! we look forward to it powering some claws out there :)",
+      "url": "https://x.com/i/status/2041914118811349199",
+      "summary": "❤️13 @alexandr_wang",
+      "publishedAt": null,
+      "source": "tw-alexandr_wang",
+      "sourceName": "@alexandr_wang"
+    },
+    {
+      "title": "@ArmenAgha apologies, we did not intend to imply our scores were highest. to the contrary, most of these evals show that our model has many areas to continue improving.\n\nwe won’t this mistake again 🙏",
+      "url": "https://x.com/i/status/2041933407379435740",
+      "summary": "❤️808 @alexandr_wang",
+      "publishedAt": null,
+      "source": "tw-alexandr_wang",
+      "sourceName": "@alexandr_wang"
+    },
+    {
+      "title": "try muse spark via the Meta AI app or https://t.co/DipeeIuXm2!\n\ncheck out this simulation i made:\nhttps://t.co/nAnYiwruoo",
+      "url": "https://x.com/i/status/2041953243895623913",
+      "summary": "❤️208 @alexandr_wang",
+      "publishedAt": null,
+      "source": "tw-alexandr_wang",
+      "sourceName": "@alexandr_wang"
+    },
+    {
+      "title": "3/ we’re also releasing contemplating mode, which orchestrates multiple agents that reason in parallel designed to handle complex scientific &amp; reasoning queries. in our testing we found it competi",
+      "url": "https://x.com/i/status/2041909381667958855",
+      "summary": "❤️701 @alexandr_wang",
+      "publishedAt": null,
+      "source": "tw-alexandr_wang",
+      "sourceName": "@alexandr_wang"
+    },
+    {
+      "title": "@ylecun thanks Yann!",
+      "url": "https://x.com/i/status/2042035840176812380",
+      "summary": "❤️217 @alexandr_wang",
+      "publishedAt": null,
+      "source": "tw-alexandr_wang",
+      "sourceName": "@alexandr_wang"
+    },
+    {
+      "title": "🚗💨",
+      "url": "https://x.com/i/status/2041934199259852817",
+      "summary": "❤️252 @alexandr_wang",
+      "publishedAt": null,
+      "source": "tw-alexandr_wang",
+      "sourceName": "@alexandr_wang"
+    },
+    {
+      "title": "2/ muse spark is a natively multimodal reasoning model w/ support for tool-use, visual chain of thought, & multi-agent orchestration. it's the most powerful model that meta has released. through its t",
+      "url": "https://x.com/i/status/2041909380208324687",
+      "summary": "❤️776 @alexandr_wang",
+      "publishedAt": null,
+      "source": "tw-alexandr_wang",
+      "sourceName": "@alexandr_wang"
+    },
+    {
+      "title": "@t_xu 🙏",
+      "url": "https://x.com/i/status/2041946600420077772",
+      "summary": "❤️20 @alexandr_wang",
+      "publishedAt": null,
+      "source": "tw-alexandr_wang",
+      "sourceName": "@alexandr_wang"
+    },
+    {
+      "title": "@LostDevraj generally available API is coming soon! looking forward to sharing that!",
+      "url": "https://x.com/i/status/2041992476115005903",
+      "summary": "❤️22 @alexandr_wang",
+      "publishedAt": null,
+      "source": "tw-alexandr_wang",
+      "sourceName": "@alexandr_wang"
+    },
+    {
+      "title": "We are always open to feedback and welcome any perspective on weaknesses you've noticed in the model from using it.\n\nWe are quite upfront that our model does not perform well on ARC AGI 2 for example,",
+      "url": "https://x.com/i/status/2042020815076831512",
+      "summary": "❤️690 @alexandr_wang",
+      "publishedAt": null,
+      "source": "tw-alexandr_wang",
+      "sourceName": "@alexandr_wang"
+    },
+    {
+      "title": "5/ meta ai now handles quick answers and deep reasoning with instant and thinking modes. shopping mode is new too—it picks up on the creators, brands, and styling content across our apps and turns tha",
+      "url": "https://x.com/i/status/2041909386411676095",
+      "summary": "❤️462 @alexandr_wang",
+      "publishedAt": null,
+      "source": "tw-alexandr_wang",
+      "sourceName": "@alexandr_wang"
+    },
+    {
+      "title": "We're not hitting an AI ceiling. Here's why the AI scaling skeptics are wrong.\n\nExponentials help us understand everything that's going on in AI. For thousands of years, we lived in a linear world. Tw",
+      "url": "https://x.com/i/status/2041895515819012598",
+      "summary": "❤️342 @mustafasuleyman",
+      "publishedAt": null,
+      "source": "tw-mustafasuleyman",
+      "sourceName": "@mustafasuleyman"
+    },
+    {
+      "title": "Anyhow, its not bad. Just not the vibe level that the benchmarks might indicate. And, for a first re-entry into the frontier model space, given the engineering efficiencies they achieved, it feels lik",
+      "url": "https://x.com/i/status/2042043828060794887",
+      "summary": "❤️27 @emollick",
+      "publishedAt": null,
+      "source": "tw-noamshazeer",
+      "sourceName": "@noamshazeer"
+    },
+    {
+      "title": "Meh on the Lem Test as well https://t.co/OqRtgAVJUl https://t.co/EAjppHpWGg",
+      "url": "https://x.com/i/status/2042041143865553201",
+      "summary": "❤️14 @emollick",
+      "publishedAt": null,
+      "source": "tw-noamshazeer",
+      "sourceName": "@noamshazeer"
+    },
+    {
+      "title": "After playing with it a bit, Meta's Muse Spark Thinking is fine so far, but really doesn't match the current Big Three models. It also is a bit... weird. Like some strange language &amp; tone, a littl",
+      "url": "https://x.com/i/status/2042040840554451286",
+      "summary": "❤️120 @emollick",
+      "publishedAt": null,
+      "source": "tw-noamshazeer",
+      "sourceName": "@noamshazeer"
+    },
+    {
+      "title": "Writing fiction seems to be a genuine weak spot for LLMs that is not improving as rapidly as almost every other area. There may be a lot of reasons why this is happening.\n\nIt would be a really interes",
+      "url": "https://x.com/i/status/2041679229952090395",
+      "summary": "❤️95 @emollick",
+      "publishedAt": null,
+      "source": "tw-noamshazeer",
+      "sourceName": "@noamshazeer"
+    },
+    {
+      "title": "Announcing LocalLlama discord server & bot!",
+      "url": "",
+      "summary": "↑147 💬95",
+      "publishedAt": null,
+      "source": "reddit-locallama",
+      "sourceName": "Reddit LocalLLaMA"
+    },
+    {
+      "title": "新 codex 站点上线，纯 plus 号池，比买 plus 月卡还划算",
+      "url": "https://www.v2ex.com/t/1204632",
+      "summary": "💬297",
+      "publishedAt": null,
+      "source": "v2ex",
+      "sourceName": "V2EX 热门"
+    },
+    {
+      "title": "大家来说一个自己独特的癖好吧！",
+      "url": "https://www.v2ex.com/t/1204499",
+      "summary": "💬172",
+      "publishedAt": null,
+      "source": "v2ex",
+      "sourceName": "V2EX 热门"
+    },
+    {
+      "title": "来一起讨论一下，你选择生育的理由是什么？",
+      "url": "https://www.v2ex.com/t/1204483",
+      "summary": "💬124",
+      "publishedAt": null,
+      "source": "v2ex",
+      "sourceName": "V2EX 热门"
+    },
+    {
+      "title": "通勤路上被和尚纠缠，应该如何应对？",
+      "url": "https://www.v2ex.com/t/1204503",
+      "summary": "💬121",
+      "publishedAt": null,
+      "source": "v2ex",
+      "sourceName": "V2EX 热门"
+    },
+    {
+      "title": "感觉周杰伦 2016 年以后就不应该继续出新专辑了",
+      "url": "https://www.v2ex.com/t/1204589",
+      "summary": "💬108",
+      "publishedAt": null,
+      "source": "v2ex",
+      "sourceName": "V2EX 热门"
+    },
+    {
+      "title": "今年 28 岁，我应该为婚姻而焦虑吗？",
+      "url": "https://www.v2ex.com/t/1204642",
+      "summary": "💬88",
+      "publishedAt": null,
+      "source": "v2ex",
+      "sourceName": "V2EX 热门"
+    },
+    {
+      "title": "豆包和 deepseek 最终会向个人收费，你们认为呢",
+      "url": "https://www.v2ex.com/t/1204484",
+      "summary": "💬84",
+      "publishedAt": null,
+      "source": "v2ex",
+      "sourceName": "V2EX 热门"
+    },
+    {
+      "title": "大家现在订阅哪个模型？",
+      "url": "https://www.v2ex.com/t/1204481",
+      "summary": "💬73",
+      "publishedAt": null,
+      "source": "v2ex",
+      "sourceName": "V2EX 热门"
+    },
+    {
+      "title": "锁单好几天了，没有发朋友圈，发抖音，今天忙里偷闲，来 V 站分享一下喜悦😄， V 友们可以和我说句恭喜吗？",
+      "url": "https://www.v2ex.com/t/1204682",
+      "summary": "💬67",
+      "publishedAt": null,
+      "source": "v2ex",
+      "sourceName": "V2EX 热门"
+    },
+    {
+      "title": "AIMock: One Mock Server For Your Entire AI Stack",
+      "url": "https://dev.to/copilotkit/aimock-one-mock-server-for-your-entire-ai-stack-1jhp",
+      "summary": "❤️82 💬7 @anmolbaranwal ai, opensource, testing, programming",
+      "publishedAt": null,
+      "source": "devto",
+      "sourceName": "DEV.to"
+    },
+    {
+      "title": "Clawshier OpenClaw Skill",
+      "url": "https://dev.to/fdocr/clawshier-openclaw-skill-l1n",
+      "summary": "❤️17 💬3 @fdocr ai, openclaw, opensource, openai",
+      "publishedAt": null,
+      "source": "devto",
+      "sourceName": "DEV.to"
+    },
+    {
+      "title": "I Built an Agent to Run Live Event Raffles (then tried to rig it)",
+      "url": "https://dev.to/kimmaida/i-built-an-agent-to-run-live-event-raffles-then-tried-to-rig-it-al5",
+      "summary": "❤️10 💬2 @kimmaida ai, webdev, security",
+      "publishedAt": null,
+      "source": "devto",
+      "sourceName": "DEV.to"
+    },
+    {
+      "title": "Experimenting with AI subagents",
+      "url": "https://dev.to/nfrankel/experimenting-with-ai-subagents-pc7",
+      "summary": "❤️7 💬0 @nfrankel ai, agents, subagents, softwareengineering",
+      "publishedAt": null,
+      "source": "devto",
+      "sourceName": "DEV.to"
+    },
+    {
+      "title": "Building an AI Invoice Generator in a Week (Week 8 of My NanoCrafts Build Curriculum)",
+      "url": "https://dev.to/azeezroheem/building-an-ai-invoice-generator-in-a-week-week-8-of-my-nanocrafts-build-curriculum-43i4",
+      "summary": "❤️1 💬0 @azeezroheem nextjs, saas, typescript",
+      "publishedAt": null,
+      "source": "devto",
+      "sourceName": "DEV.to"
+    },
+    {
+      "title": "How to Evaluate AI Model Safety Before Deploying to Production",
+      "url": "https://dev.to/alanwest/how-to-evaluate-ai-model-safety-before-deploying-to-production-2m88",
+      "summary": "❤️1 💬1 @alanwest ai, machinelearning, security, devops",
+      "publishedAt": null,
+      "source": "devto",
+      "sourceName": "DEV.to"
+    },
+    {
+      "title": "How We Use Gherkin, Envelopes, and Schemas to Shape Agent Behavior",
+      "url": "https://dev.to/lihsuanlung/how-we-use-gherkin-envelopes-and-schemas-to-shape-agent-behavior-3obe",
+      "summary": "❤️0 💬0 @lihsuanlung agents, ai, llm, promptengineering",
+      "publishedAt": null,
+      "source": "devto",
+      "sourceName": "DEV.to"
+    },
+    {
+      "title": "Building KiroGraph: a 100% local semantic code knowledge graph for Kiro",
+      "url": "https://dev.to/aws-builders/building-kirograph-a-100-local-semantic-code-knowledge-graph-for-kiro-2ja4",
+      "summary": "❤️5 💬1 @ddesio kiro, aws, ai",
+      "publishedAt": null,
+      "source": "devto",
+      "sourceName": "DEV.to"
+    },
+    {
+      "title": "The Tool Harness Meta Didnt Tell You About",
+      "url": "https://dev.to/o96a/the-tool-harness-meta-didnt-tell-you-about-92h",
+      "summary": "❤️0 💬0 @o96a ai, meta, agents, tools",
+      "publishedAt": null,
+      "source": "devto",
+      "sourceName": "DEV.to"
+    },
+    {
+      "title": "Awshar AI",
+      "url": "https://www.producthunt.com/products/awshar-ai",
+      "summary": "Understands India's nuanced digital conversations | @Ankit Narang",
+      "publishedAt": null,
+      "source": "producthunt",
+      "sourceName": "Product Hunt"
+    },
+    {
+      "title": "ZenX",
+      "url": "https://www.producthunt.com/products/zenx",
+      "summary": "Your Twitter feed, finally peaceful | @Asim Sk",
+      "publishedAt": null,
+      "source": "producthunt",
+      "sourceName": "Product Hunt"
+    },
+    {
+      "title": "Ycode Open Source",
+      "url": "https://www.producthunt.com/products/ycode",
+      "summary": "The open-source alternative to Webflow | @Ignas Lunėnas",
+      "publishedAt": null,
+      "source": "producthunt",
+      "sourceName": "Product Hunt"
+    },
+    {
+      "title": "Slm-mesh",
+      "url": "https://www.producthunt.com/products/slm-mesh",
+      "summary": "Your AI coding sessions can finally talk to each other | @varun pratap Bhardwaj",
+      "publishedAt": null,
+      "source": "producthunt",
+      "sourceName": "Product Hunt"
+    },
+    {
+      "title": "Task Bert",
+      "url": "https://www.producthunt.com/products/task-bert-inbox-zero-for-imessage",
+      "summary": "Fully local open-source agent for managing your texts | @Ann Baum",
+      "publishedAt": null,
+      "source": "producthunt",
+      "sourceName": "Product Hunt"
+    },
+    {
+      "title": "Orca",
+      "url": "https://www.producthunt.com/products/orca-5",
+      "summary": "Your control center for parallel AI agents | @Neil Parker",
+      "publishedAt": null,
+      "source": "producthunt",
+      "sourceName": "Product Hunt"
+    },
+    {
+      "title": "Claude Managed Agents",
+      "url": "https://www.producthunt.com/products/claude",
+      "summary": "Pre-built agent harness on managed infrastructure | @Zac Zuo",
+      "publishedAt": null,
+      "source": "producthunt",
+      "sourceName": "Product Hunt"
+    },
+    {
+      "title": "Cyris",
+      "url": "https://www.producthunt.com/products/cyris",
+      "summary": "Turns every AI decision into audit-ready evidence | @Krishnam Goel",
+      "publishedAt": null,
+      "source": "producthunt",
+      "sourceName": "Product Hunt"
+    },
+    {
+      "title": "Plow",
+      "url": "https://www.producthunt.com/products/plow-easily-install-openclaw-on-a-mac",
+      "summary": "Openclaw on your Mac, with permissions you can understand | @Sam Odio",
+      "publishedAt": null,
+      "source": "producthunt",
+      "sourceName": "Product Hunt"
+    },
+    {
+      "title": "PrettyMux",
+      "url": "https://www.producthunt.com/products/prettymux",
+      "summary": "The linux terminal built for Agents and Multiplexing | @Patrick Aljord",
+      "publishedAt": null,
+      "source": "producthunt",
+      "sourceName": "Product Hunt"
+    },
+    {
+      "title": "Meta Muse Spark",
+      "url": "https://www.producthunt.com/products/meta",
+      "summary": "Meta's smart multimodal AI that understands your world | @Rohan Chaubey",
+      "publishedAt": null,
+      "source": "producthunt",
+      "sourceName": "Product Hunt"
+    },
+    {
+      "title": "Cred",
+      "url": "https://www.producthunt.com/products/cred-3",
+      "summary": "OAuth credential delegation for AI agents | @Kieran Sweeney",
+      "publishedAt": null,
+      "source": "producthunt",
+      "sourceName": "Product Hunt"
+    },
+    {
+      "title": "Startups.RIP",
+      "url": "https://www.producthunt.com/products/startups-rip",
+      "summary": "Rebuild 1,738+ dead YC startups with AI | @Oscar Hong",
+      "publishedAt": null,
+      "source": "producthunt",
+      "sourceName": "Product Hunt"
+    },
+    {
+      "title": "Rudel",
+      "url": "https://www.producthunt.com/products/rudel",
+      "summary": "Claude Code & Codex session analytics for dev teams | @Marc Höffl",
+      "publishedAt": null,
+      "source": "producthunt",
+      "sourceName": "Product Hunt"
+    },
+    {
+      "title": "SuperCmd",
+      "url": "https://www.producthunt.com/products/supercmd-2",
+      "summary": "Open source alternative to Raycast Pro | @shobhit",
+      "publishedAt": null,
+      "source": "producthunt",
+      "sourceName": "Product Hunt"
+    },
+    {
+      "title": "riffle",
+      "url": "https://www.producthunt.com/products/riffle-2",
+      "summary": "An infinite, collaborative playground for music creation | @Kevin William David",
+      "publishedAt": null,
+      "source": "producthunt",
+      "sourceName": "Product Hunt"
+    },
+    {
+      "title": "Zoneless",
+      "url": "https://www.producthunt.com/products/zoneless-2",
+      "summary": "Open-source Stripe Connect alternative with $0.002 fees | @Ben Stokes (Tiny Projects💡)",
+      "publishedAt": null,
+      "source": "producthunt",
+      "sourceName": "Product Hunt"
+    },
+    {
+      "title": "OpenResource",
+      "url": "https://www.producthunt.com/products/openresource",
+      "summary": "Discover open-source tools with an AI chat assistant | @Gaurav Sharma",
+      "publishedAt": null,
+      "source": "producthunt",
+      "sourceName": "Product Hunt"
+    },
+    {
+      "title": "Cutsio",
+      "url": "https://www.producthunt.com/products/cutsio",
+      "summary": "Your entire video library, now searchable and editable by AI | @Rish Agarwal",
+      "publishedAt": null,
+      "source": "producthunt",
+      "sourceName": "Product Hunt"
+    },
+    {
+      "title": "ScreenSmooth",
+      "url": "https://www.producthunt.com/products/screensmooth",
+      "summary": "Beautiful Screen Recordings in minutes | @Sayyid Ali",
+      "publishedAt": null,
+      "source": "producthunt",
+      "sourceName": "Product Hunt"
+    },
+    {
+      "title": "Learning to Retrieve from Agent Trajectories",
+      "url": "https://arxiv.org/abs/2604.04949",
+      "summary": "↑59",
+      "publishedAt": null,
+      "source": "hf-papers",
+      "sourceName": "Hugging Face Daily Papers"
+    },
+    {
+      "title": "GBQA: A Game Benchmark for Evaluating LLMs as Quality Ass...",
+      "url": "https://arxiv.org/abs/2604.02648",
+      "summary": "↑39",
+      "publishedAt": null,
+      "source": "hf-papers",
+      "sourceName": "Hugging Face Daily Papers"
+    },
+    {
+      "title": "RAGEN-2: Reasoning Collapse in Agentic RL",
+      "url": "https://arxiv.org/abs/2604.06268",
+      "summary": "↑37",
+      "publishedAt": null,
+      "source": "hf-papers",
+      "sourceName": "Hugging Face Daily Papers"
+    },
+    {
+      "title": "MegaTrain: Full Precision Training of 100B+ Parameter Lar...",
+      "url": "https://arxiv.org/abs/2604.05091",
+      "summary": "↑36",
+      "publishedAt": null,
+      "source": "hf-papers",
+      "sourceName": "Hugging Face Daily Papers"
+    },
+    {
+      "title": "How Well Do Agentic Skills Work in the Wild: Benchmarking...",
+      "url": "https://arxiv.org/abs/2604.04323",
+      "summary": "↑28",
+      "publishedAt": null,
+      "source": "hf-papers",
+      "sourceName": "Hugging Face Daily Papers"
+    },
+    {
+      "title": "Paper Circle: An Open-source Multi-agent Research Discove...",
+      "url": "https://arxiv.org/abs/2604.06170",
+      "summary": "↑20",
+      "publishedAt": null,
+      "source": "hf-papers",
+      "sourceName": "Hugging Face Daily Papers"
+    },
+    {
+      "title": "ClawsBench: Evaluating Capability and Safety of LLM Produ...",
+      "url": "https://arxiv.org/abs/2604.05172",
+      "summary": "↑17",
+      "publishedAt": null,
+      "source": "hf-papers",
+      "sourceName": "Hugging Face Daily Papers"
+    },
+    {
+      "title": "In-Place Test-Time Training",
+      "url": "https://arxiv.org/abs/2604.06169",
+      "summary": "↑17",
+      "publishedAt": null,
+      "source": "hf-papers",
+      "sourceName": "Hugging Face Daily Papers"
+    },
+    {
+      "title": "SEVerA: Verified Synthesis of Self-Evolving Agents",
+      "url": "https://arxiv.org/abs/2603.25111",
+      "summary": "↑9",
+      "publishedAt": null,
+      "source": "hf-papers",
+      "sourceName": "Hugging Face Daily Papers"
+    },
+    {
+      "title": "如何看待Anthropic的新模型Mythos？",
+      "url": "https://www.zhihu.com/question/2025035806335596432",
+      "summary": "🔥167 万热度",
+      "publishedAt": null,
+      "source": "zhihu-hot",
+      "sourceName": "知乎热榜"
+    },
+    {
+      "title": "如何看待 Faker 称「非常期待与 AI 对战，我认为人类所拥有的直觉力是 AI 无法完全追赶的」？",
+      "url": "https://www.zhihu.com/question/2025281071332290932",
+      "summary": "🔥166 万热度",
+      "publishedAt": null,
+      "source": "zhihu-hot",
+      "sourceName": "知乎热榜"
+    },
+    {
+      "title": "当你穿进老钱班21",
+      "url": "https://www.bilibili.com/video/BV12eSoBFETE",
+      "summary": "↑4759307 @侯绿萝",
+      "publishedAt": null,
+      "source": "bilibili-ranking",
+      "sourceName": "B站排行榜"
+    },
+    {
+      "title": "住手☆！不要用1月新番玷污我啊啊啊！！【泛式】",
+      "url": "https://www.bilibili.com/video/BV1dfSfBDEa8",
+      "summary": "↑2544797 @泛式",
+      "publishedAt": null,
+      "source": "bilibili-ranking",
+      "sourceName": "B站排行榜"
+    },
+    {
+      "title": "我嫁给你是来享福的，不是来吃苦的！别再被这句话洗脑了！",
+      "url": "https://www.bilibili.com/video/BV1o7DYB2Exe",
+      "summary": "↑2790128 @晓艳教英语",
+      "publishedAt": null,
+      "source": "bilibili-ranking",
+      "sourceName": "B站排行榜"
+    },
+    {
+      "title": "《原神》角色预告-「莉奈娅：精准答疑，倾心追奇！」",
+      "url": "https://www.bilibili.com/video/BV11BDhBsEXV",
+      "summary": "↑1164459 @原神",
+      "publishedAt": null,
+      "source": "bilibili-ranking",
+      "sourceName": "B站排行榜"
+    },
+    {
+      "title": "《溺水の鱼》",
+      "url": "https://www.bilibili.com/video/BV1yrSfBAEYk",
+      "summary": "↑3409139 @伤心欲茄222",
+      "publishedAt": null,
+      "source": "bilibili-ranking",
+      "sourceName": "B站排行榜"
+    },
+    {
+      "title": "“至此，已成仙品！！！”",
+      "url": "https://www.bilibili.com/video/BV1QpSoBqEF8",
+      "summary": "↑2893255 @wrizedm",
+      "publishedAt": null,
+      "source": "bilibili-ranking",
+      "sourceName": "B站排行榜"
+    },
+    {
+      "title": "用船制作的跑酷？",
+      "url": "https://www.bilibili.com/video/BV1oGSoB5EuM",
+      "summary": "↑1712431 @求要饭的酒芳NINE",
+      "publishedAt": null,
+      "source": "bilibili-ranking",
+      "sourceName": "B站排行榜"
+    },
+    {
+      "title": "《渣养翻车》1-3合集",
+      "url": "https://www.bilibili.com/video/BV1tVSZBYEuD",
+      "summary": "↑1570861 @芥末猫meme",
+      "publishedAt": null,
+      "source": "bilibili-ranking",
+      "sourceName": "B站排行榜"
+    },
+    {
+      "title": "北约对美国的反抗",
+      "url": "https://www.bilibili.com/video/BV1TTDzBUECQ",
+      "summary": "↑1802719 @燕三嘤嘤嘤",
+      "publishedAt": null,
+      "source": "bilibili-ranking",
+      "sourceName": "B站排行榜"
+    },
+    {
+      "title": "陈鲁豫对话陈文淇：那个领完奖要回去上学的女孩，走入成人世界后 | 陈鲁豫·慢谈EP15【视频播客】",
+      "url": "https://www.bilibili.com/video/BV1xwXfBrErL",
+      "summary": "↑2093264 @陈鲁豫-慢谈",
+      "publishedAt": null,
+      "source": "bilibili-ranking",
+      "sourceName": "B站排行榜"
+    },
+    {
+      "title": "四川妹子在芬兰市中心开中式烧烤餐车摆摊创业火爆街头！川渝烧烤宜宾燃面各国老外街头撸串太疯狂！大排长龙求开店！",
+      "url": "https://www.bilibili.com/video/BV1jjSoBkEcw",
+      "summary": "↑2353266 @雨琪在芬兰",
+      "publishedAt": null,
+      "source": "bilibili-ranking",
+      "sourceName": "B站排行榜"
+    },
+    {
+      "title": "幸福是如童话般美好的念想，而生活的疲惫却更贴近我的日常【学姐系列完结卷】",
+      "url": "https://www.bilibili.com/video/BV1DTSUB1Evb",
+      "summary": "↑2413282 @清源唯心",
+      "publishedAt": null,
+      "source": "bilibili-ranking",
+      "sourceName": "B站排行榜"
+    },
+    {
+      "title": "华强买瓜，但是数学",
+      "url": "https://www.bilibili.com/video/BV1GeDvByEKR",
+      "summary": "↑1211623 @言吾言_",
+      "publishedAt": null,
+      "source": "bilibili-ranking",
+      "sourceName": "B站排行榜"
+    },
+    {
+      "title": "我将与他奇观对顶！【帝国时代4】",
+      "url": "https://www.bilibili.com/video/BV1jzDeBHEtu",
+      "summary": "↑856205 @DarkCarrot",
+      "publishedAt": null,
+      "source": "bilibili-ranking",
+      "sourceName": "B站排行榜"
+    },
+    {
+      "title": "葫芦娃救大兵瑞恩？这波伊朗和美国都赢了！",
+      "url": "https://www.bilibili.com/video/BV1sNDvBeE8q",
+      "summary": "↑1570746 @麻薯波比呀",
+      "publishedAt": null,
+      "source": "bilibili-ranking",
+      "sourceName": "B站排行榜"
+    },
+    {
+      "title": "电工小谢，逃跑故事",
+      "url": "https://www.bilibili.com/video/BV1mVSUBrEz5",
+      "summary": "↑1403200 @一块碗布",
+      "publishedAt": null,
+      "source": "bilibili-ranking",
+      "sourceName": "B站排行榜"
+    },
+    {
+      "title": "3岁儿子学骑自行车，爸爸追在身后“疯狂”夸奖。网友：他一辈子都会记得这个瞬间！",
+      "url": "https://www.bilibili.com/video/BV1MYSfBzEhN",
+      "summary": "↑2812404 @人民日报",
+      "publishedAt": null,
+      "source": "bilibili-ranking",
+      "sourceName": "B站排行榜"
+    },
+    {
+      "title": "第一次中大奖",
+      "url": "https://www.bilibili.com/video/BV15tSQBfENa",
+      "summary": "↑1676535 @李炮炮儿",
+      "publishedAt": null,
+      "source": "bilibili-ranking",
+      "sourceName": "B站排行榜"
+    },
+    {
+      "title": "【原神一条龙全收集】蒙德月之六(成就数222/技忆团块30/摩拉70)风息山+空之神殿/宝箱/摩拉堆/玉帛/摹忆因子/风之印/探索度/原神月之六一条龙",
+      "url": "https://www.bilibili.com/video/BV1YiDjB8EK9",
+      "summary": "↑1682842 @你的影月月",
+      "publishedAt": null,
+      "source": "bilibili-ranking",
+      "sourceName": "B站排行榜"
+    },
+    {
+      "title": "快问快答：美伊停火，战争结束？",
+      "url": "https://www.bilibili.com/video/BV1qmDLBPEob",
+      "summary": "↑1498899 @小王Albert",
+      "publishedAt": null,
+      "source": "bilibili-ranking",
+      "sourceName": "B站排行榜"
+    },
+    {
+      "title": "科学家要失业了？GPT-5仅用18分钟解出黑洞方程，效率碾压人类数月",
+      "url": "https://36kr.com/p/3758096847635204",
+      "summary": "",
+      "publishedAt": null,
+      "source": "36kr-hot",
+      "sourceName": "36氪热榜"
+    },
+    {
+      "title": "Anthropic的「奥本海默时刻」：最害怕AI的公司，造出了最危险的AI",
+      "url": "https://36kr.com/p/3758899511280387",
+      "summary": "",
+      "publishedAt": null,
+      "source": "36kr-hot",
+      "sourceName": "36氪热榜"
+    },
+    {
+      "title": "最高年入2000万元？AI催生的“一人公司”爆火，人人都可以吗？",
+      "url": "https://36kr.com/p/3758839901241861",
+      "summary": "",
+      "publishedAt": null,
+      "source": "36kr-hot",
+      "sourceName": "36氪热榜"
+    },
+    {
+      "title": "36氪专访 | 前小米高管王腾的下一站：从睡眠入手，抓住AI硬件十年一遇的创业窗口",
+      "url": "https://36kr.com/p/3758896443884033",
+      "summary": "",
+      "publishedAt": null,
+      "source": "36kr-hot",
+      "sourceName": "36氪热榜"
+    },
+    {
+      "title": "“生化危机”女主用Claude手搓满分AI，一年0.7美元反杀大厂",
+      "url": "https://36kr.com/p/3758096887398914",
+      "summary": "",
+      "publishedAt": null,
+      "source": "36kr-hot",
+      "sourceName": "36氪热榜"
+    },
+    {
+      "title": "给DeepSeek的最后一封催更信",
+      "url": "https://36kr.com/p/3759059471892994",
+      "summary": "",
+      "publishedAt": null,
+      "source": "36kr-hot",
+      "sourceName": "36氪热榜"
+    },
+    {
+      "title": "史上最强Claude官宣：聪明到不敢开放，还会突破权限掩盖操作痕迹",
+      "url": "https://36kr.com/p/3757422822146825",
+      "summary": "",
+      "publishedAt": null,
+      "source": "36kr-hot",
+      "sourceName": "36氪热榜"
+    },
+    {
+      "title": "刚刚，DeepSeek大升级，V4真的不远了｜附体验细节",
+      "url": "https://36kr.com/p/3757399317283593",
+      "summary": "",
+      "publishedAt": null,
+      "source": "36kr-hot",
+      "sourceName": "36氪热榜"
+    },
+    {
+      "title": "8点1氪丨马斯克在对OpenAI的诉讼中寻求罢免奥特曼职位；宁德时代聘请紫金矿业创始人陈景河；产业链人士：苹果首款折叠屏手机项目正常推进，产品下半年发布",
+      "url": "https://36kr.com/p/3757404054930182",
+      "summary": "",
+      "publishedAt": null,
+      "source": "36kr-hot",
+      "sourceName": "36氪热榜"
+    },
+    {
+      "title": "阿里电商 AI 新动向：围绕 Token 重构电商，组织迎来新一轮调整｜独家",
+      "url": "https://36kr.com/p/3748018292802309",
+      "summary": "",
+      "publishedAt": null,
+      "source": "36kr-hot",
+      "sourceName": "36氪热榜"
+    },
+    {
+      "title": "罗福莉再发声，Agent 时代模型订阅制凉了？",
+      "url": "https://36kr.com/p/3758022815445765",
+      "summary": "",
+      "publishedAt": null,
+      "source": "36kr-hot",
+      "sourceName": "36氪热榜"
+    },
+    {
+      "title": "机器人交税养打工人，奥特曼AI新政曝光，上4休3要成真？",
+      "url": "https://36kr.com/p/3757551762948611",
+      "summary": "",
+      "publishedAt": null,
+      "source": "36kr-hot",
+      "sourceName": "36氪热榜"
+    },
+    {
+      "title": "90%的代码由AI编写：拆解 Anthropic 工程师背后的“AI原生”开发范式",
+      "url": "https://36kr.com/p/3719611508929926",
+      "summary": "",
+      "publishedAt": null,
+      "source": "36kr-hot",
+      "sourceName": "36氪热榜"
+    }
+  ]
+}
