@@ -60,6 +60,8 @@ const { lang = 'zh' } = Astro.props;
     background: var(--color-bg, #fff);
     color: var(--color-text, #333);
     box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    /* 全局 * { margin: 0 } reset 覆盖了 dialog 默认的 margin: auto，需显式居中 */
+    margin: auto;
   }
 
   .feedback-modal::backdrop {
