@@ -1,6 +1,6 @@
 {
   "_description": "Agent 运营状态 — 每次采集后更新，作为下次采集的输入",
-  "lastUpdated": "2026-04-10T00:45:36.118Z",
+  "lastUpdated": "2026-04-11T00:46:54.158Z",
   "sourceHealth": {
     "github-trending": {
       "consecutiveFailures": 0,
@@ -128,29 +128,29 @@
     }
   ],
   "stats": {
-    "totalRuns": 13,
+    "totalRuns": 14,
     "sourcesAdded": 0,
     "sourcesDisabled": 0,
     "twitterAccountsAdded": 0,
     "issuesProcessed": 2
   },
   "qualitySignals": {
-    "lastChecked": "2026-04-10T00:34:58.612Z",
+    "lastChecked": "2026-04-11T00:32:23.405Z",
     "lark": {
       "available": true,
-      "messageId": "om_x100b525bc6ae4cbcb3f84dbe0e6a113",
+      "messageId": "om_x100b52b0e2b378a0b4cd354407d5d31",
       "batch": "morning",
-      "sentAt": "2026-04-09T00:53:26.575Z",
+      "sentAt": "2026-04-10T00:56:40.330Z",
       "readCount": 1,
       "memberTotal": 2,
       "readRate": 0.5
     },
     "feedback": {
       "available": true,
-      "totalOpen": 4,
-      "thisWeekNew": 35,
+      "totalOpen": 5,
+      "thisWeekNew": 36,
       "byLabel": {
-        "needs-human": 4,
+        "needs-human": 5,
         "bug": 5,
         "agent-todo": 5,
         "suggestion": 11,
@@ -158,18 +158,6 @@
       }
     },
     "history": [
-      {
-        "date": "2026-04-05",
-        "batch": "morning",
-        "readRate": 0,
-        "readCount": 0
-      },
-      {
-        "date": "2026-04-05",
-        "batch": "morning",
-        "readRate": 0,
-        "readCount": 0
-      },
       {
         "date": "2026-04-05",
         "batch": "evening",
@@ -241,14 +229,26 @@
         "batch": "morning",
         "readRate": 0.5,
         "readCount": 1
+      },
+      {
+        "date": "2026-04-11",
+        "batch": "morning",
+        "readRate": 0.5,
+        "readCount": 1
+      },
+      {
+        "date": "2026-04-11",
+        "batch": "morning",
+        "readRate": 0.5,
+        "readCount": 1
       }
     ],
     "website": {
       "available": false
     },
-    "lastMessageId": "om_x100b525bc6ae4cbcb3f84dbe0e6a113",
+    "lastMessageId": "om_x100b52b0e2b378a0b4cd354407d5d31",
     "lastMessageBatch": "morning",
-    "lastMessageTime": "2026-04-09T00:53:26.575Z"
+    "lastMessageTime": "2026-04-10T00:56:40.330Z"
   },
   "runHistory": [
     {
@@ -275,6 +275,11 @@
       "date": "2026-04-10",
       "batch": "morning",
       "completedAt": "2026-04-10T00:45:36.118Z"
+    },
+    {
+      "date": "2026-04-11",
+      "batch": "morning",
+      "completedAt": "2026-04-11T00:46:54.158Z"
     }
   ]
 }
