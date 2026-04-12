@@ -64,9 +64,18 @@
   {
     "date": "2026-04-11",
     "batches": [
+      "evening",
       "morning"
     ],
-    "itemCount": 279,
+    "itemCount": 477,
     "digestPath": "2026/04/11/morning/digest.md"
+  },
+  {
+    "date": "2026-04-12",
+    "batches": [
+      "morning"
+    ],
+    "itemCount": 199,
+    "digestPath": "2026/04/12/morning/digest.md"
   }
 ]
