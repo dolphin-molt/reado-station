@@ -1,6 +1,6 @@
 {
   "_description": "Agent 运营状态 — 每次采集后更新，作为下次采集的输入",
-  "lastUpdated": "2026-04-12T00:38:24.656Z",
+  "lastUpdated": "2026-04-13T00:39:24.139Z",
   "sourceHealth": {
     "github-trending": {
       "consecutiveFailures": 0,
@@ -128,48 +128,36 @@
     }
   ],
   "stats": {
-    "totalRuns": 15,
+    "totalRuns": 16,
     "sourcesAdded": 0,
     "sourcesDisabled": 0,
     "twitterAccountsAdded": 0,
     "issuesProcessed": 2
   },
   "qualitySignals": {
-    "lastChecked": "2026-04-12T00:31:20.116Z",
+    "lastChecked": "2026-04-13T00:32:37.736Z",
     "lark": {
       "available": true,
-      "messageId": "om_x100b52ae4a6290a8b2c22bf1fe68073",
+      "messageId": "om_x100b529af088dca8b21bdc76d769bf5",
       "batch": "morning",
-      "sentAt": "2026-04-11T01:13:47.310Z",
-      "readCount": 1,
+      "sentAt": "2026-04-12T00:48:36.686Z",
+      "readCount": 0,
       "memberTotal": 2,
-      "readRate": 0.5
+      "readRate": 0
     },
     "feedback": {
       "available": true,
-      "totalOpen": 6,
-      "thisWeekNew": 37,
+      "totalOpen": 7,
+      "thisWeekNew": 27,
       "byLabel": {
-        "needs-human": 6,
-        "bug": 5,
+        "needs-human": 7,
+        "bug": 4,
         "agent-todo": 5,
-        "suggestion": 11,
-        "source-request": 15
+        "suggestion": 8,
+        "source-request": 8
       }
     },
     "history": [
-      {
-        "date": "2026-04-05",
-        "batch": "morning",
-        "readRate": 0,
-        "readCount": 0
-      },
-      {
-        "date": "2026-04-05",
-        "batch": "evening",
-        "readRate": 0,
-        "readCount": 0
-      },
       {
         "date": "2026-04-06",
         "batch": "evening",
@@ -241,14 +229,26 @@
         "batch": "morning",
         "readRate": 0.5,
         "readCount": 1
+      },
+      {
+        "date": "2026-04-13",
+        "batch": "morning",
+        "readRate": 0,
+        "readCount": 0
+      },
+      {
+        "date": "2026-04-13",
+        "batch": "morning",
+        "readRate": 0,
+        "readCount": 0
       }
     ],
     "website": {
       "available": false
     },
-    "lastMessageId": "om_x100b52ae4a6290a8b2c22bf1fe68073",
+    "lastMessageId": "om_x100b529af088dca8b21bdc76d769bf5",
     "lastMessageBatch": "morning",
-    "lastMessageTime": "2026-04-11T01:13:47.310Z"
+    "lastMessageTime": "2026-04-12T00:48:36.686Z"
   },
   "runHistory": [
     {
@@ -285,6 +285,11 @@
       "date": "2026-04-12",
       "batch": "morning",
       "completedAt": "2026-04-12T00:38:24.656Z"
+    },
+    {
+      "date": "2026-04-13",
+      "batch": "morning",
+      "completedAt": "2026-04-13T00:39:24.140Z"
     }
   ]
 }
