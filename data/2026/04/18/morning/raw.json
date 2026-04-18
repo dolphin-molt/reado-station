@@ -1,0 +1,15 @@
+{
+  "fetchedAt": "2026-04-18T00:26:42.015Z",
+  "stats": {
+    "totalSources": 80,
+    "successSources": 24,
+    "failedSources": 0,
+    "totalItems": 224,
+    "deduplicatedItems": 5,
+    "contributingSources": 33,
+    "successSourceIds": ["the-verge-ai", "techcrunch-ai", "aws-ml", "anthropic", "techmeme", "ars-technica", "wired-ai", "bbc-tech", "the-decoder", "leiphone", "huxiu", "36kr-en", "xinzhiyuan", "tmtpost", "36kr", "simon-willison", "claude-code-release", "stratechery", "hf-blog", "a16z-blog", "arxiv-cs-ai", "mastodon-ai", "mastodon-llm", "langchain-release", "hackernews", "github-trending", "github-trending-python", "v2ex", "lobsters", "devto", "producthunt", "hf-papers", "bluesky-trending"],
+    "failedSourceIds": []
+  },
+  "items": [],
+  "_note": "raw.json items lost due to OOM kill during collect + rebase abort. Digest was preserved from ~/ai-daily backup."
+}
