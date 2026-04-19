@@ -13,51 +13,14 @@ import { readdirSync, existsSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { readJSON, writeJSON, log, categorizeSite, sanitizeText } from './lib/utils.js'
 import type { CollectedData, InfoItem } from './lib/utils.js'
-
-interface SiteItem extends InfoItem {
-  id: string
-  date: string
-  batch: string
-  category: string
-  imageUrl: string
-}
-
-interface DayMeta {
-  date: string
-  batches: string[]
-  itemCount: number
-  digestPath: string | null
-}
-
-// ─── Digest types ───────────────────────────────────────────────────
-
-interface DigestStory {
-  title: string
-  summary: string
-  sources: { name: string; url: string }[]
-  impact?: string
-}
-
-interface DigestCluster {
-  name: string
-  stories: DigestStory[]
-}
-
-interface Observation {
-  expert: string
-  avatar: string
-  text: string
-}
-
-interface DigestData {
-  date: string
-  headline: string
-  /** New format: single paragraph of editorial commentary */
-  observationText: string
-  /** @deprecated Legacy per-expert observations, kept for backwards compat */
-  observations: Observation[]
-  clusters: DigestCluster[]
-}
+import type {
+  DayMeta,
+  DigestCluster,
+  DigestData,
+  DigestStory,
+  Observation,
+  SiteItem,
+} from '../packages/shared/src/index.ts'
 
 // ─── Digest parser ──────────────────────────────────────────────────
 

@@ -19,6 +19,9 @@
     "translate": "tsx scripts/translate.ts",
     "build:site": "npm run build:site-data && npm run translate && npm run build:images && cd site && npx astro build",
     "build:site-no-translate": "npm run build:site-data && npm run build:images && cd site && npx astro build",
+    "dev:web": "npm --prefix apps/web run dev",
+    "build:web": "npm --prefix apps/web run build",
+    "typecheck:web": "npm --prefix apps/web run type-check",
     "build": "tsc --noEmit",
     "test": "vitest"
   },

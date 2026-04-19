@@ -21,6 +21,12 @@ Thumbs.db
 # Site build output
 site/dist/
 site/.astro/
+apps/*/.next/
+apps/*/.open-next/
+apps/*/.wrangler/
+apps/*/*.tsbuildinfo
+workers/*/.wrangler/
+packages/*/*.tsbuildinfo
 
 # Fetched OG images (regenerated on build, don't bloat repo)
 site/public/images/
