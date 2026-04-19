@@ -1,5 +1,354 @@
 [
   {
+    "date": "2026-04-19",
+    "headline": "AI 日报 · 2026-04-19",
+    "observationText": "AI 行业本周呈现资本与安全双线并进的态势。Cerebras 提交 IPO 申请，Recursive Superintelligence 成立仅四个月便融资 5 亿美元，DeepSeek 也首次寻求外部融资，估值达 100 亿美元——资金正在加速向基础设施和前沿能力集中。Anthropic 的安全模型 Mythos 引发广泛争议：开源小模型被证明能完成类似的安全漏洞发现任务，削弱了其\"能力独特\"的论点，而白宫与 Anthropic 的\"建设性会面\"则凸显了政府对该技术的复杂依赖。与此同时，Meta 宣布将裁员 10% 以换取 AI 基础设施投入，DRAM 短缺可能持续到 2027 年，Mac Mini 和 Mac Studio 因 AI Agent 用户需求强劲而出现缺货——算力瓶颈正在从芯片蔓延到终端设备。Salesforce 推出 Headless 360 让 AI Agent 通过 API 直接操作平台，Coding 领域成为各 AI 实验室的核心战场，Claude Design 的发布更让设计师群体感受到直接冲击。",
+    "observations": [],
+    "clusters": [
+      {
+        "name": "重大新闻",
+        "stories": [
+          {
+            "title": "Cerebras 提交 IPO 申请，AI 芯片赛道加速升温",
+            "summary": "Cerebras 正式提交 IPO 申请。该公司近期与 AWS 签署协议将自研芯片部署到亚马逊数据中心，并与 OpenAI 达成据报道超过 100 亿美元的合作。AI 芯片赛道的资本化进程正在提速。",
+            "sources": [
+              {
+                "name": "TechCrunch",
+                "url": "https://techcrunch.com/2026/04/18/ai-chip-startup-cerebras-files-for-ipo/"
+              }
+            ],
+            "impact": "AI 芯片市场竞争格局从 NVIDIA 独大到多极化演变，IPO 将为 Cerebras 提供扩产资金。"
+          },
+          {
+            "title": "Anthropic Mythos 安全模型争议持续发酵",
+            "summary": "两项新研究表明，小型开源模型能够完成与 Mythos 相同的网络安全漏洞发现任务，直接挑战 Anthropic \"无对手可比\"的说法。与此同时，Anthropic 被五角大楼列为供应链风险后，仍与白宫高层保持沟通。FT 报道称 Anthropic 推迟 Mythos 更广泛发布的原因是近期服务不稳定。开源社区对 Mythos 的推出方式提出质疑，认为其基于误导性信息。",
+            "sources": [
+              {
+                "name": "The Decoder",
+                "url": "https://the-decoder.com/the-myth-of-claude-mythos-crumbles-as-small-open-models-hunt-the-same-cybersecurity-bugs-anthropic-showcased/"
+              },
+              {
+                "name": "TechCrunch",
+                "url": "https://techcrunch.com/2026/04/18/anthropics-relationship-with-the-trump-administration-seems-to-be-thawing/"
+              },
+              {
+                "name": "BBC",
+                "url": "https://www.bbc.com/news/articles/cyv10e1d13po?at_medium=RSS&at_campaign=rss"
+              },
+              {
+                "name": "虎嗅",
+                "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTFBiX3J1TXNsNHdXMEEzREw2RGV1T0VpbWQwcUppcEg0bGMtSVdjbW41X2kzNFpCZGJIbDRRMzhNenluR3B4eHBCRVVyaDBrVVpsRzAyYQ?oc=5"
+              },
+              {
+                "name": "TechMeme",
+                "url": "http://www.techmeme.com/260418/p9#a260418p9"
+              },
+              {
+                "name": "Lobste.rs",
+                "url": "https://lobste.rs/s/1kgeq0/anthropic_s_claude_mythos_launch_is_built"
+              }
+            ],
+            "impact": "AI 安全模型的能力壁垒可能被高估，监管和商业平衡的难度加大。"
+          },
+          {
+            "title": "DeepSeek 首次寻求外部融资，估值 100 亿美元",
+            "summary": "DeepSeek 首次寻求外部资金，计划筹集至少 3 亿美元，投后估值约 100 亿美元。此前该团队一直以独立运营著称。报道指出，模型迭代延迟和核心人才被巨头高薪挖角是融资动因。钛媒体深度分析了国产 AI 硬科技初创公司在巨头碾压下面临的人才困局。",
+            "sources": [
+              {
+                "name": "The Decoder",
+                "url": "https://the-decoder.com/deepseek-reportedly-seeks-outside-funding-for-the-first-time-at-10-billion-valuation/"
+              },
+              {
+                "name": "钛媒体",
+                "url": "https://www.tmtpost.com/7958205.html"
+              },
+              {
+                "name": "虎嗅",
+                "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE5DLWZINnpaTkQyNWE0bXlHRjhXZ3J2U2NhTkZ4TnVISjRhaDlPWEVJNTVPSUo5Z0pqOUMxWHdSTjEzcEpxNjBDdFZDb20tSVZYTVlVdg?oc=5"
+              },
+              {
+                "name": "钛媒体",
+                "url": "https://www.tmtpost.com/7958318.html"
+              }
+            ],
+            "impact": "中国 AI 初创公司的\"理想主义\"时代正在被资本现实重塑，DeepSeek 的转变具有行业标志性意义。"
+          },
+          {
+            "title": "Meta 裁员 10% 以换取 AI 基础设施投入",
+            "summary": "Meta 计划在 5 月 20 日启动首轮裁员，涉及全球约 8000 人（10%），下半年还可能进一步裁员，总比例或超 20%。裁员目的是为 AI 基础设施建设腾出资金空间。",
+            "sources": [
+              {
+                "name": "The Decoder",
+                "url": "https://the-decoder.com/zuckerberg-reportedly-trades-headcount-for-compute-as-meta-readies-to-cut-10-percent-of-its-workforce-to-fund-ai-infrastructure/"
+              },
+              {
+                "name": "36氪",
+                "url": "https://36kr.com/newsflashes/3771824203530756?f=rss"
+              }
+            ],
+            "impact": "\"以人头换算力\"成为大科技公司的新常态，AI 投入的代价正在由员工承担。"
+          },
+          {
+            "title": "Salesforce 推出 Headless 360，API 成为 AI Agent 的新 UI",
+            "summary": "Salesforce 发布 Headless 360 计划，允许 AI Agent 通过 API、MCP 工具或 CLI 命令直接访问其全部平台能力。CEO Benioff 明确表示\"API 是 AI Agent 的新 UI，浏览器将变得过时\"。",
+            "sources": [
+              {
+                "name": "The Decoder",
+                "url": "https://the-decoder.com/salesforce-ceo-marc-benioff-says-apis-are-the-new-ui-for-ai-agents/"
+              },
+              {
+                "name": "TechMeme",
+                "url": "http://www.techmeme.com/260418/p7#a260418p7"
+              }
+            ],
+            "impact": "企业软件正在为 Agent 原生交互范式做准备，\"无头化\"可能是下一代 SaaS 的标配。"
+          }
+        ]
+      },
+      {
+        "name": "公司动态",
+        "stories": [
+          {
+            "title": "Recursive Superintelligence 成立四月融资 5 亿美元",
+            "summary": "一家成立仅四个月的初创公司以 40 亿美元估值融资至少 5 亿美元。团队由前 Google DeepMind 和 OpenAI 研究员组成，目标是构建自我改进的 AI 系统。",
+            "sources": [
+              {
+                "name": "The Decoder",
+                "url": "https://the-decoder.com/self-improving-ai-startup-recursive-superintelligence-pulls-in-500-million-just-four-months-after-founding/"
+              }
+            ]
+          },
+          {
+            "title": "OpenAI 结构调整，三位高管同时离职",
+            "summary": "三位高管同时离开 OpenAI，正值公司重组并将重心转向 Coding 和企业客户。",
+            "sources": [
+              {
+                "name": "The Decoder",
+                "url": "https://the-decoder.com/openai-loses-three-executives-in-one-swoop-as-restructuring-reshapes-its-product-lineup/"
+              }
+            ]
+          },
+          {
+            "title": "Anthropic CEO 称 AI Scaling \"没有终点\"",
+            "summary": "Anthropic CEO 认为 AI 扩展没有上限，同时呼吁行业不要低估就业风险，要确保正面影响足够大以抵消冲击。",
+            "sources": [
+              {
+                "name": "The Decoder",
+                "url": "https://the-decoder.com/anthropic-ceo-amodei-declares-there-is-no-end-to-the-rainbow-for-ai-scaling/"
+              }
+            ]
+          },
+          {
+            "title": "Claude Design 发布引发设计行业关注",
+            "summary": "Anthropic 推出 Claude Design，可通过对话生成原型、幻灯片和单页文档。钛媒体称其为设计行业的\"棺材板\"。同时 Wired 报道了 Schematik——被称为\"硬件领域的 Cursor\"，Anthropic 也对其表示了兴趣。",
+            "sources": [
+              {
+                "name": "钛媒体",
+                "url": "https://www.tmtpost.com/7958212.html"
+              },
+              {
+                "name": "Wired",
+                "url": "https://www.wired.com/story/schematik-is-cursor-for-hardware-anthropic-wants-in-on-it/"
+              },
+              {
+                "name": "Hacker News (204票)",
+                "url": "https://samhenri.gold/blog/20260418-claude-design/"
+              }
+            ]
+          },
+          {
+            "title": "App Store 应用爆发，AI 或为主因",
+            "summary": "Appfigures 数据显示 2026 年新应用发布量激增，AI 工具可能正在推动移动软件的新一轮繁荣。",
+            "sources": [
+              {
+                "name": "TechCrunch",
+                "url": "https://techcrunch.com/2026/04/18/the-app-store-is-booming-again-and-ai-may-be-why/"
+              }
+            ]
+          },
+          {
+            "title": "Mac Mini/Mac Studio 因 AI Agent 需求缺货",
+            "summary": "部分型号在美国缺货或等待时间长达 12 周，分析师将原因归结为 AI Agent 重度用户的需求激增。",
+            "sources": [
+              {
+                "name": "TechMeme",
+                "url": "http://www.techmeme.com/260418/p2#a260418p2"
+              }
+            ]
+          },
+          {
+            "title": "自动驾驶创投融资创纪录",
+            "summary": "自动驾驶初创公司 2026 年截至 4 月 15 日已融资 214 亿美元（34 笔交易），远超 2025 全年的 59 亿美元。",
+            "sources": [
+              {
+                "name": "TechMeme",
+                "url": "http://www.techmeme.com/260418/p4#a260418p4"
+              }
+            ]
+          },
+          {
+            "title": "禾赛发布 EXT 激光雷达",
+            "summary": "禾赛发布业界首个集成空间和颜色检测的激光雷达 EXT，作为 Nvidia ADAS 的主要供应商进一步巩固地位。",
+            "sources": [
+              {
+                "name": "TechMeme",
+                "url": "http://www.techmeme.com/260418/p3#a260418p3"
+              }
+            ]
+          },
+          {
+            "title": "DRAM 短缺将持续到 2027 年",
+            "summary": "日经亚洲报道，全球 DRAM 供应预计到 2027 年底仅能满足 60% 的需求。内存成本在低端手机中占比将从 20% 升至 40%。",
+            "sources": [
+              {
+                "name": "The Verge",
+                "url": "https://www.theverge.com/ai-artificial-intelligence/914672/the-ram-shortage-could-last-years"
+              },
+              {
+                "name": "TechMeme",
+                "url": "http://www.techmeme.com/260418/p5#a260418p5"
+              }
+            ]
+          },
+          {
+            "title": "AI 算力引爆科创板",
+            "summary": "中际旭创市值突破 9000 亿，单季利润 57 亿超过 2024 全年。激光器芯片行业因 AI 网络需求迎来爆发。",
+            "sources": [
+              {
+                "name": "虎嗅",
+                "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE9lV1NLNllOalMzVjBIUzZKclJtVDhJOEo1T1NUUFZQUTdHODgzMGNjOEJuSmM1UmVoTTlIQVVXbzRKM2Vjb2ZyakZyd3d5Zkxzc3c"
+              }
+            ]
+          },
+          {
+            "title": "智元机器人转型 AI 大模型平台",
+            "summary": "智元在产量破万台后推出六大 AI 模型和七大生产力解决方案，并首次公开 AIMA 架构。",
+            "sources": [
+              {
+                "name": "36氪",
+                "url": "https://36kr.com/p/3770721219035649?f=rss"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "论文与开源",
+        "stories": [
+          {
+            "title": "EvoMap/evolver — AI Agent 自演化引擎",
+            "summary": "[GitHub](https://github.com/EvoMap/evolver) 基于基因进化协议（GEP）的 AI Agent 自演化引擎。+1131 stars。",
+            "sources": []
+          },
+          {
+            "title": "lsdefine/GenericAgent — 自演化 Agent，技能树从 3300 行种子生长",
+            "summary": "[GitHub](https://github.com/lsdefine/GenericAgent) 自演化 Agent 系统，从 3300 行种子代码生长出技能树，实现全系统控制且 token 消耗降低 6 倍。+776 stars。",
+            "sources": []
+          },
+          {
+            "title": "openai/openai-agents-python — OpenAI 多 Agent 框架",
+            "summary": "[GitHub](https://github.com/openai/openai-agents-python) OpenAI 官方轻量级多 Agent 工作流框架。+470 stars。",
+            "sources": []
+          },
+          {
+            "title": "BasedHardware/omi — 看屏幕、听对话的 AI 助手",
+            "summary": "[GitHub](https://github.com/BasedHardware/omi) 能看屏幕、听对话并给出建议的 AI 硬件项目（Dart 语言）。+609 stars。",
+            "sources": []
+          },
+          {
+            "title": "SimoneAvogadro/android-reverse-engineering-skill — Claude Code 逆向工程技能",
+            "summary": "[GitHub](https://github.com/SimoneAvogadro/android-reverse-engineering-skill) Claude Code 的 Android 应用逆向工程技能包。+403 stars。",
+            "sources": []
+          },
+          {
+            "title": "thunderbird/thunderbolt — 可控 AI 桌面客户端",
+            "summary": "[GitHub](https://github.com/thunderbird/thunderbolt) Thunderbird 出品的 AI 客户端，支持自选模型、数据自有、避免供应商锁定。+447 stars。",
+            "sources": []
+          },
+          {
+            "title": "Lordog/dive-into-llms — 动手学大模型教程",
+            "summary": "[GitHub](https://github.com/Lordog/dive-into-llms) 《动手学大模型》系列编程实践教程（Jupyter Notebook）。+547 stars。",
+            "sources": []
+          },
+          {
+            "title": "Sema Code: 可编程的 AI Coding Agent 解耦架构",
+            "summary": "[arXiv](https://arxiv.org/abs/2604.11045) 提出将 AI Coding Agent 解耦为可编程组件的架构设计。↑23 票。",
+            "sources": []
+          },
+          {
+            "title": "SemaClaw: 通用个人 AI Agent",
+            "summary": "[arXiv](https://arxiv.org/abs/2604.11548) 面向通用个人 AI Agent 的研究工作。↑18 票。",
+            "sources": []
+          },
+          {
+            "title": "Dive into Claude Code: 设计空间探索",
+            "summary": "[arXiv](https://arxiv.org/abs/2604.14228) 深入分析 Claude Code 的设计空间，涵盖当前和未来的 AI 编程 Agent 架构。↑12 票。",
+            "sources": []
+          }
+        ]
+      },
+      {
+        "name": "社区热点",
+        "stories": [
+          {
+            "title": "Claude Model 性能下降引发用户不满",
+            "summary": "用户报告 Claude 模型性能下降，AMD 量化分析证实代码编辑质量降低。Nate Silver 也抱怨 Claude 在模型构建中反复催促\"收工\"而非解决问题。",
+            "sources": [
+              {
+                "name": "虎嗅",
+                "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE9nRlVyd2x4X1dKbTR6djdHTGlRZmZpOGFJWFhQSDZYY3JjQkNtXzFqRF9aa1VDN3hOSlhybjNQTnBZR3JaTTdaUG1EVzhfRHZWWjZYZA"
+              },
+              {
+                "name": "Mastodon",
+                "url": "https://mastodon.sayzard.org/@sayzard/116428132128857541"
+              }
+            ]
+          },
+          {
+            "title": "AI Agent 安全漏洞：一条 PR 标题就能偷走 API 密钥",
+            "summary": "三大主流 AI 编程 Agent 均曝出\"评论与控制\"漏洞，凭证窃取攻击已获多家厂商确认。",
+            "sources": [
+              {
+                "name": "钛媒体",
+                "url": "https://www.tmtpost.com/7956493.html"
+              }
+            ]
+          },
+          {
+            "title": "使用 AI 仅 10 分钟就会削弱问题解决能力",
+            "summary": "美国研究团队发现，仅使用 AI 助手 10-15 分钟就会显著降低后续无 AI 辅助任务中的问题解决能力和坚持度。",
+            "sources": [
+              {
+                "name": "The Decoder",
+                "url": "https://the-decoder.com/just-ten-minutes-of-using-ai-as-an-answer-machine-can-measurably-erode-problem-solving-skills-new-study-finds/"
+              }
+            ]
+          },
+          {
+            "title": "大学教师用打字机对抗 AI 代写",
+            "summary": "一位大学教师改用打字机布置作业以防止学生用 AI 代写，HN 上引发 94 条热议。",
+            "sources": [
+              {
+                "name": "Hacker News (95票)",
+                "url": "https://sentinelcolorado.com/uncategorized/a-college-instructor-turns-to-typewriters-to-curb-ai-written-work-and-teach-life-lessons/"
+              }
+            ]
+          },
+          {
+            "title": "Remoroo: 修复长时运行 Coding Agent 的记忆问题",
+            "summary": "Show HN 项目，尝试解决长时间运行的编码 Agent 的记忆衰减问题。",
+            "sources": [
+              {
+                "name": "Hacker News",
+                "url": "https://www.remoroo.com"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
     "date": "2026-04-18",
     "headline": "AI 日报 · 2026-04-18",
     "observationText": "今天 AI 行业呈现出一幅剧烈分化与重构的图景。Anthropic 是今日最活跃的变量——推出 Claude Design 设计工具（Figma 股价应声下跌 6.84%），其网络安全模型 Mythos 让白宫从敌对转向谈判，Claude 的市场份额也在一个月内翻倍。与此同时，OpenAI 正经历高管出走潮：Sora 负责人 Bill Peebles、前 CPO Kevin Weil 先后宣布离职，公司正从消费者\"登月项目\"转向企业 AI，股东对 Altman 能否带领公司 IPO 的疑虑也在上升。资本市场层面，Cursor 传闻以 500 亿美元估值融资 20 亿，Cerebras 提交纳斯达克上市申请并已实现盈利——AI 基础设施和开发者工具的估值正在飙升。中国方面，阿里云百度云腾讯云集体涨价 5%-34%，标志着云计算多年降价周期结束；阿里的 Qwen3.6 开源模型在编程基准上击败 Google Gemma 4。Meta 则计划在 5 月 20 日裁员约 10%（约 8000 人），同时 Quest 头显因 AI 芯片成本上涨而提价。整个行业正从\"用补贴换增长\"进入\"价格和价值重新对齐\"的阶段。",
