@@ -17,6 +17,7 @@ on:
       - 'site/**'
       - 'scripts/build-site-data.ts'
       - 'scripts/fetch-images.ts'
+      - 'packages/shared/**'
       - 'data/**'
 
 permissions:

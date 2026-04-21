@@ -1,0 +1,126 @@
+name: Deploy Web to Cloudflare
+
+on:
+  workflow_dispatch:
+    inputs:
+      deploy:
+        description: 'Deploy the Cloudflare Worker after verification'
+        required: false
+        default: false
+        type: boolean
+      backfill:
+        description: 'Apply the generated D1 backfill SQL before deploy'
+        required: false
+        default: true
+        type: boolean
+  push:
+    branches: [main]
+    paths:
+      - 'apps/web/**'
+      - 'packages/shared/**'
+      - 'db/d1/**'
+      - 'scripts/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - '.github/workflows/deploy-web-cloudflare.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cloudflare-web
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install root dependencies
+        run: npm ci
+
+      - name: Install web dependencies
+        run: npm install --prefix apps/web --no-audit
+
+      - name: Test scripts
+        run: npm test -- --run
+
+      - name: Type-check scripts
+        run: npm run build
+
+      - name: Type-check web
+        run: npm run typecheck:web
+
+      - name: Export D1 backfill
+        run: npm run d1:backfill -- --out dist/d1/backfill.sql
+
+      - name: Build Next web
+        run: npm run build:web
+
+      - name: Build Cloudflare worker
+        run: npm run build:web:cloudflare
+
+  deploy:
+    needs: verify
+    if: ${{ (github.event_name == 'workflow_dispatch' && inputs.deploy) || vars.ENABLE_CLOUDFLARE_WEB_DEPLOY == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      READO_D1_DATABASE_ID: ${{ secrets.READO_D1_DATABASE_ID }}
+      READO_API_SECRET: ${{ secrets.READO_API_SECRET }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install root dependencies
+        run: npm ci
+
+      - name: Install web dependencies
+        run: npm install --prefix apps/web --no-audit
+
+      - name: Render Wrangler D1 database id
+        run: |
+          node -e "const fs=require('fs'); const p='apps/web/wrangler.jsonc'; const id=process.env.READO_D1_DATABASE_ID; if(!id) throw new Error('READO_D1_DATABASE_ID secret is required'); fs.writeFileSync(p, fs.readFileSync(p, 'utf8').replace('00000000-0000-0000-0000-000000000000', id));"
+
+      - name: Apply D1 migrations
+        run: npm --prefix apps/web exec -- wrangler d1 migrations apply DB --remote
+
+      - name: Export D1 backfill
+        run: npm run d1:backfill -- --out dist/d1/backfill.sql
+
+      - name: Apply D1 backfill
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.backfill }}
+        run: npm --prefix apps/web exec -- wrangler d1 execute DB --remote --file ../../dist/d1/backfill.sql --yes
+
+      - name: Set API secret
+        run: |
+          if [ -z "$READO_API_SECRET" ]; then
+            echo "READO_API_SECRET secret is required"
+            exit 1
+          fi
+          printf "%s" "$READO_API_SECRET" | npm --prefix apps/web exec -- wrangler secret put READO_API_SECRET
+
+      - name: Build Cloudflare worker
+        run: npm run build:web:cloudflare
+
+      - name: Deploy Cloudflare worker
+        run: npm run deploy:web:cloudflare

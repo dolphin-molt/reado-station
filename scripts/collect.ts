@@ -15,10 +15,19 @@ import { join } from 'node:path'
 import { existsSync } from 'node:fs'
 import dayjs from 'dayjs'
 import {
+  collectedDataStatements,
+  wrapTransaction,
+} from './lib/d1-sql.js'
+import {
+  isD1ApiWriteRequired,
+  postCollectionToD1Api,
+} from './lib/d1-api.js'
+import {
   isCommandAvailable,
   runCommandAsync,
   readJSON,
   writeJSON,
+  writeText,
   readText,
   getDataDir,
   getConfigDir,
@@ -339,9 +348,12 @@ function mergeLocalData(dataDir: string, cloudItems: InfoItem[]): InfoItem[] {
 async function main() {
   const { mode } = parseArgs()
   const startTime = Date.now()
+  const runStartedAt = dayjs()
+  const runDate = runStartedAt.format('YYYY-MM-DD')
+  const runBatch: 'morning' | 'evening' = runStartedAt.hour() < 14 ? 'morning' : 'evening'
 
   log.step(`Starting data collection (mode: ${mode})`)
-  log.info(`Date: ${dayjs().format('YYYY-MM-DD HH:mm')}`)
+  log.info(`Date: ${runStartedAt.format('YYYY-MM-DD HH:mm')}`)
 
   // Check prerequisites
   if (!isCommandAvailable('reado')) {
@@ -397,7 +409,7 @@ async function main() {
   }
 
   // Get data directory
-  const dataDir = getDataDir()
+  const dataDir = getDataDir(runBatch)
 
   // For cloud mode, merge with local.json if it exists
   let mergedItems = allItems
@@ -431,6 +443,43 @@ async function main() {
   const outputFile = mode === 'local' ? 'local.json' : 'raw.json'
   const outputPath = join(dataDir, outputFile)
   writeJSON(outputPath, output)
+
+  try {
+    const shadowSqlPath = join(dataDir, mode === 'local' ? 'd1-local.sql' : 'd1-raw.sql')
+    const shadowSql = wrapTransaction(
+      `reado-station ${mode} collection shadow write`,
+      collectedDataStatements(output, {
+        date: runDate,
+        batch: runBatch,
+        mode,
+        updatedAt: output.fetchedAt,
+      }),
+      output.fetchedAt,
+    )
+    writeText(shadowSqlPath, shadowSql)
+    log.data('D1 shadow SQL', shadowSqlPath)
+  } catch (err: any) {
+    log.warn(`D1 shadow SQL write skipped: ${err?.message ?? err}`)
+  }
+
+  try {
+    const result = await postCollectionToD1Api(output, {
+      date: runDate,
+      batch: runBatch,
+      mode,
+    })
+    if (result.status === 'posted') {
+      log.data('D1 API write', result.url ?? 'posted')
+    } else if (isD1ApiWriteRequired()) {
+      throw new Error(result.reason ?? 'D1 API write skipped')
+    }
+  } catch (err: any) {
+    if (isD1ApiWriteRequired()) {
+      log.error(`D1 API write failed: ${err?.message ?? err}`)
+      process.exit(1)
+    }
+    log.warn(`D1 API write skipped: ${err?.message ?? err}`)
+  }
 
   // Summary
   const totalDuration = ((Date.now() - startTime) / 1000).toFixed(1)

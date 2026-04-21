@@ -2,6 +2,8 @@
 
 > Companion to [Migration Roadmap](./migration-roadmap.md). This checklist defines what "phase 1 migration done" means before we touch the production cutover.
 
+Production cutover runbook: [Production Migration Checklist](./production-migration-checklist.md)
+
 ## Scope
 
 Phase 1 parity means:
@@ -67,8 +69,14 @@ Phase 1 parity does not mean:
 - [x] asset bridge exists for legacy `site/public` images/placeholders
 - [x] shared content types extracted into `packages/shared`
 - [x] `scripts/build-site-data.ts` uses shared types
-- [ ] D1 read path
-- [ ] dual-write from collect/digest publish into D1
+- [x] minimum D1 schema defined in `db/d1/0001_core.sql`
+- [x] deterministic backfill SQL export exists via `npm run d1:backfill`
+- [x] collection runs write git-ignored D1 shadow SQL artifacts
+- [x] digest generation writes git-ignored D1 shadow SQL artifacts
+- [x] D1 read path for the candidate web app
+- [x] protected D1 ingest API for collection output
+- [x] protected D1 digest API for digest publishing
+- [x] optional direct D1 write from collect/digest publish scripts
 
 ## Operational Safety
 
@@ -76,25 +84,33 @@ Phase 1 parity does not mean:
 - [x] root script build remains separate from web candidate build
 - [x] migration work does not remove `data/`
 - [x] migration work does not remove `site/`
-- [ ] backfill script for D1
-- [ ] ingest API / worker write path
-- [ ] digest publish API / worker write path
+- [x] backfill script for D1
+- [x] local shadow write path for collection and digest SQL
+- [x] ingest API / worker write path
+- [x] digest publish API / worker write path
+- [x] ops-state API path
+- [x] public health check endpoint
+- [x] Cloudflare/OpenNext deployment workflow
 
 ## Validation Checklist
 
-- [ ] `npm test -- --run`
-- [ ] `npm run build`
-- [ ] `npm run typecheck:web`
-- [ ] `npm run build:web`
-- [ ] manual zh homepage pass
-- [ ] manual en homepage pass
-- [ ] manual archive/about pass
+- [x] `npm test -- --run`
+- [x] `npm run build`
+- [x] `npm run typecheck:web`
+- [x] `npm run build:web`
+- [x] `npm run build:web:cloudflare`
+- [x] local D1 migration/backfill smoke test
+- [x] Cloudflare preview `/api/health` returns D1 counts
+- [x] Cloudflare preview zh homepage HTTP pass
+- [x] Cloudflare preview en homepage HTTP pass
+- [x] Cloudflare preview archive HTTP pass
+- [ ] manual visual archive/about pass
 
 ## Immediate Follow-Up
 
-After the items above are green, the next migration slice is:
+After the automated checks above are green, the remaining production work is operational rather than code-heavy:
 
-1. define the minimum D1 schema for `items`, `digests`, `sources`, `collection_runs`, and `ops_state`
-2. add a deterministic backfill path from `data/` and generated site JSON
-3. dual-write new collection and digest output into both JSON and D1
-4. swap the candidate web app from JSON reads to repository-style data access backed by D1
+1. create the real Cloudflare D1 database and configure GitHub secrets
+2. run the Cloudflare deploy workflow with D1 migration and backfill enabled
+3. enable collection dual-write and observe 3 successful morning/evening cycles
+4. cut over traffic only after `/api/health` and page parity checks are green

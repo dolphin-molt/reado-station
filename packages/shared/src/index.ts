@@ -7,3 +7,4 @@ export type {
   Observation,
   SiteItem,
 } from './content'
+export { parseDigestMarkdown } from './digest'

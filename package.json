@@ -22,6 +22,11 @@
     "dev:web": "npm --prefix apps/web run dev",
     "build:web": "npm --prefix apps/web run build",
     "typecheck:web": "npm --prefix apps/web run type-check",
+    "build:web:cloudflare": "npm --prefix apps/web run build:cloudflare",
+    "deploy:web:cloudflare": "npm --prefix apps/web run deploy:cloudflare",
+    "cf:web:types": "npm --prefix apps/web run cf:types",
+    "d1:backfill": "tsx scripts/export-d1-backfill.ts",
+    "d1:backfill:stdout": "tsx scripts/export-d1-backfill.ts --stdout",
     "build": "tsc --noEmit",
     "test": "vitest"
   },

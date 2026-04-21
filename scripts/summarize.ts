@@ -21,10 +21,18 @@
  * 5. 输出 digest.md + 终端打印
  */
 import 'dotenv/config'
-import { join } from 'node:path'
+import { basename, join } from 'node:path'
 import { existsSync } from 'node:fs'
 import dayjs from 'dayjs'
 import Anthropic from '@anthropic-ai/sdk'
+import {
+  digestMarkdownStatement,
+  wrapTransaction,
+} from './lib/d1-sql.js'
+import {
+  isD1ApiWriteRequired,
+  postDigestToD1Api,
+} from './lib/d1-api.js'
 import {
   readJSON,
   readText,
@@ -233,6 +241,49 @@ async function main() {
   // Write digest.md
   const digestPath = join(dataDir, 'digest.md')
   writeText(digestPath, report)
+
+  const batch = basename(dataDir)
+  const headline = report.match(/^#\s+(.+)$/m)?.[1]
+
+  try {
+    const shadowSqlPath = join(dataDir, 'd1-digest.sql')
+    const shadowSql = wrapTransaction(
+      'reado-station digest shadow write',
+      [
+        digestMarkdownStatement({
+          date,
+          batch,
+          headline,
+          markdown: report,
+          updatedAt: new Date().toISOString(),
+        }),
+      ],
+    )
+    writeText(shadowSqlPath, shadowSql)
+    log.data('D1 shadow SQL', shadowSqlPath)
+  } catch (err: any) {
+    log.warn(`D1 digest shadow SQL write skipped: ${err?.message ?? err}`)
+  }
+
+  try {
+    const result = await postDigestToD1Api({
+      date,
+      batch,
+      headline,
+      markdown: report,
+    })
+    if (result.status === 'posted') {
+      log.data('D1 API write', result.url ?? 'posted')
+    } else if (isD1ApiWriteRequired()) {
+      throw new Error(result.reason ?? 'D1 API write skipped')
+    }
+  } catch (err: any) {
+    if (isD1ApiWriteRequired()) {
+      log.error(`D1 digest API write failed: ${err?.message ?? err}`)
+      process.exit(1)
+    }
+    log.warn(`D1 digest API write skipped: ${err?.message ?? err}`)
+  }
 
   // Also write to ~/ai-daily/ for backward compatibility
   const homeDigestDir = join(process.env.HOME || '~', 'ai-daily')

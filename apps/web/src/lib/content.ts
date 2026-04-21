@@ -5,6 +5,8 @@ import { join, resolve } from 'node:path'
 import { cache } from 'react'
 
 import type { DayMeta, DigestData, SiteItem } from '../../../../packages/shared/src'
+import { D1UnavailableError, getD1Database, shouldRequireD1 } from '@/lib/cloudflare'
+import { loadD1SiteContent } from '@/lib/content-d1'
 import type { Lang } from '@/lib/i18n'
 
 export interface KeyStory {
@@ -39,7 +41,7 @@ async function readJsonFile<T>(filename: string): Promise<T> {
   return JSON.parse(raw) as T
 }
 
-export const loadSiteContent = cache(async (): Promise<SiteContent> => {
+async function loadJsonSiteContent(): Promise<SiteContent> {
   const [days, digests, items] = await Promise.all([
     readJsonFile<DayMeta[]>('days.json'),
     readJsonFile<DigestData[]>('digests.json'),
@@ -51,6 +53,22 @@ export const loadSiteContent = cache(async (): Promise<SiteContent> => {
     digests: [...digests].sort((a, b) => b.date.localeCompare(a.date)),
     items,
   }
+}
+
+export const loadSiteContent = cache(async (): Promise<SiteContent> => {
+  let db: D1Database | null = null
+
+  try {
+    db = await getD1Database()
+  } catch (error) {
+    if (error instanceof D1UnavailableError || shouldRequireD1()) {
+      throw error
+    }
+    console.warn('D1 content read failed, falling back to repository JSON', error)
+  }
+
+  if (db) return loadD1SiteContent(db)
+  return loadJsonSiteContent()
 })
 
 export const getArchiveDays = cache(async (): Promise<DayMeta[]> => {

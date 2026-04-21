@@ -1,6 +1,9 @@
 # reado-station Migration Roadmap
 
-Companion checklist: [Migration Parity Checklist](./migration-parity-checklist.md)
+Companion checklists:
+
+- [Migration Parity Checklist](./migration-parity-checklist.md)
+- [Production Migration Checklist](./production-migration-checklist.md)
 
 > Goal: migrate `reado-station` from the current Astro + Git-tracked JSON delivery model to a Cloudflare-native application platform without interrupting the existing daily operation loop.
 
@@ -28,6 +31,17 @@ This means the real source of truth today is still:
 - operational data in `data/`
 - generated site JSON in `site/src/data/`
 - Astro pages in `site/src/`
+
+The migration branch now also contains a production-ready candidate path:
+
+- `apps/web`: OpenNext/Cloudflare-capable Next app
+- `db/d1/0001_core.sql`: minimum D1 schema
+- `scripts/export-d1-backfill.ts`: idempotent D1 backfill export
+- `apps/web/src/app/api/ingest`: protected collection ingest API
+- `apps/web/src/app/api/digest`: protected digest publish API
+- `apps/web/src/app/api/ops-state`: protected ops-state API
+- `apps/web/src/app/api/health`: public D1 health check
+- `.github/workflows/deploy-web-cloudflare.yml`: gated Cloudflare deploy workflow
 
 ## Planned Target
 
@@ -328,9 +342,10 @@ Main risk:
 
 ### Milestone 2: Data Dual-Write
 
-- D1 schema in place
-- historical import works
-- new runs write to both JSON and D1
+- D1 schema in place: `db/d1/0001_core.sql`
+- historical import path exists: `npm run d1:backfill`
+- new runs produce git-ignored D1 shadow SQL next to JSON/Markdown outputs
+- direct D1 writes are still a follow-up after the import artifacts are verified
 
 ### Milestone 3: Read Parity
 

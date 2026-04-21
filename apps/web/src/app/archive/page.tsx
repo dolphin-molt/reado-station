@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 import { ArchivePage } from '@/components/pages/ArchivePage'
 
-export const dynamic = 'force-static'
+export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
   title: '归档',

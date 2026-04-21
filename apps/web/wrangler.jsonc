@@ -1,0 +1,34 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "reado-station-web",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-04-16",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "services": [
+    {
+      // Self-reference service binding required by the OpenNext Cloudflare adapter.
+      "binding": "WORKER_SELF_REFERENCE",
+      "service": "reado-station-web"
+    }
+  ],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "reado-station",
+      "database_id": "00000000-0000-0000-0000-000000000000",
+      "migrations_dir": "../../db/d1"
+    }
+  ],
+  "vars": {
+    "READO_CONTENT_SOURCE": "d1",
+    "READO_REQUIRE_D1": "true"
+  },
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  }
+}

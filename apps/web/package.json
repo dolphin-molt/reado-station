@@ -7,17 +7,24 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "build:cloudflare": "opennextjs-cloudflare build",
+    "preview:cloudflare": "opennextjs-cloudflare preview",
+    "deploy:cloudflare": "opennextjs-cloudflare deploy",
+    "cf:types": "wrangler types"
   },
   "dependencies": {
-    "next": "^15.5.15",
-    "react": "^19.2.5",
-    "react-dom": "^19.2.5"
+    "next": "15.5.15",
+    "react": "19.2.5",
+    "react-dom": "19.2.5"
   },
   "devDependencies": {
-    "@types/node": "^22.19.17",
-    "@types/react": "^19.2.14",
-    "@types/react-dom": "^19.2.3",
-    "typescript": "^5.9.3"
+    "@cloudflare/workers-types": "4.20260409.1",
+    "@opennextjs/cloudflare": "1.19.1",
+    "@types/node": "22.19.17",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "typescript": "5.9.3",
+    "wrangler": "4.81.1"
   }
 }

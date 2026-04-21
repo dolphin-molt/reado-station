@@ -12,206 +12,13 @@
 import { readdirSync, existsSync, readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { readJSON, writeJSON, log, categorizeSite, sanitizeText } from './lib/utils.js'
-import type { CollectedData, InfoItem } from './lib/utils.js'
+import type { CollectedData } from './lib/utils.js'
 import type {
   DayMeta,
-  DigestCluster,
   DigestData,
-  DigestStory,
-  Observation,
   SiteItem,
 } from '../packages/shared/src/index.ts'
-
-// ─── Digest parser ──────────────────────────────────────────────────
-
-function parseDigest(md: string, date: string): DigestData {
-  const lines = md.split('\n')
-  const clusters: DigestCluster[] = []
-  const observations: Observation[] = []
-  let observationText = ''
-  let currentCluster: DigestCluster | null = null
-  let currentStory: DigestStory | null = null
-  let headline = ''
-  let inObservations = false
-  let currentObservation: Observation | null = null
-  let observationHasH3 = false // detect old vs new format
-
-  // Expert avatar mapping (legacy format support)
-  const expertAvatars: Record<string, string> = {
-    '马斯克': '🚀', 'Elon Musk': '🚀',
-    '贝佐斯': '📦', 'Jeff Bezos': '📦',
-    '黄仁勋': '🎮', 'Jensen Huang': '🎮',
-    '奥特曼': '🤖', 'Sam Altman': '🤖',
-    'Dario Amodei': '🧠', 'Amodei': '🧠',
-    '李彦宏': '🔍', '扎克伯格': '👤', 'Mark Zuckerberg': '👤',
-    '纳德拉': '☁️', 'Satya Nadella': '☁️',
-    '李飞飞': '🎓', 'Fei-Fei Li': '🎓',
-  }
-  function getAvatar(expert: string): string {
-    for (const [key, emoji] of Object.entries(expertAvatars)) {
-      if (expert.includes(key)) return emoji
-    }
-    return '💡'
-  }
-
-  // Extract headline from first H1
-  const h1Match = md.match(/^# (.+)$/m)
-  if (h1Match) headline = h1Match[1]
-
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i]
-
-    // H2 = new section
-    const h2Match = line.match(/^## (.+)$/)
-    if (h2Match) {
-      const name = h2Match[1].trim()
-      // Skip stats section
-      if (name === '采集统计') continue
-
-      // Handle observations section
-      if (name === '今日观察') {
-        inObservations = true
-        if (currentStory && currentCluster) {
-          currentCluster.stories.push(currentStory)
-          currentStory = null
-        }
-        continue
-      }
-
-      // Leaving observations section
-      if (inObservations) {
-        if (currentObservation) observations.push(currentObservation)
-        currentObservation = null
-        inObservations = false
-      }
-
-      if (currentStory && currentCluster) {
-        currentCluster.stories.push(currentStory)
-        currentStory = null
-      }
-      currentCluster = { name, stories: [] }
-      clusters.push(currentCluster)
-      continue
-    }
-
-    // Parse observations section — supports both new (plain text) and legacy (### Expert) formats
-    if (inObservations) {
-      const h3Match = line.match(/^### (.+)$/)
-      if (h3Match) {
-        // Legacy format: per-expert H3 sections
-        observationHasH3 = true
-        if (currentObservation) observations.push(currentObservation)
-        const expert = h3Match[1].trim()
-        currentObservation = { expert, avatar: getAvatar(expert), text: '' }
-        continue
-      }
-      if (observationHasH3 && currentObservation) {
-        // Legacy format: collecting expert text
-        const trimmed = line.trim()
-        if (trimmed && !trimmed.startsWith('---') && !trimmed.startsWith('>')) {
-          currentObservation.text += (currentObservation.text ? ' ' : '') + trimmed
-        }
-      } else if (!observationHasH3) {
-        // New format: plain paragraph text
-        const trimmed = line.trim()
-        if (trimmed && !trimmed.startsWith('---') && !trimmed.startsWith('>')) {
-          observationText += (observationText ? ' ' : '') + trimmed
-        }
-      }
-      continue
-    }
-
-    // H3 = new story within current cluster
-    const h3Match = line.match(/^### (.+)$/)
-    if (h3Match && currentCluster) {
-      if (currentStory) {
-        currentCluster.stories.push(currentStory)
-      }
-      currentStory = { title: h3Match[1].trim(), summary: '', sources: [] }
-      continue
-    }
-
-    if (!currentStory) continue
-
-    // Parse sources from **来源** line or **来源**: inline
-    if (line.startsWith('**来源**')) {
-      // Could be single line **来源**: [Name](url) or start of multi-line list
-      const urlMatches = line.matchAll(/\[([^\]]+)\]\(([^)]+)\)/g)
-      for (const m of urlMatches) {
-        currentStory.sources.push({ name: m[1], url: m[2] })
-      }
-      continue
-    }
-    // Source list items
-    if (line.startsWith('- ') && currentStory.sources.length >= 0) {
-      const urlMatches = line.matchAll(/\[([^\]]+)\]\(([^)]+)\)/g)
-      let found = false
-      for (const m of urlMatches) {
-        currentStory.sources.push({ name: m[1], url: m[2] })
-        found = true
-      }
-      if (found) continue
-    }
-
-    // Impact line
-    const impactMatch = line.match(/^> 影响评估[:：]\s*(.+)$/)
-    if (impactMatch) {
-      currentStory.impact = impactMatch[1].trim()
-      continue
-    }
-
-    // Skip metadata lines
-    if (line.startsWith('**官方公告**') || line.startsWith('**媒体补充**') ||
-        line.startsWith('**社区反应**') || line.startsWith('**事件**') ||
-        line.startsWith('**链接**')) {
-      // Extract the text content as summary
-      const textContent = line.replace(/^\*\*[^*]+\*\*[:：]\s*/, '')
-      if (textContent && !currentStory.summary) {
-        currentStory.summary = textContent.trim()
-      } else if (textContent && currentStory.summary) {
-        currentStory.summary += ' ' + textContent.trim()
-      }
-      continue
-    }
-
-    // Regular paragraph text → append to summary
-    const trimmed = line.trim()
-    if (trimmed && !trimmed.startsWith('---') && !trimmed.startsWith('>') && !trimmed.startsWith('|')) {
-      if (currentStory.summary) {
-        currentStory.summary += ' ' + trimmed
-      } else {
-        currentStory.summary = trimmed
-      }
-    }
-  }
-
-  // Push last story
-  if (currentStory && currentCluster) {
-    currentCluster.stories.push(currentStory)
-  }
-
-  // Push last observation
-  if (currentObservation) observations.push(currentObservation)
-
-  // Trim summaries
-  for (const cluster of clusters) {
-    for (const story of cluster.stories) {
-      story.summary = story.summary.slice(0, 300).trim()
-    }
-  }
-
-  // Trim observation texts
-  for (const obs of observations) {
-    obs.text = obs.text.slice(0, 300).trim()
-  }
-
-  // If we have legacy per-expert observations but no observationText, merge them into one paragraph
-  if (!observationText && observations.length > 0) {
-    observationText = observations.map(o => o.text).join(' ')
-  }
-
-  return { date, headline, observationText: observationText.trim(), observations, clusters }
-}
+import { parseDigestMarkdown } from '../packages/shared/src/index.ts'
 
 // ─── Category mapping (from lib/utils.ts) ────────────────────────────
 
@@ -290,7 +97,7 @@ function main() {
             digestPath = `${year}/${month}/${day}/${batch}/digest.md`
             try {
               const digestMd = readFileSync(digestMdPath, 'utf-8')
-              const parsed = parseDigest(digestMd, dateStr)
+              const parsed = parseDigestMarkdown(digestMd, dateStr)
               if (parsed.clusters.length > 0) {
                 // Keep the best digest per date — prefer the one with more content
                 const existingIdx = digests.findIndex(d => d.date === dateStr)
