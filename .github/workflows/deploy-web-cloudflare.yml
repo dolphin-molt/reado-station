@@ -50,7 +50,7 @@ jobs:
         run: npm ci
 
       - name: Install web dependencies
-        run: npm install --prefix apps/web --no-audit
+        run: npm install --prefix apps/web --no-audit --no-package-lock
 
       - name: Test scripts
         run: npm test -- --run
@@ -95,7 +95,7 @@ jobs:
         run: npm ci
 
       - name: Install web dependencies
-        run: npm install --prefix apps/web --no-audit
+        run: npm install --prefix apps/web --no-audit --no-package-lock
 
       - name: Render Wrangler D1 database id
         run: |
