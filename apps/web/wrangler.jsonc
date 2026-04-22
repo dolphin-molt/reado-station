@@ -19,7 +19,7 @@
     {
       "binding": "DB",
       "database_name": "reado-station",
-      "database_id": "00000000-0000-0000-0000-000000000000",
+      "database_id": "e2f49813-4052-4a32-b28c-0403e008b07a",
       "migrations_dir": "../../db/d1"
     }
   ],

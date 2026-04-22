@@ -101,6 +101,7 @@ Phase 1 parity does not mean:
 - [x] `npm run build:web:cloudflare`
 - [x] local D1 migration/backfill smoke test
 - [x] Cloudflare preview `/api/health` returns D1 counts
+- [x] Remote Cloudflare Worker `/api/health` returns D1 counts
 - [x] Cloudflare preview zh homepage HTTP pass
 - [x] Cloudflare preview en homepage HTTP pass
 - [x] Cloudflare preview archive HTTP pass

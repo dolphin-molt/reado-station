@@ -8,15 +8,19 @@ This is the cutover runbook for moving `reado-station` from Astro + GitHub Pages
 - `apps/web` can run against D1 in production and can fall back to repository JSON locally.
 - Collection and digest scripts still write files first, then optionally dual-write to the D1 API.
 - D1 writes are not required unless `READO_D1_WRITE_REQUIRED=true`.
+- Cloudflare Worker preview is deployed at `https://reado-station-web.cing-self.workers.dev`.
+- Production D1 database `reado-station` is provisioned and backfilled.
 
 ## Pre-Cutover Setup
 
-- [ ] Create a Cloudflare D1 database named `reado-station`.
-- [ ] Add GitHub secrets: `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_API_TOKEN`, `READO_D1_DATABASE_ID`, `READO_API_SECRET`.
-- [ ] Add collection dual-write secrets: `READO_D1_API_BASE_URL`, `READO_D1_API_SECRET`.
-- [ ] Keep `READO_D1_WRITE_REQUIRED=false` until at least one successful dual-run cycle.
-- [ ] Run the Cloudflare deploy workflow manually with `deploy=true` and `backfill=true`.
-- [ ] Confirm `/api/health` returns `status: ok`, `contentSource: d1`, and non-zero item/digest counts.
+- [x] Create a Cloudflare D1 database named `reado-station`.
+- [x] Add GitHub secrets: `CLOUDFLARE_ACCOUNT_ID`, `READO_D1_DATABASE_ID`, `READO_API_SECRET`.
+- [ ] Add GitHub secret: `CLOUDFLARE_API_TOKEN` for future CI deploys.
+- [x] Add collection dual-write secrets: `READO_D1_API_BASE_URL`, `READO_D1_API_SECRET`.
+- [x] Keep `READO_D1_WRITE_REQUIRED=false` until at least one successful dual-run cycle.
+- [x] Deploy the Cloudflare Worker from local Wrangler.
+- [x] Apply D1 migration and backfill.
+- [x] Confirm `/api/health` returns `status: ok`, `contentSource: d1`, and non-zero item/digest counts.
 
 ## Dual-Run Gate
 
