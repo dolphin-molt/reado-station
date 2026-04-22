@@ -1,9 +1,10 @@
 #!/usr/bin/env tsx
 /**
- * Export existing git-backed reado-station data as idempotent SQLite/D1 SQL.
+ * Export local reado-station history as idempotent SQLite/D1 SQL.
  *
- * This is intentionally an export step, not a production cutover. The current
- * Astro + JSON path remains the source of truth until dual-write is verified.
+ * Runtime content now lives in D1. Local JSON/Markdown files may be absent in
+ * CI because they are ignored by Git; in that case this emits an empty content
+ * backfill and lets the API-based sync path remain the source of truth.
  */
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
@@ -38,22 +39,23 @@ interface ExportStats {
   opsStateKeys: number
 }
 
-function readRequiredJson<T>(path: string): T {
+function readOptionalJson<T>(path: string, fallback: T): T {
+  if (!existsSync(path)) return fallback
   const data = readJSON<T>(path)
   if (!data) throw new Error(`Failed to read JSON: ${path}`)
   return data
 }
 
 function readSiteItems(projectRoot: string): SiteItem[] {
-  return readRequiredJson<SiteItem[]>(join(projectRoot, 'site', 'src', 'data', 'items.json'))
+  return readOptionalJson<SiteItem[]>(join(projectRoot, 'site', 'src', 'data', 'items.json'), [])
 }
 
 function readSiteDigests(projectRoot: string): DigestData[] {
-  return readRequiredJson<DigestData[]>(join(projectRoot, 'site', 'src', 'data', 'digests.json'))
+  return readOptionalJson<DigestData[]>(join(projectRoot, 'site', 'src', 'data', 'digests.json'), [])
 }
 
 function readSources(projectRoot: string): SourceConfig[] {
-  const payload = readRequiredJson<{ sources?: SourceConfig[] } | SourceConfig[]>(join(projectRoot, 'config', 'sources.json'))
+  const payload = readOptionalJson<{ sources?: SourceConfig[] } | SourceConfig[]>(join(projectRoot, 'config', 'sources.json'), [])
   return Array.isArray(payload) ? payload : payload.sources ?? []
 }
 

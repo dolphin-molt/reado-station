@@ -9,7 +9,7 @@
 [![Sources](https://img.shields.io/badge/Sources-165+-orange)](config/sources.json)
 [![Site](https://img.shields.io/badge/Site-reado.theopcapp.com-purple)](https://reado.theopcapp.com)
 
-AI 情报站自主运营平台。165 个信息源，每天自动采集、生成日报、发布网站。
+AI 情报站自主运营平台。165 个信息源，每天自动采集、生成日报，并通过 Cloudflare Worker + D1 发布网站。
 
 全流程由 Agent 自主运营 — 无需人工介入。
 
@@ -26,14 +26,19 @@ npm install
 npm run pipeline:auto   # 采集 + 摘要一条龙
 ```
 
-本地开发网站：
+本地开发生产 Web 应用：
 
 ```bash
-npm run build:site-no-translate
-cd site && npx astro dev
+npm run dev:web
 ```
 
-> Secrets 全部在 GitHub Repository Secrets，本地开发无需 `.env` 文件。详见 `.env.example`。
+一次性把本地历史数据同步到 D1：
+
+```bash
+npm run d1:sync-api -- --require
+```
+
+> Secrets 主要在 GitHub Repository Secrets。本地需要直接写 D1 API 时，配置 `READO_D1_API_BASE_URL` 和 `READO_D1_API_SECRET`。详见 `.env.example`。
 
 ## Architecture
 
@@ -47,9 +52,11 @@ cd site && npx astro dev
                    │                                     ↓     │
                    │   HEAL (故障自愈) ←── any error   PUBLISH │
                    │                                   ↙    ↘  │
-                   │                            GitHub    飞书  │
-                   │                            Pages     群   │
+                   │                            D1 API    飞书  │
+                   │                                      群   │
                    └─────────────────────────────────────────┘
+
+ Cloudflare Worker + D1 ──→ 首页 / 归档 / 受保护写入 API
 ```
 
 ### 信息源覆盖
@@ -84,12 +91,16 @@ cd site && npx astro dev
 | `npm run summarize` | AI 摘要生成 (Claude API) |
 | `npm run sync-sources` | 从飞书多维表格同步信息源配置 |
 | `npm run pipeline:auto` | sync → collect → summarize |
-| `npm run build:site` | 构建静态网站（含翻译） |
-| `npm run build:site-no-translate` | 构建静态网站（跳过翻译） |
+| `npm run d1:sync-api` | 通过受保护 API 将本地历史数据同步到 D1 |
+| `npm run dev:web` | 启动 Next/Cloudflare Web 本地开发 |
+| `npm run build:web` | 构建 Next Web 应用 |
+| `npm run build:web:cloudflare` | 构建 Cloudflare Worker 产物 |
+| `npm run build:site` | 旧 Astro 回退路径：构建静态网站（含翻译） |
+| `npm run build:site-no-translate` | 旧 Astro 回退路径：构建静态网站（跳过翻译） |
 | `npm run publish:lark` | 推送日报到飞书群 |
 | `npm test` | 运行测试 (Vitest) |
 
-## Data Structure
+## Runtime Data
 
 ```
 data/
@@ -103,13 +114,18 @@ data/
 └── ops-state.json         # Agent 运营状态
 ```
 
+`data/` 和 `site/src/data/*.json` 现在是本地运行缓存/历史回填输入，已从 Git 跟踪中移除并由 `.gitignore` 忽略。生产数据源是 Cloudflare D1；采集、摘要和 ops-state 回填通过 `/api/ingest`、`/api/digest`、`/api/ops-state` 这些受保护 API 入库。
+
 ## Site
 
-基于 [Astro](https://astro.build) 的静态网站，部署在 GitHub Pages。
+生产站点基于 `apps/web` 的 Next/OpenNext 应用，部署到 Cloudflare Worker，内容从 D1 读取。
 
 - 中文 + 英文双语（翻译由 SiliconFlow Qwen3-8B 完成）
-- 首页展示最新日报，归档页可按日期浏览
+- 首页展示最新日报并支持分页，归档页按日期分页浏览
+- 受保护 API 支持采集、摘要和 ops-state 写入
 - OG 图片自动抓取
+
+旧 `site/` Astro 项目保留为短期回退/应急重建路径，不再是生产主路径。
 
 ## Agent 运营
 
@@ -126,7 +142,7 @@ data/
 | 5 | GENERATE | 创作 | 生成结构化日报 |
 | 6 | BUILD | 机械 | 构建网站数据 |
 | 7 | PERSIST | 机械 | 持久化运营状态 |
-| 8 | PUBLISH | 机械 | 推送到 GitHub + 飞书群 |
+| 8 | PUBLISH | 机械 | 写入 D1/API + 飞书群 |
 | 9 | HEAL | 决策 | 故障诊断与自愈 |
 
 配套 7 个 Agent Skills 在 `skills/` 目录下，覆盖各阶段的专业能力。
@@ -144,8 +160,9 @@ data/
 
 | Workflow | 触发 | 说明 |
 |----------|------|------|
-| `collect.yml` | cron + manual | 云端数据采集 |
-| `deploy-site.yml` | collect 完成 / push | 构建并部署到 GitHub Pages |
+| `collect.yml` | cron + manual | 云端数据采集，并通过 D1 API 入库 |
+| `deploy-web-cloudflare.yml` | push + manual | 验证并部署 Cloudflare Worker |
+| `deploy-site.yml` | manual / legacy paths | 旧 GitHub Pages 回退部署 |
 | `on-feedback.yml` | Issue 打标 `agent-todo` | 通知 Agent 处理用户反馈 |
 
 ## License

@@ -1,4 +1,7 @@
 import { describe, expect, it } from 'vitest'
+import { mkdirSync, mkdtempSync, writeFileSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import { join } from 'node:path'
 
 import {
   collectedDataStatements,
@@ -7,6 +10,7 @@ import {
   sqlString,
   stableJson,
 } from './lib/d1-sql.js'
+import { buildBackfillSql } from './export-d1-backfill.js'
 
 describe('sqlString', () => {
   it('serializes nullish values as NULL', () => {
@@ -101,5 +105,25 @@ describe('digestMarkdownStatement', () => {
 
     expect(statement).toContain("'Today''s AI'")
     expect(statement).toContain("'# Today''s AI")
+  })
+})
+
+describe('buildBackfillSql', () => {
+  it('allows CI checkouts without ignored runtime data', () => {
+    const projectRoot = mkdtempSync(join(tmpdir(), 'reado-empty-'))
+    const configDir = join(projectRoot, 'config')
+    mkdirSync(configDir, { recursive: true })
+    writeFileSync(join(configDir, 'sources.json'), JSON.stringify({ sources: [{ id: 'openai', name: 'OpenAI', enabled: true }] }))
+
+    const { sql, stats } = buildBackfillSql({ projectRoot })
+
+    expect(sql).toContain('INSERT OR REPLACE INTO sources')
+    expect(stats).toEqual({
+      items: 0,
+      digests: 0,
+      sources: 1,
+      collectionRuns: 0,
+      opsStateKeys: 0,
+    })
   })
 })

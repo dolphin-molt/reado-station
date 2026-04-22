@@ -4,7 +4,7 @@
 #
 # 本地 Mac 定时采集脚本（由 launchd 触发）
 # 采集 cookie 源（Twitter 等需要浏览器登录的平台）
-# 然后 git push local.json，等云端合并
+# 采集结果通过 D1 API 写入数据库，不再提交到 Git 仓库。
 #
 set -euo pipefail
 
@@ -44,26 +44,9 @@ git pull --rebase --quiet || echo "WARN: git pull failed, continuing with local 
 # ─── Collect ──────────────────────────────────────────────────────────
 
 echo "Running local collection..."
+export READO_D1_WRITE_REQUIRED="${READO_D1_WRITE_REQUIRED:-true}"
 npx tsx scripts/collect.ts --mode local
 
-# ─── Push ─────────────────────────────────────────────────────────────
-
-echo "Pushing local.json to remote..."
-git add data/
-
-if git diff --cached --quiet; then
-    echo "No changes to push"
-else
-    DATE=$(date +%Y-%m-%d)
-    HOUR=$(date +%H)
-    if [ "$HOUR" -lt 14 ]; then
-        BATCH="morning"
-    else
-        BATCH="evening"
-    fi
-
-    git commit -m "data: ${DATE} ${BATCH} local collection (cookie sources)"
-    git push || echo "WARN: git push failed. Data saved locally."
-fi
+echo "Local collection finished. Runtime data is D1-only; local files are ignored by Git."
 
 echo "=== Local collection finished at $(date) ==="

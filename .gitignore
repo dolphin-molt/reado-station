@@ -4,10 +4,9 @@ dist/
 .env.local
 agent.config.local.json
 
-# Data files are committed (GitHub as backup)
-# But local collection temp files are not
-data/**/local-temp.json
-data/**/d1-*.sql
+# Runtime data lives in D1. Local collection output is intentionally ignored.
+/data/
+/site/src/data/*.json
 
 # OS
 .DS_Store

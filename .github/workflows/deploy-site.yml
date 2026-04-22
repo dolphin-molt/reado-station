@@ -1,16 +1,9 @@
 name: Deploy Site to GitHub Pages
 
 on:
-  # 采集完成后自动触发
-  workflow_run:
-    workflows: ["AI Daily Collection"]
-    types: [completed]
-    branches: [main]
-
-  # 手动触发
+  # Legacy GitHub Pages deploy. Cloudflare Worker + D1 is the production path.
   workflow_dispatch:
 
-  # 推送到 main 的 site/ 或 scripts/ 变更也触发
   push:
     branches: [main]
     paths:
@@ -18,7 +11,6 @@ on:
       - 'scripts/build-site-data.ts'
       - 'scripts/fetch-images.ts'
       - 'packages/shared/**'
-      - 'data/**'
 
 permissions:
   contents: read

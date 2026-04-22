@@ -1,10 +1,11 @@
 import { Footer } from '@/components/layout/Footer'
 import { Header } from '@/components/layout/Header'
-import { getArchiveDays } from '@/lib/content'
+import { Pagination } from '@/components/ui/Pagination'
+import { getArchivePageData } from '@/lib/content'
 import { t, type Lang } from '@/lib/i18n'
 
-export async function ArchivePage({ lang }: { lang: Lang }) {
-  const days = await getArchiveDays()
+export async function ArchivePage({ lang, page = 1 }: { lang: Lang; page?: number }) {
+  const data = await getArchivePageData(page)
 
   return (
     <div className="page-shell">
@@ -14,11 +15,14 @@ export async function ArchivePage({ lang }: { lang: Lang }) {
         <section className="panel panel--narrow">
           <div className="panel__header">
             <h1>{t(lang, 'archive.title')}</h1>
+            <p>
+              {data.pagination.totalItems} {t(lang, 'archive.days')}
+            </p>
           </div>
 
-          {days.length > 0 ? (
+          {data.days.length > 0 ? (
             <ul className="archive-list">
-              {days.map((day) => (
+              {data.days.map((day) => (
                 <li className="archive-day" key={day.date}>
                   <div>
                     <div className="archive-day__date">{day.date}</div>
@@ -35,6 +39,8 @@ export async function ArchivePage({ lang }: { lang: Lang }) {
           ) : (
             <div className="empty-state">{t(lang, 'archive.empty')}</div>
           )}
+
+          <Pagination lang={lang} pagination={data.pagination} path="archive" />
         </section>
       </main>
 

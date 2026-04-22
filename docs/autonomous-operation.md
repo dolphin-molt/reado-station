@@ -18,7 +18,7 @@
 
 1. **Agent 可替换** — 协议与具体 LLM 无关。Claude、GPT、Gemini、Qwen、本地模型，任何能执行 Shell + 读写文件的 Agent 都能接手
 2. **入职即工作** — 新 Agent 读一份文档（ONBOARD.md）就能完成环境搭建并开始运营，无需人类手把手教
-3. **状态可交接** — 所有运营状态持久化在 `ops-state.json`，Agent 重启或更换后，下一个 Agent 能无缝接手
+3. **状态可交接** — 运营状态持久化在 D1 `ops_state`，本地 `data/ops-state.json` 只作为工作副本和应急回填源
 4. **故障自愈** — 出错不停机，Agent 自行诊断和修复，只在超出能力范围时升级给人类
 5. **人类只管战略** — 人类不参与日常执行，只在架构调整、策略变更时介入
 
@@ -38,7 +38,7 @@
 │   ops-runner.ts · reado CLI · build scripts       │
 ├─────────────────────────────────────────────────┤
 │                  基础设施层                        │
-│   GitHub Actions · GitHub Pages · 飞书 · Relay    │
+│   GitHub Actions · Cloudflare D1 · 飞书 · Relay   │
 └─────────────────────────────────────────────────┘
 ```
 
@@ -79,7 +79,7 @@ RESTORE → COLLECT → ANALYZE → FEEDBACK → GENERATE → BUILD → PERSIST 
 - COLLECT — 调用 reado CLI 采集数据
 - BUILD — 调用构建脚本生成网站数据
 - PERSIST — 写运营状态到 JSON
-- PUBLISH — git push + 飞书消息推送
+- PUBLISH — D1/API 写入确认 + 飞书消息推送
 
 **决策阶段**（Agent 执行）：
 - ANALYZE — "这个源连续失败 3 次了，是暂时性故障还是永久下线？要不要禁用？"
@@ -122,7 +122,7 @@ agent.manifest.json ← 依赖清单（机器可读）
 
 ### 状态交接
 
-Agent 之间的"交班"通过 `data/ops-state.json` 实现：
+Agent 之间的"交班"通过 D1 `ops_state` 实现。历史和本地运行仍会维护 `data/ops-state.json` 工作副本，可通过 `npm run d1:sync-api -- --require` 回填到 `/api/ops-state`：
 
 ```json
 {
@@ -136,7 +136,7 @@ Agent 之间的"交班"通过 `data/ops-state.json` 实现：
 }
 ```
 
-新 Agent 启动时读这个文件，就能知道：
+新 Agent 启动时读取 D1 或本地工作副本，就能知道：
 - 上次跑到哪里了
 - 哪些源有问题
 - 有什么待办事项
@@ -217,7 +217,7 @@ skills/
 
 ### 运营状态追踪
 
-`ops-state.json` 不仅是交接文件，也是自愈的知识库：
+`ops_state` 不仅是交接状态，也是自愈的知识库：
 
 - `sourceHealth` — 追踪每个源的连续失败次数，超过阈值自动禁用
 - `recentGaps` — 记录最近的异常和处理结果，避免重复踩坑

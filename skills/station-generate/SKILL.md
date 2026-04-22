@@ -76,7 +76,7 @@ evening 批次文件名加 `-evening` 后缀。
 
 ## 网站如何消费 digest.md
 
-`build-site-data.ts` 解析 digest.md → `site/src/data/digests.json`，包含：
+生产路径通过 `/api/digest` 将 digest.md 写入 D1；旧 Astro 回退路径仍可用 `build-site-data.ts` 解析 digest.md → `site/src/data/digests.json`。结构包含：
 - `observationText` — 今日观察（一段连贯的综合解读文本）
 - `clusters[]` — 话题聚合（重大新闻/公司动态/论文等分组 + 每组的 stories）
 

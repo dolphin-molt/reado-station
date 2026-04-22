@@ -5,7 +5,7 @@ Companion checklists:
 - [Migration Parity Checklist](./migration-parity-checklist.md)
 - [Production Migration Checklist](./production-migration-checklist.md)
 
-> Goal: migrate `reado-station` from the current Astro + Git-tracked JSON delivery model to a Cloudflare-native application platform without interrupting the existing daily operation loop.
+> Goal: migrate `reado-station` from the Astro + Git-tracked JSON delivery model to a Cloudflare-native application platform without interrupting the existing daily operation loop.
 
 ## One-Line Summary
 
@@ -18,7 +18,7 @@ This keeps us from mixing "framework migration" and "product expansion" into one
 
 ## Current State
 
-The current production path is still centered on these pieces:
+The legacy path is centered on these pieces:
 
 - `scripts/collect.ts`: collects items into `data/YYYY/MM/DD/{batch}/raw.json`
 - `scripts/summarize.ts`: generates `digest.md`
@@ -26,13 +26,14 @@ The current production path is still centered on these pieces:
 - `site/`: Astro static site rendered from generated JSON
 - `scripts/ops-runner.ts`: operational backbone for restore, collect, analyze, build, persist, publish
 
-This means the real source of truth today is still:
+The production path is now D1-centered:
 
-- operational data in `data/`
-- generated site JSON in `site/src/data/`
-- Astro pages in `site/src/`
+- runtime content and operational state live in Cloudflare D1
+- `data/` remains a local ignored working cache and emergency import source
+- `site/src/data/*.json` remains a local/legacy fallback output and is not tracked as runtime data
+- Cloudflare Worker serves the Next app from `apps/web`
 
-The migration branch now also contains a production-ready candidate path:
+The repository contains the production-ready path:
 
 - `apps/web`: OpenNext/Cloudflare-capable Next app
 - `db/d1/0001_core.sql`: minimum D1 schema
@@ -42,6 +43,7 @@ The migration branch now also contains a production-ready candidate path:
 - `apps/web/src/app/api/ops-state`: protected ops-state API
 - `apps/web/src/app/api/health`: public D1 health check
 - `.github/workflows/deploy-web-cloudflare.yml`: gated Cloudflare deploy workflow
+- `scripts/sync-d1-api.ts`: API-based local history sync into D1
 
 ## Planned Target
 
@@ -64,7 +66,7 @@ The target is not just "rewrite the frontend". It is a read/write platform where
 
 1. Keep the daily briefing loop alive throughout the migration.
 2. Migrate reads before removing the current write path.
-3. Dual-write before cutover; never hard-switch the source of truth in one step.
+3. Backfill and API-write before removing tracked runtime data.
 4. Reach product parity before expanding scope.
 5. Preserve a rollback path at every stage.
 6. Treat Astro as the fallback until Next/Cloudflare proves stable in production.
@@ -151,15 +153,15 @@ Deliverables:
 
 Recommended write strategy:
 
-- continue writing the existing JSON artifacts
-- add a second write path into D1
-- treat JSON as the recovery copy until cutover is complete
+- continue writing local JSON/Markdown artifacts as ignored recovery files
+- write collection and digest output to D1 through protected APIs
+- treat D1 as production truth and local files as emergency recovery input
 
 Exit criteria:
 
-- a full backfill from Git-tracked history can populate D1
-- today's collection and digest can be written to both JSON and D1
-- item counts and digest counts match between both systems for at least 3 consecutive runs
+- a full backfill from local history can populate D1 through APIs
+- today's collection and digest can be written to D1
+- `/api/health` shows expected item, digest, and latest-date counts after sync
 
 ### Phase 3: Build a Read-Only Next Version
 
@@ -205,7 +207,7 @@ Recommended boundary split:
 - publishers publish into a stable API or worker contract
 - rendering layer reads only from D1
 
-At the end of this phase, the filesystem is still present, but no longer required by the web app.
+At the end of this phase, the filesystem is still present locally, but no longer required by the web app or repository.
 
 Exit criteria:
 
@@ -238,7 +240,7 @@ Cutover order:
 
 Exit criteria:
 
-- several consecutive successful dual-run cycles
+- successful D1 API sync and scheduled collection writes
 - no blocking data parity gap
 - rollback path tested once, not just imagined
 
@@ -251,10 +253,11 @@ Safe removals:
 - Astro site as primary runtime
 - JSON-as-runtime-data dependency
 - GitHub Pages-specific deploy logic
+- tracked historical runtime data in `data/` and generated `site/src/data/*.json`
 
 Keep longer than you think:
 
-- historical `data/` snapshots
+- ignored local `data/` snapshots until D1-only operation has stabilized
 - one backfill script
 - one emergency rebuild path
 
@@ -345,7 +348,7 @@ Main risk:
 - D1 schema in place: `db/d1/0001_core.sql`
 - historical import path exists: `npm run d1:backfill`
 - new runs produce git-ignored D1 shadow SQL next to JSON/Markdown outputs
-- direct D1 writes are still a follow-up after the import artifacts are verified
+- direct D1 writes are available through the protected HTTP APIs
 
 ### Milestone 3: Read Parity
 
@@ -355,12 +358,13 @@ Main risk:
 ### Milestone 4: Operational Parity
 
 - digest publish and ops-state mutation work in the new path
-- dual-run stable
+- D1-only collection path stable
 
 ### Milestone 5: Production Cutover
 
 - traffic moved to Cloudflare app
 - Astro retained as temporary rollback
+- runtime data removed from Git
 
 ### Milestone 6: Legacy Retirement
 
@@ -383,15 +387,15 @@ Main risk:
 - rewriting the collector while changing the frontend
 - adding auth before parity
 - introducing knowledge graph dependencies into the first homepage cutover
-- deleting `data/` too early
+- deleting local ignored `data/` snapshots before D1-only operation has stabilized
 - assuming untracked local prototypes count as completed migration work
 
 ## Suggested Immediate Next Step
 
 The next high-leverage move is:
 
-1. write and agree on the parity checklist
-2. commit the target workspace skeleton
-3. implement D1 backfill + dual-write before touching production traffic
+1. monitor the next scheduled cloud collection and confirm D1 counts advance
+2. confirm digest publishing writes through `/api/digest`
+3. keep the legacy Astro path available for one stabilization window
 
 If we do those three in order, the migration becomes operationally safe instead of aspirational.

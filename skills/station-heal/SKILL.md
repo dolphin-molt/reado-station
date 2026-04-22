@@ -53,7 +53,7 @@ description: |
 - **可自主修复**：改动 1-2 个文件、修复逻辑显而易见（错字、类型错误、缺少 null check、路径错）、不改变业务逻辑
 - **需要升级**：涉及 3+ 文件联动、改变函数签名/数据结构、修复方案不确定、涉及第三方 API 变更
 - **改完必须验证**：`npx vitest run`（回归测试）→ `tsc --noEmit` → 受影响脚本冒烟测试 → `git diff` 确认范围
-- 验证失败 → 回滚（`git checkout -- .`）→ status = `escalated`
+- 验证失败 → 停止并升级，不要擅自回滚不属于本次修复的改动 → status = `escalated`
 
 ## 9.5 升级（escalate）
 
@@ -110,7 +110,7 @@ EOF
 
 ## 记录格式
 
-写入 `ops-state.json` 的 `incidents` 数组：
+写入 D1 `ops_state` 或本地 `data/ops-state.json` 工作副本的 `incidents` 数组：
 
 ```json
 {

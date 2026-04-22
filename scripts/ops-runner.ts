@@ -10,7 +10,7 @@
  *   npx tsx scripts/ops-runner.ts analyze      # Phase 3（输出分析报告，Agent 决策）
  *   npx tsx scripts/ops-runner.ts build        # Phase 6
  *   npx tsx scripts/ops-runner.ts persist      # Phase 7
- *   npx tsx scripts/ops-runner.ts publish      # Phase 8（git push）
+ *   npx tsx scripts/ops-runner.ts publish      # Phase 8（D1-only 后不再提交运行数据）
  *   npx tsx scripts/ops-runner.ts wait-deploy  # Phase 8（等 CI 部署完成）
  *   npx tsx scripts/ops-runner.ts publish-lark # Phase 8（飞书推送，部署确认后）
  *   npx tsx scripts/ops-runner.ts quality      # Phase 3.4（质量信号采集）
@@ -291,57 +291,13 @@ function persist() {
   }, null, 2))
 }
 
-// ─── Phase 8: PUBLISH (git) ───
+// ─── Phase 8: PUBLISH (runtime data) ───
 function publish() {
-  const gitStatus = run('git status --porcelain')
-  if (!gitStatus.trim()) {
-    console.log(JSON.stringify({ phase: 'PUBLISH', status: 'skip', reason: 'nothing to commit' }))
-    return
-  }
-
-  const now = new Date()
-  const dateStr = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`
-
-  // 发布前打 tag，作为回滚锚点
-  const tagName = `pre-publish/${dateStr}-${batch}`
-  run(`git tag -f ${tagName}`)
-
-  run('git add data/ site/src/data/ site/public/images/')
-  const commitMsg = `data: ${dateStr} ${batch} collection + digest`
-  const commitResult = run(`git commit -m "${commitMsg}"`)
-
-  if (commitResult.includes('ERROR')) {
-    // commit 失败，回滚到 tag
-    run(`git reset --hard ${tagName}`)
-    console.log(JSON.stringify({
-      phase: 'PUBLISH',
-      status: 'error',
-      error: 'commit failed, rolled back',
-      output: commitResult.slice(-300)
-    }, null, 2))
-    return
-  }
-
-  const pushResult = run('git push')
-  if (pushResult.includes('ERROR')) {
-    // push 失败，revert 这次 commit（保留在本地历史中）
-    run('git revert --no-edit HEAD')
-    console.log(JSON.stringify({
-      phase: 'PUBLISH',
-      status: 'error',
-      error: 'push failed, commit reverted',
-      rollbackTag: tagName,
-      output: pushResult.slice(-300)
-    }, null, 2))
-    return
-  }
-
   console.log(JSON.stringify({
     phase: 'PUBLISH',
-    status: 'ok',
-    commit: commitMsg,
-    rollbackTag: tagName,
-    output: pushResult.slice(-300)
+    status: 'skip',
+    reason: 'runtime data is D1-only; repository data publish is disabled',
+    next: 'collection and digest writes should go through the protected D1 APIs'
   }, null, 2))
 }
 

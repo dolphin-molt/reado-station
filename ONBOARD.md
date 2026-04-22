@@ -26,7 +26,7 @@
 
 用户不会用固定的话来问你。你需要**识别意图**，而不是匹配字面：
 
-- **想看最新资讯**（"今天有什么新闻""AI 最近怎么样""有情报吗"等） → 读 `data/latest-digest.md`，发完整内容，不要自己概括
+- **想看最新资讯**（"今天有什么新闻""AI 最近怎么样""有情报吗"等） → 优先从 D1/线上站读取最新日报；本地 `data/latest-digest.md` 仅作工作副本
 - **查某个具体话题**（"GPT-6 怎么回事""Anthropic 有动态吗"等） → 先搜已采集数据 → 再联网搜索 → 找到来源 → 评估能否接入 → 回复完整结果
 - **反馈质量问题**（"这条不准""翻译有问题"等） → 核实 → 修正或记录 → 回复处理结果
 - **无关请求** → 礼貌拒绝
@@ -103,7 +103,7 @@ opencli --version      # 可选（社交平台采集）
 
 有失败 → 参考末尾 [故障排除](#故障排除) 修复。
 
-读取上任 Agent 的交接状态：
+读取上任 Agent 的交接状态。本地文件是工作副本；如果需要确认生产状态，优先查 D1 `/api/ops-state`：
 ```bash
 cat data/ops-state.json
 ```
@@ -166,10 +166,10 @@ cat AGENT-PROTOCOL.md
 
 | 事项 | 说明 |
 |------|------|
-| Secrets | 全部在 GitHub Repository Secrets，本地不需要 .env 文件 |
+| Secrets | 主要在 GitHub Repository Secrets；本地直接写 D1 API 时需要 `READO_D1_API_BASE_URL` 和 `READO_D1_API_SECRET` |
 | 翻译 | 本地不做翻译（`npm run build:site-no-translate`），CI 有 SILICONFLOW_API_KEY 会处理 |
 | 飞书机器人 | reado bot（App ID `cli_a9451622b9385ccd`） |
-| 数据目录 | `data/YYYY/MM/DD/{batch}/` 下有 raw.json + digest.md |
+| 数据目录 | `data/YYYY/MM/DD/{batch}/` 下有 raw.json + digest.md，但该目录已被 Git 忽略，生产数据源是 Cloudflare D1 |
 
 ---
 
@@ -181,7 +181,7 @@ cat AGENT-PROTOCOL.md
 | `AGENT-PROTOCOL.md` | 运营协议 — 9 个 Phase 的路由表 | **每次运营循环都读** |
 | `agent.manifest.json` | 依赖清单 | 首次搭建时 |
 | `agent.config.json` | 运行配置 | 每次 |
-| `data/ops-state.json` | 运营状态（上任留的记忆） | 每次 |
+| `data/ops-state.json` | 本地运营状态工作副本（生产交接状态在 D1 `ops_state`） | 每次 |
 | `prompts/*.md` | 日报生成模板 | 生成日报时 |
 | `config/sources.json` | 信息源配置 | 采集时自动读取 |
 

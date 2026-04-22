@@ -19,7 +19,7 @@ description: |
 
 **规则：**
 
-- `failedSources > 0` → 对每个失败源，更新 `ops-state.json` 的 `sourceHealth[id].consecutiveFailures += 1`，记录 `lastFailure`
+- `failedSources > 0` → 对每个失败源，更新 D1 `ops_state` 或本地 `data/ops-state.json` 工作副本的 `sourceHealth[id].consecutiveFailures += 1`，记录 `lastFailure`
 - 连续失败 ≥ `{config.sourceHealth.maxConsecutiveFailures}` 次 → 创建 pendingAction：
   ```json
   { "type": "disable-source", "payload": { "sourceId": "tw-karpathy" }, "reason": "连续失败 3 次", "createdAt": "ISO-8601" }
@@ -36,7 +36,7 @@ description: |
 
 ## 3.3 执行待办
 
-逐条处理 `ops-state.json` 的 `pendingActions`：
+逐条处理 `ops_state` 的 `pendingActions`：
 
 | type | 操作 |
 |------|------|

@@ -1,22 +1,20 @@
 # reado-station Parity Checklist
 
-> Companion to [Migration Roadmap](./migration-roadmap.md). This checklist defines what "phase 1 migration done" means before we touch the production cutover.
+> Companion to [Migration Roadmap](./migration-roadmap.md). This checklist defines what the production-ready D1 migration must keep true after cutover.
 
 Production cutover runbook: [Production Migration Checklist](./production-migration-checklist.md)
 
 ## Scope
 
-Phase 1 parity means:
+Production parity means:
 
-- the current Astro site remains the production path
-- a read-only candidate app exists in `apps/web`
-- the candidate app can render the same core content model from repository data
+- Cloudflare Worker + D1 is the production path
+- the Next app in `apps/web` renders the same core briefing product from D1
+- local JSON remains only as a development fallback and emergency import source
 - current scripts and tests still pass
 
-Phase 1 parity does not mean:
+Production parity does not mean:
 
-- D1 is the production source of truth
-- Cloudflare traffic has been switched
 - auth, assistant, community, tools, columns, or knowledge graph are live
 
 ## Route Parity
@@ -38,6 +36,7 @@ Phase 1 parity does not mean:
 - [x] daily observation block
 - [x] key stories block derived from digest clusters
 - [x] full latest-day item list
+- [x] latest-day item list pagination
 - [x] translated title/summary fallback for Chinese display
 - [x] category labels
 - [x] empty state when no generated content exists
@@ -48,6 +47,7 @@ Phase 1 parity does not mean:
 ## Archive Parity
 
 - [x] reverse chronological day list
+- [x] archive pagination
 - [x] day item counts
 - [x] batch labels
 - [x] bilingual labels
@@ -62,9 +62,9 @@ Phase 1 parity does not mean:
 
 ## Data Parity
 
-- [x] candidate app reads `site/src/data/days.json`
-- [x] candidate app reads `site/src/data/digests.json`
-- [x] candidate app reads `site/src/data/items.json`
+- [x] production app reads D1 for homepage content
+- [x] production app reads D1 for archive content
+- [x] local app can fall back to empty/generated JSON when D1 is not required
 - [x] content loader is server-side only
 - [x] asset bridge exists for legacy `site/public` images/placeholders
 - [x] shared content types extracted into `packages/shared`
@@ -77,12 +77,13 @@ Phase 1 parity does not mean:
 - [x] protected D1 ingest API for collection output
 - [x] protected D1 digest API for digest publishing
 - [x] optional direct D1 write from collect/digest publish scripts
+- [x] API-based historical sync script exists via `npm run d1:sync-api`
 
 ## Operational Safety
 
-- [x] Astro production path unchanged
+- [x] Astro path retained only as manual rollback
 - [x] root script build remains separate from web candidate build
-- [x] migration work does not remove `data/`
+- [x] migration removes tracked runtime `data/` files from Git while preserving local ignored files
 - [x] migration work does not remove `site/`
 - [x] backfill script for D1
 - [x] local shadow write path for collection and digest SQL
@@ -91,6 +92,7 @@ Phase 1 parity does not mean:
 - [x] ops-state API path
 - [x] public health check endpoint
 - [x] Cloudflare/OpenNext deployment workflow
+- [x] scheduled collection workflow no longer commits runtime data
 
 ## Validation Checklist
 
@@ -105,13 +107,15 @@ Phase 1 parity does not mean:
 - [x] Cloudflare preview zh homepage HTTP pass
 - [x] Cloudflare preview en homepage HTTP pass
 - [x] Cloudflare preview archive HTTP pass
+- [ ] Cloudflare preview paginated homepage/archive HTTP pass after the pagination deploy
 - [ ] manual visual archive/about pass
+- [ ] next scheduled collection proves fresh D1 write in production
 
 ## Immediate Follow-Up
 
-After the automated checks above are green, the remaining production work is operational rather than code-heavy:
+After the automated checks above are green, the remaining production work is operational monitoring:
 
-1. create the real Cloudflare D1 database and configure GitHub secrets
-2. run the Cloudflare deploy workflow with D1 migration and backfill enabled
-3. enable collection dual-write and observe 3 successful morning/evening cycles
-4. cut over traffic only after `/api/health` and page parity checks are green
+1. watch the next scheduled cloud collection and confirm `/api/health` counts advance
+2. confirm the latest digest publish writes through `/api/digest`
+3. keep the legacy Astro/GitHub Pages path available for the stabilization window
+4. remove the legacy path only after the D1-only workflow has run cleanly for multiple days

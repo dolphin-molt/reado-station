@@ -1,57 +1,39 @@
 ---
 name: station-publish
 description: |
-  reado-station Phase 8 PUBLISH — 推送到 GitHub + 飞书群。
+  reado-station Phase 8 PUBLISH — 确认 D1 写入 + 飞书群推送。
   构建完成后加载。
 ---
 
 # Phase 8: PUBLISH — 发布
 
-## 8.1 推送到 GitHub
+## 8.1 仓库不再发布运行数据
+
+`data/` 和 `site/src/data/*.json` 是本地缓存/回填源，不能再提交到仓库。
+
+采集和摘要应通过受保护 API 入库：
+
+- collection → `/api/ingest`
+- digest → `/api/digest`
+- ops-state → `/api/ops-state`
+
+机械脚本已禁用数据提交：
 
 ```bash
-cd {config.paths.station}
-git add data/ site/src/data/ site/src/components/ site/src/styles/ site/public/images/
-git commit -m "data: YYYY-MM-DD {batch} collection + digest"
-git push
+npx tsx scripts/ops-runner.ts publish
 ```
 
-GitHub Actions 会自动触发 `deploy-site.yml` 网站部署。
+预期输出是 `status: "skip"`，表示运行数据发布走 D1，不走 Git。
 
-## 8.2 等待部署完成
+## 8.2 确认 D1 和线上站点
 
-**push 之后、发飞书之前，必须确认部署成功。**
+发飞书前先确认生产站能读到 D1：
 
 ```bash
-# 等待最近一次 deploy-site.yml 完成（最长 10 分钟）
-npx tsx scripts/ops-runner.ts wait-deploy
+curl -fsS https://reado-station-web.cing-self.workers.dev/api/health
 ```
 
-如果没有 `wait-deploy` 命令，手动检查：
-
-```bash
-# 查最近一次 deploy-site 工作流状态
-gh run list --repo {config.github.repo} --workflow deploy-site.yml --limit 1 --json status,conclusion,headBranch
-
-# 或者轮询等待（最多 10 分钟，每 30 秒检查一次）
-for i in $(seq 1 20); do
-  STATUS=$(gh run list --repo {config.github.repo} --workflow deploy-site.yml --limit 1 --json conclusion -q '.[0].conclusion')
-  if [ "$STATUS" = "success" ]; then
-    echo "✅ 部署成功"
-    break
-  elif [ "$STATUS" = "failure" ]; then
-    echo "❌ 部署失败"
-    break
-  fi
-  sleep 30
-done
-```
-
-| 部署结果 | 动作 |
-|---------|------|
-| success | 继续发飞书 |
-| failure | 记录故障，仍然发飞书（告知网站部署失败，日报内容照常推送） |
-| 超时 10 分钟 | 记录警告，照常发飞书 |
+如果 health 不是 `status: ok` 或 `contentSource: d1`，记录故障并加载 `station-heal`。
 
 ## 8.3 推送日报到飞书群
 
@@ -76,4 +58,4 @@ done
 ## 前置条件
 
 - `lark-cli` 已安装且已认证（`lark-cli auth status`）
-- 如果 lark-cli 不可用 → 跳过飞书推送，只做 GitHub push，不报错
+- 如果 lark-cli 不可用 → 跳过飞书推送，不要尝试把运行数据提交到 Git

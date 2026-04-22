@@ -3,6 +3,7 @@ import 'server-only'
 import { parseDigestMarkdown, type DayMeta, type DigestCluster, type DigestData, type Observation, type SiteItem } from '../../../../packages/shared/src'
 
 import type { SiteContent } from '@/lib/content'
+import { createPaginationMeta, paginationOffset, type PaginationMeta } from '@/lib/pagination'
 
 interface D1DayRow {
   date: string
@@ -37,6 +38,32 @@ interface D1DigestRow {
   observations: string | null
   clusters: string | null
   rawMarkdown: string | null
+}
+
+interface D1LatestDateRow {
+  date: string
+}
+
+interface D1HomeStatsRow {
+  itemCount: number
+  sourceCount: number
+}
+
+interface D1TotalRow {
+  total: number
+}
+
+export interface D1HomePageContent {
+  date: string | null
+  digest: DigestData | null
+  items: SiteItem[]
+  pagination: PaginationMeta
+  sourceCount: number
+}
+
+export interface D1ArchivePageContent {
+  days: DayMeta[]
+  pagination: PaginationMeta
 }
 
 function parseJsonArray<T>(value: string | null | undefined): T[] {
@@ -151,6 +178,36 @@ async function loadItems(db: D1Database): Promise<SiteItem[]> {
   return results.map(rowToItem)
 }
 
+async function loadItemsForDate(db: D1Database, date: string, limit: number, offset: number): Promise<SiteItem[]> {
+  const { results = [] } = await db
+    .prepare(
+      `
+        SELECT
+          id,
+          title,
+          title_zh AS titleZh,
+          url,
+          summary,
+          summary_zh AS summaryZh,
+          published_at AS publishedAt,
+          source,
+          source_name AS sourceName,
+          category,
+          image_url AS imageUrl,
+          date,
+          batch
+        FROM items
+        WHERE date = ?
+        ORDER BY published_at DESC, id ASC
+        LIMIT ? OFFSET ?
+      `,
+    )
+    .bind(date, limit, offset)
+    .all<D1ItemRow>()
+
+  return results.map(rowToItem)
+}
+
 async function loadDigests(db: D1Database): Promise<DigestData[]> {
   const { results = [] } = await db
     .prepare(
@@ -187,6 +244,128 @@ async function loadDigests(db: D1Database): Promise<DigestData[]> {
   }
 
   return [...byDate.values()]
+}
+
+async function loadDigestForDate(db: D1Database, date: string): Promise<DigestData | null> {
+  const row = await db
+    .prepare(
+      `
+        SELECT
+          date,
+          batch,
+          headline,
+          headline_zh AS headlineZh,
+          observation_text AS observationText,
+          observation_text_zh AS observationTextZh,
+          observations,
+          clusters,
+          raw_markdown AS rawMarkdown
+        FROM digests
+        WHERE date = ?
+        ORDER BY
+          CASE batch
+            WHEN 'latest' THEN 0
+            WHEN 'evening' THEN 1
+            WHEN 'morning' THEN 2
+            ELSE 3
+          END,
+          id DESC
+        LIMIT 1
+      `,
+    )
+    .bind(date)
+    .first<D1DigestRow>()
+
+  return row ? rowToDigest(row) : null
+}
+
+export async function loadD1HomePageContent(db: D1Database, options: { page: number; pageSize: number }): Promise<D1HomePageContent> {
+  const latest = await db
+    .prepare(
+      `
+        SELECT date
+        FROM items
+        GROUP BY date
+        ORDER BY date DESC
+        LIMIT 1
+      `,
+    )
+    .first<D1LatestDateRow>()
+
+  if (!latest) {
+    return {
+      date: null,
+      digest: null,
+      items: [],
+      pagination: createPaginationMeta(options.page, options.pageSize, 0),
+      sourceCount: 0,
+    }
+  }
+
+  const stats = await db
+    .prepare(
+      `
+        SELECT
+          COUNT(1) AS itemCount,
+          COUNT(DISTINCT source_name) AS sourceCount
+        FROM items
+        WHERE date = ?
+      `,
+    )
+    .bind(latest.date)
+    .first<D1HomeStatsRow>()
+
+  const pagination = createPaginationMeta(options.page, options.pageSize, Number(stats?.itemCount ?? 0))
+  const [items, digest] = await Promise.all([
+    loadItemsForDate(db, latest.date, pagination.pageSize, paginationOffset(pagination)),
+    loadDigestForDate(db, latest.date),
+  ])
+
+  return {
+    date: latest.date,
+    digest,
+    items,
+    pagination,
+    sourceCount: Number(stats?.sourceCount ?? 0),
+  }
+}
+
+export async function loadD1ArchivePageContent(db: D1Database, options: { page: number; pageSize: number }): Promise<D1ArchivePageContent> {
+  const totalRow = await db
+    .prepare(
+      `
+        SELECT COUNT(1) AS total
+        FROM (
+          SELECT date
+          FROM items
+          GROUP BY date
+        )
+      `,
+    )
+    .first<D1TotalRow>()
+
+  const pagination = createPaginationMeta(options.page, options.pageSize, Number(totalRow?.total ?? 0))
+  const { results = [] } = await db
+    .prepare(
+      `
+        SELECT
+          i.date AS date,
+          GROUP_CONCAT(DISTINCT i.batch) AS batches,
+          COUNT(1) AS itemCount,
+          CASE WHEN EXISTS (SELECT 1 FROM digests d WHERE d.date = i.date) THEN 1 ELSE 0 END AS hasDigest
+        FROM items i
+        GROUP BY i.date
+        ORDER BY i.date DESC
+        LIMIT ? OFFSET ?
+      `,
+    )
+    .bind(pagination.pageSize, paginationOffset(pagination))
+    .all<D1DayRow>()
+
+  return {
+    days: results.map(rowToDay),
+    pagination,
+  }
 }
 
 export async function loadD1SiteContent(db: D1Database): Promise<SiteContent> {

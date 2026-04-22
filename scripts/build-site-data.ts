@@ -9,7 +9,7 @@
  *   site/src/data/items.json   — 所有 items 平铺，带日期和批次
  *   site/src/data/days.json    — 按天聚合的元数据列表
  */
-import { readdirSync, existsSync, readFileSync } from 'node:fs'
+import { readdirSync, existsSync, readFileSync, mkdirSync } from 'node:fs'
 import { join } from 'node:path'
 import { readJSON, writeJSON, log, categorizeSite, sanitizeText } from './lib/utils.js'
 import type { CollectedData } from './lib/utils.js'
@@ -42,6 +42,7 @@ function main() {
   const allItems: SiteItem[] = []
   const days: DayMeta[] = []
   const digests: DigestData[] = []
+  mkdirSync(outDir, { recursive: true })
 
   // Load existing items.json to preserve translations and fetched images
   const existingItemsPath = join(outDir, 'items.json')
@@ -67,8 +68,11 @@ function main() {
   }
 
   if (!existsSync(dataRoot)) {
-    log.error('No data/ directory found. Run collection first.')
-    process.exit(1)
+    log.warn('No data/ directory found. Writing empty legacy site data; production reads from D1.')
+    writeJSON(join(outDir, 'items.json'), allItems)
+    writeJSON(join(outDir, 'days.json'), days)
+    writeJSON(join(outDir, 'digests.json'), digests)
+    return
   }
 
   // Walk data/YYYY/MM/DD/batch/

@@ -37,7 +37,7 @@ export function isD1ApiWriteRequired(): boolean {
   return env('READO_D1_WRITE_REQUIRED') === 'true'
 }
 
-async function postJson(kind: ApiKind, payload: unknown): Promise<D1ApiResult> {
+async function sendJson(kind: ApiKind, payload: unknown, method = 'POST'): Promise<D1ApiResult> {
   const url = endpointFor(kind)
   if (!url) return { status: 'skipped', reason: `READO_D1_${kind.toUpperCase().replace('-', '_')}_URL or READO_D1_API_BASE_URL is not configured` }
 
@@ -45,7 +45,7 @@ async function postJson(kind: ApiKind, payload: unknown): Promise<D1ApiResult> {
   if (!secret) return { status: 'skipped', reason: 'READO_D1_API_SECRET or READO_API_SECRET is not configured' }
 
   const response = await fetch(url, {
-    method: 'POST',
+    method,
     headers: {
       authorization: `Bearer ${secret}`,
       'content-type': 'application/json',
@@ -59,6 +59,10 @@ async function postJson(kind: ApiKind, payload: unknown): Promise<D1ApiResult> {
   }
 
   return { status: 'posted', url }
+}
+
+async function postJson(kind: ApiKind, payload: unknown): Promise<D1ApiResult> {
+  return sendJson(kind, payload)
 }
 
 export async function postCollectionToD1Api(data: CollectedData, options: {
@@ -92,4 +96,8 @@ export async function postDigestToD1Api(options: {
     headline: options.headline,
     markdown: options.markdown,
   })
+}
+
+export async function putOpsStateToD1Api(state: Record<string, unknown>): Promise<D1ApiResult> {
+  return sendJson('ops-state', { state }, 'PUT')
 }

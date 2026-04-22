@@ -27,6 +27,7 @@
     "cf:web:types": "npm --prefix apps/web run cf:types",
     "d1:backfill": "tsx scripts/export-d1-backfill.ts",
     "d1:backfill:stdout": "tsx scripts/export-d1-backfill.ts --stdout",
+    "d1:sync-api": "tsx scripts/sync-d1-api.ts",
     "build": "tsc --noEmit",
     "test": "vitest"
   },

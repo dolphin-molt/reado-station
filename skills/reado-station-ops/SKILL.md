@@ -7,13 +7,13 @@ description: |
 
 # reado-station-ops — 网站运营技能包
 
-自主运营 reado-station 情报网站。这是入口技能，按需加载子技能。
+自主运营 reado-station 情报网站。这是入口技能，按需加载子技能。生产数据源是 Cloudflare D1，本地 `data/` 只是缓存/回填源。
 
 ## 入职
 
 1. `cat agent.config.json` — 配置
 2. `cat AGENT-PROTOCOL.md` — 运营循环（9 Phase 路由表）
-3. `cat data/ops-state.json` — 上一任 Agent 的记忆
+3. 读取 D1 `ops_state` 或本地 `data/ops-state.json` 工作副本 — 上一任 Agent 的记忆
 
 ## 技能体系
 
@@ -23,7 +23,7 @@ description: |
 | **station-analyze** | Phase 3 有异常时 | 源健康检查 + 覆盖度分析 + 执行待办 |
 | **station-feedback** | Phase 4 有 Issue 时 | GitHub Issue 处理规则 |
 | **station-generate** | Phase 5 | 日报生成规范 + prompt 文件 |
-| **station-publish** | Phase 8 | git push + 飞书群推送 |
+| **station-publish** | Phase 8 | D1 写入确认 + 飞书群推送 |
 | **station-heal** | 任何 Phase 出错时 | 故障分类 + 诊断 + 修复 + 升级 |
 | **reado-collect** | 需要加源时 | 信息源配置格式 + 采集命令 |
 
@@ -32,7 +32,7 @@ description: |
 一次无故障的运行只需加载：
 
 ```
-常驻：reado-station-ops + AGENT-PROTOCOL.md + agent.config.json + ops-state.json
+常驻：reado-station-ops + AGENT-PROTOCOL.md + agent.config.json + ops_state
 Phase 5：station-generate
 Phase 8：station-publish
 ```
@@ -41,14 +41,21 @@ Phase 8：station-publish
 
 ## 构建管线
 
+生产网站构建：
+
+```bash
+npm run build:web:cloudflare
+```
+
+旧 Astro 回退构建：
+
 ```bash
 npm run build:site
-# = build-site-data → translate → fetch-images → astro build
 ```
 
 ### build-site-data 输出
 
-构建脚本 `scripts/build-site-data.ts` 输出三个文件：
+旧构建脚本 `scripts/build-site-data.ts` 输出三个本地 JSON 文件，供 Astro 回退路径使用；这些文件不再提交到 Git：
 
 | 文件 | 内容 |
 |------|------|

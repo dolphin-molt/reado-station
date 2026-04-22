@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 import { HomePage } from '@/components/pages/HomePage'
+import { parsePageParam } from '@/lib/pagination'
 
 export const dynamic = 'force-dynamic'
 
@@ -8,6 +9,10 @@ export const metadata: Metadata = {
   title: 'Today',
 }
 
-export default async function Page() {
-  return <HomePage lang="en" />
+interface PageProps {
+  searchParams?: Promise<Record<string, string | string[] | undefined>>
+}
+
+export default async function Page({ searchParams }: PageProps) {
+  return <HomePage lang="en" page={parsePageParam((await searchParams)?.page)} />
 }

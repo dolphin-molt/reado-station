@@ -13,10 +13,10 @@ description: |
 gh issue list --repo {config.github.repo} --label {config.github.feedbackLabel} --state open --json number,title,body,labels,createdAt
 ```
 
-同时检查待办队列中是否有上次遗留的待处理项：
+同时检查 D1 `ops_state` 或本地工作副本中是否有上次遗留的待处理项：
 
 ```bash
-cat {station}/ops-state.json | jq '.backlog // []'
+cat {station}/data/ops-state.json | jq '.backlog // []'
 ```
 
 如果两者都为空 → 跳过本阶段。
@@ -127,7 +127,7 @@ Bug 按修复难度再分两档：
 
 ### 🟢 普通建议 → 进入 backlog
 
-不立即处理，记录到 `ops-state.json` 的 backlog：
+不立即处理，记录到 D1 `ops_state` 或本地 `data/ops-state.json` 工作副本的 backlog：
 
 ```json
 {
