@@ -102,22 +102,25 @@ jobs:
           node -e "const fs=require('fs'); const p='apps/web/wrangler.jsonc'; const id=process.env.READO_D1_DATABASE_ID; if(!id) throw new Error('READO_D1_DATABASE_ID secret is required'); fs.writeFileSync(p, fs.readFileSync(p, 'utf8').replace('00000000-0000-0000-0000-000000000000', id));"
 
       - name: Apply D1 migrations
-        run: npm --prefix apps/web exec -- wrangler d1 migrations apply DB --remote
+        working-directory: apps/web
+        run: ./node_modules/.bin/wrangler d1 migrations apply DB --remote
 
       - name: Export D1 backfill
         run: npm run d1:backfill -- --out dist/d1/backfill.sql
 
       - name: Apply D1 backfill
         if: ${{ github.event_name == 'workflow_dispatch' && inputs.backfill }}
-        run: npm --prefix apps/web exec -- wrangler d1 execute DB --remote --file ../../dist/d1/backfill.sql --yes
+        working-directory: apps/web
+        run: ./node_modules/.bin/wrangler d1 execute DB --remote --file ../../dist/d1/backfill.sql --yes
 
       - name: Set API secret
+        working-directory: apps/web
         run: |
           if [ -z "$READO_API_SECRET" ]; then
             echo "READO_API_SECRET secret is required"
             exit 1
           fi
-          printf "%s" "$READO_API_SECRET" | npm --prefix apps/web exec -- wrangler secret put READO_API_SECRET
+          printf "%s" "$READO_API_SECRET" | ./node_modules/.bin/wrangler secret put READO_API_SECRET
 
       - name: Build Cloudflare worker
         run: npm run build:web:cloudflare
