@@ -1,6 +1,6 @@
 {
   "_description": "Agent 运营状态 — 每次采集后更新，作为下次采集的输入",
-  "lastUpdated": "2026-04-21T00:40:17.305Z",
+  "lastUpdated": "2026-04-22T00:57:21.041Z",
   "sourceHealth": {
     "github-trending": {
       "consecutiveFailures": 0,
@@ -128,14 +128,14 @@
     }
   ],
   "stats": {
-    "totalRuns": 20,
+    "totalRuns": 21,
     "sourcesAdded": 0,
     "sourcesDisabled": 0,
     "twitterAccountsAdded": 0,
     "issuesProcessed": 2
   },
   "qualitySignals": {
-    "lastChecked": "2026-04-21T00:33:09.983Z",
+    "lastChecked": "2026-04-22T00:47:16.970Z",
     "lark": {
       "available": true,
       "messageId": "om_x100b516322a094b8b29011f5573884c",
@@ -147,31 +147,13 @@
     },
     "feedback": {
       "available": true,
-      "totalOpen": 15,
+      "totalOpen": 16,
       "thisWeekNew": 7,
       "byLabel": {
         "needs-human": 7
       }
     },
     "history": [
-      {
-        "date": "2026-04-07",
-        "batch": "morning",
-        "readRate": 0,
-        "readCount": 0
-      },
-      {
-        "date": "2026-04-08",
-        "batch": "morning",
-        "readRate": 1,
-        "readCount": 2
-      },
-      {
-        "date": "2026-04-08",
-        "batch": "morning",
-        "readRate": 0.5,
-        "readCount": 1
-      },
       {
         "date": "2026-04-09",
         "batch": "evening",
@@ -234,6 +216,24 @@
       },
       {
         "date": "2026-04-21",
+        "batch": "morning",
+        "readRate": 0.5,
+        "readCount": 1
+      },
+      {
+        "date": "2026-04-21",
+        "batch": "morning",
+        "readRate": 0.5,
+        "readCount": 1
+      },
+      {
+        "date": "2026-04-21",
+        "batch": "morning",
+        "readRate": 0.5,
+        "readCount": 1
+      },
+      {
+        "date": "2026-04-22",
         "batch": "morning",
         "readRate": 0.5,
         "readCount": 1
@@ -307,5 +307,7 @@
       "batch": "morning",
       "completedAt": "2026-04-21T00:40:17.305Z"
     }
-  ]
+  ],
+  "lastBatch": "morning",
+  "lastRunStatus": "ok"
 }

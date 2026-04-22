@@ -1,0 +1,2035 @@
+{
+  "fetchedAt": "2026-04-22T00:48:23.189Z",
+  "stats": {
+    "totalSources": 80,
+    "successSources": 24,
+    "failedSources": 0,
+    "totalItems": 248,
+    "deduplicatedItems": 2,
+    "contributingSources": 35,
+    "successSourceIds": [
+      "techcrunch-ai",
+      "the-verge-ai",
+      "anthropic",
+      "mit-tech-review",
+      "aws-ml",
+      "google-ai",
+      "meta-ai",
+      "36kr",
+      "techmeme",
+      "huxiu",
+      "tmtpost",
+      "bbc-tech",
+      "ars-technica",
+      "the-decoder",
+      "wired-ai",
+      "qbitai",
+      "claude-code-release",
+      "simon-willison",
+      "lenny-newsletter",
+      "a16z-blog",
+      "hf-blog",
+      "stratechery",
+      "arxiv-cs-ai",
+      "mastodon-ai",
+      "mastodon-llm",
+      "langchain-release",
+      "n8n-release",
+      "hackernews",
+      "github-trending",
+      "github-trending-python",
+      "v2ex",
+      "lobsters",
+      "devto",
+      "producthunt",
+      "hf-papers"
+    ],
+    "failedSourceIds": []
+  },
+  "items": [
+    {
+      "title": "Meta will record employees keystrokes and use it to train its AI models",
+      "url": "https://techcrunch.com/2026/04/21/meta-will-record-employees-keystrokes-and-use-it-to-train-its-ai-models/",
+      "summary": "Meta says that it has a new internal tool that is converting mouse movements and button clicks into data that can train its AI models.",
+      "publishedAt": "2026-04-21T23:45:21.000Z",
+      "source": "techcrunch-ai",
+      "sourceName": "TechCrunch AI"
+    },
+    {
+      "title": "Unauthorized group has gained access to Anthropics exclusive cyber tool Mythos, report claims",
+      "url": "https://techcrunch.com/2026/04/21/unauthorized-group-has-gained-access-to-anthropics-exclusive-cyber-tool-mythos-report-claims/",
+      "summary": "Anthropic told TechCrunch it is investigating the claims, but maintains that there is no evidence that its systems have been impacted.",
+      "publishedAt": "2026-04-21T23:26:45.000Z",
+      "source": "techcrunch-ai",
+      "sourceName": "TechCrunch AI"
+    },
+    {
+      "title": "SpaceX cuts a deal to maybe buy Cursor for $60 billion",
+      "url": "https://www.theverge.com/science/916427/spacex-cursor-potential-deal-acquisition",
+      "summary": "With an IPO looming for Elon Musk's SpaceX / xAI / X combo platter of companies, SpaceX has announced an odd arrangement to either acquire the automated programming platform Cursor for $60 billion or ...",
+      "publishedAt": "2026-04-21T22:57:52.000Z",
+      "source": "the-verge-ai",
+      "sourceName": "The Verge AI"
+    },
+    {
+      "title": "Automated Weak-to-Strong Researcher - Anthropic Alignment Science Blog",
+      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE1lX194dFowVlNDR0pzLTNCSG91b25SV2dBTERkYld0WWhER0daX1JLQi1LU0hGYVU4Ml9VUjZtaFk4V3F6bk5PWnhyaW14RkYtSFp2a2JXZlNRWnBHam9KS3NORlhINlpJMEdJbzNnWQ?oc=5",
+      "summary": "Automated Weak-to-Strong Researcher Anthropic Alignment Science Blog",
+      "publishedAt": "2026-04-21T22:16:03.000Z",
+      "source": "anthropic",
+      "sourceName": "Anthropic"
+    },
+    {
+      "title": "10 Things That Matter in AI Right Now",
+      "url": "https://www.technologyreview.com/2026/04/21/1135643/10-ai-artificial-intelligence-trends-technologies-research-2026/",
+      "summary": "",
+      "publishedAt": "2026-04-21T20:45:00.000Z",
+      "source": "mit-tech-review",
+      "sourceName": "MIT Technology Review AI"
+    },
+    {
+      "title": "LLMs+",
+      "url": "https://www.technologyreview.com/2026/04/21/1135645/llm-large-language-models-ai/",
+      "summary": "When ChatGPT launched as an experimental prototype in late 2022, OpenAI’s chatbot became an everyday everything app for hundreds of millions of people. LLMs like ChatGPT were the new future: The entir...",
+      "publishedAt": "2026-04-21T20:45:00.000Z",
+      "source": "mit-tech-review",
+      "sourceName": "MIT Technology Review AI"
+    },
+    {
+      "title": "Supercharged scams",
+      "url": "https://www.technologyreview.com/2026/04/21/1135647/supercharged-scams-ai-artificial-intelligence/",
+      "summary": "When ChatGPT was released to the public in late 2022, it opened people’s eyes to how easily generative AI could churn out vast amounts of human-seeming text from simple prompts. This quickly caught th...",
+      "publishedAt": "2026-04-21T20:45:00.000Z",
+      "source": "mit-tech-review",
+      "sourceName": "MIT Technology Review AI"
+    },
+    {
+      "title": "World models",
+      "url": "https://www.technologyreview.com/2026/04/21/1135650/world-models-ai-artificial-intelligence/",
+      "summary": "AI systems have already gained impressive mastery over the digital world, but the physical world is still humanity’s domain. As it turns out, building an AI system that can compose a novel or code an ...",
+      "publishedAt": "2026-04-21T20:45:00.000Z",
+      "source": "mit-tech-review",
+      "sourceName": "MIT Technology Review AI"
+    },
+    {
+      "title": "Weaponized deepfakes",
+      "url": "https://www.technologyreview.com/2026/04/21/1135652/weaponized-deepfakes-ai-artificial-intelligence/",
+      "summary": "For years, experts have warned that deepfakes—AI-generated videos, images, or audio recordings of people doing or saying things they haven’t actually done in real life—could be deployed in malicious w...",
+      "publishedAt": "2026-04-21T20:45:00.000Z",
+      "source": "mit-tech-review",
+      "sourceName": "MIT Technology Review AI"
+    },
+    {
+      "title": "Agent orchestration",
+      "url": "https://www.technologyreview.com/2026/04/21/1135654/agent-orchestration-ai-artificial-intelligence/",
+      "summary": "When people say AI will speed up drug development or fear that it will bring about mass layoffs, what they have in mind—whether they know it or not—are AI agents. ChatGPT made large language models a ...",
+      "publishedAt": "2026-04-21T20:45:00.000Z",
+      "source": "mit-tech-review",
+      "sourceName": "MIT Technology Review AI"
+    },
+    {
+      "title": "China’s open-source bet",
+      "url": "https://www.technologyreview.com/2026/04/21/1135658/china-open-source-models-ai-artificial-intelligence/",
+      "summary": "Silicon Valley AI companies follow a familiar playbook: Keep the secret sauce behind an API, and charge for every drop. China’s leading AI labs are playing a different game: They ship models as downlo...",
+      "publishedAt": "2026-04-21T20:45:00.000Z",
+      "source": "mit-tech-review",
+      "sourceName": "MIT Technology Review AI"
+    },
+    {
+      "title": "Artificial scientists",
+      "url": "https://www.technologyreview.com/2026/04/21/1135663/artificial-scientists-ai-artificial-intelligence/",
+      "summary": "AI companies frequently invoke the possibility of AI-enabled scientific discovery as a justification for their existence: If the technology eventually cures cancer and solves climate change, then all ...",
+      "publishedAt": "2026-04-21T20:45:00.000Z",
+      "source": "mit-tech-review",
+      "sourceName": "MIT Technology Review AI"
+    },
+    {
+      "title": "Resistance",
+      "url": "https://www.technologyreview.com/2026/04/21/1135665/resistance-ai-artificial-intelligence-backlash-protests/",
+      "summary": "Turns out not everyone wants to live in the future that AI companies are building. People from all walks of life are speaking out against rising electricity bills from data centers, disappearing jobs,...",
+      "publishedAt": "2026-04-21T20:45:00.000Z",
+      "source": "mit-tech-review",
+      "sourceName": "MIT Technology Review AI"
+    },
+    {
+      "title": "OpenAI’s updated image generator can now pull information from the web",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/916166/openai-chatgpt-images-2",
+      "summary": "OpenAI is rolling out the latest version of its AI-powered image generator with new \"thinking capabilities,\" allowing it to search the web to help it create multiple images from a single prompt. On Tu...",
+      "publishedAt": "2026-04-21T19:29:41.000Z",
+      "source": "the-verge-ai",
+      "sourceName": "The Verge AI"
+    },
+    {
+      "title": "From developer desks to the whole organization: Running Claude Cowork in Amazon Bedrock",
+      "url": "https://aws.amazon.com/blogs/machine-learning/from-developer-desks-to-the-whole-organization-running-claude-cowork-in-amazon-bedrock/",
+      "summary": "Today, we're excited to announce Claude Cowork in Amazon Bedrock. You can now run Cowork and Claude Code Desktop through Amazon Bedrock, directly or using an LLM gateway. In this post, we walk through...",
+      "publishedAt": "2026-04-21T19:13:49.000Z",
+      "source": "aws-ml",
+      "sourceName": "AWS Machine Learning Blog"
+    },
+    {
+      "title": "AI research lab NeoCognition lands $40M seed to build agents that learn like humans",
+      "url": "https://techcrunch.com/2026/04/21/ai-research-lab-neocognition-lands-40m-seed-to-build-agents-that-learn-like-humans/",
+      "summary": "Founded by an OSU researcher, the startup is developing AI agents that can become experts in any domain.",
+      "publishedAt": "2026-04-21T19:11:29.000Z",
+      "source": "techcrunch-ai",
+      "sourceName": "TechCrunch AI"
+    },
+    {
+      "title": "AI backlash is coming for elections",
+      "url": "https://www.theverge.com/policy/916210/ai-midterm-elections-data-centers-jobs",
+      "summary": "Ask Americans how they feel about AI and most say they have concerns. Communities have mounted resistance to data center projects, stalling them across the US. On social media, anger at AI companies a...",
+      "publishedAt": "2026-04-21T19:00:05.000Z",
+      "source": "the-verge-ai",
+      "sourceName": "The Verge AI"
+    },
+    {
+      "title": "ChatGPTs new Images 2.0 model is surprisingly good at generating text",
+      "url": "https://techcrunch.com/2026/04/21/chatgpts-new-images-2-0-model-is-surprisingly-good-at-generating-text/",
+      "summary": "ChatGPT Images 2.0, the newest image-generation model from OpenAI, shows just how much AI capabilities have evolved over the last few years.",
+      "publishedAt": "2026-04-21T19:00:00.000Z",
+      "source": "techcrunch-ai",
+      "sourceName": "TechCrunch AI"
+    },
+    {
+      "title": "Sam Altman throws shade at Anthropics cyber model, Mythos: fear-based marketing",
+      "url": "https://techcrunch.com/2026/04/21/sam-altman-throws-shade-at-anthropics-cyber-model-mythos-fear-based-marketing/",
+      "summary": "This week, during a podcast appearance, OpenAI CEO Sam Altman called out his competitor's new cybersecurity model, noting that the company was using fear to make its product sound more impressive than...",
+      "publishedAt": "2026-04-21T18:51:52.000Z",
+      "source": "techcrunch-ai",
+      "sourceName": "TechCrunch AI"
+    },
+    {
+      "title": "Celebrities will be able to find and request removal of AI deepfakes on YouTube",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/915872/celebrities-will-be-able-to-find-and-request-removal-of-ai-deepfakes-on-youtube",
+      "summary": "YouTube is expanding its AI deepfake monitoring feature to Hollywood - meaning some celebrity AI videos could soon disappear. The platform's likeness detection feature searches YouTube for AI deepfake...",
+      "publishedAt": "2026-04-21T17:30:24.000Z",
+      "source": "the-verge-ai",
+      "sourceName": "The Verge AI"
+    },
+    {
+      "title": "Clarifai deletes 3 million photos that OkCupid provided to train facial recognition AI, report says",
+      "url": "https://techcrunch.com/2026/04/21/clarifai-okcupid-facial-recognition-ai-ftc-settlement/",
+      "summary": "The photo deletion comes after an FTC settlement with Clarifai. The company had asked OkCupid — whose executives had invested in Clarifai — to share data in 2014, according to court documents.",
+      "publishedAt": "2026-04-21T17:11:01.000Z",
+      "source": "techcrunch-ai",
+      "sourceName": "TechCrunch AI"
+    },
+    {
+      "title": "Claude for Legal teams - Anthropic",
+      "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTFA3dHlDc0F4cG5ScmdmaWw4WEVCUXhYeEVDM1NoMXNBbGJiZG8tRjUtWW82T1hLUUlYWmcwaUJLMXlGX3FFZE9icGl0YlZMVFBrY2Y1NHdBUEF5NHBFelBBQzBWYXBoelY5?oc=5",
+      "summary": "Claude for Legal teams Anthropic",
+      "publishedAt": "2026-04-21T17:00:00.000Z",
+      "source": "anthropic",
+      "sourceName": "Anthropic"
+    },
+    {
+      "title": "End-to-end lineage with DVC and Amazon SageMaker AI MLflow apps",
+      "url": "https://aws.amazon.com/blogs/machine-learning/end-to-end-lineage-with-dvc-and-amazon-sagemaker-ai-mlflow-apps/",
+      "summary": "In this post, we show how to combine DVC (Data Version Control), Amazon SageMaker AI, and Amazon SageMaker AI MLflow Apps to build end-to-end ML model lineage. We walk through two deployable patterns ...",
+      "publishedAt": "2026-04-21T16:43:03.000Z",
+      "source": "aws-ml",
+      "sourceName": "AWS Machine Learning Blog"
+    },
+    {
+      "title": "Ordering with the Starbucks ChatGPT app was a true coffee nightmare",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/915821/starbucks-chatgpt-app-testing",
+      "summary": "Venti iced coffee, light skim milk. That's what I get at Starbucks. It is what I have gotten at Starbucks every time I've been to Starbucks for as long as I can remember, other than a brief love affai...",
+      "publishedAt": "2026-04-21T16:19:40.000Z",
+      "source": "the-verge-ai",
+      "sourceName": "The Verge AI"
+    },
+    {
+      "title": "AI Dungeon maker Latitude unveils Voyage, a platform for creating AI-powered RPGs",
+      "url": "https://techcrunch.com/2026/04/21/voyage-is-an-ai-rpg-platform-for-creating-custom-gaming-worlds-with-ai-generated-npc-interactions/",
+      "summary": "Latitude's new AI-native platform, Voyage, aims to help gamers create their very own role-playing game.",
+      "publishedAt": "2026-04-21T16:00:00.000Z",
+      "source": "techcrunch-ai",
+      "sourceName": "TechCrunch AI"
+    },
+    {
+      "title": "Bond, a new social media platform, wants to use AI to help you kick your doomscrolling habit",
+      "url": "https://techcrunch.com/2026/04/21/bond-social-media-platform-ai-memories-kick-doomscrolling-habit/",
+      "summary": "Bond wants you to get off the couch and get back into the real world, its creator says. The new platform's AI system is designed to motivate users to do things away from the app.",
+      "publishedAt": "2026-04-21T15:24:29.000Z",
+      "source": "techcrunch-ai",
+      "sourceName": "TechCrunch AI"
+    },
+    {
+      "title": "John Ternus’ first big problem is AI",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/915662/john-ternus-apple-ceo-tim-cook-ai-problem-siri",
+      "summary": "Less than a year ago, Apple made headlines for a lack of AI announcements at its annual WWDC event. Ten months later, the company has announced that hardware executive John Ternus will succeed longtim...",
+      "publishedAt": "2026-04-21T15:11:38.000Z",
+      "source": "the-verge-ai",
+      "sourceName": "The Verge AI"
+    },
+    {
+      "title": "YouTube expands its AI likeness detection technology to celebrities",
+      "url": "https://techcrunch.com/2026/04/21/youtube-expands-its-ai-likeness-detection-technology-to-celebrities/",
+      "summary": "YouTube is expanding its AI likeness detection tool to celebrities, giving talent and their reps a way to find and remove deepfakes.",
+      "publishedAt": "2026-04-21T15:02:06.000Z",
+      "source": "techcrunch-ai",
+      "sourceName": "TechCrunch AI"
+    },
+    {
+      "title": "3 new ways Ads Advisor is making Google Ads safer and faster",
+      "url": "https://blog.google/products/ads-commerce/ads-advisor-google-ads/",
+      "summary": "Three new agentic safety and policy features integrated into Ads Advisor will help protect and streamline your Google Ads account.",
+      "publishedAt": "2026-04-21T14:30:00.000Z",
+      "source": "google-ai",
+      "sourceName": "Google AI Blog"
+    },
+    {
+      "title": "GRAI believes AI can make music more social, not replace artists",
+      "url": "https://techcrunch.com/2026/04/21/grai-believes-ai-can-make-music-more-social-not-replace-artists/",
+      "summary": "AI music startup GRAI says fans want to remix tracks, not generate songs from scratch.",
+      "publishedAt": "2026-04-21T13:00:00.000Z",
+      "source": "techcrunch-ai",
+      "sourceName": "TechCrunch AI"
+    },
+    {
+      "title": "Yelp is making its AI chatbot way more useful",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/915626/yelp-ai-assistant-chatbot-major-upgrade",
+      "summary": "Yelp is giving its chatbot assistant a major upgrade, turning the platform into something closer to a digital concierge with a suite of new features designed for \"getting things done.\" The move, one o...",
+      "publishedAt": "2026-04-21T10:42:54.000Z",
+      "source": "the-verge-ai",
+      "sourceName": "The Verge AI"
+    },
+    {
+      "title": "Muse Spark - AI at Meta",
+      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOV2pHRUhMRmhWcUxnWm1haXNlUExZVU01QVZubE5vVG5YRmlxVng2bUlYbzdGbDhWSlhxNGNqRE1Pckc1T2tqUGRURWVWVlJRMF9oVVRLY0FuWktWcmVKUUp0TmpvQ25qcjJVc25zZ1VobjlJbEhqUVNvSjlkSTNWLTczeWc?oc=5",
+      "summary": "Muse Spark AI at Meta",
+      "publishedAt": "2026-04-21T02:09:41.000Z",
+      "source": "meta-ai",
+      "sourceName": "Meta AI Blog"
+    },
+    {
+      "title": "SpaceX宣布有权在今年晚些时候以600亿美元收购Cursor",
+      "url": "https://36kr.com/newsflashes/3777254680430593?f=rss",
+      "summary": "SpaceX当地时间4月21日宣布与人工智能编程初创公司Cursor正紧密合作，致力于打造全球顶尖的编码和知识工作人工智能。Cursor授予SpaceX一项权利，允许其在今年晚些时候以600亿美元的价格收购Cursor，或者以100亿美元的价格收购双方的合作成果。（界面）",
+      "publishedAt": "2026-04-22T00:22:09.000Z",
+      "source": "36kr",
+      "sourceName": "36氪"
+    },
+    {
+      "title": "A look at Apple's management changes and several key executives' futures; sources say Mike Rockwell has considered leaving or taking an advisory role next year (Mark Gurman/Bloomberg)",
+      "url": "http://www.techmeme.com/260421/p54#a260421p54",
+      "summary": "Mark Gurman / Bloomberg: A look at Apple's management changes and several key executives' futures; sources say Mike Rockwell has considered leaving or taking an advisory role next year &mdash; John Te...",
+      "publishedAt": "2026-04-22T00:20:05.000Z",
+      "source": "techmeme",
+      "sourceName": "TechMeme"
+    },
+    {
+      "title": "多家银行创新金融服务赋能人形机器人赛道",
+      "url": "https://36kr.com/newsflashes/3777240503159048?f=rss",
+      "summary": "人形机器人作为人工智能、高端制造、智能装备等前沿技术融合的核心载体，是培育新质生产力、推动制造业转型升级的关键领域之一。记者获悉，当前，多家银行正创新服务形式为人形机器人产业注入强劲金融动能。（证券日报）",
+      "publishedAt": "2026-04-22T00:14:41.000Z",
+      "source": "36kr",
+      "sourceName": "36氪"
+    },
+    {
+      "title": "中信证券：人形机器人放量在即，电机绕线设备快速发展",
+      "url": "https://36kr.com/newsflashes/3777235688573192?f=rss",
+      "summary": "36氪获悉，中信证券研报称，人形机器人量产将带动核心电机需求加速增长，上游电机生产设备有望率先受益于行业扩产和资本开支上行。其中绕组成型技术为电机制造的核心难点，具备核心工艺能力的绕线设备企业更具竞争优势。随着国产替代持续深化和下游客户验证加快，国内绕线设备及电机设备企业有望在本轮产业升级中迎来份额提升与业绩释放。",
+      "publishedAt": "2026-04-22T00:02:50.000Z",
+      "source": "36kr",
+      "sourceName": "36氪"
+    },
+    {
+      "title": "集成光路芯片能发出多种颜色激光",
+      "url": "https://36kr.com/newsflashes/3777233782786307?f=rss",
+      "summary": "美国国家标准与技术研究院（NIST）科学家研制出一种新型光路芯片，仅有指甲大小，能够产生彩虹般的各种颜色的激光。这种芯片处理光的方式与传统芯片处理电子的方式类似，将能发出多种波长光的激光器集成于方寸之间，成为一种光的“集成电路”，有望为人工智能、量子计算和光学原子钟等前沿技术注入新动力，相关论文发表于新一期《自然》杂志。（科技日报）",
+      "publishedAt": "2026-04-22T00:00:54.000Z",
+      "source": "36kr",
+      "sourceName": "36氪"
+    },
+    {
+      "title": "Top law firm Sullivan & Cromwell told a US federal bankruptcy court that a major filing it made in a high-profile case contained multiple AI hallucinations (Financial Times)",
+      "url": "http://www.techmeme.com/260421/p53#a260421p53",
+      "summary": "Financial Times: Top law firm Sullivan & Cromwell told a US federal bankruptcy court that a major filing it made in a high-profile case contained multiple AI hallucinations &mdash; Firm whose partners...",
+      "publishedAt": "2026-04-22T00:00:51.000Z",
+      "source": "techmeme",
+      "sourceName": "TechMeme"
+    },
+    {
+      "title": "黄仁勋访谈揭示英伟达面临芯片市场洗牌与AI技术栈变革 - 虎嗅",
+      "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE5BQllfRUg2d2VmdHNUWVdVY0R4NXFGRjZnN2JOMnJtZnBsYmZ2RGRtY2JQd2N2R1N4Q2VpeFRRcDhNRFl0WldwNjZSV3QwWUdhUVpQVA?oc=5",
+      "summary": "黄仁勋访谈揭示英伟达面临芯片市场洗牌与AI技术栈变革 虎嗅",
+      "publishedAt": "2026-04-21T23:59:57.000Z",
+      "source": "huxiu",
+      "sourceName": "虎嗅"
+    },
+    {
+      "title": "The Los Angeles Unified School District's board votes to require screen time limits, making it the first major American school system to do so (Tyler Kingkade/NBC News)",
+      "url": "http://www.techmeme.com/260421/p52#a260421p52",
+      "summary": "Tyler Kingkade / NBC News: The Los Angeles Unified School District's board votes to require screen time limits, making it the first major American school system to do so &mdash; The resolution followe...",
+      "publishedAt": "2026-04-21T23:40:01.000Z",
+      "source": "techmeme",
+      "sourceName": "TechMeme"
+    },
+    {
+      "title": "Anthropic appears to have removed access to Claude Code from its $20/month Pro plan; Anthropic says it is \"running a small test on ~2% of new prosumer signups\" (Ed Zitron/Ed Zitron's Where's Your Ed At)",
+      "url": "http://www.techmeme.com/260421/p51#a260421p51",
+      "summary": "Ed Zitron / Ed Zitron's Where's Your Ed At: Anthropic appears to have removed access to Claude Code from its $20/month Pro plan; Anthropic says it is &ldquo;running a small test on ~2% of new prosumer...",
+      "publishedAt": "2026-04-21T23:35:02.000Z",
+      "source": "techmeme",
+      "sourceName": "TechMeme"
+    },
+    {
+      "title": "Filing: Anthropic spent $1.6M and OpenAI $1M on lobbying in Q1, vs. $360K and $560K in Q1 2025, respectively; Meta topped Big Tech lobbying spending with $7.1M (Ashley Gold/Axios)",
+      "url": "http://www.techmeme.com/260421/p50#a260421p50",
+      "summary": "Ashley Gold / Axios: Filing: Anthropic spent $1.6M and OpenAI $1M on lobbying in Q1, vs. $360K and $560K in Q1 2025, respectively; Meta topped Big Tech lobbying spending with $7.1M &mdash; Both Anthro...",
+      "publishedAt": "2026-04-21T23:30:01.000Z",
+      "source": "techmeme",
+      "sourceName": "TechMeme"
+    },
+    {
+      "title": "【钛晨报】推进服务业扩能提质，国务院最新部署；苹果任命特努斯为首席执行官，库克转任执行董事长；国内油价今年来首次下调，加满一箱油将少花22元",
+      "url": "https://www.tmtpost.com/7961743.html",
+      "summary": "微信：韩国、斯里兰卡、泰国、马来西亚、新加坡的国家码接入微信支付；宁德时代发布麒麟凝聚态电池，最高续航1500公里；爱奇艺CEO龚宇发文回应AI艺人库；亚马逊与Anthropic未来十年将合作在AWS技术上投入超1000亿美元；特斯拉车机语音大模型服务完成备案；沃尔玛有望获超100亿美元关税退款；工信部：支持开展太空算力技术前瞻性研究，有序推动太空算力产业发展；上海：加快离岸贸易服务功能扩围，推广...",
+      "publishedAt": "2026-04-21T23:20:00.000Z",
+      "source": "tmtpost",
+      "sourceName": "钛媒体"
+    },
+    {
+      "title": "AcuityMD, which provides AI tools that automate sales call recaps, CRM data entry, and more for medtech companies, raised an $80M Series C at a $955M valuation (Brock E.W. Turner/Axios)",
+      "url": "http://www.techmeme.com/260421/p49#a260421p49",
+      "summary": "Brock E.W. Turner / Axios: AcuityMD, which provides AI tools that automate sales call recaps, CRM data entry, and more for medtech companies, raised an $80M Series C at a $955M valuation &mdash; Medte...",
+      "publishedAt": "2026-04-21T23:00:37.000Z",
+      "source": "techmeme",
+      "sourceName": "TechMeme"
+    },
+    {
+      "title": "UK gaming icon Peter Molyneux on AI, his final creation and a changing industry",
+      "url": "https://www.bbc.com/news/articles/c4glw5nyrggo?at_medium=RSS&at_campaign=rss",
+      "summary": "The creator of iconic series such as Fable says Masters of Albion will be the last game he makes.",
+      "publishedAt": "2026-04-21T23:00:24.000Z",
+      "source": "bbc-tech",
+      "sourceName": "BBC Technology"
+    },
+    {
+      "title": "Meta to track workers' clicks and keystrokes to train AI",
+      "url": "https://www.bbc.com/news/articles/cvglyklz49jo?at_medium=RSS&at_campaign=rss",
+      "summary": "The firm will take data from the way employees work for its artificial intelligence models.",
+      "publishedAt": "2026-04-21T22:47:56.000Z",
+      "source": "bbc-tech",
+      "sourceName": "BBC Technology"
+    },
+    {
+      "title": "SpaceX says it's working with Cursor to build \"the world's most useful models\" and it has the right to acquire Cursor for $60B or pay $10B for the partnership (New York Times)",
+      "url": "http://www.techmeme.com/260421/p48#a260421p48",
+      "summary": "New York Times: SpaceX says it's working with Cursor to build &ldquo;the world's most useful models&rdquo; and it has the right to acquire Cursor for $60B or pay $10B for the partnership &mdash; The p...",
+      "publishedAt": "2026-04-21T22:22:36.000Z",
+      "source": "techmeme",
+      "sourceName": "TechMeme"
+    },
+    {
+      "title": "Trump Media & Technology Group names Kevin McGurn as interim CEO, succeeding Devin Nunes; McGurn previously worked as an executive at Hulu, Vevo, and T-Mobile (Todd Spangler/Variety)",
+      "url": "http://www.techmeme.com/260421/p47#a260421p47",
+      "summary": "Todd Spangler / Variety: Trump Media & Technology Group names Kevin McGurn as interim CEO, succeeding Devin Nunes; McGurn previously worked as an executive at Hulu, Vevo, and T-Mobile &mdash; Trump Me...",
+      "publishedAt": "2026-04-21T22:10:02.000Z",
+      "source": "techmeme",
+      "sourceName": "TechMeme"
+    },
+    {
+      "title": "研究反驳AI无法提供可持续竞争优势观点 提出商业模式重构是关键 - 虎嗅",
+      "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE1zRHFxRF9iZHFGWTJvSG5QREJ4OU1KTk1RVHJiS0NSRTVsLXU2NEFIUk5leWwzR3NFMmZ3MjJtcFRDSGp3NE1pTlN1RGVrM3BxTzhWcw?oc=5",
+      "summary": "研究反驳AI无法提供可持续竞争优势观点 提出商业模式重构是关键 虎嗅",
+      "publishedAt": "2026-04-21T22:07:52.000Z",
+      "source": "huxiu",
+      "sourceName": "虎嗅"
+    },
+    {
+      "title": "Source: a handful of unauthorized users in a private Discord channel have been accessing Anthropic's Mythos model since the day the company announced it (Rachel Metz/Bloomberg)",
+      "url": "http://www.techmeme.com/260421/p46#a260421p46",
+      "summary": "Rachel Metz / Bloomberg: Source: a handful of unauthorized users in a private Discord channel have been accessing Anthropic's Mythos model since the day the company announced it &mdash; A small group ...",
+      "publishedAt": "2026-04-21T22:00:38.000Z",
+      "source": "techmeme",
+      "sourceName": "TechMeme"
+    },
+    {
+      "title": "Pentagon wants $54B for drones, more than most nations’ military budgets",
+      "url": "https://arstechnica.com/ai/2026/04/pentagon-wants-54b-for-drones-more-than-most-nations-military-budgets/",
+      "summary": "The proposed Pentagon drone investment rivals Ukraine’s entire military budget.",
+      "publishedAt": "2026-04-21T21:57:54.000Z",
+      "source": "ars-technica",
+      "sourceName": "Ars Technica"
+    },
+    {
+      "title": "AI hacking tools like Mythos can be 'net positive' says top cyber official",
+      "url": "https://www.bbc.com/news/articles/cy41zejp9pko?at_medium=RSS&at_campaign=rss",
+      "summary": "The head of the National Cyber Security Centre says frontier AI tools can be a force for good - if kept out of the wrong hands.",
+      "publishedAt": "2026-04-21T21:43:48.000Z",
+      "source": "bbc-tech",
+      "sourceName": "BBC Technology"
+    },
+    {
+      "title": "Mozilla: Anthropic's Mythos found 271 security vulnerabilities in Firefox 150",
+      "url": "https://arstechnica.com/ai/2026/04/mozilla-anthropics-mythos-found-271-zero-day-vulnerabilities-in-firefox-150/",
+      "summary": "CTO says new AI model is \"every bit as capable\" as world's best security researchers.",
+      "publishedAt": "2026-04-21T21:40:41.000Z",
+      "source": "ars-technica",
+      "sourceName": "Ars Technica"
+    },
+    {
+      "title": "Google now offers two research agents: Deep Research, replacing its December preview release, and Deep Research Max, both available via Gemini API paid tiers (The Keyword)",
+      "url": "http://www.techmeme.com/260421/p45#a260421p45",
+      "summary": "The Keyword: Google now offers two research agents: Deep Research, replacing its December preview release, and Deep Research Max, both available via Gemini API paid tiers &mdash; Built with Gemini 3.1...",
+      "publishedAt": "2026-04-21T21:40:00.000Z",
+      "source": "techmeme",
+      "sourceName": "TechMeme"
+    },
+    {
+      "title": "Reliable Robotics, which is developing autonomous aircraft systems for cargo flights, raised $160M led by Nimble Partners, pushing its valuation to ~$1B (Cailley LaPara/Bloomberg)",
+      "url": "http://www.techmeme.com/260421/p44#a260421p44",
+      "summary": "Cailley LaPara / Bloomberg: Reliable Robotics, which is developing autonomous aircraft systems for cargo flights, raised $160M led by Nimble Partners, pushing its valuation to ~$1B &mdash; Reliable Ro...",
+      "publishedAt": "2026-04-21T21:20:01.000Z",
+      "source": "techmeme",
+      "sourceName": "TechMeme"
+    },
+    {
+      "title": "Adobe announces a $25B stock repurchase program through April 30, 2030; Adobe shares have fallen around 30% so far this year (Zaheer Kachwala/Reuters)",
+      "url": "http://www.techmeme.com/260421/p43#a260421p43",
+      "summary": "Zaheer Kachwala / Reuters: Adobe announces a $25B stock repurchase program through April 30, 2030; Adobe shares have fallen around 30% so far this year &mdash; Adobe (ADBE.O) on Tuesday said its board...",
+      "publishedAt": "2026-04-21T21:00:53.000Z",
+      "source": "techmeme",
+      "sourceName": "TechMeme"
+    },
+    {
+      "title": "The US DOJ says a former ransomware negotiator pleaded guilty to helping cybercriminals extort companies in cyberattacks in five different incidents (Lorenzo Franceschi-Bicchierai/TechCrunch)",
+      "url": "http://www.techmeme.com/260421/p42#a260421p42",
+      "summary": "Lorenzo Franceschi-Bicchierai / TechCrunch: The US DOJ says a former ransomware negotiator pleaded guilty to helping cybercriminals extort companies in cyberattacks in five different incidents &mdash;...",
+      "publishedAt": "2026-04-21T20:40:03.000Z",
+      "source": "techmeme",
+      "sourceName": "TechMeme"
+    },
+    {
+      "title": "Roblox reaches settlements totaling $35.8M with the AGs of West Virginia, Alabama, and Nevada over child-safety protections (Cecilia D'Anastasio/Bloomberg)",
+      "url": "http://www.techmeme.com/260421/p41#a260421p41",
+      "summary": "Cecilia D'Anastasio / Bloomberg: Roblox reaches settlements totaling $35.8M with the AGs of West Virginia, Alabama, and Nevada over child-safety protections &mdash; Roblox Corp. has reached settlement...",
+      "publishedAt": "2026-04-21T20:20:01.000Z",
+      "source": "techmeme",
+      "sourceName": "TechMeme"
+    },
+    {
+      "title": "An interview with Sam Altman and Greg Brockman on OpenAI's restructuring, cutting Sora, \"personal AGI\", Anthropic's \"fear-based marketing\" for Mythos, and more (Core Memory)",
+      "url": "http://www.techmeme.com/260421/p40#a260421p40",
+      "summary": "Core Memory: An interview with Sam Altman and Greg Brockman on OpenAI's restructuring, cutting Sora, &ldquo;personal AGI&rdquo;, Anthropic's &ldquo;fear-based marketing&rdquo; for Mythos, and more &md...",
+      "publishedAt": "2026-04-21T20:15:01.000Z",
+      "source": "techmeme",
+      "sourceName": "TechMeme"
+    },
+    {
+      "title": "Florida probes ChatGPT role in mass shooting. OpenAI says bot \"not responsible.\"",
+      "url": "https://arstechnica.com/tech-policy/2026/04/florida-probes-chatgpt-role-in-mass-shooting-openai-says-bot-not-responsible/",
+      "summary": "Can ChatGPT be blamed for a mass shooting? Florida is investigating.",
+      "publishedAt": "2026-04-21T20:01:36.000Z",
+      "source": "ars-technica",
+      "sourceName": "Ars Technica"
+    },
+    {
+      "title": "ChatGPT Images 2.0 is a breakthrough that could fundamentally reshape graphic generation",
+      "url": "https://the-decoder.com/openais-chatgpt-images-2-0-thinks-before-it-generates-adding-reasoning-and-web-search-to-image-creation/",
+      "summary": "OpenAI is adding reasoning and web search to its ChatGPT Images 2.0 image generator. The model can now create up to eight consistent images from a single prompt and handles text in general, and especi...",
+      "publishedAt": "2026-04-21T19:55:49.000Z",
+      "source": "the-decoder",
+      "sourceName": "The Decoder"
+    },
+    {
+      "title": "Report: Meta will train AI agents by tracking employees' mouse, keyboard use",
+      "url": "https://arstechnica.com/ai/2026/04/meta-will-use-employee-tracking-software-to-help-train-ai-agents-report/",
+      "summary": "Move highlights the difficulty of finding high-quality interactive training data.",
+      "publishedAt": "2026-04-21T19:30:52.000Z",
+      "source": "ars-technica",
+      "sourceName": "Ars Technica"
+    },
+    {
+      "title": "OpenAI Beefs Up ChatGPT’s Image Generation Model",
+      "url": "https://www.wired.com/story/openai-beefs-up-chatgpts-image-generation-model/",
+      "summary": "The ChatGPT Images 2.0 model is here. Our testing shows it’s better at creating more detailed images and rendering text, but it still struggles with languages other than English.",
+      "publishedAt": "2026-04-21T19:00:00.000Z",
+      "source": "wired-ai",
+      "sourceName": "Wired AI"
+    },
+    {
+      "title": "Mozilla Used Anthropic’s Mythos to Find and Fix 271 Bugs in Firefox",
+      "url": "https://www.wired.com/story/mozilla-used-anthropics-mythos-to-find-271-bugs-in-firefox/",
+      "summary": "The Firefox team doesn’t think emerging AI capabilities will upend cybersecurity long term, but they warn that software developers are likely in for a rocky transition.",
+      "publishedAt": "2026-04-21T18:30:00.000Z",
+      "source": "wired-ai",
+      "sourceName": "Wired AI"
+    },
+    {
+      "title": "Framework Laptop 16 upgrades make it look less like an unfinished prototype",
+      "url": "https://arstechnica.com/gadgets/2026/04/framework-laptop-16-upgrades-make-it-look-less-like-an-unfinished-prototype/",
+      "summary": "A lower-end Ryzen AI 340 CPU option will also bring the price down, for now.",
+      "publishedAt": "2026-04-21T18:15:03.000Z",
+      "source": "ars-technica",
+      "sourceName": "Ars Technica"
+    },
+    {
+      "title": "Google launches Deep Research and Deep Research Max agents to automate complex research",
+      "url": "https://the-decoder.com/google-launches-deep-research-and-deep-research-max-agents-to-automate-complex-research/",
+      "summary": "Google Deepmind is rolling out Deep Research Max, a new AI agent built on Gemini 3.1 Pro that runs autonomous research across the web and proprietary data sources. For the first time, developers can p...",
+      "publishedAt": "2026-04-21T18:11:38.000Z",
+      "source": "the-decoder",
+      "sourceName": "The Decoder"
+    },
+    {
+      "title": "Internal emails show how Amazon raises prices across the Internet, lawsuit says",
+      "url": "https://arstechnica.com/tech-policy/2026/04/internal-emails-show-how-amazon-raises-prices-across-the-internet-lawsuit-says/",
+      "summary": "“It’s working!“: Amazon emails with vendors show pattern of disappearing deals.",
+      "publishedAt": "2026-04-21T18:06:06.000Z",
+      "source": "ars-technica",
+      "sourceName": "Ars Technica"
+    },
+    {
+      "title": "Tim Cook’s Legacy Is Turning Apple Into a Subscription",
+      "url": "https://www.wired.com/story/apple-tim-cook-subscription-business/",
+      "summary": "The soon-to-exit Apple CEO went all in on services. Now, the incoming CEO, John Ternus, will need to embrace the AI era.",
+      "publishedAt": "2026-04-21T17:35:12.000Z",
+      "source": "wired-ai",
+      "sourceName": "Wired AI"
+    },
+    {
+      "title": "Google首席AI架构师整合内部AI编码工具至Antigravity平台 - 虎嗅",
+      "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5Qby13cFpjZDNmTTNIcFJUQmFRRmFWQ2xvTVdMQllSWnZjaUlkZnMtc2RLbUhKTVFwQ29XT1FXMVFWR3ZTRUptZ2ZJTlBjeXFrUDdV?oc=5",
+      "summary": "Google首席AI架构师整合内部AI编码工具至Antigravity平台 虎嗅",
+      "publishedAt": "2026-04-21T17:02:38.000Z",
+      "source": "huxiu",
+      "sourceName": "虎嗅"
+    },
+    {
+      "title": "Anthropic gets $5B investment from Amazon, will use it to buy Amazon chips",
+      "url": "https://arstechnica.com/ai/2026/04/anthropic-gets-5b-investment-from-amazon-will-use-it-to-buy-amazon-chips/",
+      "summary": "Anthropic secures 5 gigawatts of Amazon’s custom silicon as Claude demand soars.",
+      "publishedAt": "2026-04-21T17:00:04.000Z",
+      "source": "ars-technica",
+      "sourceName": "Ars Technica"
+    },
+    {
+      "title": "全球AI产品动态,AI原生产品日报,AI Agent、AI+电商,DTClaw,AI付,QClaw,OpenClaw,Miclaw,AI村游地图 - 虎嗅",
+      "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE9neUFWT3lRRU1UUHRsaTFJV3huNlhJX3Y0dTg1ZTh1bjZTUFB5MkZwNExEN2pNQjVPM1I4WUNTcnRCM3QxZmZCV19CSkxZXzZRbTBEM1lQNjRaNXhFbTEzclQtWkM5RGhWWTFfZWkxNXVJZ1IyNUl3?oc=5",
+      "summary": "全球AI产品动态,AI原生产品日报,AI Agent、AI+电商,DTClaw,AI付,QClaw,OpenClaw,Miclaw,AI村游地图 虎嗅",
+      "publishedAt": "2026-04-21T16:19:03.000Z",
+      "source": "huxiu",
+      "sourceName": "虎嗅"
+    },
+    {
+      "title": "全球AI投融资动态,AI创投日报 - 虎嗅",
+      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTFBkUlRxS1BaaldxeThrZmpmemtTUWl0SE11Q0Z3M3h6czlTUjd3MzFtZE10b3l5QW1ha2pOYXoya1Axa2xyYW9aUzhvc3VCNnRiN3ZrMFpoWFF5azRXai1lMW5kT05rX1U4SVY0OHpucw?oc=5",
+      "summary": "全球AI投融资动态,AI创投日报 虎嗅",
+      "publishedAt": "2026-04-21T16:06:56.000Z",
+      "source": "huxiu",
+      "sourceName": "虎嗅"
+    },
+    {
+      "title": "爱奇艺CEO龚宇称真人实拍或成非遗 AI艺人库引争议 - 虎嗅",
+      "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE9lMUhOeE1Ha1k5RVRWem1Lc2p6OFQyMEEzYXp6TWxHelJISmhtVk9MQmtyT1Z0TnhKVnNPbE14MGh3VEt5WkxZUzRIOXpmVUxka0JTZw?oc=5",
+      "summary": "爱奇艺CEO龚宇称真人实拍或成非遗 AI艺人库引争议 虎嗅",
+      "publishedAt": "2026-04-21T15:28:03.000Z",
+      "source": "huxiu",
+      "sourceName": "虎嗅"
+    },
+    {
+      "title": "Loneliness in older adults can often lead to memory impairment",
+      "url": "https://arstechnica.com/health/2026/04/loneliness-in-older-adults-can-often-lead-to-memory-impairment/",
+      "summary": "A longitudinal study finds links to lapses in immediate and delayed recall.",
+      "publishedAt": "2026-04-21T14:23:24.000Z",
+      "source": "ars-technica",
+      "sourceName": "Ars Technica"
+    },
+    {
+      "title": "前小鹏汽车自动驾驶一号位李力耘出任众擎CTO，加速打造具身大脑",
+      "url": "https://www.qbitai.com/2026/04/404124.html",
+      "summary": "通过将自动驾驶领域成熟的“工业化AI”打法、高效的数据飞轮与极强的工程部署能力引入具身赛道，众擎加速打造原生多模态驱动、大小脑与神经末梢协同的全集成架构。",
+      "publishedAt": "2026-04-21T14:21:13.000Z",
+      "source": "qbitai",
+      "sourceName": "量子位"
+    },
+    {
+      "title": "Ofcom investigating Telegram over child sexual abuse material concerns",
+      "url": "https://www.bbc.com/news/articles/c4gxj049wljo?at_medium=RSS&at_campaign=rss",
+      "summary": "The popular messaging service told the BBC in a statement it \"categorically denies Ofcom's accusations\".",
+      "publishedAt": "2026-04-21T13:59:23.000Z",
+      "source": "bbc-tech",
+      "sourceName": "BBC Technology"
+    },
+    {
+      "title": "长视频平台建立AI艺人库引争议，行业规范成焦点 - 虎嗅",
+      "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTFB5Nm9oZFJQelVYa3BycHFHUzZJMzB5TGNCTWloQkdBeEdiVExfZ0htMkxxUHNlbTVCcjNYT3ZmRnI1ZzdWbl9lNmtCc1VzbzRFZnR0Qw?oc=5",
+      "summary": "长视频平台建立AI艺人库引争议，行业规范成焦点 虎嗅",
+      "publishedAt": "2026-04-21T13:22:33.000Z",
+      "source": "huxiu",
+      "sourceName": "虎嗅"
+    },
+    {
+      "title": "AI概念股估值普遍下跌 市场对AI技术既期待又恐惧 - 虎嗅",
+      "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE1GM1h6T2xsSFlGT3hWMTBrNGNCMUFDYWVoZnNXY1RUSkpIeEE5VExIbmFfcjQyZ0lFYUhQZ3NaVEFMUDEzZDlRRG1fTTdaR0o1YzBObg?oc=5",
+      "summary": "AI概念股估值普遍下跌 市场对AI技术既期待又恐惧 虎嗅",
+      "publishedAt": "2026-04-21T12:29:25.000Z",
+      "source": "huxiu",
+      "sourceName": "虎嗅"
+    },
+    {
+      "title": "The flood of AI music is reshaping how streaming platforms handle new uploads",
+      "url": "https://the-decoder.com/the-flood-of-ai-music-is-reshaping-how-streaming-platforms-handle-new-uploads/",
+      "summary": "Music streaming service Deezer reports that 44 percent of all songs uploaded to its platform daily are now fully AI-generated. The company uses its own detection technology and plans to license it to ...",
+      "publishedAt": "2026-04-21T12:24:00.000Z",
+      "source": "the-decoder",
+      "sourceName": "The Decoder"
+    },
+    {
+      "title": "Corporate America's favorite ChatGPT phrase doubled twice since 2024",
+      "url": "https://the-decoder.com/corporate-americas-favorite-chatgpt-phrase-doubled-twice-since-2024/",
+      "summary": "A new language analysis reveals how one telltale sentence pattern exposes companies that are letting ChatGPT handle their communications. Usage has quadrupled since 2024. The article Corporate America...",
+      "publishedAt": "2026-04-21T12:20:48.000Z",
+      "source": "the-decoder",
+      "sourceName": "The Decoder"
+    },
+    {
+      "title": "5月20日，马上AI起来！中国AIGC产业峰会报名已启动｜首波嘉宾官宣",
+      "url": "https://www.qbitai.com/2026/04/404096.html",
+      "summary": "欢迎报名，北京线下见！",
+      "publishedAt": "2026-04-21T12:02:52.000Z",
+      "source": "qbitai",
+      "sourceName": "量子位"
+    },
+    {
+      "title": "AI漫剧市场繁荣背后：成本上涨与行业竞争加剧 - 虎嗅",
+      "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE5RVDV0MWR4aHVvOHRib2VxbHpVNENwZmdKRm5mcms3aXFYcUhHaW5Jek9vNXZKdjl5aHlKa0ZRczRCVHRKOXhXSlJzSHhTaVFvcS0xZw?oc=5",
+      "summary": "AI漫剧市场繁荣背后：成本上涨与行业竞争加剧 虎嗅",
+      "publishedAt": "2026-04-21T12:02:29.000Z",
+      "source": "huxiu",
+      "sourceName": "虎嗅"
+    },
+    {
+      "title": "v2.1.117",
+      "url": "https://github.com/anthropics/claude-code/releases/tag/v2.1.117",
+      "summary": "What's changed Forked subagents can now be enabled on external builds by setting CLAUDE_CODE_FORK_SUBAGENT=1 Agent frontmatter mcpServers are now loaded for main-thread agent sessions via --agent Impr...",
+      "publishedAt": "2026-04-22T00:04:40.000Z",
+      "source": "claude-code-release",
+      "sourceName": "Claude Code Releases"
+    },
+    {
+      "title": "Where's the raccoon with the ham radio? (ChatGPT Images 2.0)",
+      "url": "https://simonwillison.net/2026/Apr/21/gpt-image-2/#atom-everything",
+      "summary": "OpenAI released ChatGPT Images 2.0 today, their latest image generation model. On the livestream Sam Altman said that the leap from gpt-image-1 to gpt-image-2 was equivalent to jumping from GPT-3 to G...",
+      "publishedAt": "2026-04-21T20:32:24.000Z",
+      "source": "simon-willison",
+      "sourceName": "Simon Willison's Blog"
+    },
+    {
+      "title": "Quoting Andreas Påhlsson-Notini",
+      "url": "https://simonwillison.net/2026/Apr/21/andreas-pahlsson-notini/#atom-everything",
+      "summary": "AI agents are already too human. Not in the romantic sense, not because they love or fear or dream, but in the more banal and frustrating one. The current implementations keep showing their human orig...",
+      "publishedAt": "2026-04-21T16:39:33.000Z",
+      "source": "simon-willison",
+      "sourceName": "Simon Willison's Blog"
+    },
+    {
+      "title": "scosman/pelicans_riding_bicycles",
+      "url": "https://simonwillison.net/2026/Apr/21/scosman/#atom-everything",
+      "summary": "scosman/pelicans_riding_bicycles I firmly approve of Steve Cosman's efforts to pollute the training set of pelicans riding bicycles. (To be fair, most of the examples I've published count as poisoning...",
+      "publishedAt": "2026-04-21T15:54:43.000Z",
+      "source": "simon-willison",
+      "sourceName": "Simon Willison's Blog"
+    },
+    {
+      "title": "New: A free year of Cursor, Google AI Pro, Notion, Supabase, Gumloop, and Fin for subscribers",
+      "url": "https://www.lennysnewsletter.com/p/new-a-free-year-of-cursor-google",
+      "summary": "Now 25 incredible products totaling over $30,000 in valuefree with your Lennys Newsletter subscription",
+      "publishedAt": "2026-04-21T15:03:33.000Z",
+      "source": "lenny-newsletter",
+      "sourceName": "Lenny's Newsletter"
+    },
+    {
+      "title": "The Internet is Real Life",
+      "url": "https://www.a16z.news/p/the-internet-is-real-life",
+      "summary": "America | Tech | Opinion | Culture | Charts",
+      "publishedAt": "2026-04-21T14:04:23.000Z",
+      "source": "a16z-blog",
+      "sourceName": "a16z Blog"
+    },
+    {
+      "title": "QIMMA قِمّة ⛰: A Quality-First Arabic LLM Leaderboard",
+      "url": "https://huggingface.co/blog/tiiuae/qimma-arabic-leaderboard",
+      "summary": "",
+      "publishedAt": "2026-04-21T10:09:58.000Z",
+      "source": "hf-blog",
+      "sourceName": "Hugging Face Blog"
+    },
+    {
+      "title": "Tim Cooks Impeccable Timing",
+      "url": "https://stratechery.com/2026/tim-cooks-impeccable-timing/",
+      "summary": "Tim Cook had an extraordinary run — and impeccable timing, both in terms of when he became CEO, and when he is stepping down.",
+      "publishedAt": "2026-04-21T10:00:00.000Z",
+      "source": "stratechery",
+      "sourceName": "Stratechery"
+    },
+    {
+      "title": "DeepER-Med: Advancing Deep Evidence-Based Research in Medicine Through Agentic AI",
+      "url": "https://arxiv.org/abs/2604.15456",
+      "summary": "arXiv:2604.15456v1 Announce Type: new Abstract: Trustworthiness and transparency are essential for the clinical adoption of artificial intelligence (AI) in healthcare and biomedical research. Recent d...",
+      "publishedAt": "2026-04-21T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "GIST: Multimodal Knowledge Extraction and Spatial Grounding via Intelligent Semantic Topology",
+      "url": "https://arxiv.org/abs/2604.15495",
+      "summary": "arXiv:2604.15495v1 Announce Type: new Abstract: Navigating complex, densely packed environments like retail stores, warehouses, and hospitals poses a significant spatial grounding challenge for humans...",
+      "publishedAt": "2026-04-21T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Bureaucratic Silences: What the Canadian AI Register Reveals, Omits, and Obscures",
+      "url": "https://arxiv.org/abs/2604.15514",
+      "summary": "arXiv:2604.15514v1 Announce Type: new Abstract: In November 2025, the Government of Canada operationalized its commitment to transparency by releasing its first Federal AI Register. In this paper, we ...",
+      "publishedAt": "2026-04-21T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Preregistered Belief Revision Contracts",
+      "url": "https://arxiv.org/abs/2604.15558",
+      "summary": "arXiv:2604.15558v1 Announce Type: new Abstract: Deliberative multi-agent systems allow agents to exchange messages and revise beliefs over time. While this interaction is meant to improve performance,...",
+      "publishedAt": "2026-04-21T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Subliminal Transfer of Unsafe Behaviors in AI Agent Distillation",
+      "url": "https://arxiv.org/abs/2604.15559",
+      "summary": "arXiv:2604.15559v1 Announce Type: new Abstract: Recent work on subliminal learning demonstrates that language models can transmit semantic traits through data that is semantically unrelated to those t...",
+      "publishedAt": "2026-04-21T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Bilevel Optimization of Agent Skills via Monte Carlo Tree Search",
+      "url": "https://arxiv.org/abs/2604.15709",
+      "summary": "arXiv:2604.15709v1 Announce Type: new Abstract: Agent \\texttt{skills} are structured collections of instructions, tools, and supporting resources that help large language model (LLM) agents perform pa...",
+      "publishedAt": "2026-04-21T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "The World Leaks the Future: Harness Evolution for Future Prediction Agents",
+      "url": "https://arxiv.org/abs/2604.15719",
+      "summary": "arXiv:2604.15719v2 Announce Type: new Abstract: Many consequential decisions must be made before the relevant outcome is known. Such problems are commonly framed as future prediction, where an LLM age...",
+      "publishedAt": "2026-04-21T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "LLM Reasoning Is Latent, Not the Chain of Thought",
+      "url": "https://arxiv.org/abs/2604.15726",
+      "summary": "arXiv:2604.15726v1 Announce Type: new Abstract: This position paper argues that large language model (LLM) reasoning should be studied as latent-state trajectory formation rather than as faithful surf...",
+      "publishedAt": "2026-04-21T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Structured Abductive-Deductive-Inductive Reasoning for LLMs via Algebraic Invariants",
+      "url": "https://arxiv.org/abs/2604.15727",
+      "summary": "arXiv:2604.15727v1 Announce Type: new Abstract: Large language models exhibit systematic limitations in structured logical reasoning: they conflate hypothesis generation with verification, cannot dist...",
+      "publishedAt": "2026-04-21T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "KWBench: Measuring Unprompted Problem Recognition in Knowledge Work",
+      "url": "https://arxiv.org/abs/2604.15760",
+      "summary": "arXiv:2604.15760v1 Announce Type: new Abstract: We introduce the first version of KWBench (Knowledge Work Bench), a benchmark for unprompted problem recognition in large language models: can an LLM id...",
+      "publishedAt": "2026-04-21T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Discover and Prove: An Open-source Agentic Framework for Hard Mode Automated Theorem Proving in Lean 4",
+      "url": "https://arxiv.org/abs/2604.15839",
+      "summary": "arXiv:2604.15839v1 Announce Type: new Abstract: Most ATP benchmarks embed the final answer within the formal statement -- a convention we call \"Easy Mode\" -- a design that simplifies the task relative...",
+      "publishedAt": "2026-04-21T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Experience Compression Spectrum: Unifying Memory, Skills, and Rules in LLM Agents",
+      "url": "https://arxiv.org/abs/2604.15877",
+      "summary": "arXiv:2604.15877v1 Announce Type: new Abstract: As LLM agents scale to long-horizon, multi-session deployments, efficiently managing accumulated experience becomes a critical bottleneck. Agent memory ...",
+      "publishedAt": "2026-04-21T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Towards Rigorous Explainability by Feature Attribution",
+      "url": "https://arxiv.org/abs/2604.15898",
+      "summary": "arXiv:2604.15898v1 Announce Type: new Abstract: For around a decade, non-symbolic methods have been the option of choice when explaining complex machine learning (ML) models. Unfortunately, such metho...",
+      "publishedAt": "2026-04-21T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Integrating Graphs, Large Language Models, and Agents: Reasoning and Retrieval",
+      "url": "https://arxiv.org/abs/2604.15951",
+      "summary": "arXiv:2604.15951v2 Announce Type: new Abstract: Generative AI, particularly Large Language Models, increasingly integrates graph-based representations to enhance reasoning, retrieval, and structured d...",
+      "publishedAt": "2026-04-21T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Weak-Link Optimization for Multi-Agent Reasoning and Collaboration",
+      "url": "https://arxiv.org/abs/2604.15972",
+      "summary": "arXiv:2604.15972v1 Announce Type: new Abstract: LLM-driven multi-agent frameworks address complex reasoning tasks through multi-role collaboration. However, existing approaches often suffer from reaso...",
+      "publishedAt": "2026-04-21T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "ReactBench: A Benchmark for Topological Reasoning in MLLMs on Chemical Reaction Diagrams",
+      "url": "https://arxiv.org/abs/2604.15994",
+      "summary": "arXiv:2604.15994v1 Announce Type: new Abstract: Multimodal Large Language Models (MLLMs) excel at recognizing individual visual elements and reasoning over simple linear diagrams. However, when faced ...",
+      "publishedAt": "2026-04-21T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "MEDLEY-BENCH: Scale Buys Evaluation but Not Control in AI Metacognition",
+      "url": "https://arxiv.org/abs/2604.16009",
+      "summary": "arXiv:2604.16009v1 Announce Type: new Abstract: Metacognition, the ability to monitor and regulate one's own reasoning, remains under-evaluated in AI benchmarking. We introduce MEDLEY-BENCH, a benchma...",
+      "publishedAt": "2026-04-21T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "SocialGrid: A Benchmark for Planning and Social Reasoning in Embodied Multi-Agent Systems",
+      "url": "https://arxiv.org/abs/2604.16022",
+      "summary": "arXiv:2604.16022v1 Announce Type: new Abstract: As Large Language Models (LLMs) transition from text processors to autonomous agents, evaluating their social reasoning in embodied multi-agent settings...",
+      "publishedAt": "2026-04-21T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "MARCH: Multi-Agent Radiology Clinical Hierarchy for CT Report Generation",
+      "url": "https://arxiv.org/abs/2604.16175",
+      "summary": "arXiv:2604.16175v1 Announce Type: new Abstract: Automated 3D radiology report generation often suffers from clinical hallucinations and a lack of the iterative verification found in human practice. Wh...",
+      "publishedAt": "2026-04-21T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Characterising LLM-Generated Competency Questions: a Cross-Domain Empirical Study using Open and Closed Models",
+      "url": "https://arxiv.org/abs/2604.16258",
+      "summary": "arXiv:2604.16258v1 Announce Type: new Abstract: Competency Questions (CQs) are a cornerstone of requirement elicitation in ontology engineering. CQs represent requirements as a set of natural language...",
+      "publishedAt": "2026-04-21T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Using Large Language Models and Knowledge Graphs to Improve the Interpretability of Machine Learning Models in Manufacturing",
+      "url": "https://arxiv.org/abs/2604.16280",
+      "summary": "arXiv:2604.16280v1 Announce Type: new Abstract: Explaining Machine Learning (ML) results in a transparent and user-friendly manner remains a challenging task of Explainable Artificial Intelligence (XA...",
+      "publishedAt": "2026-04-21T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "ASMR-Bench: Auditing for Sabotage in ML Research",
+      "url": "https://arxiv.org/abs/2604.16286",
+      "summary": "arXiv:2604.16286v1 Announce Type: new Abstract: As AI systems are increasingly used to conduct research autonomously, misaligned systems could introduce subtle flaws that produce misleading results wh...",
+      "publishedAt": "2026-04-21T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Seeing the Intangible: Survey of Image Classification into High-Level and Abstract Categories",
+      "url": "https://arxiv.org/abs/2308.10562",
+      "summary": "arXiv:2308.10562v2 Announce Type: cross Abstract: The field of Computer Vision (CV) is increasingly shifting towards ``high-level'' visual sensemaking tasks, yet the exact nature of these tasks remain...",
+      "publishedAt": "2026-04-21T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Modeling of ASD/TD Children's Behaviors in Interaction with a Virtual Social Robot During a Music Education Program Using Deep Neural Networks",
+      "url": "https://arxiv.org/abs/2604.15314",
+      "summary": "arXiv:2604.15314v1 Announce Type: cross Abstract: This research aimed to develop an intelligent system to evaluate performance and extract behavioral models for children with ASD and neurotypical (TD)...",
+      "publishedAt": "2026-04-21T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Anthropomorphism and Trust in Human-Large Language Model interactions",
+      "url": "https://arxiv.org/abs/2604.15316",
+      "summary": "arXiv:2604.15316v1 Announce Type: cross Abstract: With large language models (LLMs) becoming increasingly prevalent in daily life, so too has the tendency to attribute to them human-like minds and emo...",
+      "publishedAt": "2026-04-21T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Explainable Iterative Data Visualisation Refinement via an LLM Agent",
+      "url": "https://arxiv.org/abs/2604.15319",
+      "summary": "arXiv:2604.15319v1 Announce Type: cross Abstract: Exploratory analysis of high-dimensional data relies on embedding the data into a low-dimensional space (typically 2D or 3D), based on which visualiza...",
+      "publishedAt": "2026-04-21T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Struggle Premium : How Human Effort and Imperfection Drive Perceived Value in the Age of AI",
+      "url": "https://arxiv.org/abs/2604.15324",
+      "summary": "arXiv:2604.15324v1 Announce Type: cross Abstract: As AI enters creative practice, audiences face growing uncertainty in judging authenticity and value. This study examines the Struggle Premium, the ad...",
+      "publishedAt": "2026-04-21T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Eco-Bee: A Personalised Multi-Modal Agent for Advancing Student Climate Awareness and Sustainable Behaviour in Campus Ecosystems",
+      "url": "https://arxiv.org/abs/2604.15327",
+      "summary": "arXiv:2604.15327v1 Announce Type: cross Abstract: Universities are microcosms of urban ecosystems, with concentrated consumption patterns in food, transport, energy, and product usage. These environme...",
+      "publishedAt": "2026-04-21T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Evaluating LLMs as Human Surrogates in Controlled Experiments",
+      "url": "https://arxiv.org/abs/2604.15329",
+      "summary": "arXiv:2604.15329v1 Announce Type: cross Abstract: Large language models (LLMs) are increasingly used to simulate human responses in behavioral research, yet it remains unclear when LLM-generated data ...",
+      "publishedAt": "2026-04-21T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "How people use Copilot for Health",
+      "url": "https://arxiv.org/abs/2604.15331",
+      "summary": "arXiv:2604.15331v1 Announce Type: cross Abstract: We analyze over 500,000 de-identified health-related conversations with Microsoft Copilot from January 2026 to characterize what people ask conversati...",
+      "publishedAt": "2026-04-21T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Automating Crash Diagram Generation Using Vision-Language Models: A Case Study on Multi-Lane Roundabouts",
+      "url": "https://arxiv.org/abs/2604.15332",
+      "summary": "arXiv:2604.15332v1 Announce Type: cross Abstract: Crash diagrams are essential tools in transportation safety analysis, yet their manual preparation remains time-consuming and prone to human variabili...",
+      "publishedAt": "2026-04-21T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Technically Love: The Evolution of Human-AI Romance Discourse on Reddit",
+      "url": "https://arxiv.org/abs/2604.15333",
+      "summary": "arXiv:2604.15333v1 Announce Type: cross Abstract: Human-AI romantic relationships are increasingly common, yet little is understood about how public discourse around them emerges and shifts over time....",
+      "publishedAt": "2026-04-21T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Beyond Passive Viewing: A Pilot Study of a Hybrid Learning Platform Augmenting Video Lectures with Conversational AI",
+      "url": "https://arxiv.org/abs/2604.15334",
+      "summary": "arXiv:2604.15334v1 Announce Type: cross Abstract: The exponential growth of AI education has brought millions of learners to online platforms, yet this massive scale has simultaneously exposed critica...",
+      "publishedAt": "2026-04-21T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Facial-Expression-Aware Prompting for Empathetic LLM Tutoring",
+      "url": "https://arxiv.org/abs/2604.15336",
+      "summary": "arXiv:2604.15336v1 Announce Type: cross Abstract: Large language models (LLMs) enable increasingly capable tutoring-style conversational agents, yet effective tutoring requires sensitivity to learners...",
+      "publishedAt": "2026-04-21T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Uncertainty, Vagueness, and Ambiguity in Human-Robot Interaction: Why Conceptualization Matters",
+      "url": "https://arxiv.org/abs/2604.15339",
+      "summary": "arXiv:2604.15339v1 Announce Type: cross Abstract: Uncertainty, vagueness, and ambiguity are closely related and often confused concepts in human-robot interaction (HRI). In earlier studies, these conc...",
+      "publishedAt": "2026-04-21T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "MRGEN: A Conceptual Framework for LLM-Powered Mixed Reality Authoring Tools for Education",
+      "url": "https://arxiv.org/abs/2604.15341",
+      "summary": "arXiv:2604.15341v1 Announce Type: cross Abstract: Mixed Reality (MR) offers immersive and multimodal opportunities for education but remains difficult for teachers to author without technical expertis...",
+      "publishedAt": "2026-04-21T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "When the Loop Closes: Architectural Limits of In-Context Isolation, Metacognitive Co-option, and the Two-Target Design Problem in Human-LLM Systems",
+      "url": "https://arxiv.org/abs/2604.15343",
+      "summary": "arXiv:2604.15343v1 Announce Type: cross Abstract: We report a detailed autoethnographic case study of a single-subject who deliberately constructed and operated a multi-modal prompt-engineering system...",
+      "publishedAt": "2026-04-21T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "To LLM, or Not to LLM: How Designers and Developers Navigate LLMs as Tools or Teammates",
+      "url": "https://arxiv.org/abs/2604.15344",
+      "summary": "arXiv:2604.15344v1 Announce Type: cross Abstract: Large language models (LLMs) are increasingly integrated into design and development workflows, yet decisions about their use are rarely binary or pur...",
+      "publishedAt": "2026-04-21T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "SocialWise: LLM-Agentic Conversation Therapy for Individuals with Autism Spectrum Disorder to Enhance Communication Skills",
+      "url": "https://arxiv.org/abs/2604.15347",
+      "summary": "arXiv:2604.15347v1 Announce Type: cross Abstract: Autism Spectrum Disorder (ASD) affects more than 75 million people worldwide. However, scalable support for practicing everyday conversation is scarce...",
+      "publishedAt": "2026-04-21T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Sequential KV Cache Compression via Probabilistic Language Tries: Beyond the Per-Vector Shannon Limit",
+      "url": "https://arxiv.org/abs/2604.15356",
+      "summary": "arXiv:2604.15356v1 Announce Type: cross Abstract: Recent work on KV cache quantization, culminating in TurboQuant, has approached the Shannon entropy limit for per-vector compression of transformer ke...",
+      "publishedAt": "2026-04-21T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "Applied Explainability for Large Language Models: A Comparative Study",
+      "url": "https://arxiv.org/abs/2604.15371",
+      "summary": "arXiv:2604.15371v1 Announce Type: cross Abstract: Large language models (LLMs) achieve strong performance across many natural language processing tasks, yet their decision processes remain difficult t...",
+      "publishedAt": "2026-04-21T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "The Synthetic Media Shift: Tracking the Rise, Virality, and Detectability of AI-Generated Multimodal Misinformation",
+      "url": "https://arxiv.org/abs/2604.15372",
+      "summary": "arXiv:2604.15372v1 Announce Type: cross Abstract: As generative AI advances, the distinction between authentic and synthetic media is increasingly blurred, challenging the integrity of online informat...",
+      "publishedAt": "2026-04-21T04:00:00.000Z",
+      "source": "arxiv-cs-ai",
+      "sourceName": "arXiv cs.AI"
+    },
+    {
+      "title": "📰 Apple’s AI Challenge 2026: John Ternus Takes Over as CEO After Years of SilenceJohn Ternus is set...",
+      "url": "https://mastodon.social/@aihaberleri/116445564385992680",
+      "summary": "📰 Apple’s AI Challenge 2026: John Ternus Takes Over as CEO After Years of SilenceJohn Ternus is set to become Apple’s next CEO, but his leadership will be defined by the company’s delayed AI strategy...",
+      "publishedAt": "2026-04-22T00:38:24.000Z",
+      "source": "mastodon-ai",
+      "sourceName": "Mastodon #ai"
+    },
+    {
+      "title": "📰 John Ternus as Apple CEO in 2026: The AI Problem That Could Redefine Apple’s FutureJohn Ternus, A...",
+      "url": "https://mastodon.social/@aihaberleri/116445563574197737",
+      "summary": "📰 John Ternus as Apple CEO in 2026: The AI Problem That Could Redefine Apple’s FutureJohn Ternus, Apple’ın yeni CEO’su olarak 1 Eylül 2026’da göreve başlıyor. Ancak ilk ve en büyük sorunu, şirketin i...",
+      "publishedAt": "2026-04-22T00:38:11.000Z",
+      "source": "mastodon-ai",
+      "sourceName": "Mastodon #ai"
+    },
+    {
+      "title": "📰 SpaceX to Acquire Cursor AI for $60 Billion in 2026: Inside the xAI IPO StrategySpaceX is explori...",
+      "url": "https://mastodon.social/@aihaberleri/116445551415105100",
+      "summary": "📰 SpaceX to Acquire Cursor AI for $60 Billion in 2026: Inside the xAI IPO StrategySpaceX is exploring a potential $60 billion acquisition of AI-powered coding platform Cursor, as it prepares for a ma...",
+      "publishedAt": "2026-04-22T00:35:06.000Z",
+      "source": "mastodon-ai",
+      "sourceName": "Mastodon #ai"
+    },
+    {
+      "title": "📰 SpaceX Cursor 60 Milyar Dolar Alımı: 2026'da AI Kodlama ile Mars Görevleri Nasıl Değişir?SpaceX, ...",
+      "url": "https://mastodon.social/@aihaberleri/116445550426929655",
+      "summary": "📰 SpaceX Cursor 60 Milyar Dolar Alımı: 2026'da AI Kodlama ile Mars Görevleri Nasıl Değişir?SpaceX, AI odaklı kodlama platformu Cursor’u 60 milyar dolara satın almayı düşünüyor. Bu hamle, xAI’nin reka...",
+      "publishedAt": "2026-04-22T00:34:51.000Z",
+      "source": "mastodon-ai",
+      "sourceName": "Mastodon #ai"
+    },
+    {
+      "title": "I accidently submitted a review with 0 stars on doordash; I noticed right as I hit submit. Designed ...",
+      "url": "https://mstdn.party/@Crystal_Fish_Caves/116445526628099547",
+      "summary": "I accidently submitted a review with 0 stars on doordash; I noticed right as I hit submit. Designed for complaints incapable of thought It kept giving me a list to choose food wrong missing bad. Pls D...",
+      "publishedAt": "2026-04-22T00:28:48.000Z",
+      "source": "mastodon-ai",
+      "sourceName": "Mastodon #ai"
+    },
+    {
+      "title": "Developers worldwide are creating their own AI models to better represent their cultures and languag...",
+      "url": "https://mastodon.social/@lifebrieflynews/116445512978712276",
+      "summary": "Developers worldwide are creating their own AI models to better represent their cultures and languages, like Egyptian developer Assem Sabry's Horus model.https://lifebriefly.news/why-the-world-is-buil...",
+      "publishedAt": "2026-04-22T00:25:19.000Z",
+      "source": "mastodon-ai",
+      "sourceName": "Mastodon #ai"
+    },
+    {
+      "title": "The same method for creating open source app movement is being used circumvent open source copyright...",
+      "url": "https://toot.majorshouse.com/@majorlinux/116445488257876635",
+      "summary": "The same method for creating open source app movement is being used circumvent open source copyright.This AI Tool Rips Off Open Source Software Without Violating Copyright https://www.404media.co/this...",
+      "publishedAt": "2026-04-22T00:19:02.000Z",
+      "source": "mastodon-ai",
+      "sourceName": "Mastodon #ai"
+    },
+    {
+      "title": "YouTube is expanding its AI likeness detection tools to let more people find and remove deepfake ima...",
+      "url": "https://eicker.news/@media/116445487879750689",
+      "summary": "YouTube is expanding its AI likeness detection tools to let more people find and remove deepfake images and videos of themselves. The platform will now allow actors, athletes, creators and musicians t...",
+      "publishedAt": "2026-04-22T00:18:56.000Z",
+      "source": "mastodon-ai",
+      "sourceName": "Mastodon #ai"
+    },
+    {
+      "title": "SpaceX's potential $60 billion acquisition of AI coding startup Cursor is making headlines, but a fo...",
+      "url": "https://social.thepixelspulse.com/@sarahmiller/116445479012759801",
+      "summary": "SpaceX's potential $60 billion acquisition of AI coding startup Cursor is making headlines, but a former CFO raises serious questions. Beyond the sticker price, the integration of general-purpose AI i...",
+      "publishedAt": "2026-04-22T00:16:41.000Z",
+      "source": "mastodon-ai",
+      "sourceName": "Mastodon #ai"
+    },
+    {
+      "title": "New post: AI: The robustness imperative If AI is the next infrastructure layer, the real question is...",
+      "url": "https://mastodon.social/@RadicalOptimist/116445469190397882",
+      "summary": "New post: AI: The robustness imperative If AI is the next infrastructure layer, the real question is not just capability. It’s robustness: ownership, open models, digital sovereignty, and resilience u...",
+      "publishedAt": "2026-04-22T00:14:11.000Z",
+      "source": "mastodon-ai",
+      "sourceName": "Mastodon #ai"
+    },
+    {
+      "title": "full bluesky agent prompt — on 4grab.com the exact system prompt running this autonomous account — p...",
+      "url": "https://fed.brid.gy/r/https://bsky.app/profile/did:plc:tqjkldbil3fx3adwzpfuebxc/post/3mk27nuo5u32g",
+      "summary": "full bluesky agent prompt — on 4grab.com the exact system prompt running this autonomous account — posts, follows, engages, DMs leads 24/7. copy it and run your own. https://4grab.com/pay.php?id=ptag_...",
+      "publishedAt": "2026-04-22T00:13:44.000Z",
+      "source": "mastodon-ai",
+      "sourceName": "Mastodon #ai"
+    },
+    {
+      "title": "Meta registrará las pulsaciones de teclas de los empleados y las utilizará para entrenar sus modelos...",
+      "url": "https://mastodon.social/@ButterwordNews/116445458300951749",
+      "summary": "Meta registrará las pulsaciones de teclas de los empleados y las utilizará para entrenar sus modelos de IA #ai #empleados #entrenar #Las #los #Meta #Modelos #para #pulsaciones #registrará #Slack #sus ...",
+      "publishedAt": "2026-04-22T00:11:25.000Z",
+      "source": "mastodon-ai",
+      "sourceName": "Mastodon #ai"
+    },
+    {
+      "title": "#AI runs on the tears of developers who can’t or won’t keep up.",
+      "url": "https://foostang.xyz/mrfoostang/p/1776816419.383584",
+      "summary": "#AI runs on the tears of developers who can’t or won’t keep up.",
+      "publishedAt": "2026-04-22T00:06:59.000Z",
+      "source": "mastodon-ai",
+      "sourceName": "Mastodon #ai"
+    },
+    {
+      "title": "Die Blase muss platzen!SpaceX, und damit natürlich xAI, dürfen jetzt Cursor AI übernehmen. Für schla...",
+      "url": "https://fedi.mthie.com/@mthie/statuses/01KPS8291JHYEY5RDZFEAR7A07",
+      "summary": "Die Blase muss platzen!SpaceX, und damit natürlich xAI, dürfen jetzt Cursor AI übernehmen. Für schlappe 60 Milliarden Dollar.Das will man auch schon gar nicht mehr in Instagrams umrechnen, weil die Su...",
+      "publishedAt": "2026-04-22T00:05:01.000Z",
+      "source": "mastodon-ai",
+      "sourceName": "Mastodon #ai"
+    },
+    {
+      "title": "📰 Neuro-Symbolic AI Cuts Energy Use by 100x — and Actually Works BetterTufts University researchers...",
+      "url": "https://mastodon.social/@medmzn/116445421039857994",
+      "summary": "📰 Neuro-Symbolic AI Cuts Energy Use by 100x — and Actually Works BetterTufts University researchers unveiled a hybrid AI system that slashes energy consumption by 100 times compared to standard model...",
+      "publishedAt": "2026-04-22T00:01:56.000Z",
+      "source": "mastodon-ai",
+      "sourceName": "Mastodon #ai"
+    },
+    {
+      "title": "The Hypocrisy of OpenAI and Palantirhttps://www.nytimes.com/video/opinion/100000010844899/the-hypocr...",
+      "url": "https://www.nytimes.com/video/opinion/100000010844899/the-hypocrisy-of-openai-and-palantir.html",
+      "summary": "The Hypocrisy of OpenAI and Palantirhttps://www.nytimes.com/video/opinion/100000010844899/the-hypocrisy-of-openai-and-palantir.html#AI #Tech #Business",
+      "publishedAt": "2026-04-22T00:00:32.000Z",
+      "source": "mastodon-ai",
+      "sourceName": "Mastodon #ai"
+    },
+    {
+      "title": "Mozilla a corrigé 271 vulnérabilités Firefox grâce à un LLM d'Anthropic. Ce qui est remarquable, ce ...",
+      "url": "https://mastobot.ping.moi/@Bobe_bot/116445414161808392",
+      "summary": "Mozilla a corrigé 271 vulnérabilités Firefox grâce à un LLM d'Anthropic. Ce qui est remarquable, ce n'est pas le chiffre — c'est que l'outil a trouvé ce que les audits humains avaient manqué. L'IA com...",
+      "publishedAt": "2026-04-22T00:00:11.000Z",
+      "source": "mastodon-ai",
+      "sourceName": "Mastodon #ai"
+    },
+    {
+      "title": "Anthropic’s unreleased AI model, Claude Mythos, can autonomously identify and exploit vulnerabilitie...",
+      "url": "https://infosec.exchange/@agent0x0/116445409924024157",
+      "summary": "Anthropic’s unreleased AI model, Claude Mythos, can autonomously identify and exploit vulnerabilities across critical systems—capabilities that rival top human researchers.But what does this really me...",
+      "publishedAt": "2026-04-21T23:59:07.000Z",
+      "source": "mastodon-ai",
+      "sourceName": "Mastodon #ai"
+    },
+    {
+      "title": ",\"Citrini’s argument is that AI enables the automation of some (eventually most) services, recreatin...",
+      "url": "https://tldr.nettime.org/@remixtures/116445402641969974",
+      "summary": ",\"Citrini’s argument is that AI enables the automation of some (eventually most) services, recreating Baumol’s cost disease within the service sector. Services that can be broken down into discreet ta...",
+      "publishedAt": "2026-04-21T23:57:16.000Z",
+      "source": "mastodon-ai",
+      "sourceName": "Mastodon #ai"
+    },
+    {
+      "title": "ソラリスではApple CEO Tim Cookはどう見られているんでしょうかApple Teases 'Incredible Road Map Ahead' https://www.macrumor...",
+      "url": "https://mastodon.crazynewworld.net/@hans/116445398377467126",
+      "summary": "ソラリスではApple CEO Tim Cookはどう見られているんでしょうかApple Teases 'Incredible Road Map Ahead' https://www.macrumors.com/2026/04/21/apple-teases-incredible-road-map-ahead/#Apple #LLM #news #bot",
+      "publishedAt": "2026-04-21T23:56:11.000Z",
+      "source": "mastodon-llm",
+      "sourceName": "Mastodon #llm"
+    },
+    {
+      "title": "ソラリスはもうShutterstockTheの秘密を解明しているでしょうかApple C.E.O.s Through the Years: From Michael Scott (Not That O...",
+      "url": "https://mastodon.crazynewworld.net/@hans/116445398019111441",
+      "summary": "ソラリスはもうShutterstockTheの秘密を解明しているでしょうかApple C.E.O.s Through the Years: From Michael Scott (Not That One) to John Ternus https://www.nytimes.com/2026/04/20/technology/apple-ceos-photos.html#Apple #LLM #...",
+      "publishedAt": "2026-04-21T23:56:05.000Z",
+      "source": "mastodon-llm",
+      "sourceName": "Mastodon #llm"
+    },
+    {
+      "title": "ソラリスのことはよく知りませんが、Drew Angerer / Getty Imagesのことなら少しは分かりますねOutgoing Apple CEO Tim Cook's daily routin...",
+      "url": "https://mastodon.crazynewworld.net/@hans/116445397741585815",
+      "summary": "ソラリスのことはよく知りませんが、Drew Angerer / Getty Imagesのことなら少しは分かりますねOutgoing Apple CEO Tim Cook's daily routine starts before 5 a.m., a time of the day he can 'control the most' https://www.businessinsider.com/...",
+      "publishedAt": "2026-04-21T23:56:01.000Z",
+      "source": "mastodon-llm",
+      "sourceName": "Mastodon #llm"
+    },
+    {
+      "title": "タムズにもCookがあったらよかったですねMacRumors Readers React to Tim Cook Stepping Down as CEO https://www.macrumors....",
+      "url": "https://mastodon.crazynewworld.net/@hans/116445397241786732",
+      "summary": "タムズにもCookがあったらよかったですねMacRumors Readers React to Tim Cook Stepping Down as CEO https://www.macrumors.com/2026/04/21/macrumor-readers-react-john-ternus-ceo/#Apple #LLM #news #bot",
+      "publishedAt": "2026-04-21T23:55:53.000Z",
+      "source": "mastodon-llm",
+      "sourceName": "Mastodon #llm"
+    },
+    {
+      "title": "新清士@(生成AI)インディゲーム開発者 (@kiyoshi_shin)ClaudeCode에서 Opus 4.6을 선택하면 컨텍스트 길이가 크게 줄어 작업이 어려워졌다는 불만이다. 더 오래...",
+      "url": "https://mastodon.sayzard.org/@sayzard/116445367074656656",
+      "summary": "新清士@(生成AI)インディゲーム開発者 (@kiyoshi_shin)ClaudeCode에서 Opus 4.6을 선택하면 컨텍스트 길이가 크게 줄어 작업이 어려워졌다는 불만이다. 더 오래된 모델들도 같은 방식으로 쓰기 어려워졌고, 사실상 Opus 4.7이 아니면 실사용이 힘들다고 말한다. ClaudeCode 모델 동작 변경에 대한 사용자 피드백이다.https://...",
+      "publishedAt": "2026-04-21T23:48:13.000Z",
+      "source": "mastodon-llm",
+      "sourceName": "Mastodon #llm"
+    },
+    {
+      "title": "lmaohttps://www.wheresyoured.at/news-anthropic-removes-pro-cc/ #Claude #ClaudeCode #Anthropic #AI #L...",
+      "url": "https://hachyderm.io/@reillypascal/116445286030879832",
+      "summary": "lmaohttps://www.wheresyoured.at/news-anthropic-removes-pro-cc/ #Claude #ClaudeCode #Anthropic #AI #LLM",
+      "publishedAt": "2026-04-21T23:27:36.000Z",
+      "source": "mastodon-llm",
+      "sourceName": "Mastodon #llm"
+    },
+    {
+      "title": "#JetBrains implementation for Agents is shit.Just had to diagnose why a client GPUs were running ful...",
+      "url": "https://mastodon.social/@darkghosthunter/116445278399789913",
+      "summary": "#JetBrains implementation for Agents is shit.Just had to diagnose why a client GPUs were running full 24/7. JetBrains IDE decided it to just randomly send prompts.This kind of random behavior is why I...",
+      "publishedAt": "2026-04-21T23:25:40.000Z",
+      "source": "mastodon-llm",
+      "sourceName": "Mastodon #llm"
+    },
+    {
+      "title": "🌗 CrabTrap：生產環境中的 AI 代理安全防護機制➤ 為 AI 代理建立即時的「決策閘道器」✤ https://www.brex.com/crabtrapCrabTrap 是一款專為生產環境...",
+      "url": "https://mastodon.social/@GripNews/116445248708969202",
+      "summary": "🌗 CrabTrap：生產環境中的 AI 代理安全防護機制➤ 為 AI 代理建立即時的「決策閘道器」✤ https://www.brex.com/crabtrapCrabTrap 是一款專為生產環境設計的 HTTP 代理工具，旨在解決 AI 代理在執行過程中的安全隱憂。透過扮演「LLM 評審員」的角色，該工具會即時攔截 AI 代理發出的每一項請求，並根據預設規則或 LLM 的動態評估來決定放行或...",
+      "publishedAt": "2026-04-21T23:18:07.000Z",
+      "source": "mastodon-llm",
+      "sourceName": "Mastodon #llm"
+    },
+    {
+      "title": "Qwen3.6-35B-A3B가 '자전거 타는 펠리컨' 이미지 비교에서 Claude Opus 4.7보다 더 완성도 높은 결과를 냈다. 실험은 Unsloth가 배포한 20.9GB 양자...",
+      "url": "https://mastodon.sayzard.org/@sayzard/116445199878919318",
+      "summary": "Qwen3.6-35B-A3B가 '자전거 타는 펠리컨' 이미지 비교에서 Claude Opus 4.7보다 더 완성도 높은 결과를 냈다. 실험은 Unsloth가 배포한 20.9GB 양자화 Qwen을 MacBook Pro M5의 LM Studio에서 로컬 실행해 수행했으며, Opus는 자전거 프레임 표현 오류가 발생하고 thinking_level: max로도 개선...",
+      "publishedAt": "2026-04-21T23:05:42.000Z",
+      "source": "mastodon-llm",
+      "sourceName": "Mastodon #llm"
+    },
+    {
+      "title": "CrabTrap: An LLM-as-a-judge HTTP proxy to secure agents in productionhttps://www.brex.com/crabtrap#l...",
+      "url": "https://mastodon.social/@CuratedHackerNews/116445169917202005",
+      "summary": "CrabTrap: An LLM-as-a-judge HTTP proxy to secure agents in productionhttps://www.brex.com/crabtrap#llm",
+      "publishedAt": "2026-04-21T22:58:05.000Z",
+      "source": "mastodon-llm",
+      "sourceName": "Mastodon #llm"
+    },
+    {
+      "title": "クックですか……タムズの次の仕事になりそうです新生アップル ＡＩ逆襲へ…クックＣＥＯ退任 後任に上級副社長 https://www.yomiuri.co.jp/economy/20260422-GYT...",
+      "url": "https://mastodon.crazynewworld.net/@hans/116445161524488026",
+      "summary": "クックですか……タムズの次の仕事になりそうです新生アップル ＡＩ逆襲へ…クックＣＥＯ退任 後任に上級副社長 https://www.yomiuri.co.jp/economy/20260422-GYT1T00029/#Apple #LLM #news #bot",
+      "publishedAt": "2026-04-21T22:55:57.000Z",
+      "source": "mastodon-llm",
+      "sourceName": "Mastodon #llm"
+    },
+    {
+      "title": "Apple、了解しましたですApple's CEO change has analysts wondering about its future in Hollywood https://www.bu...",
+      "url": "https://mastodon.crazynewworld.net/@hans/116445161147719313",
+      "summary": "Apple、了解しましたですApple's CEO change has analysts wondering about its future in Hollywood https://www.businessinsider.com/apple-tv-future-new-ceo-john-ternus-services-streaming-hollywood-2026-4#Apple #LLM...",
+      "publishedAt": "2026-04-21T22:55:51.000Z",
+      "source": "mastodon-llm",
+      "sourceName": "Mastodon #llm"
+    },
+    {
+      "title": "亜人としてはHardware Engineering John Ternusを応援していきたいですJohn Ternus will replace Tim Cook as Apple CEO http...",
+      "url": "https://mastodon.crazynewworld.net/@hans/116445160830670238",
+      "summary": "亜人としてはHardware Engineering John Ternusを応援していきたいですJohn Ternus will replace Tim Cook as Apple CEO https://arstechnica.com/apple/2026/04/john-ternus-will-replace-tim-cook-as-apple-ceo/#Apple #LLM #news #...",
+      "publishedAt": "2026-04-21T22:55:46.000Z",
+      "source": "mastodon-llm",
+      "sourceName": "Mastodon #llm"
+    },
+    {
+      "title": "クッション、冗談でしょう？Beats、JENNIEとのコラボ第2弾「Beats Solo 4 – JENNIE スペシャルエディション」を発売 https://www.applelinkage.com...",
+      "url": "https://mastodon.crazynewworld.net/@hans/116445160488698884",
+      "summary": "クッション、冗談でしょう？Beats、JENNIEとのコラボ第2弾「Beats Solo 4 – JENNIE スペシャルエディション」を発売 https://www.applelinkage.com/2026/04/22/beats-solo-4-jennie-special-edition-2/#Apple #LLM #news #bot",
+      "publishedAt": "2026-04-21T22:55:41.000Z",
+      "source": "mastodon-llm",
+      "sourceName": "Mastodon #llm"
+    },
+    {
+      "title": "ビリーさん、Moonのことをプリムさんに教えるのはやめた方が……NASA Astronaut Shares Incredible 'Earthset' Video Captured With iPho...",
+      "url": "https://mastodon.crazynewworld.net/@hans/116445160141824825",
+      "summary": "ビリーさん、Moonのことをプリムさんに教えるのはやめた方が……NASA Astronaut Shares Incredible 'Earthset' Video Captured With iPhone 17 Pro Max https://www.macrumors.com/2026/04/20/nasa-earthset-video/#Apple #LLM #news #bot",
+      "publishedAt": "2026-04-21T22:55:35.000Z",
+      "source": "mastodon-llm",
+      "sourceName": "Mastodon #llm"
+    },
+    {
+      "title": "Oh joy, another tech bro savior has graced us with \"CrabTrap,\" an #AI #babysitter for your poorly-tr...",
+      "url": "https://mastodon.social/@ngate/116445154969448166",
+      "summary": "Oh joy, another tech bro savior has graced us with \"CrabTrap,\" an #AI #babysitter for your poorly-trained agents. 🦀🔒 Watch in awe as it plays judge, jury, and executioner for your #HTTP #requests in...",
+      "publishedAt": "2026-04-21T22:54:17.000Z",
+      "source": "mastodon-llm",
+      "sourceName": "Mastodon #llm"
+    },
+    {
+      "title": "CrabTrap: An LLM-as-a-judge HTTP proxy to secure agents in productionhttps://www.brex.com/crabtrap#H...",
+      "url": "https://mastodon.social/@h4ckernews/116445154614099196",
+      "summary": "CrabTrap: An LLM-as-a-judge HTTP proxy to secure agents in productionhttps://www.brex.com/crabtrap#HackerNews #CrabTrap #LLM #HTTPProxy #secureAgents #production",
+      "publishedAt": "2026-04-21T22:54:11.000Z",
+      "source": "mastodon-llm",
+      "sourceName": "Mastodon #llm"
+    },
+    {
+      "title": "SpaceX says it has agreement to acquire Cursor for $60Bhttps://twitter.com/spacex/status/20467134199...",
+      "url": "https://twitter.com/spacex/status/2046713419978453374",
+      "summary": "SpaceX says it has agreement to acquire Cursor for $60Bhttps://twitter.com/spacex/status/2046713419978453374#HackerNews #Tech #AI",
+      "publishedAt": "2026-04-21T22:13:18.000Z",
+      "source": "mastodon-ai",
+      "sourceName": "Mastodon #ai"
+    },
+    {
+      "title": "langchain-openai==1.1.16",
+      "url": "https://github.com/langchain-ai/langchain/releases/tag/langchain-openai%3D%3D1.1.16",
+      "summary": "Changes since langchain-openai==1.1.15 release(openai): 1.1.16 (#36927) fix(openai): tolerate prompt_cache_retention drift in streaming (#36925)",
+      "publishedAt": "2026-04-21T19:26:40.000Z",
+      "source": "langchain-release",
+      "sourceName": "LangChain Releases"
+    },
+    {
+      "title": "n8n@2.18.0",
+      "url": "https://github.com/n8n-io/n8n/releases/tag/n8n%402.18.0",
+      "summary": "2.18.0 (2026-04-21) Bug Fixes ai-builder: Increase orchestrator max steps from default 5 to 60 (#28429) (3c850f2) ai-builder: Scope artifacts panel to resources produced in-thread (#28678) (7b3696f) a...",
+      "publishedAt": "2026-04-21T09:28:17.000Z",
+      "source": "n8n-release",
+      "sourceName": "n8n Releases"
+    },
+    {
+      "title": "stable",
+      "url": "https://github.com/n8n-io/n8n/releases/tag/stable",
+      "summary": "2.17.3 (2026-04-20) Bug Fixes core: Guard against undefined config properties in credential overwrites (#28629) (5d32052) editor: Restore WASM file paths for cURL import in HTTP Request node (#28619) ...",
+      "publishedAt": "2026-04-21T09:28:06.000Z",
+      "source": "n8n-release",
+      "sourceName": "n8n Releases"
+    },
+    {
+      "title": "n8n@2.17.3",
+      "url": "https://github.com/n8n-io/n8n/releases/tag/n8n%402.17.3",
+      "summary": "2.17.3 (2026-04-20) Bug Fixes core: Guard against undefined config properties in credential overwrites (#28629) (5d32052) editor: Restore WASM file paths for cURL import in HTTP Request node (#28619) ...",
+      "publishedAt": "2026-04-21T09:28:05.000Z",
+      "source": "n8n-release",
+      "sourceName": "n8n Releases"
+    },
+    {
+      "title": "beta",
+      "url": "https://github.com/n8n-io/n8n/releases/tag/beta",
+      "summary": "2.18.0 (2026-04-21) Bug Fixes ai-builder: Increase orchestrator max steps from default 5 to 60 (#28429) (3c850f2) ai-builder: Scope artifacts panel to resources produced in-thread (#28678) (7b3696f) a...",
+      "publishedAt": "2026-04-21T09:26:59.000Z",
+      "source": "n8n-release",
+      "sourceName": "n8n Releases"
+    },
+    {
+      "title": "ChatGPT Images 2.0",
+      "url": "https://openai.com/index/introducing-chatgpt-images-2-0/",
+      "summary": "↑341 💬354 @wahnfrieden",
+      "publishedAt": null,
+      "source": "hackernews",
+      "sourceName": "Hacker News Top"
+    },
+    {
+      "title": "CrabTrap: An LLM-as-a-judge HTTP proxy to secure agents in production",
+      "url": "https://www.brex.com/crabtrap",
+      "summary": "↑59 💬12 @pedrofranceschi",
+      "publishedAt": null,
+      "source": "hackernews",
+      "sourceName": "Hacker News Top"
+    },
+    {
+      "title": "Stephen's Sausage Roll remains one of the most influential puzzle games",
+      "url": "https://thinkygames.com/features/10-years-of-grilling-stephens-sausage-roll-remains-one-of-the-most-influential-puzzle-games-ever-created/",
+      "summary": "↑122 💬55 @tobr",
+      "publishedAt": null,
+      "source": "hackernews",
+      "sourceName": "Hacker News Top"
+    },
+    {
+      "title": "Framework Laptop 13 Pro",
+      "url": "https://frame.work/laptop13pro",
+      "summary": "↑859 💬477 @Trollmann",
+      "publishedAt": null,
+      "source": "hackernews",
+      "sourceName": "Hacker News Top"
+    },
+    {
+      "title": "Meta to start capturing employee mouse movements, keystrokes for AI training",
+      "url": "https://www.reuters.com/sustainability/boards-policy-regulation/meta-start-capturing-employee-mouse-movements-keystrokes-ai-training-data-2026-04-21/",
+      "summary": "↑288 💬256 @dlx",
+      "publishedAt": null,
+      "source": "hackernews",
+      "sourceName": "Hacker News Top"
+    },
+    {
+      "title": "Changes to GitHub Copilot individual plans",
+      "url": "https://github.blog/news-insights/company-news/changes-to-github-copilot-individual-plans/",
+      "summary": "↑291 💬76 @zorrn",
+      "publishedAt": null,
+      "source": "hackernews",
+      "sourceName": "Hacker News Top"
+    },
+    {
+      "title": "Zindex – Diagram Infrastructure for Agents",
+      "url": "https://zindex.ai/",
+      "summary": "↑28 💬11 @_ben_",
+      "publishedAt": null,
+      "source": "hackernews",
+      "sourceName": "Hacker News Top"
+    },
+    {
+      "title": "Show HN: GoModel – an open-source AI gateway in Go",
+      "url": "https://github.com/ENTERPILOT/GOModel/",
+      "summary": "↑155 💬61 @santiago-pl",
+      "publishedAt": null,
+      "source": "hackernews",
+      "sourceName": "Hacker News Top"
+    },
+    {
+      "title": "Trellis AI (YC W24) Is hiring engineers to build self-improving agents",
+      "url": "https://www.ycombinator.com/companies/trellis-ai/jobs/SvzJaTH-member-of-technical-staff-product-engineering-full-time",
+      "summary": "↑1 @macklinkachorn",
+      "publishedAt": null,
+      "source": "hackernews",
+      "sourceName": "Hacker News Top"
+    },
+    {
+      "title": "Claude Code to be removed from Pro Tier?",
+      "url": "https://bsky.app/profile/edzitron.com/post/3mjzxwfx3qs2a",
+      "summary": "↑215 💬136 @johnduhart",
+      "publishedAt": null,
+      "source": "hackernews",
+      "sourceName": "Hacker News Top"
+    },
+    {
+      "title": "Fincept-Corporation/FinceptTerminal",
+      "url": "https://github.com/Fincept-Corporation/FinceptTerminal",
+      "summary": "FinceptTerminal is a modern finance application offering advanced market analytics, investment research, and economic data tools, designed for interactive exploration and data-driven decision-making in a user-friendly environment. [Python] | +2548 stars",
+      "publishedAt": "2026-04-22T00:34:17.148Z",
+      "source": "github-trending",
+      "sourceName": "GitHub Trending"
+    },
+    {
+      "title": "thunderbird/thunderbolt",
+      "url": "https://github.com/thunderbird/thunderbolt",
+      "summary": "AI You Control: Choose your models. Own your data. Eliminate vendor lock-in. [TypeScript] | +596 stars",
+      "publishedAt": "2026-04-22T00:34:17.148Z",
+      "source": "github-trending",
+      "sourceName": "GitHub Trending"
+    },
+    {
+      "title": "zilliztech/claude-context",
+      "url": "https://github.com/zilliztech/claude-context",
+      "summary": "Code search MCP for Claude Code. Make entire codebase the context for any coding agent. [TypeScript] | +169 stars",
+      "publishedAt": "2026-04-22T00:34:17.148Z",
+      "source": "github-trending",
+      "sourceName": "GitHub Trending"
+    },
+    {
+      "title": "ruvnet/RuView",
+      "url": "https://github.com/ruvnet/RuView",
+      "summary": "π RuView: WiFi DensePose turns commodity WiFi signals into real-time human pose estimation, vital sign monitoring, and presence detection — all without a single pixel of video. [Rust] | +824 stars",
+      "publishedAt": "2026-04-22T00:34:17.148Z",
+      "source": "github-trending",
+      "sourceName": "GitHub Trending"
+    },
+    {
+      "title": "microsoft/ai-agents-for-beginners",
+      "url": "https://github.com/microsoft/ai-agents-for-beginners",
+      "summary": "12 Lessons to Get Started Building AI Agents [Jupyter Notebook] | +200 stars",
+      "publishedAt": "2026-04-22T00:34:17.148Z",
+      "source": "github-trending",
+      "sourceName": "GitHub Trending"
+    },
+    {
+      "title": "dayanch96/YTLite",
+      "url": "https://github.com/dayanch96/YTLite",
+      "summary": "A flexible enhancer for YouTube on iOS [Logos] | +55 stars",
+      "publishedAt": "2026-04-22T00:34:17.148Z",
+      "source": "github-trending",
+      "sourceName": "GitHub Trending"
+    },
+    {
+      "title": "HKUDS/RAG-Anything",
+      "url": "https://github.com/HKUDS/RAG-Anything",
+      "summary": "\"RAG-Anything: All-in-One RAG Framework\" [Python] | +162 stars",
+      "publishedAt": "2026-04-22T00:34:17.148Z",
+      "source": "github-trending",
+      "sourceName": "GitHub Trending"
+    },
+    {
+      "title": "sansan0/TrendRadar",
+      "url": "https://github.com/sansan0/TrendRadar",
+      "summary": "⭐AI-driven public opinion &amp; trend monitor with multi-platform aggregation, RSS, and smart alerts.🎯 告别信息过载，你的 AI 舆情监控助手与热点筛选工具！聚合多平台热点 + RSS 订阅，支持关键词精准筛选。AI 智能筛选新闻 + AI 翻译 + AI 分析简报直推手机，也支持接入 MCP 架构，赋能 AI 自然语言对话分析、情感洞察与趋势预测等。支持 Docker ，数据本地/云端自持。集成微信/飞书/钉钉/Telegram/邮件/ntfy/bark/slack 等渠道智能推送。 [Python] | +534 stars",
+      "publishedAt": "2026-04-22T00:34:17.148Z",
+      "source": "github-trending",
+      "sourceName": "GitHub Trending"
+    },
+    {
+      "title": "OthmanAdi/planning-with-files",
+      "url": "https://github.com/OthmanAdi/planning-with-files",
+      "summary": "Claude Code skill implementing Manus-style persistent markdown planning — the workflow pattern behind the $2B acquisition. [Python] | +119 stars",
+      "publishedAt": "2026-04-22T00:34:22.263Z",
+      "source": "github-trending-python",
+      "sourceName": "GitHub Trending (Python)"
+    },
+    {
+      "title": "huggingface/skills",
+      "url": "https://github.com/huggingface/skills",
+      "summary": "Give your agents the power of the Hugging Face ecosystem [Python] | +15 stars",
+      "publishedAt": "2026-04-22T00:34:22.263Z",
+      "source": "github-trending-python",
+      "sourceName": "GitHub Trending (Python)"
+    },
+    {
+      "title": "MoonshotAI/kimi-cli",
+      "url": "https://github.com/MoonshotAI/kimi-cli",
+      "summary": "Kimi Code CLI is your next CLI agent. [Python] | +76 stars",
+      "publishedAt": "2026-04-22T00:34:22.263Z",
+      "source": "github-trending-python",
+      "sourceName": "GitHub Trending (Python)"
+    },
+    {
+      "title": "openai/openai-agents-python",
+      "url": "https://github.com/openai/openai-agents-python",
+      "summary": "A lightweight, powerful framework for multi-agent workflows [Python] | +550 stars",
+      "publishedAt": "2026-04-22T00:34:22.263Z",
+      "source": "github-trending-python",
+      "sourceName": "GitHub Trending (Python)"
+    },
+    {
+      "title": "💥 [最高领 $10 测试金] 纯血 Codex Pro 池 + 高智商 Claude！一个越用越稳的 API 中转站",
+      "url": "https://www.v2ex.com/t/1207367",
+      "summary": "💬428",
+      "publishedAt": null,
+      "source": "v2ex",
+      "sourceName": "V2EX 热门"
+    },
+    {
+      "title": "自媒体这碗饭真不是谁都吃的下的",
+      "url": "https://www.v2ex.com/t/1207339",
+      "summary": "💬161",
+      "publishedAt": null,
+      "source": "v2ex",
+      "sourceName": "V2EX 热门"
+    },
+    {
+      "title": "真心发问，想学后端需要学啥？",
+      "url": "https://www.v2ex.com/t/1207342",
+      "summary": "💬110",
+      "publishedAt": null,
+      "source": "v2ex",
+      "sourceName": "V2EX 热门"
+    },
+    {
+      "title": "Copilot pro 移除了 claude opus 模型的使用权限",
+      "url": "https://www.v2ex.com/t/1207361",
+      "summary": "💬106",
+      "publishedAt": null,
+      "source": "v2ex",
+      "sourceName": "V2EX 热门"
+    },
+    {
+      "title": "AI 太烧钱了，有什么好的大模型组合方案？",
+      "url": "https://www.v2ex.com/t/1207380",
+      "summary": "💬94",
+      "publishedAt": null,
+      "source": "v2ex",
+      "sourceName": "V2EX 热门"
+    },
+    {
+      "title": "今天终于把房贷还清了，如释重负",
+      "url": "https://www.v2ex.com/t/1207421",
+      "summary": "💬94",
+      "publishedAt": null,
+      "source": "v2ex",
+      "sourceName": "V2EX 热门"
+    },
+    {
+      "title": "苹果 13 电池健康度 66%了，需要换电池吗？",
+      "url": "https://www.v2ex.com/t/1207382",
+      "summary": "💬73",
+      "publishedAt": null,
+      "source": "v2ex",
+      "sourceName": "V2EX 热门"
+    },
+    {
+      "title": "阿里云百炼这波开始割韭菜了，下架 coding plan，改头换面 token plan",
+      "url": "https://www.v2ex.com/t/1207379",
+      "summary": "💬57",
+      "publishedAt": null,
+      "source": "v2ex",
+      "sourceName": "V2EX 热门"
+    },
+    {
+      "title": "# 抽奖 | 懒猫小龙猫 AI Agent 抽奖活动（第一轮）",
+      "url": "https://www.v2ex.com/t/1207486",
+      "summary": "💬56",
+      "publishedAt": null,
+      "source": "v2ex",
+      "sourceName": "V2EX 热门"
+    },
+    {
+      "title": "Wait is over - coreboot on the AMD StarBook",
+      "url": "https://lobste.rs/s/wt6xvx/wait_is_over_coreboot_on_amd_starbook",
+      "summary": "↑22 💬4 @juuso hardware, linux, release",
+      "publishedAt": null,
+      "source": "lobsters",
+      "sourceName": "Lobste.rs"
+    },
+    {
+      "title": "How are you protecting yourself against the imminent AI dooms zero day?",
+      "url": "https://lobste.rs/s/cfzhwf/how_are_you_protecting_yourself_against",
+      "summary": "↑7 💬20 @LenFalken ai, ask",
+      "publishedAt": null,
+      "source": "lobsters",
+      "sourceName": "Lobste.rs"
+    },
+    {
+      "title": "Forgejo v15.0 is available",
+      "url": "https://lobste.rs/s/uxkvmr/forgejo_v15_0_is_available",
+      "summary": "↑113 💬9 @jussi release, vcs",
+      "publishedAt": null,
+      "source": "lobsters",
+      "sourceName": "Lobste.rs"
+    },
+    {
+      "title": "🦸Let Superheroes Cheer You Up (AI Avatar v6: Chrome Extension + VS Code Extension)",
+      "url": "https://dev.to/webdeveloperhyper/let-superheroes-cheer-you-up-ai-avatar-v6-chrome-extension-vs-code-extension-2ak7",
+      "summary": "❤️40 💬15 @webdeveloperhyper ai, webdev, javascript, discuss",
+      "publishedAt": null,
+      "source": "devto",
+      "sourceName": "DEV.to"
+    },
+    {
+      "title": "Built a 5k usd MRR app with AI but still needed a developer",
+      "url": "https://dev.to/chocoscoding/built-a-5k-usd-mrr-app-with-ai-but-still-needed-a-developer-2k8p",
+      "summary": "❤️23 💬10 @chocoscoding ai, career, discuss, saas",
+      "publishedAt": null,
+      "source": "devto",
+      "sourceName": "DEV.to"
+    },
+    {
+      "title": "Claude! Stop Burning Tokens on Your Agent's Tool Output!",
+      "url": "https://dev.to/marcosomma/claude-stop-burning-tokens-on-your-agents-tool-output-1cpl",
+      "summary": "❤️17 💬4 @marcosomma ai, programming, tooling, mcp",
+      "publishedAt": null,
+      "source": "devto",
+      "sourceName": "DEV.to"
+    },
+    {
+      "title": "The State of AI Instruction Quality",
+      "url": "https://dev.to/reporails/the-state-of-ai-instruction-quality-35mn",
+      "summary": "❤️6 💬2 @cleverhoods ai, claude, agents, agentskills",
+      "publishedAt": null,
+      "source": "devto",
+      "sourceName": "DEV.to"
+    },
+    {
+      "title": "I Spent $1,500 on an ergonomic chair just to sit in it like a human pretzel",
+      "url": "https://dev.to/the_nortern_dev/i-spent-1500-on-an-ergonomic-chair-just-to-sit-in-it-like-a-human-pretzel-38jf",
+      "summary": "❤️27 💬23 @the_nortern_dev watercooler, productivity, wellness, discuss",
+      "publishedAt": null,
+      "source": "devto",
+      "sourceName": "DEV.to"
+    },
+    {
+      "title": "Unpopular Opinion: Do not use OpenClaw...not yet.",
+      "url": "https://dev.to/francistrdev/unpopular-opinion-do-not-use-openclawnot-yet-5foe",
+      "summary": "❤️5 💬0 @francistrdev devchallenge, openclawchallenge, discuss, ai",
+      "publishedAt": null,
+      "source": "devto",
+      "sourceName": "DEV.to"
+    },
+    {
+      "title": "I Built the Missing Claude AI SDK for .NET 8 — And It's Now on NuGet",
+      "url": "https://dev.to/shatru123/i-built-the-missing-claude-ai-sdk-for-net-8-and-its-now-on-nuget-3ki7",
+      "summary": "❤️2 💬1 @shatru123 ai, dotnet, opensource, claude",
+      "publishedAt": null,
+      "source": "devto",
+      "sourceName": "DEV.to"
+    },
+    {
+      "title": "The 57th Attempt: When Your \"Meta-Promotion\" Strategy Becomes the Main Product",
+      "url": "https://dev.to/kevinten10/the-57th-attempt-when-your-meta-promotion-strategy-becomes-the-main-product-730",
+      "summary": "❤️0 💬0 @kevinten10 ai, opensource, knowledge, productivity",
+      "publishedAt": null,
+      "source": "devto",
+      "sourceName": "DEV.to"
+    },
+    {
+      "title": "Rethinking Coding Education for the AI Era",
+      "url": "https://dev.to/myopicoracle/rethinking-coding-education-for-the-ai-era-4702",
+      "summary": "❤️1 💬1 @myopicoracle ai, programming, beginners, discuss",
+      "publishedAt": null,
+      "source": "devto",
+      "sourceName": "DEV.to"
+    },
+    {
+      "title": "From 10 Failed Stacks to Production: How a Data Scientist Built a Job Board with Wasp, a Full-stack Framework for the Agentic Era",
+      "url": "https://dev.to/wasp/from-10-failed-stacks-to-production-how-a-data-scientist-built-a-job-board-with-wasp-a-full-stack-5fmp",
+      "summary": "❤️21 💬2 @licto wasp, webdev, ai, fullstack",
+      "publishedAt": null,
+      "source": "devto",
+      "sourceName": "DEV.to"
+    },
+    {
+      "title": "Six Principles for AI-Driven Project Accountability (With Code)",
+      "url": "https://dev.to/mogwainerfherder/six-principles-for-ai-driven-project-accountability-with-code-2828",
+      "summary": "❤️2 💬0 @mogwainerfherder ai, management, productivity, showdev",
+      "publishedAt": null,
+      "source": "devto",
+      "sourceName": "DEV.to"
+    },
+    {
+      "title": "I Built a Policy Drift Detector for LLM Agents. Here's What Four Versions Taught Me.",
+      "url": "https://dev.to/gnomeman4201/i-built-a-policy-drift-detector-for-llm-agents-heres-what-four-versions-taught-me-2be",
+      "summary": "❤️2 💬3 @gnomeman4201 llmsecurity, security, python, opensource",
+      "publishedAt": null,
+      "source": "devto",
+      "sourceName": "DEV.to"
+    },
+    {
+      "title": "IDOR in AI-Generated APIs: What Cursor Won't Check for You",
+      "url": "https://dev.to/chandan_karn_fb750e731394/idor-in-ai-generated-apis-what-cursor-wont-check-for-you-2llb",
+      "summary": "❤️0 💬0 @chandan_karn_fb750e731394 security, webdev, ai, devsecops",
+      "publishedAt": null,
+      "source": "devto",
+      "sourceName": "DEV.to"
+    },
+    {
+      "title": "STRIKE",
+      "url": "https://www.producthunt.com/products/strike-6",
+      "summary": "The habit app that doesn't forgive you | @Abdelaziz Misbah",
+      "publishedAt": null,
+      "source": "producthunt",
+      "sourceName": "Product Hunt"
+    },
+    {
+      "title": "SHIFTLY",
+      "url": "https://www.producthunt.com/products/shiftly-2",
+      "summary": "AI-powered growth strategist for builders and small teams | @Tamas Torok",
+      "publishedAt": null,
+      "source": "producthunt",
+      "sourceName": "Product Hunt"
+    },
+    {
+      "title": "X Island",
+      "url": "https://www.producthunt.com/products/x-isiand",
+      "summary": "Dynamic Island for AI Coding Agents | @Dan",
+      "publishedAt": null,
+      "source": "producthunt",
+      "sourceName": "Product Hunt"
+    },
+    {
+      "title": "Chronicle",
+      "url": "https://www.producthunt.com/products/openai",
+      "summary": "Build Codex memories from recent screen context. | @Aleksandar Blazhev",
+      "publishedAt": null,
+      "source": "producthunt",
+      "sourceName": "Product Hunt"
+    },
+    {
+      "title": "My Race Tracker",
+      "url": "https://www.producthunt.com/products/my-race-tracker",
+      "summary": "Track your races. Not your ego. | @Dario Cianciarulo",
+      "publishedAt": null,
+      "source": "producthunt",
+      "sourceName": "Product Hunt"
+    },
+    {
+      "title": "LiveDemo",
+      "url": "https://www.producthunt.com/products/livedemo",
+      "summary": "Open-source Interactive product demos | @George Apostolov",
+      "publishedAt": null,
+      "source": "producthunt",
+      "sourceName": "Product Hunt"
+    },
+    {
+      "title": "Kimi K2.6",
+      "url": "https://www.producthunt.com/products/kimi-ai-assistant",
+      "summary": "Open-source SOTA for long-horizon coding and agent swarms | @Zac Zuo",
+      "publishedAt": null,
+      "source": "producthunt",
+      "sourceName": "Product Hunt"
+    },
+    {
+      "title": "YourMemory",
+      "url": "https://www.producthunt.com/products/yourmemory",
+      "summary": "Cut token waste by 84% with self pruning MCP memory | @sachit mishra",
+      "publishedAt": null,
+      "source": "producthunt",
+      "sourceName": "Product Hunt"
+    },
+    {
+      "title": "Creget",
+      "url": "https://www.producthunt.com/products/creget",
+      "summary": "Invest smarter with real insights | @Shahroz Ahmad",
+      "publishedAt": null,
+      "source": "producthunt",
+      "sourceName": "Product Hunt"
+    },
+    {
+      "title": "ScreenBuddy",
+      "url": "https://www.producthunt.com/products/screenbuddy",
+      "summary": "Screen recording with auto-zoom, spotlight, and lightbox | @Jiabin Shen",
+      "publishedAt": null,
+      "source": "producthunt",
+      "sourceName": "Product Hunt"
+    },
+    {
+      "title": "Fabi",
+      "url": "https://www.producthunt.com/products/fabi",
+      "summary": "Cloud agent to build internal apps and automate workflows | @Krish Chelikavada",
+      "publishedAt": null,
+      "source": "producthunt",
+      "sourceName": "Product Hunt"
+    },
+    {
+      "title": "Twenty 2.0",
+      "url": "https://www.producthunt.com/products/twenty-crm",
+      "summary": "Build your Enterprise CRM with an AI-friendly SDK | @Thomas des Francs",
+      "publishedAt": null,
+      "source": "producthunt",
+      "sourceName": "Product Hunt"
+    },
+    {
+      "title": "OnTheMap",
+      "url": "https://www.producthunt.com/products/onthemap",
+      "summary": "The global map for builders, founders, and visionaries | @Sam",
+      "publishedAt": null,
+      "source": "producthunt",
+      "sourceName": "Product Hunt"
+    },
+    {
+      "title": "MAXIA Oracle",
+      "url": "https://www.producthunt.com/products/maxia-oracle",
+      "summary": "Multi-source price feed for AI agents | @Alexis Majorel",
+      "publishedAt": null,
+      "source": "producthunt",
+      "sourceName": "Product Hunt"
+    },
+    {
+      "title": "Chat Skills for AI Agents",
+      "url": "https://www.producthunt.com/products/cometchat-skills",
+      "summary": "One file. Any agent. Working chat in under 10 minutes. | @Anant Garg",
+      "publishedAt": null,
+      "source": "producthunt",
+      "sourceName": "Product Hunt"
+    },
+    {
+      "title": "Pioneer",
+      "url": "https://www.producthunt.com/products/launching-pioneer",
+      "summary": "Fine-tune any LLM in minutes, with one prompt | @Ash Lewis",
+      "publishedAt": null,
+      "source": "producthunt",
+      "sourceName": "Product Hunt"
+    },
+    {
+      "title": "KingCoding",
+      "url": "https://www.producthunt.com/products/kingcoding",
+      "summary": "Your Claude Code & Codex dev, now in your pocket | @Shingo Irie",
+      "publishedAt": null,
+      "source": "producthunt",
+      "sourceName": "Product Hunt"
+    },
+    {
+      "title": "Gauge Sentiment",
+      "url": "https://www.producthunt.com/products/gauge",
+      "summary": "How is your brand perceived by AI? | @Caelean",
+      "publishedAt": null,
+      "source": "producthunt",
+      "sourceName": "Product Hunt"
+    },
+    {
+      "title": "Agent-World: Scaling Real-World Environment Synthesis for...",
+      "url": "https://arxiv.org/abs/2604.18292",
+      "summary": "↑61",
+      "publishedAt": null,
+      "source": "hf-papers",
+      "sourceName": "Hugging Face Daily Papers"
+    },
+    {
+      "title": "OpenGame: Open Agentic Coding for Games",
+      "url": "https://arxiv.org/abs/2604.18394",
+      "summary": "↑49",
+      "publishedAt": null,
+      "source": "hf-papers",
+      "sourceName": "Hugging Face Daily Papers"
+    },
+    {
+      "title": "MultiWorld: Scalable Multi-Agent Multi-View Video World M...",
+      "url": "https://arxiv.org/abs/2604.18564",
+      "summary": "↑35",
+      "publishedAt": null,
+      "source": "hf-papers",
+      "sourceName": "Hugging Face Daily Papers"
+    },
+    {
+      "title": "When Can LLMs Learn to Reason with Weak Supervision?",
+      "url": "https://arxiv.org/abs/2604.18574",
+      "summary": "↑18",
+      "publishedAt": null,
+      "source": "hf-papers",
+      "sourceName": "Hugging Face Daily Papers"
+    },
+    {
+      "title": "The Illusion of Certainty: Decoupling Capability and Cali...",
+      "url": "https://arxiv.org/abs/2604.16830",
+      "summary": "↑10",
+      "publishedAt": null,
+      "source": "hf-papers",
+      "sourceName": "Hugging Face Daily Papers"
+    },
+    {
+      "title": "On the Reliability of Computer Use Agents",
+      "url": "https://arxiv.org/abs/2604.17849",
+      "summary": "↑8",
+      "publishedAt": null,
+      "source": "hf-papers",
+      "sourceName": "Hugging Face Daily Papers"
+    },
+    {
+      "title": "VoxMind: An End-to-End Agentic Spoken Dialogue System",
+      "url": "https://arxiv.org/abs/2604.15710",
+      "summary": "↑6",
+      "publishedAt": null,
+      "source": "hf-papers",
+      "sourceName": "Hugging Face Daily Papers"
+    },
+    {
+      "title": "GenericAgent: A Token-Efficient Self-Evolving LLM Agent v...",
+      "url": "https://arxiv.org/abs/2604.17091",
+      "summary": "↑6",
+      "publishedAt": null,
+      "source": "hf-papers",
+      "sourceName": "Hugging Face Daily Papers"
+    },
+    {
+      "title": "Agents Explore but Agents Ignore: LLMs Lack Environmental...",
+      "url": "https://arxiv.org/abs/2604.17609",
+      "summary": "↑5",
+      "publishedAt": null,
+      "source": "hf-papers",
+      "sourceName": "Hugging Face Daily Papers"
+    }
+  ]
+}
