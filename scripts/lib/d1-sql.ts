@@ -57,6 +57,16 @@ export function stableJson(value: unknown): string {
   return JSON.stringify(value ?? null)
 }
 
+export function stableItemId(item: InfoItem, date: string, batch: string, index: number): string {
+  const key = [date, batch, item.source, item.url || item.title || String(index)].join('|')
+  let hash = 0x811c9dc5
+  for (let i = 0; i < key.length; i++) {
+    hash ^= key.charCodeAt(i)
+    hash = Math.imul(hash, 0x01000193) >>> 0
+  }
+  return `${date}-${batch}-${hash.toString(36)}`
+}
+
 export function insertOrReplace(table: string, columns: string[], values: SqlValue[]): string {
   if (columns.length !== values.length) {
     throw new Error(`Column/value length mismatch for ${table}: ${columns.length} !== ${values.length}`)
@@ -262,7 +272,7 @@ export function rawItemToSiteItem(item: InfoItem, date: string, batch: string, i
   const category = categorizeSite(item.source)
   return {
     ...item,
-    id: `${date}-${batch}-${index}`,
+    id: stableItemId(item, date, batch, index),
     title: sanitizeText(item.title, 200),
     summary: sanitizeText(item.summary, 400),
     date,

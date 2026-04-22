@@ -7,6 +7,7 @@ import {
   collectedDataStatements,
   digestMarkdownStatement,
   insertOrReplace,
+  stableItemId,
   sqlString,
   stableJson,
 } from './lib/d1-sql.js'
@@ -87,9 +88,25 @@ describe('collectedDataStatements', () => {
     })
 
     expect(statements).toHaveLength(2)
-    expect(statements[0]).toContain("'2026-04-21-morning-0'")
+    expect(statements[0]).toContain("'2026-04-21-morning-")
     expect(statements[0]).toContain("'OpenAI & friends'")
     expect(statements[1]).toContain('INSERT OR REPLACE INTO collection_runs')
+  })
+})
+
+describe('stableItemId', () => {
+  it('uses source and URL instead of collection index only', () => {
+    const item = {
+      title: 'A',
+      url: 'https://example.com/a',
+      summary: '',
+      publishedAt: '2026-04-21T00:00:00.000Z',
+      source: 'openai',
+      sourceName: 'OpenAI',
+    }
+
+    expect(stableItemId(item, '2026-04-21', 'morning', 0)).toBe(stableItemId(item, '2026-04-21', 'morning', 99))
+    expect(stableItemId(item, '2026-04-21', 'morning', 0)).not.toBe(stableItemId({ ...item, source: 'anthropic' }, '2026-04-21', 'morning', 0))
   })
 })
 

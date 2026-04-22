@@ -48,6 +48,17 @@ function stableJson(value: unknown): string {
   return JSON.stringify(value ?? null)
 }
 
+function stableItemId(item: Record<string, unknown>, date: string, batch: string, index: number): string {
+  const source = asString(item.source, 'unknown')
+  const key = [date, batch, source, asString(item.url) || asString(item.title) || String(index)].join('|')
+  let hash = 0x811c9dc5
+  for (let i = 0; i < key.length; i++) {
+    hash ^= key.charCodeAt(i)
+    hash = Math.imul(hash, 0x01000193) >>> 0
+  }
+  return `${date}-${batch}-${hash.toString(36)}`
+}
+
 function sanitizeText(text: string, maxLength: number): string {
   return text.replace(/\n+/g, ' ').replace(/\s+/g, ' ').trim().slice(0, maxLength)
 }
@@ -74,7 +85,7 @@ function normalizeSiteItem(value: unknown, date: string, batch: string, index: n
   if (!title || !url) return null
 
   return {
-    id: asString(item.id, `${date}-${batch}-${index}`),
+    id: stableItemId(item, date, batch, index),
     title,
     titleZh: asOptionalString(item.titleZh) ?? undefined,
     url,
@@ -120,7 +131,23 @@ export async function upsertIngestPayload(db: D1Database, payload: unknown): Pro
     throw new Error('date and batch are required')
   }
 
-  const statements = items.map((item) =>
+  const sourceIdsToReplace = [
+    ...new Set([
+      ...items.map((item) => item.source),
+      ...(stats.successSourceIds ?? []),
+      ...(stats.failedSourceIds ?? []),
+    ].filter(Boolean)),
+  ]
+
+  const statements = sourceIdsToReplace.length > 0
+    ? [
+        db.prepare(
+          `DELETE FROM items WHERE date = ? AND batch = ? AND source IN (${sourceIdsToReplace.map(() => '?').join(', ')})`,
+        ).bind(date, batch, ...sourceIdsToReplace),
+      ]
+    : []
+
+  statements.push(...items.map((item) =>
     db.prepare(
       `
         INSERT OR REPLACE INTO items (
@@ -144,7 +171,7 @@ export async function upsertIngestPayload(db: D1Database, payload: unknown): Pro
       item.batch,
       updatedAt,
     ),
-  )
+  ))
 
   statements.push(
     db.prepare(
