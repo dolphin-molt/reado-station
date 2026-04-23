@@ -256,6 +256,7 @@ function persist() {
   }
 
   state.lastUpdated = new Date().toISOString()
+  if (!state.stats) state.stats = { totalRuns: 0 }
   state.stats.totalRuns = (state.stats.totalRuns || 0) + 1
 
   // 记录本次运行
