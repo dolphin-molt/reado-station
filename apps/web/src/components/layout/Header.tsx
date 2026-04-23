@@ -44,6 +44,9 @@ export function Header({
           </div>
 
           <div className="topnav__actions">
+            <Link href="/login" className="lang-switch">
+              {t(lang, 'auth.login')}
+            </Link>
             <Link href={switchPath(lang, path)} className="lang-switch">
               {t(lang, 'lang.switch')}
             </Link>

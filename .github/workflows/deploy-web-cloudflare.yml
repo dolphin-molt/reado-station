@@ -80,6 +80,9 @@ jobs:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
       READO_D1_DATABASE_ID: ${{ secrets.READO_D1_DATABASE_ID }}
       READO_API_SECRET: ${{ secrets.READO_API_SECRET }}
+      READO_AUTH_SECRET: ${{ secrets.READO_AUTH_SECRET }}
+      READO_ADMIN_USERNAME: ${{ secrets.READO_ADMIN_USERNAME }}
+      READO_ADMIN_PASSWORD: ${{ secrets.READO_ADMIN_PASSWORD }}
 
     steps:
       - name: Checkout
@@ -121,6 +124,25 @@ jobs:
             exit 1
           fi
           printf "%s" "$READO_API_SECRET" | ./node_modules/.bin/wrangler secret put READO_API_SECRET
+
+      - name: Set auth secrets
+        working-directory: apps/web
+        run: |
+          if [ -n "$READO_AUTH_SECRET" ]; then
+            printf "%s" "$READO_AUTH_SECRET" | ./node_modules/.bin/wrangler secret put READO_AUTH_SECRET
+          else
+            echo "READO_AUTH_SECRET is not configured; /login will show a configuration error"
+          fi
+
+          if [ -n "$READO_ADMIN_PASSWORD" ]; then
+            printf "%s" "$READO_ADMIN_PASSWORD" | ./node_modules/.bin/wrangler secret put READO_ADMIN_PASSWORD
+          else
+            echo "READO_ADMIN_PASSWORD is not configured; /login will show a configuration error"
+          fi
+
+          if [ -n "$READO_ADMIN_USERNAME" ]; then
+            printf "%s" "$READO_ADMIN_USERNAME" | ./node_modules/.bin/wrangler secret put READO_ADMIN_USERNAME
+          fi
 
       - name: Build Cloudflare worker
         run: npm run build:web:cloudflare

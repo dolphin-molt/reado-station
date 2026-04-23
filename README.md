@@ -56,7 +56,7 @@ npm run d1:sync-api -- --require
                    │                                      群   │
                    └─────────────────────────────────────────┘
 
- Cloudflare Worker + D1 ──→ 首页 / 归档 / 受保护写入 API
+Cloudflare Worker + D1 ──→ 首页 / 归档 / 受保护写入 API
 ```
 
 ### 信息源覆盖
@@ -126,6 +126,29 @@ data/
 - OG 图片自动抓取
 
 旧 `site/` Astro 项目保留为短期回退/应急重建路径，不再是生产主路径。
+
+## Admin Console
+
+`apps/web` 提供内置后台管理系统：
+
+- `/login`：登录页
+- `/admin`：受保护控制台入口
+- `/admin/sources`：管理数据源，支持新增、编辑、启用/停用
+- `/admin/items`：管理资讯，支持筛选、分页、软隐藏/恢复
+- `/api/auth/login` / `/api/auth/logout`：登录与登出
+- `/api/admin/*`：受登录保护的后台写入 API
+
+生产环境需要配置 Cloudflare Worker Secret：
+
+```bash
+cd apps/web
+printf "%s" "一段32字节以上随机字符串" | npx wrangler secret put READO_AUTH_SECRET
+printf "%s" "你的管理员密码" | npx wrangler secret put READO_ADMIN_PASSWORD
+# 可选，默认用户名是 admin
+printf "%s" "admin" | npx wrangler secret put READO_ADMIN_USERNAME
+```
+
+如果通过 GitHub Actions 部署，同步添加 `READO_AUTH_SECRET`、`READO_ADMIN_PASSWORD`，可选添加 `READO_ADMIN_USERNAME` 到 GitHub Repository Secrets。
 
 ## Agent 运营
 

@@ -142,6 +142,7 @@ async function loadDays(db: D1Database): Promise<DayMeta[]> {
           COUNT(1) AS itemCount,
           CASE WHEN EXISTS (SELECT 1 FROM digests d WHERE d.date = i.date) THEN 1 ELSE 0 END AS hasDigest
         FROM items i
+        WHERE i.hidden_at IS NULL
         GROUP BY i.date
         ORDER BY i.date ASC
       `,
@@ -170,6 +171,7 @@ async function loadItems(db: D1Database): Promise<SiteItem[]> {
           date,
           batch
         FROM items
+        WHERE hidden_at IS NULL
         ORDER BY date DESC, published_at DESC, id ASC
       `,
     )
@@ -197,7 +199,7 @@ async function loadItemsForDate(db: D1Database, date: string, limit: number, off
           date,
           batch
         FROM items
-        WHERE date = ?
+        WHERE date = ? AND hidden_at IS NULL
         ORDER BY published_at DESC, id ASC
         LIMIT ? OFFSET ?
       `,
@@ -285,6 +287,7 @@ export async function loadD1HomePageContent(db: D1Database, options: { page: num
       `
         SELECT date
         FROM items
+        WHERE hidden_at IS NULL
         GROUP BY date
         ORDER BY date DESC
         LIMIT 1
@@ -309,7 +312,7 @@ export async function loadD1HomePageContent(db: D1Database, options: { page: num
           COUNT(1) AS itemCount,
           COUNT(DISTINCT source_name) AS sourceCount
         FROM items
-        WHERE date = ?
+        WHERE date = ? AND hidden_at IS NULL
       `,
     )
     .bind(latest.date)
@@ -338,6 +341,7 @@ export async function loadD1ArchivePageContent(db: D1Database, options: { page: 
         FROM (
           SELECT date
           FROM items
+          WHERE hidden_at IS NULL
           GROUP BY date
         )
       `,
@@ -354,6 +358,7 @@ export async function loadD1ArchivePageContent(db: D1Database, options: { page: 
           COUNT(1) AS itemCount,
           CASE WHEN EXISTS (SELECT 1 FROM digests d WHERE d.date = i.date) THEN 1 ELSE 0 END AS hasDigest
         FROM items i
+        WHERE i.hidden_at IS NULL
         GROUP BY i.date
         ORDER BY i.date DESC
         LIMIT ? OFFSET ?

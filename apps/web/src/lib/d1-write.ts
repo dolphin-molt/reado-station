@@ -142,7 +142,7 @@ export async function upsertIngestPayload(db: D1Database, payload: unknown): Pro
   const statements = sourceIdsToReplace.length > 0
     ? [
         db.prepare(
-          `DELETE FROM items WHERE date = ? AND batch = ? AND source IN (${sourceIdsToReplace.map(() => '?').join(', ')})`,
+          `DELETE FROM items WHERE date = ? AND batch = ? AND hidden_at IS NULL AND source IN (${sourceIdsToReplace.map(() => '?').join(', ')})`,
         ).bind(date, batch, ...sourceIdsToReplace),
       ]
     : []
@@ -150,10 +150,24 @@ export async function upsertIngestPayload(db: D1Database, payload: unknown): Pro
   statements.push(...items.map((item) =>
     db.prepare(
       `
-        INSERT OR REPLACE INTO items (
+        INSERT INTO items (
           id, title, title_zh, url, summary, summary_zh, published_at,
           source, source_name, category, image_url, date, batch, updated_at
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ON CONFLICT(id) DO UPDATE SET
+          title = excluded.title,
+          title_zh = excluded.title_zh,
+          url = excluded.url,
+          summary = excluded.summary,
+          summary_zh = excluded.summary_zh,
+          published_at = excluded.published_at,
+          source = excluded.source,
+          source_name = excluded.source_name,
+          category = excluded.category,
+          image_url = excluded.image_url,
+          date = excluded.date,
+          batch = excluded.batch,
+          updated_at = excluded.updated_at
       `,
     ).bind(
       item.id,
