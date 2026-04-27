@@ -35,6 +35,8 @@ declare global {
     SILICONFLOW_API_BASE_URL?: string
     LLM_PROVIDER?: string
     LLM_MODEL?: string
+    READO_COLLECT_MAX_SOURCES?: string
+    READO_COLLECT_CONCURRENCY?: string
   }
 }
 

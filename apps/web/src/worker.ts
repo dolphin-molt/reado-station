@@ -2,6 +2,7 @@
 import openNextWorker from '../.open-next/worker.js'
 
 import { generateLatestDigest } from './lib/digest-generator'
+import { collectProgramSources } from './lib/program-collector'
 
 export default {
   fetch(request: Request, env: CloudflareEnv, ctx: ExecutionContext): Promise<Response> {
@@ -15,12 +16,14 @@ export default {
     }
 
     ctx.waitUntil(
-      generateLatestDigest(env.DB, env)
+      collectProgramSources(env.DB, env)
+        .then((collection) => generateLatestDigest(env.DB as D1Database, env)
+          .then((digest) => ({ collection, digest })))
         .then((result) => {
-          console.log('Scheduled digest finished', JSON.stringify(result))
+          console.log('Scheduled collection and digest finished', JSON.stringify(result))
         })
         .catch((error) => {
-          console.error('Scheduled digest failed', error)
+          console.error('Scheduled collection and digest failed', error)
         }),
     )
   },

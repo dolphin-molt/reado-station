@@ -34,6 +34,8 @@ export interface ReadoCloudflareEnv extends CloudflareEnv {
   SILICONFLOW_API_BASE_URL?: string
   LLM_PROVIDER?: string
   LLM_MODEL?: string
+  READO_COLLECT_MAX_SOURCES?: string
+  READO_COLLECT_CONCURRENCY?: string
 }
 
 export class D1UnavailableError extends Error {
