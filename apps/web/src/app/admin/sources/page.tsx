@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation'
 
 import { AdminChrome } from '@/components/admin/AdminChrome'
 import { AdminPagination } from '@/components/admin/AdminPagination'
-import { getCurrentAuthSession } from '@/lib/auth'
+import { getCurrentAuthSession, isAdminSession } from '@/lib/auth'
 import { getD1Database } from '@/lib/cloudflare'
 import { loadAdminSourcesPage } from '@/lib/admin-data'
 import { parsePageParam } from '@/lib/pagination'
@@ -35,6 +35,7 @@ function currentPath(params: Record<string, string>): string {
 export default async function AdminSourcesPage({ searchParams }: SourcesPageProps) {
   const session = await getCurrentAuthSession()
   if (!session) redirect('/login?next=/admin/sources')
+  if (!isAdminSession(session)) redirect('/')
 
   const params = await searchParams
   const q = paramValue(params?.q)

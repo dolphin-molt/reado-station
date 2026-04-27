@@ -2,6 +2,7 @@ import 'server-only'
 
 import { parseDigestMarkdown, type DayMeta, type DigestCluster, type DigestData, type Observation, type SiteItem } from '../../../../packages/shared/src'
 
+import { buildCategoryOptions, type CategoryOption } from '@/lib/categories'
 import type { SiteContent } from '@/lib/content'
 import { createPaginationMeta, paginationOffset, type PaginationMeta } from '@/lib/pagination'
 
@@ -49,16 +50,22 @@ interface D1HomeStatsRow {
   sourceCount: number
 }
 
+interface D1CategoryCountRow {
+  category: string
+  itemCount: number
+}
+
 interface D1TotalRow {
   total: number
 }
 
 export interface D1HomePageContent {
   date: string | null
-  digest: DigestData | null
   items: SiteItem[]
   pagination: PaginationMeta
   sourceCount: number
+  totalItems: number
+  categories: CategoryOption[]
 }
 
 export interface D1ArchivePageContent {
@@ -180,7 +187,15 @@ async function loadItems(db: D1Database): Promise<SiteItem[]> {
   return results.map(rowToItem)
 }
 
-async function loadItemsForDate(db: D1Database, date: string, limit: number, offset: number): Promise<SiteItem[]> {
+async function loadItemsForDate(db: D1Database, date: string, limit: number, offset: number, category?: string | null): Promise<SiteItem[]> {
+  const filters = ['date = ?', 'hidden_at IS NULL']
+  const bindings: Array<string | number> = [date]
+
+  if (category) {
+    filters.push('category = ?')
+    bindings.push(category)
+  }
+
   const { results = [] } = await db
     .prepare(
       `
@@ -199,56 +214,36 @@ async function loadItemsForDate(db: D1Database, date: string, limit: number, off
           date,
           batch
         FROM items
-        WHERE date = ? AND hidden_at IS NULL
+        WHERE ${filters.join(' AND ')}
         ORDER BY published_at DESC, id ASC
         LIMIT ? OFFSET ?
       `,
     )
-    .bind(date, limit, offset)
+    .bind(...bindings, limit, offset)
     .all<D1ItemRow>()
 
   return results.map(rowToItem)
 }
 
-async function loadDigests(db: D1Database): Promise<DigestData[]> {
+async function loadCategoryCountsForDate(db: D1Database, date: string): Promise<CategoryOption[]> {
   const { results = [] } = await db
     .prepare(
       `
         SELECT
-          date,
-          batch,
-          headline,
-          headline_zh AS headlineZh,
-          observation_text AS observationText,
-          observation_text_zh AS observationTextZh,
-          observations,
-          clusters,
-          raw_markdown AS rawMarkdown
-        FROM digests
-        ORDER BY
-          date DESC,
-          CASE batch
-            WHEN 'latest' THEN 0
-            WHEN 'evening' THEN 1
-            WHEN 'morning' THEN 2
-            ELSE 3
-          END,
-          id DESC
+          category,
+          COUNT(1) AS itemCount
+        FROM items
+        WHERE date = ? AND hidden_at IS NULL
+        GROUP BY category
       `,
     )
-    .all<D1DigestRow>()
+    .bind(date)
+    .all<D1CategoryCountRow>()
 
-  const byDate = new Map<string, DigestData>()
-  for (const row of results) {
-    if (!byDate.has(row.date)) {
-      byDate.set(row.date, rowToDigest(row))
-    }
-  }
-
-  return [...byDate.values()]
+  return buildCategoryOptions(new Map(results.map((row) => [row.category, Number(row.itemCount ?? 0)])))
 }
 
-async function loadDigestForDate(db: D1Database, date: string): Promise<DigestData | null> {
+export async function loadDigestForDate(db: D1Database, date: string): Promise<DigestData | null> {
   const row = await db
     .prepare(
       `
@@ -281,7 +276,7 @@ async function loadDigestForDate(db: D1Database, date: string): Promise<DigestDa
   return row ? rowToDigest(row) : null
 }
 
-export async function loadD1HomePageContent(db: D1Database, options: { page: number; pageSize: number }): Promise<D1HomePageContent> {
+export async function loadD1HomePageContent(db: D1Database, options: { page: number; pageSize: number; category?: string | null }): Promise<D1HomePageContent> {
   const latest = await db
     .prepare(
       `
@@ -298,38 +293,46 @@ export async function loadD1HomePageContent(db: D1Database, options: { page: num
   if (!latest) {
     return {
       date: null,
-      digest: null,
       items: [],
       pagination: createPaginationMeta(options.page, options.pageSize, 0),
       sourceCount: 0,
+      totalItems: 0,
+      categories: [],
     }
   }
 
-  const stats = await db
-    .prepare(
-      `
-        SELECT
-          COUNT(1) AS itemCount,
-          COUNT(DISTINCT source_name) AS sourceCount
-        FROM items
-        WHERE date = ? AND hidden_at IS NULL
-      `,
-    )
-    .bind(latest.date)
-    .first<D1HomeStatsRow>()
-
-  const pagination = createPaginationMeta(options.page, options.pageSize, Number(stats?.itemCount ?? 0))
-  const [items, digest] = await Promise.all([
-    loadItemsForDate(db, latest.date, pagination.pageSize, paginationOffset(pagination)),
-    loadDigestForDate(db, latest.date),
+  const [stats, categories] = await Promise.all([
+    db
+      .prepare(
+        `
+          SELECT
+            COUNT(1) AS itemCount,
+            COUNT(DISTINCT source_name) AS sourceCount
+          FROM items
+          WHERE date = ? AND hidden_at IS NULL
+        `,
+      )
+      .bind(latest.date)
+      .first<D1HomeStatsRow>(),
+    loadCategoryCountsForDate(db, latest.date),
   ])
+
+  const totalItems = Number(stats?.itemCount ?? 0)
+  const activeCategory = options.category ?? null
+  const filteredCount = activeCategory
+    ? categories.find((category) => category.id === activeCategory)?.count ?? 0
+    : totalItems
+
+  const pagination = createPaginationMeta(options.page, options.pageSize, filteredCount)
+  const items = await loadItemsForDate(db, latest.date, pagination.pageSize, paginationOffset(pagination), activeCategory)
 
   return {
     date: latest.date,
-    digest,
     items,
     pagination,
     sourceCount: Number(stats?.sourceCount ?? 0),
+    totalItems,
+    categories: buildCategoryOptions(new Map(categories.map((category) => [category.id, category.count])), activeCategory),
   }
 }
 
@@ -374,11 +377,10 @@ export async function loadD1ArchivePageContent(db: D1Database, options: { page: 
 }
 
 export async function loadD1SiteContent(db: D1Database): Promise<SiteContent> {
-  const [days, digests, items] = await Promise.all([
+  const [days, items] = await Promise.all([
     loadDays(db),
-    loadDigests(db),
     loadItems(db),
   ])
 
-  return { days, digests, items }
+  return { days, items }
 }

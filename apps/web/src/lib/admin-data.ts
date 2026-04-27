@@ -1,5 +1,6 @@
 import 'server-only'
 
+import { hashPassword } from '@/lib/security'
 import { createPaginationMeta, paginationOffset, type PaginationMeta } from '@/lib/pagination'
 
 export interface AdminSource {
@@ -66,6 +67,56 @@ export interface AdminOverviewData {
   itemCount: number
   hiddenItemCount: number
   latestDate: string | null
+}
+
+export interface AdminBillingLog {
+  id: string
+  traceId: string
+  stage: string
+  status: string
+  workspaceId: string | null
+  userId: string | null
+  planId: string | null
+  stripeCustomerId: string | null
+  stripeSubscriptionId: string | null
+  stripeCheckoutSessionId: string | null
+  stripeInvoiceId: string | null
+  stripeEventId: string | null
+  amount: number | null
+  currency: string | null
+  message: string | null
+  metadataJson: string | null
+  createdAt: string
+}
+
+export interface AdminBillingLogsPageData {
+  logs: AdminBillingLog[]
+  pagination: PaginationMeta
+  totals: {
+    all: number
+    failed: number
+    succeeded: number
+  }
+}
+
+export interface AdminUser {
+  id: string
+  username: string
+  email: string | null
+  role: string
+  createdAt: string
+  updatedAt: string
+  lastLoginAt: string | null
+}
+
+export interface AdminUsersPageData {
+  users: AdminUser[]
+  pagination: PaginationMeta
+  totals: {
+    all: number
+    admins: number
+    members: number
+  }
 }
 
 export interface SourceInput {
@@ -136,6 +187,36 @@ interface OverviewRow {
   latestDate: string | null
 }
 
+interface BillingLogRow {
+  id: string
+  traceId: string
+  stage: string
+  status: string
+  workspaceId: string | null
+  userId: string | null
+  planId: string | null
+  stripeCustomerId: string | null
+  stripeSubscriptionId: string | null
+  stripeCheckoutSessionId: string | null
+  stripeInvoiceId: string | null
+  stripeEventId: string | null
+  amount: number | null
+  currency: string | null
+  message: string | null
+  metadataJson: string | null
+  createdAt: string
+}
+
+interface AdminUserRow {
+  id: string
+  username: string
+  email: string | null
+  role: string
+  createdAt: string
+  updatedAt: string
+  lastLoginAt: string | null
+}
+
 function parseJsonArray(value: string | null | undefined): string[] {
   if (!value) return []
   try {
@@ -193,6 +274,40 @@ function rowToItem(row: ItemRow): AdminItem {
     batch: row.batch,
     hiddenAt: row.hiddenAt,
     hiddenReason: row.hiddenReason,
+  }
+}
+
+function rowToBillingLog(row: BillingLogRow): AdminBillingLog {
+  return {
+    id: row.id,
+    traceId: row.traceId,
+    stage: row.stage,
+    status: row.status,
+    workspaceId: row.workspaceId,
+    userId: row.userId,
+    planId: row.planId,
+    stripeCustomerId: row.stripeCustomerId,
+    stripeSubscriptionId: row.stripeSubscriptionId,
+    stripeCheckoutSessionId: row.stripeCheckoutSessionId,
+    stripeInvoiceId: row.stripeInvoiceId,
+    stripeEventId: row.stripeEventId,
+    amount: row.amount == null ? null : Number(row.amount),
+    currency: row.currency,
+    message: row.message,
+    metadataJson: row.metadataJson,
+    createdAt: row.createdAt,
+  }
+}
+
+function rowToAdminUser(row: AdminUserRow): AdminUser {
+  return {
+    id: row.id,
+    username: row.username,
+    email: row.email,
+    role: row.role,
+    createdAt: row.createdAt,
+    updatedAt: row.updatedAt,
+    lastLoginAt: row.lastLoginAt,
   }
 }
 
@@ -491,5 +606,169 @@ export async function setAdminItemHidden(db: D1Database, id: string, hidden: boo
   await db
     .prepare('UPDATE items SET hidden_at = NULL, hidden_reason = NULL, updated_at = ? WHERE id = ?')
     .bind(now, id)
+    .run()
+}
+
+export async function loadAdminBillingLogsPage(
+  db: D1Database,
+  options: { page: number; pageSize: number; q?: string; status?: string },
+): Promise<AdminBillingLogsPageData> {
+  const filters: string[] = []
+  const bindings: Array<string | number> = []
+
+  if (options.q) {
+    filters.push(
+      "(trace_id LIKE ? ESCAPE '\\' OR workspace_id LIKE ? ESCAPE '\\' OR stripe_checkout_session_id LIKE ? ESCAPE '\\' OR stripe_subscription_id LIKE ? ESCAPE '\\' OR stripe_invoice_id LIKE ? ESCAPE '\\' OR stripe_event_id LIKE ? ESCAPE '\\' OR message LIKE ? ESCAPE '\\')",
+    )
+    const pattern = likePattern(options.q)
+    bindings.push(pattern, pattern, pattern, pattern, pattern, pattern, pattern)
+  }
+
+  if (options.status === 'failed' || options.status === 'succeeded' || options.status === 'started' || options.status === 'ignored') {
+    filters.push('status = ?')
+    bindings.push(options.status)
+  }
+
+  const where = filters.length > 0 ? `WHERE ${filters.join(' AND ')}` : ''
+  const totalRow = await db.prepare(`SELECT COUNT(1) AS total FROM billing_event_logs ${where}`).bind(...bindings).first<CountRow>()
+  const pagination = createPaginationMeta(options.page, options.pageSize, Number(totalRow?.total ?? 0))
+
+  const [{ results = [] }, totals] = await Promise.all([
+    db
+      .prepare(
+        `
+          SELECT
+            id,
+            trace_id AS traceId,
+            stage,
+            status,
+            workspace_id AS workspaceId,
+            user_id AS userId,
+            plan_id AS planId,
+            stripe_customer_id AS stripeCustomerId,
+            stripe_subscription_id AS stripeSubscriptionId,
+            stripe_checkout_session_id AS stripeCheckoutSessionId,
+            stripe_invoice_id AS stripeInvoiceId,
+            stripe_event_id AS stripeEventId,
+            amount,
+            currency,
+            message,
+            metadata_json AS metadataJson,
+            created_at AS createdAt
+          FROM billing_event_logs
+          ${where}
+          ORDER BY created_at DESC, id DESC
+          LIMIT ? OFFSET ?
+        `,
+      )
+      .bind(...bindings, pagination.pageSize, paginationOffset(pagination))
+      .all<BillingLogRow>(),
+    db
+      .prepare(
+        `
+          SELECT
+            COUNT(1) AS allCount,
+            SUM(CASE WHEN status = 'failed' THEN 1 ELSE 0 END) AS failedCount,
+            SUM(CASE WHEN status = 'succeeded' THEN 1 ELSE 0 END) AS succeededCount
+          FROM billing_event_logs
+        `,
+      )
+      .first<{ allCount: number; failedCount: number; succeededCount: number }>(),
+  ])
+
+  return {
+    logs: results.map(rowToBillingLog),
+    pagination,
+    totals: {
+      all: Number(totals?.allCount ?? 0),
+      failed: Number(totals?.failedCount ?? 0),
+      succeeded: Number(totals?.succeededCount ?? 0),
+    },
+  }
+}
+
+export async function loadAdminUsersPage(
+  db: D1Database,
+  options: { page: number; pageSize: number; q?: string; role?: string },
+): Promise<AdminUsersPageData> {
+  const filters: string[] = []
+  const bindings: Array<string | number> = []
+
+  if (options.q) {
+    filters.push("(username LIKE ? ESCAPE '\\' OR email LIKE ? ESCAPE '\\' OR id LIKE ? ESCAPE '\\')")
+    const pattern = likePattern(options.q)
+    bindings.push(pattern, pattern, pattern)
+  }
+
+  if (options.role === 'admin' || options.role === 'member') {
+    filters.push('role = ?')
+    bindings.push(options.role)
+  }
+
+  const where = filters.length > 0 ? `WHERE ${filters.join(' AND ')}` : ''
+  const totalRow = await db.prepare(`SELECT COUNT(1) AS total FROM auth_users ${where}`).bind(...bindings).first<CountRow>()
+  const pagination = createPaginationMeta(options.page, options.pageSize, Number(totalRow?.total ?? 0))
+
+  const [{ results = [] }, totals] = await Promise.all([
+    db
+      .prepare(
+        `
+          SELECT
+            id,
+            username,
+            email,
+            role,
+            created_at AS createdAt,
+            updated_at AS updatedAt,
+            last_login_at AS lastLoginAt
+          FROM auth_users
+          ${where}
+          ORDER BY role DESC, updated_at DESC, created_at DESC
+          LIMIT ? OFFSET ?
+        `,
+      )
+      .bind(...bindings, pagination.pageSize, paginationOffset(pagination))
+      .all<AdminUserRow>(),
+    db
+      .prepare(
+        `
+          SELECT
+            COUNT(1) AS allCount,
+            SUM(CASE WHEN role = 'admin' THEN 1 ELSE 0 END) AS adminCount,
+            SUM(CASE WHEN role != 'admin' THEN 1 ELSE 0 END) AS memberCount
+          FROM auth_users
+        `,
+      )
+      .first<{ allCount: number; adminCount: number; memberCount: number }>(),
+  ])
+
+  return {
+    users: results.map(rowToAdminUser),
+    pagination,
+    totals: {
+      all: Number(totals?.allCount ?? 0),
+      admins: Number(totals?.adminCount ?? 0),
+      members: Number(totals?.memberCount ?? 0),
+    },
+  }
+}
+
+export async function countAdminUsers(db: D1Database): Promise<number> {
+  const row = await db.prepare("SELECT COUNT(1) AS total FROM auth_users WHERE role = 'admin'").first<{ total: number | null }>()
+  return Number(row?.total ?? 0)
+}
+
+export async function setAdminUserRole(db: D1Database, userId: string, role: 'admin' | 'member'): Promise<void> {
+  await db
+    .prepare('UPDATE auth_users SET role = ?, updated_at = ? WHERE id = ?')
+    .bind(role, new Date().toISOString(), userId)
+    .run()
+}
+
+export async function setAdminUserPassword(db: D1Database, userId: string, password: string): Promise<void> {
+  const passwordHash = await hashPassword(password)
+  await db
+    .prepare('UPDATE auth_users SET password_hash = ?, updated_at = ? WHERE id = ?')
+    .bind(passwordHash, new Date().toISOString(), userId)
     .run()
 }

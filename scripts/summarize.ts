@@ -9,9 +9,8 @@
  * 不需要此脚本。此脚本仅在需要全自动无人值守时使用。
  *
  * 支持的 LLM 后端（通过 LLM_PROVIDER 环境变量切换）：
- * - anthropic (默认): Claude Haiku
- * - openai: GPT-4o-mini
- * - deepseek: DeepSeek Chat
+ * - anthropic: Claude Haiku
+ * - siliconflow: SiliconFlow OpenAI-compatible chat completions
  *
  * 流程：
  * 1. 读取 raw.json
@@ -47,19 +46,98 @@ import {
 
 // ─── Config ──────────────────────────────────────────────────────────
 
-const MODEL = 'claude-haiku-4-20250414'
+const PROVIDER = process.env.LLM_PROVIDER ?? (process.env.SILICONFLOW_API_KEY ? 'siliconflow' : 'anthropic')
+const MODEL = process.env.LLM_MODEL ?? (PROVIDER === 'siliconflow' ? 'Qwen/Qwen3-32B' : 'claude-haiku-4-20250414')
 const MAX_TOKENS = 8192
 const MAX_ITEMS_PER_SECTION = 50 // Avoid context overflow
 
-// ─── Claude Client ───────────────────────────────────────────────────
+// ─── LLM Clients ─────────────────────────────────────────────────────
 
-function createClient(): Anthropic {
+interface LlmCompletion {
+  text: string
+  inputTokens?: number
+  outputTokens?: number
+}
+
+interface LlmClient {
+  complete(system: string, content: string): Promise<LlmCompletion>
+}
+
+function createAnthropicClient(): LlmClient {
   const apiKey = process.env.ANTHROPIC_API_KEY
   if (!apiKey) {
-    log.error('ANTHROPIC_API_KEY not set. Add it to .env or environment.')
+    log.error('ANTHROPIC_API_KEY not set. Add it to .env or environment, or set LLM_PROVIDER=siliconflow.')
     process.exit(1)
   }
-  return new Anthropic({ apiKey })
+  const client = new Anthropic({ apiKey })
+  return {
+    async complete(system, content) {
+      const response = await client.messages.create({
+        model: MODEL,
+        max_tokens: MAX_TOKENS,
+        system,
+        messages: [{ role: 'user', content }],
+      })
+
+      return {
+        text: response.content
+          .filter(block => block.type === 'text')
+          .map(block => (block as any).text)
+          .join(''),
+        inputTokens: response.usage.input_tokens,
+        outputTokens: response.usage.output_tokens,
+      }
+    },
+  }
+}
+
+function createSiliconFlowClient(): LlmClient {
+  const apiKey = process.env.SILICONFLOW_API_KEY
+  if (!apiKey) {
+    log.error('SILICONFLOW_API_KEY not set. Add it to .env or environment, or set LLM_PROVIDER=anthropic.')
+    process.exit(1)
+  }
+  const baseUrl = process.env.SILICONFLOW_API_BASE_URL ?? 'https://api.siliconflow.cn/v1'
+  return {
+    async complete(system, content) {
+      const response = await fetch(`${baseUrl.replace(/\/$/, '')}/chat/completions`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          model: MODEL,
+          max_tokens: MAX_TOKENS,
+          temperature: 0.2,
+          messages: [
+            { role: 'system', content: system },
+            { role: 'user', content },
+          ],
+        }),
+      })
+
+      const text = await response.text()
+      if (!response.ok) throw new Error(`SiliconFlow API error ${response.status}: ${text.slice(0, 500)}`)
+
+      const data = JSON.parse(text) as {
+        choices?: Array<{ message?: { content?: string } }>
+        usage?: { prompt_tokens?: number; completion_tokens?: number }
+      }
+      return {
+        text: data.choices?.[0]?.message?.content ?? '',
+        inputTokens: data.usage?.prompt_tokens,
+        outputTokens: data.usage?.completion_tokens,
+      }
+    },
+  }
+}
+
+function createClient(): LlmClient {
+  if (PROVIDER === 'siliconflow') return createSiliconFlowClient()
+  if (PROVIDER === 'anthropic') return createAnthropicClient()
+  log.error(`Unsupported LLM_PROVIDER: ${PROVIDER}`)
+  process.exit(1)
 }
 
 // ─── Prompt Helpers ──────────────────────────────────────────────────
@@ -83,7 +161,7 @@ function formatItemsForPrompt(items: InfoItem[], limit: number = MAX_ITEMS_PER_S
 // ─── Section Summarizers ─────────────────────────────────────────────
 
 async function summarizeSection(
-  client: Anthropic,
+  client: LlmClient,
   systemPrompt: string,
   items: InfoItem[],
   sectionName: string,
@@ -98,25 +176,13 @@ async function summarizeSection(
   const formattedItems = formatItemsForPrompt(items)
 
   try {
-    const response = await client.messages.create({
-      model: MODEL,
-      max_tokens: MAX_TOKENS,
-      system: systemPrompt,
-      messages: [
-        {
-          role: 'user',
-          content: `以下是采集到的 ${sectionName} 数据（共 ${items.length} 条）。请按照 system prompt 中的格式要求生成摘要。\n\n${formattedItems}`,
-        },
-      ],
-    })
+    const response = await client.complete(
+      systemPrompt,
+      `以下是采集到的 ${sectionName} 数据（共 ${items.length} 条）。请按照 system prompt 中的格式要求生成摘要。\n\n${formattedItems}`,
+    )
 
-    const text = response.content
-      .filter(block => block.type === 'text')
-      .map(block => (block as any).text)
-      .join('')
-
-    log.success(`[${sectionName}] Done (${response.usage.input_tokens}+${response.usage.output_tokens} tokens)`)
-    return text
+    log.success(`[${sectionName}] Done (${response.inputTokens ?? '?'}+${response.outputTokens ?? '?'} tokens)`)
+    return response.text
   } catch (err) {
     log.error(`[${sectionName}] Claude API error: ${err}`)
     return `> ⚠️ ${sectionName} 摘要生成失败\n`

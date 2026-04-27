@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation'
 
 import { AdminChrome } from '@/components/admin/AdminChrome'
 import { loadAdminOverview } from '@/lib/admin-data'
-import { getCurrentAuthSession } from '@/lib/auth'
+import { getCurrentAuthSession, isAdminSession } from '@/lib/auth'
 import { getD1Database } from '@/lib/cloudflare'
 
 export const dynamic = 'force-dynamic'
@@ -26,6 +26,9 @@ export default async function AdminPage() {
   if (!session) {
     redirect('/login?next=/admin')
   }
+  if (!isAdminSession(session)) {
+    redirect('/')
+  }
 
   const db = await getD1Database()
   if (!db) {
@@ -43,7 +46,7 @@ export default async function AdminPage() {
           <p className="auth-card__eyebrow">Admin Console</p>
           <h1>控制台已开启</h1>
           <p className="admin-panel__intro">
-            当前登录为 <strong>{session.userId}</strong>。认证层已经就绪，后续可以把采集状态、手动同步、数据修复等操作接到这里。
+            当前登录为 <strong>{session.username}</strong>。认证层已经就绪，后续可以把采集状态、手动同步、数据修复等操作接到这里。
           </p>
 
           <dl className="admin-facts">

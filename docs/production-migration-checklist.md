@@ -18,7 +18,7 @@ This is the cutover runbook for moving `reado-station` from Astro + GitHub Pages
 - [x] Add GitHub secrets: `CLOUDFLARE_ACCOUNT_ID`, `READO_D1_DATABASE_ID`, `READO_API_SECRET`.
 - [x] Add GitHub secret: `CLOUDFLARE_API_TOKEN` for CI deploys.
 - [x] Add collection dual-write secrets: `READO_D1_API_BASE_URL`, `READO_D1_API_SECRET`.
-- [x] Add admin login secrets: `READO_AUTH_SECRET`, `READO_ADMIN_PASSWORD` and optionally `READO_ADMIN_USERNAME`.
+- [x] Add auth session secret: `READO_AUTH_SECRET`. Registration creates ordinary `member` accounts; admin access is controlled by `auth_users.role = 'admin'` in D1.
 - [x] Set `READO_D1_WRITE_REQUIRED=true` so failed D1 writes fail the collection job.
 - [x] Deploy the Cloudflare Worker from local Wrangler.
 - [x] Apply D1 migration and backfill.

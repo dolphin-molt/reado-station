@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation'
 import { AdminChrome } from '@/components/admin/AdminChrome'
 import { AdminPagination } from '@/components/admin/AdminPagination'
 import { loadAdminItemsPage } from '@/lib/admin-data'
-import { getCurrentAuthSession } from '@/lib/auth'
+import { getCurrentAuthSession, isAdminSession } from '@/lib/auth'
 import { getD1Database } from '@/lib/cloudflare'
 import { parsePageParam } from '@/lib/pagination'
 
@@ -34,6 +34,7 @@ function currentPath(params: Record<string, string>): string {
 export default async function AdminItemsPage({ searchParams }: ItemsPageProps) {
   const session = await getCurrentAuthSession()
   if (!session) redirect('/login?next=/admin/items')
+  if (!isAdminSession(session)) redirect('/')
 
   const params = await searchParams
   const q = paramValue(params?.q)

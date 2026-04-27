@@ -9,11 +9,12 @@ import {
   getActiveLoginLock,
   getAuthConfig,
   loginAttemptKey,
-  missingAuthConfig,
   recordFailedLoginAttempt,
-  verifyAdminCredentials,
+  safeNextPathForRole,
+  updateUserLastLogin,
+  verifyLoginCredentials,
 } from '@/lib/auth'
-import { getD1Database } from '@/lib/cloudflare'
+import { getD1Binding } from '@/lib/cloudflare'
 
 export const dynamic = 'force-dynamic'
 
@@ -48,9 +49,8 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   const password = formString(form.get('password'))
   const nextPath = safeNextPath(formString(form.get('next')) || '/admin')
 
-  const [db, config] = await Promise.all([getD1Database().catch(() => null), getAuthConfig()])
-  const missing = missingAuthConfig(config)
-  if (!db || missing.length > 0) {
+  const [db, config] = await Promise.all([getD1Binding().catch(() => null), getAuthConfig()])
+  if (!db || !config.authSecret) {
     return loginRedirect(request, 'config', nextPath)
   }
 
@@ -60,15 +60,18 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     return loginRedirect(request, 'locked', nextPath)
   }
 
-  if (!verifyAdminCredentials(config, username, password)) {
+  const user = await verifyLoginCredentials(db, config, username, password)
+  if (!user) {
     await recordFailedLoginAttempt(db, attemptKey)
     return loginRedirect(request, 'invalid', nextPath)
   }
 
   await clearLoginAttempts(db, attemptKey)
   await cleanupExpiredAuthSessions(db)
-  const session = await createAuthSession(db, config)
-  const response = NextResponse.redirect(new URL(nextPath, request.url), { status: 303 })
+  await updateUserLastLogin(db, user.id)
+  const session = await createAuthSession(db, config, user.id)
+  const redirectPath = safeNextPathForRole(nextPath, user.role)
+  const response = NextResponse.redirect(new URL(redirectPath, request.url), { status: 303 })
   response.cookies.set(AUTH_SESSION_COOKIE, session.token, {
     expires: session.expiresAt,
     httpOnly: true,

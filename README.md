@@ -135,20 +135,19 @@ data/
 - `/admin`：受保护控制台入口
 - `/admin/sources`：管理数据源，支持新增、编辑、启用/停用
 - `/admin/items`：管理资讯，支持筛选、分页、软隐藏/恢复
-- `/api/auth/login` / `/api/auth/logout`：登录与登出
-- `/api/admin/*`：受登录保护的后台写入 API
+- `/api/auth/login` / `/api/auth/register` / `/api/auth/logout`：登录、注册与登出
+- `/api/admin/*`：受 admin 角色保护的后台写入 API
 
-生产环境需要配置 Cloudflare Worker Secret：
+生产环境需要配置 Cloudflare Worker Secret。`READO_AUTH_SECRET` 只用于会话签名，不是管理员密码。注册会创建普通 `member` 账号，后台权限由 D1 的 `auth_users.role = 'admin'` 控制。
 
 ```bash
 cd apps/web
 printf "%s" "一段32字节以上随机字符串" | npx wrangler secret put READO_AUTH_SECRET
-printf "%s" "你的管理员密码" | npx wrangler secret put READO_ADMIN_PASSWORD
-# 可选，默认用户名是 admin
-printf "%s" "admin" | npx wrangler secret put READO_ADMIN_USERNAME
 ```
 
-如果通过 GitHub Actions 部署，同步添加 `READO_AUTH_SECRET`、`READO_ADMIN_PASSWORD`，可选添加 `READO_ADMIN_USERNAME` 到 GitHub Repository Secrets。
+管理员密码不建议放在本地环境变量里。如果不使用 legacy `READO_ADMIN_PASSWORD` bootstrap，请在 D1 中保留一个 `role = 'admin'` 的账号；普通账号即使带着 `next=/admin` 登录或直接访问 `/admin` 也会被挡回首页。
+
+如果通过 GitHub Actions 部署，同步添加 `READO_AUTH_SECRET` 到 GitHub Repository Secrets。
 
 ## Agent 运营
 

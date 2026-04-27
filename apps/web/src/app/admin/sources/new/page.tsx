@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation'
 
 import { AdminChrome } from '@/components/admin/AdminChrome'
 import { SourceForm } from '@/components/admin/SourceForm'
-import { getCurrentAuthSession } from '@/lib/auth'
+import { getCurrentAuthSession, isAdminSession } from '@/lib/auth'
 
 export const dynamic = 'force-dynamic'
 
@@ -14,6 +14,7 @@ export const metadata: Metadata = {
 export default async function NewSourcePage() {
   const session = await getCurrentAuthSession()
   if (!session) redirect('/login?next=/admin/sources/new')
+  if (!isAdminSession(session)) redirect('/')
 
   return (
     <div className="page-shell admin-shell">

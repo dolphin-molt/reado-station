@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 interface AdminChromeProps {
-  active: 'overview' | 'sources' | 'items'
+  active: 'overview' | 'sources' | 'items' | 'billing' | 'users'
 }
 
 export function AdminChrome({ active }: AdminChromeProps) {
@@ -20,6 +20,12 @@ export function AdminChrome({ active }: AdminChromeProps) {
           </Link>
           <Link data-active={active === 'items'} href="/admin/items">
             资讯
+          </Link>
+          <Link data-active={active === 'billing'} href="/admin/billing">
+            支付日志
+          </Link>
+          <Link data-active={active === 'users'} href="/admin/users">
+            用户
           </Link>
         </div>
         <form action="/api/auth/logout" method="post">

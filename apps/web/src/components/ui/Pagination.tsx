@@ -7,20 +7,30 @@ interface PaginationProps {
   lang: Lang
   pagination: PaginationMeta
   path?: string
+  query?: Record<string, string | null | undefined>
 }
 
-function pageHref(lang: Lang, path: string | undefined, page: number): string {
+function pageHref(lang: Lang, path: string | undefined, page: number, query?: Record<string, string | null | undefined>): string {
   const base = localizedPath(lang, path ?? '')
-  return page <= 1 ? base : `${base}?page=${page}`
+  const params = new URLSearchParams()
+
+  for (const [key, value] of Object.entries(query ?? {})) {
+    if (value) params.set(key, value)
+  }
+
+  if (page > 1) params.set('page', String(page))
+
+  const search = params.toString()
+  return search ? `${base}?${search}` : base
 }
 
-export function Pagination({ lang, pagination, path }: PaginationProps) {
+export function Pagination({ lang, pagination, path, query }: PaginationProps) {
   if (pagination.totalPages <= 1) return null
 
   return (
     <nav aria-label={t(lang, 'pagination.label')} className="pagination">
       {pagination.hasPrevious ? (
-        <Link className="pagination__link" href={pageHref(lang, path, pagination.page - 1)}>
+        <Link className="pagination__link" href={pageHref(lang, path, pagination.page - 1, query)}>
           {t(lang, 'pagination.previous')}
         </Link>
       ) : (
@@ -34,7 +44,7 @@ export function Pagination({ lang, pagination, path }: PaginationProps) {
       </span>
 
       {pagination.hasNext ? (
-        <Link className="pagination__link" href={pageHref(lang, path, pagination.page + 1)}>
+        <Link className="pagination__link" href={pageHref(lang, path, pagination.page + 1, query)}>
           {t(lang, 'pagination.next')}
         </Link>
       ) : (

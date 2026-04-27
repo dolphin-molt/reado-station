@@ -5,7 +5,8 @@ import { join, resolve } from 'node:path'
 import { cache } from 'react'
 
 import type { DayMeta, DigestData, SiteItem } from '../../../../packages/shared/src'
-import { D1UnavailableError, getD1Database, shouldRequireD1 } from '@/lib/cloudflare'
+import { buildCategoryOptions, type CategoryOption } from '@/lib/categories'
+import { D1UnavailableError, getCloudflareEnv, getD1Database, shouldRequireD1 } from '@/lib/cloudflare'
 import { loadD1ArchivePageContent, loadD1HomePageContent, loadD1SiteContent } from '@/lib/content-d1'
 import type { Lang } from '@/lib/i18n'
 import { createPaginationMeta, paginationOffset, type PaginationMeta } from '@/lib/pagination'
@@ -26,6 +27,16 @@ export interface HomePageData {
   pagination: PaginationMeta
   sourceCount: number
   totalItems: number
+  categories: CategoryOption[]
+  activeCategory: string | null
+}
+
+export interface SidebarData {
+  date: string | null
+  sourceCount: number
+  totalItems: number
+  categories: CategoryOption[]
+  activeCategory: string | null
 }
 
 export interface ArchivePageData {
@@ -35,7 +46,6 @@ export interface ArchivePageData {
 
 export interface SiteContent {
   days: DayMeta[]
-  digests: DigestData[]
   items: SiteItem[]
 }
 
@@ -57,15 +67,13 @@ async function readJsonFile<T>(filename: string, fallback: T): Promise<T> {
 }
 
 async function loadJsonSiteContent(): Promise<SiteContent> {
-  const [days, digests, items] = await Promise.all([
+  const [days, items] = await Promise.all([
     readJsonFile<DayMeta[]>('days.json', []),
-    readJsonFile<DigestData[]>('digests.json', []),
     readJsonFile<SiteItem[]>('items.json', []),
   ])
 
   return {
     days: [...days].sort((a, b) => a.date.localeCompare(b.date)),
-    digests: [...digests].sort((a, b) => b.date.localeCompare(a.date)),
     items,
   }
 }
@@ -116,6 +124,34 @@ function buildKeyStories(digest: DigestData | null | undefined): KeyStory[] {
   return keyStories
 }
 
+function isBuildTime(): boolean {
+  return process.env.NEXT_PHASE === 'phase-production-build' || process.env.npm_lifecycle_event?.includes('build') === true
+}
+
+async function fetchDigestFromApi(date: string | null): Promise<DigestData | null> {
+  if (!date) return null
+  if (isBuildTime()) return null
+
+  try {
+    const env = await getCloudflareEnv()
+    const path = `/api/digest?date=${encodeURIComponent(date)}`
+    const response = env?.WORKER_SELF_REFERENCE
+      ? await env.WORKER_SELF_REFERENCE.fetch(`https://reado.internal${path}`)
+      : env?.READO_INTERNAL_API_BASE_URL
+        ? await fetch(`${env.READO_INTERNAL_API_BASE_URL.replace(/\/$/, '')}${path}`)
+        : process.env.READO_INTERNAL_API_BASE_URL
+          ? await fetch(`${process.env.READO_INTERNAL_API_BASE_URL.replace(/\/$/, '')}${path}`)
+          : null
+
+    if (!response?.ok) return null
+    const payload = await response.json() as { digest?: DigestData | null }
+    return payload.digest ?? null
+  } catch (error) {
+    console.warn('Digest API read failed', error)
+    return null
+  }
+}
+
 export const getArchivePageData = cache(async (page = 1): Promise<ArchivePageData> => {
   const db = await getD1DatabaseForContent()
   if (db) {
@@ -135,25 +171,38 @@ export const getArchivePageData = cache(async (page = 1): Promise<ArchivePageDat
   }
 })
 
-export const getHomePageData = cache(async (_lang: Lang, page = 1): Promise<HomePageData> => {
+function categoryOptionsForItems(items: SiteItem[], activeCategory?: string | null): CategoryOption[] {
+  const counts = new Map<string, number>()
+  for (const item of items) {
+    counts.set(item.category, (counts.get(item.category) ?? 0) + 1)
+  }
+  return buildCategoryOptions(counts, activeCategory)
+}
+
+export const getHomePageData = cache(async (_lang: Lang, page = 1, category: string | null = null): Promise<HomePageData> => {
+  const itemCategory = category === 'all' ? null : category
   const db = await getD1DatabaseForContent()
   if (db) {
     const data = await loadD1HomePageContent(db, {
       page,
       pageSize: HOME_ITEMS_PAGE_SIZE,
+      category: itemCategory,
     })
+    const digest = category ? null : await fetchDigestFromApi(data.date)
     return {
       date: data.date,
       items: data.items,
-      observationText: data.digest?.observationText ?? '',
-      keyStories: buildKeyStories(data.digest),
+      observationText: digest?.observationText ?? '',
+      keyStories: buildKeyStories(digest),
       pagination: data.pagination,
       sourceCount: data.sourceCount,
-      totalItems: data.pagination.totalItems,
+      totalItems: data.totalItems,
+      categories: data.categories,
+      activeCategory: category,
     }
   }
 
-  const { days, digests, items } = await loadSiteContent()
+  const { days, items } = await loadSiteContent()
   const latestDay = days.at(-1)
 
   if (!latestDay) {
@@ -166,14 +215,17 @@ export const getHomePageData = cache(async (_lang: Lang, page = 1): Promise<Home
       pagination,
       sourceCount: 0,
       totalItems: 0,
+      categories: [],
+      activeCategory: category,
     }
   }
 
   const todayItems = items.filter((item) => item.date === latestDay.date)
-  const pagination = createPaginationMeta(page, HOME_ITEMS_PAGE_SIZE, todayItems.length)
-  const pageItems = todayItems.slice(paginationOffset(pagination), paginationOffset(pagination) + pagination.pageSize)
+  const filteredItems = itemCategory ? todayItems.filter((item) => item.category === itemCategory) : todayItems
+  const pagination = createPaginationMeta(page, HOME_ITEMS_PAGE_SIZE, filteredItems.length)
+  const pageItems = filteredItems.slice(paginationOffset(pagination), paginationOffset(pagination) + pagination.pageSize)
   const sourceCount = new Set(todayItems.map((item) => item.sourceName).filter(Boolean)).size
-  const digest = digests.find((entry) => entry.date === latestDay.date)
+  const digest = category ? null : await fetchDigestFromApi(latestDay.date)
 
   return {
     date: latestDay.date,
@@ -183,6 +235,19 @@ export const getHomePageData = cache(async (_lang: Lang, page = 1): Promise<Home
     pagination,
     sourceCount,
     totalItems: todayItems.length,
+    categories: categoryOptionsForItems(todayItems, itemCategory),
+    activeCategory: category,
+  }
+})
+
+export const getSidebarData = cache(async (lang: Lang, activeCategory: string | null = null): Promise<SidebarData> => {
+  const data = await getHomePageData(lang, 1, activeCategory)
+  return {
+    date: data.date,
+    sourceCount: data.sourceCount,
+    totalItems: data.totalItems,
+    categories: data.categories,
+    activeCategory: data.activeCategory,
   }
 })
 

@@ -4,7 +4,7 @@ import { notFound, redirect } from 'next/navigation'
 import { AdminChrome } from '@/components/admin/AdminChrome'
 import { SourceForm } from '@/components/admin/SourceForm'
 import { getAdminSource } from '@/lib/admin-data'
-import { getCurrentAuthSession } from '@/lib/auth'
+import { getCurrentAuthSession, isAdminSession } from '@/lib/auth'
 import { getD1Database } from '@/lib/cloudflare'
 
 export const dynamic = 'force-dynamic'
@@ -21,6 +21,7 @@ export default async function SourceEditPage({ params }: SourceEditPageProps) {
   const { id } = await params
   const session = await getCurrentAuthSession()
   if (!session) redirect(`/login?next=/admin/sources/${encodeURIComponent(id)}`)
+  if (!isAdminSession(session)) redirect('/')
 
   const db = await getD1Database()
   if (!db) throw new Error('D1 database is required for admin source management')

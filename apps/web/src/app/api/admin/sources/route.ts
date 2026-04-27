@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server'
 
 import { safeNextPath, sourceInputFromForm } from '@/lib/admin-forms'
 import { upsertAdminSource } from '@/lib/admin-data'
-import { getCurrentAuthSession } from '@/lib/auth'
+import { getCurrentAuthSession, isAdminSession } from '@/lib/auth'
 import { getD1Database } from '@/lib/cloudflare'
 
 export const dynamic = 'force-dynamic'
@@ -14,7 +14,8 @@ function redirectTo(request: NextRequest, path: string): NextResponse {
 
 async function requireAdmin(request: NextRequest): Promise<NextResponse | null> {
   const session = await getCurrentAuthSession()
-  if (session) return null
+  if (isAdminSession(session)) return null
+  if (session) return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
   return redirectTo(request, '/login?next=/admin/sources')
 }
 

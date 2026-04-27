@@ -47,6 +47,13 @@ echo "Running local collection..."
 export READO_D1_WRITE_REQUIRED="${READO_D1_WRITE_REQUIRED:-true}"
 npx tsx scripts/collect.ts --mode local
 
+if [ -n "${ANTHROPIC_API_KEY:-}" ] || [ -n "${SILICONFLOW_API_KEY:-}" ] || [ -f ".env" ]; then
+    echo "Generating AI summary..."
+    npx tsx scripts/summarize.ts
+else
+    echo "WARN: ANTHROPIC_API_KEY/.env not found. Skipping AI summary."
+fi
+
 echo "Local collection finished. Runtime data is D1-only; local files are ignored by Git."
 
 echo "=== Local collection finished at $(date) ==="

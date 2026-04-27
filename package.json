@@ -14,6 +14,7 @@
     "pipeline:cloud": "npm run sync-sources && npm run collect:cloud",
     "pipeline:auto": "npm run sync-sources && npm run collect && npm run summarize",
     "pipeline:local": "npm run collect:local",
+    "backfill:run": "tsx scripts/run-backfill.ts",
     "build:site-data": "tsx scripts/build-site-data.ts",
     "build:images": "tsx scripts/fetch-images.ts",
     "translate": "tsx scripts/translate.ts",
