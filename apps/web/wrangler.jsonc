@@ -1,7 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "reado-station-web",
-  "main": ".open-next/worker.js",
+  "main": "src/worker.ts",
   "compatibility_date": "2026-04-16",
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
   "assets": {
@@ -23,9 +23,17 @@
       "migrations_dir": "../../db/d1"
     }
   ],
+  "triggers": {
+    "crons": [
+      "0 0 * * *",
+      "0 10 * * *"
+    ]
+  },
   "vars": {
     "READO_CONTENT_SOURCE": "d1",
-    "READO_REQUIRE_D1": "true"
+    "READO_REQUIRE_D1": "true",
+    "LLM_PROVIDER": "siliconflow",
+    "LLM_MODEL": "Qwen/Qwen3-32B"
   },
   "observability": {
     "enabled": true,

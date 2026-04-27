@@ -1,11 +1,6 @@
 name: AI Daily Collection
 
 on:
-  schedule:
-    # 早报: UTC 00:00 = 北京 08:00
-    - cron: '0 0 * * *'
-    # 晚报: UTC 10:00 = 北京 18:00
-    - cron: '0 10 * * *'
   workflow_dispatch:
     inputs:
       mode:
@@ -27,6 +22,10 @@ env:
   READO_D1_API_BASE_URL: ${{ secrets.READO_D1_API_BASE_URL }}
   READO_D1_API_SECRET: ${{ secrets.READO_D1_API_SECRET }}
   READO_D1_WRITE_REQUIRED: ${{ vars.READO_D1_WRITE_REQUIRED || 'true' }}
+  ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+  SILICONFLOW_API_KEY: ${{ secrets.SILICONFLOW_API_KEY }}
+  LLM_PROVIDER: ${{ vars.LLM_PROVIDER || 'siliconflow' }}
+  LLM_MODEL: ${{ vars.LLM_MODEL || 'Qwen/Qwen3-32B' }}
 
 jobs:
   collect:
@@ -60,12 +59,13 @@ jobs:
       - name: Collect data (cloud mode)
         run: npx tsx scripts/collect.ts --mode ${{ inputs.mode || 'cloud' }}
 
-      # v1.0: 日报由 Agent 在对话中生成，Actions 只负责采集
-      # v2.0: 取消下面的注释启用自动摘要（需要 ANTHROPIC_API_KEY secret）
-      # - name: Generate AI summary
-      #   run: npx tsx scripts/summarize.ts
-      #   env:
-      #     ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      - name: Generate AI summary
+        if: ${{ env.ANTHROPIC_API_KEY != '' || env.SILICONFLOW_API_KEY != '' }}
+        run: npx tsx scripts/summarize.ts
+
+      - name: Skip AI summary without model key
+        if: ${{ env.ANTHROPIC_API_KEY == '' && env.SILICONFLOW_API_KEY == '' }}
+        run: echo "No LLM API key is configured; collection succeeded but digest generation was skipped."
 
       - name: Confirm D1-only collection
         run: echo "Collection writes to D1 through /api/ingest; repository data files are intentionally not committed."

@@ -3,12 +3,38 @@
 declare global {
   interface CloudflareEnv {
     DB?: D1Database
+    WORKER_SELF_REFERENCE?: Fetcher
     READO_API_SECRET?: string
     READO_AUTH_SECRET?: string
     READO_ADMIN_USERNAME?: string
     READO_ADMIN_PASSWORD?: string
     READO_CONTENT_SOURCE?: 'd1' | 'json'
     READO_REQUIRE_D1?: string
+    READO_X_API_BASE_URL?: string
+    READO_X_BEARER_TOKEN?: string
+    READO_INTERNAL_API_BASE_URL?: string
+    X_BEARER_TOKEN?: string
+    GOOGLE_CLIENT_ID?: string
+    GOOGLE_CLIENT_SECRET?: string
+    GITHUB_CLIENT_ID?: string
+    GITHUB_CLIENT_SECRET?: string
+    READO_STRIPE_SECRET_KEY?: string
+    READO_STRIPE_WEBHOOK_SECRET?: string
+    READO_STRIPE_PRICE_TEST?: string
+    READO_STRIPE_PRICE_PRO?: string
+    READO_STRIPE_PRICE_POWER?: string
+    READO_STRIPE_PRICE_TEAM?: string
+    STRIPE_PRICE_TEST?: string
+    STRIPE_SECRET_KEY?: string
+    STRIPE_WEBHOOK_SECRET?: string
+    STRIPE_PRICE_PRO?: string
+    STRIPE_PRICE_POWER?: string
+    STRIPE_PRICE_TEAM?: string
+    ANTHROPIC_API_KEY?: string
+    SILICONFLOW_API_KEY?: string
+    SILICONFLOW_API_BASE_URL?: string
+    LLM_PROVIDER?: string
+    LLM_MODEL?: string
   }
 }
 
