@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { NewsCard } from '@/components/news/NewsCard'
 import { getCurrentAuthSession } from '@/lib/auth'
 import { getD1Binding } from '@/lib/cloudflare'
-import { localizedPath, readerHomePath, t, type Lang } from '@/lib/i18n'
+import { localizedPath, t, type Lang } from '@/lib/i18n'
 import { getDefaultWorkspaceForUser } from '@/lib/workspaces'
 import { loadWorkspaceXReaderData } from '@/lib/x-accounts'
 
@@ -13,13 +13,12 @@ interface XReaderPageProps {
   subscribed?: boolean
 }
 
-function accountHref(lang: Lang, username: string): string {
-  const base = readerHomePath(lang)
-  return `${base}?category=twitter&account=${encodeURIComponent(username)}`
-}
-
 function sourceDetailHref(lang: Lang, username: string): string {
   return `${localizedPath(lang, 'sources')}/tw-${encodeURIComponent(username.toLowerCase())}`
+}
+
+function xProfileHref(username: string): string {
+  return `https://x.com/${username}`
 }
 
 export async function XReaderPage({ account = null, lang, subscribed = false }: XReaderPageProps) {
@@ -88,7 +87,7 @@ export async function XReaderPage({ account = null, lang, subscribed = false }: 
                   const active = data.activeAccount?.account.id === entry.account.id
                   return (
                     <article className="x-reader__account" data-active={active} key={entry.account.id}>
-                      <Link className="x-reader__account-main" href={accountHref(lang, entry.account.username)}>
+                      <Link className="x-reader__account-main" href={sourceDetailHref(lang, entry.account.username)}>
                         <div className="x-reader__account-header">
                           {entry.account.profileImageUrl ? (
                             <img alt="" className="x-reader__avatar x-reader__avatar--image" src={entry.account.profileImageUrl} />
@@ -103,9 +102,6 @@ export async function XReaderPage({ account = null, lang, subscribed = false }: 
                       </Link>
                       <div className="x-reader__account-meta">
                         <span>{entry.itemCount} {t(lang, 'xReader.items')}</span>
-                        <Link className="x-reader__account-detail" href={sourceDetailHref(lang, entry.account.username)}>
-                          {t(lang, 'xReader.detail')}
-                        </Link>
                       </div>
                     </article>
                   )
@@ -126,21 +122,17 @@ export async function XReaderPage({ account = null, lang, subscribed = false }: 
                     <div className="x-reader__profile-headline">
                       <div>
                         <h3>
-                          <a href={`https://x.com/${data.activeAccount.account.username}`} rel="noreferrer" target="_blank">
+                          <a href={xProfileHref(data.activeAccount.account.username)} rel="noreferrer" target="_blank">
                             {data.activeAccount.account.name}
                           </a>
                         </h3>
-                        <p>@{data.activeAccount.account.username}</p>
+                        <p>
+                          <a href={xProfileHref(data.activeAccount.account.username)} rel="noreferrer" target="_blank">
+                            @{data.activeAccount.account.username}
+                          </a>
+                        </p>
                       </div>
-                      <div className="x-reader__profile-actions">
-                        {data.activeAccount.account.verified && <span className="status-pill status-pill--ok">Verified</span>}
-                        <Link className="table-link" href={sourceDetailHref(lang, data.activeAccount.account.username)}>
-                          {t(lang, 'xReader.detail')}
-                        </Link>
-                        <a className="table-link" href={`https://x.com/${data.activeAccount.account.username}`} rel="noreferrer" target="_blank">
-                          {t(lang, 'xReader.openProfile')}
-                        </a>
-                      </div>
+                      {data.activeAccount.account.verified && <span className="status-pill status-pill--ok">Verified</span>}
                     </div>
 
                     {data.activeAccount.account.description && <p className="x-reader__profile-description">{data.activeAccount.account.description}</p>}

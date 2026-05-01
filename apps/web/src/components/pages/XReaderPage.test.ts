@@ -50,12 +50,14 @@ vi.mock('@/lib/x-accounts', () => ({
 }))
 
 describe('XReaderPage', () => {
-  it('renders a direct source detail link without explanatory copy', async () => {
+  it('uses the account card for details and the handle for X profile navigation', async () => {
     const element = await XReaderPage({ lang: 'zh' })
     const html = renderToStaticMarkup(createElement(() => element))
 
-    expect(html).toContain('href="/sources/tw-openai"')
-    expect(html).toContain('详情')
+    expect(html).toContain('class="x-reader__account-main" href="/sources/tw-openai"')
+    expect(html).toContain('href="https://x.com/OpenAI"')
+    expect(html).not.toContain('详情')
+    expect(html).not.toContain('X 主页')
     expect(html).not.toContain('按来源阅读更新')
     expect(html).not.toContain('选择你订阅的账号')
     expect(html).not.toContain('订阅账号')
