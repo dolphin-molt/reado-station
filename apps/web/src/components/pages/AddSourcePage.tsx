@@ -102,6 +102,7 @@ interface AddSourceCopy {
   sourceTypes: Array<{ id: 'x' | 'rss'; title: string; detail: string }>
   xLabel: string
   xPlaceholder: string
+  xExactHandleHint: string
   xHint: string
   xSubmit: string
   xNotice: string
@@ -140,6 +141,7 @@ const copy: Record<Lang, AddSourceCopy> = {
     ],
     xLabel: 'X 用户名或主页链接',
     xPlaceholder: '@OpenAI / https://x.com/OpenAI',
+    xExactHandleHint: '请填写完整 @handle 或账号主页；reado 不会按前缀自动选择账号。',
     xHint: 'X 入库信息按 1 item = 1 credit 扣减；如果额度不足，回溯任务会保留已入库内容并标记为部分完成。',
     xSubmit: '接入频道',
     xNotice: '频道信号已填入，可以直接接入。',
@@ -188,6 +190,7 @@ const copy: Record<Lang, AddSourceCopy> = {
     ],
     xLabel: 'X username or profile URL',
     xPlaceholder: '@OpenAI / https://x.com/OpenAI',
+    xExactHandleHint: 'Enter the complete @handle or profile URL. reado will not auto-pick an account from a prefix.',
     xHint: 'X items cost 1 credit per stored item. If credits run out, the job keeps what was imported and is marked partial.',
     xSubmit: 'Tune channel',
     xNotice: 'The signal is in the input. You can tune this channel directly.',
@@ -316,6 +319,7 @@ export async function AddSourcePage({ error = '', intent = '', lang, query = '',
                   placeholder={sourceType === 'x' ? text.xPlaceholder : text.rssPlaceholder}
                   type={sourceType === 'x' ? 'text' : 'url'}
                 />
+                {sourceType === 'x' && <small>{text.xExactHandleHint}</small>}
               </label>
 
               <div className="source-intake__options">

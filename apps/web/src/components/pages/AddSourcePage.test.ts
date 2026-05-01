@@ -24,4 +24,13 @@ describe('add source form controls', () => {
     expect(html).toContain('name="backfillHours"')
     expect(html).not.toContain('<select')
   })
+
+  it('makes X subscription exact-handle behavior explicit', async () => {
+    const element = await AddSourcePage({ lang: 'zh', query: 'Anthropic', type: 'x' })
+    const html = renderToStaticMarkup(createElement(() => element))
+
+    expect(html).toContain('完整 @handle')
+    expect(html).toContain('不会按前缀自动选择账号')
+    expect(html).toContain('https://x.com/AnthropicAI')
+  })
 })
