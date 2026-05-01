@@ -60,7 +60,7 @@ export async function MySourcesPage({ lang }: { lang: Lang }) {
                     <small>{lang === 'zh' ? '最近采集' : 'Last collected'}: {source.latestCollectedAt ?? (lang === 'zh' ? '等待采集' : 'pending')}</small>
                   </div>
                   <div className="source-suggestion__actions">
-                    <Link className="table-link" href={localizedPath(lang, 'channels')}>{lang === 'zh' ? '查看频道库' : 'Channel library'}</Link>
+                    <Link className="table-link" href={`${localizedPath(lang, 'sources')}/${encodeURIComponent(source.sourceId)}`}>{lang === 'zh' ? '查看详情' : 'Details'}</Link>
                   </div>
                 </article>
               ))}
