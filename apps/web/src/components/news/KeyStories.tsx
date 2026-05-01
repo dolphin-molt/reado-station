@@ -5,9 +5,11 @@ export function KeyStories({ lang, stories }: { lang: Lang; stories: KeyStory[] 
   if (stories.length === 0) return null
 
   return (
-    <section className="key-stories">
-      <div className="container">
+    <section className="key-stories reader-signal-list">
+      <div className="key-stories__header">
         <h2 className="key-stories__title">{t(lang, 'keyStories.title')}</h2>
+        <p>{lang === 'zh' ? '按重要程度排列，像一张今天的信号清单。' : 'Ranked by importance, like a signal log for the day.'}</p>
+      </div>
         <ol className="key-stories__list">
           {stories.map((story, index) => (
             <li className="key-stories__item" key={`${story.title}-${index}`}>
@@ -43,7 +45,6 @@ export function KeyStories({ lang, stories }: { lang: Lang; stories: KeyStory[] 
             </li>
           ))}
         </ol>
-      </div>
     </section>
   )
 }

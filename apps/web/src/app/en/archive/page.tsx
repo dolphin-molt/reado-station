@@ -1,18 +1,12 @@
 import type { Metadata } from 'next'
+import { redirect } from 'next/navigation'
 
-import { ArchivePage } from '@/components/pages/ArchivePage'
-import { parsePageParam } from '@/lib/pagination'
-
-export const dynamic = 'force-dynamic'
+export const dynamic = 'force-static'
 
 export const metadata: Metadata = {
   title: 'Archive',
 }
 
-interface PageProps {
-  searchParams?: Promise<Record<string, string | string[] | undefined>>
-}
-
-export default async function Page({ searchParams }: PageProps) {
-  return <ArchivePage lang="en" page={parsePageParam((await searchParams)?.page)} />
+export default function Page() {
+  redirect('/en')
 }

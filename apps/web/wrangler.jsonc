@@ -23,6 +23,12 @@
       "migrations_dir": "../../db/d1"
     }
   ],
+  "r2_buckets": [
+    {
+      "binding": "AUDIO_BUCKET",
+      "bucket_name": "reado-station-audio"
+    }
+  ],
   "triggers": {
     "crons": [
       "0 0 * * *",

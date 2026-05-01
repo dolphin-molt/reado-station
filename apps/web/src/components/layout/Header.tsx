@@ -5,14 +5,14 @@ import { getCurrentAuthSession } from '@/lib/auth'
 import { getD1Binding } from '@/lib/cloudflare'
 import type { CategoryOption } from '@/lib/categories'
 import { getSidebarData } from '@/lib/content'
-import { formatDayLabel, localizedPath, switchPath, t, type Lang } from '@/lib/i18n'
+import { formatDayLabel, localizedPath, readerHomePath, switchPath, t, type Lang } from '@/lib/i18n'
 import { PLAN_LIMITS } from '@/lib/plans'
 import { getDefaultWorkspaceForUser, getWorkspaceCreditBalance, getWorkspaceSourceCount } from '@/lib/workspaces'
 import { loadUserXSubscriptionCount } from '@/lib/x-accounts'
 
-type NavKey = 'home' | 'archive' | 'about' | 'source-add' | 'subscription' | 'auth'
+type NavKey = 'home' | 'channels' | 'archive' | 'about' | 'source-add' | 'subscription' | 'auth'
 
-const FEEDBACK_URL = 'https://github.com/dolphin-molt/reado-station/issues/new/choose'
+const FEEDBACK_PATH = '/#apply'
 
 interface AccountUsage {
   planName: string
@@ -31,6 +31,39 @@ interface HeaderProps {
   activeCategory?: string | null
   categories?: CategoryOption[]
   showSourceFilter?: boolean
+}
+
+function HomeNavIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      className="sidebar-nav__icon"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <path d="M4 11.2 12 4l8 7.2" />
+      <path d="M6.7 10.7V20h10.6v-9.3" />
+      <path d="M10 20v-5.2h4V20" />
+    </svg>
+  )
+}
+
+function ChannelNavIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      className="sidebar-nav__icon"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <path d="M5 6.5h14" />
+      <path d="M7.5 12h9" />
+      <path d="M5 17.5h14" />
+      <path d="M9 4.5v4" />
+      <path d="M15 10v4" />
+      <path d="M11 15.5v4" />
+    </svg>
+  )
 }
 
 export async function Header({
@@ -101,13 +134,35 @@ export async function Header({
 
   const dateLabel = sidebarDate ? formatDayLabel(sidebarDate, lang) : undefined
   const navItems = [
-    { key: 'home' as const, href: localizedPath(lang), label: t(lang, 'nav.today') },
+    {
+      className: 'sidebar-nav__link--home',
+      href: readerHomePath(lang),
+      icon: <HomeNavIcon />,
+      key: 'home' as const,
+      label: t(lang, 'nav.today'),
+    },
+    {
+      className: 'sidebar-nav__link--channels',
+      href: localizedPath(lang, 'channels'),
+      icon: <ChannelNavIcon />,
+      key: 'channels' as const,
+      label: t(lang, 'nav.channels'),
+    },
   ]
   const username = session?.username ?? 'admin'
   const userInitial = username.slice(0, 1).toUpperCase()
   const isAdmin = session?.role === 'admin'
   const showPageMeta = active === 'home' && !sidebarActiveCategory
   const highlightSourceFilter = active === 'home' && Boolean(sidebarActiveCategory)
+  const showMasthead = active === 'home'
+  const mastheadTitle = active === 'home' && !sidebarActiveCategory
+    ? t(lang, 'home.briefTitle')
+    : t(lang, 'home.channelTitle')
+  const mastheadSubtitle = active === 'home' && !sidebarActiveCategory
+    ? t(lang, 'home.briefSubtitle')
+    : active === 'home'
+      ? t(lang, 'home.channelSubtitle')
+      : ''
 
   return (
     <>
@@ -120,7 +175,7 @@ export async function Header({
       <aside className="app-sidebar">
         <div className="sidebar-main">
           <div className="sidebar-brand-row">
-            <Link href={localizedPath(lang)} className="sidebar-brand">
+            <Link href={readerHomePath(lang)} className="sidebar-brand">
               <span className="sidebar-brand__mark">r</span>
               <span className="sidebar-brand__text">reado</span>
             </Link>
@@ -133,12 +188,14 @@ export async function Header({
           <nav aria-label="Main navigation" className="sidebar-nav">
             {navItems.map((item) => (
               <Link
-                className="sidebar-nav__link"
+                aria-label={item.label}
+                className={`sidebar-nav__link ${item.className}`}
                 data-active={active === item.key && !highlightSourceFilter}
                 data-short={item.label.slice(0, 1)}
                 href={item.href}
                 key={item.key}
               >
+                {item.icon}
                 <span className="sidebar-nav__text">{item.label}</span>
               </Link>
             ))}
@@ -187,12 +244,10 @@ export async function Header({
               )}
               {isAdmin && <Link href="/admin">{lang === 'zh' ? '控制台' : 'Console'}</Link>}
               <Link href={localizedPath(lang, 'subscription')}>{t(lang, 'nav.subscription')}</Link>
-              <Link href={localizedPath(lang, 'archive')}>{t(lang, 'nav.archive')}</Link>
               <Link href={switchPath(lang, path)}>{t(lang, 'lang.switch')}</Link>
-              <Link href={localizedPath(lang, 'about')}>{t(lang, 'nav.about')}</Link>
-              <a href={FEEDBACK_URL} rel="noreferrer" target="_blank">
+              <Link href={FEEDBACK_PATH}>
                 {t(lang, 'footer.feedback')}
-              </a>
+              </Link>
               <form action="/api/auth/logout" method="post">
                 <button type="submit">{lang === 'zh' ? '退出登录' : 'Sign out'}</button>
               </form>
@@ -212,24 +267,30 @@ export async function Header({
       </aside>
       <label aria-hidden="true" className="sidebar-backdrop" htmlFor="app-sidebar-toggle" />
 
-      <header className="masthead container">
-        <div className="masthead__tagline">{t(lang, 'tagline')}</div>
-        {showPageMeta && (
-          <div className="masthead__meta">
-            {dateLabel && <span>{dateLabel}</span>}
-            {sidebarSourceCount > 0 && (
-              <span>
-                {sidebarSourceCount} {t(lang, 'header.sources')}
-              </span>
-            )}
-            {sidebarItemCount > 0 && (
-              <span>
-                {sidebarItemCount} {t(lang, 'header.items')}
-              </span>
-            )}
+      {showMasthead && (
+        <header className="masthead container">
+          <div className="masthead__copy">
+            <span className="masthead__label">{t(lang, 'home.signalLabel')}</span>
+            <h1 className="masthead__tagline">{mastheadTitle}</h1>
+            {mastheadSubtitle && <p className="masthead__summary">{mastheadSubtitle}</p>}
           </div>
-        )}
-      </header>
+          {showPageMeta && (
+            <div className="masthead__meta">
+              {dateLabel && <span>{dateLabel}</span>}
+              {sidebarSourceCount > 0 && (
+                <span>
+                  {sidebarSourceCount} {t(lang, 'header.sources')}
+                </span>
+              )}
+              {sidebarItemCount > 0 && (
+                <span>
+                  {sidebarItemCount} {t(lang, 'header.items')}
+                </span>
+              )}
+            </div>
+          )}
+        </header>
+      )}
     </>
   )
 }

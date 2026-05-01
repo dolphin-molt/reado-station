@@ -240,14 +240,18 @@ export const getHomePageData = cache(async (_lang: Lang, page = 1, category: str
   }
 })
 
+export function sidebarDataHomeCategory(activeCategory: string | null = null): string {
+  return activeCategory ?? 'all'
+}
+
 export const getSidebarData = cache(async (lang: Lang, activeCategory: string | null = null): Promise<SidebarData> => {
-  const data = await getHomePageData(lang, 1, activeCategory)
+  const data = await getHomePageData(lang, 1, sidebarDataHomeCategory(activeCategory))
   return {
     date: data.date,
     sourceCount: data.sourceCount,
     totalItems: data.totalItems,
     categories: data.categories,
-    activeCategory: data.activeCategory,
+    activeCategory,
   }
 })
 

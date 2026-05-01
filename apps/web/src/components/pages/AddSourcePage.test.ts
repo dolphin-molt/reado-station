@@ -1,0 +1,27 @@
+import { createElement } from 'react'
+import { renderToStaticMarkup } from 'react-dom/server'
+import { describe, expect, it, vi } from 'vitest'
+
+import { AddSourcePage } from './AddSourcePage'
+
+vi.mock('@/components/layout/Header', () => ({
+  Header: vi.fn(() => createElement('header', { className: 'test-header' })),
+}))
+
+vi.mock('@/components/layout/Footer', () => ({
+  Footer: vi.fn(() => createElement('footer', { className: 'test-footer' })),
+}))
+
+describe('add source form controls', () => {
+  it('renders source options with branded custom dropdowns instead of native selects', async () => {
+    const element = await AddSourcePage({ lang: 'zh' })
+    const html = renderToStaticMarkup(createElement(() => element))
+
+    expect(html).toContain('auth-select')
+    expect(html).toContain('data-name="visibility"')
+    expect(html).toContain('data-name="backfillHours"')
+    expect(html).toContain('name="visibility"')
+    expect(html).toContain('name="backfillHours"')
+    expect(html).not.toContain('<select')
+  })
+})

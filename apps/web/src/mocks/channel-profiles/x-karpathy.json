@@ -1,0 +1,180 @@
+{
+  "id": "x-karpathy",
+  "fetchedAt": "2026-05-01T19:20:00.000Z",
+  "status": 200,
+  "account": {
+    "id": "33836629",
+    "username": "karpathy",
+    "name": "Andrej Karpathy",
+    "description": "I like to train large deep neural nets. Previously Director of AI @ Tesla, founding team @ OpenAI, PhD @ Stanford.",
+    "location": "Stanford",
+    "url": "https://t.co/0EcFthjJXM",
+    "expandedUrl": "https://karpathy.ai",
+    "profileImageUrl": "https://pbs.twimg.com/profile_images/1296667294148382721/9Pr6XrPB_normal.jpg",
+    "createdAt": "2009-04-21T06:49:15.000Z",
+    "verified": true,
+    "verifiedType": "blue",
+    "protected": false,
+    "pinnedTweetId": "1617979122625712128",
+    "publicMetrics": {
+      "followers_count": 2358128,
+      "following_count": 1085,
+      "tweet_count": 10105,
+      "listed_count": 25368,
+      "like_count": 23465,
+      "media_count": 864
+    },
+    "entities": {
+      "url": {
+        "urls": [
+          {
+            "start": 0,
+            "end": 23,
+            "url": "https://t.co/0EcFthjJXM",
+            "expanded_url": "https://karpathy.ai",
+            "display_url": "karpathy.ai"
+          }
+        ]
+      }
+    }
+  },
+  "posts": [
+    {
+      "id": "1617979122625712128",
+      "url": "https://x.com/karpathy/status/1617979122625712128",
+      "text": "The hottest new programming language is English",
+      "createdAt": "2023-01-24T20:14:18.000Z",
+      "lang": "en",
+      "publicMetrics": {
+        "retweet_count": 8118,
+        "reply_count": 2021,
+        "like_count": 64965,
+        "quote_count": 1745,
+        "bookmark_count": 6518,
+        "impression_count": 11495635
+      },
+      "contextAnnotations": [
+        {
+          "domain": {
+            "id": "46",
+            "name": "Business Taxonomy",
+            "description": "Categories within Brand Verticals that narrow down the scope of Brands"
+          },
+          "entity": {
+            "id": "1557697333571112960",
+            "name": "Technology Business",
+            "description": "Brands, companies, advertisers and every non-person handle with the profit intent related to softwares, apps, communication equipments, hardwares"
+          }
+        }
+      ],
+      "conversationId": "1617979122625712128",
+      "replySettings": "everyone",
+      "possiblySensitive": false,
+      "editHistoryTweetIds": ["1617979122625712128"]
+    }
+  ],
+  "extensions": {
+    "website": [
+      {
+        "title": "karpathy.ai",
+        "url": "https://karpathy.ai",
+        "kind": "website",
+        "source": "profile url",
+        "meta": "profile url",
+        "evidence": "X API profile entities.url.expanded_url",
+        "summary": "个人网站，汇总文章、课程、研究和近期项目。"
+      }
+    ],
+    "github": [
+      {
+        "title": "nanoGPT",
+        "url": "https://github.com/karpathy/nanoGPT",
+        "kind": "repo",
+        "source": "GitHub",
+        "meta": "GPT training / educational repo",
+        "stars": "57.4k",
+        "forks": "9.8k",
+        "commits": "210",
+        "language": "Python",
+        "evidence": "GitHub public profile search result",
+        "summary": "一个面向教育和实验的最小 GPT 训练代码库，用尽量短的代码展示 GPT 训练、采样和模型结构。适合从 X 上的观点继续深入到可运行代码。"
+      },
+      {
+        "title": "micrograd",
+        "url": "https://github.com/karpathy/micrograd",
+        "kind": "repo",
+        "source": "GitHub",
+        "meta": "autograd / backprop from scratch",
+        "stars": "15.7k",
+        "forks": "2.4k",
+        "commits": "24",
+        "language": "Jupyter Notebook",
+        "evidence": "GitHub public profile search result",
+        "summary": "一个很小的自动微分引擎，用标量级计算把反向传播讲清楚。适合理解他在 X 上反复强调的“从底层构建直觉”。"
+      }
+    ],
+    "videos": [
+      {
+        "title": "Andrej Karpathy YouTube Channel",
+        "url": "https://www.youtube.com/@AndrejKarpathy",
+        "kind": "channel",
+        "thumbnailUrl": "https://pbs.twimg.com/profile_images/1296667294148382721/9Pr6XrPB_400x400.jpg",
+        "source": "YouTube",
+        "meta": "AI education channel",
+        "evidence": "karpathy.ai and public web search results",
+        "summary": "他的 AI 教育视频主阵地，包括神经网络、语言模型和工程化教学内容。"
+      },
+      {
+        "title": "Lex Fridman Podcast #333",
+        "url": "https://www.youtube.com/watch?v=cdiD-9MMpb0",
+        "kind": "video",
+        "thumbnailUrl": "https://i.ytimg.com/vi/cdiD-9MMpb0/hqdefault.jpg",
+        "source": "YouTube",
+        "meta": "3h+ interview",
+        "evidence": "public web search result for Lex Fridman Podcast #333",
+        "summary": "长访谈，覆盖 Tesla AI、自动驾驶、Optimus、AGI 和个人研究脉络。"
+      }
+    ]
+  },
+  "request": {
+    "endpoint": "GET /2/users/by/username/karpathy",
+    "expansions": ["pinned_tweet_id"],
+    "userFields": [
+      "created_at",
+      "description",
+      "entities",
+      "id",
+      "location",
+      "name",
+      "pinned_tweet_id",
+      "profile_image_url",
+      "protected",
+      "public_metrics",
+      "url",
+      "username",
+      "verified",
+      "verified_type",
+      "withheld"
+    ],
+    "tweetFields": [
+      "attachments",
+      "author_id",
+      "context_annotations",
+      "conversation_id",
+      "created_at",
+      "edit_controls",
+      "edit_history_tweet_ids",
+      "entities",
+      "geo",
+      "id",
+      "in_reply_to_user_id",
+      "lang",
+      "possibly_sensitive",
+      "public_metrics",
+      "referenced_tweets",
+      "reply_settings",
+      "text",
+      "withheld"
+    ]
+  }
+}

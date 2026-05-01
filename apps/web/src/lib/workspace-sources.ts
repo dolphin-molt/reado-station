@@ -1,6 +1,7 @@
 import 'server-only'
 
 import { PLAN_LIMITS, normalizeBackfillHours, normalizeSourceType, normalizeVisibility, type SourceType, type SourceVisibility } from '@/lib/plans'
+import { collectionWindowForHours, ensureSourceCollectionJob } from '@/lib/source-collections'
 import { getWorkspaceCreditBalance, getWorkspaceSourceCount, type Workspace } from '@/lib/workspaces'
 import { normalizeXUsername, resolveXAccount } from '@/lib/x-accounts'
 
@@ -34,7 +35,8 @@ export interface SubscribeWorkspaceSourceResult {
   sourceId: string
   sourceType: SourceType
   displayName: string
-  backfillJobId: string
+  collectionJobId: string | null
+  collectionStatus: string
 }
 
 function sourceIdForRss(url: string): string {
@@ -176,31 +178,35 @@ export async function subscribeWorkspaceSource(db: D1Database, input: SubscribeI
       : await ensureXSource(db, normalizeXUsername(input.value), backfillHours)
 
   const now = new Date().toISOString()
-  const backfillJobId = crypto.randomUUID()
+  const { windowStart, windowEnd } = collectionWindowForHours(backfillHours)
+  const collection = await ensureSourceCollectionJob(db, {
+    sourceId: source.id,
+    sourceType,
+    windowStart,
+    windowEnd,
+    requestedByWorkspaceId: input.workspace.id,
+  }).catch((error) => {
+    if (error instanceof Error && (error.message.includes('source_collection_jobs') || error.message.includes('source_collection_snapshots'))) {
+      return null
+    }
+    throw error
+  })
+  const subscriptionStatus = collection ? (collection.decision.status === 'fresh' ? 'ready' : collection.decision.status) : 'pending_backfill'
   const batch: D1PreparedStatement[] = [
     db
       .prepare(
         `
           INSERT INTO workspace_source_subscriptions (
             workspace_id, source_id, source_type, visibility, backfill_hours, status, created_by, created_at, updated_at
-          ) VALUES (?, ?, ?, ?, ?, 'pending_backfill', ?, ?, ?)
+          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
           ON CONFLICT(workspace_id, source_id) DO UPDATE SET
             visibility = excluded.visibility,
             backfill_hours = excluded.backfill_hours,
-            status = 'pending_backfill',
+            status = excluded.status,
             updated_at = excluded.updated_at
         `,
       )
-      .bind(input.workspace.id, source.id, sourceType, visibility, backfillHours, input.userId, now, now),
-    db
-      .prepare(
-        `
-          INSERT INTO source_backfill_jobs (
-            id, workspace_id, source_id, source_type, backfill_hours, status, credits_used, created_at, updated_at
-          ) VALUES (?, ?, ?, ?, ?, 'queued', 0, ?, ?)
-        `,
-      )
-      .bind(backfillJobId, input.workspace.id, source.id, sourceType, backfillHours, now, now),
+      .bind(input.workspace.id, source.id, sourceType, visibility, backfillHours, subscriptionStatus, input.userId, now, now),
   ]
 
   if ('accountId' in source) {
@@ -223,7 +229,8 @@ export async function subscribeWorkspaceSource(db: D1Database, input: SubscribeI
     sourceId: source.id,
     sourceType,
     displayName: source.name,
-    backfillJobId,
+    collectionJobId: collection?.job?.id ?? null,
+    collectionStatus: subscriptionStatus,
   }
 }
 

@@ -11,6 +11,7 @@ export interface ReadoCloudflareEnv extends CloudflareEnv {
   READO_REQUIRE_D1?: string
   READO_X_API_BASE_URL?: string
   READO_X_BEARER_TOKEN?: string
+  X_READO_BEAR_TOKEN?: string
   READO_INTERNAL_API_BASE_URL?: string
   GOOGLE_CLIENT_ID?: string
   GOOGLE_CLIENT_SECRET?: string
@@ -29,6 +30,8 @@ export interface ReadoCloudflareEnv extends CloudflareEnv {
   STRIPE_PRICE_POWER?: string
   STRIPE_PRICE_TEAM?: string
   X_BEARER_TOKEN?: string
+  MINIMAX_READO_KEY?: string
+  MINIMAX_API_KEY?: string
   ANTHROPIC_API_KEY?: string
   SILICONFLOW_API_KEY?: string
   SILICONFLOW_API_BASE_URL?: string

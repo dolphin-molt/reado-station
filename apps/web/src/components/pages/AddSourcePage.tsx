@@ -2,7 +2,8 @@ import Link from 'next/link'
 
 import { Footer } from '@/components/layout/Footer'
 import { Header } from '@/components/layout/Header'
-import { localizedPath, type Lang } from '@/lib/i18n'
+import { BrandedSelect } from '@/components/ui/BrandedSelect'
+import { localizedPath, readerHomePath, type Lang } from '@/lib/i18n'
 
 interface AddSourcePageProps {
   error?: string
@@ -123,29 +124,29 @@ interface AddSourceCopy {
 
 const copy: Record<Lang, AddSourceCopy> = {
   zh: {
-    kicker: 'reado 信息源接入',
-    title: '添加信息源',
-    subtitle: '订阅 X 或 RSS 源，选择私有/公开共享与回溯窗口。提交后系统会建立 workspace 订阅并排队采集。',
+    kicker: 'reado private signal station',
+    title: '接入一个新频道',
+    subtitle: '把值得关注的 X 或 RSS 源调进你的私人信号台。reado 会保存订阅、安排回溯，并在每日简报里过滤噪声。',
     sourceTypes: [
-      { id: 'x', title: 'X 账号', detail: '按用户名订阅，缓存账号资料' },
-      { id: 'rss', title: 'RSS', detail: '标准订阅源，排队回溯' },
+      { id: 'x', title: 'X 频道', detail: '按用户名调频，缓存账号资料' },
+      { id: 'rss', title: 'RSS 频道', detail: '接入标准订阅源，排队回溯' },
     ],
     xLabel: 'X 用户名或主页链接',
     xPlaceholder: '@OpenAI / https://x.com/OpenAI',
     xHint: 'X 入库信息按 1 item = 1 credit 扣减；如果额度不足，回溯任务会保留已入库内容并标记为部分完成。',
-    xSubmit: '订阅账号',
-    xNotice: '线索已放入输入框，可以直接发起订阅。',
+    xSubmit: '接入频道',
+    xNotice: '频道信号已填入，可以直接接入。',
     rssLabel: 'RSS / Atom URL',
     rssPlaceholder: 'https://example.com/feed.xml',
     rssHint: 'RSS 回溯暂不扣 credits，但会受套餐源数量、回溯窗口与后台 runner 单次最大条数限制。',
-    rssSubmit: '订阅 RSS',
+    rssSubmit: '接入 RSS',
     visibilityLabel: '共享设置',
     privateLabel: '私有',
     publicLabel: '公开共享',
     backfillLabel: '回溯窗口',
     backfillOptions: { '24': '24 小时', '168': '7 天', '720': '30 天' },
-    recommendedTitle: '推荐先订阅这些账号',
-    recommendedSubtitle: '这些账号适合作为 X 入口源，订阅后会在 X 分类里按账号阅读。',
+    recommendedTitle: '推荐先调这些频道',
+    recommendedSubtitle: '这些频道适合作为 X 入口源，接入后会在 X 分类里按账号阅读。',
     fillHandle: '填入',
     useSource: '使用',
     noSuggested: '没有匹配的预制源，直接输入也可以。',
@@ -164,29 +165,29 @@ const copy: Record<Lang, AddSourceCopy> = {
     },
   },
   en: {
-    kicker: 'reado source intake',
-    title: 'Add Source',
-    subtitle: 'Subscribe to X or RSS, choose privacy and a backfill window, then let the queue collect the history.',
+    kicker: 'reado private signal station',
+    title: 'Tune a new channel',
+    subtitle: 'Bring a trusted X or RSS source into your private signal station. reado saves the subscription, backfills history, and filters noise into the daily brief.',
     sourceTypes: [
-      { id: 'x', title: 'X account', detail: 'Subscribe by username and cache profile data' },
-      { id: 'rss', title: 'RSS', detail: 'Standard feed sources with queued backfill' },
+      { id: 'x', title: 'X channel', detail: 'Tune by username and cache profile data' },
+      { id: 'rss', title: 'RSS channel', detail: 'Connect a standard feed with queued backfill' },
     ],
     xLabel: 'X username or profile URL',
     xPlaceholder: '@OpenAI / https://x.com/OpenAI',
     xHint: 'X items cost 1 credit per stored item. If credits run out, the job keeps what was imported and is marked partial.',
-    xSubmit: 'Subscribe account',
-    xNotice: 'The handle is in the input. You can subscribe directly.',
+    xSubmit: 'Tune channel',
+    xNotice: 'The signal is in the input. You can tune this channel directly.',
     rssLabel: 'RSS / Atom URL',
     rssPlaceholder: 'https://example.com/feed.xml',
     rssHint: 'RSS backfill does not spend credits in V1, but plan source count, backfill window, and runner item caps still apply.',
-    rssSubmit: 'Subscribe RSS',
+    rssSubmit: 'Tune RSS',
     visibilityLabel: 'Sharing',
     privateLabel: 'Private',
     publicLabel: 'Public shared',
     backfillLabel: 'Backfill window',
     backfillOptions: { '24': '24h', '168': '7d', '720': '30d' },
-    recommendedTitle: 'Recommended starter accounts',
-    recommendedSubtitle: 'These make a strong X reading foundation. After subscribing, they appear in the X reader.',
+    recommendedTitle: 'Recommended starter channels',
+    recommendedSubtitle: 'These make a strong X signal foundation. After tuning, they appear in the X reader.',
     fillHandle: 'Use handle',
     useSource: 'Use',
     noSuggested: 'No matching preset source. You can enter one directly.',
@@ -232,11 +233,11 @@ export async function AddSourcePage({ error = '', intent = '', lang, query = '',
   const text = copy[lang]
   const sourceType = type === 'rss' ? 'rss' : 'x'
   const suggestions = sourceType === 'x' ? filterSuggestedAccounts(query) : filterSuggestedRssSources(query)
-  const nextPath = sourceType === 'x' ? `${localizedPath(lang)}?category=twitter` : localizedPath(lang)
+  const nextPath = sourceType === 'x' ? `${readerHomePath(lang)}?category=twitter` : readerHomePath(lang)
   const errorMessage = error ? text.errorMessages[error] ?? text.errorMessages.unknown : ''
 
   return (
-    <div className="page-shell">
+    <div className="page-shell reader-shell">
       <Header lang={lang} active="source-add" path="sources/new" />
 
       <main className="container section-stack source-intake">
@@ -266,6 +267,21 @@ export async function AddSourcePage({ error = '', intent = '', lang, query = '',
             })}
           </div>
 
+          <div className="source-intake__signal-console" aria-hidden="true">
+            <div className="source-intake__dial">
+              <span />
+            </div>
+            <div className="source-intake__readout">
+              <strong>{sourceType === 'x' ? '92.4' : '101.7'}</strong>
+              <small>{sourceType === 'x' ? 'X SIGNAL' : 'RSS SIGNAL'}</small>
+            </div>
+            <div className="source-intake__waveform">
+              <i />
+              <i />
+              <i />
+            </div>
+          </div>
+
           <form action="/api/workspace-sources" className="source-intake__form" method="post">
               <input name="lang" type="hidden" value={lang} />
               <input name="type" type="hidden" value={sourceType} />
@@ -284,20 +300,22 @@ export async function AddSourcePage({ error = '', intent = '', lang, query = '',
               <div className="source-intake__options">
                 <label className="auth-field">
                   <span>{text.visibilityLabel}</span>
-                  <select name="visibility" defaultValue="private">
-                    <option value="private">{text.privateLabel}</option>
-                    <option value="public">{text.publicLabel}</option>
-                  </select>
+                  <BrandedSelect
+                    defaultValue="private"
+                    name="visibility"
+                    options={[
+                      { value: 'private', label: text.privateLabel },
+                      { value: 'public', label: text.publicLabel },
+                    ]}
+                  />
                 </label>
                 <label className="auth-field">
                   <span>{text.backfillLabel}</span>
-                  <select name="backfillHours" defaultValue="24">
-                    {Object.entries(text.backfillOptions).map(([value, label]) => (
-                      <option key={value} value={value}>
-                        {label}
-                      </option>
-                    ))}
-                  </select>
+                  <BrandedSelect
+                    defaultValue="24"
+                    name="backfillHours"
+                    options={Object.entries(text.backfillOptions).map(([value, label]) => ({ value, label }))}
+                  />
                 </label>
               </div>
 

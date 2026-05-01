@@ -11,7 +11,8 @@
     "build:cloudflare": "opennextjs-cloudflare build",
     "preview:cloudflare": "opennextjs-cloudflare preview",
     "deploy:cloudflare": "opennextjs-cloudflare deploy",
-    "cf:types": "wrangler types"
+    "cf:types": "wrangler types",
+    "d1:migrate:local": "wrangler d1 migrations apply reado-station --local"
   },
   "dependencies": {
     "next": "15.5.15",

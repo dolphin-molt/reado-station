@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 import type { CategoryOption } from '@/lib/categories'
-import { localizedPath, t, type Lang } from '@/lib/i18n'
+import { localizedPath, readerHomePath, t, type Lang } from '@/lib/i18n'
 
 interface SourceFilterProps {
   activeCategory: string | null
@@ -12,7 +12,7 @@ interface SourceFilterProps {
 }
 
 function filterHref(lang: Lang, category: string | null): string {
-  const base = localizedPath(lang)
+  const base = readerHomePath(lang)
   if (!category) return `${base}?category=all`
   return `${base}?category=${encodeURIComponent(category)}`
 }

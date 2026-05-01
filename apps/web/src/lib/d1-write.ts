@@ -50,7 +50,8 @@ function stableJson(value: unknown): string {
 
 function stableItemId(item: Record<string, unknown>, date: string, batch: string, index: number): string {
   const source = asString(item.source, 'unknown')
-  const key = [date, batch, source, asString(item.url) || asString(item.title) || String(index)].join('|')
+  const contentKey = asString(item.url) || asString(item.title) || String(index)
+  const key = [source, contentKey].join('|')
   let hash = 0x811c9dc5
   for (let i = 0; i < key.length; i++) {
     hash ^= key.charCodeAt(i)

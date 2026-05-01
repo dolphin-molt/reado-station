@@ -1,19 +1,18 @@
 import Link from 'next/link'
 
-import { localizedPath, t, type Lang } from '@/lib/i18n'
+import { t, type Lang } from '@/lib/i18n'
 
-const FEEDBACK_URL = 'https://github.com/dolphin-molt/reado-station/issues/new/choose'
+const FEEDBACK_PATH = '/#apply'
 
-export function Footer({ lang }: { lang: Lang }) {
+export function Footer({ lang, showSlogan = true }: { lang: Lang; showSlogan?: boolean }) {
   return (
     <footer className="footer container">
       <div className="footer__logo">reado</div>
-      <p>{t(lang, 'footer.slogan')}</p>
+      {showSlogan && <p>{t(lang, 'footer.slogan')}</p>}
       <div className="footer__links">
-        <Link href={localizedPath(lang, 'about')}>{t(lang, 'nav.about')}</Link>
-        <a href={FEEDBACK_URL} target="_blank" rel="noreferrer">
+        <Link href={FEEDBACK_PATH}>
           {t(lang, 'footer.feedback')}
-        </a>
+        </Link>
       </div>
     </footer>
   )

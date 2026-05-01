@@ -6,6 +6,7 @@ const translations: Record<Lang, Record<string, string>> = {
     'header.sources': '信息源',
     'header.items': '条资讯',
     'nav.today': '首页',
+    'nav.channels': '频道发现',
     'nav.archive': '归档',
     'nav.subscription': '订阅',
     'nav.about': '关于',
@@ -13,6 +14,11 @@ const translations: Record<Lang, Record<string, string>> = {
     'observations.title': '今日观察',
     'keyStories.title': '今日关键',
     'home.fallbackTitle': '最新资讯',
+    'home.briefTitle': '今日简报',
+    'home.briefSubtitle': '从你关注的来源里，保留今天最值得看的变化。',
+    'home.channelTitle': '频道信号',
+    'home.channelSubtitle': '按来源阅读更新，随时把新的信号加入你的每日节奏。',
+    'home.signalLabel': '私人阅读台',
     'home.digestPending': 'AI 解读正在生成中。',
     'allItems.title': '全部资讯',
     'allItems.items': '条资讯',
@@ -70,6 +76,7 @@ const translations: Record<Lang, Record<string, string>> = {
     'header.sources': 'sources',
     'header.items': 'items',
     'nav.today': 'Home',
+    'nav.channels': 'Channels',
     'nav.archive': 'Archive',
     'nav.subscription': 'Subscription',
     'nav.about': 'About',
@@ -77,6 +84,11 @@ const translations: Record<Lang, Record<string, string>> = {
     'observations.title': 'Daily Observations',
     'keyStories.title': 'Key Stories',
     'home.fallbackTitle': 'Latest Items',
+    'home.briefTitle': 'Today Brief',
+    'home.briefSubtitle': 'The changes worth keeping from the sources you follow.',
+    'home.channelTitle': 'Channel Signals',
+    'home.channelSubtitle': 'Read updates by source and keep tuning your daily rhythm.',
+    'home.signalLabel': 'Private reading desk',
     'home.digestPending': 'AI digest is being generated.',
     'allItems.title': 'All Items',
     'allItems.items': 'items',
@@ -141,6 +153,10 @@ export function localizedPath(lang: Lang, path: string = ''): string {
     return normalized ? `/${normalized}` : '/'
   }
   return normalized ? `/en/${normalized}` : '/en'
+}
+
+export function readerHomePath(lang: Lang): string {
+  return lang === 'zh' ? '/today' : '/en'
 }
 
 export function switchPath(lang: Lang, path: string = ''): string {

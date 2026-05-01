@@ -2,9 +2,9 @@ import Link from 'next/link'
 
 import { Footer } from '@/components/layout/Footer'
 import { Header } from '@/components/layout/Header'
-import { localizedPath, type Lang } from '@/lib/i18n'
+import { readerHomePath, type Lang } from '@/lib/i18n'
 
-type PlanId = 'free' | 'test' | 'pro' | 'power' | 'team'
+type PlanId = 'free' | 'pro' | 'power' | 'team'
 
 interface SubscriptionPlan {
   id: PlanId
@@ -13,17 +13,18 @@ interface SubscriptionPlan {
   cadence: string
   description: string
   features: string[]
+  signal: string
+  quota: string
   cta: string
   highlighted?: boolean
 }
 
 interface SubscriptionCopy {
-  eyebrow: string
+  kicker: string
   title: string
   subtitle: string
   plans: SubscriptionPlan[]
   manageBilling: string
-  addSource: string
   backHome: string
   checkoutMessages: Record<string, string>
   portalMessages: Record<string, string>
@@ -32,35 +33,30 @@ interface SubscriptionCopy {
 
 const copy: Record<Lang, SubscriptionCopy> = {
   zh: {
-    eyebrow: 'Billing',
-    title: '订阅',
-    subtitle: '选择信息源数量和历史回溯范围。',
+    kicker: 'READO PLAN DIAL',
+    title: '把每日阅读调到合适档位',
+    subtitle: '不同套餐只决定可接入的信息源、回溯窗口和团队协作能力。内容仍然围绕你的每日简报。',
     plans: [
       {
         id: 'free',
         name: 'Free',
         price: '$0',
-        cadence: '入门体验',
-        description: '体验公共信息流和基础阅读。',
-        features: ['3 个信息源', '24h 回溯', 'X/RSS 订阅', '基础阅读体验'],
-        cta: '当前可用',
-      },
-      {
-        id: 'test',
-        name: 'Test',
-        price: '$0.01',
-        cadence: '/ 月',
-        description: '验证支付链路。',
-        features: ['测试支付链路', '测试 webhook', '不影响正式定价'],
-        cta: '测试支付',
+        cadence: 'starter',
+        description: '先把少量频道调进来，确认每日简报是否适合你的阅读节奏。',
+        features: ['3 个信息源', '24 小时回溯', 'X / RSS 订阅', '基础阅读体验'],
+        signal: '92.4',
+        quota: '3 sources',
+        cta: '当前档位',
       },
       {
         id: 'pro',
         name: 'Pro',
         price: '$12',
         cadence: '/ 月',
-        description: '每天跟进 AI、产品和技术信息。',
-        features: ['20 个信息源', '7 天回溯', '共享源订阅', 'Customer Portal 管理订阅'],
+        description: '适合每天跟进 AI、产品和技术信息的人，把固定来源变成短日报。',
+        features: ['20 个信息源', '7 天回溯', '共享源订阅', '账单中心管理'],
+        signal: '101.7',
+        quota: '20 sources',
         cta: '升级 Pro',
         highlighted: true,
       },
@@ -69,8 +65,10 @@ const copy: Record<Lang, SubscriptionCopy> = {
         name: 'Power',
         price: '$29',
         cadence: '/ 月',
-        description: '重度信息消费、研究和创作。',
+        description: '给重度信息消费、研究和创作使用，保留更宽的回溯和源池。',
         features: ['100 个信息源', '30 天回溯', '高级筛选和主题追踪', '适合高频回溯'],
+        signal: '1200',
+        quota: '100 sources',
         cta: '升级 Power',
       },
       {
@@ -78,14 +76,15 @@ const copy: Record<Lang, SubscriptionCopy> = {
         name: 'Team',
         price: '$99',
         cadence: '/ 月起',
-        description: '团队共同维护信息源和知识库。',
+        description: '团队一起维护信号源，把每日变化沉淀到共享阅读节奏里。',
         features: ['5 seats 起', '团队共享源池', '100 个信息源', '30 天回溯'],
+        signal: '1600',
+        quota: 'team pool',
         cta: '升级 Team',
       },
     ],
-    manageBilling: '管理账单',
-    addSource: '添加信息源',
-    backHome: '返回首页',
+    manageBilling: '账单中心',
+    backHome: '回到今日简报',
     checkoutMessages: {
       success: 'Stripe 已返回成功页。订阅是否生效和 credits 是否发放，以后台支付日志和 Stripe webhook 为准。',
       cancelled: '你取消了本次支付，没有创建新订阅。',
@@ -99,35 +98,30 @@ const copy: Record<Lang, SubscriptionCopy> = {
     },
   },
   en: {
-    eyebrow: 'Billing',
-    title: 'Subscription',
-    subtitle: 'Choose source capacity and history range.',
+    kicker: 'READO PLAN DIAL',
+    title: 'Tune your reading capacity',
+    subtitle: 'Plans only change source capacity, backfill range, and collaboration. The product still revolves around your daily brief.',
     plans: [
       {
         id: 'free',
         name: 'Free',
         price: '$0',
         cadence: 'starter',
-        description: 'Try the public feed and basic reading.',
-        features: ['3 sources', '24h backfill', 'X/RSS subscriptions', 'Basic reading experience'],
-        cta: 'Available now',
-      },
-      {
-        id: 'test',
-        name: 'Test',
-        price: '$0.01',
-        cadence: '/ month',
-        description: 'Validate the payment flow.',
-        features: ['Test checkout flow', 'Test webhooks', 'Does not affect pricing'],
-        cta: 'Test payment',
+        description: 'Bring in a few channels first and see whether the daily brief fits your rhythm.',
+        features: ['3 sources', '24h backfill', 'X / RSS subscriptions', 'Basic reading experience'],
+        signal: '92.4',
+        quota: '3 sources',
+        cta: 'Current plan',
       },
       {
         id: 'pro',
         name: 'Pro',
         price: '$12',
         cadence: '/ month',
-        description: 'Follow AI, product, and technical signals daily.',
-        features: ['20 sources', '7d backfill', 'Shared source subscriptions', 'Customer Portal billing'],
+        description: 'For people who track AI, product, and technical signals every day.',
+        features: ['20 sources', '7d backfill', 'Shared source subscriptions', 'Billing portal management'],
+        signal: '101.7',
+        quota: '20 sources',
         cta: 'Upgrade Pro',
         highlighted: true,
       },
@@ -136,8 +130,10 @@ const copy: Record<Lang, SubscriptionCopy> = {
         name: 'Power',
         price: '$29',
         cadence: '/ month',
-        description: 'For heavy readers, researchers, and creators.',
+        description: 'For heavy readers, researchers, and creators who need a wider source pool.',
         features: ['100 sources', '30d backfill', 'Advanced filters and topic tracking', 'Built for frequent backfills'],
+        signal: '1200',
+        quota: '100 sources',
         cta: 'Upgrade Power',
       },
       {
@@ -145,13 +141,14 @@ const copy: Record<Lang, SubscriptionCopy> = {
         name: 'Team',
         price: '$99',
         cadence: '/ month+',
-        description: 'For teams maintaining shared sources and knowledge.',
+        description: 'For teams maintaining shared signals and a common reading rhythm.',
         features: ['Starts with 5 seats', 'Team shared source pool', '100 sources', '30d backfill'],
+        signal: '1600',
+        quota: 'team pool',
         cta: 'Upgrade Team',
       },
     ],
     manageBilling: 'Manage billing',
-    addSource: 'Add source',
     backHome: 'Back home',
     checkoutMessages: {
       success: 'Stripe returned to the success page. Confirm final subscription state and credit grants in /admin/billing and Stripe webhooks.',
@@ -184,42 +181,68 @@ export async function SubscriptionPage({
   const billingErrorMessage = billingError ? text.billingErrors[billingError] : ''
   const checkoutMessage = checkout ? text.checkoutMessages[checkout] : ''
   const portalMessage = portal ? text.portalMessages[portal] : ''
+  const hasStatus = Boolean(checkoutMessage || portalMessage || billingErrorMessage || trace)
 
   return (
-    <div className="page-shell">
+    <div className="page-shell reader-shell">
       <Header lang={lang} active="subscription" path="subscription" />
 
-      <main className="container section-stack subscription-page">
-        <section className="subscription-header">
-          <div>
-            <span>{text.eyebrow}</span>
+      <main className="container subscription-station">
+        <section className="subscription-station__hero">
+          <div className="subscription-station__copy">
+            <span>{text.kicker}</span>
             <h1>{text.title}</h1>
             <p>{text.subtitle}</p>
+            <div className="subscription-station__actions">
+              <form action="/api/billing/portal" method="post">
+                <button className="subscription-station__ghost" type="submit">
+                  {text.manageBilling}
+                </button>
+              </form>
+            </div>
           </div>
-          <div className="subscription-actions subscription-actions--header">
-            <form action="/api/billing/portal" method="post">
-              <button className="secondary-button" type="submit">
-                {text.manageBilling}
-              </button>
-            </form>
-            <Link className="cta-button" href={localizedPath(lang, 'sources/new')}>
-              {text.addSource}
-            </Link>
+          <div className="subscription-station__console" aria-hidden="true">
+            <div className="subscription-station__dial">
+              <span />
+            </div>
+            <div className="subscription-station__readout">
+              <strong>4</strong>
+              <small>{lang === 'zh' ? 'PLAN LEVELS' : 'PLAN LEVELS'}</small>
+            </div>
+            <div className="subscription-station__bars">
+              <i />
+              <i />
+              <i />
+            </div>
           </div>
-          {checkoutMessage && <p className="auth-message">{checkoutMessage}</p>}
-          {portalMessage && <p className="auth-message">{portalMessage}</p>}
-          {billingErrorMessage && <p className="auth-message auth-message--error">{billingErrorMessage}</p>}
-          {trace && <p className="auth-card__intro">Trace: <code>{trace}</code></p>}
         </section>
 
-        <section className="subscription-plans" aria-label={lang === 'zh' ? '套餐' : 'Plans'}>
+        {hasStatus && (
+          <section className="subscription-status" aria-live="polite">
+            {checkoutMessage && <p className="auth-message">{checkoutMessage}</p>}
+            {portalMessage && <p className="auth-message">{portalMessage}</p>}
+            {billingErrorMessage && <p className="auth-message auth-message--error">{billingErrorMessage}</p>}
+            {trace && (
+              <p>
+                Trace: <code>{trace}</code>
+              </p>
+            )}
+          </section>
+        )}
+
+        <section className="subscription-station__plans" aria-label={lang === 'zh' ? '套餐' : 'Plans'}>
           {text.plans.map((plan) => (
-            <article className="subscription-plan" data-highlighted={plan.highlighted ?? false} key={plan.id}>
-              <div className="subscription-plan__head">
-                <h2>{plan.name}</h2>
-                <p>{plan.description}</p>
+            <article className="subscription-plan-card" data-highlighted={plan.highlighted ?? false} key={plan.id}>
+              <div className="subscription-plan-card__signal">{plan.signal}</div>
+              <div className="subscription-plan-card__head">
+                <div>
+                  <h2>{plan.name}</h2>
+                  <small>{plan.quota}</small>
+                </div>
+                {plan.highlighted && <em>{lang === 'zh' ? '推荐档位' : 'Recommended'}</em>}
               </div>
-              <div className="subscription-plan__price">
+              <p>{plan.description}</p>
+              <div className="subscription-plan-card__price">
                 <strong>{plan.price}</strong>
                 <span>{plan.cadence}</span>
               </div>
@@ -229,13 +252,13 @@ export async function SubscriptionPage({
                 ))}
               </ul>
               {plan.id === 'free' ? (
-                <button className="subscription-plan__button" disabled type="button">
+                <button className="subscription-plan-card__button" disabled type="button">
                   {plan.cta}
                 </button>
               ) : (
                 <form action="/api/billing/checkout" method="post">
                   <input name="plan" type="hidden" value={plan.id} />
-                  <button className="subscription-plan__button" type="submit">
+                  <button className="subscription-plan-card__button" type="submit">
                     {plan.cta}
                   </button>
                 </form>
@@ -244,8 +267,8 @@ export async function SubscriptionPage({
           ))}
         </section>
 
-        <div className="subscription-actions">
-          <Link className="table-link" href={localizedPath(lang)}>
+        <div className="subscription-station__footer">
+          <Link href={readerHomePath(lang)}>
             {text.backHome}
           </Link>
         </div>

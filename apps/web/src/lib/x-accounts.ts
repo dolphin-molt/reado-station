@@ -3,6 +3,7 @@ import 'server-only'
 import type { SiteItem } from '../../../../packages/shared/src'
 
 import { getCloudflareEnv } from '@/lib/cloudflare'
+import { resolveXBearerToken } from '@/lib/provider-env'
 
 export interface XAccount {
   id: string
@@ -99,6 +100,8 @@ export class XAccountError extends Error {
   }
 }
 
+const X_ACCOUNT_PROFILE_TTL_MS = 7 * 24 * 60 * 60 * 1000
+
 function readProcessEnv(name: string): string | undefined {
   return process.env[name]
 }
@@ -187,12 +190,19 @@ export function parseXAccountParam(value: string | string[] | undefined): string
   }
 }
 
+export function isXAccountProfileFresh(fetchedAt: string | null | undefined, now = new Date()): boolean {
+  if (!fetchedAt) return false
+  const fetchedTime = new Date(fetchedAt).getTime()
+  if (Number.isNaN(fetchedTime)) return false
+  return now.getTime() - fetchedTime <= X_ACCOUNT_PROFILE_TTL_MS
+}
+
 async function getXApiConfig(): Promise<{ baseUrl: string; bearerToken: string | null }> {
   const env = await getCloudflareEnv()
 
   return {
     baseUrl: env?.READO_X_API_BASE_URL ?? readProcessEnv('READO_X_API_BASE_URL') ?? 'https://api.x.com',
-    bearerToken: env?.READO_X_BEARER_TOKEN ?? env?.X_BEARER_TOKEN ?? readProcessEnv('READO_X_BEARER_TOKEN') ?? readProcessEnv('X_BEARER_TOKEN') ?? null,
+    bearerToken: resolveXBearerToken(env),
   }
 }
 
@@ -358,7 +368,7 @@ async function ensureXSource(db: D1Database, account: XAccount): Promise<void> {
 export async function resolveXAccount(db: D1Database, input: string): Promise<XAccount> {
   const username = normalizeXUsername(input)
   const existing = await findXAccountByUsername(db, username)
-  if (existing) return existing
+  if (existing && isXAccountProfileFresh(existing.fetchedAt)) return existing
 
   const { account, raw } = await fetchXAccount(username)
   await saveXAccount(db, account, raw)

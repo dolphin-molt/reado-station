@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
-
-import { AboutPage } from '@/components/pages/AboutPage'
+import { redirect } from 'next/navigation'
 
 export const dynamic = 'force-static'
 
@@ -9,5 +8,5 @@ export const metadata: Metadata = {
 }
 
 export default function Page() {
-  return <AboutPage lang="zh" />
+  redirect('/today')
 }

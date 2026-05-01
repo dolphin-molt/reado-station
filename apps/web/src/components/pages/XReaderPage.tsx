@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { NewsCard } from '@/components/news/NewsCard'
 import { getCurrentAuthSession } from '@/lib/auth'
 import { getD1Binding } from '@/lib/cloudflare'
-import { localizedPath, t, type Lang } from '@/lib/i18n'
+import { localizedPath, readerHomePath, t, type Lang } from '@/lib/i18n'
 import { getDefaultWorkspaceForUser } from '@/lib/workspaces'
 import { loadWorkspaceXReaderData } from '@/lib/x-accounts'
 
@@ -14,7 +14,7 @@ interface XReaderPageProps {
 }
 
 function accountHref(lang: Lang, username: string): string {
-  const base = localizedPath(lang)
+  const base = readerHomePath(lang)
   return `${base}?category=twitter&account=${encodeURIComponent(username)}`
 }
 
