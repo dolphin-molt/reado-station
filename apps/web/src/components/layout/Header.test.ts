@@ -51,6 +51,15 @@ describe('reader chrome navigation', () => {
     expect(html).toContain('data-active="true"')
   })
 
+  it('exposes my sources as a first-level sidebar destination', async () => {
+    const element = await Header({ active: 'source-add', lang: 'zh', path: 'sources', showSourceFilter: false })
+    const html = renderToStaticMarkup(createElement(() => element))
+
+    expect(html).toContain('href="/sources"')
+    expect(html).toContain('aria-label="我的信息源"')
+    expect(html).toContain('data-active="true"')
+  })
+
   it('does not render the reader masthead on the channel discovery page', async () => {
     const element = await Header({ active: 'channels', lang: 'zh', path: 'channels', showSourceFilter: false })
     const html = renderToStaticMarkup(createElement(() => element))

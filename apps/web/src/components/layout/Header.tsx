@@ -67,6 +67,24 @@ function ChannelNavIcon() {
   )
 }
 
+function SourcesNavIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      className="sidebar-nav__icon"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <path d="M5 5.5h14" />
+      <path d="M5 12h14" />
+      <path d="M5 18.5h14" />
+      <path d="M8.5 4v3" />
+      <path d="M15.5 10.5v3" />
+      <path d="M11.5 17v3" />
+    </svg>
+  )
+}
+
 export async function Header({
   lang,
   active,
@@ -149,6 +167,13 @@ export async function Header({
       icon: <ChannelNavIcon />,
       key: 'channels' as const,
       label: t(lang, 'nav.channels'),
+    },
+    {
+      className: 'sidebar-nav__link--sources',
+      href: localizedPath(lang, 'sources'),
+      icon: <SourcesNavIcon />,
+      key: 'source-add' as const,
+      label: t(lang, 'nav.sources'),
     },
   ]
   const username = session?.username ?? 'admin'
