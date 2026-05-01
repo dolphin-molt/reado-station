@@ -60,6 +60,14 @@ describe('reader chrome navigation', () => {
     expect(html).not.toContain('私人阅读台')
   })
 
+  it('can suppress the reader masthead for focused channel workspaces', async () => {
+    const element = await Header({ active: 'home', activeCategory: 'twitter', lang: 'zh', path: 'today', showMasthead: false, showSourceFilter: false })
+    const html = renderToStaticMarkup(createElement(() => element))
+
+    expect(html).not.toContain('频道信号')
+    expect(html).not.toContain('私人阅读台')
+  })
+
   it('uses the landing contact form as the footer feedback destination', () => {
     const html = renderToStaticMarkup(createElement(Footer, { lang: 'zh' }))
 

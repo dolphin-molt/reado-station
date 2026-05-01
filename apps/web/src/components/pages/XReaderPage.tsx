@@ -132,7 +132,15 @@ export async function XReaderPage({ account = null, lang, subscribed = false }: 
                         </h3>
                         <p>@{data.activeAccount.account.username}</p>
                       </div>
-                      {data.activeAccount.account.verified && <span className="status-pill status-pill--ok">Verified</span>}
+                      <div className="x-reader__profile-actions">
+                        {data.activeAccount.account.verified && <span className="status-pill status-pill--ok">Verified</span>}
+                        <Link className="table-link" href={sourceDetailHref(lang, data.activeAccount.account.username)}>
+                          {t(lang, 'xReader.detail')}
+                        </Link>
+                        <a className="table-link" href={`https://x.com/${data.activeAccount.account.username}`} rel="noreferrer" target="_blank">
+                          {t(lang, 'xReader.openProfile')}
+                        </a>
+                      </div>
                     </div>
 
                     {data.activeAccount.account.description && <p className="x-reader__profile-description">{data.activeAccount.account.description}</p>}

@@ -1518,6 +1518,14 @@ p {
   justify-content: space-between;
 }
 
+.x-reader__profile-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  justify-content: flex-end;
+}
+
 .x-reader__profile-headline h3 {
   font-family: var(--font-body);
   font-size: 1.1rem;

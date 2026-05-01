@@ -30,6 +30,7 @@ interface HeaderProps {
   sourceCount?: number
   activeCategory?: string | null
   categories?: CategoryOption[]
+  showMasthead?: boolean
   showSourceFilter?: boolean
 }
 
@@ -75,6 +76,7 @@ export async function Header({
   sourceCount = 0,
   activeCategory = null,
   categories = [],
+  showMasthead: showMastheadProp = true,
   showSourceFilter = true,
 }: HeaderProps) {
   let sidebarDate = date
@@ -154,7 +156,7 @@ export async function Header({
   const isAdmin = session?.role === 'admin'
   const showPageMeta = active === 'home' && !sidebarActiveCategory
   const highlightSourceFilter = active === 'home' && Boolean(sidebarActiveCategory)
-  const showMasthead = active === 'home'
+  const showMasthead = showMastheadProp && active === 'home'
   const mastheadTitle = active === 'home' && !sidebarActiveCategory
     ? t(lang, 'home.briefTitle')
     : t(lang, 'home.channelTitle')

@@ -184,7 +184,7 @@ export async function HomePage({
   if (category === 'twitter') {
     return (
       <div className="page-shell reader-shell">
-        <Header active="home" activeCategory={category} lang={lang} showSourceFilter />
+        <Header active="home" activeCategory={category} lang={lang} showMasthead={false} showSourceFilter />
         <XReaderPage account={account} lang={lang} subscribed={subscribed} />
         <Footer lang={lang} />
       </div>
