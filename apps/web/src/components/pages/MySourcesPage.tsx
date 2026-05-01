@@ -61,6 +61,13 @@ export async function MySourcesPage({ lang }: { lang: Lang }) {
                   </div>
                   <div className="source-suggestion__actions">
                     <Link className="table-link" href={`${localizedPath(lang, 'sources')}/${encodeURIComponent(source.sourceId)}`}>{lang === 'zh' ? '查看详情' : 'Details'}</Link>
+                    <form action={`/api/workspace-sources/${encodeURIComponent(source.sourceId)}/unsubscribe`} method="post">
+                      <input name="lang" type="hidden" value={lang} />
+                      <input name="next" type="hidden" value={localizedPath(lang, 'sources')} />
+                      <button className="table-link table-link--danger" type="submit">
+                        {lang === 'zh' ? '取消订阅' : 'Unsubscribe'}
+                      </button>
+                    </form>
                   </div>
                 </article>
               ))}

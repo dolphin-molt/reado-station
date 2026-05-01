@@ -2259,14 +2259,27 @@ p {
 .reader-shell .source-suggestion__actions .table-link {
   background: rgba(31, 29, 25, 0.92);
   border-radius: 8px;
+  border: 0;
   color: #fff8ed;
+  cursor: pointer;
   display: inline-flex;
+  font: inherit;
   padding: 0.58rem 0.78rem;
 }
 
 .reader-shell .source-suggestion__actions .table-link:hover {
   background: #d99a32;
   color: #171614;
+}
+
+.reader-shell .source-suggestion__actions .table-link--danger {
+  background: rgba(148, 55, 44, 0.12);
+  color: #94372c;
+}
+
+.reader-shell .source-suggestion__actions .table-link--danger:hover {
+  background: #94372c;
+  color: #fff8ed;
 }
 
 .reader-shell .footer {

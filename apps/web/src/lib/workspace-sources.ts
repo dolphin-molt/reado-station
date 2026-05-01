@@ -41,6 +41,12 @@ export interface SubscribeWorkspaceSourceResult {
   collectionStatus: string
 }
 
+interface UnsubscribeInput {
+  workspaceId: string
+  userId: string
+  sourceId: string
+}
+
 function sourceIdForRss(url: string): string {
   const encoded = new TextEncoder().encode(url.toLowerCase())
   let hash = 2166136261
@@ -247,4 +253,38 @@ export function sourceErrorCode(error: unknown): string {
     return maybeCode ?? 'unknown'
   }
   return 'unknown'
+}
+
+export async function unsubscribeWorkspaceSource(db: D1Database, input: UnsubscribeInput): Promise<void> {
+  const username = input.sourceId.toLowerCase().startsWith('tw-') ? input.sourceId.slice(3) : null
+  const statements: D1PreparedStatement[] = [
+    db
+      .prepare(
+        `
+          DELETE FROM workspace_source_subscriptions
+          WHERE workspace_id = ? AND source_id = ?
+        `,
+      )
+      .bind(input.workspaceId, input.sourceId),
+  ]
+
+  if (username) {
+    statements.push(
+      db
+        .prepare(
+          `
+            DELETE FROM user_x_account_subscriptions
+            WHERE user_id = ?
+              AND x_account_id IN (
+                SELECT id
+                FROM x_accounts
+                WHERE lower(username) = lower(?)
+              )
+          `,
+        )
+        .bind(input.userId, username),
+    )
+  }
+
+  await db.batch(statements)
 }
