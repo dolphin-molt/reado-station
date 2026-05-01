@@ -26,6 +26,18 @@ export interface WorkspaceSourceRecentItem {
   contentType: string
 }
 
+export interface WorkspaceSourceXAccount {
+  username: string
+  name: string
+  description: string
+  profileImageUrl: string
+  verified: boolean
+  followersCount: number | null
+  followingCount: number | null
+  tweetCount: number | null
+  listedCount: number | null
+}
+
 export interface WorkspaceSourceDetail extends WorkspaceSourceListItem {
   collectionPreferences: XCollectionPreferences | null
   preferenceLabels: string[]
@@ -33,6 +45,7 @@ export interface WorkspaceSourceDetail extends WorkspaceSourceListItem {
   latestWindowEnd: string | null
   latestCollectionStatus: string | null
   latestFailureReason: string | null
+  xAccount: WorkspaceSourceXAccount | null
   recentItems: WorkspaceSourceRecentItem[]
 }
 
@@ -52,6 +65,15 @@ interface WorkspaceSourceRow {
   latestWindowEnd?: string | null
   latestCollectionStatus?: string | null
   latestFailureReason?: string | null
+  xUsername?: string | null
+  xName?: string | null
+  xDescription?: string | null
+  xProfileImageUrl?: string | null
+  xVerified?: number | null
+  xFollowersCount?: number | null
+  xFollowingCount?: number | null
+  xTweetCount?: number | null
+  xListedCount?: number | null
 }
 
 interface WorkspaceSourceRecentItemRow {
@@ -167,6 +189,21 @@ function rowToRecentItem(row: WorkspaceSourceRecentItemRow): WorkspaceSourceRece
   }
 }
 
+function rowToXAccount(row: WorkspaceSourceRow): WorkspaceSourceXAccount | null {
+  if (!row.xUsername) return null
+  return {
+    username: row.xUsername,
+    name: row.xName ?? row.xUsername,
+    description: row.xDescription ?? '',
+    profileImageUrl: row.xProfileImageUrl ?? '',
+    verified: Number(row.xVerified ?? 0) === 1,
+    followersCount: row.xFollowersCount ?? null,
+    followingCount: row.xFollowingCount ?? null,
+    tweetCount: row.xTweetCount ?? null,
+    listedCount: row.xListedCount ?? null,
+  }
+}
+
 export async function loadWorkspaceSourceDetail(db: D1Database, workspaceId: string, sourceId: string, lang: 'zh' | 'en'): Promise<WorkspaceSourceDetail | null> {
   const row = await db
     .prepare(
@@ -186,9 +223,19 @@ export async function loadWorkspaceSourceDetail(db: D1Database, workspaceId: str
           snap.window_end AS latestWindowEnd,
           snap.status AS latestCollectionStatus,
           job.error AS latestFailureReason,
+          xa.username AS xUsername,
+          xa.name AS xName,
+          xa.description AS xDescription,
+          xa.profile_image_url AS xProfileImageUrl,
+          xa.verified AS xVerified,
+          xa.followers_count AS xFollowersCount,
+          xa.following_count AS xFollowingCount,
+          xa.tweet_count AS xTweetCount,
+          xa.listed_count AS xListedCount,
           (SELECT COUNT(1) FROM items i WHERE i.hidden_at IS NULL AND lower(i.source) = lower(s.source_id)) AS itemCount
         FROM workspace_source_subscriptions s
         INNER JOIN sources src ON src.id = s.source_id
+        LEFT JOIN x_accounts xa ON lower(s.source_id) = lower('tw-' || xa.username)
         LEFT JOIN source_collection_snapshots snap ON snap.source_id = s.source_id
         LEFT JOIN source_collection_jobs job ON job.source_id = s.source_id AND job.status = 'failed'
         WHERE s.workspace_id = ? AND s.source_id = ?
@@ -238,6 +285,7 @@ export async function loadWorkspaceSourceDetail(db: D1Database, workspaceId: str
     latestWindowEnd: row.latestWindowEnd ?? null,
     latestCollectionStatus: row.latestCollectionStatus ?? null,
     latestFailureReason: row.latestFailureReason ?? null,
+    xAccount: rowToXAccount(row),
     recentItems: results.map(rowToRecentItem),
   }
 }

@@ -9,6 +9,14 @@ import { localizedPath, type Lang } from '@/lib/i18n'
 import { loadWorkspaceSourceDetail, sourceDisplayUrl } from '@/lib/my-sources'
 import { getDefaultWorkspaceForUser } from '@/lib/workspaces'
 
+function compactNumber(value: number | null | undefined, lang: Lang): string {
+  if (typeof value !== 'number') return ''
+  return new Intl.NumberFormat(lang === 'zh' ? 'zh-CN' : 'en-US', {
+    maximumFractionDigits: 1,
+    notation: 'compact',
+  }).format(value)
+}
+
 export async function SourceDetailPage({ lang, sourceId }: { lang: Lang; sourceId: string }) {
   const session = await getCurrentAuthSession()
   const loginPath = `${localizedPath(lang, 'login')}?next=${encodeURIComponent(`${localizedPath(lang, 'sources')}/${sourceId}`)}`
@@ -35,6 +43,79 @@ export async function SourceDetailPage({ lang, sourceId }: { lang: Lang; sourceI
   const workspace = await getDefaultWorkspaceForUser(db, session.userId, session.username)
   const source = await loadWorkspaceSourceDetail(db, workspace.id, sourceId, lang)
   if (!source) notFound()
+  const xAccount = source.xAccount
+
+  if (source.sourceType === 'x') {
+    const username = xAccount?.username ?? source.sourceId.replace(/^tw-/i, '')
+    const displayName = xAccount?.name ?? source.name.replace(/\s*\(X\)$/i, '')
+    const xUrl = `https://x.com/${username}`
+
+    return (
+      <div className="page-shell reader-shell">
+        <Header active="source-add" lang={lang} path="sources" />
+        <main className="container section-stack">
+          <section className="panel channel-profile">
+            <Link className="channel-profile__back" href={localizedPath(lang, 'sources')}>
+              {lang === 'zh' ? '返回' : 'Back'}
+            </Link>
+            <div className="channel-profile__hero">
+              <div>
+                <span>X · {xAccount?.verified ? (lang === 'zh' ? '已认证' : 'Verified') : `${source.itemCount} ${lang === 'zh' ? '条内容' : 'items'}`}</span>
+                <h1>{displayName}</h1>
+                <p>
+                  <a className="channel-profile__source-link" href={xUrl} rel="noreferrer" target="_blank">
+                    @{username}
+                  </a>
+                </p>
+              </div>
+            </div>
+
+            {xAccount && (
+              <section className="channel-profile__account-card">
+                {xAccount.profileImageUrl && <img alt="" src={xAccount.profileImageUrl} />}
+                <div>
+                  {xAccount.description && <p>{xAccount.description}</p>}
+                  <div className="channel-profile__metric-row">
+                    {xAccount.followersCount != null && <span>{compactNumber(xAccount.followersCount, lang)} followers</span>}
+                    {xAccount.tweetCount != null && <span>{compactNumber(xAccount.tweetCount, lang)} posts</span>}
+                    <a href={xUrl} rel="noreferrer" target="_blank">x.com/{username}</a>
+                  </div>
+                </div>
+              </section>
+            )}
+          </section>
+
+          <section className="panel my-sources">
+            <div className="panel__header">
+              <div>
+                <h2>{lang === 'zh' ? '最近内容' : 'Recent items'}</h2>
+              </div>
+            </div>
+
+            {source.recentItems.length > 0 ? (
+              <div className="my-sources__list">
+                {source.recentItems.map((item) => (
+                  <article className="my-sources__item" key={item.id}>
+                    <div>
+                      <div className="source-suggestion__meta">
+                        <span>{item.contentType}</span>
+                        <span>{item.publishedAt || (lang === 'zh' ? '未知时间' : 'unknown time')}</span>
+                      </div>
+                      <h2><a href={item.url}>{item.title}</a></h2>
+                      {item.summary && <p>{item.summary}</p>}
+                    </div>
+                  </article>
+                ))}
+              </div>
+            ) : (
+              <div className="empty-state">{lang === 'zh' ? '还没有可展示的内容。' : 'No visible items yet.'}</div>
+            )}
+          </section>
+        </main>
+        <Footer lang={lang} />
+      </div>
+    )
+  }
 
   return (
     <div className="page-shell reader-shell">
