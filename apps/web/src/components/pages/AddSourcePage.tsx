@@ -114,6 +114,13 @@ interface AddSourceCopy {
   publicLabel: string
   backfillLabel: string
   backfillOptions: Record<string, string>
+  rulesTitle: string
+  rulesSummary: string
+  includeLongformPosts: string
+  includeReplies: string
+  includeReposts: string
+  includeQuotes: string
+  includeMediaPosts: string
   recommendedTitle: string
   recommendedSubtitle: string
   fillHandle: string
@@ -145,6 +152,13 @@ const copy: Record<Lang, AddSourceCopy> = {
     publicLabel: '公开共享',
     backfillLabel: '回溯窗口',
     backfillOptions: { '24': '24 小时', '168': '7 天', '720': '30 天' },
+    rulesTitle: '采集规则',
+    rulesSummary: '默认收录原创、thread、长文和原创媒体帖',
+    includeLongformPosts: '包含长文',
+    includeReplies: '包含回复',
+    includeReposts: '包含转发',
+    includeQuotes: '包含引用',
+    includeMediaPosts: '包含媒体帖',
     recommendedTitle: '推荐先调这些频道',
     recommendedSubtitle: '这些频道适合作为 X 入口源，接入后会在 X 分类里按账号阅读。',
     fillHandle: '填入',
@@ -186,6 +200,13 @@ const copy: Record<Lang, AddSourceCopy> = {
     publicLabel: 'Public shared',
     backfillLabel: 'Backfill window',
     backfillOptions: { '24': '24h', '168': '7d', '720': '30d' },
+    rulesTitle: 'Collection rules',
+    rulesSummary: 'Original posts, threads, longform, and original media are included by default',
+    includeLongformPosts: 'Include longform posts',
+    includeReplies: 'Include replies',
+    includeReposts: 'Include reposts',
+    includeQuotes: 'Include quotes',
+    includeMediaPosts: 'Include media posts',
     recommendedTitle: 'Recommended starter channels',
     recommendedSubtitle: 'These make a strong X signal foundation. After tuning, they appear in the X reader.',
     fillHandle: 'Use handle',
@@ -318,6 +339,22 @@ export async function AddSourcePage({ error = '', intent = '', lang, query = '',
                   />
                 </label>
               </div>
+
+              {sourceType === 'x' && (
+                <details className="source-intake__rules">
+                  <summary>
+                    <span>{text.rulesTitle}</span>
+                    <small>{text.rulesSummary}</small>
+                  </summary>
+                  <div className="source-intake__rule-grid">
+                    <label><input defaultChecked name="includeLongformPosts" type="checkbox" value="1" /> {text.includeLongformPosts}</label>
+                    <label><input name="includeReplies" type="checkbox" value="1" /> {text.includeReplies}</label>
+                    <label><input name="includeReposts" type="checkbox" value="1" /> {text.includeReposts}</label>
+                    <label><input name="includeQuotes" type="checkbox" value="1" /> {text.includeQuotes}</label>
+                    <label><input defaultChecked name="includeMediaPosts" type="checkbox" value="1" /> {text.includeMediaPosts}</label>
+                  </div>
+                </details>
+              )}
 
               <p className="source-intake__hint">{sourceType === 'x' ? text.xHint : text.rssHint}</p>
               {intent === 'add' && query.trim().length > 0 && <p className="source-intake__notice">{text.xNotice}</p>}

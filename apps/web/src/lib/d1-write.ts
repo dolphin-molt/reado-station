@@ -24,6 +24,10 @@ export interface DigestWriteResult {
   clusterCount: number
 }
 
+interface NormalizedSiteItem extends SiteItem {
+  metadataJson: string
+}
+
 function asRecord(value: unknown): Record<string, unknown> {
   return value && typeof value === 'object' && !Array.isArray(value) ? value as Record<string, unknown> : {}
 }
@@ -76,7 +80,7 @@ function categorizeSource(source: string): string {
   return 'tech-media'
 }
 
-function normalizeSiteItem(value: unknown, date: string, batch: string, index: number): SiteItem | null {
+function normalizeSiteItem(value: unknown, date: string, batch: string, index: number): NormalizedSiteItem | null {
   const item = asRecord(value)
   const title = sanitizeText(asString(item.title), 200)
   const url = asString(item.url)
@@ -99,6 +103,7 @@ function normalizeSiteItem(value: unknown, date: string, batch: string, index: n
     imageUrl: asString(item.imageUrl, `/placeholders/${category}.svg`),
     date,
     batch,
+    metadataJson: stableJson(asRecord(item.metadata)),
   }
 }
 
@@ -125,7 +130,7 @@ export async function upsertIngestPayload(db: D1Database, payload: unknown): Pro
   const rawItems = Array.isArray(body.items) ? body.items : []
   const items = rawItems
     .map((item, index) => normalizeSiteItem(item, date, batch, index))
-    .filter((item): item is SiteItem => item !== null)
+    .filter((item): item is NormalizedSiteItem => item !== null)
   const stats = normalizeStats(body.stats)
 
   if (!date || !batch) {
@@ -153,8 +158,8 @@ export async function upsertIngestPayload(db: D1Database, payload: unknown): Pro
       `
         INSERT INTO items (
           id, title, title_zh, url, summary, summary_zh, published_at,
-          source, source_name, category, image_url, date, batch, updated_at
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+          source, source_name, category, image_url, date, batch, metadata_json, updated_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ON CONFLICT(id) DO UPDATE SET
           title = excluded.title,
           title_zh = excluded.title_zh,
@@ -168,6 +173,7 @@ export async function upsertIngestPayload(db: D1Database, payload: unknown): Pro
           image_url = excluded.image_url,
           date = excluded.date,
           batch = excluded.batch,
+          metadata_json = excluded.metadata_json,
           updated_at = excluded.updated_at
       `,
     ).bind(
@@ -184,6 +190,7 @@ export async function upsertIngestPayload(db: D1Database, payload: unknown): Pro
       item.imageUrl,
       item.date,
       item.batch,
+      item.metadataJson,
       updatedAt,
     ),
   ))

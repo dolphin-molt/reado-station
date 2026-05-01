@@ -3,6 +3,7 @@ import 'server-only'
 import { PLAN_LIMITS, normalizeBackfillHours, normalizeSourceType, normalizeVisibility, type SourceType, type SourceVisibility } from '@/lib/plans'
 import { collectionWindowForHours, ensureSourceCollectionJob } from '@/lib/source-collections'
 import { getWorkspaceCreditBalance, getWorkspaceSourceCount, type Workspace } from '@/lib/workspaces'
+import { DEFAULT_X_COLLECTION_PREFERENCES, normalizeXCollectionPreferences } from '@/lib/x-content-preferences'
 import { normalizeXUsername, resolveXAccount } from '@/lib/x-accounts'
 
 export type SubscribeWorkspaceSourceErrorCode =
@@ -27,6 +28,7 @@ interface SubscribeInput {
   value: string
   visibility?: string
   backfillHours?: string | number | null
+  collectionPreferences?: unknown
   userId: string
   workspace: Workspace
 }
@@ -164,6 +166,9 @@ export async function subscribeWorkspaceSource(db: D1Database, input: SubscribeI
   const sourceType = normalizeSourceType(input.type)
   const visibility = normalizeVisibility(input.visibility)
   const backfillHours = normalizeBackfillHours(input.backfillHours)
+  const collectionPreferences = sourceType === 'x'
+    ? normalizeXCollectionPreferences(input.collectionPreferences ?? DEFAULT_X_COLLECTION_PREFERENCES)
+    : {}
   const sourceId =
     sourceType === 'rss'
       ? sourceIdForRss(normalizeRssUrl(input.value).toString())
@@ -197,16 +202,17 @@ export async function subscribeWorkspaceSource(db: D1Database, input: SubscribeI
       .prepare(
         `
           INSERT INTO workspace_source_subscriptions (
-            workspace_id, source_id, source_type, visibility, backfill_hours, status, created_by, created_at, updated_at
-          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            workspace_id, source_id, source_type, visibility, backfill_hours, status, collection_preferences_json, created_by, created_at, updated_at
+          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
           ON CONFLICT(workspace_id, source_id) DO UPDATE SET
             visibility = excluded.visibility,
             backfill_hours = excluded.backfill_hours,
             status = excluded.status,
+            collection_preferences_json = excluded.collection_preferences_json,
             updated_at = excluded.updated_at
         `,
       )
-      .bind(input.workspace.id, source.id, sourceType, visibility, backfillHours, subscriptionStatus, input.userId, now, now),
+      .bind(input.workspace.id, source.id, sourceType, visibility, backfillHours, subscriptionStatus, JSON.stringify(collectionPreferences), input.userId, now, now),
   ]
 
   if ('accountId' in source) {

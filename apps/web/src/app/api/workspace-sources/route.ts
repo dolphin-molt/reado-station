@@ -19,6 +19,10 @@ function sourcePagePath(lang: string, params: Record<string, string>): string {
   return `${prefix}?${query.toString()}`
 }
 
+function formToggle(form: FormData, key: string): boolean {
+  return form.has(key)
+}
+
 export async function POST(request: NextRequest): Promise<NextResponse> {
   const form = await request.formData()
   const lang = String(form.get('lang') ?? 'zh')
@@ -43,6 +47,17 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       value,
       visibility: String(form.get('visibility') ?? 'private'),
       backfillHours: String(form.get('backfillHours') ?? '24'),
+      collectionPreferences: type === 'x'
+        ? {
+            includeOriginalPosts: true,
+            includeThreads: true,
+            includeLongformPosts: formToggle(form, 'includeLongformPosts'),
+            includeReplies: formToggle(form, 'includeReplies'),
+            includeReposts: formToggle(form, 'includeReposts'),
+            includeQuotes: formToggle(form, 'includeQuotes'),
+            includeMediaPosts: formToggle(form, 'includeMediaPosts'),
+          }
+        : undefined,
       userId: session.userId,
       workspace,
     })

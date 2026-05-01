@@ -6,6 +6,7 @@ import { resolveXBearerToken } from '@/lib/provider-env'
 import { parseRssOrAtom } from '@/lib/source-collection-parser'
 import { upsertSourceCollectionSnapshot } from '@/lib/source-collections'
 import { estimateSourceCollectionCredits } from '@/lib/usage-metering'
+import { classifyXTweetContentType, type XContentType } from '@/lib/x-content-preferences'
 
 interface ClaimedSourceJob {
   id: string
@@ -26,6 +27,7 @@ interface CollectedSourceItem {
   source: string
   sourceName: string
   category: string
+  metadata?: Record<string, unknown>
 }
 
 interface XApiTweetsResponse {
@@ -33,8 +35,15 @@ interface XApiTweetsResponse {
     id: string
     text?: string
     created_at?: string
+    author_id?: string
+    conversation_id?: string
+    referenced_tweets?: Array<{ type?: string; id?: string }>
+    public_metrics?: Record<string, number>
+    note_tweet?: { text?: string }
+    attachments?: { media_keys?: string[] }
     entities?: {
       urls?: Array<{ expanded_url?: string; url?: string }>
+      media?: unknown[]
     }
   }>
   errors?: Array<{ detail?: string; title?: string }>
@@ -80,8 +89,7 @@ async function collectX(db: D1Database, job: ClaimedSourceJob): Promise<Collecte
   const baseUrl = env?.READO_X_API_BASE_URL ?? 'https://api.x.com'
   const url = new URL(`/2/users/${encodeURIComponent(account.id)}/tweets`, baseUrl)
   url.searchParams.set('max_results', '20')
-  url.searchParams.set('tweet.fields', 'created_at,entities')
-  url.searchParams.set('exclude', 'replies,retweets')
+  url.searchParams.set('tweet.fields', 'created_at,entities,referenced_tweets,conversation_id,author_id,public_metrics,note_tweet,attachments')
   const response = await fetch(url, {
     headers: {
       accept: 'application/json',
@@ -94,14 +102,26 @@ async function collectX(db: D1Database, job: ClaimedSourceJob): Promise<Collecte
   return (payload.data ?? []).map((tweet) => {
     const publishedAt = safeDate(tweet.created_at ?? '')
     const expandedUrl = tweet.entities?.urls?.find((entry) => entry.expanded_url)?.expanded_url
+    const contentType: XContentType = classifyXTweetContentType(tweet, account.id)
+    const referencedType = tweet.referenced_tweets?.[0]?.type ?? null
     return {
-      title: (tweet.text ?? '').replace(/\s+/g, ' ').trim().slice(0, 220),
+      title: (tweet.note_tweet?.text ?? tweet.text ?? '').replace(/\s+/g, ' ').trim().slice(0, 220),
       url: expandedUrl ?? `https://x.com/${account.username}/status/${tweet.id}`,
-      summary: tweet.text ?? '',
+      summary: tweet.note_tweet?.text ?? tweet.text ?? '',
       publishedAt,
       source: job.sourceId,
       sourceName: `@${account.username}`,
       category: 'twitter',
+      metadata: {
+        content_type: contentType,
+        x_tweet_id: tweet.id,
+        x_conversation_id: tweet.conversation_id ?? tweet.id,
+        x_root_tweet_id: tweet.conversation_id ?? tweet.id,
+        x_referenced_type: referencedType,
+        thread_part_count: contentType === 'thread' ? 1 : 0,
+        is_partial_thread: false,
+        public_metrics: tweet.public_metrics ?? {},
+      },
     }
   }).filter((item) => item.title && item.url && inWindow(item.publishedAt, job.windowStart, job.windowEnd))
 }
