@@ -4,6 +4,7 @@ import { Footer } from '@/components/layout/Footer'
 import { Header } from '@/components/layout/Header'
 import { BrandedSelect } from '@/components/ui/BrandedSelect'
 import { localizedPath, readerHomePath, type Lang } from '@/lib/i18n'
+import { suggestedXAccounts, type SuggestedXAccount } from '@/lib/source-suggestions'
 
 interface AddSourcePageProps {
   error?: string
@@ -13,52 +14,11 @@ interface AddSourcePageProps {
   type?: string
 }
 
-interface SuggestedXAccount {
-  description: Record<Lang, string>
-  name: string
-  username: string
-}
-
 interface SuggestedRssSource {
   description: Record<Lang, string>
   name: string
   url: string
 }
-
-const suggestedXAccounts: SuggestedXAccount[] = [
-  {
-    name: 'OpenAI',
-    username: 'OpenAI',
-    description: {
-      zh: '官方产品与平台发布，适合作为 AI 公司基础源。',
-      en: 'Official product and platform updates for the core AI company feed.',
-    },
-  },
-  {
-    name: 'Anthropic',
-    username: 'AnthropicAI',
-    description: {
-      zh: '模型发布、安全研究和团队动态。',
-      en: 'Model launches, safety research, and team updates.',
-    },
-  },
-  {
-    name: 'Andrej Karpathy',
-    username: 'karpathy',
-    description: {
-      zh: '高信号工程与模型思考，适合个人观察列表。',
-      en: 'High-signal engineering and model thinking for personal watchlists.',
-    },
-  },
-  {
-    name: 'Shawn Wang',
-    username: 'swyx',
-    description: {
-      zh: '开发者视角的 AI 产品、工作流和社区讨论。',
-      en: 'AI product, workflow, and community discussions from a builder perspective.',
-    },
-  },
-]
 
 const suggestedRssSources: SuggestedRssSource[] = [
   {
@@ -177,6 +137,7 @@ const copy: Record<Lang, AddSourceCopy> = {
       'limit-sources': '当前套餐的信息源数量已达上限。',
       'limit-backfill': '当前套餐不支持这个回溯窗口。',
       'insufficient-credits': '当前 workspace credits 不足，无法发起 X 回溯。',
+      'ambiguous-handle': '这个名称容易订错账号。请点击下方推荐卡填入完整 handle，或粘贴准确的 X 主页链接。',
       unknown: '订阅失败，请稍后再试。',
     },
   },
@@ -226,6 +187,7 @@ const copy: Record<Lang, AddSourceCopy> = {
       'limit-sources': 'Your current plan has reached the source limit.',
       'limit-backfill': 'Your current plan does not allow this backfill window.',
       'insufficient-credits': 'This workspace needs credits before starting an X backfill.',
+      'ambiguous-handle': 'This name can point to the wrong account. Use the preset card below for the complete handle, or paste the exact X profile URL.',
       unknown: 'Subscription failed. Please try again later.',
     },
   },

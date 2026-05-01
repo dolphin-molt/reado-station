@@ -2,6 +2,7 @@ import 'server-only'
 
 import { PLAN_LIMITS, normalizeBackfillHours, normalizeSourceType, normalizeVisibility, type SourceType, type SourceVisibility } from '@/lib/plans'
 import { collectionWindowForHours, ensureSourceCollectionJob } from '@/lib/source-collections'
+import { findSuggestedXNameConflict } from '@/lib/source-suggestions'
 import { getWorkspaceCreditBalance, getWorkspaceSourceCount, type Workspace } from '@/lib/workspaces'
 import { DEFAULT_X_COLLECTION_PREFERENCES, normalizeXCollectionPreferences } from '@/lib/x-content-preferences'
 import { normalizeXUsername, resolveXAccount } from '@/lib/x-accounts'
@@ -11,6 +12,7 @@ export type SubscribeWorkspaceSourceErrorCode =
   | 'limit-sources'
   | 'limit-backfill'
   | 'insufficient-credits'
+  | 'ambiguous-handle'
   | 'unsupported'
 
 export class SubscribeWorkspaceSourceError extends Error {
@@ -172,6 +174,13 @@ export async function subscribeWorkspaceSource(db: D1Database, input: SubscribeI
   const sourceType = normalizeSourceType(input.type)
   const visibility = normalizeVisibility(input.visibility)
   const backfillHours = normalizeBackfillHours(input.backfillHours)
+  const suggestedConflict = sourceType === 'x' ? findSuggestedXNameConflict(input.value) : null
+  if (suggestedConflict) {
+    throw new SubscribeWorkspaceSourceError(
+      'ambiguous-handle',
+      `${input.value} matches ${suggestedConflict.name}; choose @${suggestedConflict.username} from the preset card or enter a full profile URL.`,
+    )
+  }
   const collectionPreferences = sourceType === 'x'
     ? normalizeXCollectionPreferences(input.collectionPreferences ?? DEFAULT_X_COLLECTION_PREFERENCES)
     : {}
