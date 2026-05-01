@@ -17,6 +17,18 @@ function compactNumber(value: number | null | undefined, lang: Lang): string {
   }).format(value)
 }
 
+function XVerifiedMark({ lang }: { lang: Lang }) {
+  const label = lang === 'zh' ? '已认证' : 'Verified'
+  return (
+    <span aria-label={label} className="x-verified-mark" role="img" title={label}>
+      <svg aria-hidden="true" viewBox="0 0 20 20">
+        <path d="M10 1.7 12.1 3l2.5-.1 1.1 2.2 2.1 1.3-.5 2.4.5 2.4-2.1 1.3-1.1 2.2-2.5-.1L10 16.3l-2.1-1.3-2.5.1-1.1-2.2-2.1-1.3.5-2.4-.5-2.4 2.1-1.3 1.1-2.2 2.5.1L10 1.7Z" />
+        <path d="m6.7 10.1 2 2 4.6-5" />
+      </svg>
+    </span>
+  )
+}
+
 export async function SourceDetailPage({ lang, sourceId }: { lang: Lang; sourceId: string }) {
   const session = await getCurrentAuthSession()
   const loginPath = `${localizedPath(lang, 'login')}?next=${encodeURIComponent(`${localizedPath(lang, 'sources')}/${sourceId}`)}`
@@ -60,8 +72,11 @@ export async function SourceDetailPage({ lang, sourceId }: { lang: Lang; sourceI
             </Link>
             <div className="channel-profile__hero">
               <div>
-                <span>X · {xAccount?.verified ? (lang === 'zh' ? '已认证' : 'Verified') : `${source.itemCount} ${lang === 'zh' ? '条内容' : 'items'}`}</span>
-                <h1>{displayName}</h1>
+                <span>X · {source.itemCount} {lang === 'zh' ? '条内容' : 'items'}</span>
+                <h1 className="x-profile-title">
+                  {displayName}
+                  {xAccount?.verified && <XVerifiedMark lang={lang} />}
+                </h1>
                 <p>
                   <a className="channel-profile__source-link" href={xUrl} rel="noreferrer" target="_blank">
                     @{username}

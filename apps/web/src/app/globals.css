@@ -7586,6 +7586,41 @@ p {
   color: #9a5e16;
 }
 
+.x-profile-title {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.x-verified-mark {
+  align-items: center;
+  color: #1d9bf0;
+  display: inline-flex;
+  flex: 0 0 auto;
+  height: 1.45rem;
+  justify-content: center;
+  width: 1.45rem;
+}
+
+.x-verified-mark svg {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.x-verified-mark svg path:first-child {
+  fill: currentColor;
+}
+
+.x-verified-mark svg path:last-child {
+  fill: none;
+  stroke: #fff;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.2;
+}
+
 .channel-profile__add-button {
   align-items: center;
   background: #1d1a16;
