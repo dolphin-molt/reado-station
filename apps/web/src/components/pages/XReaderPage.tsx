@@ -18,6 +18,10 @@ function accountHref(lang: Lang, username: string): string {
   return `${base}?category=twitter&account=${encodeURIComponent(username)}`
 }
 
+function sourceDetailHref(lang: Lang, username: string): string {
+  return `${localizedPath(lang, 'sources')}/tw-${encodeURIComponent(username.toLowerCase())}`
+}
+
 export async function XReaderPage({ account = null, lang, subscribed = false }: XReaderPageProps) {
   const session = await getCurrentAuthSession()
 
@@ -64,7 +68,6 @@ export async function XReaderPage({ account = null, lang, subscribed = false }: 
         <div className="panel__header">
           <div>
             <h2>{t(lang, 'xReader.title')}</h2>
-            <p>{t(lang, 'xReader.subtitle')}</p>
           </div>
           <Link className="nav-button" href={`${localizedPath(lang, 'sources/new')}?type=x`}>
             {t(lang, 'xReader.addAccount')}
@@ -80,32 +83,31 @@ export async function XReaderPage({ account = null, lang, subscribed = false }: 
         {data.subscriptions.length > 0 ? (
           <div className="x-reader__layout">
             <aside className="x-reader__accounts">
-              <div className="x-reader__accounts-title">{t(lang, 'xReader.accounts')}</div>
               <nav className="x-reader__account-list">
                 {data.subscriptions.map((entry) => {
                   const active = data.activeAccount?.account.id === entry.account.id
                   return (
-                    <Link
-                      className="x-reader__account"
-                      data-active={active}
-                      href={accountHref(lang, entry.account.username)}
-                      key={entry.account.id}
-                    >
-                      <div className="x-reader__account-header">
-                        {entry.account.profileImageUrl ? (
-                          <img alt="" className="x-reader__avatar x-reader__avatar--image" src={entry.account.profileImageUrl} />
-                        ) : (
-                          <span className="x-reader__avatar">{entry.account.name.slice(0, 1)}</span>
-                        )}
-                        <div className="x-reader__account-text">
-                          <strong>{entry.account.name}</strong>
-                          <small>@{entry.account.username}</small>
+                    <article className="x-reader__account" data-active={active} key={entry.account.id}>
+                      <Link className="x-reader__account-main" href={accountHref(lang, entry.account.username)}>
+                        <div className="x-reader__account-header">
+                          {entry.account.profileImageUrl ? (
+                            <img alt="" className="x-reader__avatar x-reader__avatar--image" src={entry.account.profileImageUrl} />
+                          ) : (
+                            <span className="x-reader__avatar">{entry.account.name.slice(0, 1)}</span>
+                          )}
+                          <div className="x-reader__account-text">
+                            <strong>{entry.account.name}</strong>
+                            <small>@{entry.account.username}</small>
+                          </div>
                         </div>
-                      </div>
+                      </Link>
                       <div className="x-reader__account-meta">
                         <span>{entry.itemCount} {t(lang, 'xReader.items')}</span>
+                        <Link className="x-reader__account-detail" href={sourceDetailHref(lang, entry.account.username)}>
+                          {t(lang, 'xReader.detail')}
+                        </Link>
                       </div>
-                    </Link>
+                    </article>
                   )
                 })}
               </nav>

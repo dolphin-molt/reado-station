@@ -1396,6 +1396,11 @@ p {
   transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
 }
 
+.x-reader__account-main {
+  color: inherit;
+  display: block;
+}
+
 .x-reader__account:hover {
   background: var(--color-surface-strong);
   border-color: rgba(224, 120, 80, 0.28);
@@ -1434,13 +1439,24 @@ p {
 }
 
 .x-reader__account-meta {
+  align-items: center;
   color: var(--color-text-muted);
   display: flex;
   flex-wrap: wrap;
   font-family: var(--font-ui);
   font-size: 0.8rem;
   gap: 0.5rem;
+  justify-content: space-between;
   margin-top: 0.45rem;
+}
+
+.x-reader__account-detail {
+  color: var(--color-accent-hover);
+  font-weight: 700;
+}
+
+.x-reader__account-detail:hover {
+  text-decoration: underline;
 }
 
 .x-reader__avatar,
