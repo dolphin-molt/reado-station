@@ -72,7 +72,6 @@ export async function SourceDetailPage({ lang, sourceId }: { lang: Lang; sourceI
             </Link>
             <div className="channel-profile__hero">
               <div>
-                <span>X · {source.itemCount} {lang === 'zh' ? '条内容' : 'items'}</span>
                 <h1 className="x-profile-title">
                   {displayName}
                   {xAccount?.verified && <XVerifiedMark lang={lang} />}
