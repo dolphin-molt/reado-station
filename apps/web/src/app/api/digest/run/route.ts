@@ -16,7 +16,10 @@ export async function POST(request: NextRequest) {
     if (!db) return NextResponse.json({ error: 'D1 database is unavailable' }, { status: 503 })
     if (!env) return NextResponse.json({ error: 'Cloudflare environment is unavailable' }, { status: 503 })
 
-    return NextResponse.json(await generateLatestDigest(db, env))
+    const input = request.headers.get('content-type')?.includes('application/json')
+      ? await request.json().catch(() => ({}))
+      : {}
+    return NextResponse.json(await generateLatestDigest(db, env, input))
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Failed to generate digest'
     const status = error instanceof D1UnavailableError ? 503 : 400

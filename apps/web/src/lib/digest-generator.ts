@@ -1,6 +1,7 @@
 import type { DigestData, DigestStory, SiteItem } from '../../../../packages/shared/src'
 
 import { upsertDigestPayload } from '@/lib/d1-write'
+import type { XContentType } from '@/lib/x-content-preferences'
 
 interface DigestItemRow {
   id: string
@@ -24,6 +25,44 @@ export interface DigestGenerationResult {
   clusterCount?: number
 }
 
+export interface DigestGenerationInput {
+  workspaceId?: string | null
+  windowStart?: string | null
+  windowEnd?: string | null
+  scope?: 'daily' | 'hourly'
+  allowedContentTypes?: XContentType[]
+}
+
+const X_CONTENT_TYPES = new Set<XContentType>([
+  'original_post',
+  'thread',
+  'thread_part',
+  'longform_post',
+  'quote',
+  'reply',
+  'repost',
+  'media_post',
+])
+
+function stringValue(value: unknown): string | null {
+  return typeof value === 'string' && value.trim() ? value.trim() : null
+}
+
+export function normalizeDigestGenerationInput(value: unknown): DigestGenerationInput {
+  const record = value && typeof value === 'object' && !Array.isArray(value) ? value as Record<string, unknown> : {}
+  const allowedContentTypes = Array.isArray(record.allowedContentTypes)
+    ? [...new Set(record.allowedContentTypes.filter((entry): entry is XContentType => typeof entry === 'string' && X_CONTENT_TYPES.has(entry as XContentType)))]
+    : undefined
+
+  return {
+    workspaceId: stringValue(record.workspaceId),
+    scope: record.scope === 'hourly' ? 'hourly' : 'daily',
+    windowStart: stringValue(record.windowStart),
+    windowEnd: stringValue(record.windowEnd),
+    allowedContentTypes,
+  }
+}
+
 function rowToItem(row: DigestItemRow): SiteItem {
   return {
     id: row.id,
@@ -40,24 +79,61 @@ function rowToItem(row: DigestItemRow): SiteItem {
   }
 }
 
-async function loadLatestDate(db: D1Database): Promise<string | null> {
+function workspaceVisibleDigestSql(): string {
+  return `
+    EXISTS (
+      SELECT 1
+      FROM workspace_source_subscriptions wss
+      WHERE wss.workspace_id = ?
+        AND lower(wss.source_id) = lower(items.source)
+    )
+  `
+}
+
+function addDigestInputFilters(filters: string[], bindings: Array<string | number>, input: DigestGenerationInput): void {
+  if (input.workspaceId) {
+    filters.push(workspaceVisibleDigestSql())
+    bindings.push(input.workspaceId)
+  }
+  if (input.windowStart) {
+    filters.push('published_at >= ?')
+    bindings.push(input.windowStart)
+  }
+  if (input.windowEnd) {
+    filters.push('published_at <= ?')
+    bindings.push(input.windowEnd)
+  }
+  if (input.allowedContentTypes?.length) {
+    filters.push(`COALESCE(json_extract(metadata_json, '$.content_type'), 'original_post') IN (${input.allowedContentTypes.map(() => '?').join(', ')})`)
+    bindings.push(...input.allowedContentTypes)
+  }
+}
+
+async function loadLatestDate(db: D1Database, input: DigestGenerationInput): Promise<string | null> {
+  const filters = ['hidden_at IS NULL']
+  const bindings: Array<string | number> = []
+  addDigestInputFilters(filters, bindings, input)
   const row = await db
     .prepare(
       `
         SELECT date
         FROM items
-        WHERE hidden_at IS NULL
+        WHERE ${filters.join(' AND ')}
         GROUP BY date
         ORDER BY date DESC
         LIMIT 1
       `,
     )
+    .bind(...bindings)
     .first<{ date: string }>()
 
   return row?.date ?? null
 }
 
-async function loadItemsForDigest(db: D1Database, date: string, limit = 80): Promise<SiteItem[]> {
+async function loadItemsForDigest(db: D1Database, date: string, input: DigestGenerationInput, limit = 80): Promise<SiteItem[]> {
+  const filters = ['date = ?', 'hidden_at IS NULL']
+  const bindings: Array<string | number> = [date]
+  addDigestInputFilters(filters, bindings, input)
   const { results = [] } = await db
     .prepare(
       `
@@ -73,12 +149,12 @@ async function loadItemsForDigest(db: D1Database, date: string, limit = 80): Pro
           date,
           batch
         FROM items
-        WHERE date = ? AND hidden_at IS NULL
+        WHERE ${filters.join(' AND ')}
         ORDER BY published_at DESC, id ASC
         LIMIT ?
       `,
     )
-    .bind(date, limit)
+    .bind(...bindings, limit)
     .all<DigestItemRow>()
 
   return results.map(rowToItem)
@@ -201,11 +277,12 @@ async function generateDigestWithLlm(env: CloudflareEnv, date: string, items: Si
   return parseDigestJson(await callSiliconFlow(env, prompt), date)
 }
 
-export async function generateLatestDigest(db: D1Database, env: CloudflareEnv): Promise<DigestGenerationResult> {
-  const date = await loadLatestDate(db)
+export async function generateLatestDigest(db: D1Database, env: CloudflareEnv, rawInput?: unknown): Promise<DigestGenerationResult> {
+  const input = normalizeDigestGenerationInput(rawInput)
+  const date = await loadLatestDate(db, input)
   if (!date) return { status: 'skipped', reason: 'no items' }
 
-  const items = await loadItemsForDigest(db, date)
+  const items = await loadItemsForDigest(db, date, input)
   if (items.length === 0) return { status: 'skipped', reason: 'no items', date }
   if (!env.SILICONFLOW_API_KEY) return { status: 'skipped', reason: 'SILICONFLOW_API_KEY is not configured', date, itemCount: items.length }
 
@@ -213,7 +290,7 @@ export async function generateLatestDigest(db: D1Database, env: CloudflareEnv): 
 
   const result = await upsertDigestPayload(db, {
     date,
-    batch: 'latest',
+    batch: input.scope === 'hourly' ? 'hourly' : 'latest',
     digest,
   })
 
