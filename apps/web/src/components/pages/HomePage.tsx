@@ -159,6 +159,15 @@ async function loadTodayRadio(date: string | null): Promise<Awaited<ReturnType<t
   return loadRadioEpisode(db, workspace.id, date)
 }
 
+async function loadCurrentWorkspaceId(): Promise<string | null> {
+  const session = await getCurrentAuthSession().catch(() => null)
+  if (!session) return null
+  const db = await getD1Binding().catch(() => null)
+  if (!db) return null
+  const workspace = await getDefaultWorkspaceForUser(db, session.userId, session.username)
+  return workspace.id
+}
+
 export async function HomePage({
   account = null,
   category = null,
@@ -182,7 +191,8 @@ export async function HomePage({
     )
   }
 
-  const data = await getHomePageData(lang, page, category)
+  const workspaceId = await loadCurrentWorkspaceId()
+  const data = await getHomePageData(lang, page, category, workspaceId)
   const hasDigest = Boolean(data.observationText || data.keyStories.length > 0)
   const showOnboarding = !category && await shouldShowOnboarding()
   const radioEpisode = !category && hasDigest ? await loadTodayRadio(data.date) : null

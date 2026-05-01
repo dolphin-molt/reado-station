@@ -4,6 +4,7 @@ import {
   DEFAULT_X_COLLECTION_PREFERENCES,
   classifyXTweetContentType,
   normalizeXCollectionPreferences,
+  xContentTypeAllowedByPreferences,
   xAllowedContentTypes,
 } from './x-content-preferences'
 
@@ -44,6 +45,22 @@ describe('X collection preferences', () => {
       includeQuotes: false,
       includeMediaPosts: false,
     })
+  })
+
+  it('checks whether a stored item content type is visible for a subscription', () => {
+    const preferences = normalizeXCollectionPreferences({
+      includeOriginalPosts: true,
+      includeThreads: true,
+      includeLongformPosts: true,
+      includeReplies: true,
+      includeReposts: false,
+      includeQuotes: false,
+      includeMediaPosts: true,
+    })
+
+    expect(xContentTypeAllowedByPreferences('reply', preferences)).toBe(true)
+    expect(xContentTypeAllowedByPreferences('quote', preferences)).toBe(false)
+    expect(xContentTypeAllowedByPreferences('thread_part', preferences)).toBe(true)
   })
 })
 

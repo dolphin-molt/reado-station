@@ -179,7 +179,7 @@ function categoryOptionsForItems(items: SiteItem[], activeCategory?: string | nu
   return buildCategoryOptions(counts, activeCategory)
 }
 
-export const getHomePageData = cache(async (_lang: Lang, page = 1, category: string | null = null): Promise<HomePageData> => {
+export const getHomePageData = cache(async (_lang: Lang, page = 1, category: string | null = null, workspaceId: string | null = null): Promise<HomePageData> => {
   const itemCategory = category === 'all' ? null : category
   const db = await getD1DatabaseForContent()
   if (db) {
@@ -187,6 +187,7 @@ export const getHomePageData = cache(async (_lang: Lang, page = 1, category: str
       page,
       pageSize: HOME_ITEMS_PAGE_SIZE,
       category: itemCategory,
+      workspaceId,
     })
     const digest = category ? null : await fetchDigestFromApi(data.date)
     return {

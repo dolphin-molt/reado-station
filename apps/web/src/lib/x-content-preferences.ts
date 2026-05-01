@@ -74,6 +74,17 @@ export function xAllowedContentTypes(preferences: XCollectionPreferences): XCont
   return types
 }
 
+export function xContentTypeAllowedByPreferences(contentType: XContentType | string, preferences: XCollectionPreferences): boolean {
+  if (contentType === 'original_post') return preferences.includeOriginalPosts
+  if (contentType === 'thread' || contentType === 'thread_part') return preferences.includeThreads
+  if (contentType === 'longform_post') return preferences.includeLongformPosts
+  if (contentType === 'reply') return preferences.includeReplies
+  if (contentType === 'repost') return preferences.includeReposts
+  if (contentType === 'quote') return preferences.includeQuotes
+  if (contentType === 'media_post') return preferences.includeMediaPosts
+  return preferences.includeOriginalPosts
+}
+
 export function classifyXTweetContentType(tweet: XTweetForClassification, accountAuthorId: string): XContentType {
   const referenceType = tweet.referenced_tweets?.[0]?.type
   if (referenceType === 'replied_to') return 'reply'

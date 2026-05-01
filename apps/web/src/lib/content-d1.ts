@@ -187,35 +187,67 @@ async function loadItems(db: D1Database): Promise<SiteItem[]> {
   return results.map(rowToItem)
 }
 
-async function loadItemsForDate(db: D1Database, date: string, limit: number, offset: number, category?: string | null): Promise<SiteItem[]> {
-  const filters = ['date = ?', 'hidden_at IS NULL']
+function workspaceVisibleItemSql(itemAlias: string): string {
+  return `
+    EXISTS (
+      SELECT 1
+      FROM workspace_source_subscriptions wss
+      WHERE wss.workspace_id = ?
+        AND lower(wss.source_id) = lower(${itemAlias}.source)
+        AND (
+          wss.source_type <> 'x'
+          OR CASE COALESCE(json_extract(${itemAlias}.metadata_json, '$.content_type'), 'original_post')
+            WHEN 'original_post' THEN COALESCE(json_extract(wss.collection_preferences_json, '$.includeOriginalPosts'), 1)
+            WHEN 'thread' THEN COALESCE(json_extract(wss.collection_preferences_json, '$.includeThreads'), 1)
+            WHEN 'thread_part' THEN COALESCE(json_extract(wss.collection_preferences_json, '$.includeThreads'), 1)
+            WHEN 'longform_post' THEN COALESCE(json_extract(wss.collection_preferences_json, '$.includeLongformPosts'), 1)
+            WHEN 'reply' THEN COALESCE(json_extract(wss.collection_preferences_json, '$.includeReplies'), 0)
+            WHEN 'repost' THEN COALESCE(json_extract(wss.collection_preferences_json, '$.includeReposts'), 0)
+            WHEN 'quote' THEN COALESCE(json_extract(wss.collection_preferences_json, '$.includeQuotes'), 0)
+            WHEN 'media_post' THEN COALESCE(json_extract(wss.collection_preferences_json, '$.includeMediaPosts'), 1)
+            ELSE COALESCE(json_extract(wss.collection_preferences_json, '$.includeOriginalPosts'), 1)
+          END = 1
+        )
+    )
+  `
+}
+
+function addWorkspaceVisibleFilter(filters: string[], bindings: Array<string | number>, workspaceId?: string | null, itemAlias = 'i'): void {
+  if (!workspaceId) return
+  filters.push(workspaceVisibleItemSql(itemAlias))
+  bindings.push(workspaceId)
+}
+
+async function loadItemsForDate(db: D1Database, date: string, limit: number, offset: number, category?: string | null, workspaceId?: string | null): Promise<SiteItem[]> {
+  const filters = ['i.date = ?', 'i.hidden_at IS NULL']
   const bindings: Array<string | number> = [date]
 
   if (category) {
-    filters.push('category = ?')
+    filters.push('i.category = ?')
     bindings.push(category)
   }
+  addWorkspaceVisibleFilter(filters, bindings, workspaceId, 'i')
 
   const { results = [] } = await db
     .prepare(
       `
         SELECT
-          id,
-          title,
-          title_zh AS titleZh,
-          url,
-          summary,
-          summary_zh AS summaryZh,
-          published_at AS publishedAt,
-          source,
-          source_name AS sourceName,
-          category,
-          image_url AS imageUrl,
-          date,
-          batch
-        FROM items
+          i.id,
+          i.title,
+          i.title_zh AS titleZh,
+          i.url,
+          i.summary,
+          i.summary_zh AS summaryZh,
+          i.published_at AS publishedAt,
+          i.source,
+          i.source_name AS sourceName,
+          i.category,
+          i.image_url AS imageUrl,
+          i.date,
+          i.batch
+        FROM items i
         WHERE ${filters.join(' AND ')}
-        ORDER BY published_at DESC, id ASC
+        ORDER BY i.published_at DESC, i.id ASC
         LIMIT ? OFFSET ?
       `,
     )
@@ -225,19 +257,23 @@ async function loadItemsForDate(db: D1Database, date: string, limit: number, off
   return results.map(rowToItem)
 }
 
-async function loadCategoryCountsForDate(db: D1Database, date: string): Promise<CategoryOption[]> {
+async function loadCategoryCountsForDate(db: D1Database, date: string, workspaceId?: string | null): Promise<CategoryOption[]> {
+  const filters = ['i.date = ?', 'i.hidden_at IS NULL']
+  const bindings: Array<string | number> = [date]
+  addWorkspaceVisibleFilter(filters, bindings, workspaceId, 'i')
+
   const { results = [] } = await db
     .prepare(
       `
         SELECT
-          category,
+          i.category,
           COUNT(1) AS itemCount
-        FROM items
-        WHERE date = ? AND hidden_at IS NULL
-        GROUP BY category
+        FROM items i
+        WHERE ${filters.join(' AND ')}
+        GROUP BY i.category
       `,
     )
-    .bind(date)
+    .bind(...bindings)
     .all<D1CategoryCountRow>()
 
   return buildCategoryOptions(new Map(results.map((row) => [row.category, Number(row.itemCount ?? 0)])))
@@ -276,18 +312,22 @@ export async function loadDigestForDate(db: D1Database, date: string): Promise<D
   return row ? rowToDigest(row) : null
 }
 
-export async function loadD1HomePageContent(db: D1Database, options: { page: number; pageSize: number; category?: string | null }): Promise<D1HomePageContent> {
+export async function loadD1HomePageContent(db: D1Database, options: { page: number; pageSize: number; category?: string | null; workspaceId?: string | null }): Promise<D1HomePageContent> {
+  const latestFilters = ['i.hidden_at IS NULL']
+  const latestBindings: Array<string | number> = []
+  addWorkspaceVisibleFilter(latestFilters, latestBindings, options.workspaceId, 'i')
   const latest = await db
     .prepare(
       `
-        SELECT date
-        FROM items
-        WHERE hidden_at IS NULL
-        GROUP BY date
-        ORDER BY date DESC
+        SELECT i.date
+        FROM items i
+        WHERE ${latestFilters.join(' AND ')}
+        GROUP BY i.date
+        ORDER BY i.date DESC
         LIMIT 1
       `,
     )
+    .bind(...latestBindings)
     .first<D1LatestDateRow>()
 
   if (!latest) {
@@ -301,20 +341,24 @@ export async function loadD1HomePageContent(db: D1Database, options: { page: num
     }
   }
 
+  const statsFilters = ['i.date = ?', 'i.hidden_at IS NULL']
+  const statsBindings: Array<string | number> = [latest.date]
+  addWorkspaceVisibleFilter(statsFilters, statsBindings, options.workspaceId, 'i')
+
   const [stats, categories] = await Promise.all([
     db
       .prepare(
         `
           SELECT
             COUNT(1) AS itemCount,
-            COUNT(DISTINCT source_name) AS sourceCount
-          FROM items
-          WHERE date = ? AND hidden_at IS NULL
+            COUNT(DISTINCT i.source_name) AS sourceCount
+          FROM items i
+          WHERE ${statsFilters.join(' AND ')}
         `,
       )
-      .bind(latest.date)
+      .bind(...statsBindings)
       .first<D1HomeStatsRow>(),
-    loadCategoryCountsForDate(db, latest.date),
+    loadCategoryCountsForDate(db, latest.date, options.workspaceId),
   ])
 
   const totalItems = Number(stats?.itemCount ?? 0)
@@ -324,7 +368,7 @@ export async function loadD1HomePageContent(db: D1Database, options: { page: num
     : totalItems
 
   const pagination = createPaginationMeta(options.page, options.pageSize, filteredCount)
-  const items = await loadItemsForDate(db, latest.date, pagination.pageSize, paginationOffset(pagination), activeCategory)
+  const items = await loadItemsForDate(db, latest.date, pagination.pageSize, paginationOffset(pagination), activeCategory, options.workspaceId)
 
   return {
     date: latest.date,
