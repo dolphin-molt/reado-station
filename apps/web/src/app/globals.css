@@ -6551,6 +6551,58 @@ p {
   box-shadow: 0 18px 52px rgba(57, 43, 22, 0.08);
 }
 
+.reader-feed-waiting {
+  background: rgba(255, 248, 236, 0.78);
+  border: 1px solid rgba(166, 101, 24, 0.16);
+  border-radius: 8px;
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+
+.reader-feed-waiting h3 {
+  color: #24211b;
+  font-size: 1.05rem;
+  margin: 0;
+}
+
+.reader-feed-waiting p {
+  color: rgba(34, 31, 26, 0.62);
+  line-height: 1.6;
+  margin-top: 0.28rem;
+}
+
+.reader-feed-waiting__list {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.reader-feed-waiting__item {
+  align-items: center;
+  background: rgba(255, 252, 244, 0.82);
+  border: 1px solid rgba(34, 31, 26, 0.1);
+  border-radius: 8px;
+  color: #24211b;
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: auto minmax(0, 0.5fr) minmax(0, 1fr);
+  padding: 0.62rem 0.75rem;
+  text-decoration: none;
+}
+
+.reader-feed-waiting__item strong,
+.reader-feed-waiting__item small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.reader-feed-waiting__item small {
+  color: rgba(34, 31, 26, 0.58);
+  font-weight: 700;
+}
+
 .reader-shell .news-grid {
   display: grid;
   gap: 0.7rem;

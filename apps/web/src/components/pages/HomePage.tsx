@@ -11,6 +11,7 @@ import { getCurrentAuthSession } from '@/lib/auth'
 import { getD1Binding } from '@/lib/cloudflare'
 import { getHomePageData } from '@/lib/content'
 import { localizedPath, t, type Lang } from '@/lib/i18n'
+import { loadWorkspaceSources, sourceDisplayUrl, type WorkspaceSourceListItem } from '@/lib/my-sources'
 import { loadRadioEpisode } from '@/lib/radio'
 import { getWorkspaceSourceCount, getDefaultWorkspaceForUser } from '@/lib/workspaces'
 
@@ -18,10 +19,12 @@ function ItemsPanel({
   data,
   lang,
   title,
+  waitingSources = [],
 }: {
   data: Awaited<ReturnType<typeof getHomePageData>>
   lang: Lang
   title: string
+  waitingSources?: WorkspaceSourceListItem[]
 }) {
   return (
     <main className="container reader-feed-desk">
@@ -34,6 +37,32 @@ function ItemsPanel({
             </p>
           )}
         </div>
+
+        {waitingSources.length > 0 && (
+          <div className="reader-feed-waiting">
+            <div>
+              <h3>{lang === 'zh' ? '等待采集的信息源' : 'Sources waiting for collection'}</h3>
+              <p>
+                {lang === 'zh'
+                  ? '这些订阅还没有可展示内容；完成采集后会自动进入全部。'
+                  : 'These subscriptions do not have visible items yet. They will appear here after collection finishes.'}
+              </p>
+            </div>
+            <div className="reader-feed-waiting__list">
+              {waitingSources.map((source) => (
+                <Link
+                  className="reader-feed-waiting__item"
+                  href={`${localizedPath(lang, 'sources')}/${encodeURIComponent(source.sourceId)}`}
+                  key={source.sourceId}
+                >
+                  <span className="status-pill status-pill--ok">{source.sourceType.toUpperCase()}</span>
+                  <strong>{source.name}</strong>
+                  <small>{source.status} · {sourceDisplayUrl(source)}</small>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
 
         {data.items.length > 0 ? (
           <div className="news-grid">
@@ -149,6 +178,15 @@ async function shouldShowOnboarding(): Promise<boolean> {
   return !profile
 }
 
+async function loadCurrentWorkspaceSources(): Promise<WorkspaceSourceListItem[]> {
+  const session = await getCurrentAuthSession().catch(() => null)
+  if (!session) return []
+  const db = await getD1Binding().catch(() => null)
+  if (!db) return []
+  const workspace = await getDefaultWorkspaceForUser(db, session.userId, session.username)
+  return loadWorkspaceSources(db, workspace.id)
+}
+
 async function loadTodayRadio(date: string | null): Promise<Awaited<ReturnType<typeof loadRadioEpisode>>> {
   if (!date) return null
   const session = await getCurrentAuthSession().catch(() => null)
@@ -196,6 +234,9 @@ export async function HomePage({
   const hasDigest = Boolean(data.observationText || data.keyStories.length > 0)
   const showOnboarding = !category && await shouldShowOnboarding()
   const radioEpisode = !category && hasDigest ? await loadTodayRadio(data.date) : null
+  const waitingSources = data.activeCategory === 'all'
+    ? (await loadCurrentWorkspaceSources()).filter((source) => source.itemCount === 0)
+    : []
 
   return (
     <div className="page-shell reader-shell">
@@ -223,7 +264,7 @@ export async function HomePage({
           <DigestPending lang={lang} />
         )
       ) : (
-        <ItemsPanel data={data} lang={lang} title={t(lang, 'allItems.title')} />
+        <ItemsPanel data={data} lang={lang} title={t(lang, 'allItems.title')} waitingSources={waitingSources} />
       )}
 
       <Footer lang={lang} />
