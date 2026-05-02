@@ -40,6 +40,8 @@ export interface SubscribeWorkspaceSourceResult {
   displayName: string
   collectionJobId: string | null
   collectionStatus: string
+  profileEnrichmentJobId: string | null
+  profileEnrichmentStatus: 'queued' | 'existing' | null
 }
 
 interface UnsubscribeInput {
@@ -238,8 +240,9 @@ export async function subscribeWorkspaceSource(db: D1Database, input: SubscribeI
 
   await db.batch(batch)
   const sourceUsername = 'username' in source && typeof source.username === 'string' ? source.username : null
+  let profileEnrichment: { id: string; status: 'queued' | 'existing' } | null = null
   if (sourceUsername) {
-    await enqueueProfileEnrichmentJob(db, {
+    profileEnrichment = await enqueueProfileEnrichmentJob(db, {
       jobType: 'discover_profile_assets',
       sourceType: 'x',
       sourceValue: sourceUsername,
@@ -255,6 +258,8 @@ export async function subscribeWorkspaceSource(db: D1Database, input: SubscribeI
     displayName: source.name,
     collectionJobId: collection?.job?.id ?? null,
     collectionStatus: subscriptionStatus,
+    profileEnrichmentJobId: profileEnrichment?.id ?? null,
+    profileEnrichmentStatus: profileEnrichment?.status ?? null,
   }
 }
 

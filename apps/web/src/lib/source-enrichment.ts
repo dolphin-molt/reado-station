@@ -36,6 +36,8 @@ interface ProfileEnrichmentRunOptions extends ProfileAssetDiscoveryOptions {
   env?: ReadoCloudflareEnv | null
 }
 
+type ProfileEnrichmentRunResult = NonNullable<Awaited<ReturnType<typeof runOneProfileEnrichmentJob>>>
+
 export async function enqueueProfileEnrichmentJob(
   db: D1Database,
   input: EnqueueProfileEnrichmentJobInput,
@@ -237,5 +239,28 @@ export async function runOneProfileEnrichmentJob(
       .bind(message, now, now, job.id)
       .run()
     return { jobId: job.id, status: 'failed', assetCount: 0, error: message }
+  }
+}
+
+export async function runProfileEnrichmentQueue(
+  db: D1Database,
+  options: ProfileEnrichmentRunOptions & {
+    maxJobs?: number
+    runOne?: (db: D1Database) => Promise<ProfileEnrichmentRunResult | null>
+  } = {},
+): Promise<{ processedCount: number; results: ProfileEnrichmentRunResult[] }> {
+  const maxJobs = Math.max(1, Math.min(25, options.maxJobs ?? 5))
+  const results: ProfileEnrichmentRunResult[] = []
+  const runOne = options.runOne ?? ((database: D1Database) => runOneProfileEnrichmentJob(database, options))
+
+  for (let index = 0; index < maxJobs; index += 1) {
+    const result = await runOne(db)
+    if (!result) break
+    results.push(result)
+  }
+
+  return {
+    processedCount: results.length,
+    results,
   }
 }

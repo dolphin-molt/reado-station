@@ -4,6 +4,7 @@ import openNextWorker from '../.open-next/worker.js'
 import { generateLatestDigest } from './lib/digest-generator'
 import { collectProgramSources } from './lib/program-collector'
 import { runSourceCollectionQueue } from './lib/source-collection-runner'
+import { runProfileEnrichmentQueue } from './lib/source-enrichment'
 
 const DIGEST_CRONS = new Set(['0 0 * * *', '0 10 * * *'])
 
@@ -20,12 +21,15 @@ export default {
     }
 
     ctx.waitUntil(
-      runSourceCollectionQueue(db as D1Database, { maxJobs: 10 })
-        .then((sourceCollections) => {
-          if (!DIGEST_CRONS.has(event.cron)) return { sourceCollections }
+      Promise.all([
+        runSourceCollectionQueue(db as D1Database, { maxJobs: 10 }),
+        runProfileEnrichmentQueue(db as D1Database, { maxJobs: 10 }),
+      ])
+        .then(([sourceCollections, profileEnrichments]) => {
+          if (!DIGEST_CRONS.has(event.cron)) return { sourceCollections, profileEnrichments }
           return collectProgramSources(db, env)
             .then((collection) => generateLatestDigest(db as D1Database, env)
-              .then((digest) => ({ sourceCollections, collection, digest })))
+              .then((digest) => ({ sourceCollections, profileEnrichments, collection, digest })))
         })
         .then((result) => {
           console.log('Scheduled work finished', JSON.stringify(result))

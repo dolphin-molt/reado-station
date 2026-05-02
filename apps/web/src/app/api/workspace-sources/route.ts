@@ -6,6 +6,7 @@ import { safeNextPath } from '@/lib/admin-forms'
 import { getCurrentAuthSession } from '@/lib/auth'
 import { getD1Binding } from '@/lib/cloudflare'
 import { runSourceCollectionQueue } from '@/lib/source-collection-runner'
+import { runProfileEnrichmentQueue } from '@/lib/source-enrichment'
 import { getDefaultWorkspaceForUser } from '@/lib/workspaces'
 import { shouldRunSourceCollectionAfterSubscribe, sourceErrorCode, subscribeWorkspaceSource } from '@/lib/workspace-sources'
 
@@ -63,11 +64,20 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       userId: session.userId,
       workspace,
     })
-    if (shouldRunSourceCollectionAfterSubscribe(result.collectionStatus)) {
+    if (shouldRunSourceCollectionAfterSubscribe(result.collectionStatus) || result.profileEnrichmentJobId) {
       after(async () => {
-        await runSourceCollectionQueue(db, { maxJobs: 3 }).catch((error) => {
-          console.error('Source collection queue kick failed after subscribe', error)
-        })
+        await Promise.all([
+          shouldRunSourceCollectionAfterSubscribe(result.collectionStatus)
+            ? runSourceCollectionQueue(db, { maxJobs: 3 }).catch((error) => {
+                console.error('Source collection queue kick failed after subscribe', error)
+              })
+            : Promise.resolve(null),
+          result.profileEnrichmentJobId
+            ? runProfileEnrichmentQueue(db, { maxJobs: 3 }).catch((error) => {
+                console.error('Profile enrichment queue kick failed after subscribe', error)
+              })
+            : Promise.resolve(null),
+        ])
       })
     }
     const separator = next.includes('?') ? '&' : '?'

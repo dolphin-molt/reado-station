@@ -4,7 +4,7 @@ import { vi } from 'vitest'
 
 vi.mock('server-only', () => ({}))
 
-import { enqueueProfileEnrichmentJob, runOneProfileEnrichmentJob } from './source-enrichment'
+import { enqueueProfileEnrichmentJob, runOneProfileEnrichmentJob, runProfileEnrichmentQueue } from './source-enrichment'
 
 describe('profile enrichment jobs', () => {
   it('enqueues discover_profile_assets without duplicating active jobs', async () => {
@@ -98,5 +98,23 @@ describe('profile enrichment jobs', () => {
     expect(result).toMatchObject({ assetCount: 4, jobId: 'job-1', status: 'completed' })
     expect(writes.some((statement) => statement.sql.includes('INSERT INTO channel_profiles'))).toBe(true)
     expect(writes.some((statement) => statement.sql.includes('featured_json'))).toBe(true)
+  })
+
+  it('processes queued enrichment jobs until the batch limit or empty queue', async () => {
+    const results = [
+      { assetCount: 1, jobId: 'job-1', status: 'completed' },
+      { assetCount: 2, jobId: 'job-2', status: 'completed' },
+      null,
+    ]
+    let calls = 0
+
+    const summary = await runProfileEnrichmentQueue({} as D1Database, {
+      maxJobs: 5,
+      runOne: async () => results[calls++] ?? null,
+    })
+
+    expect(summary.processedCount).toBe(2)
+    expect(summary.results.map((result) => result.jobId)).toEqual(['job-1', 'job-2'])
+    expect(calls).toBe(3)
   })
 })

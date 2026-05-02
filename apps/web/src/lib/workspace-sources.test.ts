@@ -88,7 +88,11 @@ describe('workspace source subscription errors', () => {
         type: 'personal',
         updatedAt: '2026-05-02T00:00:00.000Z',
       },
-    })).resolves.toMatchObject({ sourceId: 'tw-anthropic' })
+    })).resolves.toMatchObject({
+      profileEnrichmentJobId: 'enrich-1',
+      profileEnrichmentStatus: 'queued',
+      sourceId: 'tw-anthropic',
+    })
     expect(mocks.resolveXAccount).toHaveBeenCalledWith(db, 'Anthropic')
     expect(mocks.enqueueProfileEnrichmentJob).toHaveBeenCalledWith(db, {
       jobType: 'discover_profile_assets',
