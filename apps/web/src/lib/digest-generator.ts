@@ -1,6 +1,7 @@
 import type { DigestData, DigestStory, SiteItem } from '../../../../packages/shared/src'
 
 import { upsertDigestPayload } from '@/lib/d1-write'
+import { createExecutionRunId, logExecutionStep, withExecutionStep } from '@/lib/execution-logs'
 import type { XContentType } from '@/lib/x-content-preferences'
 
 interface DigestItemRow {
@@ -279,26 +280,101 @@ async function generateDigestWithLlm(env: CloudflareEnv, date: string, items: Si
 
 export async function generateLatestDigest(db: D1Database, env: CloudflareEnv, rawInput?: unknown): Promise<DigestGenerationResult> {
   const input = normalizeDigestGenerationInput(rawInput)
-  const date = await loadLatestDate(db, input)
-  if (!date) return { status: 'skipped', reason: 'no items' }
-
-  const items = await loadItemsForDigest(db, date, input)
-  if (items.length === 0) return { status: 'skipped', reason: 'no items', date }
-  if (!env.SILICONFLOW_API_KEY) return { status: 'skipped', reason: 'SILICONFLOW_API_KEY is not configured', date, itemCount: items.length }
-
-  const digest = await generateDigestWithLlm(env, date, items)
-
-  const result = await upsertDigestPayload(db, {
-    date,
-    batch: input.scope === 'hourly' ? 'hourly' : 'latest',
-    digest,
+  const runId = createExecutionRunId(`digest-${input.scope ?? 'daily'}`)
+  const subject = {
+    runId,
+    scope: 'digest',
+    subjectId: input.workspaceId ?? input.scope ?? 'global',
+    subjectType: input.workspaceId ? 'workspace' : 'digest',
+  }
+  await logExecutionStep(db, {
+    ...subject,
+    metadata: input as Record<string, unknown>,
+    status: 'started',
+    step: 'digest_generation',
   })
 
-  return {
-    status: 'generated',
-    date,
-    itemCount: items.length,
-    headline: result.headline,
-    clusterCount: result.clusterCount,
+  try {
+    const date = await withExecutionStep(db, {
+      ...subject,
+      metadata: input as Record<string, unknown>,
+      step: 'load_latest_digest_date',
+    }, () => loadLatestDate(db, input))
+    if (!date) {
+      await logExecutionStep(db, {
+        ...subject,
+        message: 'no items',
+        metadata: input as Record<string, unknown>,
+        status: 'completed',
+        step: 'digest_generation',
+      })
+      return { status: 'skipped', reason: 'no items' }
+    }
+
+    const items = await withExecutionStep(db, {
+      ...subject,
+      metadata: { date, ...input },
+      step: 'load_digest_items',
+    }, () => loadItemsForDigest(db, date, input))
+    if (items.length === 0) {
+      await logExecutionStep(db, {
+        ...subject,
+        message: 'no items',
+        metadata: { date, itemCount: 0 },
+        status: 'completed',
+        step: 'digest_generation',
+      })
+      return { status: 'skipped', reason: 'no items', date }
+    }
+    if (!env.SILICONFLOW_API_KEY) {
+      await logExecutionStep(db, {
+        ...subject,
+        message: 'SILICONFLOW_API_KEY is not configured',
+        metadata: { date, itemCount: items.length },
+        status: 'completed',
+        step: 'digest_generation',
+      })
+      return { status: 'skipped', reason: 'SILICONFLOW_API_KEY is not configured', date, itemCount: items.length }
+    }
+
+    const digest = await withExecutionStep(db, {
+      ...subject,
+      metadata: { date, itemCount: items.length },
+      step: 'generate_digest_with_llm',
+    }, () => generateDigestWithLlm(env, date, items))
+
+    const result = await withExecutionStep(db, {
+      ...subject,
+      metadata: { clusterCount: digest.clusters.length, date },
+      step: 'upsert_digest',
+    }, () => upsertDigestPayload(db, {
+      date,
+      batch: input.scope === 'hourly' ? 'hourly' : 'latest',
+      digest,
+    }))
+
+    await logExecutionStep(db, {
+      ...subject,
+      metadata: { clusterCount: result.clusterCount, date, headline: result.headline, itemCount: items.length },
+      status: 'completed',
+      step: 'digest_generation',
+    })
+    return {
+      status: 'generated',
+      date,
+      itemCount: items.length,
+      headline: result.headline,
+      clusterCount: result.clusterCount,
+    }
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'Failed to generate digest'
+    await logExecutionStep(db, {
+      ...subject,
+      message,
+      metadata: input as Record<string, unknown>,
+      status: 'failed',
+      step: 'digest_generation',
+    })
+    throw error
   }
 }

@@ -1,10 +1,10 @@
-import { describe, expect, it } from 'vitest'
+import { afterEach, describe, expect, it } from 'vitest'
 
 import { vi } from 'vitest'
 
 vi.mock('server-only', () => ({}))
 
-import { runSourceCollectionQueue } from './source-collection-runner'
+import { runOneSourceCollectionJob, runSourceCollectionQueue } from './source-collection-runner'
 import { parseRssOrAtom } from './source-collection-parser'
 
 const job = {
@@ -65,6 +65,10 @@ describe('source collection runner RSS parsing', () => {
 })
 
 describe('source collection queue runner', () => {
+  afterEach(() => {
+    vi.unstubAllGlobals()
+  })
+
   it('processes queued jobs until the batch limit or empty queue', async () => {
     const results = [
       { jobId: 'job-1', status: 'completed', itemCount: 1 },
@@ -81,5 +85,53 @@ describe('source collection queue runner', () => {
     expect(summary.processedCount).toBe(2)
     expect(summary.results.map((result) => result.jobId)).toEqual(['job-1', 'job-2'])
     expect(calls).toBe(3)
+  })
+
+  it('records execution logs while processing a queued RSS job', async () => {
+    const writes: Array<{ sql: string; bindings: unknown[] }> = []
+    const db = {
+      batch: async () => {},
+      prepare: (sql: string) => ({
+        first: async () => {
+          if (sql.includes('FROM source_collection_jobs j')) {
+            return {
+              adapter: 'rss',
+              id: 'job-1',
+              sourceId: 'rss-test',
+              sourceName: 'RSS Test',
+              sourceType: 'rss',
+              sourceUrl: 'https://example.com/feed.xml',
+              windowEnd: '2026-05-02T00:00:00.000Z',
+              windowStart: '2026-05-01T00:00:00.000Z',
+            }
+          }
+          return null
+        },
+        bind: (...bindings: unknown[]) => {
+          writes.push({ sql, bindings })
+          return {
+            all: async () => ({ results: [] }),
+            first: async () => null,
+            run: async () => {},
+          }
+        },
+      }),
+    } as unknown as D1Database
+
+    vi.stubGlobal('fetch', async () => new Response(`
+      <rss><channel>
+        <item>
+          <title>Collected item</title>
+          <link>https://example.com/item</link>
+          <pubDate>Fri, 01 May 2026 12:00:00 GMT</pubDate>
+          <description>Collected summary</description>
+        </item>
+      </channel></rss>
+    `, { status: 200 }))
+
+    const result = await runOneSourceCollectionJob(db)
+
+    expect(result).toMatchObject({ itemCount: 1, jobId: 'job-1', status: 'completed' })
+    expect(writes.some((statement) => statement.sql.includes('INSERT INTO execution_logs') && statement.bindings.includes('source-collection'))).toBe(true)
   })
 })

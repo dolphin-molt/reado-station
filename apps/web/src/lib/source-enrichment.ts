@@ -1,6 +1,7 @@
 import 'server-only'
 
 import { getCloudflareEnv, type ReadoCloudflareEnv } from '@/lib/cloudflare'
+import { createExecutionRunId, logExecutionStep, withExecutionStep } from '@/lib/execution-logs'
 import { createAiSdkProfileAssetSelector, createBigModelSearchProvider, createBraveSearchProvider, discoverXProfileAssets, type ProfileAssetDiscoveryOptions } from '@/lib/profile-asset-discovery'
 import { presetXProfileAssets, type SourceProfileAsset } from '@/lib/source-profile-assets'
 
@@ -327,14 +328,41 @@ export async function runOneProfileEnrichmentJob(
   const job = await claimQueuedEnrichmentJob(db)
   if (!job) return null
   const now = new Date().toISOString()
+  const runId = createExecutionRunId(`profile-${job.id}`)
+  const subject = {
+    runId,
+    scope: 'profile-enrichment',
+    subjectId: job.sourceValue,
+    subjectType: job.sourceType,
+  }
+  await logExecutionStep(db, {
+    ...subject,
+    metadata: { jobId: job.id, jobType: job.jobType },
+    status: 'started',
+    step: 'profile_enrichment_job',
+  })
 
   try {
-    const { assets, providerStatus } = await discoverProfileAssets(db, job, options)
-    await upsertChannelProfile(db, job, assets)
+    const { assets, providerStatus } = await withExecutionStep(db, {
+      ...subject,
+      metadata: { jobId: job.id, jobType: job.jobType },
+      step: 'discover_profile_assets',
+    }, () => discoverProfileAssets(db, job, options))
+    await withExecutionStep(db, {
+      ...subject,
+      metadata: { assetCount: assets.length, jobId: job.id },
+      step: 'upsert_channel_profile',
+    }, () => upsertChannelProfile(db, job, assets))
     await db
       .prepare("UPDATE enrichment_jobs SET status = 'completed', output_json = ?, completed_at = ?, updated_at = ? WHERE id = ?")
       .bind(JSON.stringify({ assets, providerStatus }), now, now, job.id)
       .run()
+    await logExecutionStep(db, {
+      ...subject,
+      metadata: { assetCount: assets.length, jobId: job.id, providerStatus },
+      status: 'completed',
+      step: 'profile_enrichment_job',
+    })
     return { jobId: job.id, status: 'completed', assetCount: assets.length, providerStatus }
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown enrichment error'
@@ -343,6 +371,13 @@ export async function runOneProfileEnrichmentJob(
       .prepare("UPDATE enrichment_jobs SET status = 'failed', error = ?, output_json = ?, completed_at = ?, updated_at = ? WHERE id = ?")
       .bind(message, JSON.stringify({ assets: [], providerStatus }), now, now, job.id)
       .run()
+    await logExecutionStep(db, {
+      ...subject,
+      message,
+      metadata: { jobId: job.id, providerStatus },
+      status: 'failed',
+      step: 'profile_enrichment_job',
+    })
     return { jobId: job.id, status: 'failed', assetCount: 0, error: message, providerStatus }
   }
 }

@@ -108,6 +108,7 @@ describe('profile enrichment jobs', () => {
     expect(result).toMatchObject({ assetCount: 4, jobId: 'job-1', status: 'completed' })
     expect(writes.some((statement) => statement.sql.includes('INSERT INTO channel_profiles'))).toBe(true)
     expect(writes.some((statement) => statement.sql.includes('featured_json'))).toBe(true)
+    expect(writes.some((statement) => statement.sql.includes('INSERT INTO execution_logs') && statement.bindings.includes('profile-enrichment'))).toBe(true)
   })
 
   it('fails a profile enrichment job when search or model providers are missing', async () => {

@@ -63,12 +63,16 @@ describe('workspace source subscription errors', () => {
       verified: false,
     })
 
+    const writes: Array<{ sql: string; bindings: unknown[] }> = []
     const db = {
-      prepare: () => ({
-        bind: () => ({
+      prepare: (sql: string) => ({
+        bind: (...bindings: unknown[]) => {
+          writes.push({ sql, bindings })
+          return {
           first: async () => null,
           run: async () => {},
-        }),
+          }
+        },
       }),
       batch: async () => {},
     } as unknown as D1Database
@@ -99,5 +103,6 @@ describe('workspace source subscription errors', () => {
       sourceType: 'x',
       sourceValue: 'Anthropic',
     })
+    expect(writes.some((statement) => statement.sql.includes('INSERT INTO execution_logs') && statement.bindings.includes('subscription'))).toBe(true)
   })
 })

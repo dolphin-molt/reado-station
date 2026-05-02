@@ -2,6 +2,7 @@ import 'server-only'
 
 import { getCloudflareEnv } from '@/lib/cloudflare'
 import { upsertIngestPayload } from '@/lib/d1-write'
+import { createExecutionRunId, logExecutionStep, withExecutionStep } from '@/lib/execution-logs'
 import { resolveXBearerToken } from '@/lib/provider-env'
 import { parseRssOrAtom } from '@/lib/source-collection-parser'
 import { upsertSourceCollectionSnapshot } from '@/lib/source-collections'
@@ -166,9 +167,36 @@ export async function runOneSourceCollectionJob(db: D1Database): Promise<{ jobId
 
   const now = new Date().toISOString()
   const run = currentRunTime()
+  const runId = createExecutionRunId(`collect-${job.id}`)
+  const subject = {
+    runId,
+    scope: 'source-collection',
+    subjectId: job.sourceId,
+    subjectType: 'source',
+  }
+  await logExecutionStep(db, {
+    ...subject,
+    metadata: {
+      adapter: job.adapter,
+      jobId: job.id,
+      sourceType: job.sourceType,
+      windowEnd: job.windowEnd,
+      windowStart: job.windowStart,
+    },
+    status: 'started',
+    step: 'source_collection_job',
+  })
   try {
-    const items = job.sourceType === 'x' ? await collectX(db, job) : await collectRss(job)
-    await upsertIngestPayload(db, {
+    const items = await withExecutionStep(db, {
+      ...subject,
+      metadata: { jobId: job.id, sourceType: job.sourceType, sourceUrl: job.sourceUrl },
+      step: job.sourceType === 'x' ? 'fetch_x_timeline' : 'fetch_rss_feed',
+    }, () => job.sourceType === 'x' ? collectX(db, job) : collectRss(job))
+    await withExecutionStep(db, {
+      ...subject,
+      metadata: { itemCount: items.length, jobId: job.id },
+      step: 'persist_items',
+    }, () => upsertIngestPayload(db, {
       date: run.date,
       batch: run.batch,
       mode: 'source-collection-runner',
@@ -183,22 +211,36 @@ export async function runOneSourceCollectionJob(db: D1Database): Promise<{ jobId
         failedSourceIds: [],
       },
       items,
-    })
-    await upsertSourceCollectionSnapshot(db, {
+    }))
+    await withExecutionStep(db, {
+      ...subject,
+      metadata: { itemCount: items.length, jobId: job.id },
+      step: 'update_collection_snapshot',
+    }, () => upsertSourceCollectionSnapshot(db, {
       sourceId: job.sourceId,
       sourceType: job.sourceType,
       windowStart: job.windowStart,
       windowEnd: job.windowEnd,
       status: 'fresh',
       itemCount: items.length,
-    })
+    }))
     const creditsUsed = estimateSourceCollectionCredits(job.sourceType === 'x' ? 'x-api' : 'rss', items.length)
-    await db.batch([
+    await withExecutionStep(db, {
+      ...subject,
+      metadata: { creditsUsed, itemCount: items.length, jobId: job.id },
+      step: 'complete_source_collection_job',
+    }, () => db.batch([
       db.prepare("UPDATE source_collection_jobs SET status = 'completed', credits_used = ?, updated_at = ?, completed_at = ? WHERE id = ?")
         .bind(creditsUsed, now, now, job.id),
       db.prepare("UPDATE workspace_source_subscriptions SET status = 'ready', updated_at = ? WHERE source_id = ?")
         .bind(now, job.sourceId),
-    ])
+    ]))
+    await logExecutionStep(db, {
+      ...subject,
+      metadata: { creditsUsed, itemCount: items.length, jobId: job.id },
+      status: 'completed',
+      step: 'source_collection_job',
+    })
     return { jobId: job.id, status: 'completed', itemCount: items.length }
   } catch (error) {
     const message = error instanceof Error ? error.message : 'unknown error'
@@ -215,6 +257,13 @@ export async function runOneSourceCollectionJob(db: D1Database): Promise<{ jobId
       windowEnd: job.windowEnd,
       status: 'failed',
       itemCount: 0,
+    })
+    await logExecutionStep(db, {
+      ...subject,
+      message,
+      metadata: { jobId: job.id },
+      status: 'failed',
+      step: 'source_collection_job',
     })
     return { jobId: job.id, status: 'failed', itemCount: 0, error: message }
   }

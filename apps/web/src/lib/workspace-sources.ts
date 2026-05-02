@@ -1,5 +1,6 @@
 import 'server-only'
 
+import { createExecutionRunId, logExecutionStep, withExecutionStep } from '@/lib/execution-logs'
 import { PLAN_LIMITS, normalizeBackfillHours, normalizeSourceType, normalizeVisibility, type SourceType, type SourceVisibility } from '@/lib/plans'
 import { enqueueProfileEnrichmentJob } from '@/lib/source-enrichment'
 import { collectionWindowForHours, ensureSourceCollectionJob } from '@/lib/source-collections'
@@ -172,94 +173,164 @@ async function assertPlanLimits(
 }
 
 export async function subscribeWorkspaceSource(db: D1Database, input: SubscribeInput): Promise<SubscribeWorkspaceSourceResult> {
-  const sourceType = normalizeSourceType(input.type)
-  const visibility = normalizeVisibility(input.visibility)
-  const backfillHours = normalizeBackfillHours(input.backfillHours)
-  const collectionPreferences = sourceType === 'x'
-    ? normalizeXCollectionPreferences(input.collectionPreferences ?? DEFAULT_X_COLLECTION_PREFERENCES)
-    : {}
-  const sourceId =
-    sourceType === 'rss'
-      ? sourceIdForRss(normalizeRssUrl(input.value).toString())
-      : `tw-${normalizeXUsername(input.value).toLowerCase()}`
-  const existingSubscription = await hasWorkspaceSubscription(db, input.workspace.id, sourceId)
-
-  await assertPlanLimits(db, input.workspace, backfillHours, sourceType, existingSubscription)
-
-  const source =
-    sourceType === 'rss'
-      ? await ensureRssSource(db, input.value, backfillHours)
-      : await ensureXSource(db, normalizeXUsername(input.value), backfillHours)
-
-  const now = new Date().toISOString()
-  const { windowStart, windowEnd } = collectionWindowForHours(backfillHours)
-  const collection = await ensureSourceCollectionJob(db, {
-    sourceId: source.id,
-    sourceType,
-    windowStart,
-    windowEnd,
-    requestedByWorkspaceId: input.workspace.id,
-  }).catch((error) => {
-    if (error instanceof Error && (error.message.includes('source_collection_jobs') || error.message.includes('source_collection_snapshots'))) {
-      return null
-    }
-    throw error
+  const runId = createExecutionRunId('subscription')
+  const subject = {
+    runId,
+    scope: 'subscription',
+    subjectId: input.workspace.id,
+    subjectType: 'workspace',
+  }
+  await logExecutionStep(db, {
+    ...subject,
+    metadata: { rawType: input.type, rawValue: input.value, userId: input.userId },
+    status: 'started',
+    step: 'subscription_request',
   })
-  const subscriptionStatus = collection ? (collection.decision.status === 'fresh' ? 'ready' : collection.decision.status) : 'pending_backfill'
-  const batch: D1PreparedStatement[] = [
-    db
-      .prepare(
-        `
-          INSERT INTO workspace_source_subscriptions (
-            workspace_id, source_id, source_type, visibility, backfill_hours, status, collection_preferences_json, created_by, created_at, updated_at
-          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-          ON CONFLICT(workspace_id, source_id) DO UPDATE SET
-            visibility = excluded.visibility,
-            backfill_hours = excluded.backfill_hours,
-            status = excluded.status,
-            collection_preferences_json = excluded.collection_preferences_json,
-            updated_at = excluded.updated_at
-        `,
-      )
-      .bind(input.workspace.id, source.id, sourceType, visibility, backfillHours, subscriptionStatus, JSON.stringify(collectionPreferences), input.userId, now, now),
-  ]
 
-  if ('accountId' in source) {
-    batch.push(
+  try {
+    const sourceType = normalizeSourceType(input.type)
+    const visibility = normalizeVisibility(input.visibility)
+    const backfillHours = normalizeBackfillHours(input.backfillHours)
+    const collectionPreferences = sourceType === 'x'
+      ? normalizeXCollectionPreferences(input.collectionPreferences ?? DEFAULT_X_COLLECTION_PREFERENCES)
+      : {}
+    const sourceId =
+      sourceType === 'rss'
+        ? sourceIdForRss(normalizeRssUrl(input.value).toString())
+        : `tw-${normalizeXUsername(input.value).toLowerCase()}`
+    await logExecutionStep(db, {
+      ...subject,
+      metadata: { backfillHours, sourceId, sourceType, visibility },
+      status: 'info',
+      step: 'normalize_subscription_input',
+    })
+    const existingSubscription = await withExecutionStep(db, {
+      ...subject,
+      metadata: { sourceId },
+      step: 'check_existing_subscription',
+    }, () => hasWorkspaceSubscription(db, input.workspace.id, sourceId))
+
+    await withExecutionStep(db, {
+      ...subject,
+      metadata: { backfillHours, existingSubscription, planId: input.workspace.planId, sourceType },
+      step: 'check_plan_limits',
+    }, () => assertPlanLimits(db, input.workspace, backfillHours, sourceType, existingSubscription))
+
+    const source = await withExecutionStep(db, {
+      ...subject,
+      metadata: { backfillHours, sourceId, sourceType },
+      step: 'ensure_source',
+    }, () => (
+      sourceType === 'rss'
+        ? ensureRssSource(db, input.value, backfillHours)
+        : ensureXSource(db, normalizeXUsername(input.value), backfillHours)
+    ))
+
+    const now = new Date().toISOString()
+    const { windowStart, windowEnd } = collectionWindowForHours(backfillHours)
+    const collection = await withExecutionStep(db, {
+      ...subject,
+      metadata: { sourceId: source.id, sourceType, windowEnd, windowStart },
+      step: 'ensure_collection_job',
+    }, () => ensureSourceCollectionJob(db, {
+      sourceId: source.id,
+      sourceType,
+      windowStart,
+      windowEnd,
+      requestedByWorkspaceId: input.workspace.id,
+    }).catch((error) => {
+      if (error instanceof Error && (error.message.includes('source_collection_jobs') || error.message.includes('source_collection_snapshots'))) {
+        return null
+      }
+      throw error
+    }))
+    const subscriptionStatus = collection ? (collection.decision.status === 'fresh' ? 'ready' : collection.decision.status) : 'pending_backfill'
+    const batch: D1PreparedStatement[] = [
       db
         .prepare(
           `
-            INSERT INTO user_x_account_subscriptions (user_id, x_account_id, subscribed_at)
-            VALUES (?, ?, ?)
-            ON CONFLICT(user_id, x_account_id) DO NOTHING
+            INSERT INTO workspace_source_subscriptions (
+              workspace_id, source_id, source_type, visibility, backfill_hours, status, collection_preferences_json, created_by, created_at, updated_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ON CONFLICT(workspace_id, source_id) DO UPDATE SET
+              visibility = excluded.visibility,
+              backfill_hours = excluded.backfill_hours,
+              status = excluded.status,
+              collection_preferences_json = excluded.collection_preferences_json,
+              updated_at = excluded.updated_at
           `,
         )
-        .bind(input.userId, source.accountId, now),
-    )
-  }
+        .bind(input.workspace.id, source.id, sourceType, visibility, backfillHours, subscriptionStatus, JSON.stringify(collectionPreferences), input.userId, now, now),
+    ]
 
-  await db.batch(batch)
-  const sourceUsername = 'username' in source && typeof source.username === 'string' ? source.username : null
-  let profileEnrichment: { id: string; status: 'queued' | 'existing' } | null = null
-  if (sourceUsername) {
-    profileEnrichment = await enqueueProfileEnrichmentJob(db, {
-      jobType: 'discover_profile_assets',
-      sourceType: 'x',
-      sourceValue: sourceUsername,
-    }).catch((error) => {
-      if (error instanceof Error && error.message.includes('enrichment_jobs')) return null
-      throw error
+    if ('accountId' in source) {
+      batch.push(
+        db
+          .prepare(
+            `
+              INSERT INTO user_x_account_subscriptions (user_id, x_account_id, subscribed_at)
+              VALUES (?, ?, ?)
+              ON CONFLICT(user_id, x_account_id) DO NOTHING
+            `,
+          )
+          .bind(input.userId, source.accountId, now),
+      )
+    }
+
+    await withExecutionStep(db, {
+      ...subject,
+      metadata: { sourceId: source.id, sourceType, subscriptionStatus },
+      step: 'save_workspace_subscription',
+    }, () => db.batch(batch))
+    const sourceUsername = 'username' in source && typeof source.username === 'string' ? source.username : null
+    let profileEnrichment: { id: string; status: 'queued' | 'existing' } | null = null
+    if (sourceUsername) {
+      profileEnrichment = await withExecutionStep(db, {
+        ...subject,
+        metadata: { sourceId: source.id, sourceUsername },
+        step: 'enqueue_profile_enrichment',
+      }, () => enqueueProfileEnrichmentJob(db, {
+        jobType: 'discover_profile_assets',
+        sourceType: 'x',
+        sourceValue: sourceUsername,
+      }).catch((error) => {
+        if (error instanceof Error && error.message.includes('enrichment_jobs')) return null
+        throw error
+      }))
+    }
+
+    await logExecutionStep(db, {
+      ...subject,
+      metadata: {
+        collectionJobId: collection?.job?.id ?? null,
+        collectionStatus: subscriptionStatus,
+        profileEnrichmentJobId: profileEnrichment?.id ?? null,
+        profileEnrichmentStatus: profileEnrichment?.status ?? null,
+        sourceId: source.id,
+        sourceType,
+      },
+      status: 'completed',
+      step: 'subscription_request',
     })
-  }
-
-  return {
-    sourceId: source.id,
-    sourceType,
-    displayName: source.name,
-    collectionJobId: collection?.job?.id ?? null,
-    collectionStatus: subscriptionStatus,
-    profileEnrichmentJobId: profileEnrichment?.id ?? null,
-    profileEnrichmentStatus: profileEnrichment?.status ?? null,
+    return {
+      sourceId: source.id,
+      sourceType,
+      displayName: source.name,
+      collectionJobId: collection?.job?.id ?? null,
+      collectionStatus: subscriptionStatus,
+      profileEnrichmentJobId: profileEnrichment?.id ?? null,
+      profileEnrichmentStatus: profileEnrichment?.status ?? null,
+    }
+  } catch (error) {
+    const message = error instanceof Error ? error.message : 'unknown subscription error'
+    await logExecutionStep(db, {
+      ...subject,
+      message,
+      metadata: { rawType: input.type, rawValue: input.value, userId: input.userId },
+      status: 'failed',
+      step: 'subscription_request',
+    })
+    throw error
   }
 }
 

@@ -69,6 +69,10 @@ export default async function AdminPage() {
               <span>{overview.itemCount}</span>
               <strong>资讯总量</strong>
             </Link>
+            <Link className="admin-stat" href="/admin/execution-logs">
+              <span>Trace</span>
+              <strong>执行过程</strong>
+            </Link>
             <Link className="admin-stat" href="/admin/items?visibility=hidden">
               <span>{overview.hiddenItemCount}</span>
               <strong>已隐藏资讯</strong>
@@ -85,6 +89,9 @@ export default async function AdminPage() {
             </Link>
             <Link className="secondary-button" href="/admin/items">
               管理资讯
+            </Link>
+            <Link className="secondary-button" href="/admin/execution-logs">
+              查看执行过程
             </Link>
             <form action="/api/auth/logout" method="post">
               <button className="secondary-button" type="submit">

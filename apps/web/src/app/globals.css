@@ -5598,6 +5598,26 @@ p {
   padding: 0.62rem 0.74rem;
 }
 
+.execution-log-item {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.execution-log-item__metadata {
+  background: rgba(48, 47, 44, 0.04);
+  border: 1px dashed var(--color-rule);
+  border-radius: 8px;
+  color: var(--color-text-secondary);
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  line-height: 1.55;
+  margin-top: 0.75rem;
+  max-height: 12rem;
+  overflow: auto;
+  padding: 0.75rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
 .footer {
   border-top: 2px dashed var(--color-rule);
   color: var(--color-text-secondary);
