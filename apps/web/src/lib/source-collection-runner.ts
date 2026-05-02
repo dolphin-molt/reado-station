@@ -219,3 +219,28 @@ export async function runOneSourceCollectionJob(db: D1Database): Promise<{ jobId
     return { jobId: job.id, status: 'failed', itemCount: 0, error: message }
   }
 }
+
+type SourceCollectionRunResult = NonNullable<Awaited<ReturnType<typeof runOneSourceCollectionJob>>>
+
+export async function runSourceCollectionQueue(
+  db: D1Database,
+  options: {
+    maxJobs?: number
+    runOne?: (db: D1Database) => Promise<SourceCollectionRunResult | null>
+  } = {},
+): Promise<{ processedCount: number; results: SourceCollectionRunResult[] }> {
+  const maxJobs = Math.max(1, Math.min(25, Math.floor(options.maxJobs ?? 10)))
+  const runOne = options.runOne ?? runOneSourceCollectionJob
+  const results: SourceCollectionRunResult[] = []
+
+  for (let index = 0; index < maxJobs; index += 1) {
+    const result = await runOne(db)
+    if (!result) break
+    results.push(result)
+  }
+
+  return {
+    processedCount: results.length,
+    results,
+  }
+}

@@ -24,6 +24,7 @@ export interface XAccountSubscription {
   subscribedAt: string
   itemCount: number
   latestPublishedAt: string | null
+  status: string
 }
 
 export interface XReaderData {
@@ -50,6 +51,7 @@ interface XSubscriptionRow extends XAccountRow {
   subscribedAt: string
   itemCount: number | null
   latestPublishedAt: string | null
+  status: string | null
 }
 
 interface XApiUser {
@@ -128,6 +130,7 @@ function rowToSubscription(row: XSubscriptionRow): XAccountSubscription {
     subscribedAt: row.subscribedAt,
     itemCount: Number(row.itemCount ?? 0),
     latestPublishedAt: row.latestPublishedAt,
+    status: row.status ?? 'missing',
   }
 }
 
@@ -416,6 +419,7 @@ export async function loadWorkspaceXReaderData(db: D1Database, workspaceId: stri
           a.listed_count AS listedCount,
           a.fetched_at AS fetchedAt,
           s.created_at AS subscribedAt,
+          s.status,
           (
             SELECT COUNT(1)
             FROM items i
@@ -436,9 +440,10 @@ export async function loadWorkspaceXReaderData(db: D1Database, workspaceId: stri
     .all<XSubscriptionRow>()
 
   const subscriptions = results.map(rowToSubscription)
+  const readySubscriptions = subscriptions.filter((entry) => entry.status === 'ready')
   const activeAccount =
-    (selectedUsername ? subscriptions.find((entry) => entry.account.username.toLowerCase() === selectedUsername.toLowerCase()) : null) ??
-    subscriptions[0] ??
+    (selectedUsername ? readySubscriptions.find((entry) => entry.account.username.toLowerCase() === selectedUsername.toLowerCase()) : null) ??
+    readySubscriptions[0] ??
     null
 
   if (!activeAccount) {
@@ -495,6 +500,7 @@ export async function loadUserXReaderData(db: D1Database, userId: string, select
           a.listed_count AS listedCount,
           a.fetched_at AS fetchedAt,
           s.subscribed_at AS subscribedAt,
+          'ready' AS status,
           (
             SELECT COUNT(1)
             FROM items i

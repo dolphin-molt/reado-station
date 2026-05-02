@@ -33,6 +33,7 @@ vi.mock('@/lib/x-accounts', () => ({
         followersCount: 100,
       },
       itemCount: 0,
+      status: 'ready',
     },
     items: [],
     subscriptions: [
@@ -44,6 +45,17 @@ vi.mock('@/lib/x-accounts', () => ({
           profileImageUrl: '',
         },
         itemCount: 0,
+        status: 'ready',
+      },
+      {
+        account: {
+          id: 'x-2',
+          username: 'elonmusk',
+          name: 'Elon Musk',
+          profileImageUrl: '',
+        },
+        itemCount: 0,
+        status: 'queued',
       },
     ],
   })),
@@ -55,6 +67,9 @@ describe('XReaderPage', () => {
     const html = renderToStaticMarkup(createElement(() => element))
 
     expect(html).toContain('class="x-reader__account-main" href="/sources/tw-openai"')
+    expect(html).toContain('处理队列')
+    expect(html).toContain('Elon Musk')
+    expect(html).not.toContain('class="x-reader__account-main" href="/sources/tw-elonmusk"')
     expect(html).toContain('href="https://x.com/OpenAI"')
     expect(html).not.toContain('详情')
     expect(html).not.toContain('X 主页')

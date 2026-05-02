@@ -2,11 +2,20 @@ import Link from 'next/link'
 
 import { Footer } from '@/components/layout/Footer'
 import { Header } from '@/components/layout/Header'
+import { ProcessingQueueAutoRefresh } from '@/components/ui/ProcessingQueueAutoRefresh'
 import { getCurrentAuthSession } from '@/lib/auth'
 import { getD1Binding } from '@/lib/cloudflare'
 import { localizedPath, type Lang } from '@/lib/i18n'
 import { loadWorkspaceSources, sourceDisplayUrl } from '@/lib/my-sources'
 import { getDefaultWorkspaceForUser } from '@/lib/workspaces'
+
+function sourceStatusLabel(status: string, lang: Lang): string {
+  if (status === 'queued') return lang === 'zh' ? '排队中' : 'Queued'
+  if (status === 'running') return lang === 'zh' ? '处理中' : 'Processing'
+  if (status === 'failed') return lang === 'zh' ? '处理失败' : 'Failed'
+  if (status === 'ready') return lang === 'zh' ? '已完成' : 'Ready'
+  return lang === 'zh' ? '等待处理' : 'Pending'
+}
 
 export async function MySourcesPage({ lang }: { lang: Lang }) {
   const session = await getCurrentAuthSession()
@@ -31,12 +40,16 @@ export async function MySourcesPage({ lang }: { lang: Lang }) {
   const db = await getD1Binding().catch(() => null)
   const workspace = db ? await getDefaultWorkspaceForUser(db, session.userId, session.username) : null
   const sources = db && workspace ? await loadWorkspaceSources(db, workspace.id) : []
+  const readySources = sources.filter((source) => source.status === 'ready')
+  const processingSources = sources.filter((source) => source.status !== 'ready')
+  const shouldAutoRefresh = processingSources.some((source) => source.status !== 'failed')
 
   return (
     <div className="page-shell reader-shell">
       <Header active="source-add" lang={lang} path="sources" />
       <main className="container section-stack">
         <section className="panel my-sources">
+          {shouldAutoRefresh && <ProcessingQueueAutoRefresh />}
           <div className="panel__header">
             <div>
               <h1>{lang === 'zh' ? '我的信息源' : 'My sources'}</h1>
@@ -45,9 +58,32 @@ export async function MySourcesPage({ lang }: { lang: Lang }) {
             <Link className="nav-button" href={localizedPath(lang, 'channels')}>{lang === 'zh' ? '发现频道' : 'Discover channels'}</Link>
           </div>
 
-          {sources.length > 0 ? (
+          {processingSources.length > 0 && (
+            <section className="my-sources__queue" aria-live="polite">
+              <div>
+                <h2>{lang === 'zh' ? '处理队列' : 'Processing queue'}</h2>
+                <p>{lang === 'zh' ? '这些信息源已经保存，内容采集完成后才会进入我的信息源列表。' : 'These sources are saved and move into your source list after collection finishes.'}</p>
+              </div>
+              <div className="my-sources__list">
+                {processingSources.map((source) => (
+                  <article className="my-sources__item my-sources__item--processing" key={source.sourceId}>
+                    <div>
+                      <div className="source-suggestion__meta">
+                        <span className="status-pill">{source.sourceType.toUpperCase()}</span>
+                        <span>{sourceStatusLabel(source.status, lang)}</span>
+                      </div>
+                      <h2>{source.name}</h2>
+                      <p>{sourceDisplayUrl(source)}</p>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {readySources.length > 0 ? (
             <div className="my-sources__list">
-              {sources.map((source) => (
+              {readySources.map((source) => (
                 <article className="my-sources__item" key={source.sourceId}>
                   <div>
                     <div className="source-suggestion__meta">
@@ -72,12 +108,12 @@ export async function MySourcesPage({ lang }: { lang: Lang }) {
                 </article>
               ))}
             </div>
-          ) : (
+          ) : processingSources.length === 0 ? (
             <div className="empty-state my-sources__empty">
               <p>{lang === 'zh' ? '你还没有关注任何信息源。先选择一个频道包，reado 才能开始为你建立输入。' : 'No sources yet. Choose a starter pack so reado can build your input stream.'}</p>
               <Link className="table-link" href={localizedPath(lang, 'channels')}>{lang === 'zh' ? '去频道发现' : 'Go to channels'}</Link>
             </div>
-          )}
+          ) : null}
         </section>
       </main>
       <Footer lang={lang} />

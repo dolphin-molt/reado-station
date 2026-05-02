@@ -1480,6 +1480,53 @@ p {
   min-width: 0;
 }
 
+.x-reader__queue {
+  background: rgba(255, 252, 244, 0.74);
+  border: 1px dashed rgba(224, 120, 80, 0.28);
+  border-radius: 18px;
+  display: grid;
+  gap: 0.8rem;
+  padding: 1rem;
+}
+
+.x-reader__queue-head h3 {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.25;
+}
+
+.x-reader__queue-head p {
+  color: var(--color-text-muted);
+  font-size: 0.88rem;
+  margin-top: 0.2rem;
+}
+
+.x-reader__queue-list {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.x-reader__queue-item {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.68);
+  border: 1px solid rgba(34, 31, 26, 0.08);
+  border-radius: 12px;
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: 40px minmax(0, 1fr) auto;
+  padding: 0.7rem;
+}
+
+.x-reader__queue-item strong,
+.x-reader__queue-item small {
+  display: block;
+}
+
+.x-reader__queue-item small {
+  color: var(--color-text-muted);
+  margin-top: 0.08rem;
+}
+
 .x-reader__profile {
   align-items: flex-start;
   background: rgba(255, 255, 255, 0.62);
@@ -7933,6 +7980,29 @@ p {
 .my-sources__list {
   display: grid;
   gap: 14px;
+}
+
+.my-sources__queue {
+  border-bottom: 1px dashed rgba(34, 31, 26, 0.12);
+  display: grid;
+  gap: 14px;
+  margin-bottom: 18px;
+  padding-bottom: 18px;
+}
+
+.my-sources__queue h2 {
+  font-family: var(--font-headline);
+  font-size: 1.28rem;
+}
+
+.my-sources__queue p {
+  color: rgba(34, 31, 26, 0.62);
+  margin-top: 0.25rem;
+}
+
+.my-sources__item--processing {
+  background: rgba(255, 252, 244, 0.72);
+  border-style: dashed;
 }
 
 .reader-radio-panel audio {

@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest'
 
+import { vi } from 'vitest'
+
+vi.mock('server-only', () => ({}))
+
+import { runSourceCollectionQueue } from './source-collection-runner'
 import { parseRssOrAtom } from './source-collection-parser'
 
 const job = {
@@ -56,5 +61,25 @@ describe('source collection runner RSS parsing', () => {
       url: 'https://example.com/atom',
       summary: 'Atom summary',
     })
+  })
+})
+
+describe('source collection queue runner', () => {
+  it('processes queued jobs until the batch limit or empty queue', async () => {
+    const results = [
+      { jobId: 'job-1', status: 'completed', itemCount: 1 },
+      { jobId: 'job-2', status: 'completed', itemCount: 2 },
+      null,
+    ]
+    let calls = 0
+
+    const summary = await runSourceCollectionQueue({} as D1Database, {
+      maxJobs: 5,
+      runOne: async () => results[calls++] ?? null,
+    })
+
+    expect(summary.processedCount).toBe(2)
+    expect(summary.results.map((result) => result.jobId)).toEqual(['job-1', 'job-2'])
+    expect(calls).toBe(3)
   })
 })
