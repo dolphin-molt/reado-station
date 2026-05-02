@@ -15,10 +15,26 @@ interface RouteContext {
   params: Promise<{ sourceId: string }>
 }
 
-function redirectBack(request: NextRequest, sourceId: string, status: string): NextResponse {
+function wantsJson(request: NextRequest): boolean {
+  const accept = request.headers.get('accept') ?? ''
+  return accept.includes('application/json') || request.headers.get('x-requested-with') === 'fetch'
+}
+
+function respondBack(request: NextRequest, sourceId: string, status: string): NextResponse {
+  if (wantsJson(request)) {
+    return NextResponse.json({ sourceId, status })
+  }
+
   const formLang = new URL(request.url).searchParams.get('lang')
   const prefix = formLang === 'en' ? '/en/sources' : '/sources'
   return NextResponse.redirect(new URL(`${prefix}/${encodeURIComponent(sourceId)}?collect=${status}`, request.url), { status: 303 })
+}
+
+function errorResponse(request: NextRequest, sourceId: string, status: number, error: string): NextResponse {
+  if (wantsJson(request)) {
+    return NextResponse.json({ error, sourceId }, { status })
+  }
+  return respondBack(request, sourceId, error)
 }
 
 async function enqueueProfileEnrichmentForSource(db: D1Database, sourceId: string, sourceType: string): Promise<string | null> {
@@ -55,10 +71,15 @@ function kickQueues(db: D1Database, options: { runCollection: boolean; runProfil
 export async function POST(request: NextRequest, context: RouteContext): Promise<NextResponse> {
   const { sourceId } = await context.params
   const session = await getCurrentAuthSession()
-  if (!session) return NextResponse.redirect(new URL(`/login?next=${encodeURIComponent(`/sources/${sourceId}`)}`, request.url), { status: 303 })
+  if (!session) {
+    if (wantsJson(request)) {
+      return NextResponse.json({ error: 'Unauthorized', sourceId }, { status: 401 })
+    }
+    return NextResponse.redirect(new URL(`/login?next=${encodeURIComponent(`/sources/${sourceId}`)}`, request.url), { status: 303 })
+  }
 
   const db = await getD1Binding().catch(() => null)
-  if (!db) return redirectBack(request, sourceId, 'd1')
+  if (!db) return errorResponse(request, sourceId, 503, 'd1')
 
   const workspace = await getDefaultWorkspaceForUser(db, session.userId, session.username)
   const subscription = await db
@@ -73,13 +94,13 @@ export async function POST(request: NextRequest, context: RouteContext): Promise
     .bind(workspace.id, sourceId)
     .first<{ sourceType: 'x' | 'rss'; backfillHours: number | null }>()
 
-  if (!subscription) return redirectBack(request, sourceId, 'missing')
+  if (!subscription) return errorResponse(request, sourceId, 404, 'missing')
 
   const profileEnrichmentJobId = await enqueueProfileEnrichmentForSource(db, sourceId, subscription.sourceType)
   const activeJob = await findActiveSourceCollectionJobForSource(db, sourceId)
   if (activeJob) {
     kickQueues(db, { runCollection: true, runProfileEnrichment: Boolean(profileEnrichmentJobId) })
-    return redirectBack(request, sourceId, activeJob.status)
+    return respondBack(request, sourceId, activeJob.status)
   }
 
   const { windowStart, windowEnd } = collectionWindowForHours(Number(subscription.backfillHours ?? 24))
@@ -93,5 +114,5 @@ export async function POST(request: NextRequest, context: RouteContext): Promise
   })
   kickQueues(db, { runCollection: true, runProfileEnrichment: Boolean(profileEnrichmentJobId) })
 
-  return redirectBack(request, sourceId, collection.job?.status ?? 'queued')
+  return respondBack(request, sourceId, collection.job?.status ?? 'queued')
 }

@@ -8,6 +8,10 @@ vi.mock('@/components/news/NewsCard', () => ({
   NewsCard: vi.fn(({ item }) => createElement('article', null, item.title)),
 }))
 
+vi.mock('@/components/ui/ProcessingQueueAutoRefresh', () => ({
+  ProcessingQueueAutoRefresh: vi.fn(() => null),
+}))
+
 vi.mock('@/lib/auth', () => ({
   getCurrentAuthSession: vi.fn(async () => ({ userId: 'user-1', username: 'testuser' })),
 }))

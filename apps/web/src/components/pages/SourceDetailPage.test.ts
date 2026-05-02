@@ -105,18 +105,18 @@ describe('SourceDetailPage', () => {
     expect(html).not.toContain('采集状态')
     expect(html).not.toContain('采集规则')
     expect(html).not.toContain('最近内容')
-    expect(html).toContain('action="/api/workspace-sources/tw-openai/collect?lang=zh"')
+    expect(html).not.toContain('action="/api/workspace-sources/tw-openai/collect?lang=zh"')
+    expect(html).toContain('data-collect-endpoint="/api/workspace-sources/tw-openai/collect?lang=zh"')
     expect(html).toContain('重新采集')
   })
 
-  it('shows refresh queue feedback as a transient toast, not inline page content', async () => {
+  it('does not replay queue feedback from collect query params', async () => {
     const element = await SourceDetailPage({ collectStatus: 'queued', lang: 'zh', sourceId: 'tw-openai' })
     const html = renderToStaticMarkup(createElement(() => element))
 
-    expect(html).toContain('已加入处理队列')
-    expect(html).toContain('处理完成后页面会自动刷新')
-    expect(html).toContain('class="app-toast"')
-    expect(html).toContain('role="status"')
+    expect(html).not.toContain('已加入处理队列')
+    expect(html).not.toContain('处理完成后页面会自动刷新')
+    expect(html).not.toContain('class="app-toast"')
     expect(html).not.toContain('source-intake__notice')
     expect(html).not.toContain('采集状态')
     expect(html).not.toContain('采集规则')

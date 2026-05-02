@@ -44,6 +44,10 @@ vi.mock('@/components/layout/Footer', () => ({
   Footer: vi.fn(() => createElement('footer')),
 }))
 
+vi.mock('@/components/ui/ProcessingQueueAutoRefresh', () => ({
+  ProcessingQueueAutoRefresh: vi.fn(() => null),
+}))
+
 vi.mock('@/lib/auth', () => ({
   getCurrentAuthSession: mocks.getCurrentAuthSession,
 }))

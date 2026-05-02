@@ -5,8 +5,7 @@ import { ExternalBlankLink } from '@/components/common/ExternalBlankLink'
 import { InlineYouTubePlayer } from '@/components/common/InlineYouTubePlayer'
 import { Footer } from '@/components/layout/Footer'
 import { Header } from '@/components/layout/Header'
-import { AppToast } from '@/components/ui/AppToast'
-import { ProcessingQueueAutoRefresh } from '@/components/ui/ProcessingQueueAutoRefresh'
+import { SourceCollectButton } from '@/components/ui/SourceCollectButton'
 import { getCurrentAuthSession } from '@/lib/auth'
 import { getD1Binding } from '@/lib/cloudflare'
 import { localizedPath, type Lang } from '@/lib/i18n'
@@ -23,6 +22,7 @@ function compactNumber(value: number | null | undefined, lang: Lang): string {
 
 function XVerifiedMark({ lang }: { lang: Lang }) {
   const label = lang === 'zh' ? '已认证' : 'Verified'
+
   return (
     <span aria-label={label} className="x-verified-mark" role="img" title={label}>
       <svg aria-hidden="true" viewBox="0 0 20 20">
@@ -50,21 +50,7 @@ function isYouTubeVideoAsset(asset: { kind: string; thumbnailUrl?: string; url: 
   return asset.kind === 'youtube' && Boolean(asset.thumbnailUrl) && (asset.url.includes('youtube.com/watch') || asset.url.includes('youtu.be/'))
 }
 
-function collectNotice(status: string | null | undefined, lang: Lang): string {
-  if (status === 'queued' || status === 'running' || status === 'stale') {
-    return lang === 'zh'
-      ? '已加入处理队列，处理完成后页面会自动刷新。'
-      : 'Added to the processing queue. This page will refresh when processing finishes.'
-  }
-  if (status === 'failed') {
-    return lang === 'zh'
-      ? '重新处理失败，请稍后再试。'
-      : 'Refresh failed. Please try again later.'
-  }
-  return ''
-}
-
-export async function SourceDetailPage({ collectStatus = '', lang, sourceId }: { collectStatus?: string; lang: Lang; sourceId: string }) {
+export async function SourceDetailPage({ lang, sourceId }: { collectStatus?: string; lang: Lang; sourceId: string }) {
   const session = await getCurrentAuthSession()
   const loginPath = `${localizedPath(lang, 'login')}?next=${encodeURIComponent(`${localizedPath(lang, 'sources')}/${sourceId}`)}`
 
@@ -101,23 +87,18 @@ export async function SourceDetailPage({ collectStatus = '', lang, sourceId }: {
       ['github', source.profileAssets.filter((asset) => asset.kind === 'github')],
       ['youtube', source.profileAssets.filter((asset) => asset.kind === 'youtube')],
     ].filter(([, assets]) => Array.isArray(assets) && assets.length > 0) as Array<[string, typeof source.profileAssets]>
-    const notice = collectNotice(collectStatus, lang)
-    const shouldAutoRefresh = collectStatus === 'queued' || collectStatus === 'running' || collectStatus === 'stale'
+    const collectEndpoint = `/api/workspace-sources/${encodeURIComponent(source.sourceId)}/collect?lang=${lang}`
 
     return (
       <div className="page-shell reader-shell">
         <Header active="source-add" lang={lang} path="sources" />
         <main className="container section-stack">
           <section className="panel channel-profile">
-            {shouldAutoRefresh && <ProcessingQueueAutoRefresh />}
-            {notice && <AppToast message={notice} />}
             <div className="channel-profile__topbar">
               <Link className="channel-profile__back" href={localizedPath(lang, 'sources')}>
                 {lang === 'zh' ? '返回' : 'Back'}
               </Link>
-              <form action={`/api/workspace-sources/${encodeURIComponent(source.sourceId)}/collect?lang=${lang}`} method="post">
-                <button className="channel-profile__back" type="submit">{lang === 'zh' ? '重新采集' : 'Refresh'}</button>
-              </form>
+              <SourceCollectButton className="channel-profile__back" endpoint={collectEndpoint} label={lang === 'zh' ? '重新采集' : 'Refresh'} lang={lang} />
             </div>
             <div className="channel-profile__hero">
               <div>
@@ -193,6 +174,8 @@ export async function SourceDetailPage({ collectStatus = '', lang, sourceId }: {
     )
   }
 
+  const collectEndpoint = `/api/workspace-sources/${encodeURIComponent(source.sourceId)}/collect?lang=${lang}`
+
   return (
     <div className="page-shell reader-shell">
       <Header active="source-add" lang={lang} path="sources" />
@@ -208,9 +191,7 @@ export async function SourceDetailPage({ collectStatus = '', lang, sourceId }: {
               <h1>{source.name}</h1>
               <p>{sourceDisplayUrl(source)}</p>
             </div>
-            <form action={`/api/workspace-sources/${encodeURIComponent(source.sourceId)}/collect?lang=${lang}`} method="post">
-              <button className="nav-button" type="submit">{lang === 'zh' ? '重新采集' : 'Collect again'}</button>
-            </form>
+            <SourceCollectButton className="nav-button" endpoint={collectEndpoint} label={lang === 'zh' ? '重新采集' : 'Collect again'} lang={lang} />
           </div>
 
           <div className="my-sources__list">
