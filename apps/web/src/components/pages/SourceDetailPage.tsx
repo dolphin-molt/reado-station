@@ -36,6 +36,12 @@ function profileAssetKindLabel(kind: string, lang: Lang): string {
   return kind
 }
 
+function profileAssetGroupTitle(kind: string, lang: Lang): string {
+  if (kind === 'github') return lang === 'zh' ? 'GitHub 项目' : 'GitHub projects'
+  if (kind === 'youtube') return 'YouTube'
+  return profileAssetKindLabel(kind, lang)
+}
+
 export async function SourceDetailPage({ lang, sourceId }: { lang: Lang; sourceId: string }) {
   const session = await getCurrentAuthSession()
   const loginPath = `${localizedPath(lang, 'login')}?next=${encodeURIComponent(`${localizedPath(lang, 'sources')}/${sourceId}`)}`
@@ -68,6 +74,11 @@ export async function SourceDetailPage({ lang, sourceId }: { lang: Lang; sourceI
     const username = xAccount?.username ?? source.sourceId.replace(/^tw-/i, '')
     const displayName = xAccount?.name ?? source.name.replace(/\s*\(X\)$/i, '')
     const xUrl = `https://x.com/${username}`
+    const websiteAsset = source.profileAssets.find((asset) => asset.kind === 'website')
+    const groupedProfileAssets = [
+      ['github', source.profileAssets.filter((asset) => asset.kind === 'github')],
+      ['youtube', source.profileAssets.filter((asset) => asset.kind === 'youtube')],
+    ].filter(([, assets]) => Array.isArray(assets) && assets.length > 0) as Array<[string, typeof source.profileAssets]>
 
     return (
       <div className="page-shell reader-shell">
@@ -105,27 +116,37 @@ export async function SourceDetailPage({ lang, sourceId }: { lang: Lang; sourceI
                     {xAccount.followersCount != null && <span>{compactNumber(xAccount.followersCount, lang)} followers</span>}
                     {xAccount.tweetCount != null && <span>{compactNumber(xAccount.tweetCount, lang)} posts</span>}
                     <a href={xUrl} rel="noreferrer" target="_blank">x.com/{username}</a>
+                    {websiteAsset && <a href={websiteAsset.url} rel="noreferrer" target="_blank">{websiteAsset.url.replace(/^https?:\/\//, '')}</a>}
                   </div>
                 </div>
               </section>
             )}
             {source.profileAssets.length > 0 && (
               <section className="channel-profile__extensions source-profile-assets">
-                <section className="channel-profile__extension-group">
-                  <h3>{lang === 'zh' ? '相关资产' : 'Related assets'}</h3>
-                  <div>
-                    {source.profileAssets.map((asset) => (
-                      <a className="channel-profile__media-link" href={asset.url} key={asset.url} rel="noreferrer" target="_blank">
-                        <span>{asset.meta ?? profileAssetKindLabel(asset.kind, lang)}</span>
-                        <strong>{asset.title}</strong>
-                        <ul className="channel-profile__extension-metrics">
-                          <li>{profileAssetKindLabel(asset.kind, lang)}</li>
-                        </ul>
-                        {asset.summary && <p>{asset.summary}</p>}
-                      </a>
-                    ))}
-                  </div>
-                </section>
+                {websiteAsset && (
+                  <a className="channel-profile__website-band" href={websiteAsset.url} rel="noreferrer" target="_blank">
+                    <span>{lang === 'zh' ? '个人网站' : 'Website'}</span>
+                    <strong>{websiteAsset.title}</strong>
+                    {websiteAsset.summary && <p>{websiteAsset.summary}</p>}
+                  </a>
+                )}
+                {groupedProfileAssets.map(([kind, assets]) => (
+                  <section className="channel-profile__extension-group" key={kind}>
+                    <h3>{profileAssetGroupTitle(kind, lang)}</h3>
+                    <div>
+                      {assets.map((asset) => (
+                        <a className="channel-profile__media-link" href={asset.url} key={asset.url} rel="noreferrer" target="_blank">
+                          <span>{asset.meta ?? profileAssetKindLabel(asset.kind, lang)}</span>
+                          <strong>{asset.title}</strong>
+                          <ul className="channel-profile__extension-metrics">
+                            <li>{profileAssetKindLabel(asset.kind, lang)}</li>
+                          </ul>
+                          {asset.summary && <p>{asset.summary}</p>}
+                        </a>
+                      ))}
+                    </div>
+                  </section>
+                ))}
               </section>
             )}
           </section>

@@ -106,7 +106,11 @@ describe('SourceDetailPage', () => {
     const element = await SourceDetailPage({ lang: 'zh', sourceId: 'tw-anthropicai' })
     const html = renderToStaticMarkup(createElement(() => element))
 
-    expect(html).toContain('相关资产')
+    expect(html).not.toContain('相关资产')
+    expect(html).toContain('个人网站')
+    expect(html).toContain('GitHub 项目')
+    expect(html).toContain('YouTube')
+    expect(html).toContain('class="channel-profile__website-band"')
     expect(html).toContain('href="https://www.anthropic.com"')
     expect(html).toContain('href="https://github.com/anthropics"')
     expect(html).toContain('href="https://www.youtube.com/@anthropic-ai"')
