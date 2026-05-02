@@ -93,7 +93,12 @@ describe('profile enrichment jobs', () => {
       return new Response('', { status: 404 })
     }
 
-    const result = await runOneProfileEnrichmentJob(db, { fetcher })
+    const result = await runOneProfileEnrichmentJob(db, {
+      assetSelector: {
+        select: async ({ candidates }) => candidates,
+      },
+      fetcher,
+    })
 
     expect(result).toMatchObject({ assetCount: 4, jobId: 'job-1', status: 'completed' })
     expect(writes.some((statement) => statement.sql.includes('INSERT INTO channel_profiles'))).toBe(true)

@@ -138,7 +138,12 @@ describe('profile asset discovery', () => {
       name: 'Anthropic',
       rawJson: '{"data":{"profile_image_url":"https://pbs.twimg.com/profile_images/not-a-website.jpg"}}',
       username: 'AnthropicAI',
-    }, { fetcher })
+    }, {
+      assetSelector: {
+        select: async ({ candidates }) => candidates,
+      },
+      fetcher,
+    })
 
     expect(requestedUrls).toContain('https://www.anthropic.com/')
     expect(assets).toEqual(expect.arrayContaining([
@@ -177,7 +182,12 @@ describe('profile asset discovery', () => {
       name: 'Anthropic',
       rawJson: '{"data":{"profile_image_url":"https://pbs.twimg.com/profile_images/not-a-website.jpg"}}',
       username: 'AnthropicAI',
-    }, { fetcher })
+    }, {
+      assetSelector: {
+        select: async ({ candidates }) => candidates,
+      },
+      fetcher,
+    })
 
     expect(assets).toEqual(expect.arrayContaining([
       expect.objectContaining({ title: 'Anthropic', url: 'https://www.anthropic.com' }),
@@ -219,6 +229,57 @@ describe('profile asset discovery', () => {
     expect(assets).not.toEqual(expect.arrayContaining([
       expect.objectContaining({ url: 'https://www.elon-musk.com' }),
     ]))
+  })
+
+  it('does not accept web search candidates when no model selector is configured', async () => {
+    const fetcher: typeof fetch = async (input) => {
+      const url = input.toString()
+      if (url === 'https://www.elon-musk.com/') return htmlResponse('<title>Elon Musk Official</title>')
+      if (url.startsWith('https://api.github.com/search/users')) return jsonResponse({ items: [] })
+      if (url === 'https://www.youtube.com/@elon-musk') return new Response('', { status: 404 })
+      if (url === 'https://www.youtube.com/@elonmusk') return new Response('', { status: 404 })
+      return new Response('', { status: 404 })
+    }
+
+    const assets = await discoverXProfileAssets({
+      description: '',
+      name: 'Elon Musk',
+      username: 'elonmusk',
+    }, {
+      fetcher,
+      searchProvider: {
+        search: async () => [{ title: 'Elon Musk', url: 'https://www.elon-musk.com/' }],
+      },
+    })
+
+    expect(assets).toEqual([])
+  })
+
+  it('rejects web search candidates when the model selector does not approve them', async () => {
+    const fetcher: typeof fetch = async (input) => {
+      const url = input.toString()
+      if (url === 'https://www.elon-musk.com/') return htmlResponse('<title>Elon Musk Official</title>')
+      if (url.startsWith('https://api.github.com/search/users')) return jsonResponse({ items: [] })
+      if (url === 'https://www.youtube.com/@elon-musk') return new Response('', { status: 404 })
+      if (url === 'https://www.youtube.com/@elonmusk') return new Response('', { status: 404 })
+      return new Response('', { status: 404 })
+    }
+
+    const assets = await discoverXProfileAssets({
+      description: '',
+      name: 'Elon Musk',
+      username: 'elonmusk',
+    }, {
+      assetSelector: {
+        select: async () => [],
+      },
+      fetcher,
+      searchProvider: {
+        search: async () => [{ title: 'Elon Musk', url: 'https://www.elon-musk.com/' }],
+      },
+    })
+
+    expect(assets).toEqual([])
   })
 
   it('rejects redirect-only lander pages from public search candidates', async () => {

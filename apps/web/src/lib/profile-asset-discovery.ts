@@ -32,6 +32,19 @@ export interface ProfileAssetDiscoveryOptions {
   searchProvider?: ProfileSearchProvider | null
 }
 
+type DiscoverySource = 'profile_url' | 'web_search' | 'provider_api' | 'direct_guess'
+
+interface CandidateProfileAsset extends SourceProfileAsset {
+  discoverySource: DiscoverySource
+  evidence?: string
+}
+
+interface UrlCandidate {
+  discoverySource: DiscoverySource
+  evidence?: string
+  url: string
+}
+
 interface BraveSearchPayload {
   web?: {
     results?: Array<{
@@ -130,16 +143,38 @@ async function searchResults(provider: ProfileSearchProvider | null | undefined,
   return batches.flat()
 }
 
-function websiteCandidates(profile: XProfileForAssetDiscovery, results: ProfileSearchResult[]): string[] {
+function dedupeUrlCandidates(candidates: UrlCandidate[]): UrlCandidate[] {
+  const seen = new Set<string>()
+  return candidates.filter((candidate) => {
+    const key = candidate.url.toLowerCase()
+    if (seen.has(key)) return false
+    seen.add(key)
+    return true
+  })
+}
+
+function websiteCandidates(profile: XProfileForAssetDiscovery, results: ProfileSearchResult[]): UrlCandidate[] {
   const nameSlug = normalizeSlug(profile.name)
-  const fromProfile = urlsFromProfile(profile)
-  const fromSearch = results.map((result) => result.url)
+  const fromProfile = urlsFromProfile(profile).map((url) => ({
+    discoverySource: 'profile_url' as const,
+    evidence: 'URL published on the X profile.',
+    url,
+  }))
+  const fromSearch = results.map((result) => ({
+    discoverySource: 'web_search' as const,
+    evidence: [result.title, result.snippet].filter(Boolean).join(' - '),
+    url: result.url,
+  }))
   const direct = nameSlug && !nameSlug.includes('-')
-    ? [`https://www.${nameSlug}.com/`, `https://${nameSlug}.com/`]
+    ? [`https://www.${nameSlug}.com/`, `https://${nameSlug}.com/`].map((url) => ({
+      discoverySource: 'direct_guess' as const,
+      evidence: 'Generated from the X profile display name.',
+      url,
+    }))
     : []
-  return unique([...fromProfile, ...fromSearch, ...direct])
-    .filter((value) => {
-      const url = safeUrl(value)
+  return dedupeUrlCandidates([...fromProfile, ...fromSearch, ...direct])
+    .filter((candidate) => {
+      const url = safeUrl(candidate.url)
       if (!url) return false
       const hostname = url.hostname.replace(/^www\./, '')
       if (/\.(avif|gif|jpe?g|png|svg|webp)$/i.test(url.pathname)) return false
@@ -163,9 +198,9 @@ function matchesProfileIdentity(profile: XProfileForAssetDiscovery, ...values: A
   })
 }
 
-async function discoverWebsite(profile: XProfileForAssetDiscovery, results: ProfileSearchResult[], fetcher: typeof fetch): Promise<SourceProfileAsset | null> {
+async function discoverWebsite(profile: XProfileForAssetDiscovery, results: ProfileSearchResult[], fetcher: typeof fetch): Promise<CandidateProfileAsset | null> {
   for (const candidate of websiteCandidates(profile, results)) {
-    const url = safeUrl(candidate)
+    const url = safeUrl(candidate.url)
     if (!url) continue
     try {
       const response = await fetcher(url.toString(), { headers: { accept: 'text/html,*/*', 'user-agent': 'reado-station/1.0' } })
@@ -179,9 +214,11 @@ async function discoverWebsite(profile: XProfileForAssetDiscovery, results: Prof
       if (/\.(avif|gif|jpe?g|png|svg|webp)$/i.test(finalUrl.pathname)) continue
       if (finalHostname.includes('x.com') || finalHostname.includes('twitter.com') || finalHostname.includes('github.com') || finalHostname.includes('youtube.com') || finalHostname.includes('youtu.be')) continue
       return {
+        discoverySource: candidate.discoverySource,
+        evidence: candidate.evidence,
         kind: 'website',
         meta: 'Official website',
-        summary: `${profile.name} public website discovered from the profile and public search results.`,
+        summary: `${profile.name} public website candidate discovered from ${candidate.discoverySource.replace(/_/g, ' ')}.`,
         title,
         url: stripTrailingSlash(finalUrl.toString()),
       }
@@ -207,12 +244,32 @@ function githubSearchUrl(profile: XProfileForAssetDiscovery): string {
   return url.toString()
 }
 
-async function discoverGitHub(profile: XProfileForAssetDiscovery, results: ProfileSearchResult[], fetcher: typeof fetch): Promise<SourceProfileAsset | null> {
+interface LoginCandidate {
+  discoverySource: DiscoverySource
+  evidence?: string
+  login: string
+}
+
+function dedupeLoginCandidates(candidates: LoginCandidate[]): LoginCandidate[] {
+  const seen = new Set<string>()
+  return candidates.filter((candidate) => {
+    const key = candidate.login.toLowerCase()
+    if (seen.has(key)) return false
+    seen.add(key)
+    return true
+  })
+}
+
+async function discoverGitHub(profile: XProfileForAssetDiscovery, results: ProfileSearchResult[], fetcher: typeof fetch): Promise<CandidateProfileAsset | null> {
   const discoveredLogins = results.flatMap((result) => {
     const url = safeUrl(result.url)
     if (!url || url.hostname !== 'github.com') return []
     const login = url.pathname.split('/').filter(Boolean)[0]
-    return login ? [login] : []
+    return login ? [{
+      discoverySource: 'web_search' as const,
+      evidence: [result.title, result.snippet].filter(Boolean).join(' - '),
+      login,
+    }] : []
   })
 
   const searchResponse = await fetcher(githubSearchUrl(profile), {
@@ -221,10 +278,19 @@ async function discoverGitHub(profile: XProfileForAssetDiscovery, results: Profi
   const searchPayload = searchResponse?.ok ? await searchResponse.json().catch(() => ({})) as { items?: GitHubSearchItem[] } : {}
   const searchedLogins = (searchPayload.items ?? [])
     .filter((item) => item.type === 'Organization' || item.type === undefined)
-    .flatMap((item) => item.login ? [item.login] : [])
+    .flatMap((item) => item.login ? [{
+      discoverySource: 'provider_api' as const,
+      evidence: item.html_url ? `GitHub user search returned ${item.html_url}.` : 'GitHub user search returned this organization.',
+      login: item.login,
+    }] : [])
+  const guessedLogins = githubLoginCandidates(profile).map((login) => ({
+    discoverySource: 'direct_guess' as const,
+    evidence: 'Generated from the X profile display name or username.',
+    login,
+  }))
 
-  for (const login of unique([...discoveredLogins, ...searchedLogins, ...githubLoginCandidates(profile)])) {
-    const response = await fetcher(`https://api.github.com/orgs/${encodeURIComponent(login)}`, {
+  for (const candidate of dedupeLoginCandidates([...discoveredLogins, ...searchedLogins, ...guessedLogins])) {
+    const response = await fetcher(`https://api.github.com/orgs/${encodeURIComponent(candidate.login)}`, {
       headers: { accept: 'application/vnd.github+json', 'user-agent': 'reado-station/1.0' },
     }).catch(() => null)
     if (!response?.ok) continue
@@ -232,8 +298,10 @@ async function discoverGitHub(profile: XProfileForAssetDiscovery, results: Profi
     if (!org.login && !org.html_url) continue
     if (typeof org.public_repos === 'number' && org.public_repos <= 0) continue
     if (!matchesProfileIdentity(profile, org.login, org.description, org.html_url)) continue
-    const title = org.login ?? login
+    const title = org.login ?? candidate.login
     return {
+      discoverySource: candidate.discoverySource,
+      evidence: candidate.evidence,
       kind: 'github',
       meta: 'GitHub organization',
       summary: org.description ?? `${profile.name} GitHub organization discovered from public provider data.`,
@@ -245,16 +313,41 @@ async function discoverGitHub(profile: XProfileForAssetDiscovery, results: Profi
   return null
 }
 
-function youtubeHandleCandidates(profile: XProfileForAssetDiscovery, results: ProfileSearchResult[]): string[] {
+interface YouTubeHandleCandidate {
+  discoverySource: DiscoverySource
+  evidence?: string
+  handle: string
+}
+
+function dedupeYouTubeHandleCandidates(candidates: YouTubeHandleCandidate[]): YouTubeHandleCandidate[] {
+  const seen = new Set<string>()
+  return candidates.filter((candidate) => {
+    const key = candidate.handle.toLowerCase()
+    if (seen.has(key)) return false
+    seen.add(key)
+    return true
+  })
+}
+
+function youtubeHandleCandidates(profile: XProfileForAssetDiscovery, results: ProfileSearchResult[]): YouTubeHandleCandidate[] {
   const fromSearch = results.flatMap((result) => {
     const url = safeUrl(result.url)
     if (!url || !url.hostname.includes('youtube.com')) return []
     const handle = url.pathname.split('/').filter(Boolean).find((part) => part.startsWith('@'))
-    return handle ? [handle.slice(1)] : []
+    return handle ? [{
+      discoverySource: 'web_search' as const,
+      evidence: [result.title, result.snippet].filter(Boolean).join(' - '),
+      handle: handle.slice(1),
+    }] : []
   })
   const name = normalizeSlug(profile.name)
   const username = normalizeSlug(profile.username)
-  return unique([...fromSearch, name, `${name}-ai`, username])
+  const guessed = [name, `${name}-ai`, username].map((handle) => ({
+    discoverySource: 'direct_guess' as const,
+    evidence: 'Generated from the X profile display name or username.',
+    handle,
+  }))
+  return dedupeYouTubeHandleCandidates([...fromSearch, ...guessed])
 }
 
 function decodeJsonText(value: string): string {
@@ -271,15 +364,17 @@ function firstYouTubeVideo(html: string): { id: string; title: string } | null {
   return { id: match[1], title: decodeJsonText(match[2]) }
 }
 
-async function discoverYouTube(profile: XProfileForAssetDiscovery, results: ProfileSearchResult[], fetcher: typeof fetch): Promise<SourceProfileAsset[]> {
-  for (const handle of youtubeHandleCandidates(profile, results)) {
-    const channelUrl = `https://www.youtube.com/@${handle}`
+async function discoverYouTube(profile: XProfileForAssetDiscovery, results: ProfileSearchResult[], fetcher: typeof fetch): Promise<CandidateProfileAsset[]> {
+  for (const candidate of youtubeHandleCandidates(profile, results)) {
+    const channelUrl = `https://www.youtube.com/@${candidate.handle}`
     const response = await fetcher(channelUrl, { headers: { accept: 'text/html,*/*', 'user-agent': 'reado-station/1.0' } }).catch(() => null)
     if (!response?.ok) continue
     const html = await response.text().catch(() => '')
     const title = titleFromHtml(html)?.replace(/\s+-\s+YouTube$/i, '') || `${profile.name} YouTube`
     if (!matchesProfileIdentity(profile, title)) continue
-    const assets: SourceProfileAsset[] = [{
+    const assets: CandidateProfileAsset[] = [{
+      discoverySource: candidate.discoverySource,
+      evidence: candidate.evidence,
       kind: 'youtube',
       meta: 'Video channel',
       summary: `${profile.name} YouTube channel discovered from public provider data.`,
@@ -289,6 +384,8 @@ async function discoverYouTube(profile: XProfileForAssetDiscovery, results: Prof
     const video = firstYouTubeVideo(html)
     if (video) {
       assets.push({
+        discoverySource: candidate.discoverySource,
+        evidence: candidate.evidence,
         kind: 'youtube',
         meta: 'Video',
         summary: `${profile.name} public YouTube video.`,
@@ -302,7 +399,7 @@ async function discoverYouTube(profile: XProfileForAssetDiscovery, results: Prof
   return []
 }
 
-function dedupeAssets(assets: SourceProfileAsset[]): SourceProfileAsset[] {
+function dedupeAssets<T extends SourceProfileAsset>(assets: T[]): T[] {
   const seen = new Set<string>()
   return assets.filter((asset) => {
     const key = asset.url.toLowerCase()
@@ -310,6 +407,34 @@ function dedupeAssets(assets: SourceProfileAsset[]): SourceProfileAsset[] {
     seen.add(key)
     return true
   })
+}
+
+function publicAsset(asset: SourceProfileAsset): SourceProfileAsset {
+  return {
+    kind: asset.kind,
+    meta: asset.meta,
+    summary: asset.summary,
+    thumbnailUrl: asset.thumbnailUrl,
+    title: asset.title,
+    url: asset.url,
+  }
+}
+
+function normalizedAssetUrl(value: string): string {
+  return stripTrailingSlash(value).toLowerCase()
+}
+
+function selectedCandidateAssets(selected: SourceProfileAsset[], candidates: CandidateProfileAsset[]): SourceProfileAsset[] {
+  const candidateUrls = new Set(candidates.map((candidate) => normalizedAssetUrl(candidate.url)))
+  return dedupeAssets(selected)
+    .filter((asset) => candidateUrls.has(normalizedAssetUrl(asset.url)))
+    .map(publicAsset)
+}
+
+function trustedFallbackAssets(candidates: CandidateProfileAsset[]): SourceProfileAsset[] {
+  return dedupeAssets(candidates)
+    .filter((candidate) => candidate.discoverySource === 'profile_url')
+    .map(publicAsset)
 }
 
 function normalizeModelAssets(value: unknown): SourceProfileAsset[] {
@@ -385,7 +510,7 @@ export function createOpenAICompatibleProfileAssetSelector(input: {
         body: JSON.stringify({
           messages: [
             {
-              content: 'Select official profile assets from candidates. Return only JSON: {"assets":[{"kind":"website|github|youtube","title":"...","url":"...","summary":"...","meta":"...","thumbnailUrl":"..."}]}. Prefer official website, official GitHub org, official YouTube channel and high-signal videos. Reject lookalikes, avatars, unrelated same-name channels, and zero-content orgs.',
+              content: 'Select official profile assets from candidates. Candidates from web_search and direct_guess are untrusted until you verify they match the X profile. Return only JSON: {"assets":[{"kind":"website|github|youtube","title":"...","url":"...","summary":"...","meta":"...","thumbnailUrl":"..."}]}. Choose only URLs present in the candidate list. Prefer official website, official GitHub org, official YouTube channel and high-signal videos. Reject parked domains, redirect landers, lookalikes, avatars, unrelated same-name channels, stale fan pages, and zero-content orgs.',
               role: 'system',
             },
             {
@@ -426,8 +551,10 @@ export async function discoverXProfileAssets(
     discoverGitHub(profile, results, fetcher),
     discoverYouTube(profile, results, fetcher),
   ])
-  const candidates = dedupeAssets([website, github, ...youtube].filter((asset): asset is SourceProfileAsset => Boolean(asset)))
-  if (!options.assetSelector || candidates.length === 0) return candidates
+  const candidates = dedupeAssets([website, github, ...youtube].filter((asset): asset is CandidateProfileAsset => Boolean(asset)))
+  if (candidates.length === 0) return []
+  if (!options.assetSelector) return trustedFallbackAssets(candidates)
   const selected = await options.assetSelector.select({ candidates, profile }).catch(() => [])
-  return selected.length > 0 ? dedupeAssets(selected) : candidates
+  const approved = selectedCandidateAssets(selected, candidates)
+  return approved.length > 0 ? approved : trustedFallbackAssets(candidates)
 }
