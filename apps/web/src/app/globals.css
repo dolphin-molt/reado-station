@@ -7622,16 +7622,24 @@ p {
 
 .channel-profile__back {
   align-items: center;
+  background: transparent;
   border: 1px solid rgba(34, 31, 26, 0.12);
   border-radius: 999px;
   color: rgba(34, 31, 26, 0.68);
+  cursor: pointer;
   display: inline-flex;
   font-family: var(--font-ui);
   font-size: 0.82rem;
   font-weight: 850;
-  margin-bottom: 1rem;
   padding: 0.36rem 0.72rem;
   text-decoration: none;
+}
+
+.channel-profile__topbar {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
 }
 
 .channel-profile__back:hover {

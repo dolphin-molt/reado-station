@@ -15,7 +15,7 @@ export interface SourceCollectionSnapshot {
 export interface SourceCollectionDecision {
   shouldCollect: boolean
   status: CollectionStatus
-  reason: 'fresh-snapshot' | 'active-job' | 'no-snapshot' | 'stale-snapshot' | 'failed-snapshot'
+  reason: 'fresh-snapshot' | 'active-job' | 'no-snapshot' | 'stale-snapshot' | 'failed-snapshot' | 'force-refresh'
 }
 
 export interface SourceCollectionJob {
@@ -68,16 +68,19 @@ export function snapshotCoversWindow(snapshot: SourceCollectionSnapshot | null, 
 
 export function decideSourceCollection(input: {
   activeJob?: SourceCollectionJob | null
+  force?: boolean
   snapshot?: SourceCollectionSnapshot | null
   windowStart: string
   windowEnd: string
 }): SourceCollectionDecision {
-  if (snapshotCoversWindow(input.snapshot ?? null, input.windowStart, input.windowEnd)) {
-    return { shouldCollect: false, status: 'fresh', reason: 'fresh-snapshot' }
-  }
-
   if (input.activeJob && ACTIVE_JOB_STATUSES.has(input.activeJob.status)) {
     return { shouldCollect: false, status: input.activeJob.status === 'running' ? 'running' : 'queued', reason: 'active-job' }
+  }
+
+  if (input.force) return { shouldCollect: true, status: 'stale', reason: 'force-refresh' }
+
+  if (snapshotCoversWindow(input.snapshot ?? null, input.windowStart, input.windowEnd)) {
+    return { shouldCollect: false, status: 'fresh', reason: 'fresh-snapshot' }
   }
 
   if (!input.snapshot) return { shouldCollect: true, status: 'missing', reason: 'no-snapshot' }
@@ -144,6 +147,7 @@ export async function getSourceCollectionSnapshot(db: D1Database, sourceId: stri
 }
 
 export async function ensureSourceCollectionJob(db: D1Database, input: {
+  force?: boolean
   sourceId: string
   sourceType: SourceType
   windowStart: string
@@ -154,7 +158,7 @@ export async function ensureSourceCollectionJob(db: D1Database, input: {
     getSourceCollectionSnapshot(db, input.sourceId),
     findActiveSourceCollectionJob(db, input.sourceId, input.windowStart, input.windowEnd),
   ])
-  const decision = decideSourceCollection({ activeJob, snapshot, windowStart: input.windowStart, windowEnd: input.windowEnd })
+  const decision = decideSourceCollection({ activeJob, force: input.force, snapshot, windowStart: input.windowStart, windowEnd: input.windowEnd })
   if (!decision.shouldCollect) return { job: activeJob, decision }
 
   const now = new Date().toISOString()

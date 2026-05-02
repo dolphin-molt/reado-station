@@ -74,9 +74,14 @@ export async function SourceDetailPage({ lang, sourceId }: { lang: Lang; sourceI
         <Header active="source-add" lang={lang} path="sources" />
         <main className="container section-stack">
           <section className="panel channel-profile">
-            <Link className="channel-profile__back" href={localizedPath(lang, 'sources')}>
-              {lang === 'zh' ? '返回' : 'Back'}
-            </Link>
+            <div className="channel-profile__topbar">
+              <Link className="channel-profile__back" href={localizedPath(lang, 'sources')}>
+                {lang === 'zh' ? '返回' : 'Back'}
+              </Link>
+              <form action={`/api/workspace-sources/${encodeURIComponent(source.sourceId)}/collect?lang=${lang}`} method="post">
+                <button className="channel-profile__back" type="submit">{lang === 'zh' ? '重新采集' : 'Refresh'}</button>
+              </form>
+            </div>
             <div className="channel-profile__hero">
               <div>
                 <h1 className="x-profile-title">

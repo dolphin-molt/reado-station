@@ -44,4 +44,28 @@ describe('public source collection reuse decisions', () => {
       reason: 'active-job',
     })
   })
+
+  it('allows manual collection to bypass a fresh snapshot', () => {
+    const request = collectionWindowForHours(24, new Date('2026-04-30T12:00:00.000Z'))
+    const snapshot = {
+      sourceId: 'tw-anthropicai',
+      sourceType: 'x' as const,
+      windowStart: '2026-04-29T00:00:00.000Z',
+      windowEnd: '2026-04-30T12:30:00.000Z',
+      status: 'fresh' as const,
+      itemCount: 0,
+      collectedAt: '2026-04-30T12:30:00.000Z',
+    }
+
+    expect(decideSourceCollection({
+      force: true,
+      snapshot,
+      windowStart: request.windowStart,
+      windowEnd: request.windowEnd,
+    })).toEqual({
+      shouldCollect: true,
+      status: 'stale',
+      reason: 'force-refresh',
+    })
+  })
 })

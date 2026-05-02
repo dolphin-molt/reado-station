@@ -43,6 +43,7 @@ export async function POST(request: NextRequest, context: RouteContext): Promise
 
   const { windowStart, windowEnd } = collectionWindowForHours(Number(subscription.backfillHours ?? 24))
   await ensureSourceCollectionJob(db, {
+    force: true,
     sourceId,
     sourceType: subscription.sourceType,
     windowStart,
