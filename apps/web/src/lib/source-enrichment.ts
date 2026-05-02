@@ -1,7 +1,7 @@
 import 'server-only'
 
 import { getCloudflareEnv, type ReadoCloudflareEnv } from '@/lib/cloudflare'
-import { createBraveSearchProvider, createOpenAICompatibleProfileAssetSelector, discoverXProfileAssets, type ProfileAssetDiscoveryOptions } from '@/lib/profile-asset-discovery'
+import { createBigModelSearchProvider, createBraveSearchProvider, createOpenAICompatibleProfileAssetSelector, discoverXProfileAssets, type ProfileAssetDiscoveryOptions } from '@/lib/profile-asset-discovery'
 import { presetXProfileAssets, type SourceProfileAsset } from '@/lib/source-profile-assets'
 
 export type EnrichmentJobType =
@@ -32,6 +32,9 @@ interface XAccountProfileRow {
   verified: number | null
 }
 
+const BIGMODEL_CHAT_COMPLETIONS_ENDPOINT = 'https://open.bigmodel.cn/api/paas/v4/chat/completions'
+const BIGMODEL_DEFAULT_MODEL = 'glm-4.7-flash'
+
 interface ProfileEnrichmentRunOptions extends ProfileAssetDiscoveryOptions {
   env?: ReadoCloudflareEnv | null
 }
@@ -42,13 +45,13 @@ export interface ProfileEnrichmentProviderStatus {
     configured: boolean
     endpointConfigured: boolean
     model: string | null
-    provider: 'custom' | 'openai-compatible'
+    provider: 'bigmodel' | 'custom' | 'openai-compatible'
     tokenConfigured: boolean
   }
   ready: boolean
   search: {
     configured: boolean
-    provider: 'custom' | 'brave'
+    provider: 'bigmodel' | 'custom' | 'brave'
   }
 }
 
@@ -145,11 +148,24 @@ function braveSearchApiKey(env: ReadoCloudflareEnv | null | undefined): string |
   return env?.READO_BRAVE_SEARCH_API_KEY ?? env?.BRAVE_SEARCH_API_KEY ?? process.env.READO_BRAVE_SEARCH_API_KEY ?? process.env.BRAVE_SEARCH_API_KEY ?? null
 }
 
+function bigModelApiKey(env: ReadoCloudflareEnv | null | undefined): string | null {
+  return env?.READO_BIGMODEL_API_KEY
+    ?? env?.BIGMODEL_OKIT_KEY
+    ?? env?.ZHIPUAI_API_KEY
+    ?? env?.ZHIPU_API_KEY
+    ?? process.env.READO_BIGMODEL_API_KEY
+    ?? process.env.BIGMODEL_OKIT_KEY
+    ?? process.env.ZHIPUAI_API_KEY
+    ?? process.env.ZHIPU_API_KEY
+    ?? null
+}
+
 function profileModelEndpoint(env: ReadoCloudflareEnv | null | undefined): string | null {
   return env?.READO_PROFILE_ENRICHMENT_MODEL_ENDPOINT
     ?? env?.CLOUDFLARE_AI_GATEWAY_URL
     ?? process.env.READO_PROFILE_ENRICHMENT_MODEL_ENDPOINT
     ?? process.env.CLOUDFLARE_AI_GATEWAY_URL
+    ?? (bigModelApiKey(env) ? BIGMODEL_CHAT_COMPLETIONS_ENDPOINT : null)
     ?? null
 }
 
@@ -158,6 +174,7 @@ function profileModelToken(env: ReadoCloudflareEnv | null | undefined): string |
     ?? env?.CLOUDFLARE_AI_GATEWAY_TOKEN
     ?? process.env.READO_PROFILE_ENRICHMENT_MODEL_TOKEN
     ?? process.env.CLOUDFLARE_AI_GATEWAY_TOKEN
+    ?? bigModelApiKey(env)
     ?? null
 }
 
@@ -166,6 +183,7 @@ function profileModelName(env: ReadoCloudflareEnv | null | undefined): string | 
     ?? env?.LLM_MODEL
     ?? process.env.READO_PROFILE_ENRICHMENT_MODEL
     ?? process.env.LLM_MODEL
+    ?? (bigModelApiKey(env) ? BIGMODEL_DEFAULT_MODEL : null)
     ?? null
 }
 
@@ -180,11 +198,16 @@ function resolveProfileEnrichmentProviders(
   const customSearchProvider = options.searchProvider !== undefined && options.searchProvider !== null
   const customAssetSelector = options.assetSelector !== undefined && options.assetSelector !== null
   const searchApiKey = options.searchProvider === undefined ? braveSearchApiKey(env) : null
+  const bigModelKey = bigModelApiKey(env)
   const modelEndpoint = options.assetSelector === undefined ? profileModelEndpoint(env) : null
   const modelToken = options.assetSelector === undefined ? profileModelToken(env) : null
   const modelName = options.assetSelector === undefined ? profileModelName(env) : null
+  const searchProviderName = customSearchProvider ? 'custom' : searchApiKey ? 'brave' : bigModelKey ? 'bigmodel' : 'brave'
   const searchProvider = options.searchProvider === undefined
-    ? createBraveSearchProvider({ apiKey: searchApiKey, fetcher: options.fetcher })
+    ? (
+      createBraveSearchProvider({ apiKey: searchApiKey, fetcher: options.fetcher })
+      ?? createBigModelSearchProvider({ apiKey: bigModelKey, fetcher: options.fetcher })
+    )
     : options.searchProvider
   const assetSelector = options.assetSelector === undefined
     ? createOpenAICompatibleProfileAssetSelector({
@@ -195,16 +218,21 @@ function resolveProfileEnrichmentProviders(
     })
     : options.assetSelector
   const missing: string[] = []
-  if (!searchProvider) missing.push('READO_BRAVE_SEARCH_API_KEY or BRAVE_SEARCH_API_KEY')
+  if (!searchProvider) missing.push('READO_BRAVE_SEARCH_API_KEY, BRAVE_SEARCH_API_KEY, or BIGMODEL_OKIT_KEY')
   if (!assetSelector) {
     if (customAssetSelector) {
       missing.push('profile asset selector')
     } else {
       if (!modelEndpoint) missing.push('READO_PROFILE_ENRICHMENT_MODEL_ENDPOINT or CLOUDFLARE_AI_GATEWAY_URL')
-      if (!modelToken) missing.push('READO_PROFILE_ENRICHMENT_MODEL_TOKEN or CLOUDFLARE_AI_GATEWAY_TOKEN')
-      if (!modelName) missing.push('READO_PROFILE_ENRICHMENT_MODEL or LLM_MODEL')
+      if (!modelToken) missing.push('READO_PROFILE_ENRICHMENT_MODEL_TOKEN, CLOUDFLARE_AI_GATEWAY_TOKEN, or BIGMODEL_OKIT_KEY')
+      if (!modelName) missing.push('READO_PROFILE_ENRICHMENT_MODEL, LLM_MODEL, or BIGMODEL_OKIT_KEY')
     }
   }
+  const modelProvider = customAssetSelector
+    ? 'custom'
+    : modelEndpoint === BIGMODEL_CHAT_COMPLETIONS_ENDPOINT
+      ? 'bigmodel'
+      : 'openai-compatible'
 
   const providerStatus: ProfileEnrichmentProviderStatus = {
     missing,
@@ -212,13 +240,13 @@ function resolveProfileEnrichmentProviders(
       configured: Boolean(assetSelector),
       endpointConfigured: customAssetSelector || Boolean(modelEndpoint),
       model: customAssetSelector ? 'custom' : modelName,
-      provider: customAssetSelector ? 'custom' : 'openai-compatible',
+      provider: modelProvider,
       tokenConfigured: customAssetSelector || Boolean(modelToken),
     },
     ready: missing.length === 0,
     search: {
       configured: Boolean(searchProvider),
-      provider: customSearchProvider ? 'custom' : 'brave',
+      provider: searchProviderName,
     },
   }
 

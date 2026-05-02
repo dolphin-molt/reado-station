@@ -55,6 +55,14 @@ interface BraveSearchPayload {
   }
 }
 
+interface BigModelSearchPayload {
+  search_result?: Array<{
+    content?: string
+    link?: string
+    title?: string
+  }>
+}
+
 interface OpenAICompatibleChatPayload {
   choices?: Array<{
     message?: {
@@ -487,6 +495,46 @@ export function createBraveSearchProvider(input: {
           snippet: result.description,
           title: result.title,
           url: result.url,
+        }]
+      })
+    },
+  }
+}
+
+export function createBigModelSearchProvider(input: {
+  apiKey?: string | null
+  endpoint?: string | null
+  fetcher?: typeof fetch
+}): ProfileSearchProvider | null {
+  const apiKey = input.apiKey?.trim()
+  if (!apiKey) return null
+  const fetcher = input.fetcher ?? fetch
+  const endpoint = input.endpoint?.trim() || 'https://open.bigmodel.cn/api/paas/v4/web_search'
+  return {
+    async search(query, options) {
+      const response = await fetcher(endpoint, {
+        body: JSON.stringify({
+          content_size: 'medium',
+          count: Math.max(1, Math.min(10, options?.limit ?? 5)),
+          search_engine: 'search_std',
+          search_intent: false,
+          search_query: query,
+          search_recency_filter: 'noLimit',
+        }),
+        headers: {
+          authorization: `Bearer ${apiKey}`,
+          'content-type': 'application/json',
+        },
+        method: 'POST',
+      })
+      if (!response.ok) return []
+      const payload = await response.json().catch(() => ({})) as BigModelSearchPayload
+      return (payload.search_result ?? []).flatMap((result) => {
+        if (!result.title || !result.link) return []
+        return [{
+          snippet: result.content,
+          title: result.title,
+          url: result.link,
         }]
       })
     },

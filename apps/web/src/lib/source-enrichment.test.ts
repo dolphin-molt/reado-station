@@ -163,10 +163,10 @@ describe('profile enrichment jobs', () => {
     expect(result?.error).toContain('Missing profile enrichment providers')
     expect(providerStatus?.ready).toBe(false)
     expect(providerStatus?.missing).toEqual(expect.arrayContaining([
-      'READO_BRAVE_SEARCH_API_KEY or BRAVE_SEARCH_API_KEY',
+      'READO_BRAVE_SEARCH_API_KEY, BRAVE_SEARCH_API_KEY, or BIGMODEL_OKIT_KEY',
       'READO_PROFILE_ENRICHMENT_MODEL_ENDPOINT or CLOUDFLARE_AI_GATEWAY_URL',
-      'READO_PROFILE_ENRICHMENT_MODEL_TOKEN or CLOUDFLARE_AI_GATEWAY_TOKEN',
-      'READO_PROFILE_ENRICHMENT_MODEL or LLM_MODEL',
+      'READO_PROFILE_ENRICHMENT_MODEL_TOKEN, CLOUDFLARE_AI_GATEWAY_TOKEN, or BIGMODEL_OKIT_KEY',
+      'READO_PROFILE_ENRICHMENT_MODEL, LLM_MODEL, or BIGMODEL_OKIT_KEY',
     ]))
     const failedWrite = writes.find((statement) => statement.sql.includes("UPDATE enrichment_jobs SET status = 'failed'"))
     const failedOutput = JSON.parse(String(failedWrite?.bindings[1] ?? '{}')) as { providerStatus?: { ready?: boolean } }
@@ -240,6 +240,110 @@ describe('profile enrichment jobs', () => {
 
     expect(result).toMatchObject({ assetCount: 0, jobId: 'job-1', status: 'completed' })
     expect(featuredJson).toBe('[]')
+  })
+
+  it('uses BIGMODEL_OKIT_KEY for profile search and model selection when explicit providers are not configured', async () => {
+    const writes: Array<{ sql: string; bindings: unknown[] }> = []
+    const requestedUrls: string[] = []
+    const db = {
+      prepare: (sql: string) => ({
+        first: async () => {
+          if (sql.includes('FROM enrichment_jobs')) {
+            return {
+              id: 'job-1',
+              jobType: 'discover_profile_assets',
+              sourceType: 'x',
+              sourceValue: 'AnthropicAI',
+            }
+          }
+          return null
+        },
+        bind: (...bindings: unknown[]) => {
+          writes.push({ sql, bindings })
+          return {
+            first: async () => {
+              if (sql.includes('FROM enrichment_jobs')) {
+                return {
+                  id: 'job-1',
+                  jobType: 'discover_profile_assets',
+                  sourceType: 'x',
+                  sourceValue: 'AnthropicAI',
+                }
+              }
+              if (sql.includes('FROM x_accounts')) {
+                return {
+                  description: 'Anthropic builds Claude.',
+                  name: 'Anthropic',
+                  profileImageUrl: '',
+                  username: 'AnthropicAI',
+                  verified: 1,
+                }
+              }
+              return null
+            },
+            run: async () => {},
+          }
+        },
+      }),
+    } as unknown as D1Database
+
+    const result = await runOneProfileEnrichmentJob(db, {
+      env: { BIGMODEL_OKIT_KEY: 'bigmodel-key' },
+      fetcher: async (input, init) => {
+        const url = input.toString()
+        requestedUrls.push(url)
+        if (url === 'https://open.bigmodel.cn/api/paas/v4/web_search') {
+          expect((init?.headers as Record<string, string>).authorization).toBe('Bearer bigmodel-key')
+          return new Response(JSON.stringify({
+            search_result: [
+              { title: 'Anthropic', link: 'https://www.anthropic.com/', content: 'Official site.' },
+            ],
+          }), { status: 200 })
+        }
+        if (url === 'https://www.anthropic.com/') return new Response('<title>Anthropic</title>', { status: 200 })
+        if (url.startsWith('https://api.github.com/search/users')) return new Response(JSON.stringify({ items: [] }), { status: 200 })
+        if (url === 'https://www.youtube.com/@anthropic') return new Response('', { status: 404 })
+        if (url === 'https://www.youtube.com/@anthropic-ai') return new Response('', { status: 404 })
+        if (url === 'https://www.youtube.com/@anthropicai') return new Response('', { status: 404 })
+        if (url === 'https://open.bigmodel.cn/api/paas/v4/chat/completions') {
+          const body = JSON.parse(init?.body as string) as { model?: string }
+          expect((init?.headers as Record<string, string>).authorization).toBe('Bearer bigmodel-key')
+          expect(body.model).toBe('glm-4.7-flash')
+          return new Response(JSON.stringify({
+            choices: [{
+              message: {
+                content: JSON.stringify({
+                  assets: [
+                    {
+                      kind: 'website',
+                      title: 'Anthropic',
+                      url: 'https://www.anthropic.com',
+                      summary: 'Official website selected by the model.',
+                    },
+                  ],
+                }),
+              },
+            }],
+          }), { status: 200 })
+        }
+        return new Response('', { status: 404 })
+      },
+    })
+
+    expect(requestedUrls).toContain('https://open.bigmodel.cn/api/paas/v4/web_search')
+    expect(requestedUrls).toContain('https://open.bigmodel.cn/api/paas/v4/chat/completions')
+    expect(result).toMatchObject({
+      assetCount: 1,
+      jobId: 'job-1',
+      providerStatus: {
+        model: { model: 'glm-4.7-flash', provider: 'bigmodel' },
+        ready: true,
+        search: { provider: 'bigmodel' },
+      },
+      status: 'completed',
+    })
+    const profileWrite = writes.find((statement) => statement.sql.includes('INSERT INTO channel_profiles'))
+    expect(profileWrite?.bindings[7]).toContain('Official website selected by the model.')
   })
 
   it('processes queued enrichment jobs until the batch limit or empty queue', async () => {

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { createBraveSearchProvider, createOpenAICompatibleProfileAssetSelector, discoverXProfileAssets } from './profile-asset-discovery'
+import { createBigModelSearchProvider, createBraveSearchProvider, createOpenAICompatibleProfileAssetSelector, discoverXProfileAssets } from './profile-asset-discovery'
 
 function jsonResponse(value: unknown): Response {
   return new Response(JSON.stringify(value), {
@@ -43,6 +43,32 @@ describe('profile asset discovery', () => {
     ])
     expect(requestedUrls[0]).toContain('api.search.brave.com/res/v1/web/search')
     expect(requestedUrls[0]).toContain('q=Anthropic+official+website')
+  })
+
+  it('normalizes BigModel web search results behind the provider interface', async () => {
+    const requestedBodies: unknown[] = []
+    const provider = createBigModelSearchProvider({
+      apiKey: 'bigmodel-key',
+      fetcher: async (input, init) => {
+        expect(input.toString()).toBe('https://open.bigmodel.cn/api/paas/v4/web_search')
+        expect((init?.headers as Record<string, string>).authorization).toBe('Bearer bigmodel-key')
+        requestedBodies.push(JSON.parse(init?.body as string))
+        return jsonResponse({
+          search_result: [
+            { title: 'Anthropic', link: 'https://www.anthropic.com', content: 'Official site.' },
+          ],
+        })
+      },
+    })
+
+    await expect(provider?.search('Anthropic official website', { limit: 3 })).resolves.toEqual([
+      { title: 'Anthropic', url: 'https://www.anthropic.com', snippet: 'Official site.' },
+    ])
+    expect(requestedBodies[0]).toMatchObject({
+      count: 3,
+      search_engine: 'search_std',
+      search_query: 'Anthropic official website',
+    })
   })
 
   it('can use an OpenAI-compatible model gateway to select profile assets', async () => {
