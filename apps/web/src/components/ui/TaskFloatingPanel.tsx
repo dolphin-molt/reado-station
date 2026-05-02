@@ -15,7 +15,8 @@ interface TaskFloatingPanelProps {
 
 function taskStatusLabel(status: FloatingTask['status'], lang: Lang): string {
   if (status === 'running') return lang === 'zh' ? '运行中' : 'Running'
-  return lang === 'zh' ? '排队中' : 'Queued'
+  if (status === 'completed') return lang === 'zh' ? '已完成' : 'Done'
+  return lang === 'zh' ? '等待中' : 'Queued'
 }
 
 function TasksIcon() {
@@ -66,24 +67,27 @@ export function TaskFloatingPanel({ lang, tasks, totalCount = tasks.length }: Ta
         </div>
 
         {visibleTasks.length > 0 ? (
-          <div className="task-floating-list">
+          <ul className="task-floating-list">
             {visibleTasks.map((task) => (
-              <article className="task-floating-list__item" key={task.id}>
-                <span className={task.status === 'running' ? 'status-pill status-pill--ok' : 'status-pill'}>
-                  {taskStatusLabel(task.status, lang)}
-                </span>
-                <div>
+              <li className="task-floating-list__row" key={task.id}>
+                <span
+                  aria-label={taskStatusLabel(task.status, lang)}
+                  className={`task-floating-status-icon task-floating-status-icon--${task.status}`}
+                  role="img"
+                />
+                <span className="task-floating-list__content">
                   <strong>{task.title}</strong>
-                  <p>{task.subject}</p>
-                </div>
-              </article>
+                  <span>{task.subject}</span>
+                </span>
+                <span className="task-floating-list__status">{taskStatusLabel(task.status, lang)}</span>
+              </li>
             ))}
             {hiddenCount > 0 && (
-              <p className="task-floating-list__more">
+              <li className="task-floating-list__more">
                 {lang === 'zh' ? `还有 ${hiddenCount} 个任务` : `${hiddenCount} more tasks`}
-              </p>
+              </li>
             )}
-          </div>
+          </ul>
         ) : (
           <p className="task-floating-popover__empty">
             {lang === 'zh' ? '没有进行中的任务' : 'No active tasks right now.'}

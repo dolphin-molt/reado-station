@@ -1,7 +1,7 @@
 import 'server-only'
 
 export type TaskKind = 'profile-enrichment' | 'radio' | 'source-backfill' | 'source-collection'
-export type TaskStatus = 'queued' | 'running'
+export type TaskStatus = 'completed' | 'queued' | 'running'
 export type TaskQueueName = 'enrichment_jobs' | 'radio_episodes' | 'source_backfill_jobs' | 'source_collection_jobs'
 
 export interface TaskQueueRef {
