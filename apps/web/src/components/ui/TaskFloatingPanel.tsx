@@ -3,13 +3,9 @@
 import { useId, useState } from 'react'
 
 import type { Lang } from '@/lib/i18n'
+import type { Task } from '@/lib/tasks'
 
-export interface FloatingTask {
-  id: string
-  status: 'queued' | 'running'
-  subject: string
-  title: string
-}
+export type FloatingTask = Pick<Task, 'id' | 'status' | 'subject' | 'title'>
 
 interface TaskFloatingPanelProps {
   lang: Lang

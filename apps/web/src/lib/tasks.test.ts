@@ -2,7 +2,7 @@ import { describe, expect, it, vi } from 'vitest'
 
 vi.mock('server-only', () => ({}))
 
-import { loadWorkspaceTasks } from './tasks'
+import { getTaskQueueAdapters, loadWorkspaceTasks } from './tasks'
 
 describe('workspace tasks', () => {
   it('loads active collection, enrichment, and radio jobs for a workspace', async () => {
@@ -62,10 +62,22 @@ describe('workspace tasks', () => {
     } as unknown as D1Database
 
     await expect(loadWorkspaceTasks(db, 'workspace-1')).resolves.toEqual([
-      expect.objectContaining({ id: 'radio-1', kind: 'radio', status: 'queued', title: '今日电台' }),
-      expect.objectContaining({ id: 'profile-1', kind: 'profile-enrichment', status: 'running', subject: '@elonmusk' }),
-      expect.objectContaining({ id: 'collect-1', kind: 'source-collection', status: 'queued', subject: '@elonmusk (X)' }),
+      expect.objectContaining({ id: 'radio-1', kind: 'radio', queue: { name: 'radio_episodes', recordId: 'radio-1' }, status: 'queued', title: '今日电台' }),
+      expect.objectContaining({ id: 'profile-1', kind: 'profile-enrichment', queue: { name: 'enrichment_jobs', recordId: 'profile-1' }, status: 'running', subject: '@elonmusk' }),
+      expect.objectContaining({ id: 'collect-1', kind: 'source-collection', queue: { name: 'source_collection_jobs', recordId: 'collect-1' }, status: 'queued', subject: '@elonmusk (X)' }),
     ])
     expect(queries.join('\n')).toContain('workspace_source_subscriptions')
+  })
+
+  it('registers every task-producing queue through task adapters', () => {
+    expect(getTaskQueueAdapters().map((adapter) => ({
+      kind: adapter.kind,
+      queueName: adapter.queueName,
+    }))).toEqual([
+      { kind: 'source-collection', queueName: 'source_collection_jobs' },
+      { kind: 'profile-enrichment', queueName: 'enrichment_jobs' },
+      { kind: 'radio', queueName: 'radio_episodes' },
+      { kind: 'source-backfill', queueName: 'source_backfill_jobs' },
+    ])
   })
 })

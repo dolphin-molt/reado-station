@@ -1,19 +1,36 @@
 import 'server-only'
 
-export type WorkspaceTaskKind = 'profile-enrichment' | 'radio' | 'source-backfill' | 'source-collection'
-export type WorkspaceTaskStatus = 'queued' | 'running'
+export type TaskKind = 'profile-enrichment' | 'radio' | 'source-backfill' | 'source-collection'
+export type TaskStatus = 'queued' | 'running'
+export type TaskQueueName = 'enrichment_jobs' | 'radio_episodes' | 'source_backfill_jobs' | 'source_collection_jobs'
 
-export interface WorkspaceTask {
+export interface TaskQueueRef {
+  name: TaskQueueName
+  recordId: string
+}
+
+export interface Task {
   createdAt: string
   href: string
   id: string
-  kind: WorkspaceTaskKind
+  kind: TaskKind
+  queue: TaskQueueRef
   startedAt: string | null
-  status: WorkspaceTaskStatus
+  status: TaskStatus
   subject: string
   title: string
   updatedAt: string
 }
+
+export interface TaskQueueAdapter {
+  kind: TaskKind
+  loadActiveTasks(db: D1Database, workspaceId: string): Promise<Task[]>
+  queueName: TaskQueueName
+}
+
+export type WorkspaceTask = Task
+export type WorkspaceTaskKind = TaskKind
+export type WorkspaceTaskStatus = TaskStatus
 
 interface SourceCollectionTaskRow {
   createdAt: string
@@ -59,7 +76,7 @@ interface BackfillTaskRow {
   updatedAt: string
 }
 
-function activeStatus(value: string): WorkspaceTaskStatus {
+function activeStatus(value: string): TaskStatus {
   return value === 'running' ? 'running' : 'queued'
 }
 
@@ -67,7 +84,7 @@ function sourceHref(sourceId: string): string {
   return `/sources/${encodeURIComponent(sourceId)}`
 }
 
-function taskUpdatedTime(task: WorkspaceTask): number {
+function taskUpdatedTime(task: Task): number {
   const time = new Date(task.updatedAt || task.createdAt).getTime()
   return Number.isNaN(time) ? 0 : time
 }
@@ -92,9 +109,11 @@ async function safeAll<T>(query: Promise<{ results?: T[] }>): Promise<T[]> {
   }
 }
 
-export async function loadWorkspaceTasks(db: D1Database, workspaceId: string): Promise<WorkspaceTask[]> {
-  const [collectionRows, enrichmentRows, radioRows, backfillRows] = await Promise.all([
-    safeAll<SourceCollectionTaskRow>(
+const sourceCollectionTaskAdapter: TaskQueueAdapter = {
+  kind: 'source-collection',
+  queueName: 'source_collection_jobs',
+  async loadActiveTasks(db, workspaceId) {
+    const rows = await safeAll<SourceCollectionTaskRow>(
       db
         .prepare(
           `
@@ -121,8 +140,28 @@ export async function loadWorkspaceTasks(db: D1Database, workspaceId: string): P
         )
         .bind(workspaceId)
         .all<SourceCollectionTaskRow>(),
-    ),
-    safeAll<ProfileEnrichmentTaskRow>(
+    )
+
+    return rows.map((row) => ({
+      createdAt: row.createdAt,
+      href: sourceHref(row.sourceId),
+      id: row.id,
+      kind: 'source-collection' as const,
+      queue: { name: 'source_collection_jobs', recordId: row.id },
+      startedAt: row.startedAt,
+      status: activeStatus(row.status),
+      subject: row.sourceName || row.sourceId,
+      title: '内容采集',
+      updatedAt: row.updatedAt,
+    }))
+  },
+}
+
+const profileEnrichmentTaskAdapter: TaskQueueAdapter = {
+  kind: 'profile-enrichment',
+  queueName: 'enrichment_jobs',
+  async loadActiveTasks(db, workspaceId) {
+    const rows = await safeAll<ProfileEnrichmentTaskRow>(
       db
         .prepare(
           `
@@ -147,8 +186,28 @@ export async function loadWorkspaceTasks(db: D1Database, workspaceId: string): P
         )
         .bind(workspaceId)
         .all<ProfileEnrichmentTaskRow>(),
-    ),
-    safeAll<RadioTaskRow>(
+    )
+
+    return rows.map((row) => ({
+      createdAt: row.createdAt,
+      href: row.sourceType === 'x' ? sourceHref(`tw-${row.sourceValue.toLowerCase()}`) : '/sources',
+      id: row.id,
+      kind: 'profile-enrichment' as const,
+      queue: { name: 'enrichment_jobs', recordId: row.id },
+      startedAt: row.startedAt,
+      status: activeStatus(row.status),
+      subject: row.sourceType === 'x' ? `@${row.sourceValue}` : row.sourceValue,
+      title: '主页补全',
+      updatedAt: row.updatedAt,
+    }))
+  },
+}
+
+const radioTaskAdapter: TaskQueueAdapter = {
+  kind: 'radio',
+  queueName: 'radio_episodes',
+  async loadActiveTasks(db, workspaceId) {
+    const rows = await safeAll<RadioTaskRow>(
       db
         .prepare(
           `
@@ -168,8 +227,28 @@ export async function loadWorkspaceTasks(db: D1Database, workspaceId: string): P
         )
         .bind(workspaceId)
         .all<RadioTaskRow>(),
-    ),
-    safeAll<BackfillTaskRow>(
+    )
+
+    return rows.map((row) => ({
+      createdAt: row.createdAt,
+      href: '/today',
+      id: row.id,
+      kind: 'radio' as const,
+      queue: { name: 'radio_episodes', recordId: row.id },
+      startedAt: null,
+      status: activeStatus(row.status),
+      subject: row.date,
+      title: row.title || '电台生成',
+      updatedAt: row.updatedAt,
+    }))
+  },
+}
+
+const sourceBackfillTaskAdapter: TaskQueueAdapter = {
+  kind: 'source-backfill',
+  queueName: 'source_backfill_jobs',
+  async loadActiveTasks(db, workspaceId) {
+    const rows = await safeAll<BackfillTaskRow>(
       db
         .prepare(
           `
@@ -192,55 +271,37 @@ export async function loadWorkspaceTasks(db: D1Database, workspaceId: string): P
         )
         .bind(workspaceId)
         .all<BackfillTaskRow>(),
-    ),
-  ])
+    )
 
-  const tasks: WorkspaceTask[] = [
-    ...collectionRows.map((row) => ({
-      createdAt: row.createdAt,
-      href: sourceHref(row.sourceId),
-      id: row.id,
-      kind: 'source-collection' as const,
-      startedAt: row.startedAt,
-      status: activeStatus(row.status),
-      subject: row.sourceName || row.sourceId,
-      title: '内容采集',
-      updatedAt: row.updatedAt,
-    })),
-    ...enrichmentRows.map((row) => ({
-      createdAt: row.createdAt,
-      href: row.sourceType === 'x' ? sourceHref(`tw-${row.sourceValue.toLowerCase()}`) : '/sources',
-      id: row.id,
-      kind: 'profile-enrichment' as const,
-      startedAt: row.startedAt,
-      status: activeStatus(row.status),
-      subject: row.sourceType === 'x' ? `@${row.sourceValue}` : row.sourceValue,
-      title: '主页补全',
-      updatedAt: row.updatedAt,
-    })),
-    ...radioRows.map((row) => ({
-      createdAt: row.createdAt,
-      href: '/today',
-      id: row.id,
-      kind: 'radio' as const,
-      startedAt: null,
-      status: activeStatus(row.status),
-      subject: row.date,
-      title: row.title || '电台生成',
-      updatedAt: row.updatedAt,
-    })),
-    ...backfillRows.map((row) => ({
+    return rows.map((row) => ({
       createdAt: row.createdAt,
       href: sourceHref(row.sourceId),
       id: row.id,
       kind: 'source-backfill' as const,
+      queue: { name: 'source_backfill_jobs', recordId: row.id },
       startedAt: row.startedAt,
       status: activeStatus(row.status),
       subject: row.sourceName || row.sourceId,
       title: '历史回溯',
       updatedAt: row.updatedAt,
-    })),
-  ]
+    }))
+  },
+}
+
+const TASK_QUEUE_ADAPTERS: readonly TaskQueueAdapter[] = [
+  sourceCollectionTaskAdapter,
+  profileEnrichmentTaskAdapter,
+  radioTaskAdapter,
+  sourceBackfillTaskAdapter,
+]
+
+export function getTaskQueueAdapters(): readonly TaskQueueAdapter[] {
+  return TASK_QUEUE_ADAPTERS
+}
+
+export async function loadWorkspaceTasks(db: D1Database, workspaceId: string): Promise<Task[]> {
+  const taskGroups = await Promise.all(TASK_QUEUE_ADAPTERS.map((adapter) => adapter.loadActiveTasks(db, workspaceId)))
+  const tasks = taskGroups.flat()
 
   return tasks.sort((a, b) => taskUpdatedTime(b) - taskUpdatedTime(a))
 }

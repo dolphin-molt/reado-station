@@ -8,7 +8,7 @@ import type { CategoryOption } from '@/lib/categories'
 import { getSidebarData } from '@/lib/content'
 import { formatDayLabel, localizedPath, readerHomePath, switchPath, t, type Lang } from '@/lib/i18n'
 import { PLAN_LIMITS } from '@/lib/plans'
-import { loadWorkspaceTasks, type WorkspaceTask } from '@/lib/tasks'
+import { loadWorkspaceTasks, type Task } from '@/lib/tasks'
 import { getDefaultWorkspaceForUser, getWorkspaceCreditBalance, getWorkspaceSourceCount } from '@/lib/workspaces'
 import { loadUserXSubscriptionCount } from '@/lib/x-accounts'
 
@@ -104,7 +104,7 @@ export async function Header({
   let sidebarSourceCount = sourceCount
   let sidebarActiveCategory = activeCategory
   let sidebarCategories = categories
-  let activeTasks: WorkspaceTask[] = []
+  let activeTasks: Task[] = []
 
   const shouldLoadSidebarData = showSourceFilter && !sidebarDate && sidebarItemCount === 0 && sidebarSourceCount === 0 && sidebarCategories.length === 0
   const [sidebarData, session] = await Promise.all([

@@ -6,7 +6,7 @@ import { ProcessingQueueAutoRefresh } from '@/components/ui/ProcessingQueueAutoR
 import { getCurrentAuthSession } from '@/lib/auth'
 import { getD1Binding } from '@/lib/cloudflare'
 import { localizedPath, type Lang } from '@/lib/i18n'
-import { loadWorkspaceTasks, type WorkspaceTask, type WorkspaceTaskKind } from '@/lib/tasks'
+import { loadWorkspaceTasks, type Task, type TaskKind } from '@/lib/tasks'
 import { getDefaultWorkspaceForUser } from '@/lib/workspaces'
 
 function taskStatusLabel(status: string, lang: Lang): string {
@@ -14,7 +14,7 @@ function taskStatusLabel(status: string, lang: Lang): string {
   return lang === 'zh' ? '排队中' : 'Queued'
 }
 
-function taskKindLabel(kind: WorkspaceTaskKind, fallback: string, lang: Lang): string {
+function taskKindLabel(kind: TaskKind, fallback: string, lang: Lang): string {
   if (lang === 'zh') return fallback
   if (kind === 'source-collection') return 'Content collection'
   if (kind === 'profile-enrichment') return 'Profile enrichment'
@@ -31,7 +31,7 @@ function formatTaskTime(value: string, lang: Lang): string {
   })
 }
 
-function TaskItem({ lang, task }: { lang: Lang; task: WorkspaceTask }) {
+function TaskItem({ lang, task }: { lang: Lang; task: Task }) {
   return (
     <article className="task-list__item">
       <div>
