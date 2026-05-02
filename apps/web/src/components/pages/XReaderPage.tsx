@@ -1,6 +1,7 @@
 import Link from 'next/link'
 
 import { NewsCard } from '@/components/news/NewsCard'
+import { AppToast } from '@/components/ui/AppToast'
 import { ProcessingQueueAutoRefresh } from '@/components/ui/ProcessingQueueAutoRefresh'
 import { getCurrentAuthSession } from '@/lib/auth'
 import { getD1Binding } from '@/lib/cloudflare'
@@ -75,11 +76,21 @@ export async function XReaderPage({ account = null, lang, subscribed = false }: 
     ? processingSubscriptions.find((entry) => entry.account.username.toLowerCase() === account.toLowerCase())
     : null
   const shouldAutoRefresh = processingSubscriptions.some((entry) => entry.status !== 'failed')
+  const subscriptionMessage = subscribed && selectedProcessing
+    ? (lang === 'zh'
+        ? `已加入处理队列：@${selectedProcessing.account.username}。处理完成后会出现在 X 账号列表。`
+        : `Added to processing queue: @${selectedProcessing.account.username}. It will appear in X accounts when processing finishes.`)
+    : subscribed && data.activeAccount
+      ? (lang === 'zh'
+          ? `处理完成：@${data.activeAccount.account.username}，可以查看了。`
+          : `Processing complete: @${data.activeAccount.account.username}. It is ready to read.`)
+      : ''
 
   return (
     <main className="container section-stack">
       <section className="panel x-reader">
         {shouldAutoRefresh && <ProcessingQueueAutoRefresh />}
+        {subscriptionMessage && <AppToast message={subscriptionMessage} />}
         <div className="panel__header">
           <div>
             <h2>{t(lang, 'xReader.title')}</h2>
@@ -88,22 +99,6 @@ export async function XReaderPage({ account = null, lang, subscribed = false }: 
             {t(lang, 'xReader.addAccount')}
           </Link>
         </div>
-
-        {subscribed && selectedProcessing && (
-          <div className="source-intake__notice">
-            {lang === 'zh'
-              ? `已加入处理队列：@${selectedProcessing.account.username}。处理完成后会出现在 X 账号列表。`
-              : `Added to processing queue: @${selectedProcessing.account.username}. It will appear in X accounts when processing finishes.`}
-          </div>
-        )}
-
-        {subscribed && !selectedProcessing && data.activeAccount && (
-          <div className="source-intake__notice">
-            {lang === 'zh'
-              ? `处理完成：@${data.activeAccount.account.username}，可以查看了。`
-              : `Processing complete: @${data.activeAccount.account.username}. It is ready to read.`}
-          </div>
-        )}
 
         {data.subscriptions.length > 0 ? (
           <div className="x-reader__layout">

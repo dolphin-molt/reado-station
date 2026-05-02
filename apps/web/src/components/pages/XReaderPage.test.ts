@@ -77,4 +77,14 @@ describe('XReaderPage', () => {
     expect(html).not.toContain('选择你订阅的账号')
     expect(html).not.toContain('订阅账号')
   })
+
+  it('shows subscription result feedback as a toast instead of inline content', async () => {
+    const element = await XReaderPage({ account: 'elonmusk', lang: 'zh', subscribed: true })
+    const html = renderToStaticMarkup(createElement(() => element))
+
+    expect(html).toContain('已加入处理队列：@elonmusk')
+    expect(html).toContain('class="app-toast"')
+    expect(html).toContain('role="status"')
+    expect(html).not.toContain('source-intake__notice')
+  })
 })
