@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest'
 import { vi } from 'vitest'
 
 const mocks = vi.hoisted(() => ({
+  enqueueProfileEnrichmentJob: vi.fn(),
   ensureSourceCollectionJob: vi.fn(),
   getWorkspaceCreditBalance: vi.fn(),
   getWorkspaceSourceCount: vi.fn(),
@@ -10,6 +11,9 @@ const mocks = vi.hoisted(() => ({
 }))
 
 vi.mock('server-only', () => ({}))
+vi.mock('@/lib/source-enrichment', () => ({
+  enqueueProfileEnrichmentJob: mocks.enqueueProfileEnrichmentJob,
+}))
 vi.mock('@/lib/source-collections', () => ({
   collectionWindowForHours: vi.fn(() => ({ windowEnd: '2026-05-02T00:00:00.000Z', windowStart: '2026-05-01T00:00:00.000Z' })),
   ensureSourceCollectionJob: mocks.ensureSourceCollectionJob,
@@ -29,14 +33,15 @@ vi.mock('@/lib/x-accounts', async () => {
 import { SubscribeWorkspaceSourceError, sourceErrorCode, subscribeWorkspaceSource } from './workspace-sources'
 
 describe('workspace source subscription errors', () => {
-  it('returns an explicit error code for ambiguous preset X names', () => {
-    expect(sourceErrorCode(new SubscribeWorkspaceSourceError('ambiguous-handle', 'Choose the preset handle'))).toBe('ambiguous-handle')
+  it('returns explicit subscription error codes', () => {
+    expect(sourceErrorCode(new SubscribeWorkspaceSourceError('limit-sources', 'Plan limit'))).toBe('limit-sources')
   })
 
-  it('blocks preset company names before subscribing the wrong exact handle', async () => {
+  it('subscribes exact X handles and enqueues profile enrichment', async () => {
     mocks.getWorkspaceCreditBalance.mockResolvedValue(10)
     mocks.getWorkspaceSourceCount.mockResolvedValue(0)
     mocks.ensureSourceCollectionJob.mockResolvedValue({ decision: { status: 'queued' }, job: { id: 'job-1' } })
+    mocks.enqueueProfileEnrichmentJob.mockResolvedValue({ id: 'enrich-1', status: 'queued' })
     mocks.resolveXAccount.mockResolvedValue({
       description: '',
       fetchedAt: '2026-05-02T00:00:00.000Z',
@@ -76,7 +81,12 @@ describe('workspace source subscription errors', () => {
         type: 'personal',
         updatedAt: '2026-05-02T00:00:00.000Z',
       },
-    })).rejects.toMatchObject({ code: 'ambiguous-handle' })
-    expect(mocks.resolveXAccount).not.toHaveBeenCalled()
+    })).resolves.toMatchObject({ sourceId: 'tw-anthropic' })
+    expect(mocks.resolveXAccount).toHaveBeenCalledWith(db, 'Anthropic')
+    expect(mocks.enqueueProfileEnrichmentJob).toHaveBeenCalledWith(db, {
+      jobType: 'discover_profile_assets',
+      sourceType: 'x',
+      sourceValue: 'Anthropic',
+    })
   })
 })

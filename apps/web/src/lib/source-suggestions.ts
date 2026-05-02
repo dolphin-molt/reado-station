@@ -40,16 +40,3 @@ export const suggestedXAccounts: SuggestedXAccount[] = [
     },
   },
 ]
-
-function bareXInput(input: string): string {
-  return input.trim().replace(/^@+/, '').trim()
-}
-
-export function findSuggestedXNameConflict(input: string): SuggestedXAccount | null {
-  const value = bareXInput(input)
-  if (!value) return null
-
-  const match = suggestedXAccounts.find((account) => account.name.toLowerCase() === value.toLowerCase())
-  if (!match) return null
-  return match.username.toLowerCase() === value.toLowerCase() ? null : match
-}

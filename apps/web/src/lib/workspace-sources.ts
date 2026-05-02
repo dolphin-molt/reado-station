@@ -1,8 +1,8 @@
 import 'server-only'
 
 import { PLAN_LIMITS, normalizeBackfillHours, normalizeSourceType, normalizeVisibility, type SourceType, type SourceVisibility } from '@/lib/plans'
+import { enqueueProfileEnrichmentJob } from '@/lib/source-enrichment'
 import { collectionWindowForHours, ensureSourceCollectionJob } from '@/lib/source-collections'
-import { findSuggestedXNameConflict } from '@/lib/source-suggestions'
 import { getWorkspaceCreditBalance, getWorkspaceSourceCount, type Workspace } from '@/lib/workspaces'
 import { DEFAULT_X_COLLECTION_PREFERENCES, normalizeXCollectionPreferences } from '@/lib/x-content-preferences'
 import { normalizeXUsername, resolveXAccount } from '@/lib/x-accounts'
@@ -12,7 +12,6 @@ export type SubscribeWorkspaceSourceErrorCode =
   | 'limit-sources'
   | 'limit-backfill'
   | 'insufficient-credits'
-  | 'ambiguous-handle'
   | 'unsupported'
 
 export class SubscribeWorkspaceSourceError extends Error {
@@ -174,13 +173,6 @@ export async function subscribeWorkspaceSource(db: D1Database, input: SubscribeI
   const sourceType = normalizeSourceType(input.type)
   const visibility = normalizeVisibility(input.visibility)
   const backfillHours = normalizeBackfillHours(input.backfillHours)
-  const suggestedConflict = sourceType === 'x' ? findSuggestedXNameConflict(input.value) : null
-  if (suggestedConflict) {
-    throw new SubscribeWorkspaceSourceError(
-      'ambiguous-handle',
-      `${input.value} matches ${suggestedConflict.name}; choose @${suggestedConflict.username} from the preset card or enter a full profile URL.`,
-    )
-  }
   const collectionPreferences = sourceType === 'x'
     ? normalizeXCollectionPreferences(input.collectionPreferences ?? DEFAULT_X_COLLECTION_PREFERENCES)
     : {}
@@ -245,6 +237,17 @@ export async function subscribeWorkspaceSource(db: D1Database, input: SubscribeI
   }
 
   await db.batch(batch)
+  const sourceUsername = 'username' in source && typeof source.username === 'string' ? source.username : null
+  if (sourceUsername) {
+    await enqueueProfileEnrichmentJob(db, {
+      jobType: 'discover_profile_assets',
+      sourceType: 'x',
+      sourceValue: sourceUsername,
+    }).catch((error) => {
+      if (error instanceof Error && error.message.includes('enrichment_jobs')) return null
+      throw error
+    })
+  }
 
   return {
     sourceId: source.id,
