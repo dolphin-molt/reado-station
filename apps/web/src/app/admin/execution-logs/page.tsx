@@ -3,8 +3,9 @@ import { redirect } from 'next/navigation'
 
 import { AdminChrome } from '@/components/admin/AdminChrome'
 import { ExecutionLogsPage } from '@/components/pages/ExecutionLogsPage'
-import { getCurrentAuthSession, isAdminSession } from '@/lib/auth'
+import { getCurrentAuthSession } from '@/lib/auth'
 import { getD1Database } from '@/lib/cloudflare'
+import { canViewExecutionLogs } from '@/lib/developer-access'
 import { listExecutionLogs } from '@/lib/execution-logs'
 
 export const dynamic = 'force-dynamic'
@@ -24,7 +25,7 @@ function paramValue(value: string | string[] | undefined): string {
 export default async function AdminExecutionLogsRoute({ searchParams }: ExecutionLogsRouteProps) {
   const session = await getCurrentAuthSession()
   if (!session) redirect('/login?next=/admin/execution-logs')
-  if (!isAdminSession(session)) redirect('/')
+  if (!canViewExecutionLogs(session)) redirect('/')
 
   const params = await searchParams
   const filters = {
