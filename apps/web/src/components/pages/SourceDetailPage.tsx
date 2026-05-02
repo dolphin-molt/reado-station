@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
+import { ExternalBlankLink } from '@/components/common/ExternalBlankLink'
+import { InlineYouTubePlayer } from '@/components/common/InlineYouTubePlayer'
 import { Footer } from '@/components/layout/Footer'
 import { Header } from '@/components/layout/Header'
 import { getCurrentAuthSession } from '@/lib/auth'
@@ -40,6 +42,10 @@ function profileAssetGroupTitle(kind: string, lang: Lang): string {
   if (kind === 'github') return lang === 'zh' ? 'GitHub 项目' : 'GitHub projects'
   if (kind === 'youtube') return 'YouTube'
   return profileAssetKindLabel(kind, lang)
+}
+
+function isYouTubeVideoAsset(asset: { kind: string; thumbnailUrl?: string; url: string }): boolean {
+  return asset.kind === 'youtube' && Boolean(asset.thumbnailUrl) && (asset.url.includes('youtube.com/watch') || asset.url.includes('youtu.be/'))
 }
 
 export async function SourceDetailPage({ lang, sourceId }: { lang: Lang; sourceId: string }) {
@@ -135,14 +141,25 @@ export async function SourceDetailPage({ lang, sourceId }: { lang: Lang; sourceI
                     <h3>{profileAssetGroupTitle(kind, lang)}</h3>
                     <div>
                       {assets.map((asset) => (
-                        <a className="channel-profile__media-link" href={asset.url} key={asset.url} rel="noreferrer" target="_blank">
-                          <span>{asset.meta ?? profileAssetKindLabel(asset.kind, lang)}</span>
-                          <strong>{asset.title}</strong>
-                          <ul className="channel-profile__extension-metrics">
-                            <li>{profileAssetKindLabel(asset.kind, lang)}</li>
-                          </ul>
-                          {asset.summary && <p>{asset.summary}</p>}
-                        </a>
+                        isYouTubeVideoAsset(asset) ? (
+                          <article className="channel-profile__video-card" key={asset.url}>
+                            <InlineYouTubePlayer className="channel-profile__video-cover" thumbnailUrl={asset.thumbnailUrl ?? ''} title={asset.title} url={asset.url} />
+                            <ExternalBlankLink className="channel-profile__video-meta" href={asset.url}>
+                              <span>{asset.meta ?? profileAssetKindLabel(asset.kind, lang)}</span>
+                              <strong>{asset.title}</strong>
+                              {asset.summary && <p>{asset.summary}</p>}
+                            </ExternalBlankLink>
+                          </article>
+                        ) : (
+                          <a className="channel-profile__media-link" href={asset.url} key={asset.url} rel="noreferrer" target="_blank">
+                            <span>{asset.meta ?? profileAssetKindLabel(asset.kind, lang)}</span>
+                            <strong>{asset.title}</strong>
+                            <ul className="channel-profile__extension-metrics">
+                              <li>{profileAssetKindLabel(asset.kind, lang)}</li>
+                            </ul>
+                            {asset.summary && <p>{asset.summary}</p>}
+                          </a>
+                        )
                       ))}
                     </div>
                   </section>

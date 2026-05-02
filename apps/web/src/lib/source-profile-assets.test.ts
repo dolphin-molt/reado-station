@@ -11,6 +11,13 @@ describe('source profile asset provider', () => {
         url: 'https://github.com/example/model-filled',
         summary: 'Discovered by enrichment.',
       },
+      {
+        kind: 'youtube',
+        title: 'model-filled video',
+        url: 'https://www.youtube.com/watch?v=abc123',
+        summary: 'Discovered video.',
+        thumbnailUrl: 'https://i.ytimg.com/vi/abc123/hqdefault.jpg',
+      },
     ])
     const db = {
       prepare: () => ({
@@ -26,6 +33,13 @@ describe('source profile asset provider', () => {
         title: 'model-filled repo',
         url: 'https://github.com/example/model-filled',
         summary: 'Discovered by enrichment.',
+      },
+      {
+        kind: 'youtube',
+        title: 'model-filled video',
+        url: 'https://www.youtube.com/watch?v=abc123',
+        summary: 'Discovered video.',
+        thumbnailUrl: 'https://i.ytimg.com/vi/abc123/hqdefault.jpg',
       },
     ])
   })
@@ -44,5 +58,7 @@ describe('source profile asset provider', () => {
     expect(assets.map((asset) => asset.url)).toContain('https://www.anthropic.com')
     expect(assets.map((asset) => asset.url)).toContain('https://github.com/anthropics')
     expect(assets.map((asset) => asset.url)).toContain('https://www.youtube.com/@anthropic-ai')
+    expect(assets.map((asset) => asset.url)).toContain('https://www.youtube.com/watch?v=ysPbXH0LpIE')
+    expect(assets.find((asset) => asset.url === 'https://www.youtube.com/watch?v=ysPbXH0LpIE')?.thumbnailUrl).toContain('ytimg.com')
   })
 })

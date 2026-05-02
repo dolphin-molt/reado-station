@@ -69,6 +69,13 @@ vi.mock('@/lib/my-sources', () => ({
         url: 'https://www.youtube.com/@anthropic-ai',
         summary: 'Official Anthropic video channel.',
       },
+      {
+        kind: 'youtube',
+        title: 'Prompting 101 | Code w/ Claude',
+        url: 'https://www.youtube.com/watch?v=ysPbXH0LpIE',
+        summary: 'Anthropic Code w/ Claude session.',
+        thumbnailUrl: 'https://i.ytimg.com/vi/ysPbXH0LpIE/hqdefault.jpg',
+      },
     ],
     xAccount: {
       username: 'OpenAI',
@@ -114,5 +121,8 @@ describe('SourceDetailPage', () => {
     expect(html).toContain('href="https://www.anthropic.com"')
     expect(html).toContain('href="https://github.com/anthropics"')
     expect(html).toContain('href="https://www.youtube.com/@anthropic-ai"')
+    expect(html).toContain('class="channel-profile__video-card"')
+    expect(html).toContain('播放 Prompting 101 | Code w/ Claude')
+    expect(html).toContain('https://i.ytimg.com/vi/ysPbXH0LpIE/hqdefault.jpg')
   })
 })

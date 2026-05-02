@@ -4,6 +4,7 @@ export interface SourceProfileAsset {
   url: string
   summary: string
   meta?: string
+  thumbnailUrl?: string
 }
 
 interface SourceProfileAssetRow {
@@ -37,6 +38,22 @@ const SEED_X_PROFILE_ASSETS: Record<string, SourceProfileAsset[]> = {
       url: 'https://www.youtube.com/@anthropic-ai',
       meta: 'Video channel',
       summary: 'Anthropic video channel for Claude demos, product walkthroughs, and research or safety talks.',
+    },
+    {
+      kind: 'youtube',
+      title: 'Prompting 101 | Code w/ Claude',
+      url: 'https://www.youtube.com/watch?v=ysPbXH0LpIE',
+      meta: 'Code w/ Claude',
+      thumbnailUrl: 'https://i.ytimg.com/vi/ysPbXH0LpIE/hqdefault.jpg',
+      summary: 'Anthropic session on prompt design patterns for Claude-powered coding workflows.',
+    },
+    {
+      kind: 'youtube',
+      title: 'Claude Code & the evolution of agentic coding',
+      url: 'https://www.youtube.com/watch?v=Lue8K2jqfKk',
+      meta: 'Code w/ Claude',
+      thumbnailUrl: 'https://i.ytimg.com/vi/Lue8K2jqfKk/hqdefault.jpg',
+      summary: 'Boris Cherny discusses Claude Code and agentic coding workflows.',
     },
   ],
   openai: [
@@ -87,6 +104,7 @@ function normalizeProfileAssets(value: unknown): SourceProfileAsset[] {
       url: asset.url,
       summary: typeof asset.summary === 'string' ? asset.summary : '',
       meta: typeof asset.meta === 'string' ? asset.meta : undefined,
+      thumbnailUrl: typeof asset.thumbnailUrl === 'string' ? asset.thumbnailUrl : undefined,
     }]
   })
 }
