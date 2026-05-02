@@ -36,7 +36,30 @@ interface ProfileEnrichmentRunOptions extends ProfileAssetDiscoveryOptions {
   env?: ReadoCloudflareEnv | null
 }
 
+export interface ProfileEnrichmentProviderStatus {
+  missing: string[]
+  model: {
+    configured: boolean
+    endpointConfigured: boolean
+    model: string | null
+    provider: 'custom' | 'openai-compatible'
+    tokenConfigured: boolean
+  }
+  ready: boolean
+  search: {
+    configured: boolean
+    provider: 'custom' | 'brave'
+  }
+}
+
 type ProfileEnrichmentRunResult = NonNullable<Awaited<ReturnType<typeof runOneProfileEnrichmentJob>>>
+
+class ProfileEnrichmentConfigurationError extends Error {
+  constructor(public providerStatus: ProfileEnrichmentProviderStatus) {
+    super(`Missing profile enrichment providers: ${providerStatus.missing.join(', ')}`)
+    this.name = 'ProfileEnrichmentConfigurationError'
+  }
+}
 
 export async function enqueueProfileEnrichmentJob(
   db: D1Database,
@@ -146,22 +169,73 @@ function profileModelName(env: ReadoCloudflareEnv | null | undefined): string | 
     ?? null
 }
 
-async function discoverProfileAssets(db: D1Database, job: EnrichmentJobRow, options: ProfileEnrichmentRunOptions): Promise<SourceProfileAsset[]> {
-  if (job.jobType !== 'discover_profile_assets') return []
+function resolveProfileEnrichmentProviders(
+  env: ReadoCloudflareEnv | null | undefined,
+  options: ProfileEnrichmentRunOptions,
+): {
+  assetSelector: NonNullable<ProfileAssetDiscoveryOptions['assetSelector']> | null
+  providerStatus: ProfileEnrichmentProviderStatus
+  searchProvider: NonNullable<ProfileAssetDiscoveryOptions['searchProvider']> | null
+} {
+  const customSearchProvider = options.searchProvider !== undefined && options.searchProvider !== null
+  const customAssetSelector = options.assetSelector !== undefined && options.assetSelector !== null
+  const searchApiKey = options.searchProvider === undefined ? braveSearchApiKey(env) : null
+  const modelEndpoint = options.assetSelector === undefined ? profileModelEndpoint(env) : null
+  const modelToken = options.assetSelector === undefined ? profileModelToken(env) : null
+  const modelName = options.assetSelector === undefined ? profileModelName(env) : null
+  const searchProvider = options.searchProvider === undefined
+    ? createBraveSearchProvider({ apiKey: searchApiKey, fetcher: options.fetcher })
+    : options.searchProvider
+  const assetSelector = options.assetSelector === undefined
+    ? createOpenAICompatibleProfileAssetSelector({
+      apiKey: modelToken,
+      endpoint: modelEndpoint,
+      fetcher: options.fetcher,
+      model: modelName,
+    })
+    : options.assetSelector
+  const missing: string[] = []
+  if (!searchProvider) missing.push('READO_BRAVE_SEARCH_API_KEY or BRAVE_SEARCH_API_KEY')
+  if (!assetSelector) {
+    if (customAssetSelector) {
+      missing.push('profile asset selector')
+    } else {
+      if (!modelEndpoint) missing.push('READO_PROFILE_ENRICHMENT_MODEL_ENDPOINT or CLOUDFLARE_AI_GATEWAY_URL')
+      if (!modelToken) missing.push('READO_PROFILE_ENRICHMENT_MODEL_TOKEN or CLOUDFLARE_AI_GATEWAY_TOKEN')
+      if (!modelName) missing.push('READO_PROFILE_ENRICHMENT_MODEL or LLM_MODEL')
+    }
+  }
+
+  const providerStatus: ProfileEnrichmentProviderStatus = {
+    missing,
+    model: {
+      configured: Boolean(assetSelector),
+      endpointConfigured: customAssetSelector || Boolean(modelEndpoint),
+      model: customAssetSelector ? 'custom' : modelName,
+      provider: customAssetSelector ? 'custom' : 'openai-compatible',
+      tokenConfigured: customAssetSelector || Boolean(modelToken),
+    },
+    ready: missing.length === 0,
+    search: {
+      configured: Boolean(searchProvider),
+      provider: customSearchProvider ? 'custom' : 'brave',
+    },
+  }
+
+  return { assetSelector, providerStatus, searchProvider }
+}
+
+async function discoverProfileAssets(db: D1Database, job: EnrichmentJobRow, options: ProfileEnrichmentRunOptions): Promise<{
+  assets: SourceProfileAsset[]
+  providerStatus: ProfileEnrichmentProviderStatus | null
+}> {
+  if (job.jobType !== 'discover_profile_assets') return { assets: [], providerStatus: null }
   if (job.sourceType === 'x') {
     const profile = await loadXAccountProfile(db, job.sourceValue)
-    if (!profile) return presetXProfileAssets(job.sourceValue)
+    if (!profile) return { assets: presetXProfileAssets(job.sourceValue), providerStatus: null }
     const env = options.env ?? await getCloudflareEnv().catch(() => null)
-    const searchProvider = options.searchProvider ?? createBraveSearchProvider({
-      apiKey: braveSearchApiKey(env),
-      fetcher: options.fetcher,
-    })
-    const assetSelector = options.assetSelector ?? createOpenAICompatibleProfileAssetSelector({
-      apiKey: profileModelToken(env),
-      endpoint: profileModelEndpoint(env),
-      fetcher: options.fetcher,
-      model: profileModelName(env),
-    })
+    const { assetSelector, providerStatus, searchProvider } = resolveProfileEnrichmentProviders(env, options)
+    if (!providerStatus.ready) throw new ProfileEnrichmentConfigurationError(providerStatus)
     const discovered = await discoverXProfileAssets({
       description: profile.description,
       name: profile.name,
@@ -172,9 +246,9 @@ async function discoverProfileAssets(db: D1Database, job: EnrichmentJobRow, opti
       fetcher: options.fetcher,
       searchProvider,
     })
-    return discovered.length > 0 ? discovered : presetXProfileAssets(job.sourceValue)
+    return { assets: discovered, providerStatus }
   }
-  return []
+  return { assets: [], providerStatus: null }
 }
 
 async function upsertChannelProfile(
@@ -219,26 +293,27 @@ async function upsertChannelProfile(
 export async function runOneProfileEnrichmentJob(
   db: D1Database,
   options: ProfileEnrichmentRunOptions = {},
-): Promise<{ jobId: string; status: string; assetCount: number; error?: string } | null> {
+): Promise<{ jobId: string; status: string; assetCount: number; error?: string; providerStatus?: ProfileEnrichmentProviderStatus | null } | null> {
   const job = await claimQueuedEnrichmentJob(db)
   if (!job) return null
   const now = new Date().toISOString()
 
   try {
-    const assets = await discoverProfileAssets(db, job, options)
+    const { assets, providerStatus } = await discoverProfileAssets(db, job, options)
     await upsertChannelProfile(db, job, assets)
     await db
       .prepare("UPDATE enrichment_jobs SET status = 'completed', output_json = ?, completed_at = ?, updated_at = ? WHERE id = ?")
-      .bind(JSON.stringify({ assets }), now, now, job.id)
+      .bind(JSON.stringify({ assets, providerStatus }), now, now, job.id)
       .run()
-    return { jobId: job.id, status: 'completed', assetCount: assets.length }
+    return { jobId: job.id, status: 'completed', assetCount: assets.length, providerStatus }
   } catch (error) {
     const message = error instanceof Error ? error.message : 'Unknown enrichment error'
+    const providerStatus = error instanceof ProfileEnrichmentConfigurationError ? error.providerStatus : null
     await db
-      .prepare("UPDATE enrichment_jobs SET status = 'failed', error = ?, completed_at = ?, updated_at = ? WHERE id = ?")
-      .bind(message, now, now, job.id)
+      .prepare("UPDATE enrichment_jobs SET status = 'failed', error = ?, output_json = ?, completed_at = ?, updated_at = ? WHERE id = ?")
+      .bind(message, JSON.stringify({ assets: [], providerStatus }), now, now, job.id)
       .run()
-    return { jobId: job.id, status: 'failed', assetCount: 0, error: message }
+    return { jobId: job.id, status: 'failed', assetCount: 0, error: message, providerStatus }
   }
 }
 

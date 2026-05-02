@@ -61,4 +61,16 @@ describe('source profile asset provider', () => {
     expect(assets.map((asset) => asset.url)).toContain('https://www.youtube.com/watch?v=ysPbXH0LpIE')
     expect(assets.find((asset) => asset.url === 'https://www.youtube.com/watch?v=ysPbXH0LpIE')?.thumbnailUrl).toContain('ytimg.com')
   })
+
+  it('treats an empty enrichment result as authoritative instead of falling back to seed data', async () => {
+    const db = {
+      prepare: () => ({
+        bind: () => ({
+          first: async () => ({ featuredJson: '[]' }),
+        }),
+      }),
+    } as unknown as D1Database
+
+    await expect(loadSourceProfileAssets(db, { sourceType: 'x', sourceValue: 'AnthropicAI' })).resolves.toEqual([])
+  })
 })

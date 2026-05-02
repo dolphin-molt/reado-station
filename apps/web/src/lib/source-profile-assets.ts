@@ -136,7 +136,7 @@ export async function loadSourceProfileAssets(db: D1Database, input: LoadSourceP
     })
 
   const filledAssets = parseProfileAssetsJson(row?.featuredJson)
-  if (filledAssets.length > 0) return filledAssets
+  if (row?.featuredJson) return filledAssets
 
   return input.sourceType === 'x' ? presetXProfileAssets(input.sourceValue) : []
 }

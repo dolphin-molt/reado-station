@@ -98,11 +98,148 @@ describe('profile enrichment jobs', () => {
         select: async ({ candidates }) => candidates,
       },
       fetcher,
+      searchProvider: {
+        search: async () => [],
+      },
     })
 
     expect(result).toMatchObject({ assetCount: 4, jobId: 'job-1', status: 'completed' })
     expect(writes.some((statement) => statement.sql.includes('INSERT INTO channel_profiles'))).toBe(true)
     expect(writes.some((statement) => statement.sql.includes('featured_json'))).toBe(true)
+  })
+
+  it('fails a profile enrichment job when search or model providers are missing', async () => {
+    const writes: Array<{ sql: string; bindings: unknown[] }> = []
+    const db = {
+      prepare: (sql: string) => ({
+        first: async () => {
+          if (sql.includes('FROM enrichment_jobs')) {
+            return {
+              id: 'job-1',
+              jobType: 'discover_profile_assets',
+              sourceType: 'x',
+              sourceValue: 'ElonMusk',
+            }
+          }
+          return null
+        },
+        bind: (...bindings: unknown[]) => {
+          writes.push({ sql, bindings })
+          return {
+            first: async () => {
+              if (sql.includes('FROM enrichment_jobs')) {
+                return {
+                  id: 'job-1',
+                  jobType: 'discover_profile_assets',
+                  sourceType: 'x',
+                  sourceValue: 'ElonMusk',
+                }
+              }
+              if (sql.includes('FROM x_accounts')) {
+                return {
+                  description: 'https://t.co/dDtDyVssfm',
+                  name: 'Elon Musk',
+                  profileImageUrl: '',
+                  username: 'elonmusk',
+                  verified: 1,
+                }
+              }
+              return null
+            },
+            run: async () => {},
+          }
+        },
+      }),
+    } as unknown as D1Database
+
+    const result = await runOneProfileEnrichmentJob(db, {
+      assetSelector: null,
+      env: {},
+      searchProvider: null,
+    })
+    const providerStatus = (result as { providerStatus?: { ready?: boolean; missing?: string[] } } | null)?.providerStatus
+
+    expect(result).toMatchObject({ assetCount: 0, jobId: 'job-1', status: 'failed' })
+    expect(result?.error).toContain('Missing profile enrichment providers')
+    expect(providerStatus?.ready).toBe(false)
+    expect(providerStatus?.missing).toEqual(expect.arrayContaining([
+      'READO_BRAVE_SEARCH_API_KEY or BRAVE_SEARCH_API_KEY',
+      'READO_PROFILE_ENRICHMENT_MODEL_ENDPOINT or CLOUDFLARE_AI_GATEWAY_URL',
+      'READO_PROFILE_ENRICHMENT_MODEL_TOKEN or CLOUDFLARE_AI_GATEWAY_TOKEN',
+      'READO_PROFILE_ENRICHMENT_MODEL or LLM_MODEL',
+    ]))
+    const failedWrite = writes.find((statement) => statement.sql.includes("UPDATE enrichment_jobs SET status = 'failed'"))
+    const failedOutput = JSON.parse(String(failedWrite?.bindings[1] ?? '{}')) as { providerStatus?: { ready?: boolean } }
+    expect(failedOutput.providerStatus?.ready).toBe(false)
+    expect(writes.some((statement) => statement.sql.includes('INSERT INTO channel_profiles'))).toBe(false)
+    expect(failedWrite).toBeTruthy()
+  })
+
+  it('does not replace a model rejection with seeded profile assets', async () => {
+    const writes: Array<{ sql: string; bindings: unknown[] }> = []
+    const db = {
+      prepare: (sql: string) => ({
+        first: async () => {
+          if (sql.includes('FROM enrichment_jobs')) {
+            return {
+              id: 'job-1',
+              jobType: 'discover_profile_assets',
+              sourceType: 'x',
+              sourceValue: 'OpenAI',
+            }
+          }
+          return null
+        },
+        bind: (...bindings: unknown[]) => {
+          writes.push({ sql, bindings })
+          return {
+            first: async () => {
+              if (sql.includes('FROM enrichment_jobs')) {
+                return {
+                  id: 'job-1',
+                  jobType: 'discover_profile_assets',
+                  sourceType: 'x',
+                  sourceValue: 'OpenAI',
+                }
+              }
+              if (sql.includes('FROM x_accounts')) {
+                return {
+                  description: 'OpenAI mission text.',
+                  name: 'OpenAI',
+                  profileImageUrl: '',
+                  username: 'OpenAI',
+                  verified: 1,
+                }
+              }
+              return null
+            },
+            run: async () => {},
+          }
+        },
+      }),
+    } as unknown as D1Database
+
+    const result = await runOneProfileEnrichmentJob(db, {
+      assetSelector: {
+        select: async () => [],
+      },
+      fetcher: async (input) => {
+        const url = input.toString()
+        if (url === 'https://openai.com/') return new Response('<title>OpenAI</title>', { status: 200 })
+        if (url.startsWith('https://api.github.com/search/users')) return new Response(JSON.stringify({ items: [] }), { status: 200 })
+        if (url === 'https://www.youtube.com/@openai') return new Response('', { status: 404 })
+        if (url === 'https://www.youtube.com/@openai-ai') return new Response('', { status: 404 })
+        return new Response('', { status: 404 })
+      },
+      searchProvider: {
+        search: async () => [{ title: 'OpenAI', url: 'https://openai.com/' }],
+      },
+    })
+    const profileWrite = writes.find((statement) => statement.sql.includes('INSERT INTO channel_profiles'))
+    const featuredJson = profileWrite?.bindings[7]
+
+    expect(result).toMatchObject({ assetCount: 0, jobId: 'job-1', status: 'completed' })
+    expect(featuredJson).toBe('[]')
   })
 
   it('processes queued enrichment jobs until the batch limit or empty queue', async () => {
