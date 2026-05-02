@@ -50,6 +50,26 @@ vi.mock('@/lib/my-sources', () => ({
     latestWindowEnd: null,
     latestCollectionStatus: null,
     latestFailureReason: null,
+    profileAssets: [
+      {
+        kind: 'website',
+        title: 'Anthropic',
+        url: 'https://www.anthropic.com',
+        summary: 'Official Anthropic website.',
+      },
+      {
+        kind: 'github',
+        title: 'anthropics',
+        url: 'https://github.com/anthropics',
+        summary: 'Official Anthropic GitHub organization.',
+      },
+      {
+        kind: 'youtube',
+        title: 'Anthropic YouTube',
+        url: 'https://www.youtube.com/@anthropic-ai',
+        summary: 'Official Anthropic video channel.',
+      },
+    ],
     xAccount: {
       username: 'OpenAI',
       name: 'OpenAI',
@@ -78,5 +98,15 @@ describe('SourceDetailPage', () => {
     expect(html).not.toContain('采集状态')
     expect(html).not.toContain('采集规则')
     expect(html).not.toContain('重新采集')
+  })
+
+  it('renders profile assets for subscribed X accounts', async () => {
+    const element = await SourceDetailPage({ lang: 'zh', sourceId: 'tw-anthropicai' })
+    const html = renderToStaticMarkup(createElement(() => element))
+
+    expect(html).toContain('相关资产')
+    expect(html).toContain('href="https://www.anthropic.com"')
+    expect(html).toContain('href="https://github.com/anthropics"')
+    expect(html).toContain('href="https://www.youtube.com/@anthropic-ai"')
   })
 })

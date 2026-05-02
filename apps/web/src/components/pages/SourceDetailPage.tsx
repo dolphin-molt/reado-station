@@ -29,6 +29,13 @@ function XVerifiedMark({ lang }: { lang: Lang }) {
   )
 }
 
+function profileAssetKindLabel(kind: string, lang: Lang): string {
+  if (kind === 'website') return lang === 'zh' ? '官网' : 'Website'
+  if (kind === 'github') return 'GitHub'
+  if (kind === 'youtube') return 'YouTube'
+  return kind
+}
+
 export async function SourceDetailPage({ lang, sourceId }: { lang: Lang; sourceId: string }) {
   const session = await getCurrentAuthSession()
   const loginPath = `${localizedPath(lang, 'login')}?next=${encodeURIComponent(`${localizedPath(lang, 'sources')}/${sourceId}`)}`
@@ -95,6 +102,25 @@ export async function SourceDetailPage({ lang, sourceId }: { lang: Lang; sourceI
                     <a href={xUrl} rel="noreferrer" target="_blank">x.com/{username}</a>
                   </div>
                 </div>
+              </section>
+            )}
+            {source.profileAssets.length > 0 && (
+              <section className="channel-profile__extensions source-profile-assets">
+                <section className="channel-profile__extension-group">
+                  <h3>{lang === 'zh' ? '相关资产' : 'Related assets'}</h3>
+                  <div>
+                    {source.profileAssets.map((asset) => (
+                      <a className="channel-profile__media-link" href={asset.url} key={asset.url} rel="noreferrer" target="_blank">
+                        <span>{asset.meta ?? profileAssetKindLabel(asset.kind, lang)}</span>
+                        <strong>{asset.title}</strong>
+                        <ul className="channel-profile__extension-metrics">
+                          <li>{profileAssetKindLabel(asset.kind, lang)}</li>
+                        </ul>
+                        {asset.summary && <p>{asset.summary}</p>}
+                      </a>
+                    ))}
+                  </div>
+                </section>
               </section>
             )}
           </section>
