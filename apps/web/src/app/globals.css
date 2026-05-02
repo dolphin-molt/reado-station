@@ -1154,6 +1154,45 @@ p {
   padding: 0.55rem 0.7rem;
 }
 
+.app-toast {
+  animation: app-toast-in 160ms ease-out;
+  background: rgba(31, 29, 25, 0.94);
+  border: 1px solid rgba(255, 248, 237, 0.18);
+  border-radius: 8px;
+  box-shadow: 0 14px 36px rgba(31, 29, 25, 0.22);
+  color: #fff8ed;
+  font-family: var(--font-ui);
+  font-size: 0.92rem;
+  line-height: 1.45;
+  max-width: min(380px, calc(100vw - 32px));
+  padding: 0.72rem 0.9rem;
+  pointer-events: none;
+  position: fixed;
+  right: 24px;
+  top: 24px;
+  z-index: 80;
+}
+
+@media (max-width: 720px) {
+  .app-toast {
+    left: 16px;
+    right: 16px;
+    top: 16px;
+  }
+}
+
+@keyframes app-toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .source-intake__controls {
   align-items: stretch;
   display: grid;

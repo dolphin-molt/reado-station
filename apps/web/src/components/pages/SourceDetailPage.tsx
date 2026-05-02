@@ -5,6 +5,7 @@ import { ExternalBlankLink } from '@/components/common/ExternalBlankLink'
 import { InlineYouTubePlayer } from '@/components/common/InlineYouTubePlayer'
 import { Footer } from '@/components/layout/Footer'
 import { Header } from '@/components/layout/Header'
+import { AppToast } from '@/components/ui/AppToast'
 import { ProcessingQueueAutoRefresh } from '@/components/ui/ProcessingQueueAutoRefresh'
 import { getCurrentAuthSession } from '@/lib/auth'
 import { getD1Binding } from '@/lib/cloudflare'
@@ -109,6 +110,7 @@ export async function SourceDetailPage({ collectStatus = '', lang, sourceId }: {
         <main className="container section-stack">
           <section className="panel channel-profile">
             {shouldAutoRefresh && <ProcessingQueueAutoRefresh />}
+            {notice && <AppToast message={notice} />}
             <div className="channel-profile__topbar">
               <Link className="channel-profile__back" href={localizedPath(lang, 'sources')}>
                 {lang === 'zh' ? '返回' : 'Back'}
@@ -117,7 +119,6 @@ export async function SourceDetailPage({ collectStatus = '', lang, sourceId }: {
                 <button className="channel-profile__back" type="submit">{lang === 'zh' ? '重新采集' : 'Refresh'}</button>
               </form>
             </div>
-            {notice && <p className="source-intake__notice">{notice}</p>}
             <div className="channel-profile__hero">
               <div>
                 <h1 className="x-profile-title">
