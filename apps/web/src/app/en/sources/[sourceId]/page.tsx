@@ -10,9 +10,12 @@ export const metadata: Metadata = {
 
 interface PageProps {
   params: Promise<{ sourceId: string }>
+  searchParams?: Promise<Record<string, string | string[] | undefined>>
 }
 
-export default async function SourcePage({ params }: PageProps) {
+export default async function SourcePage({ params, searchParams }: PageProps) {
   const { sourceId } = await params
-  return <SourceDetailPage lang="en" sourceId={decodeURIComponent(sourceId)} />
+  const query = await searchParams
+  const collect = Array.isArray(query?.collect) ? query?.collect[0] : query?.collect
+  return <SourceDetailPage collectStatus={collect} lang="en" sourceId={decodeURIComponent(sourceId)} />
 }

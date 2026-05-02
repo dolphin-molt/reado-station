@@ -130,6 +130,23 @@ export async function findActiveSourceCollectionJob(db: D1Database, sourceId: st
   return row ? rowToJob(row) : null
 }
 
+export async function findActiveSourceCollectionJobForSource(db: D1Database, sourceId: string): Promise<SourceCollectionJob | null> {
+  const row = await db
+    .prepare(
+      `
+        SELECT id, source_id AS sourceId, source_type AS sourceType, window_start AS windowStart, window_end AS windowEnd, status
+        FROM source_collection_jobs
+        WHERE source_id = ?
+          AND status IN ('queued', 'running')
+        ORDER BY created_at ASC
+        LIMIT 1
+      `,
+    )
+    .bind(sourceId)
+    .first<SourceCollectionJobRow>()
+  return row ? rowToJob(row) : null
+}
+
 export async function getSourceCollectionSnapshot(db: D1Database, sourceId: string): Promise<SourceCollectionSnapshot | null> {
   const row = await db
     .prepare(

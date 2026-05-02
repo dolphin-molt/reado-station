@@ -109,6 +109,16 @@ describe('SourceDetailPage', () => {
     expect(html).toContain('重新采集')
   })
 
+  it('shows a visible refresh queue notice for X sources', async () => {
+    const element = await SourceDetailPage({ collectStatus: 'queued', lang: 'zh', sourceId: 'tw-openai' })
+    const html = renderToStaticMarkup(createElement(() => element))
+
+    expect(html).toContain('已加入处理队列')
+    expect(html).toContain('处理完成后页面会自动刷新')
+    expect(html).not.toContain('采集状态')
+    expect(html).not.toContain('采集规则')
+  })
+
   it('renders profile assets for subscribed X accounts', async () => {
     const element = await SourceDetailPage({ lang: 'zh', sourceId: 'tw-anthropicai' })
     const html = renderToStaticMarkup(createElement(() => element))

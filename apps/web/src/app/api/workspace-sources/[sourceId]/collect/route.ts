@@ -1,9 +1,11 @@
 import type { NextRequest } from 'next/server'
+import { after } from 'next/server'
 import { NextResponse } from 'next/server'
 
 import { getCurrentAuthSession } from '@/lib/auth'
 import { getD1Binding } from '@/lib/cloudflare'
-import { collectionWindowForHours, ensureSourceCollectionJob } from '@/lib/source-collections'
+import { runSourceCollectionQueue } from '@/lib/source-collection-runner'
+import { collectionWindowForHours, ensureSourceCollectionJob, findActiveSourceCollectionJobForSource } from '@/lib/source-collections'
 import { getDefaultWorkspaceForUser } from '@/lib/workspaces'
 
 export const dynamic = 'force-dynamic'
@@ -41,8 +43,18 @@ export async function POST(request: NextRequest, context: RouteContext): Promise
 
   if (!subscription) return redirectBack(request, sourceId, 'missing')
 
+  const activeJob = await findActiveSourceCollectionJobForSource(db, sourceId)
+  if (activeJob) {
+    after(async () => {
+      await runSourceCollectionQueue(db, { maxJobs: 3 }).catch((error) => {
+        console.error('Source collection queue kick failed after manual collect', error)
+      })
+    })
+    return redirectBack(request, sourceId, activeJob.status)
+  }
+
   const { windowStart, windowEnd } = collectionWindowForHours(Number(subscription.backfillHours ?? 24))
-  await ensureSourceCollectionJob(db, {
+  const collection = await ensureSourceCollectionJob(db, {
     force: true,
     sourceId,
     sourceType: subscription.sourceType,
@@ -50,6 +62,11 @@ export async function POST(request: NextRequest, context: RouteContext): Promise
     windowEnd,
     requestedByWorkspaceId: workspace.id,
   })
+  after(async () => {
+    await runSourceCollectionQueue(db, { maxJobs: 3 }).catch((error) => {
+      console.error('Source collection queue kick failed after manual collect', error)
+    })
+  })
 
-  return redirectBack(request, sourceId, 'queued')
+  return redirectBack(request, sourceId, collection.job?.status ?? 'queued')
 }

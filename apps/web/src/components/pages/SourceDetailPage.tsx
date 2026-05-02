@@ -5,6 +5,7 @@ import { ExternalBlankLink } from '@/components/common/ExternalBlankLink'
 import { InlineYouTubePlayer } from '@/components/common/InlineYouTubePlayer'
 import { Footer } from '@/components/layout/Footer'
 import { Header } from '@/components/layout/Header'
+import { ProcessingQueueAutoRefresh } from '@/components/ui/ProcessingQueueAutoRefresh'
 import { getCurrentAuthSession } from '@/lib/auth'
 import { getD1Binding } from '@/lib/cloudflare'
 import { localizedPath, type Lang } from '@/lib/i18n'
@@ -48,7 +49,21 @@ function isYouTubeVideoAsset(asset: { kind: string; thumbnailUrl?: string; url: 
   return asset.kind === 'youtube' && Boolean(asset.thumbnailUrl) && (asset.url.includes('youtube.com/watch') || asset.url.includes('youtu.be/'))
 }
 
-export async function SourceDetailPage({ lang, sourceId }: { lang: Lang; sourceId: string }) {
+function collectNotice(status: string | null | undefined, lang: Lang): string {
+  if (status === 'queued' || status === 'running' || status === 'stale') {
+    return lang === 'zh'
+      ? '已加入处理队列，处理完成后页面会自动刷新。'
+      : 'Added to the processing queue. This page will refresh when processing finishes.'
+  }
+  if (status === 'failed') {
+    return lang === 'zh'
+      ? '重新处理失败，请稍后再试。'
+      : 'Refresh failed. Please try again later.'
+  }
+  return ''
+}
+
+export async function SourceDetailPage({ collectStatus = '', lang, sourceId }: { collectStatus?: string; lang: Lang; sourceId: string }) {
   const session = await getCurrentAuthSession()
   const loginPath = `${localizedPath(lang, 'login')}?next=${encodeURIComponent(`${localizedPath(lang, 'sources')}/${sourceId}`)}`
 
@@ -85,12 +100,15 @@ export async function SourceDetailPage({ lang, sourceId }: { lang: Lang; sourceI
       ['github', source.profileAssets.filter((asset) => asset.kind === 'github')],
       ['youtube', source.profileAssets.filter((asset) => asset.kind === 'youtube')],
     ].filter(([, assets]) => Array.isArray(assets) && assets.length > 0) as Array<[string, typeof source.profileAssets]>
+    const notice = collectNotice(collectStatus, lang)
+    const shouldAutoRefresh = collectStatus === 'queued' || collectStatus === 'running' || collectStatus === 'stale'
 
     return (
       <div className="page-shell reader-shell">
         <Header active="source-add" lang={lang} path="sources" />
         <main className="container section-stack">
           <section className="panel channel-profile">
+            {shouldAutoRefresh && <ProcessingQueueAutoRefresh />}
             <div className="channel-profile__topbar">
               <Link className="channel-profile__back" href={localizedPath(lang, 'sources')}>
                 {lang === 'zh' ? '返回' : 'Back'}
@@ -99,6 +117,7 @@ export async function SourceDetailPage({ lang, sourceId }: { lang: Lang; sourceI
                 <button className="channel-profile__back" type="submit">{lang === 'zh' ? '重新采集' : 'Refresh'}</button>
               </form>
             </div>
+            {notice && <p className="source-intake__notice">{notice}</p>}
             <div className="channel-profile__hero">
               <div>
                 <h1 className="x-profile-title">
