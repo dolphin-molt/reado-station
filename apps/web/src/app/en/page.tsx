@@ -19,7 +19,7 @@ export default async function Page({ searchParams }: PageProps) {
   const params = await searchParams
   return (
     <HomePage
-      account={parseXAccountParam(params?.account)}
+      account={parseXAccountParam(params?.account, params?.source)}
       category={parseCategoryParam(params?.category)}
       lang="en"
       page={parsePageParam(params?.page)}

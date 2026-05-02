@@ -179,9 +179,14 @@ export function normalizeXUsername(input: string): string {
   return value
 }
 
-export function parseXAccountParam(value: string | string[] | undefined): string | null {
-  const raw = Array.isArray(value) ? value[0] : value
+export function parseXAccountParam(value: string | string[] | undefined, fallbackValue?: string | string[] | undefined): string | null {
+  const rawValue = Array.isArray(value) ? value[0] : value
+  const rawFallback = Array.isArray(fallbackValue) ? fallbackValue[0] : fallbackValue
+  const raw = rawValue || rawFallback
   if (!raw) return null
+
+  const sourceMatch = raw.match(/^tw-([A-Za-z0-9_]{1,15})$/i)
+  if (sourceMatch) return sourceMatch[1]
 
   try {
     return normalizeXUsername(raw)
