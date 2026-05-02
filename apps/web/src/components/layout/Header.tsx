@@ -86,11 +86,11 @@ function SourcesNavIcon() {
   )
 }
 
-function TasksNavIcon() {
+function TasksNavIcon({ className = 'sidebar-nav__icon' }: { className?: string }) {
   return (
     <svg
       aria-hidden="true"
-      className="sidebar-nav__icon"
+      className={className}
       fill="none"
       viewBox="0 0 24 24"
     >
@@ -201,14 +201,6 @@ export async function Header({
       key: 'source-add' as const,
       label: t(lang, 'nav.sources'),
     },
-    {
-      badge: activeTaskCount,
-      className: 'sidebar-nav__link--tasks',
-      href: localizedPath(lang, 'tasks'),
-      icon: <TasksNavIcon />,
-      key: 'tasks' as const,
-      label: t(lang, 'nav.tasks'),
-    },
   ]
   const username = session?.username ?? 'admin'
   const userInitial = username.slice(0, 1).toUpperCase()
@@ -247,23 +239,19 @@ export async function Header({
           </div>
 
           <nav aria-label="Main navigation" className="sidebar-nav">
-            {navItems.map((item) => {
-              const badge = 'badge' in item ? item.badge ?? 0 : 0
-              return (
-                <Link
-                  aria-label={item.label}
-                  className={`sidebar-nav__link ${item.className}`}
-                  data-active={active === item.key && !highlightSourceFilter}
-                  data-short={item.label.slice(0, 1)}
-                  href={item.href}
-                  key={item.key}
-                >
-                  {item.icon}
-                  <span className="sidebar-nav__text">{item.label}</span>
-                  {badge > 0 && <span className="sidebar-nav__badge">{badge}</span>}
-                </Link>
-              )
-            })}
+            {navItems.map((item) => (
+              <Link
+                aria-label={item.label}
+                className={`sidebar-nav__link ${item.className}`}
+                data-active={active === item.key && !highlightSourceFilter}
+                data-short={item.label.slice(0, 1)}
+                href={item.href}
+                key={item.key}
+              >
+                {item.icon}
+                <span className="sidebar-nav__text">{item.label}</span>
+              </Link>
+            ))}
           </nav>
 
           {showSourceFilter && (
@@ -330,6 +318,18 @@ export async function Header({
           </div>
         )}
       </aside>
+      {session && (
+        <Link
+          aria-label={t(lang, 'nav.tasks')}
+          className="task-floating-button"
+          data-active={active === 'tasks'}
+          href={localizedPath(lang, 'tasks')}
+          title={t(lang, 'nav.tasks')}
+        >
+          <TasksNavIcon className="task-floating-button__icon" />
+          {activeTaskCount > 0 && <span className="task-floating-button__badge">{activeTaskCount}</span>}
+        </Link>
+      )}
       <label aria-hidden="true" className="sidebar-backdrop" htmlFor="app-sidebar-toggle" />
 
       {showMasthead && (

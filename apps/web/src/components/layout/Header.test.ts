@@ -60,13 +60,15 @@ describe('reader chrome navigation', () => {
     expect(html).toContain('data-active="true"')
   })
 
-  it('exposes running tasks as a first-level sidebar destination', async () => {
+  it('exposes running tasks as a floating button, not a sidebar tab', async () => {
     const element = await Header({ active: 'tasks', lang: 'zh', path: 'tasks', showSourceFilter: false })
     const html = renderToStaticMarkup(createElement(() => element))
 
     expect(html).toContain('href="/tasks"')
+    expect(html).toContain('class="task-floating-button"')
     expect(html).toContain('aria-label="任务"')
     expect(html).toContain('data-active="true"')
+    expect(html).not.toContain('sidebar-nav__link--tasks')
   })
 
   it('does not render the reader masthead on the channel discovery page', async () => {

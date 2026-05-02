@@ -280,20 +280,58 @@ p {
   width: 1.05rem;
 }
 
-.sidebar-nav__badge {
+.task-floating-button {
   align-items: center;
   background: var(--color-accent);
+  border: 1px solid rgba(130, 76, 22, 0.2);
+  border-radius: 999px;
+  bottom: 1.25rem;
+  box-shadow: 0 16px 36px rgba(76, 48, 21, 0.22);
+  color: white;
+  display: inline-flex;
+  height: 3.1rem;
+  justify-content: center;
+  position: fixed;
+  right: 1.25rem;
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  width: 3.1rem;
+  z-index: 180;
+}
+
+.task-floating-button:hover,
+.task-floating-button[data-active='true'] {
+  background: var(--color-accent-hover);
+  box-shadow: 0 18px 42px rgba(76, 48, 21, 0.28);
+  transform: translateY(-1px);
+}
+
+.task-floating-button__icon {
+  display: inline-flex;
+  height: 1.35rem;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+  width: 1.35rem;
+}
+
+.task-floating-button__badge {
+  align-items: center;
+  background: var(--color-text);
+  border: 2px solid var(--color-surface);
   border-radius: 999px;
   color: white;
   display: inline-flex;
   font-family: var(--font-ui);
   font-size: 0.72rem;
   font-weight: 800;
-  height: 1.15rem;
+  height: 1.25rem;
   justify-content: center;
-  margin-left: auto;
-  min-width: 1.15rem;
+  min-width: 1.25rem;
   padding: 0 0.32rem;
+  position: absolute;
+  right: -0.32rem;
+  top: -0.28rem;
 }
 
 .sidebar-nav__link:hover,
