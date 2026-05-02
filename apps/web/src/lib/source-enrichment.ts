@@ -1,7 +1,7 @@
 import 'server-only'
 
 import { getCloudflareEnv, type ReadoCloudflareEnv } from '@/lib/cloudflare'
-import { createBigModelSearchProvider, createBraveSearchProvider, createOpenAICompatibleProfileAssetSelector, discoverXProfileAssets, type ProfileAssetDiscoveryOptions } from '@/lib/profile-asset-discovery'
+import { createAiSdkProfileAssetSelector, createBigModelSearchProvider, createBraveSearchProvider, discoverXProfileAssets, type ProfileAssetDiscoveryOptions } from '@/lib/profile-asset-discovery'
 import { presetXProfileAssets, type SourceProfileAsset } from '@/lib/source-profile-assets'
 
 export type EnrichmentJobType =
@@ -210,11 +210,13 @@ function resolveProfileEnrichmentProviders(
     )
     : options.searchProvider
   const assetSelector = options.assetSelector === undefined
-    ? createOpenAICompatibleProfileAssetSelector({
+    ? createAiSdkProfileAssetSelector({
       apiKey: modelToken,
       endpoint: modelEndpoint,
       fetcher: options.fetcher,
+      jsonModeOnly: modelEndpoint === BIGMODEL_CHAT_COMPLETIONS_ENDPOINT,
       model: modelName,
+      providerName: modelEndpoint === BIGMODEL_CHAT_COMPLETIONS_ENDPOINT ? 'bigmodel' : 'profile-enrichment',
     })
     : options.assetSelector
   const missing: string[] = []

@@ -1,3 +1,8 @@
+import { createOpenAICompatible } from '@ai-sdk/openai-compatible'
+import { generateObject } from 'ai'
+import type { LanguageModel } from 'ai'
+import { z } from 'zod/v4'
+
 import type { SourceProfileAsset } from '@/lib/source-profile-assets'
 
 export interface XProfileForAssetDiscovery {
@@ -63,19 +68,32 @@ interface BigModelSearchPayload {
   }>
 }
 
-interface OpenAICompatibleChatPayload {
-  choices?: Array<{
-    message?: {
-      content?: string
-    }
-  }>
-}
-
 interface GitHubSearchItem {
   html_url?: string
   login?: string
   type?: string
 }
+
+const PROFILE_ASSET_SELECTION_SYSTEM_PROMPT = 'Select official profile assets from candidates. Candidates from web_search and direct_guess are untrusted until you verify they match the X profile. Return only JSON in this shape: {"assets":[{"kind":"website|github|youtube","title":"...","url":"...","summary":"...","meta":"...","thumbnailUrl":"..."}]}. Choose only URLs present in the candidate list. Prefer official website, official GitHub org, official YouTube channel and high-signal videos. Reject parked domains, redirect landers, lookalikes, avatars, unrelated same-name channels, stale fan pages, and zero-content orgs.'
+
+const profileAssetSelectionSchema = z.object({
+  assets: z.array(z.object({
+    kind: z.enum(['website', 'github', 'youtube']),
+    meta: z.string().optional(),
+    summary: z.string().default(''),
+    thumbnailUrl: z.string().optional(),
+    title: z.string(),
+    url: z.string(),
+  })),
+})
+
+type ProfileAssetGenerateObject = (options: {
+  maxRetries?: number
+  model: LanguageModel
+  prompt: string
+  schema: typeof profileAssetSelectionSchema
+  system: string
+}) => Promise<{ object: unknown }>
 
 interface GitHubOrgPayload {
   description?: string | null
@@ -541,49 +559,57 @@ export function createBigModelSearchProvider(input: {
   }
 }
 
-export function createOpenAICompatibleProfileAssetSelector(input: {
+function openAICompatibleBaseUrl(endpoint: string): string {
+  return endpoint.replace(/\/chat\/completions\/?$/i, '').replace(/\/+$/, '')
+}
+
+function downgradeJsonSchemaToJsonMode(body: Record<string, unknown>): Record<string, unknown> {
+  const responseFormat = body.response_format
+  if (!responseFormat || typeof responseFormat !== 'object' || (responseFormat as { type?: unknown }).type !== 'json_schema') return body
+  return {
+    ...body,
+    response_format: { type: 'json_object' },
+  }
+}
+
+export function createAiSdkProfileAssetSelector(input: {
   apiKey?: string | null
   endpoint?: string | null
   fetcher?: typeof fetch
+  generateObject?: ProfileAssetGenerateObject
+  jsonModeOnly?: boolean | null
   model?: string | null
+  providerName?: string | null
 }): ProfileAssetSelector | null {
   const endpoint = input.endpoint?.trim()
   const apiKey = input.apiKey?.trim()
   const model = input.model?.trim()
   if (!endpoint || !apiKey || !model) return null
-  const fetcher = input.fetcher ?? fetch
+  const provider = createOpenAICompatible({
+    apiKey,
+    baseURL: openAICompatibleBaseUrl(endpoint),
+    fetch: input.fetcher,
+    name: input.providerName?.trim() || 'profile-enrichment',
+    supportsStructuredOutputs: true,
+    transformRequestBody: input.jsonModeOnly ? downgradeJsonSchemaToJsonMode : undefined,
+  })
+  const runGenerateObject = input.generateObject ?? ((options) => generateObject({
+    maxRetries: options.maxRetries,
+    model: options.model,
+    prompt: options.prompt,
+    schema: options.schema,
+    system: options.system,
+  }))
   return {
     async select(selectionInput) {
-      const response = await fetcher(endpoint, {
-        body: JSON.stringify({
-          messages: [
-            {
-              content: 'Select official profile assets from candidates. Candidates from web_search and direct_guess are untrusted until you verify they match the X profile. Return only JSON: {"assets":[{"kind":"website|github|youtube","title":"...","url":"...","summary":"...","meta":"...","thumbnailUrl":"..."}]}. Choose only URLs present in the candidate list. Prefer official website, official GitHub org, official YouTube channel and high-signal videos. Reject parked domains, redirect landers, lookalikes, avatars, unrelated same-name channels, stale fan pages, and zero-content orgs.',
-              role: 'system',
-            },
-            {
-              content: JSON.stringify(selectionInput),
-              role: 'user',
-            },
-          ],
-          model,
-          response_format: { type: 'json_object' },
-        }),
-        headers: {
-          authorization: `Bearer ${apiKey}`,
-          'content-type': 'application/json',
-        },
-        method: 'POST',
+      const result = await runGenerateObject({
+        maxRetries: 1,
+        model: provider(model),
+        prompt: JSON.stringify(selectionInput),
+        schema: profileAssetSelectionSchema,
+        system: PROFILE_ASSET_SELECTION_SYSTEM_PROMPT,
       })
-      if (!response.ok) return []
-      const payload = await response.json().catch(() => ({})) as OpenAICompatibleChatPayload
-      const content = payload.choices?.[0]?.message?.content
-      if (!content) return []
-      try {
-        return normalizeModelAssets(JSON.parse(content) as unknown)
-      } catch {
-        return []
-      }
+      return normalizeModelAssets(result.object)
     },
   }
 }

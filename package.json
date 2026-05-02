@@ -49,7 +49,9 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "@ai-sdk/openai-compatible": "^2.0.45",
     "@anthropic-ai/sdk": "^0.39.0",
+    "ai": "^6.0.174",
     "consola": "^3.2.3",
     "dayjs": "^1.11.13",
     "dotenv": "^16.4.7",

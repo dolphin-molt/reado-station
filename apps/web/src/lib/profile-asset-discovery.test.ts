@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { createBigModelSearchProvider, createBraveSearchProvider, createOpenAICompatibleProfileAssetSelector, discoverXProfileAssets } from './profile-asset-discovery'
+import { createAiSdkProfileAssetSelector, createBigModelSearchProvider, createBraveSearchProvider, discoverXProfileAssets } from './profile-asset-discovery'
 
 function jsonResponse(value: unknown): Response {
   return new Response(JSON.stringify(value), {
@@ -71,31 +71,28 @@ describe('profile asset discovery', () => {
     })
   })
 
-  it('can use an OpenAI-compatible model gateway to select profile assets', async () => {
-    const provider = createOpenAICompatibleProfileAssetSelector({
+  it('uses Vercel AI SDK generateObject to select profile assets', async () => {
+    const generateObjectCalls: Array<{
+      prompt: string
+      system: string
+    }> = []
+    const provider = createAiSdkProfileAssetSelector({
       apiKey: 'model-token',
       endpoint: 'https://gateway.example.com/v1/chat/completions',
-      fetcher: async (input, init) => {
-        expect(input.toString()).toBe('https://gateway.example.com/v1/chat/completions')
-        expect((init?.headers as Record<string, string>).authorization).toBe('Bearer model-token')
-        const body = JSON.parse(init?.body as string) as { response_format?: { type?: string } }
-        expect(body.response_format?.type).toBe('json_object')
-        return jsonResponse({
-          choices: [{
-            message: {
-              content: JSON.stringify({
-                assets: [
-                  {
-                    kind: 'website',
-                    title: 'Anthropic',
-                    url: 'https://www.anthropic.com',
-                    summary: 'Selected official website.',
-                  },
-                ],
-              }),
-            },
-          }],
-        })
+      generateObject: async (options) => {
+        generateObjectCalls.push({ prompt: options.prompt, system: options.system })
+        return {
+          object: {
+            assets: [
+              {
+                kind: 'website',
+                title: 'Anthropic',
+                url: 'https://www.anthropic.com',
+                summary: 'Selected official website.',
+              },
+            ],
+          },
+        }
       },
       model: 'test-model',
     })
@@ -116,6 +113,10 @@ describe('profile asset discovery', () => {
         summary: 'Selected official website.',
       },
     ])
+    expect(generateObjectCalls).toHaveLength(1)
+    expect(generateObjectCalls[0].system).toContain('Select official profile assets from candidates')
+    expect(generateObjectCalls[0].prompt).toContain('Anthropic')
+    expect(generateObjectCalls[0].prompt).toContain('https://www.anthropic.com')
   })
 
   it('discovers website, GitHub, YouTube channel, and YouTube videos from public providers', async () => {

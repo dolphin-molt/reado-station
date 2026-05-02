@@ -1,12 +1,14 @@
-import { describe, expect, it } from 'vitest'
-
-import { vi } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 
 vi.mock('server-only', () => ({}))
 
 import { enqueueProfileEnrichmentJob, runOneProfileEnrichmentJob, runProfileEnrichmentQueue } from './source-enrichment'
 
 describe('profile enrichment jobs', () => {
+  afterEach(() => {
+    vi.restoreAllMocks()
+  })
+
   it('enqueues discover_profile_assets without duplicating active jobs', async () => {
     const statements: Array<{ sql: string; bindings: unknown[] }> = []
     const db = {
@@ -243,6 +245,8 @@ describe('profile enrichment jobs', () => {
   })
 
   it('uses BIGMODEL_OKIT_KEY for profile search and model selection when explicit providers are not configured', async () => {
+    const infoSpy = vi.spyOn(console, 'info').mockImplementation(() => {})
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {})
     const writes: Array<{ sql: string; bindings: unknown[] }> = []
     const requestedUrls: string[] = []
     const db = {
@@ -342,6 +346,8 @@ describe('profile enrichment jobs', () => {
       },
       status: 'completed',
     })
+    expect(infoSpy).not.toHaveBeenCalled()
+    expect(warnSpy).not.toHaveBeenCalled()
     const profileWrite = writes.find((statement) => statement.sql.includes('INSERT INTO channel_profiles'))
     expect(profileWrite?.bindings[7]).toContain('Official website selected by the model.')
   })
