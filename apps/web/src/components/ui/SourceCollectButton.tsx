@@ -1,5 +1,6 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 import { AppToast } from '@/components/ui/AppToast'
@@ -9,6 +10,20 @@ function defaultCollectMessage(status: string, lang: 'en' | 'zh'): string {
   if (status === 'running') return lang === 'zh' ? '正在处理' : 'Processing'
   if (status === 'ready') return lang === 'zh' ? '处理完成' : 'Processing complete'
   return lang === 'zh' ? '已加入处理队列' : 'Added to the processing queue'
+}
+
+interface RefreshableRouter {
+  refresh(): void
+}
+
+export function handleCollectSuccess(
+  status: string,
+  lang: 'en' | 'zh',
+  router: RefreshableRouter,
+  showToast: (message: string) => void,
+) {
+  showToast(defaultCollectMessage(status, lang))
+  router.refresh()
 }
 
 export function SourceCollectButton({
@@ -24,6 +39,7 @@ export function SourceCollectButton({
 }) {
   const [pending, setPending] = useState(false)
   const [toast, setToast] = useState<{ id: number; message: string } | null>(null)
+  const router = useRouter()
 
   function showToast(message: string) {
     setToast((current) => ({ id: (current?.id ?? 0) + 1, message }))
@@ -45,7 +61,7 @@ export function SourceCollectButton({
         showToast(payload.error || (lang === 'zh' ? '重新处理失败，请稍后再试。' : 'Refresh failed. Please try again later.'))
         return
       }
-      showToast(defaultCollectMessage(payload.status ?? 'queued', lang))
+      handleCollectSuccess(payload.status ?? 'queued', lang, router, showToast)
     } catch {
       showToast(lang === 'zh' ? '重新处理失败，请稍后再试。' : 'Refresh failed. Please try again later.')
     } finally {

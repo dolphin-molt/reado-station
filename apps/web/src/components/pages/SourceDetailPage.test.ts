@@ -12,6 +12,13 @@ vi.mock('@/components/layout/Footer', () => ({
   Footer: vi.fn(() => createElement('footer')),
 }))
 
+vi.mock('next/navigation', () => ({
+  notFound: vi.fn(() => {
+    throw new Error('not-found')
+  }),
+  useRouter: vi.fn(() => ({ refresh: vi.fn() })),
+}))
+
 vi.mock('@/lib/auth', () => ({
   getCurrentAuthSession: vi.fn(async () => ({ userId: 'user-1', username: 'testuser' })),
 }))
