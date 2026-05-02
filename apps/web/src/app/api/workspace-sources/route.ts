@@ -1,11 +1,13 @@
 import type { NextRequest } from 'next/server'
+import { after } from 'next/server'
 import { NextResponse } from 'next/server'
 
 import { safeNextPath } from '@/lib/admin-forms'
 import { getCurrentAuthSession } from '@/lib/auth'
 import { getD1Binding } from '@/lib/cloudflare'
+import { runSourceCollectionQueue } from '@/lib/source-collection-runner'
 import { getDefaultWorkspaceForUser } from '@/lib/workspaces'
-import { sourceErrorCode, subscribeWorkspaceSource } from '@/lib/workspace-sources'
+import { shouldRunSourceCollectionAfterSubscribe, sourceErrorCode, subscribeWorkspaceSource } from '@/lib/workspace-sources'
 
 export const dynamic = 'force-dynamic'
 
@@ -61,6 +63,13 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       userId: session.userId,
       workspace,
     })
+    if (shouldRunSourceCollectionAfterSubscribe(result.collectionStatus)) {
+      after(async () => {
+        await runSourceCollectionQueue(db, { maxJobs: 3 }).catch((error) => {
+          console.error('Source collection queue kick failed after subscribe', error)
+        })
+      })
+    }
     const separator = next.includes('?') ? '&' : '?'
     return redirectTo(request, `${next}${separator}source=${encodeURIComponent(result.sourceId)}&subscribed=1`)
   } catch (error) {

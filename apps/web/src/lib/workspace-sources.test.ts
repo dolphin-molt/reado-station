@@ -30,11 +30,18 @@ vi.mock('@/lib/x-accounts', async () => {
   }
 })
 
-import { SubscribeWorkspaceSourceError, sourceErrorCode, subscribeWorkspaceSource } from './workspace-sources'
+import { SubscribeWorkspaceSourceError, shouldRunSourceCollectionAfterSubscribe, sourceErrorCode, subscribeWorkspaceSource } from './workspace-sources'
 
 describe('workspace source subscription errors', () => {
   it('returns explicit subscription error codes', () => {
     expect(sourceErrorCode(new SubscribeWorkspaceSourceError('limit-sources', 'Plan limit'))).toBe('limit-sources')
+  })
+
+  it('runs the source queue after non-ready subscription states', () => {
+    expect(shouldRunSourceCollectionAfterSubscribe('ready')).toBe(false)
+    expect(shouldRunSourceCollectionAfterSubscribe('queued')).toBe(true)
+    expect(shouldRunSourceCollectionAfterSubscribe('running')).toBe(true)
+    expect(shouldRunSourceCollectionAfterSubscribe('missing')).toBe(true)
   })
 
   it('subscribes exact X handles and enqueues profile enrichment', async () => {

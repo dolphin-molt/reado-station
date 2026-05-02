@@ -267,6 +267,10 @@ export function sourceErrorCode(error: unknown): string {
   return 'unknown'
 }
 
+export function shouldRunSourceCollectionAfterSubscribe(status: string): boolean {
+  return status !== 'ready' && status !== 'failed'
+}
+
 export async function unsubscribeWorkspaceSource(db: D1Database, input: UnsubscribeInput): Promise<void> {
   const username = input.sourceId.toLowerCase().startsWith('tw-') ? input.sourceId.slice(3) : null
   const statements: D1PreparedStatement[] = [
