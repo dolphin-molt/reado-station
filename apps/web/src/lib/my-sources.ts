@@ -2,7 +2,7 @@ import 'server-only'
 
 import { channelSubtitle } from '@/lib/channel-catalog'
 import { normalizeSourceType, type SourceType } from '@/lib/plans'
-import { presetXProfileAssets, type SourceProfileAsset } from '@/lib/source-profile-assets'
+import { loadSourceProfileAssets, type SourceProfileAsset } from '@/lib/source-profile-assets'
 import { DEFAULT_X_COLLECTION_PREFERENCES, normalizeXCollectionPreferences, type XCollectionPreferences } from '@/lib/x-content-preferences'
 
 export interface WorkspaceSourceListItem {
@@ -288,7 +288,9 @@ export async function loadWorkspaceSourceDetail(db: D1Database, workspaceId: str
     latestWindowEnd: row.latestWindowEnd ?? null,
     latestCollectionStatus: row.latestCollectionStatus ?? null,
     latestFailureReason: row.latestFailureReason ?? null,
-    profileAssets: source.sourceType === 'x' ? presetXProfileAssets(xAccount?.username ?? source.sourceId.replace(/^tw-/i, '')) : [],
+    profileAssets: source.sourceType === 'x'
+      ? await loadSourceProfileAssets(db, { sourceType: 'x', sourceValue: xAccount?.username ?? source.sourceId.replace(/^tw-/i, '') })
+      : [],
     xAccount,
     recentItems: results.map(rowToRecentItem),
   }

@@ -6,7 +6,16 @@ export interface SourceProfileAsset {
   meta?: string
 }
 
-const PRESET_X_PROFILE_ASSETS: Record<string, SourceProfileAsset[]> = {
+interface SourceProfileAssetRow {
+  featuredJson: string | null
+}
+
+interface LoadSourceProfileAssetsInput {
+  sourceType: string
+  sourceValue: string
+}
+
+const SEED_X_PROFILE_ASSETS: Record<string, SourceProfileAsset[]> = {
   anthropicai: [
     {
       kind: 'website',
@@ -57,5 +66,59 @@ const PRESET_X_PROFILE_ASSETS: Record<string, SourceProfileAsset[]> = {
 
 export function presetXProfileAssets(username: string | null | undefined): SourceProfileAsset[] {
   if (!username) return []
-  return PRESET_X_PROFILE_ASSETS[username.toLowerCase()] ?? []
+  return SEED_X_PROFILE_ASSETS[username.toLowerCase()] ?? []
+}
+
+function normalizeProfileAssets(value: unknown): SourceProfileAsset[] {
+  if (!Array.isArray(value)) return []
+  return value.flatMap((item) => {
+    if (!item || typeof item !== 'object') return []
+    const asset = item as Partial<SourceProfileAsset>
+    if (
+      (asset.kind !== 'website' && asset.kind !== 'github' && asset.kind !== 'youtube') ||
+      typeof asset.title !== 'string' ||
+      typeof asset.url !== 'string'
+    ) {
+      return []
+    }
+    return [{
+      kind: asset.kind,
+      title: asset.title,
+      url: asset.url,
+      summary: typeof asset.summary === 'string' ? asset.summary : '',
+      meta: typeof asset.meta === 'string' ? asset.meta : undefined,
+    }]
+  })
+}
+
+function parseProfileAssetsJson(value: string | null | undefined): SourceProfileAsset[] {
+  if (!value) return []
+  try {
+    return normalizeProfileAssets(JSON.parse(value) as unknown)
+  } catch {
+    return []
+  }
+}
+
+export async function loadSourceProfileAssets(db: D1Database, input: LoadSourceProfileAssetsInput): Promise<SourceProfileAsset[]> {
+  const row = await db
+    .prepare(
+      `
+        SELECT featured_json AS featuredJson
+        FROM channel_profiles
+        WHERE source_type = ? AND lower(source_value) = lower(?)
+        LIMIT 1
+      `,
+    )
+    .bind(input.sourceType, input.sourceValue)
+    .first<SourceProfileAssetRow>()
+    .catch((error) => {
+      if (error instanceof Error && error.message.includes('channel_profiles')) return null
+      throw error
+    })
+
+  const filledAssets = parseProfileAssetsJson(row?.featuredJson)
+  if (filledAssets.length > 0) return filledAssets
+
+  return input.sourceType === 'x' ? presetXProfileAssets(input.sourceValue) : []
 }

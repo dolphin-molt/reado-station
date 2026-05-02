@@ -124,33 +124,6 @@ export async function SourceDetailPage({ lang, sourceId }: { lang: Lang; sourceI
               </section>
             )}
           </section>
-
-          <section className="panel my-sources">
-            <div className="panel__header">
-              <div>
-                <h2>{lang === 'zh' ? '最近内容' : 'Recent items'}</h2>
-              </div>
-            </div>
-
-            {source.recentItems.length > 0 ? (
-              <div className="my-sources__list">
-                {source.recentItems.map((item) => (
-                  <article className="my-sources__item" key={item.id}>
-                    <div>
-                      <div className="source-suggestion__meta">
-                        <span>{item.contentType}</span>
-                        <span>{item.publishedAt || (lang === 'zh' ? '未知时间' : 'unknown time')}</span>
-                      </div>
-                      <h2><a href={item.url}>{item.title}</a></h2>
-                      {item.summary && <p>{item.summary}</p>}
-                    </div>
-                  </article>
-                ))}
-              </div>
-            ) : (
-              <div className="empty-state">{lang === 'zh' ? '还没有可展示的内容。' : 'No visible items yet.'}</div>
-            )}
-          </section>
         </main>
         <Footer lang={lang} />
       </div>

@@ -98,6 +98,7 @@ describe('SourceDetailPage', () => {
     expect(html).not.toContain('采集状态')
     expect(html).not.toContain('采集规则')
     expect(html).not.toContain('重新采集')
+    expect(html).not.toContain('最近内容')
   })
 
   it('renders profile assets for subscribed X accounts', async () => {
