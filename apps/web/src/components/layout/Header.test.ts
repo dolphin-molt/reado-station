@@ -64,10 +64,12 @@ describe('reader chrome navigation', () => {
     const element = await Header({ active: 'tasks', lang: 'zh', path: 'tasks', showSourceFilter: false })
     const html = renderToStaticMarkup(createElement(() => element))
 
-    expect(html).toContain('href="/tasks"')
-    expect(html).toContain('class="task-floating-button"')
+    expect(html).toContain('class="task-floating"')
+    expect(html).toContain('class="task-floating-trigger"')
+    expect(html).toContain('type="button"')
     expect(html).toContain('aria-label="任务"')
-    expect(html).toContain('data-active="true"')
+    expect(html).toContain('进行中的任务')
+    expect(html).not.toContain('href="/tasks"')
     expect(html).not.toContain('sidebar-nav__link--tasks')
   })
 

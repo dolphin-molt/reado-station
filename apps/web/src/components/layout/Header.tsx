@@ -1,13 +1,14 @@
 import Link from 'next/link'
 
 import { SourceFilter } from '@/components/news/SourceFilter'
+import { TaskFloatingPanel } from '@/components/ui/TaskFloatingPanel'
 import { getCurrentAuthSession } from '@/lib/auth'
 import { getD1Binding } from '@/lib/cloudflare'
 import type { CategoryOption } from '@/lib/categories'
 import { getSidebarData } from '@/lib/content'
 import { formatDayLabel, localizedPath, readerHomePath, switchPath, t, type Lang } from '@/lib/i18n'
 import { PLAN_LIMITS } from '@/lib/plans'
-import { loadWorkspaceTaskSummary } from '@/lib/tasks'
+import { loadWorkspaceTasks, type WorkspaceTask } from '@/lib/tasks'
 import { getDefaultWorkspaceForUser, getWorkspaceCreditBalance, getWorkspaceSourceCount } from '@/lib/workspaces'
 import { loadUserXSubscriptionCount } from '@/lib/x-accounts'
 
@@ -86,26 +87,6 @@ function SourcesNavIcon() {
   )
 }
 
-function TasksNavIcon({ className = 'sidebar-nav__icon' }: { className?: string }) {
-  return (
-    <svg
-      aria-hidden="true"
-      className={className}
-      fill="none"
-      viewBox="0 0 24 24"
-    >
-      <path d="M7 7h10" />
-      <path d="M7 12h6" />
-      <path d="M7 17h9" />
-      <path d="M4 7h.1" />
-      <path d="M4 12h.1" />
-      <path d="M4 17h.1" />
-      <path d="M19 5.5v3" />
-      <path d="M17.5 7h3" />
-    </svg>
-  )
-}
-
 export async function Header({
   lang,
   active,
@@ -123,7 +104,7 @@ export async function Header({
   let sidebarSourceCount = sourceCount
   let sidebarActiveCategory = activeCategory
   let sidebarCategories = categories
-  let activeTaskCount = 0
+  let activeTasks: WorkspaceTask[] = []
 
   const shouldLoadSidebarData = showSourceFilter && !sidebarDate && sidebarItemCount === 0 && sidebarSourceCount === 0 && sidebarCategories.length === 0
   const [sidebarData, session] = await Promise.all([
@@ -160,8 +141,7 @@ export async function Header({
     const db = await getD1Binding().catch(() => null)
     if (db) {
       const workspace = await getDefaultWorkspaceForUser(db, session.userId, session.username)
-      const taskSummary = await loadWorkspaceTaskSummary(db, workspace.id).catch(() => ({ activeCount: 0 }))
-      activeTaskCount = taskSummary.activeCount
+      activeTasks = await loadWorkspaceTasks(db, workspace.id).catch(() => [])
       if (session.role !== 'admin') {
         const limits = PLAN_LIMITS[workspace.planId]
         const [creditsBalance, workspaceSourceCount] = await Promise.all([
@@ -319,16 +299,7 @@ export async function Header({
         )}
       </aside>
       {session && (
-        <Link
-          aria-label={t(lang, 'nav.tasks')}
-          className="task-floating-button"
-          data-active={active === 'tasks'}
-          href={localizedPath(lang, 'tasks')}
-          title={t(lang, 'nav.tasks')}
-        >
-          <TasksNavIcon className="task-floating-button__icon" />
-          {activeTaskCount > 0 && <span className="task-floating-button__badge">{activeTaskCount}</span>}
-        </Link>
+        <TaskFloatingPanel lang={lang} tasks={activeTasks.slice(0, 5)} totalCount={activeTasks.length} />
       )}
       <label aria-hidden="true" className="sidebar-backdrop" htmlFor="app-sidebar-toggle" />
 

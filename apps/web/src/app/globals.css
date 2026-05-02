@@ -280,32 +280,46 @@ p {
   width: 1.05rem;
 }
 
-.task-floating-button {
+.task-floating {
+  bottom: 1.25rem;
+  display: grid;
+  gap: 0.75rem;
+  justify-items: end;
+  position: fixed;
+  right: 1.25rem;
+  z-index: 240;
+}
+
+.task-floating-trigger {
   align-items: center;
   background: var(--color-accent);
   border: 1px solid rgba(130, 76, 22, 0.2);
   border-radius: 999px;
-  bottom: 1.25rem;
   box-shadow: 0 16px 36px rgba(76, 48, 21, 0.22);
   color: white;
+  cursor: pointer;
   display: inline-flex;
   height: 3.1rem;
   justify-content: center;
-  position: fixed;
-  right: 1.25rem;
+  padding: 0;
+  position: relative;
   transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
   width: 3.1rem;
-  z-index: 180;
 }
 
-.task-floating-button:hover,
-.task-floating-button[data-active='true'] {
+.task-floating-trigger:hover,
+.task-floating-trigger:focus-visible {
   background: var(--color-accent-hover);
   box-shadow: 0 18px 42px rgba(76, 48, 21, 0.28);
   transform: translateY(-1px);
 }
 
-.task-floating-button__icon {
+.task-floating-trigger:focus-visible {
+  outline: 3px solid rgba(217, 154, 50, 0.32);
+  outline-offset: 3px;
+}
+
+.task-floating-trigger__icon {
   display: inline-flex;
   height: 1.35rem;
   stroke: currentColor;
@@ -315,7 +329,7 @@ p {
   width: 1.35rem;
 }
 
-.task-floating-button__badge {
+.task-floating-trigger__badge {
   align-items: center;
   background: var(--color-text);
   border: 2px solid var(--color-surface);
@@ -332,6 +346,99 @@ p {
   position: absolute;
   right: -0.32rem;
   top: -0.28rem;
+}
+
+.task-floating-popover {
+  background: rgba(255, 250, 244, 0.98);
+  border: 1px solid var(--color-rule);
+  border-radius: 14px;
+  bottom: calc(100% + 0.75rem);
+  box-shadow: 0 22px 54px rgba(67, 44, 28, 0.18);
+  color: var(--color-text);
+  opacity: 0;
+  padding: 0.9rem;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  transform: translateY(0.4rem);
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
+  visibility: hidden;
+  width: min(21rem, calc(100vw - 2rem));
+}
+
+.task-floating-popover[data-open='true'] {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+  visibility: visible;
+}
+
+.task-floating-popover__header {
+  align-items: center;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.task-floating-popover__header h2 {
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+.task-floating-popover__close {
+  align-items: center;
+  background: transparent;
+  border: 1px solid var(--color-rule);
+  border-radius: 999px;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 1.05rem;
+  height: 1.8rem;
+  justify-content: center;
+  line-height: 1;
+  padding: 0;
+  width: 1.8rem;
+}
+
+.task-floating-list {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.task-floating-list__item {
+  align-items: start;
+  background: rgba(255, 255, 255, 0.58);
+  border: 1px solid rgba(232, 221, 208, 0.72);
+  border-radius: 10px;
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: auto minmax(0, 1fr);
+  padding: 0.62rem;
+}
+
+.task-floating-list__item strong {
+  display: block;
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+.task-floating-list__item p,
+.task-floating-popover__empty,
+.task-floating-list__more {
+  color: var(--color-text-secondary);
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+
+.task-floating-list__item p {
+  overflow-wrap: anywhere;
+}
+
+.task-floating-popover__empty,
+.task-floating-list__more {
+  padding: 0.2rem 0.1rem 0.1rem;
 }
 
 .sidebar-nav__link:hover,
@@ -6385,6 +6492,11 @@ p {
 .reader-shell > * {
   position: relative;
   z-index: 1;
+}
+
+.reader-shell > .task-floating {
+  position: fixed;
+  z-index: 240;
 }
 
 .reader-shell .app-sidebar {
