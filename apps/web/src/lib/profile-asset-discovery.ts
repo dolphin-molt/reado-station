@@ -99,6 +99,11 @@ function titleFromHtml(html: string): string | null {
   return html.match(/<title[^>]*>([^<]+)<\/title>/i)?.[1]?.replace(/\s+/g, ' ').trim() || null
 }
 
+function isRedirectOnlyLander(html: string): boolean {
+  const normalized = html.toLowerCase().replace(/\s+/g, '')
+  return normalized.includes('window.location.href="/lander"') || normalized.includes("window.location.href='/lander'")
+}
+
 function urlsFromProfile(profile: XProfileForAssetDiscovery): string[] {
   const urls = Array.from((profile.description ?? '').matchAll(/https?:\/\/[^\s"'<>]+/g)).map((match) => match[0].replace(/[),.]+$/g, ''))
   try {
@@ -129,8 +134,10 @@ function websiteCandidates(profile: XProfileForAssetDiscovery, results: ProfileS
   const nameSlug = normalizeSlug(profile.name)
   const fromProfile = urlsFromProfile(profile)
   const fromSearch = results.map((result) => result.url)
-  const direct = [`https://www.${nameSlug}.com/`, `https://${nameSlug}.com/`]
-  return unique([...direct, ...fromProfile, ...fromSearch])
+  const direct = nameSlug && !nameSlug.includes('-')
+    ? [`https://www.${nameSlug}.com/`, `https://${nameSlug}.com/`]
+    : []
+  return unique([...fromProfile, ...fromSearch, ...direct])
     .filter((value) => {
       const url = safeUrl(value)
       if (!url) return false
@@ -164,13 +171,19 @@ async function discoverWebsite(profile: XProfileForAssetDiscovery, results: Prof
       const response = await fetcher(url.toString(), { headers: { accept: 'text/html,*/*', 'user-agent': 'reado-station/1.0' } })
       if (!response.ok) continue
       const html = await response.text().catch(() => '')
-      const title = titleFromHtml(html) ?? profile.name
+      if (isRedirectOnlyLander(html)) continue
+      const title = titleFromHtml(html)
+      if (!title) continue
+      const finalUrl = safeUrl(response.url || url.toString()) ?? url
+      const finalHostname = finalUrl.hostname.replace(/^www\./, '')
+      if (/\.(avif|gif|jpe?g|png|svg|webp)$/i.test(finalUrl.pathname)) continue
+      if (finalHostname.includes('x.com') || finalHostname.includes('twitter.com') || finalHostname.includes('github.com') || finalHostname.includes('youtube.com') || finalHostname.includes('youtu.be')) continue
       return {
         kind: 'website',
         meta: 'Official website',
         summary: `${profile.name} public website discovered from the profile and public search results.`,
         title,
-        url: stripTrailingSlash(url.toString()),
+        url: stripTrailingSlash(finalUrl.toString()),
       }
     } catch {
       // Try the next public candidate.

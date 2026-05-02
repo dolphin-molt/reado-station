@@ -9,11 +9,15 @@ function jsonResponse(value: unknown): Response {
   })
 }
 
-function htmlResponse(value: string): Response {
-  return new Response(value, {
+function htmlResponse(value: string, finalUrl?: string): Response {
+  const response = new Response(value, {
     headers: { 'content-type': 'text/html' },
     status: 200,
   })
+  if (finalUrl) {
+    Object.defineProperty(response, 'url', { value: finalUrl })
+  }
+  return response
 }
 
 describe('profile asset discovery', () => {
@@ -184,6 +188,64 @@ describe('profile asset discovery', () => {
       expect.objectContaining({ url: 'https://pbs.twimg.com/profile_images/not-a-website.jpg' }),
       expect.objectContaining({ title: 'Matt Gregory YouTube' }),
       expect.objectContaining({ url: 'https://github.com/random-lab' }),
+    ]))
+  })
+
+  it('prefers URLs from the X profile over guessed personal-name domains', async () => {
+    const requestedUrls: string[] = []
+    const fetcher: typeof fetch = async (input) => {
+      const url = input.toString()
+      requestedUrls.push(url)
+      if (url === 'https://t.co/dDtDyVssfm') {
+        return htmlResponse('<title>Join Us On Our Journey</title>', 'https://terafab.ai/')
+      }
+      if (url.startsWith('https://api.github.com/search/users')) return jsonResponse({ items: [] })
+      if (url === 'https://www.youtube.com/@elon-musk') return new Response('', { status: 404 })
+      if (url === 'https://www.youtube.com/@elonmusk') return new Response('', { status: 404 })
+      return new Response('', { status: 404 })
+    }
+
+    const assets = await discoverXProfileAssets({
+      description: 'https://t.co/dDtDyVssfm',
+      name: 'Elon Musk',
+      username: 'elonmusk',
+    }, { fetcher })
+
+    expect(requestedUrls[0]).toBe('https://t.co/dDtDyVssfm')
+    expect(requestedUrls).not.toContain('https://www.elon-musk.com/')
+    expect(assets).toEqual(expect.arrayContaining([
+      expect.objectContaining({ kind: 'website', url: 'https://terafab.ai' }),
+    ]))
+    expect(assets).not.toEqual(expect.arrayContaining([
+      expect.objectContaining({ url: 'https://www.elon-musk.com' }),
+    ]))
+  })
+
+  it('rejects redirect-only lander pages from public search candidates', async () => {
+    const fetcher: typeof fetch = async (input) => {
+      const url = input.toString()
+      if (url === 'https://www.elon-musk.com/') {
+        return htmlResponse('<!DOCTYPE html><html><head><script>window.onload=function(){window.location.href="/lander"}</script></head></html>')
+      }
+      if (url.startsWith('https://api.github.com/search/users')) return jsonResponse({ items: [] })
+      if (url === 'https://www.youtube.com/@elon-musk') return new Response('', { status: 404 })
+      if (url === 'https://www.youtube.com/@elonmusk') return new Response('', { status: 404 })
+      return new Response('', { status: 404 })
+    }
+
+    const assets = await discoverXProfileAssets({
+      description: '',
+      name: 'Elon Musk',
+      username: 'elonmusk',
+    }, {
+      fetcher,
+      searchProvider: {
+        search: async () => [{ title: 'Elon Musk', url: 'https://www.elon-musk.com/' }],
+      },
+    })
+
+    expect(assets).not.toEqual(expect.arrayContaining([
+      expect.objectContaining({ kind: 'website', url: 'https://www.elon-musk.com' }),
     ]))
   })
 })
