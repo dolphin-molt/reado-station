@@ -1,5 +1,7 @@
 import 'server-only'
 
+import { getCloudflareEnv, type ReadoCloudflareEnv } from '@/lib/cloudflare'
+import { createBraveSearchProvider, createOpenAICompatibleProfileAssetSelector, discoverXProfileAssets, type ProfileAssetDiscoveryOptions } from '@/lib/profile-asset-discovery'
 import { presetXProfileAssets, type SourceProfileAsset } from '@/lib/source-profile-assets'
 
 export type EnrichmentJobType =
@@ -26,7 +28,12 @@ interface XAccountProfileRow {
   name: string
   description: string | null
   profileImageUrl: string | null
+  rawJson: string | null
   verified: number | null
+}
+
+interface ProfileEnrichmentRunOptions extends ProfileAssetDiscoveryOptions {
+  env?: ReadoCloudflareEnv | null
 }
 
 export async function enqueueProfileEnrichmentJob(
@@ -98,6 +105,7 @@ async function loadXAccountProfile(db: D1Database, username: string): Promise<XA
           name,
           description,
           profile_image_url AS profileImageUrl,
+          raw_json AS rawJson,
           verified
         FROM x_accounts
         WHERE lower(username) = lower(?)
@@ -108,11 +116,62 @@ async function loadXAccountProfile(db: D1Database, username: string): Promise<XA
     .first<XAccountProfileRow>()
 }
 
-async function discoverProfileAssets(job: EnrichmentJobRow): Promise<SourceProfileAsset[]> {
-  // Provider boundary: later replace this with Vercel AI SDK + Cloudflare AI Gateway,
-  // using public search/API results as inputs and returning this same schema.
+function braveSearchApiKey(env: ReadoCloudflareEnv | null | undefined): string | null {
+  return env?.READO_BRAVE_SEARCH_API_KEY ?? env?.BRAVE_SEARCH_API_KEY ?? process.env.READO_BRAVE_SEARCH_API_KEY ?? process.env.BRAVE_SEARCH_API_KEY ?? null
+}
+
+function profileModelEndpoint(env: ReadoCloudflareEnv | null | undefined): string | null {
+  return env?.READO_PROFILE_ENRICHMENT_MODEL_ENDPOINT
+    ?? env?.CLOUDFLARE_AI_GATEWAY_URL
+    ?? process.env.READO_PROFILE_ENRICHMENT_MODEL_ENDPOINT
+    ?? process.env.CLOUDFLARE_AI_GATEWAY_URL
+    ?? null
+}
+
+function profileModelToken(env: ReadoCloudflareEnv | null | undefined): string | null {
+  return env?.READO_PROFILE_ENRICHMENT_MODEL_TOKEN
+    ?? env?.CLOUDFLARE_AI_GATEWAY_TOKEN
+    ?? process.env.READO_PROFILE_ENRICHMENT_MODEL_TOKEN
+    ?? process.env.CLOUDFLARE_AI_GATEWAY_TOKEN
+    ?? null
+}
+
+function profileModelName(env: ReadoCloudflareEnv | null | undefined): string | null {
+  return env?.READO_PROFILE_ENRICHMENT_MODEL
+    ?? env?.LLM_MODEL
+    ?? process.env.READO_PROFILE_ENRICHMENT_MODEL
+    ?? process.env.LLM_MODEL
+    ?? null
+}
+
+async function discoverProfileAssets(db: D1Database, job: EnrichmentJobRow, options: ProfileEnrichmentRunOptions): Promise<SourceProfileAsset[]> {
   if (job.jobType !== 'discover_profile_assets') return []
-  if (job.sourceType === 'x') return presetXProfileAssets(job.sourceValue)
+  if (job.sourceType === 'x') {
+    const profile = await loadXAccountProfile(db, job.sourceValue)
+    if (!profile) return presetXProfileAssets(job.sourceValue)
+    const env = options.env ?? await getCloudflareEnv().catch(() => null)
+    const searchProvider = options.searchProvider ?? createBraveSearchProvider({
+      apiKey: braveSearchApiKey(env),
+      fetcher: options.fetcher,
+    })
+    const assetSelector = options.assetSelector ?? createOpenAICompatibleProfileAssetSelector({
+      apiKey: profileModelToken(env),
+      endpoint: profileModelEndpoint(env),
+      fetcher: options.fetcher,
+      model: profileModelName(env),
+    })
+    const discovered = await discoverXProfileAssets({
+      description: profile.description,
+      name: profile.name,
+      rawJson: profile.rawJson,
+      username: profile.username,
+    }, {
+      assetSelector,
+      fetcher: options.fetcher,
+      searchProvider,
+    })
+    return discovered.length > 0 ? discovered : presetXProfileAssets(job.sourceValue)
+  }
   return []
 }
 
@@ -155,13 +214,16 @@ async function upsertChannelProfile(
     .run()
 }
 
-export async function runOneProfileEnrichmentJob(db: D1Database): Promise<{ jobId: string; status: string; assetCount: number; error?: string } | null> {
+export async function runOneProfileEnrichmentJob(
+  db: D1Database,
+  options: ProfileEnrichmentRunOptions = {},
+): Promise<{ jobId: string; status: string; assetCount: number; error?: string } | null> {
   const job = await claimQueuedEnrichmentJob(db)
   if (!job) return null
   const now = new Date().toISOString()
 
   try {
-    const assets = await discoverProfileAssets(job)
+    const assets = await discoverProfileAssets(db, job, options)
     await upsertChannelProfile(db, job, assets)
     await db
       .prepare("UPDATE enrichment_jobs SET status = 'completed', output_json = ?, completed_at = ?, updated_at = ? WHERE id = ?")

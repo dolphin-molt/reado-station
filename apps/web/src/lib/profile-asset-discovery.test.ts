@@ -1,0 +1,189 @@
+import { describe, expect, it } from 'vitest'
+
+import { createBraveSearchProvider, createOpenAICompatibleProfileAssetSelector, discoverXProfileAssets } from './profile-asset-discovery'
+
+function jsonResponse(value: unknown): Response {
+  return new Response(JSON.stringify(value), {
+    headers: { 'content-type': 'application/json' },
+    status: 200,
+  })
+}
+
+function htmlResponse(value: string): Response {
+  return new Response(value, {
+    headers: { 'content-type': 'text/html' },
+    status: 200,
+  })
+}
+
+describe('profile asset discovery', () => {
+  it('normalizes Brave web search results behind the provider interface', async () => {
+    const requestedUrls: string[] = []
+    const provider = createBraveSearchProvider({
+      apiKey: 'search-key',
+      fetcher: async (input, init) => {
+        requestedUrls.push(input.toString())
+        expect((init?.headers as Record<string, string>)['X-Subscription-Token']).toBe('search-key')
+        return jsonResponse({
+          web: {
+            results: [
+              { title: 'Anthropic', url: 'https://www.anthropic.com', description: 'Official site.' },
+            ],
+          },
+        })
+      },
+    })
+
+    await expect(provider?.search('Anthropic official website', { limit: 3 })).resolves.toEqual([
+      { title: 'Anthropic', url: 'https://www.anthropic.com', snippet: 'Official site.' },
+    ])
+    expect(requestedUrls[0]).toContain('api.search.brave.com/res/v1/web/search')
+    expect(requestedUrls[0]).toContain('q=Anthropic+official+website')
+  })
+
+  it('can use an OpenAI-compatible model gateway to select profile assets', async () => {
+    const provider = createOpenAICompatibleProfileAssetSelector({
+      apiKey: 'model-token',
+      endpoint: 'https://gateway.example.com/v1/chat/completions',
+      fetcher: async (input, init) => {
+        expect(input.toString()).toBe('https://gateway.example.com/v1/chat/completions')
+        expect((init?.headers as Record<string, string>).authorization).toBe('Bearer model-token')
+        const body = JSON.parse(init?.body as string) as { response_format?: { type?: string } }
+        expect(body.response_format?.type).toBe('json_object')
+        return jsonResponse({
+          choices: [{
+            message: {
+              content: JSON.stringify({
+                assets: [
+                  {
+                    kind: 'website',
+                    title: 'Anthropic',
+                    url: 'https://www.anthropic.com',
+                    summary: 'Selected official website.',
+                  },
+                ],
+              }),
+            },
+          }],
+        })
+      },
+      model: 'test-model',
+    })
+
+    await expect(provider?.select({
+      candidates: [{
+        kind: 'website',
+        title: 'Anthropic',
+        url: 'https://www.anthropic.com',
+        summary: 'Candidate website.',
+      }],
+      profile: { description: 'We build Claude.', name: 'Anthropic', username: 'AnthropicAI' },
+    })).resolves.toEqual([
+      {
+        kind: 'website',
+        title: 'Anthropic',
+        url: 'https://www.anthropic.com',
+        summary: 'Selected official website.',
+      },
+    ])
+  })
+
+  it('discovers website, GitHub, YouTube channel, and YouTube videos from public providers', async () => {
+    const requestedUrls: string[] = []
+    const fetcher: typeof fetch = async (input) => {
+      const url = input.toString()
+      requestedUrls.push(url)
+      if (url === 'https://www.anthropic.com/') return htmlResponse('<title>Anthropic</title>')
+      if (url.startsWith('https://api.github.com/search/users')) {
+        return jsonResponse({
+          items: [
+            { html_url: 'https://github.com/AnthropicAI', login: 'AnthropicAI', type: 'Organization' },
+            { html_url: 'https://github.com/anthropics', login: 'anthropics', type: 'Organization' },
+          ],
+        })
+      }
+      if (url === 'https://api.github.com/orgs/AnthropicAI') {
+        return jsonResponse({
+          description: null,
+          html_url: 'https://github.com/AnthropicAI',
+          login: 'AnthropicAI',
+          public_repos: 0,
+        })
+      }
+      if (url === 'https://api.github.com/orgs/anthropics') {
+        return jsonResponse({
+          description: 'Official Anthropic GitHub organization.',
+          html_url: 'https://github.com/anthropics',
+          login: 'anthropics',
+          public_repos: 42,
+        })
+      }
+      if (url === 'https://www.youtube.com/@anthropic-ai') {
+        return htmlResponse(`
+          <html><head><title>Anthropic - YouTube</title></head>
+          <body>
+            <script>{"videoId":"ysPbXH0LpIE","title":{"runs":[{"text":"Prompting 101 | Code w/ Claude"}]}}</script>
+          </body></html>
+        `)
+      }
+      return new Response('', { status: 404 })
+    }
+
+    const assets = await discoverXProfileAssets({
+      description: 'We build Claude.',
+      name: 'Anthropic',
+      rawJson: '{"data":{"profile_image_url":"https://pbs.twimg.com/profile_images/not-a-website.jpg"}}',
+      username: 'AnthropicAI',
+    }, { fetcher })
+
+    expect(requestedUrls).toContain('https://www.anthropic.com/')
+    expect(assets).toEqual(expect.arrayContaining([
+      expect.objectContaining({ kind: 'website', title: 'Anthropic', url: 'https://www.anthropic.com' }),
+      expect.objectContaining({ kind: 'github', title: 'anthropics', url: 'https://github.com/anthropics' }),
+      expect.objectContaining({ kind: 'youtube', title: 'Anthropic YouTube', url: 'https://www.youtube.com/@anthropic-ai' }),
+      expect.objectContaining({
+        kind: 'youtube',
+        thumbnailUrl: 'https://i.ytimg.com/vi/ysPbXH0LpIE/hqdefault.jpg',
+        title: 'Prompting 101 | Code w/ Claude',
+        url: 'https://www.youtube.com/watch?v=ysPbXH0LpIE',
+      }),
+    ]))
+  })
+
+  it('rejects public candidates that do not match the X profile identity', async () => {
+    const fetcher: typeof fetch = async (input) => {
+      const url = input.toString()
+      if (url === 'https://www.anthropic.com/') return htmlResponse('<title>Anthropic</title>')
+      if (url.startsWith('https://api.github.com/search/users')) {
+        return jsonResponse({ items: [{ html_url: 'https://github.com/random-lab', login: 'random-lab', type: 'Organization' }] })
+      }
+      if (url === 'https://api.github.com/orgs/random-lab') {
+        return jsonResponse({ description: 'Not related.', html_url: 'https://github.com/random-lab', login: 'random-lab' })
+      }
+      if (url === 'https://api.github.com/orgs/anthropics') {
+        return jsonResponse({ description: 'Official Anthropic GitHub organization.', html_url: 'https://github.com/anthropics', login: 'anthropics' })
+      }
+      if (url === 'https://www.youtube.com/@anthropic') return htmlResponse('<title>Matt Gregory - YouTube</title>')
+      if (url === 'https://www.youtube.com/@anthropic-ai') return htmlResponse('<title>Anthropic - YouTube</title>')
+      return new Response('', { status: 404 })
+    }
+
+    const assets = await discoverXProfileAssets({
+      description: 'We build Claude.',
+      name: 'Anthropic',
+      rawJson: '{"data":{"profile_image_url":"https://pbs.twimg.com/profile_images/not-a-website.jpg"}}',
+      username: 'AnthropicAI',
+    }, { fetcher })
+
+    expect(assets).toEqual(expect.arrayContaining([
+      expect.objectContaining({ title: 'Anthropic', url: 'https://www.anthropic.com' }),
+      expect.objectContaining({ title: 'anthropics', url: 'https://github.com/anthropics' }),
+      expect.objectContaining({ title: 'Anthropic YouTube', url: 'https://www.youtube.com/@anthropic-ai' }),
+    ]))
+    expect(assets).not.toEqual(expect.arrayContaining([
+      expect.objectContaining({ url: 'https://pbs.twimg.com/profile_images/not-a-website.jpg' }),
+      expect.objectContaining({ title: 'Matt Gregory YouTube' }),
+      expect.objectContaining({ url: 'https://github.com/random-lab' }),
+    ]))
+  })
+})

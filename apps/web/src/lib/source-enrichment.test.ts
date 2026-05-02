@@ -76,9 +76,26 @@ describe('profile enrichment jobs', () => {
       }),
     } as unknown as D1Database
 
-    const result = await runOneProfileEnrichmentJob(db)
+    const fetcher: typeof fetch = async (input) => {
+      const url = input.toString()
+      if (url === 'https://www.anthropic.com/') {
+        return new Response('<title>Anthropic</title>', { status: 200, headers: { 'content-type': 'text/html' } })
+      }
+      if (url.startsWith('https://api.github.com/search/users')) {
+        return new Response(JSON.stringify({ items: [{ html_url: 'https://github.com/anthropics', login: 'anthropics', type: 'Organization' }] }), { status: 200 })
+      }
+      if (url === 'https://api.github.com/orgs/anthropics') {
+        return new Response(JSON.stringify({ description: 'Official Anthropic GitHub organization.', html_url: 'https://github.com/anthropics', login: 'anthropics' }), { status: 200 })
+      }
+      if (url === 'https://www.youtube.com/@anthropic-ai') {
+        return new Response('<title>Anthropic - YouTube</title><script>{"videoId":"ysPbXH0LpIE","title":{"runs":[{"text":"Prompting 101 | Code w/ Claude"}]}}</script>', { status: 200 })
+      }
+      return new Response('', { status: 404 })
+    }
 
-    expect(result).toMatchObject({ assetCount: 3, jobId: 'job-1', status: 'completed' })
+    const result = await runOneProfileEnrichmentJob(db, { fetcher })
+
+    expect(result).toMatchObject({ assetCount: 4, jobId: 'job-1', status: 'completed' })
     expect(writes.some((statement) => statement.sql.includes('INSERT INTO channel_profiles'))).toBe(true)
     expect(writes.some((statement) => statement.sql.includes('featured_json'))).toBe(true)
   })
