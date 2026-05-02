@@ -280,6 +280,22 @@ p {
   width: 1.05rem;
 }
 
+.sidebar-nav__badge {
+  align-items: center;
+  background: var(--color-accent);
+  border-radius: 999px;
+  color: white;
+  display: inline-flex;
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 800;
+  height: 1.15rem;
+  justify-content: center;
+  margin-left: auto;
+  min-width: 1.15rem;
+  padding: 0 0.32rem;
+}
+
 .sidebar-nav__link:hover,
 .sidebar-action:hover {
   background: var(--color-tag-bg);
@@ -5616,6 +5632,42 @@ p {
   padding: 0.75rem;
   white-space: pre-wrap;
   word-break: break-word;
+}
+
+.task-board {
+  display: grid;
+  gap: 1.1rem;
+}
+
+.task-list {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.task-list__item {
+  align-items: center;
+  background: var(--color-surface-strong);
+  border: 1px solid rgba(232, 221, 208, 0.95);
+  border-radius: var(--radius);
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: minmax(0, 1fr) auto;
+  padding: 1rem;
+}
+
+.task-list__item h2 {
+  font-family: var(--font-body);
+  font-size: 1.08rem;
+  margin-top: 0.35rem;
+}
+
+.task-list__item p {
+  color: var(--color-text-secondary);
+  margin-top: 0.28rem;
+}
+
+.task-board__empty {
+  min-height: 12rem;
 }
 
 .footer {

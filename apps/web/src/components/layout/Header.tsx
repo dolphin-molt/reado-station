@@ -7,10 +7,11 @@ import type { CategoryOption } from '@/lib/categories'
 import { getSidebarData } from '@/lib/content'
 import { formatDayLabel, localizedPath, readerHomePath, switchPath, t, type Lang } from '@/lib/i18n'
 import { PLAN_LIMITS } from '@/lib/plans'
+import { loadWorkspaceTaskSummary } from '@/lib/tasks'
 import { getDefaultWorkspaceForUser, getWorkspaceCreditBalance, getWorkspaceSourceCount } from '@/lib/workspaces'
 import { loadUserXSubscriptionCount } from '@/lib/x-accounts'
 
-type NavKey = 'home' | 'channels' | 'archive' | 'about' | 'source-add' | 'subscription' | 'auth'
+type NavKey = 'home' | 'channels' | 'archive' | 'about' | 'source-add' | 'subscription' | 'auth' | 'tasks'
 
 const FEEDBACK_PATH = '/#apply'
 
@@ -85,6 +86,26 @@ function SourcesNavIcon() {
   )
 }
 
+function TasksNavIcon() {
+  return (
+    <svg
+      aria-hidden="true"
+      className="sidebar-nav__icon"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <path d="M7 7h10" />
+      <path d="M7 12h6" />
+      <path d="M7 17h9" />
+      <path d="M4 7h.1" />
+      <path d="M4 12h.1" />
+      <path d="M4 17h.1" />
+      <path d="M19 5.5v3" />
+      <path d="M17.5 7h3" />
+    </svg>
+  )
+}
+
 export async function Header({
   lang,
   active,
@@ -102,6 +123,7 @@ export async function Header({
   let sidebarSourceCount = sourceCount
   let sidebarActiveCategory = activeCategory
   let sidebarCategories = categories
+  let activeTaskCount = 0
 
   const shouldLoadSidebarData = showSourceFilter && !sidebarDate && sidebarItemCount === 0 && sidebarSourceCount === 0 && sidebarCategories.length === 0
   const [sidebarData, session] = await Promise.all([
@@ -134,20 +156,24 @@ export async function Header({
   }
 
   let accountUsage: AccountUsage | null = null
-  if (session && session.role !== 'admin') {
+  if (session) {
     const db = await getD1Binding().catch(() => null)
     if (db) {
       const workspace = await getDefaultWorkspaceForUser(db, session.userId, session.username)
-      const limits = PLAN_LIMITS[workspace.planId]
-      const [creditsBalance, workspaceSourceCount] = await Promise.all([
-        getWorkspaceCreditBalance(db, workspace.id),
-        getWorkspaceSourceCount(db, workspace.id),
-      ])
-      accountUsage = {
-        planName: limits.name,
-        creditsBalance,
-        sourceCount: workspaceSourceCount,
-        sourceLimit: limits.sourceLimit,
+      const taskSummary = await loadWorkspaceTaskSummary(db, workspace.id).catch(() => ({ activeCount: 0 }))
+      activeTaskCount = taskSummary.activeCount
+      if (session.role !== 'admin') {
+        const limits = PLAN_LIMITS[workspace.planId]
+        const [creditsBalance, workspaceSourceCount] = await Promise.all([
+          getWorkspaceCreditBalance(db, workspace.id),
+          getWorkspaceSourceCount(db, workspace.id),
+        ])
+        accountUsage = {
+          planName: limits.name,
+          creditsBalance,
+          sourceCount: workspaceSourceCount,
+          sourceLimit: limits.sourceLimit,
+        }
       }
     }
   }
@@ -174,6 +200,14 @@ export async function Header({
       icon: <SourcesNavIcon />,
       key: 'source-add' as const,
       label: t(lang, 'nav.sources'),
+    },
+    {
+      badge: activeTaskCount,
+      className: 'sidebar-nav__link--tasks',
+      href: localizedPath(lang, 'tasks'),
+      icon: <TasksNavIcon />,
+      key: 'tasks' as const,
+      label: t(lang, 'nav.tasks'),
     },
   ]
   const username = session?.username ?? 'admin'
@@ -213,19 +247,23 @@ export async function Header({
           </div>
 
           <nav aria-label="Main navigation" className="sidebar-nav">
-            {navItems.map((item) => (
-              <Link
-                aria-label={item.label}
-                className={`sidebar-nav__link ${item.className}`}
-                data-active={active === item.key && !highlightSourceFilter}
-                data-short={item.label.slice(0, 1)}
-                href={item.href}
-                key={item.key}
-              >
-                {item.icon}
-                <span className="sidebar-nav__text">{item.label}</span>
-              </Link>
-            ))}
+            {navItems.map((item) => {
+              const badge = 'badge' in item ? item.badge ?? 0 : 0
+              return (
+                <Link
+                  aria-label={item.label}
+                  className={`sidebar-nav__link ${item.className}`}
+                  data-active={active === item.key && !highlightSourceFilter}
+                  data-short={item.label.slice(0, 1)}
+                  href={item.href}
+                  key={item.key}
+                >
+                  {item.icon}
+                  <span className="sidebar-nav__text">{item.label}</span>
+                  {badge > 0 && <span className="sidebar-nav__badge">{badge}</span>}
+                </Link>
+              )
+            })}
           </nav>
 
           {showSourceFilter && (
