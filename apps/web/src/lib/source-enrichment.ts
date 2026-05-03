@@ -180,11 +180,14 @@ function profileModelToken(env: ReadoCloudflareEnv | null | undefined): string |
     ?? null
 }
 
-function profileModelName(env: ReadoCloudflareEnv | null | undefined): string | null {
+function profileModelName(env: ReadoCloudflareEnv | null | undefined, modelEndpoint: string | null): string | null {
   return env?.READO_PROFILE_ENRICHMENT_MODEL
-    ?? env?.LLM_MODEL
     ?? process.env.READO_PROFILE_ENRICHMENT_MODEL
-    ?? process.env.LLM_MODEL
+    ?? (
+      modelEndpoint === BIGMODEL_CHAT_COMPLETIONS_ENDPOINT
+        ? BIGMODEL_DEFAULT_MODEL
+        : env?.LLM_MODEL ?? process.env.LLM_MODEL
+    )
     ?? (bigModelApiKey(env) ? BIGMODEL_DEFAULT_MODEL : null)
     ?? null
 }
@@ -203,7 +206,7 @@ function resolveProfileEnrichmentProviders(
   const bigModelKey = bigModelApiKey(env)
   const modelEndpoint = options.assetSelector === undefined ? profileModelEndpoint(env) : null
   const modelToken = options.assetSelector === undefined ? profileModelToken(env) : null
-  const modelName = options.assetSelector === undefined ? profileModelName(env) : null
+  const modelName = options.assetSelector === undefined ? profileModelName(env, modelEndpoint) : null
   const searchProviderName = customSearchProvider ? 'custom' : searchApiKey ? 'brave' : bigModelKey ? 'bigmodel' : 'brave'
   const searchProvider = options.searchProvider === undefined
     ? (

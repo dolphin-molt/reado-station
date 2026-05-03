@@ -293,7 +293,7 @@ describe('profile enrichment jobs', () => {
     } as unknown as D1Database
 
     const result = await runOneProfileEnrichmentJob(db, {
-      env: { BIGMODEL_OKIT_KEY: 'bigmodel-key' },
+      env: { BIGMODEL_OKIT_KEY: 'bigmodel-key', LLM_MODEL: 'Qwen/Qwen3-32B' },
       fetcher: async (input, init) => {
         const url = input.toString()
         requestedUrls.push(url)
