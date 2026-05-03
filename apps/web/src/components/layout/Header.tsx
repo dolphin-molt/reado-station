@@ -1,6 +1,7 @@
 import Link from 'next/link'
 
 import { SourceFilter } from '@/components/news/SourceFilter'
+import { ProcessingQueueAutoRefresh } from '@/components/ui/ProcessingQueueAutoRefresh'
 import { TaskFloatingPanel } from '@/components/ui/TaskFloatingPanel'
 import { getCurrentAuthSession } from '@/lib/auth'
 import { getD1Binding } from '@/lib/cloudflare'
@@ -299,7 +300,10 @@ export async function Header({
         )}
       </aside>
       {session && (
-        <TaskFloatingPanel lang={lang} tasks={activeTasks.slice(0, 5)} totalCount={activeTasks.length} />
+        <>
+          {activeTasks.length > 0 && <ProcessingQueueAutoRefresh />}
+          <TaskFloatingPanel lang={lang} tasks={activeTasks.slice(0, 5)} totalCount={activeTasks.length} />
+        </>
       )}
       <label aria-hidden="true" className="sidebar-backdrop" htmlFor="app-sidebar-toggle" />
 

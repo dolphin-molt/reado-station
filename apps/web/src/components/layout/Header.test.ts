@@ -1,14 +1,20 @@
 import { createElement } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
-import { describe, expect, it, vi } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import { Footer } from './Footer'
 import { Header } from './Header'
+import { getD1Binding } from '@/lib/cloudflare'
+import { loadWorkspaceTasks } from '@/lib/tasks'
 
 vi.mock('server-only', () => ({}))
 
 vi.mock('@/components/news/SourceFilter', () => ({
   SourceFilter: vi.fn(() => createElement('nav', { className: 'test-source-filter' })),
+}))
+
+vi.mock('@/components/ui/ProcessingQueueAutoRefresh', () => ({
+  ProcessingQueueAutoRefresh: vi.fn(() => createElement('span', { 'data-testid': 'processing-queue-auto-refresh' })),
 }))
 
 vi.mock('@/lib/auth', () => ({
@@ -23,7 +29,22 @@ vi.mock('@/lib/content', () => ({
   getSidebarData: vi.fn(async () => null),
 }))
 
+vi.mock('@/lib/tasks', () => ({
+  loadWorkspaceTasks: vi.fn(async () => []),
+}))
+
+vi.mock('@/lib/workspaces', () => ({
+  getDefaultWorkspaceForUser: vi.fn(async () => ({ id: 'workspace-1', planId: 'free' })),
+  getWorkspaceCreditBalance: vi.fn(async () => 0),
+  getWorkspaceSourceCount: vi.fn(async () => 0),
+}))
+
 describe('reader chrome navigation', () => {
+  afterEach(() => {
+    vi.mocked(getD1Binding).mockResolvedValue(null)
+    vi.mocked(loadWorkspaceTasks).mockResolvedValue([])
+  })
+
   it('keeps account navigation focused on reader actions and feedback', async () => {
     const element = await Header({ active: 'home', lang: 'zh', path: 'today', showSourceFilter: false })
     const html = renderToStaticMarkup(createElement(() => element))
@@ -71,6 +92,28 @@ describe('reader chrome navigation', () => {
     expect(html).toContain('进行中的任务')
     expect(html).not.toContain('href="/tasks"')
     expect(html).not.toContain('sidebar-nav__link--tasks')
+  })
+
+  it('refreshes reader chrome while active tasks are visible', async () => {
+    vi.mocked(getD1Binding).mockResolvedValue({} as D1Database)
+    vi.mocked(loadWorkspaceTasks).mockResolvedValue([{
+      createdAt: '2026-05-02T10:00:00.000Z',
+      href: '/sources/tw-elonmusk',
+      id: 'profile-1',
+      kind: 'profile-enrichment',
+      queue: { name: 'enrichment_jobs', recordId: 'profile-1' },
+      startedAt: '2026-05-02T10:00:01.000Z',
+      status: 'running',
+      subject: '@elonmusk',
+      title: '主页补全',
+      updatedAt: '2026-05-02T10:00:01.000Z',
+    }])
+
+    const element = await Header({ active: 'source-add', lang: 'zh', path: 'sources/tw-elonmusk', showSourceFilter: false })
+    const html = renderToStaticMarkup(createElement(() => element))
+
+    expect(html).toContain('主页补全')
+    expect(html).toContain('data-testid="processing-queue-auto-refresh"')
   })
 
   it('does not render the reader masthead on the channel discovery page', async () => {
