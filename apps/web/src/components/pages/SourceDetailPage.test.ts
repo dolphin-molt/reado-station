@@ -3,6 +3,7 @@ import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it, vi } from 'vitest'
 
 import { SourceDetailPage } from './SourceDetailPage'
+import { loadWorkspaceSourceDetail } from '@/lib/my-sources'
 
 vi.mock('@/components/layout/Header', () => ({
   Header: vi.fn(() => createElement('header')),
@@ -144,5 +145,60 @@ describe('SourceDetailPage', () => {
     expect(html).toContain('class="channel-profile__video-card"')
     expect(html).toContain('播放 Prompting 101 | Code w/ Claude')
     expect(html).toContain('https://i.ytimg.com/vi/ysPbXH0LpIE/hqdefault.jpg')
+  })
+
+  it('puts the X handle beside the avatar and hides raw profile URL bios', async () => {
+    vi.mocked(loadWorkspaceSourceDetail).mockResolvedValueOnce({
+      sourceId: 'tw-elonmusk',
+      sourceType: 'x',
+      name: '@elonmusk (X)',
+      url: 'https://x.com/elonmusk',
+      status: 'ready',
+      visibility: 'private',
+      backfillHours: 24,
+      createdAt: '2026-05-01T00:00:00.000Z',
+      latestCollectedAt: null,
+      itemCount: 20,
+      collectionPreferences: null,
+      preferenceLabels: [],
+      latestWindowStart: null,
+      latestWindowEnd: null,
+      latestCollectionStatus: null,
+      latestFailureReason: null,
+      profileAssets: [
+        {
+          kind: 'website',
+          title: 'Join Us On Our Journey',
+          url: 'https://terafab.ai',
+          summary: 'Public link discovered from the X profile.',
+        },
+      ],
+      xAccount: {
+        username: 'elonmusk',
+        name: 'Elon Musk',
+        description: 'https://t.co/dDtDyVssfm',
+        profileImageUrl: 'https://pbs.twimg.com/profile_images/avatar_normal.jpg',
+        verified: false,
+        followersCount: 239825435,
+        followingCount: 1320,
+        listedCount: 168680,
+        tweetCount: 102050,
+      },
+      recentItems: [],
+    })
+
+    const element = await SourceDetailPage({ lang: 'zh', sourceId: 'tw-elonmusk' })
+    const html = renderToStaticMarkup(createElement(() => element))
+    const accountCardIndex = html.indexOf('channel-profile__account-card')
+    const avatarIndex = html.indexOf('<img alt="" src="https://pbs.twimg.com/profile_images/avatar_normal.jpg"')
+    const handleIndex = html.indexOf('@elonmusk')
+
+    expect(html).not.toContain('https://t.co/dDtDyVssfm')
+    expect(accountCardIndex).toBeGreaterThan(-1)
+    expect(avatarIndex).toBeGreaterThan(accountCardIndex)
+    expect(handleIndex).toBeGreaterThan(avatarIndex)
+    expect(html).toContain('主页链接')
+    expect(html).not.toContain('个人网站')
+    expect(html).toContain('href="https://terafab.ai"')
   })
 })

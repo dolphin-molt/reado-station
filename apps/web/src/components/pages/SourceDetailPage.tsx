@@ -46,8 +46,23 @@ function profileAssetGroupTitle(kind: string, lang: Lang): string {
   return profileAssetKindLabel(kind, lang)
 }
 
+function websiteAssetLabel(asset: { meta?: string; summary?: string }, lang: Lang): string {
+  const evidence = `${asset.meta ?? ''} ${asset.summary ?? ''}`.toLowerCase()
+  if (evidence.includes('profile url') || evidence.includes('x profile') || evidence.includes('profile link')) {
+    return lang === 'zh' ? '主页链接' : 'Profile link'
+  }
+  return lang === 'zh' ? '个人网站' : 'Website'
+}
+
 function isYouTubeVideoAsset(asset: { kind: string; thumbnailUrl?: string; url: string }): boolean {
   return asset.kind === 'youtube' && Boolean(asset.thumbnailUrl) && (asset.url.includes('youtube.com/watch') || asset.url.includes('youtu.be/'))
+}
+
+function visibleXProfileDescription(description: string | null | undefined): string | null {
+  const value = description?.trim()
+  if (!value) return null
+  if (/^https?:\/\/\S+$/i.test(value)) return null
+  return value
 }
 
 export async function SourceDetailPage({ lang, sourceId }: { collectStatus?: string; lang: Lang; sourceId: string }) {
@@ -82,6 +97,7 @@ export async function SourceDetailPage({ lang, sourceId }: { collectStatus?: str
     const username = xAccount?.username ?? source.sourceId.replace(/^tw-/i, '')
     const displayName = xAccount?.name ?? source.name.replace(/\s*\(X\)$/i, '')
     const xUrl = `https://x.com/${username}`
+    const profileDescription = visibleXProfileDescription(xAccount?.description)
     const websiteAsset = source.profileAssets.find((asset) => asset.kind === 'website')
     const groupedProfileAssets = [
       ['github', source.profileAssets.filter((asset) => asset.kind === 'github')],
@@ -106,19 +122,22 @@ export async function SourceDetailPage({ lang, sourceId }: { collectStatus?: str
                   {displayName}
                   {xAccount?.verified && <XVerifiedMark lang={lang} />}
                 </h1>
-                <p>
+                {!xAccount && (
                   <a className="channel-profile__source-link" href={xUrl} rel="noreferrer" target="_blank">
                     @{username}
                   </a>
-                </p>
+                )}
               </div>
             </div>
 
             {xAccount && (
               <section className="channel-profile__account-card">
                 {xAccount.profileImageUrl && <img alt="" src={xAccount.profileImageUrl} />}
-                <div>
-                  {xAccount.description && <p>{xAccount.description}</p>}
+                <div className="channel-profile__account-main">
+                  <a className="channel-profile__source-link channel-profile__account-handle" href={xUrl} rel="noreferrer" target="_blank">
+                    @{username}
+                  </a>
+                  {profileDescription && <p>{profileDescription}</p>}
                   <div className="channel-profile__metric-row">
                     {xAccount.followersCount != null && <span>{compactNumber(xAccount.followersCount, lang)} followers</span>}
                     {xAccount.tweetCount != null && <span>{compactNumber(xAccount.tweetCount, lang)} posts</span>}
@@ -132,7 +151,7 @@ export async function SourceDetailPage({ lang, sourceId }: { collectStatus?: str
               <section className="channel-profile__extensions source-profile-assets">
                 {websiteAsset && (
                   <a className="channel-profile__website-band" href={websiteAsset.url} rel="noreferrer" target="_blank">
-                    <span>{lang === 'zh' ? '个人网站' : 'Website'}</span>
+                    <span>{websiteAssetLabel(websiteAsset, lang)}</span>
                     <strong>{websiteAsset.title}</strong>
                     {websiteAsset.summary && <p>{websiteAsset.summary}</p>}
                   </a>

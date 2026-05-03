@@ -7950,6 +7950,18 @@ p {
   line-height: 1.6;
 }
 
+.channel-profile__account-main {
+  min-width: 0;
+}
+
+.channel-profile__account-handle {
+  display: inline-flex;
+  font-family: var(--font-ui);
+  font-size: 0.98rem;
+  font-weight: 850;
+  margin-bottom: 0.42rem;
+}
+
 .channel-profile__metric-row {
   display: flex;
   flex-wrap: wrap;
