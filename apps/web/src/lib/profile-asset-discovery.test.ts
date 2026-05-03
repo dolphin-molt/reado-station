@@ -115,8 +115,131 @@ describe('profile asset discovery', () => {
     ])
     expect(generateObjectCalls).toHaveLength(1)
     expect(generateObjectCalls[0].system).toContain('Select official profile assets from candidates')
+    expect(generateObjectCalls[0].system).toContain('Use web search evidence')
+    expect(generateObjectCalls[0].system).toContain('Do not rely on memory')
     expect(generateObjectCalls[0].prompt).toContain('Anthropic')
     expect(generateObjectCalls[0].prompt).toContain('https://www.anthropic.com')
+  })
+
+  it('emits model input and output for execution logging', async () => {
+    const events: Array<{
+      output?: unknown
+      phase: string
+      prompt: string
+      system: string
+    }> = []
+    const provider = createAiSdkProfileAssetSelector({
+      apiKey: 'model-token',
+      endpoint: 'https://gateway.example.com/v1/chat/completions',
+      generateObject: async () => ({
+        object: {
+          assets: [{
+            kind: 'website',
+            title: 'Anthropic',
+            url: 'https://www.anthropic.com',
+            summary: 'Selected official website.',
+          }],
+        },
+      }),
+      model: 'test-model',
+      onModelCall: async (event) => {
+        events.push({
+          output: event.output,
+          phase: event.phase,
+          prompt: event.prompt,
+          system: event.system,
+        })
+      },
+    })
+
+    await provider?.select({
+      candidates: [{
+        kind: 'website',
+        title: 'Anthropic',
+        url: 'https://www.anthropic.com',
+        summary: 'Candidate website.',
+      }],
+      profile: { description: 'We build Claude.', name: 'Anthropic', username: 'AnthropicAI' },
+    })
+
+    expect(events.map((event) => event.phase)).toEqual(['input', 'output'])
+    expect(events[0].prompt).toContain('Anthropic')
+    expect(events[0].system).toContain('Use web search evidence')
+    expect(events[1].output).toEqual({
+      assets: [{
+        kind: 'website',
+        title: 'Anthropic',
+        url: 'https://www.anthropic.com',
+        summary: 'Selected official website.',
+      }],
+    })
+  })
+
+  it('lets the model select related organizations, projects, and public interviews from search candidates', async () => {
+    const selectedCandidateUrls: string[] = []
+    const assets = await discoverXProfileAssets({
+      description: '',
+      name: 'Elon Musk',
+      username: 'elonmusk',
+    }, {
+      assetSelector: {
+        select: async ({ candidates }) => {
+          selectedCandidateUrls.push(...candidates.map((candidate) => candidate.url))
+          return [
+            {
+              kind: 'organization',
+              title: 'SpaceX',
+              url: 'https://www.spacex.com',
+              summary: 'Related organization selected by model.',
+            },
+            {
+              kind: 'project',
+              title: 'Starship',
+              url: 'https://www.spacex.com/vehicles/starship/',
+              summary: 'Related project selected by model.',
+            },
+            {
+              kind: 'interview',
+              title: 'Elon Musk interview',
+              url: 'https://example.com/elon-musk-interview',
+              summary: 'Public interview selected by model.',
+            },
+          ]
+        },
+      },
+      fetcher: async (input) => {
+        const url = input.toString()
+        if (url.startsWith('https://api.github.com/search/users')) return jsonResponse({ items: [] })
+        return new Response('', { status: 404 })
+      },
+      searchProvider: {
+        search: async (query) => {
+          if (query.includes('organizations') || query.includes('projects')) {
+            return [
+              { title: 'SpaceX', url: 'https://www.spacex.com', snippet: 'SpaceX designs, manufactures and launches rockets and spacecraft.' },
+              { title: 'Starship', url: 'https://www.spacex.com/vehicles/starship/', snippet: 'SpaceX vehicle program.' },
+            ]
+          }
+          if (query.includes('interview') || query.includes('public profile')) {
+            return [
+              { title: 'Elon Musk interview', url: 'https://example.com/elon-musk-interview', snippet: 'Public interview.' },
+            ]
+          }
+          return []
+        },
+      },
+    })
+
+    expect(selectedCandidateUrls).toEqual(expect.arrayContaining([
+      'https://www.spacex.com',
+      'https://www.spacex.com/vehicles/starship',
+      'https://example.com/elon-musk-interview',
+    ]))
+    expect(assets).toEqual(expect.arrayContaining([
+      expect.objectContaining({ kind: 'organization', title: 'SpaceX', url: 'https://www.spacex.com' }),
+      expect.objectContaining({ kind: 'project', title: 'Starship', url: 'https://www.spacex.com/vehicles/starship/' }),
+      expect.objectContaining({ kind: 'interview', title: 'Elon Musk interview', url: 'https://example.com/elon-musk-interview' }),
+    ]))
   })
 
   it('discovers website, GitHub, YouTube channel, and YouTube videos from public providers', async () => {

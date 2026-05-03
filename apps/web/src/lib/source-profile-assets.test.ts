@@ -18,6 +18,18 @@ describe('source profile asset provider', () => {
         summary: 'Discovered video.',
         thumbnailUrl: 'https://i.ytimg.com/vi/abc123/hqdefault.jpg',
       },
+      {
+        kind: 'organization',
+        title: 'model-filled organization',
+        url: 'https://example.com/company',
+        summary: 'Discovered related organization.',
+      },
+      {
+        kind: 'interview',
+        title: 'model-filled interview',
+        url: 'https://example.com/interview',
+        summary: 'Discovered public interview.',
+      },
     ])
     const db = {
       prepare: () => ({
@@ -40,6 +52,18 @@ describe('source profile asset provider', () => {
         url: 'https://www.youtube.com/watch?v=abc123',
         summary: 'Discovered video.',
         thumbnailUrl: 'https://i.ytimg.com/vi/abc123/hqdefault.jpg',
+      },
+      {
+        kind: 'organization',
+        title: 'model-filled organization',
+        url: 'https://example.com/company',
+        summary: 'Discovered related organization.',
+      },
+      {
+        kind: 'interview',
+        title: 'model-filled interview',
+        url: 'https://example.com/interview',
+        summary: 'Discovered public interview.',
       },
     ])
   })

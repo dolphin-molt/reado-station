@@ -2,7 +2,7 @@ import 'server-only'
 
 import { getCloudflareEnv, type ReadoCloudflareEnv } from '@/lib/cloudflare'
 import { createExecutionRunId, logExecutionStep, withExecutionStep } from '@/lib/execution-logs'
-import { createAiSdkProfileAssetSelector, createBigModelSearchProvider, createBraveSearchProvider, discoverXProfileAssets, type ProfileAssetDiscoveryOptions } from '@/lib/profile-asset-discovery'
+import { createAiSdkProfileAssetSelector, createBigModelSearchProvider, createBraveSearchProvider, discoverXProfileAssets, type ProfileAssetDiscoveryOptions, type ProfileAssetModelCallEvent } from '@/lib/profile-asset-discovery'
 import { presetXProfileAssets, type SourceProfileAsset } from '@/lib/source-profile-assets'
 
 export type EnrichmentJobType =
@@ -38,6 +38,7 @@ const BIGMODEL_DEFAULT_MODEL = 'glm-4.7-flash'
 
 interface ProfileEnrichmentRunOptions extends ProfileAssetDiscoveryOptions {
   env?: ReadoCloudflareEnv | null
+  modelCallLogger?: (event: ProfileAssetModelCallEvent) => Promise<void> | void
 }
 
 export interface ProfileEnrichmentProviderStatus {
@@ -217,6 +218,7 @@ function resolveProfileEnrichmentProviders(
       fetcher: options.fetcher,
       jsonModeOnly: modelEndpoint === BIGMODEL_CHAT_COMPLETIONS_ENDPOINT,
       model: modelName,
+      onModelCall: options.modelCallLogger,
       providerName: modelEndpoint === BIGMODEL_CHAT_COMPLETIONS_ENDPOINT ? 'bigmodel' : 'profile-enrichment',
     })
     : options.assetSelector
@@ -347,7 +349,32 @@ export async function runOneProfileEnrichmentJob(
       ...subject,
       metadata: { jobId: job.id, jobType: job.jobType },
       step: 'discover_profile_assets',
-    }, () => discoverProfileAssets(db, job, options))
+    }, () => discoverProfileAssets(db, job, {
+      ...options,
+      modelCallLogger: async (event) => {
+        await logExecutionStep(db, {
+          ...subject,
+          message: event.error ?? null,
+          metadata: {
+            error: event.error,
+            input: {
+              prompt: event.prompt,
+              system: event.system,
+            },
+            jobId: job.id,
+            model: event.model,
+            output: event.output,
+            providerName: event.providerName,
+          },
+          status: event.phase === 'error' ? 'failed' : 'info',
+          step: event.phase === 'input'
+            ? 'profile_asset_model_input'
+            : event.phase === 'output'
+              ? 'profile_asset_model_output'
+              : 'profile_asset_model_error',
+        })
+      },
+    }))
     await withExecutionStep(db, {
       ...subject,
       metadata: { assetCount: assets.length, jobId: job.id },

@@ -37,12 +37,19 @@ function profileAssetKindLabel(kind: string, lang: Lang): string {
   if (kind === 'website') return lang === 'zh' ? '官网' : 'Website'
   if (kind === 'github') return 'GitHub'
   if (kind === 'youtube') return 'YouTube'
+  if (kind === 'organization') return lang === 'zh' ? '组织' : 'Organization'
+  if (kind === 'project') return lang === 'zh' ? '项目' : 'Project'
+  if (kind === 'article') return lang === 'zh' ? '资料' : 'Article'
+  if (kind === 'interview') return lang === 'zh' ? '采访' : 'Interview'
+  if (kind === 'reference') return lang === 'zh' ? '公开资料' : 'Reference'
   return kind
 }
 
 function profileAssetGroupTitle(kind: string, lang: Lang): string {
   if (kind === 'github') return lang === 'zh' ? 'GitHub 项目' : 'GitHub projects'
   if (kind === 'youtube') return 'YouTube'
+  if (kind === 'organization-project') return lang === 'zh' ? '关联组织/项目' : 'Related organizations/projects'
+  if (kind === 'public-reference') return lang === 'zh' ? '公开资料/采访' : 'Public references/interviews'
   return profileAssetKindLabel(kind, lang)
 }
 
@@ -100,6 +107,8 @@ export async function SourceDetailPage({ lang, sourceId }: { collectStatus?: str
     const profileDescription = visibleXProfileDescription(xAccount?.description)
     const websiteAsset = source.profileAssets.find((asset) => asset.kind === 'website')
     const groupedProfileAssets = [
+      ['organization-project', source.profileAssets.filter((asset) => asset.kind === 'organization' || asset.kind === 'project')],
+      ['public-reference', source.profileAssets.filter((asset) => asset.kind === 'article' || asset.kind === 'interview' || asset.kind === 'reference')],
       ['github', source.profileAssets.filter((asset) => asset.kind === 'github')],
       ['youtube', source.profileAssets.filter((asset) => asset.kind === 'youtube')],
     ].filter(([, assets]) => Array.isArray(assets) && assets.length > 0) as Array<[string, typeof source.profileAssets]>

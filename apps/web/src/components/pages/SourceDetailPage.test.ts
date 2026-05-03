@@ -84,6 +84,30 @@ vi.mock('@/lib/my-sources', () => ({
         summary: 'Anthropic Code w/ Claude session.',
         thumbnailUrl: 'https://i.ytimg.com/vi/ysPbXH0LpIE/hqdefault.jpg',
       },
+      {
+        kind: 'organization',
+        title: 'Anthropic',
+        url: 'https://www.anthropic.com/company',
+        summary: 'Company profile and public information.',
+      },
+      {
+        kind: 'project',
+        title: 'Claude',
+        url: 'https://claude.ai',
+        summary: 'Anthropic assistant product.',
+      },
+      {
+        kind: 'article',
+        title: 'Anthropic company profile',
+        url: 'https://www.anthropic.com/news',
+        summary: 'Public company updates.',
+      },
+      {
+        kind: 'interview',
+        title: 'Anthropic interview',
+        url: 'https://example.com/anthropic-interview',
+        summary: 'Public interview with the team.',
+      },
     ],
     xAccount: {
       username: 'OpenAI',
@@ -138,10 +162,14 @@ describe('SourceDetailPage', () => {
     expect(html).toContain('个人网站')
     expect(html).toContain('GitHub 项目')
     expect(html).toContain('YouTube')
+    expect(html).toContain('关联组织/项目')
+    expect(html).toContain('公开资料/采访')
     expect(html).toContain('class="channel-profile__website-band"')
     expect(html).toContain('href="https://www.anthropic.com"')
     expect(html).toContain('href="https://github.com/anthropics"')
     expect(html).toContain('href="https://www.youtube.com/@anthropic-ai"')
+    expect(html).toContain('href="https://claude.ai"')
+    expect(html).toContain('href="https://example.com/anthropic-interview"')
     expect(html).toContain('class="channel-profile__video-card"')
     expect(html).toContain('播放 Prompting 101 | Code w/ Claude')
     expect(html).toContain('https://i.ytimg.com/vi/ysPbXH0LpIE/hqdefault.jpg')

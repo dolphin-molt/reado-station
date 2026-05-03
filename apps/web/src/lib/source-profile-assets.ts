@@ -1,10 +1,27 @@
+export const SOURCE_PROFILE_ASSET_KINDS = [
+  'website',
+  'github',
+  'youtube',
+  'organization',
+  'project',
+  'article',
+  'interview',
+  'reference',
+] as const
+
+export type SourceProfileAssetKind = typeof SOURCE_PROFILE_ASSET_KINDS[number]
+
 export interface SourceProfileAsset {
-  kind: 'website' | 'github' | 'youtube'
+  kind: SourceProfileAssetKind
   title: string
   url: string
   summary: string
   meta?: string
   thumbnailUrl?: string
+}
+
+export function isSourceProfileAssetKind(kind: unknown): kind is SourceProfileAssetKind {
+  return typeof kind === 'string' && (SOURCE_PROFILE_ASSET_KINDS as readonly string[]).includes(kind)
 }
 
 interface SourceProfileAssetRow {
@@ -92,7 +109,7 @@ function normalizeProfileAssets(value: unknown): SourceProfileAsset[] {
     if (!item || typeof item !== 'object') return []
     const asset = item as Partial<SourceProfileAsset>
     if (
-      (asset.kind !== 'website' && asset.kind !== 'github' && asset.kind !== 'youtube') ||
+      !isSourceProfileAssetKind(asset.kind) ||
       typeof asset.title !== 'string' ||
       typeof asset.url !== 'string'
     ) {

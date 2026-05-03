@@ -3,7 +3,7 @@ import { generateObject } from 'ai'
 import type { LanguageModel } from 'ai'
 import { z } from 'zod/v4'
 
-import type { SourceProfileAsset } from '@/lib/source-profile-assets'
+import { SOURCE_PROFILE_ASSET_KINDS, isSourceProfileAssetKind, type SourceProfileAsset } from '@/lib/source-profile-assets'
 
 export interface XProfileForAssetDiscovery {
   description?: string | null
@@ -29,6 +29,16 @@ export interface ProfileAssetSelectorInput {
 
 export interface ProfileAssetSelector {
   select(input: ProfileAssetSelectorInput): Promise<SourceProfileAsset[]>
+}
+
+export interface ProfileAssetModelCallEvent {
+  error?: string
+  model: string
+  output?: unknown
+  phase: 'input' | 'output' | 'error'
+  prompt: string
+  providerName: string
+  system: string
 }
 
 export interface ProfileAssetDiscoveryOptions {
@@ -74,11 +84,11 @@ interface GitHubSearchItem {
   type?: string
 }
 
-const PROFILE_ASSET_SELECTION_SYSTEM_PROMPT = 'Select official profile assets from candidates. Candidates from web_search and direct_guess are untrusted until you verify they match the X profile. Return only JSON in this shape: {"assets":[{"kind":"website|github|youtube","title":"...","url":"...","summary":"...","meta":"...","thumbnailUrl":"..."}]}. Choose only URLs present in the candidate list. Prefer official website, official GitHub org, official YouTube channel and high-signal videos. Reject parked domains, redirect landers, lookalikes, avatars, unrelated same-name channels, stale fan pages, and zero-content orgs.'
+const PROFILE_ASSET_SELECTION_SYSTEM_PROMPT = 'Select official profile assets from candidates. Use web search evidence in the candidate list before selecting any organization, project, article, interview, or reference. Do not rely on memory or unstated assumptions: if a URL and evidence are not present in the candidate list, reject it. Candidates from web_search and direct_guess are untrusted until you verify they match the X profile. Return only JSON in this shape: {"assets":[{"kind":"website|github|youtube|organization|project|article|interview|reference","title":"...","url":"...","summary":"...","meta":"...","thumbnailUrl":"..."}]}. Choose only URLs present in the candidate list. Prefer official website/profile link, official GitHub org, official YouTube channel, related organizations/projects, and high-signal public articles or interviews. Reject parked domains, redirect landers, lookalikes, avatars, unrelated same-name channels, stale fan pages, low-signal SEO pages, and zero-content orgs.'
 
 const profileAssetSelectionSchema = z.object({
   assets: z.array(z.object({
-    kind: z.enum(['website', 'github', 'youtube']),
+    kind: z.enum(SOURCE_PROFILE_ASSET_KINDS),
     meta: z.string().optional(),
     summary: z.string().default(''),
     thumbnailUrl: z.string().optional(),
@@ -134,6 +144,20 @@ function safeUrl(value: string): URL | null {
   }
 }
 
+function isHostname(hostname: string, domain: string): boolean {
+  return hostname === domain || hostname.endsWith(`.${domain}`)
+}
+
+function isBlockedProfileAssetHost(hostname: string): boolean {
+  return (
+    isHostname(hostname, 'x.com') ||
+    isHostname(hostname, 'twitter.com') ||
+    isHostname(hostname, 'github.com') ||
+    isHostname(hostname, 'youtube.com') ||
+    isHostname(hostname, 'youtu.be')
+  )
+}
+
 function titleFromHtml(html: string): string | null {
   return html.match(/<title[^>]*>([^<]+)<\/title>/i)?.[1]?.replace(/\s+/g, ' ').trim() || null
 }
@@ -159,6 +183,8 @@ function profileSearchQueries(profile: XProfileForAssetDiscovery): string[] {
     `${profile.name} official website`,
     `${profile.name} GitHub`,
     `${profile.name} YouTube`,
+    `${profile.name} associated organizations projects official`,
+    `${profile.name} public profile interview`,
     `${profile.username} official website`,
   ]
 }
@@ -204,8 +230,28 @@ function websiteCandidates(profile: XProfileForAssetDiscovery, results: ProfileS
       if (!url) return false
       const hostname = url.hostname.replace(/^www\./, '')
       if (/\.(avif|gif|jpe?g|png|svg|webp)$/i.test(url.pathname)) return false
-      return !hostname.includes('x.com') && !hostname.includes('twitter.com') && !hostname.includes('github.com') && !hostname.includes('youtube.com') && !hostname.includes('youtu.be')
+      return !isBlockedProfileAssetHost(hostname)
     })
+}
+
+function publicSearchAssetCandidates(profile: XProfileForAssetDiscovery, results: ProfileSearchResult[]): CandidateProfileAsset[] {
+  const candidates = results.flatMap((result) => {
+    const url = safeUrl(result.url)
+    if (!url) return []
+    const hostname = url.hostname.replace(/^www\./, '')
+    if (/\.(avif|gif|jpe?g|png|svg|webp)$/i.test(url.pathname)) return []
+    if (isBlockedProfileAssetHost(hostname)) return []
+    return [{
+      discoverySource: 'web_search' as const,
+      evidence: [result.title, result.snippet].filter(Boolean).join(' - '),
+      kind: 'reference' as const,
+      meta: 'Public source candidate',
+      summary: result.snippet ?? `Public source candidate for ${profile.name}.`,
+      title: result.title,
+      url: stripTrailingSlash(url.toString()),
+    }]
+  })
+  return dedupeAssets(candidates).slice(0, 12)
 }
 
 function profileIdentityTerms(profile: XProfileForAssetDiscovery): string[] {
@@ -238,7 +284,7 @@ async function discoverWebsite(profile: XProfileForAssetDiscovery, results: Prof
       const finalUrl = safeUrl(response.url || url.toString()) ?? url
       const finalHostname = finalUrl.hostname.replace(/^www\./, '')
       if (/\.(avif|gif|jpe?g|png|svg|webp)$/i.test(finalUrl.pathname)) continue
-      if (finalHostname.includes('x.com') || finalHostname.includes('twitter.com') || finalHostname.includes('github.com') || finalHostname.includes('youtube.com') || finalHostname.includes('youtu.be')) continue
+      if (isBlockedProfileAssetHost(finalHostname)) continue
       return {
         discoverySource: candidate.discoverySource,
         evidence: candidate.evidence,
@@ -470,7 +516,7 @@ function normalizeModelAssets(value: unknown): SourceProfileAsset[] {
     if (!item || typeof item !== 'object') return []
     const asset = item as Partial<SourceProfileAsset>
     if (
-      (asset.kind !== 'website' && asset.kind !== 'github' && asset.kind !== 'youtube') ||
+      !isSourceProfileAssetKind(asset.kind) ||
       typeof asset.title !== 'string' ||
       typeof asset.url !== 'string'
     ) {
@@ -579,17 +625,19 @@ export function createAiSdkProfileAssetSelector(input: {
   generateObject?: ProfileAssetGenerateObject
   jsonModeOnly?: boolean | null
   model?: string | null
+  onModelCall?: (event: ProfileAssetModelCallEvent) => Promise<void> | void
   providerName?: string | null
 }): ProfileAssetSelector | null {
   const endpoint = input.endpoint?.trim()
   const apiKey = input.apiKey?.trim()
   const model = input.model?.trim()
   if (!endpoint || !apiKey || !model) return null
+  const providerName = input.providerName?.trim() || 'profile-enrichment'
   const provider = createOpenAICompatible({
     apiKey,
     baseURL: openAICompatibleBaseUrl(endpoint),
     fetch: input.fetcher,
-    name: input.providerName?.trim() || 'profile-enrichment',
+    name: providerName,
     supportsStructuredOutputs: true,
     transformRequestBody: input.jsonModeOnly ? downgradeJsonSchemaToJsonMode : undefined,
   })
@@ -602,14 +650,43 @@ export function createAiSdkProfileAssetSelector(input: {
   }))
   return {
     async select(selectionInput) {
-      const result = await runGenerateObject({
-        maxRetries: 1,
-        model: provider(model),
-        prompt: JSON.stringify(selectionInput),
-        schema: profileAssetSelectionSchema,
-        system: PROFILE_ASSET_SELECTION_SYSTEM_PROMPT,
+      const prompt = JSON.stringify(selectionInput)
+      const system = PROFILE_ASSET_SELECTION_SYSTEM_PROMPT
+      await input.onModelCall?.({
+        model,
+        phase: 'input',
+        prompt,
+        providerName,
+        system,
       })
-      return normalizeModelAssets(result.object)
+      try {
+        const result = await runGenerateObject({
+          maxRetries: 1,
+          model: provider(model),
+          prompt,
+          schema: profileAssetSelectionSchema,
+          system,
+        })
+        await input.onModelCall?.({
+          model,
+          output: result.object,
+          phase: 'output',
+          prompt,
+          providerName,
+          system,
+        })
+        return normalizeModelAssets(result.object)
+      } catch (error) {
+        await input.onModelCall?.({
+          error: error instanceof Error ? error.message : 'unknown model error',
+          model,
+          phase: 'error',
+          prompt,
+          providerName,
+          system,
+        })
+        throw error
+      }
     },
   }
 }
@@ -625,7 +702,8 @@ export async function discoverXProfileAssets(
     discoverGitHub(profile, results, fetcher),
     discoverYouTube(profile, results, fetcher),
   ])
-  const candidates = dedupeAssets([website, github, ...youtube].filter((asset): asset is CandidateProfileAsset => Boolean(asset)))
+  const publicResources = publicSearchAssetCandidates(profile, results)
+  const candidates = dedupeAssets([website, github, ...youtube, ...publicResources].filter((asset): asset is CandidateProfileAsset => Boolean(asset)))
   if (candidates.length === 0) return []
   if (!options.assetSelector) return trustedFallbackAssets(candidates)
   const selected = await options.assetSelector.select({ candidates, profile }).catch(() => [])
